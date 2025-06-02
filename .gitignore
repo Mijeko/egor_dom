@@ -2,5 +2,5 @@
 .idea
 upload/
 bitrix/
-local/php_interface/vendor/
+local/php_interface/*/vendor/
 */node_modules/
