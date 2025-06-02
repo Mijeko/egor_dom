@@ -1,4 +1,5 @@
 .git
+.idea
 upload/
 bitrix/
 local/php_interface/vendor/
