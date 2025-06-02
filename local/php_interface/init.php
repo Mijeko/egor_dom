@@ -25,7 +25,10 @@ foreach([
 }
 
 require_once __DIR__ . '/dev_functions.php';
-require_once __DIR__ . '/../js/config.php';
+if(file_exists(__DIR__ . '/../js/config.php'))
+{
+	require_once __DIR__ . '/../js/config.php';
+}
 
 
 if(\Bitrix\Main\Loader::includeModule('craft.core'))

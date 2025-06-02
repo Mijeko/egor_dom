@@ -1,0 +1,1 @@
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/local/modules/craft.translate/admin/craft_translate_manage.php'; ?>

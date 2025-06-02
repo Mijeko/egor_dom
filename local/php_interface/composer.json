@@ -1,24 +1,25 @@
 {
-	"name": "jedi/dev",
-	"license": "Commerce",
-	"autoload": {
-		"psr-4": {
-			"Jedi\\": "lib/Jedi"
-		}
-	},
-	"minimum-stability": "dev",
-	"require": {
-		"yiisoft/validator": "^3.0@dev",
-		"phpoffice/phpword": "dev-master",
-		"dompdf/dompdf": "dev-master"
-	},
-	"replace": {
-		"psr/log": "*",
-		"psr/container": "*",
-		"psr/http-client": "*",
-		"psr/http-message": "*"
-	},
-	"require-dev": {
-		"phpstan/phpstan": "2.1.x-dev"
-	}
+  "version": "1.0.0",
+  "name": "craft/dev",
+  "license": "Commerce",
+  "autoload": {
+    "psr-4": {
+      "Craft\\": "lib/Craft"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "yiisoft/validator": "^3.0@dev",
+    "phpoffice/phpword": "dev-master",
+    "dompdf/dompdf": "dev-master"
+  },
+  "replace": {
+    "psr/log": "*",
+    "psr/container": "*",
+    "psr/http-client": "*",
+    "psr/http-message": "*"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "2.1.x-dev"
+  }
 }

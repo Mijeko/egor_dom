@@ -1,0 +1,116 @@
+.adm-adaptive-container *:not(.skip-bbox *) {
+  box-sizing: border-box;
+}
+.adm-adaptive-control {
+  display: flex;
+  gap: 10px;
+}
+.adm-adaptive-create {
+  border: 1px grey solid;
+  padding: 10px 20px;
+  border-radius: 7px;
+  background-color: white;
+  cursor: pointer;
+}
+.adm-adaptive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px 0;
+}
+.adm-adaptive-item {
+  border-radius: 7px;
+  border: 1px rgba(128, 128, 128, 0.55) solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.adm-adaptive-item__header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(204, 204, 204, 0.46);
+  padding: 10px;
+}
+.adm-adaptive-item__header-label {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  color: rgba(10, 10, 10, 0.78);
+}
+.adm-adaptive-item__header-remove {
+  padding: 7px 15px;
+  border: 1px rgba(221, 0, 8, 0.78) solid;
+  margin: 0 20px 0 auto;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: rgba(221, 0, 8, 0.78);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+.adm-adaptive-item__body {
+  padding: 20px 10px;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.adm-adaptive-item__size {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.adm-adaptive-item__image {
+  width: 200px;
+  object-fit: contain;
+}
+.adm-adaptive-item__image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.adm-adaptive-item__load {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.size-variant {
+  width: 100%;
+}
+.size-variant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.size-variant-item {
+  border: 1px grey solid;
+  border-radius: 7px;
+  padding: 7px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.size-variant-item-wrap {
+  cursor: pointer;
+}
+.size-variant-item__input {
+  display: none;
+}
+.size-variant-item__input:checked ~ .size-variant-item .size-variant-item__label:after {
+  line-height: 100%;
+  margin-left: 5px;
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  background-image: url("/local/modules/craft.slider/assets/images/icons/check-green.png");
+  background-size: cover;
+}
+.size-variant-item__label {
+  line-height: 130%;
+}
+
+/*# sourceMappingURL=style.css.map */
