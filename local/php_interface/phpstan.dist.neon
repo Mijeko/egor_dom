@@ -1,0 +1,10 @@
+parameters:
+    reportUnmatchedIgnoredErrors: false
+    scanDirectories:
+        - ../../bitrix
+    bootstrapFiles:
+        - php.stan.constants.php
+    level: 6
+    paths:
+        - ../modules/craft.user/lib
+        - ../modules/craft.core/lib
