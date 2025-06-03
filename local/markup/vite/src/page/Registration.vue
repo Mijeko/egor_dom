@@ -5,11 +5,23 @@ const form = ref({email: '', phone: '', password: ''});
 
 
 let submit = () => {
-  fetch('')
-      .then((r: any) => r.json())
-      .then((d: any) => {
-        console.log(d);
-      })
+
+  BX.ajax.runComponentAction(
+      'my_components:ajax',
+      'test', {
+        mode: 'class',
+        data: {
+          param1: 'asd',
+          sessid: BX.message('bitrix_sessid')
+        }
+      });
+
+
+  // fetch('')
+  //     .then((r: any) => r.json())
+  //     .then((d: any) => {
+  //       console.log(d);
+  //     })
 }
 
 </script>
