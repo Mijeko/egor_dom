@@ -1,4 +1,5 @@
 markup: npm-i markup-build markup-copy
+composer: composer-i
 
 npm-i:
 	cd local/markup/vite && npm i
@@ -9,3 +10,9 @@ markup-build:
 markup-copy:
 	mkdir -p local/templates/main/images/
 	cp -r -f local/markup/vite/dist/*.svg local/templates/main/images/
+
+composer-i:
+	cd local/php_interface && composer i
+
+composer-dump:
+	cd local/php_interface && composer dump-autoload

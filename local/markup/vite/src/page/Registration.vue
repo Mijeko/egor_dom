@@ -6,8 +6,10 @@ const form = ref({email: '', phone: '', password: ''});
 
 let submit = () => {
   fetch('')
-      .then(r=>r.json())
-      .then(d=>{})
+      .then((r: any) => r.json())
+      .then((d: any) => {
+        console.log(d);
+      })
 }
 
 </script>

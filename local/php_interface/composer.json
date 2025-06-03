@@ -9,7 +9,7 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "yiisoft/validator": "^3.0@dev",
+    "yiisoft/validator": "dev-master",
     "phpoffice/phpword": "dev-master",
     "dompdf/dompdf": "dev-master"
   },
