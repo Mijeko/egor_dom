@@ -1,7 +1,7 @@
 <?php
 
 use Bitrix\Main\Page\Asset;
-use Craft\Dto\ViteManifestAssetsDto;
+use Craft\Dto\ManifestBlockDto;
 
 class CraftViteComponent extends CBitrixComponent
 {
@@ -16,28 +16,90 @@ class CraftViteComponent extends CBitrixComponent
 
 	public function executeComponent()
 	{
-		$assets = $this->readManifest();
 
-		if(!$assets)
+		try
+		{
+			$this->modules(['craft.core']);
+			$this->readManifest($this->arParams['SOURCE']);
+			$this->includeComponentTemplate();
+		} catch(Exception $e)
 		{
 			return;
 		}
+	}
 
-		$this->includeAssets($assets);
+	protected function modules(array $modules): void
+	{
+		foreach($modules as $module)
+		{
+			if(!\Bitrix\Main\Loader::includeModule($module))
+			{
+				throw new Exception('Module "' . $module . '" not found');
+			}
+		}
+	}
 
-		$this->includeComponentTemplate();
+	protected function viteDir(): string
+	{
+		return '/local/markup/dom-egor';
 	}
 
 	protected function getManifestPath(): string
 	{
-		return '/local/markup/vite/dist/.vite/manifest.json';
+		return $this->viteDir() . '/dist/.vite/manifest.json';
 	}
 
 
-	protected function readManifest(): ?ViteManifestAssetsDto
+	protected function readManifest(string $blockKey): void
+	{
+		$manifestBlock = $this->readManifestBlock($blockKey);
+
+		if(!$manifestBlock)
+		{
+			throw new Exception('Manifest not found');
+		}
+
+		//		\Bitrix\Main\Diag\Debug::dump($manifestBlock);
+
+		$this->loadManifestBlock($manifestBlock);
+	}
+
+	protected function loadManifestBlock(ManifestBlockDto $manifestBlock): void
+	{
+		$assets = Asset::getInstance();
+
+		if($manifestBlock->getImports())
+		{
+			foreach($manifestBlock->getImports() as $import)
+			{
+				$this->readManifest($import);
+			}
+		}
+
+		if($manifestBlock->getFile())
+		{
+			$assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifestBlock->getFile() . '"></script>');
+		}
+
+
+		if($manifestBlock->getCss())
+		{
+			foreach($manifestBlock->getCss() as $css)
+			{
+				$assets->addCss($this->viteDir() . '/dist/' . $css);
+			}
+		}
+
+		$this->includeAssets($manifestBlock);
+
+
+	}
+
+	protected function readManifestBlock(string $blockKey): ?ManifestBlockDto
 	{
 		if(!file_exists($_SERVER['DOCUMENT_ROOT'] . $this->getManifestPath()))
 		{
+			\Bitrix\Main\Diag\Debug::dump('Manifest file not found');
 			return null;
 		}
 
@@ -45,44 +107,31 @@ class CraftViteComponent extends CBitrixComponent
 
 		$manifest = json_decode($rawManifest, true);
 
-		if(!$manifest[$this->arParams['SOURCE']])
+		if(!$manifest[$blockKey])
 		{
+			\Bitrix\Main\Diag\Debug::dump('Source not found');
 			return null;
 		}
 
-		$manifestBlock = $manifest[$this->arParams['SOURCE']];
-
-		$viteManifestAssetsDto = new ViteManifestAssetsDto();
-
-		if($manifestBlock['file'])
-		{
-			$viteManifestAssetsDto->addJs($manifestBlock['file']);
-		}
-
-		if($manifestBlock['css'] && is_array($manifestBlock['css']))
-		{
-			foreach($manifestBlock['css'] as $css)
-			{
-				$viteManifestAssetsDto->addCss($css);
-			}
-
-		}
-
-		return $viteManifestAssetsDto;
+		return ManifestBlockDto::fromArray($manifest[$blockKey]);
 	}
 
-	protected function includeAssets(ViteManifestAssetsDto $assetsData): void
+	protected function includeAssets(ManifestBlockDto $manifestBlock): void
 	{
-		$assets = Asset::getInstance();
-
-		foreach($assetsData->getJsFiles() as $jsFile)
+		if(!$manifestBlock->getAssets())
 		{
-			$assets->addJs('/local/markup/vite/dist/' . $jsFile);
+			return;
 		}
 
-		foreach($assetsData->getCssFiles() as $cssFile)
+		$assets = Asset::getInstance();
+
+		foreach($manifestBlock->getAssets() as $asset)
 		{
-			$assets->addCss('/local/markup/vite/dist/' . $cssFile);
+			if($asset->isFont())
+			{
+				$assets->addString('<link rel="preload" as="font" type="font/' . $asset->getExtension() . '" href="' . $this->viteDir() . '/dist/' . $asset->getFile() .
+					'" crossorigin="anonymous">');
+			}
 		}
 	}
 }

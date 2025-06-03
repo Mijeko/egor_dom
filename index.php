@@ -9,7 +9,8 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'index.html',
+		'SOURCE' => 'src/pages/index.vue',
+//		'SOURCE' => 'index.html',
 		'ID'     => 'app',
 	]
 );

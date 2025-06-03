@@ -2,10 +2,10 @@ markup: npm-i markup-build markup-copy
 composer: composer-i
 
 npm-i:
-	cd local/markup/vite && npm i
+	cd local/markup/dom-egor && npm i
 
 markup-build:
-	cd local/markup/vite && npm run build
+	cd local/markup/dom-egor && npm run build
 
 markup-copy:
 	mkdir -p local/templates/main/images/
