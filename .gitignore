@@ -4,3 +4,7 @@ upload/
 bitrix/
 local/php_interface/**/vendor/
 */node_modules/
+
+#
+/assets/
+**/dist/
