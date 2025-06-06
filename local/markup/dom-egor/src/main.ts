@@ -1,6 +1,6 @@
 import {createApp} from 'vue'
 import {registerPlugins} from "@/plugins";
-import {Component} from "@vue/runtime-core";
+import type {Component} from "@vue/runtime-core";
 
 
 export default class VueService {
@@ -8,11 +8,13 @@ export default class VueService {
   static render(component: Component, selectors: string) {
 
     const mountedElements = document.querySelectorAll(selectors);
-    mountedElements.forEach(mountedElement => {
+    mountedElements.forEach((element: Element, key: number, parent: NodeListOf<Element>) => {
+
+      let mountedElement = element as HTMLElement;
 
       if (mountedElement) {
-        let params: Record<string, unknown> = [];
-        Object.keys(mountedElement.dataset).forEach(function (key) {
+        let params: Record<string, unknown> = {};
+        Object.keys(mountedElement.dataset).forEach(function (key: string) {
           try {
             params[key] = JSON.parse(mountedElement.dataset[key]);
           } catch (e) {
