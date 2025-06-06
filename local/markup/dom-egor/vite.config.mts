@@ -14,6 +14,7 @@ export default defineConfig({
     manifest: true,
     lib: {
       entry: ['src/main.js'],
+      name: 'Vite',
       fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
       cssFileName: 'my-lib-style',
     }
