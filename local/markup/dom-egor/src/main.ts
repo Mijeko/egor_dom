@@ -1,23 +1,32 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
+import {createApp} from 'vue'
+import {registerPlugins} from "@/plugins";
 
-// Plugins
-import { registerPlugins } from '@/plugins'
 
-// Components
-import App from './App.vue'
+export default class VueService {
 
-// Composables
-import { createApp } from 'vue'
+  static render(component, selectors) {
 
-// Styles
-import 'unfonts.css'
+    const mountedElements = document.querySelectorAll(selectors);
+    mountedElements.forEach(mountedElement => {
 
-const app = createApp(App)
+      if (mountedElement) {
+        let params = [];
+        Object.keys(mountedElement.dataset).forEach(function (key) {
+          try {
+            params[key] = JSON.parse(mountedElement.dataset[key]);
+          } catch (e) {
+            params[key] = mountedElement.dataset[key];
+          }
+        });
 
-registerPlugins(app)
+        const app = createApp(component, {...params});
 
-app.mount('#app')
+        app.config.globalProperties.$breakpoints = breakpoint;
+        registerPlugins(app);
+        app.mount(mountedElement);
+      }
+
+    });
+  }
+
+}

@@ -1,18 +1,26 @@
 // Plugins
 import Components from 'unplugin-vue-components/vite'
 import Vue from '@vitejs/plugin-vue'
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import Vuetify, {transformAssetUrls} from 'vite-plugin-vuetify'
 import Fonts from 'unplugin-fonts/vite'
 
 // Utilities
-import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'node:url'
+import {defineConfig} from 'vite'
+import {fileURLToPath, URL} from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    manifest: true,
+    lib: {
+      entry: ['src/main.js'],
+      fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
+      cssFileName: 'my-lib-style',
+    }
+  },
   plugins: [
     Vue({
-      template: { transformAssetUrls },
+      template: {transformAssetUrls},
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify(),
@@ -32,7 +40,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['vuetify'],
   },
-  define: { 'process.env': {} },
+  define: {'process.env': {}},
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('src', import.meta.url)),
@@ -48,7 +56,8 @@ export default defineConfig({
     ],
   },
   server: {
-    port: 3000,
+    port: 27000,
+    host: true,
   },
   css: {
     preprocessorOptions: {
