@@ -2,8 +2,6 @@ import {createApp} from 'vue';
 import {registerPlugins} from "@/plugins";
 import type {Component} from 'vue';
 
-import App from "./App.vue";
-
 export type VueWithLayout = Component | {
   layout?: PromisedVue
 };
@@ -12,24 +10,20 @@ export type PromisedVue = VueWithLayout | Promise<VueWithLayout> | (VueWithLayou
 
 const components = import.meta.glob('./components/**/*.vue');
 
-
-for (const path in components) {
-  components[path]().then((mod) => {
-    console.log(path, mod)
-  })
-}
-
-
 export default class VueService {
 
   static async getComponent(name: string) {
-    return await components[`./components/${name}.vue`]() as VueWithLayout;
+    const module = await components[`./components/${name}.vue`]() as any;
+    return module.default as VueWithLayout;
   }
 
   static async render(componentName: string, selectors: string) {
     let component = await this.getComponent(componentName);
 
-    console.log(component);
+
+    if (!component) {
+      return;
+    }
 
     const targetElement = document.getElementById(selectors) as HTMLElement;
     if (targetElement) {
