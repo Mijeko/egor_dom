@@ -11,7 +11,9 @@ if(mb_strlen($arParams['ID']) > 0)
 	?>
 	<div id="<?=$arParams['ID'];?>"></div>
 	<script>
-        window.vs.render('HelloWorld', '<?=$arParams['ID'];?>');
+        document.addEventListener('DOMContentLoaded', function (event) {
+            window.vs.render('HelloWorld', '<?=$arParams['ID'];?>');
+        });
 	</script>
 	<?php
 }

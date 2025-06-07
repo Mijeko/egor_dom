@@ -14,34 +14,30 @@ export default class VueService {
 
   static async render(componentName: string, selectors: string) {
 
-    let comp = await this.getComponent(componentName)
+    let component = await this.getComponent(componentName);
 
-    const mountedElement = document.getElementById(selectors) as HTMLElement;
-    // mountedElements.forEach((element: Element, key: number, parent: NodeListOf<Element>) => {
+    const targetElement = document.getElementById(selectors) as HTMLElement;
+    if (targetElement) {
+      let params: Record<string, unknown> = {};
+      Object.keys(targetElement.dataset).forEach(function (key: string) {
+        try {
+          params[key] = JSON.parse(targetElement.dataset[key] as string);
+        } catch (e) {
+          params[key] = targetElement.dataset[key];
+        }
+      });
 
-      // let mountedElement = element as HTMLElement;
+      const app = createApp(component, {...params});
 
-      if (mountedElement) {
-        let params: Record<string, unknown> = {};
-        Object.keys(mountedElement.dataset).forEach(function (key: string) {
-          try {
-            params[key] = JSON.parse(mountedElement.dataset[key] as string);
-          } catch (e) {
-            params[key] = mountedElement.dataset[key];
-          }
-        });
+      // app.config.globalProperties.$breakpoints = breakpoint;
+      registerPlugins(app);
 
-        const app = createApp(comp, {...params});
+      console.log(app);
+      console.log(component);
+      console.log(targetElement);
 
-        // app.config.globalProperties.$breakpoints = breakpoint;
-        registerPlugins(app);
-
-        console.log(comp);
-        console.log(mountedElement);
-        app.mount(mountedElement);
-      }
-
-    // });
+      app.mount(targetElement);
+    }
   }
 
 }

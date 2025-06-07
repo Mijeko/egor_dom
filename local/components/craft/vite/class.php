@@ -98,11 +98,12 @@ class CraftViteComponent extends CBitrixComponent
 
 		if($manifest->getFile())
 		{
+			$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
 //			if($manifest->getIsDynamicEntry())
 //			{
-				$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
-
-//				echo '<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>';
+//				$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
+//
+////				echo '<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>';
 //			} else
 //			{
 //				$this->assets->addJs($this->viteDir() . '/dist/' . $manifest->getFile());
