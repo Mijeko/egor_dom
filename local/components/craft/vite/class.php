@@ -13,7 +13,8 @@ class CraftViteComponent extends CBitrixComponent
 	public function onPrepareComponentParams($arParams)
 	{
 		$arParams['SOURCE'] = $arParams['SOURCE'] ?? 'index.html';
-		$arParams['ID'] = uniqid();
+		$arParams['ID'] = 'app';
+		//		$arParams['ID'] = uniqid();
 
 		return $arParams;
 	}
@@ -29,15 +30,16 @@ class CraftViteComponent extends CBitrixComponent
 
 			$this->readManifest();
 
-			$manifestBlock = $this->findManifestBlock($this->arParams['SOURCE']);
-			if(!$manifestBlock)
-			{
-				throw new \Exception("Manifest not found");
-			}
-
 			$this->loadCore();
 
-			$this->loadManifest($manifestBlock);
+//			$manifestBlock = $this->findManifestBlock($this->arParams['SOURCE']);
+//			if(!$manifestBlock)
+//			{
+//				throw new \Exception("Manifest not found");
+//			}
+//
+//
+//			$this->loadManifest($manifestBlock);
 
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
@@ -99,15 +101,15 @@ class CraftViteComponent extends CBitrixComponent
 		if($manifest->getFile())
 		{
 			$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
-//			if($manifest->getIsDynamicEntry())
-//			{
-//				$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
-//
-////				echo '<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>';
-//			} else
-//			{
-//				$this->assets->addJs($this->viteDir() . '/dist/' . $manifest->getFile());
-//			}
+			//			if($manifest->getIsDynamicEntry())
+			//			{
+			//				$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
+			//
+			////				echo '<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>';
+			//			} else
+			//			{
+			//				$this->assets->addJs($this->viteDir() . '/dist/' . $manifest->getFile());
+			//			}
 		}
 
 		if($manifest->getCss())

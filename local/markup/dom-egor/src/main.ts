@@ -1,20 +1,35 @@
-import {createApp} from 'vue'
+import {createApp} from 'vue';
 import {registerPlugins} from "@/plugins";
-import type {Component} from "@vue/runtime-core";
+import type {Component} from 'vue';
+
+import App from "./App.vue";
+
+export type VueWithLayout = Component | {
+  layout?: PromisedVue
+};
+
+export type PromisedVue = VueWithLayout | Promise<VueWithLayout> | (VueWithLayout | Promise<VueWithLayout>)[]
+
+const components = import.meta.glob('./components/**/*.vue');
+
+
+for (const path in components) {
+  components[path]().then((mod) => {
+    console.log(path, mod)
+  })
+}
 
 
 export default class VueService {
 
   static async getComponent(name: string) {
-    const components = import.meta.glob('./components/**/*.vue');
-    // console.log(`./components/${name}.vue`);
-    // console.log(components);
-    return await components[`./components/${name}.vue`]() as any;
+    return await components[`./components/${name}.vue`]() as VueWithLayout;
   }
 
   static async render(componentName: string, selectors: string) {
-
     let component = await this.getComponent(componentName);
+
+    console.log(component);
 
     const targetElement = document.getElementById(selectors) as HTMLElement;
     if (targetElement) {
@@ -27,21 +42,14 @@ export default class VueService {
         }
       });
 
-      const app = createApp(component, {...params});
-
-      // app.config.globalProperties.$breakpoints = breakpoint;
-      registerPlugins(app);
-
-      console.log(app);
-      console.log(component);
-      console.log(targetElement);
-
-      app.mount(targetElement);
     }
+
+    const app = createApp(component);
+    registerPlugins(app);
+    app.mount(`#${selectors}`);
   }
 
 }
-
 
 declare global {
   interface Window {
