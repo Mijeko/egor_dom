@@ -1,20 +1,12 @@
 import {createApp} from 'vue';
 import {registerPlugins} from "@/plugins";
-import type {Component} from 'vue';
-
-export type VueWithLayout = Component | {
-  layout?: PromisedVue
-};
-
-export type PromisedVue = VueWithLayout | Promise<VueWithLayout> | (VueWithLayout | Promise<VueWithLayout>)[]
-
-const components = import.meta.glob('./components/**/*.vue');
 
 export default class VueService {
 
   static async getComponent(name: string) {
+    const components = import.meta.glob('./components/**/*.vue');
     const module = await components[`./components/${name}.vue`]() as any;
-    return module.default as VueWithLayout;
+    return module.default as any;
   }
 
   static async render(componentName: string, selectors: string) {
@@ -26,8 +18,9 @@ export default class VueService {
     }
 
     const targetElement = document.getElementById(selectors) as HTMLElement;
+    let params: Record<string, unknown> = {};
+
     if (targetElement) {
-      let params: Record<string, unknown> = {};
       Object.keys(targetElement.dataset).forEach(function (key: string) {
         try {
           params[key] = JSON.parse(targetElement.dataset[key] as string);
@@ -38,7 +31,7 @@ export default class VueService {
 
     }
 
-    const app = createApp(component);
+    const app = createApp(component, {...params});
     registerPlugins(app);
     app.mount(`#${selectors}`);
   }
