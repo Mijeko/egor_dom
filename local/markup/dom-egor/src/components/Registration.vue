@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  DEsss
+  Register Page
 </template>
 
 <style scoped>

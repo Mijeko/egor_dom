@@ -13,8 +13,7 @@ class CraftViteComponent extends CBitrixComponent
 	public function onPrepareComponentParams($arParams)
 	{
 		$arParams['SOURCE'] = $arParams['SOURCE'] ?? 'index.html';
-		$arParams['ID'] = 'app';
-		//		$arParams['ID'] = uniqid();
+		$arParams['ID'] = $this->generateRandomString();
 
 		return $arParams;
 	}
@@ -32,14 +31,15 @@ class CraftViteComponent extends CBitrixComponent
 
 			$this->loadCore();
 
-//			$manifestBlock = $this->findManifestBlock($this->arParams['SOURCE']);
-//			if(!$manifestBlock)
-//			{
-//				throw new \Exception("Manifest not found");
-//			}
-//
-//
-//			$this->loadManifest($manifestBlock);
+			$manifestBlock = $this->findManifestBlock($this->arParams['SOURCE']);
+			if(!$manifestBlock)
+			{
+				throw new \Exception("Manifest not found");
+			}
+
+//			\Bitrix\Main\Diag\Debug::dump($manifestBlock);
+
+			$this->loadManifest($manifestBlock);
 
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
@@ -100,16 +100,14 @@ class CraftViteComponent extends CBitrixComponent
 
 		if($manifest->getFile())
 		{
-			$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
-			//			if($manifest->getIsDynamicEntry())
-			//			{
-			//				$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
-			//
-			////				echo '<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>';
-			//			} else
-			//			{
-			//				$this->assets->addJs($this->viteDir() . '/dist/' . $manifest->getFile());
-			//			}
+			if($manifest->getIsDynamicEntry())
+			{
+				$this->assets->addString('<script type="module" src="' . $this->viteDir() . '/dist/' . $manifest->getFile() . '"></script>');
+
+			} else
+			{
+				$this->assets->addJs($this->viteDir() . '/dist/' . $manifest->getFile());
+			}
 		}
 
 		if($manifest->getCss())
@@ -161,5 +159,10 @@ class CraftViteComponent extends CBitrixComponent
 	protected function getManifestPath(): string
 	{
 		return $_SERVER['DOCUMENT_ROOT'] . $this->viteDir() . '/dist/.vite/manifest.json';
+	}
+
+	function generateRandomString($length = 10): string
+	{
+		return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
 	}
 }

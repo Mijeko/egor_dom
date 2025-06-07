@@ -31,8 +31,13 @@ export default class VueService {
 
     }
 
+
+
     const app = createApp(component, {...params});
     registerPlugins(app);
+    console.log(app);
+    console.log(component);
+    console.log(`#${selectors}`);
     app.mount(`#${selectors}`);
   }
 
