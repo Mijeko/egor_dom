@@ -6,33 +6,50 @@ use Craft\Core\Helper\DtoManager;
 
 class ManifestBlockDto extends DtoManager
 {
-	public function __construct(
-		protected ?string $file = null,
-		protected array   $css = [],
-		protected array   $assets = [],
-		protected array   $imports = [],
-	)
-	{
+	protected ?string $file = null;
+	protected ?string $name = null;
+	protected ?string $src = null;
+	protected ?bool $isDynamicEntry = false;
+	protected ?bool $isEntry = false;
+	protected ?array $imports = [];
+	protected ?array $dynamicImports = [];
+	protected ?array $css = [];
+	protected ?array $assets = [];
 
+
+	public function getIsDynamicEntry(): ?bool
+	{
+		return $this->isDynamicEntry;
 	}
 
-	public function addAsset(ManifestAssetItemDto $assetItemDto): static
+	public function getIsEntry(): ?bool
 	{
-		$this->assets[] = $assetItemDto;
-		return $this;
+		return $this->isEntry;
 	}
 
-	public function setAssets(array $assets): static
+	public function getCss(): ?array
 	{
-		$this->assets = array_map(function(string $asset) {
-			return new ManifestAssetItemDto($asset);
-		}, $assets);
-		return $this;
+		return $this->css;
 	}
 
-	public function setCss(array $css): void
+	public function setCss(?array $css): void
 	{
 		$this->css = $css;
+	}
+
+	public function setAssets(?array $assets): void
+	{
+		$this->assets = $assets;
+	}
+
+	public function getAssets(): ?array
+	{
+		return $this->assets;
+	}
+
+	public function setImports(?array $imports): void
+	{
+		$this->imports = $imports;
 	}
 
 	public function setFile(?string $file): void
@@ -40,31 +57,54 @@ class ManifestBlockDto extends DtoManager
 		$this->file = $file;
 	}
 
-	public function setImports(array $imports): void
+	public function setName(?string $name): void
 	{
-		$this->imports = $imports;
+		$this->name = $name;
 	}
 
-	/**
-	 * @return ManifestAssetItemDto[]
-	 */
-	public function getAssets(): array
+	public function setDynamicImports(?array $dynamicImports): void
 	{
-		return $this->assets;
+		$this->dynamicImports = $dynamicImports;
 	}
 
-	public function getCss(): array
+	public function setIsDynamicEntry(?bool $isDynamicEntry): void
 	{
-		return $this->css;
+		$this->isDynamicEntry = $isDynamicEntry;
 	}
 
-	public function getFile(): ?string
+	public function setIsEntry(?bool $isEntry): void
 	{
-		return $this->file;
+		$this->isEntry = $isEntry;
 	}
+
+	public function setSrc(?string $src): void
+	{
+		$this->src = $src;
+	}
+
 
 	public function getImports(): array
 	{
 		return $this->imports;
+	}
+
+	public function getFile(): string
+	{
+		return $this->file;
+	}
+
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+	public function getDynamicImports(): array
+	{
+		return $this->dynamicImports;
+	}
+
+	public function getSrc(): string
+	{
+		return $this->src;
 	}
 }

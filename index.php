@@ -9,11 +9,10 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'src/pages/index.vue',
-//		'SOURCE' => 'index.html',
-		'ID'     => 'app',
+		'SOURCE' => 'HelloWorld',
 	]
 );
 ?>
+
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
