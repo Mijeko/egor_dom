@@ -1,14 +1,23 @@
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
-import CraftApi from "@/service/CraftApi.js";
+import RegisterService from "../service/Register/RegisterService.ts";
+import type RegisterRequestDto from "@/Dto/RegisterRequestDto.ts";
 
 export default defineComponent({
   methods: {
-    submitForm: function (event) {
+    submitForm: function () {
       if (this.valid) {
-        CraftApi.post('user.register', new FormData(event.target))
-          .then(response => response.json())
-          .then(data => {
+
+        let body: RegisterRequestDto = {
+          email: this.form.email,
+          phone: this.form.phone,
+          password: this.form.password
+        };
+
+        let service = new RegisterService();
+        service.execute(body)
+          .then((response: any) => response.json())
+          .then((data: object) => {
             console.log(data)
           });
       }
@@ -26,31 +35,30 @@ export default defineComponent({
       },
       validate: {
         phone: [
-          value => {
+          (value: string) => {
             if (value) return true
 
             return 'Телефон обязателен.'
           },
-          value => {
+          (value: string) => {
             if (value?.length <= 11) return true
 
             return 'Телефон должен быть 11 символов.'
           },
         ],
         email: [
-          value => {
+          (value: string) => {
             if (value) return true
 
             return 'Email обязателен.'
           },
-          value => {
+          (value: string) => {
             if (/.+@.+\..+/.test(value)) return true
 
             return 'Неккоректное значение email.'
           },
         ],
       },
-      email: '',
     }
   },
 })
@@ -61,7 +69,7 @@ export default defineComponent({
   <v-form v-model="valid" @submit.prevent="submitForm">
     <v-container>
 
-      <h1 style="margin-bottom: 30px; text-align: center;">Dom Egor регистрация</h1>
+      <h1 style="margin-bottom: 30px; text-align: center;">АБН - регистрация</h1>
 
       <v-row>
         <v-col
@@ -82,7 +90,7 @@ export default defineComponent({
           md="12"
         >
           <v-text-field
-            v-model="email"
+            v-model="form.email"
             :rules="validate.email"
             label="E-mail"
             required

@@ -9,9 +9,13 @@ const pinia = createPinia();
 export default class VueService {
 
   static async getComponent(name: string) {
-    const components = import.meta.glob('./components/**/*.vue');
-    const module = await components[`./components/${name}.vue`]() as any;
-    return module.default as any;
+    try {
+      const components = import.meta.glob('./components/**/*.vue');
+      const module = await components[`./components/${name}.vue`]() as any;
+      return module.default as any;
+    } catch (e) {
+      console.log(name);
+    }
   }
 
   static async render(componentName: string, selectors: string) {

@@ -16,3 +16,6 @@ composer-i:
 
 composer-dump:
 	cd local/php_interface && composer dump-autoload
+
+orm:
+	cd local/modules/craft.orm && php run.php orm:annotate -m all

@@ -1,21 +1,18 @@
 <?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
 <?php
+
 /**
  * @global CMain $APPLICATION
- * @global CUser $USER
  */
 
-global $APPLICATION, $USER;
-
-if($USER->IsAuthorized())
-{
-	LocalRedirect("/");
-}
+global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:register',
-	'vue',
-	[],
+	'craft:vite',
+	'vite',
+	[
+		'SOURCE' => 'ListRequests',
+	],
 	false,
 	['HIDE_ICONS' => 'Y']
 );

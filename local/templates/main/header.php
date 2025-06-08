@@ -32,5 +32,12 @@
 <body>
 
 <div id="panel">
-	<?php $APPLICATION->ShowPanel(); ?>
+	<?php
+	if(!\Bitrix\Main\Application::getInstance()->getContext()->getRequest()->get('hp'))
+	{
+		?>
+		<?php $APPLICATION->ShowPanel(); ?>
+		<?php
+	}
+	?>
 </div>
