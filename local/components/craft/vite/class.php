@@ -14,6 +14,7 @@ class CraftViteComponent extends CBitrixComponent
 	{
 		$arParams['SOURCE'] = $arParams['SOURCE'] ?? 'index.html';
 		$arParams['ID'] = $this->generateRandomString();
+		$arParams['PROPS'] = is_array($arParams['PROPS']) ? $arParams['PROPS'] : [];
 
 		return $arParams;
 	}

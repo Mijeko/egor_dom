@@ -11,4 +11,9 @@ class CraftUserTable extends UserTable
 		$map = parent::getMap();
 		return $map;
 	}
+
+	public static function getObjectClass()
+	{
+		return CraftUser::class;
+	}
 }

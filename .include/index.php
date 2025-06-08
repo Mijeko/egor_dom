@@ -8,10 +8,10 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
+	'craft:claims',
+	'.default',
 	[
-		'SOURCE' => 'ListRequests',
+		'USER_ID' => \Craft\Model\CraftUser::load()->getId(),
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

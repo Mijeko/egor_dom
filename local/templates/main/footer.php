@@ -7,7 +7,7 @@
 
 <?php
 
-if($USER->IsAuthorized())
+if(\Craft\Model\CraftUser::load()?->isAuthorized())
 {
 	$APPLICATION->IncludeComponent(
 		'craft:vite',

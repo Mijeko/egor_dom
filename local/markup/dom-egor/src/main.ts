@@ -18,7 +18,7 @@ export default class VueService {
     }
   }
 
-  static async render(componentName: string, selectors: string) {
+  static async render(componentName: string, selectors: string, extParams: Record<string, unknown> = {}) {
     let component = await this.getComponent(componentName);
 
 
@@ -28,8 +28,7 @@ export default class VueService {
 
     const targetElement = document.getElementById(selectors) as HTMLElement;
     let params: Record<string, unknown> = {};
-
-    if (targetElement) {
+    if (targetElement && !extParams) {
       Object.keys(targetElement.dataset).forEach(function (key: string) {
         try {
           params[key] = JSON.parse(targetElement.dataset[key] as string);
@@ -38,6 +37,8 @@ export default class VueService {
         }
       });
 
+    } else {
+      params = extParams;
     }
 
 
