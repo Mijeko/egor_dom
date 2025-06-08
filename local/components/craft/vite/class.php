@@ -97,7 +97,7 @@ class CraftViteComponent extends CBitrixComponent
 			}
 		}
 
-		if($manifest->getFile())
+		if($manifest->getFile() && !$manifest->isCss())
 		{
 			if($manifest->getIsDynamicEntry())
 			{
@@ -115,6 +115,11 @@ class CraftViteComponent extends CBitrixComponent
 			{
 				$this->assets->addCss($this->viteDir() . '/dist/' . $css);
 			}
+		}
+
+		if($manifest->isCss())
+		{
+			$this->assets->addCss($this->viteDir() . '/dist/' . $manifest->getFile());
 		}
 
 		$this->includeAssets($manifest);

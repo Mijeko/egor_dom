@@ -61,7 +61,18 @@ class ManifestDto
 
 	public function getCoreCss(): ?ManifestBlockDto
 	{
-		return null;
+		$blocks = array_filter($this->blocks, function(ManifestChainDto $block) {
+			return $block->getName() === 'style.css';
+		});
+
+		if(count($blocks) != 1)
+		{
+			return null;
+		}
+
+		$block = array_shift($blocks);
+
+		return $block->getManifestBlock();
 	}
 
 	public function getCoreJs(): ?ManifestBlockDto

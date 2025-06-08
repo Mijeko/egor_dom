@@ -16,6 +16,11 @@ class ManifestBlockDto extends DtoManager
 	protected ?array $css = [];
 	protected ?array $assets = [];
 
+	public function isCss(): bool
+	{
+		return $this->getSrc() === 'style.css';
+	}
+
 
 	public function getIsDynamicEntry(): ?bool
 	{
