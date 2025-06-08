@@ -4,12 +4,12 @@ namespace Craft\Rest;
 
 class Handler
 {
-	const SCOPE_USER = 'user';
+	const SCOPE_CRAFT = 'craft';
 
 	public static function onRestServiceBuildDescription()
 	{
 		return [
-			static::SCOPE_USER => [
+			static::SCOPE_CRAFT => [
 				'user.register' => [RegistrationRest::class, 'register'],
 				'user.auth'     => [RegistrationRest::class, 'authorize'],
 			],

@@ -4,7 +4,13 @@ namespace Craft\Rest;
 
 class RegistrationRest extends \IRestService
 {
-	public function register() { }
+	public static function register($query, $nav, \CRestServer $server)
+	{
+		return [
+			'demo' => rand(),
+		];
 
-	public function authorize() { }
+	}
+
+	public static function authorize($query, $nav, \CRestServer $server) { }
 }
