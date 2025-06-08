@@ -5,13 +5,13 @@ $APPLICATION->SetTitle("Dom");
 
 
 <?php
-//$APPLICATION->IncludeComponent(
-//	'craft:vite',
-//	'vite',
-//	[
-//		'SOURCE' => 'HelloWorld',
-//	]
-//);
+$APPLICATION->IncludeComponent(
+	'craft:vite',
+	'vite',
+	[
+		'SOURCE' => 'HelloWorld',
+	]
+);
 ?>
 
 

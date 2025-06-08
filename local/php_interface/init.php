@@ -35,3 +35,9 @@ if(\Bitrix\Main\Loader::includeModule('craft.core'))
 {
 	require_once __DIR__ . '/defines.php';
 }
+
+
+if(file_exists(__DIR__ . '/events.php'))
+{
+	require_once __DIR__ . '/events.php';
+}

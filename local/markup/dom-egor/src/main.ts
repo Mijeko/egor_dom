@@ -1,5 +1,10 @@
-import {createApp} from 'vue';
+import {createApp, createSSRApp} from 'vue';
+import {createPinia} from 'pinia';
 import {registerPlugins} from "@/plugins";
+
+import './store.ts';
+
+const pinia = createPinia();
 
 export default class VueService {
 
@@ -32,12 +37,9 @@ export default class VueService {
     }
 
 
-
-    const app = createApp(component, {...params});
+    const app = createSSRApp(component, {...params});
     registerPlugins(app);
-    console.log(app);
-    console.log(component);
-    console.log(`#${selectors}`);
+    app.use(pinia);
     app.mount(`#${selectors}`);
   }
 

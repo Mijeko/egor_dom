@@ -31,16 +31,14 @@ class CraftViteComponent extends CBitrixComponent
 
 			$this->loadCore();
 
-			\Bitrix\Main\Diag\Debug::dump($this->arParams['SOURCE']);
+			/*
 			$manifestBlock = $this->findManifestBlock($this->arParams['SOURCE']);
 			if(!$manifestBlock)
 			{
 				throw new \Exception("Manifest not found");
 			}
-
-			\Bitrix\Main\Diag\Debug::dump($manifestBlock);
-
 			$this->loadManifest($manifestBlock);
+			*/
 
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
