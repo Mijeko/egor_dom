@@ -1,0 +1,15 @@
+html, body {
+  height: 100%;
+}
+
+.stronger {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bs-body-bg);
+}
+
+.page-content {
+  flex: 1 1 auto;
+  position: relative;
+}

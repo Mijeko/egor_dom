@@ -15,11 +15,16 @@
 	<?php
 	$assets = \Bitrix\Main\Page\Asset::getInstance();
 
+
+	$assets->addJs(SITE_TEMPLATE_PATH . '/js/bundle.js');
+	$assets->addCss(SITE_TEMPLATE_PATH . '/css/main.css');
+
 	$APPLICATION->ShowHead();
 	?>
 </head>
-<body>
 
+
+<body class="page">
 <div id="panel">
 	<?php
 	if(!\Bitrix\Main\Application::getInstance()->getContext()->getRequest()->get('hp'))
@@ -32,4 +37,14 @@
 </div>
 
 
-<h1><?php $APPLICATION->ShowTitle(); ?></h1>
+<div class="stronger">
+
+	<header>
+		<div class="container">
+			header
+		</div>
+	</header>
+
+	<div class="page-content">
+		<div class="container">
+			<h1><?php $APPLICATION->ShowTitle(); ?></h1>

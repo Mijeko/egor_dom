@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+blockquote,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+body {
+  //font-family: var(--font-family);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  padding: 0;
+  max-width: 1720px;
+  width: 100%;
+  margin: 0 auto;
+
+  @include _1200 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @include _640 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

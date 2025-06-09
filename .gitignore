@@ -4,6 +4,8 @@
 /bitrix/
 local/php_interface/**/vendor/
 */node_modules/
+*.log
+*.zip
 
 #
 /assets/

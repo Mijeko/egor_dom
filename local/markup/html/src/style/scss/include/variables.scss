@@ -1,0 +1,75 @@
+$text-color: #1B1D26;
+$alternative-text-color: #fff;
+$second-color: #001F85;
+$linear-color: #004885;
+$alert-text-color: #CF0000;
+$label-color: #5A5B5D;
+$mulled-wine: #504e75;
+$border-color: #D5D7D9;
+$bg-color: #F6FAFF;
+$btn-hover: #2847AD;
+$bg-color-footer: #E6EFF9;
+$bg-color-contacts: #F0F5F5;
+$border-color-contacts: #CECECE;
+
+
+$transition-link: 0.2s ease all;
+
+$extra_brake_point_min: 1920;
+$large_brake_point_min: 1580;
+$small_brake_point_min: 1200;
+$tablet_brake_point_min: 991;
+$phone_brake_point_min: 640;
+$start_phone_brake_point_min: 375;
+
+$extra_brake_point_max: $extra_brake_point_min - 1; /* 1919 */
+$large_brake_point_max: $large_brake_point_min - 1; /* 1579 */
+$medium_brake_point_max: $small_brake_point_min - 1; /* 1199 */
+$tablet_brake_point_max: $tablet_brake_point_min - 1; /* 990 */
+$phone_brake_point_max: $phone_brake_point_min - 1; /* 639 */
+$start_phone_brake_point_max: $phone_brake_point_min - 1; /* 374 */
+
+$extra_large: "(max-width: #{$extra_brake_point_max}px)"; /* максимальная ширина 1919 */
+$extra: "(min-width: #{$extra_brake_point_max}px)"; /* минимальная ширина 1920 */
+$large: "(max-width: #{$large_brake_point_max}px)"; /* минимальная ширина 1580 */
+$medium: "(max-width: #{$medium_brake_point_max}px)"; /* максимальная ширина 1200 */
+$tablet: "(max-width: #{$tablet_brake_point_max}px)"; /* максимальная ширина 990 */
+$phone: "(max-width: #{$phone_brake_point_max}px)"; /* максимальная ширина 640 */
+$start_phone: "(max-width: #{$start_phone_brake_point_max}px)"; /* максимальная ширина 375 */
+
+
+@mixin _1920 {
+  @media #{$extra_large} {
+    @content;
+  }
+}
+
+@mixin _1580 {
+  @media #{$extra} {
+    @content;
+  }
+}
+
+@mixin _1200 {
+  @media #{$large} {
+    @content;
+  }
+}
+
+@mixin _991 {
+  @media #{$medium} {
+    @content;
+  }
+}
+
+@mixin _640 {
+  @media #{$tablet} {
+    @content;
+  }
+}
+
+@mixin _375 {
+  @media #{$phone} {
+    @content;
+  }
+}

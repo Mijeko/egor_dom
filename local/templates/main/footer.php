@@ -31,6 +31,14 @@ if(\Craft\Model\CraftUser::load()?->isAuthorized())
 }
 ?>
 
+</div>
+</div>
+<footer>
+	<div>
+		footer
+	</div>
+</footer>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,12 @@
+build/
+node_modules/
+.idea/
+991px.jpg
+1920px.jpg
+src/pug/include/_header.pug
+src/style/scss/block/last_header.scss
+991dropdownmenu.jpg
+mobilemenuclose.jpg
+mobilemenuopen.jpg
+375ffff.jpg
+991ffff.jpg
