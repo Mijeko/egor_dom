@@ -11,7 +11,7 @@ $APPLICATION->IncludeComponent(
 	'craft:claims',
 	'.default',
 	[
-		'USER_ID' => \Craft\Model\CraftUser::load()->getId(),
+		'USER_ID' => \Craft\Model\CraftUser::load()?->getId(),
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

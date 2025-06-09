@@ -2,11 +2,14 @@
 
 namespace Craft\DDD\Claims\Domain\Entity;
 
+use Craft\DDD\Objects\Domain\BuildObject;
+
 class Claim
 {
 	public function __construct(
-		protected int    $id,
-		protected string $name,
+		protected int         $id,
+		protected string      $name,
+		protected BuildObject $buildObject,
 	)
 	{
 	}
@@ -19,5 +22,10 @@ class Claim
 	public function getId(): int
 	{
 		return $this->id;
+	}
+
+	public function getBuildObject(): BuildObject
+	{
+		return $this->buildObject;
 	}
 }
