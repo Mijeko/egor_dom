@@ -12,6 +12,7 @@ if(empty($arResult))
 	return;
 }
 
+ob_start();
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
@@ -30,3 +31,4 @@ $APPLICATION->IncludeComponent(
 	false,
 	['HIDE_ICONS' => 'Y']
 );
+return ob_get_clean();
