@@ -6,7 +6,7 @@ use Craft\DDD\Claims\Domain\Entity\Claim;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Claims\Infrastructure\Entity\Claim as BxClaim;
-use Craft\DDD\Objects\Domain\BuildObject;
+use Craft\DDD\Objects\Domain\Entity\BuildObject;
 
 class OrmClaimRepository implements ClaimRepositoryInterface
 {

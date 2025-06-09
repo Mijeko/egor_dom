@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Claims\Domain\Entity;
 
-use Craft\DDD\Objects\Domain\BuildObject;
+use Craft\DDD\Objects\Domain\Entity\BuildObject;
 
 class Claim
 {
