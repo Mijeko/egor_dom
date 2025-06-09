@@ -1,5 +1,5 @@
 import CraftApi from "@/service/CraftApi.ts";
-import type RegisterRequestDto from "@/Dto/RegisterRequestDto.ts";
+import type RegisterRequestDto from "@/dto/RegisterRequestDto.ts";
 
 export default class RegisterService {
 

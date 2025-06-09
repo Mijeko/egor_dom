@@ -23,6 +23,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			$result[] = new Developer(
 				$developer->getId(),
 				$developer->getName(),
+				$developer->getPictureId(),
 			);
 		}
 

@@ -3,6 +3,9 @@ import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: "Developers",
+  mounted() {
+    console.log(this.developers)
+  },
   props: {
     developers: []
   }
@@ -17,7 +20,7 @@ export default defineComponent({
       <v-card v-for="developer in developers">
         <v-row>
           <v-col md="3">
-            <v-img :src="developer.picture"></v-img>
+            <v-img :src="developer.picture.src"></v-img>
           </v-col>
           <v-col md="9">
             <v-card-text>{{ developer.name }}</v-card-text>

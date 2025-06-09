@@ -1,4 +1,4 @@
-import type RegisterResponseDto from "@/Dto/RegisterResponseDto.ts";
+import type RegisterResponseDto from "@/dto/RegisterResponseDto.ts";
 import {th} from "vuetify/locale";
 
 export default class CraftApi {

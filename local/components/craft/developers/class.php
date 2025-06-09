@@ -1,5 +1,7 @@
 <?php
 
+use Craft\DDD\Developers\Domain\Entity\Developer;
+use Craft\DDD\Developers\Application\Dto\DeveloperFrontDto;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Application\Service\DeveloperServiceFactory;
@@ -34,10 +36,13 @@ class CraftDevelopersComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['DEVELOPERS'] = $this->service->findAll([
-			'filter' => [
-//				DeveloperTable::F_ACTIVE => DeveloperTable::ACTIVE_Y,
-			],
-		]);
+		$this->arResult['DEVELOPERS'] = array_map(function(Developer $developer) {
+			return DeveloperFrontDto::fromModel($developer);
+		},
+			$this->service->findAll([
+				'filter' => [
+					#DeveloperTable::F_ACTIVE => DeveloperTable::ACTIVE_Y,
+				],
+			]));
 	}
 }

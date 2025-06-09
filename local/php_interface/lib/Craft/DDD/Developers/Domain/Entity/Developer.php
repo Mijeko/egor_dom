@@ -7,6 +7,7 @@ class Developer
 	public function __construct(
 		public int    $id,
 		public string $name,
+		public int    $pictureId
 	)
 	{
 
@@ -20,5 +21,10 @@ class Developer
 	public function getName(): string
 	{
 		return $this->name;
+	}
+
+	public function getPictureId(): int
+	{
+		return $this->pictureId;
 	}
 }

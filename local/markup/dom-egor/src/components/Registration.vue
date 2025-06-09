@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import RegisterService from "../service/Register/RegisterService.ts";
-import type RegisterRequestDto from "@/Dto/RegisterRequestDto.ts";
+import type RegisterRequestDto from "@/dto/RegisterRequestDto.ts";
 
 export default defineComponent({
   methods: {
