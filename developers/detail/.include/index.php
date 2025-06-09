@@ -25,6 +25,7 @@ if(!$developer->getId())
 
 
 $APPLICATION->SetTitle('Строительные объекты компании: ' . $developer->getName());
+$APPLICATION->AddChainItem('Строительные объекты компании: ' . $developer->getName(),$APPLICATION->GetCurPage());
 
 $APPLICATION->IncludeComponent(
 	'craft:objects',

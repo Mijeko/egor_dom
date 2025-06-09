@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BottomFloatMenu: typeof import('./src/components/BottomFloatMenu.vue')['default']
+    Breadcrumbs: typeof import('./src/components/Breadcrumbs.vue')['default']
     BuildObjectsList: typeof import('./src/components/BuildObjectsList.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']

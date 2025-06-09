@@ -11,11 +11,9 @@ export default defineComponent({
 
 <template>
   <v-app>
-    <v-container>
-      <v-card v-for="claim in claims">
-        <v-card-text>{{ claim.name }}</v-card-text>
-      </v-card>
-    </v-container>
+    <v-card v-for="claim in claims">
+      <v-card-text>{{ claim.name }}</v-card-text>
+    </v-card>
   </v-app>
 </template>
 

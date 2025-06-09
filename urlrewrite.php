@@ -8,7 +8,7 @@ $arUrlRewrite=array (
     'PATH' => '/developers/detail/index.php',
     'SORT' => 100,
   ),
-  4 =>
+  4 => 
   array (
     'CONDITION' => '#^/objects/([^/]+)/?(\\?[^/]*)?$#',
     'RULE' => 'ELEMENT_ID=$1',

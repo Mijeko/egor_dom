@@ -838,7 +838,7 @@ html, body {
   justify-content: flex-start;
   gap: 40px;
   padding: 20px 0;
-  margin-bottom: 40px; }
+  margin-bottom: 15px; }
   .header-menu {
     display: flex;
     align-items: center;

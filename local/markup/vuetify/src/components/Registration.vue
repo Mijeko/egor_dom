@@ -66,52 +66,50 @@ export default defineComponent({
 
 <template>
   <v-app>
-    <v-container>
-      <v-form v-model="valid" @submit.prevent="submitForm">
-        <v-row>
-          <v-col
-            cols="12"
-            md="12"
-          >
-            <v-text-field
-              v-model="form.phone"
-              :counter="11"
-              :rules="validate.phone"
-              label="Номер телефона"
-              required
-            ></v-text-field>
-          </v-col>
+    <v-form v-model="valid" @submit.prevent="submitForm">
+      <v-row>
+        <v-col
+          cols="12"
+          md="12"
+        >
+          <v-text-field
+            v-model="form.phone"
+            :counter="11"
+            :rules="validate.phone"
+            label="Номер телефона"
+            required
+          ></v-text-field>
+        </v-col>
 
-          <v-col
-            cols="12"
-            md="12"
-          >
-            <v-text-field
-              v-model="form.email"
-              :rules="validate.email"
-              label="E-mail"
-              required
-            ></v-text-field>
-          </v-col>
+        <v-col
+          cols="12"
+          md="12"
+        >
+          <v-text-field
+            v-model="form.email"
+            :rules="validate.email"
+            label="E-mail"
+            required
+          ></v-text-field>
+        </v-col>
 
 
-          <v-col
-            cols="12"
-            md="12"
-          >
-            <v-text-field
-              v-model="form.password"
-              :counter="10"
-              label="Пароль"
-              required
-            ></v-text-field>
-          </v-col>
-        </v-row>
+        <v-col
+          cols="12"
+          md="12"
+        >
+          <v-text-field
+            v-model="form.password"
+            :counter="10"
+            label="Пароль"
+            required
+          ></v-text-field>
+        </v-col>
+      </v-row>
 
-        <v-btn class="mt-2" type="submit" block>Зарегистрироваться</v-btn>
+      <v-btn class="mt-2" type="submit" block>Зарегистрироваться</v-btn>
 
-      </v-form>
-    </v-container>
+    </v-form>
   </v-app>
 </template>
 
