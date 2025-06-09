@@ -37,6 +37,7 @@ class CraftBuildObjectsDetailComponent extends CBitrixComponent
 		global $APPLICATION;
 
 		$APPLICATION->SetTitle($element->name);
+		$APPLICATION->AddChainItem($element->name);
 	}
 
 	protected function loadService(): void

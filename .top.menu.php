@@ -2,7 +2,7 @@
 $aMenuLinks = [
 	[
 		"Объекты",
-		"/",
+		"/objects/",
 		[],
 		[
 			'ICON' => 'mdi-menu',

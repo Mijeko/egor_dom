@@ -1,5 +1,5 @@
-<?
-$sSectionName = "Новый раздел";
+<?php
+$sSectionName = "Объекты недвижимости";
 $arDirProperties = [
 
 ];
