@@ -1,8 +1,11 @@
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "Developers"
+  name: "Developers",
+  props: {
+    developers: []
+  }
 })
 </script>
 
@@ -10,6 +13,10 @@ export default defineComponent({
   <v-app>
     <v-container>
       Застройщики
+
+      <v-card v-for="developer in developers">
+        <v-card-text>{{ developer.name }}</v-card-text>
+      </v-card>
     </v-container>
   </v-app>
 </template>

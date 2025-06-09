@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Developers\Domain;
+namespace Craft\DDD\Developers\Domain\Entity;
 
 class Developer
 {

@@ -16,7 +16,6 @@
  * @var  $component
  */
 
-
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
