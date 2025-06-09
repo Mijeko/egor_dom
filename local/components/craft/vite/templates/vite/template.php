@@ -13,7 +13,7 @@ if(mb_strlen($arParams['ID']) > 0)
 
 	<script>
         document.addEventListener('DOMContentLoaded', function (event) {
-            window.vs.render('<?=$arParams['SOURCE'];?>', '<?=$arParams['ID'];?>');
+            window.vs.render('<?=$arParams['SOURCE'];?>', '<?=$arParams['ID'];?>', <?=json_encode($arParams['PROPS'])?>);
         });
 	</script>
 	<?php

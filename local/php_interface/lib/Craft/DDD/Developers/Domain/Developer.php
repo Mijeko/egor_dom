@@ -5,8 +5,8 @@ namespace Craft\DDD\Developers\Domain;
 class Developer
 {
 	public function __construct(
-		protected int    $id,
-		protected string $name,
+		public int    $id,
+		public string $name,
 	)
 	{
 

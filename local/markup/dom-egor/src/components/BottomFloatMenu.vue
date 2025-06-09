@@ -8,23 +8,28 @@ export default defineComponent({
       icons: [
         {
           icon: 'mdi-menu',
-          title: 'Заявки',
+          title: 'Объекты',
           link: '/',
+        },
+        {
+          icon: 'mdi-menu',
+          title: 'Заявки',
+          link: '/claims/',
         },
         {
           icon: 'mdi-crosshairs-gps',
           title: 'Застройщики',
-          link: '/',
+          link: '/developers/',
         },
         {
           icon: 'mdi-crosshairs-gps',
           title: 'Кабинет',
-          link: '/',
+          link: '/profile/',
         },
         {
           icon: 'mdi-crosshairs-gps',
           title: 'Помощь',
-          link: '/',
+          link: '/help/',
         },
       ]
     };

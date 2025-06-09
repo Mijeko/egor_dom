@@ -7,9 +7,9 @@ use Craft\DDD\Objects\Domain\BuildObject;
 class Claim
 {
 	public function __construct(
-		protected int         $id,
-		protected string      $name,
-		protected BuildObject $buildObject,
+		public int         $id,
+		public string      $name,
+		public BuildObject $buildObject,
 	)
 	{
 	}

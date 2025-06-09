@@ -7,4 +7,12 @@
 
 global $APPLICATION;
 
+$APPLICATION->IncludeComponent(
+	'craft:developers',
+	'.default',
+	[
+	],
+	false,
+	['HIDE_ICONS' => 'Y']
+);
 ?>

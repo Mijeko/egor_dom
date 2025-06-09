@@ -5,6 +5,7 @@ namespace Craft\DDD\Claims\Infrastructure\Entity;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
+use Bitrix\Main\ORM\Fields\StringField;
 
 class ClaimTable extends DataManager
 {
@@ -31,7 +32,7 @@ class ClaimTable extends DataManager
 			(new IntegerField(self::F_ID))
 				->configurePrimary()
 				->configureTitle('ID'),
-			(new IntegerField(self::F_NAME))
+			(new StringField(self::F_NAME))
 				->configureTitle('Название'),
 			(new IntegerField(self::F_USER_ID))
 				->configureTitle('ID пользователя')

@@ -41,7 +41,6 @@ export default class VueService {
       params = extParams;
     }
 
-
     const app = createSSRApp(component, {...params});
     registerPlugins(app);
     app.use(pinia);

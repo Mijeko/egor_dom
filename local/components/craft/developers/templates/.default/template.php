@@ -15,17 +15,15 @@
  * @var string $componentPath
  * @var  $component
  */
-?>
 
 
-<?php
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'ListClaims',
+		'SOURCE' => 'Developers',
 		'PROPS'  => [
-			'claims' => $arResult['CLAIMS'],
+			'developers' => $arResult['DEVELOPERS'],
 		],
 	],
 	false,

@@ -28,7 +28,11 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 	{
 		$result = [];
 
-		$query = ClaimTable::getList();
+		$query = ClaimTable::getList([
+			'filter' => [
+				ClaimTable::F_USER_ID => $userId,
+			],
+		]);
 
 		foreach($query->fetchCollection() as $claim)
 		{

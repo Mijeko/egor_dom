@@ -2,12 +2,16 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "ListRequests"
+  name: "Developers"
 })
 </script>
 
 <template>
-  Список заявок
+  <v-app>
+    <v-container>
+      Застройщики
+    </v-container>
+  </v-app>
 </template>
 
 <style scoped>
