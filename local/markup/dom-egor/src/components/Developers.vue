@@ -21,6 +21,7 @@ export default defineComponent({
           </v-col>
           <v-col md="9">
             <v-card-text>{{ developer.name }}</v-card-text>
+            <v-card-text>Объектов в продаже: 3 378 <v-btn :href="`/developers/${developer.id}/`">смотреть</v-btn></v-card-text>
           </v-col>
         </v-row>
       </v-card>

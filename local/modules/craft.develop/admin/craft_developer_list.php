@@ -5,12 +5,12 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
  * @global CMain $APPLICATION
  */
 
-$APPLICATION->SetTitle("Редактируемый контент");
+$APPLICATION->SetTitle("Застройщики");
 
 use Bitrix\Main\Loader;
-use Craft\Area\Entity\AreaTable;
+use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
-foreach(['craft.area'] as $module)
+foreach(['craft.develop'] as $module)
 {
 	if(!Loader::includeModule($module))
 	{
@@ -27,7 +27,7 @@ if($request->getPost('action_button'))
 	{
 		if(is_array($elementIdList))
 		{
-			$areaList = AreaTable::getList([
+			$areaList = DeveloperTable::getList([
 				'filter' => [
 					'ID' => $elementIdList,
 				],
@@ -51,22 +51,21 @@ if($request->getPost('action_button'))
 }
 
 
-$res = AreaTable::getList([
+$res = DeveloperTable::getList([
 	'order' => [
-		AreaTable::FIELD_ID => 'DESC',
+		DeveloperTable::F_ID => 'DESC',
 	],
 ]);
-$POST_RIGHT = $APPLICATION->GetGroupRight("craft.area");
-$table_id = AreaTable::getTableName(); // ид таблицы
+$POST_RIGHT = $APPLICATION->GetGroupRight("craft.develop");
+$table_id = DeveloperTable::getTableName(); // ид таблицы
 $lAdmin = new CAdminList($table_id);
 
 // Какие поля выводить
 $lAdmin->AddHeaders([
-	['id' => AreaTable::FIELD_ID, 'content' => 'ID', 'default' => true],
-	['id' => AreaTable::FIELD_NAME, 'content' => 'Название', 'default' => true],
-	['id' => AreaTable::FIELD_CODE, 'content' => 'Символьный код', 'default' => true],
-	['id' => AreaTable::FIELD_ACTIVE, 'content' => 'Активность', 'default' => true],
-	['id' => AreaTable::FIELD_SORT, 'content' => 'Сортировка', 'default' => true],
+	['id' => DeveloperTable::F_ID, 'content' => 'ID', 'default' => true],
+	['id' => DeveloperTable::F_NAME, 'content' => 'Название', 'default' => true],
+	['id' => DeveloperTable::F_ACTIVE, 'content' => 'Активность', 'default' => true],
+	['id' => DeveloperTable::F_SORT, 'content' => 'Сортировка', 'default' => true],
 ]);
 
 $data = new CAdminResult($res, $table_id);
@@ -79,7 +78,7 @@ while($element = $data->NavNext(true, "f_"))
 	 */
 
 
-	$area = AreaTable::getByPrimary($f_ID)->fetchObject();
+	$area = DeveloperTable::getByPrimary($f_ID)->fetchObject();
 
 	// создание строки (экземпляра класса CAdminListRow)
 	$row =& $lAdmin->AddRow($f_ID, $element);
@@ -91,18 +90,8 @@ while($element = $data->NavNext(true, "f_"))
 		"ICON"    => "edit",
 		"DEFAULT" => true,
 		"TEXT"    => 'Изменить',
-		"ACTION"  => $lAdmin->ActionRedirect(CRAFT_AREA_ADMIN_URL_EDIT_AREA . "?ID=" . $f_ID),
+		"ACTION"  => $lAdmin->ActionRedirect(CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?ID=" . $f_ID),
 	];
-
-	if($area->fillFields()->count() > 0)
-	{
-		$arActions[] = [
-			"ICON"    => "edit",
-			"DEFAULT" => true,
-			"TEXT"    => 'Контент',
-			"ACTION"  => $lAdmin->ActionRedirect(JEDI_AREA_ADMIN_URL_EDIT_CONTENT . "?ID=" . $f_ID),
-		];
-	}
 
 	if($POST_RIGHT >= "W")
 	{
@@ -133,8 +122,8 @@ $lAdmin->AddGroupActionTable([
 
 $aContext = [
 	[
-		"TEXT"  => 'Добавить новую область',
-		"LINK"  => CRAFT_AREA_ADMIN_URL_EDIT_AREA . "?lang=" . LANG,
+		"TEXT"  => 'Добавить застройщика',
+		"LINK"  => CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?lang=" . LANG,
 		"TITLE" => 'Создать',
 		"ICON"  => "btn_new",
 	],

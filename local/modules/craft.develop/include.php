@@ -25,4 +25,5 @@ if(!\Bitrix\Main\Loader::includeModule("craft.core"))
 }
 
 
-define('CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS', '');
+define('CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS', '/bitrix/admin/craft_developer_list.php');
+define('CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS', '/bitrix/admin/craft_developer_edit.php');
