@@ -36,13 +36,15 @@ class CraftDevelopersComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['DEVELOPERS'] = array_map(function(Developer $developer) {
-			return DeveloperFrontDto::fromModel($developer);
-		},
+		$this->arResult['DEVELOPERS'] = array_map(
+			function(Developer $developer) {
+				return DeveloperFrontDto::fromModel($developer);
+			},
 			$this->service->findAll([
 				'filter' => [
 					#DeveloperTable::F_ACTIVE => DeveloperTable::ACTIVE_Y,
 				],
-			]));
+			])
+		);
 	}
 }
