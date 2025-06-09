@@ -8,6 +8,14 @@ $arUrlRewrite=array (
     'PATH' => '/developers/detail/index.php',
     'SORT' => 100,
   ),
+  4 =>
+  array (
+    'CONDITION' => '#^/objects/([^/]+)/?(\\?[^/]*)?$#',
+    'RULE' => 'ELEMENT_ID=$1',
+    'ID' => '',
+    'PATH' => '/objects/detail.php',
+    'SORT' => 100,
+  ),
   0 => 
   array (
     'CONDITION' => '#^\\/?\\/mobileapp/jn\\/(.*)\\/.*#',

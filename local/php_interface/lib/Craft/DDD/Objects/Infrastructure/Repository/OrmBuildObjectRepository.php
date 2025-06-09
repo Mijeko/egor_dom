@@ -8,6 +8,24 @@ use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
+
+
+	public function findById(int $id): ?BuildObject
+	{
+		$model = BuildObjectTable::getByPrimary($id)->fetchObject();
+		if(!$model)
+		{
+			return null;
+		}
+
+
+		return new BuildObject(
+			$model->getId(),
+			$model->getName(),
+			$model->getPictureId(),
+		);
+	}
+
 	public function findAll(array $criteria = []): array
 	{
 		$result = [];
