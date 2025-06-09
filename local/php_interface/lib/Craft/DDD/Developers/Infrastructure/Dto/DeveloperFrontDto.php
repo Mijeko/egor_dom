@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Developers\Application\Dto;
+namespace Craft\DDD\Developers\Infrastructure\Dto;
 
 use Craft\DDD\Developers\Domain\Entity\Developer;
 

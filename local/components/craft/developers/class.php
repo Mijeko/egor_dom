@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\Developers\Domain\Entity\Developer;
-use Craft\DDD\Developers\Application\Dto\DeveloperFrontDto;
+use Craft\DDD\Developers\Infrastructure\Dto\DeveloperFrontDto;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Application\Service\DeveloperServiceFactory;
