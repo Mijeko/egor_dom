@@ -1,5 +1,5 @@
 <?php
-$sSectionName = "Заявки";
+$sSectionName = "Помощь";
 $arDirProperties = [
 
 ];

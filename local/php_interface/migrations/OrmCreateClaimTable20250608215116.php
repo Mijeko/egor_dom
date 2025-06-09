@@ -19,6 +19,7 @@ CREATE TABLE `craft_claims` (
   `ACTIVE` int NOT NULL,
   `NAME` varchar(128) NOT NULL,
   `USER_ID` int NOT NULL,
+  `BUILD_OBJECT_ID` int NOT NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL
 ) ENGINE='InnoDB';

@@ -1,39 +1,14 @@
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: "BottomFloatMenu",
-  data: function () {
-    return {
-      icons: [
-        {
-          icon: 'mdi-menu',
-          title: 'Объекты',
-          link: '/',
-        },
-        {
-          icon: 'mdi-menu',
-          title: 'Заявки',
-          link: '/claims/',
-        },
-        {
-          icon: 'mdi-crosshairs-gps',
-          title: 'Застройщики',
-          link: '/developers/',
-        },
-        {
-          icon: 'mdi-crosshairs-gps',
-          title: 'Кабинет',
-          link: '/profile/',
-        },
-        {
-          icon: 'mdi-crosshairs-gps',
-          title: 'Помощь',
-          link: '/help/',
-        },
-      ]
-    };
-  }
+  mounted() {
+    console.log(this.menuItems);
+  },
+  props: {
+    menuItems: []
+  },
 })
 </script>
 
@@ -42,7 +17,7 @@ export default defineComponent({
     <v-app-bar location="bottom" :elevation="6">
 
       <v-btn
-        v-for="menuItem in icons"
+        v-for="menuItem in menuItems"
         :href="menuItem.link"
         :prepend-icon="menuItem.icon"
         height="auto"

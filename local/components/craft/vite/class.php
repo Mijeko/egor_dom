@@ -44,6 +44,7 @@ class CraftViteComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
+			echo $e->getMessage();
 			return;
 		}
 	}

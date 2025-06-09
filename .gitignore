@@ -1,7 +1,7 @@
 .git
 .idea
-upload/
-bitrix/
+/upload/
+/bitrix/
 local/php_interface/**/vendor/
 */node_modules/
 

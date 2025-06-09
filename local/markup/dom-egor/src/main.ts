@@ -12,6 +12,7 @@ export default class VueService {
     try {
       const components = import.meta.glob('./components/**/*.vue');
       const module = await components[`./components/${name}.vue`]() as any;
+      console.log(name);
       return module.default as any;
     } catch (e) {
       console.log(name);
