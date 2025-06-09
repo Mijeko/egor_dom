@@ -31,8 +31,19 @@ class CraftBuildObjectsComponent extends CBitrixComponent
 	protected function loadData(): void
 	{
 		$this->arResult['BUILD_OBJECTS'] = array_map(
-			function(BuildObject $service) {
-				return BuildObjectFrontDto::fromModel($service);
+			function(BuildObject $buildObject) {
+
+				$file = \CFile::GetFileArray($buildObject->getPictureId());
+				if(!$file)
+				{
+					$file = [];
+				}
+
+				return new BuildObjectFrontDto(
+					$buildObject->getId(),
+					$buildObject->getName(),
+					$file
+				);
 			},
 			$this->service->findAll([
 				'filter' => array_merge(
