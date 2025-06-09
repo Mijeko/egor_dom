@@ -2,11 +2,11 @@ markup: npm-i markup-build markup-copy
 composer: composer-i
 
 npm-i:
-	cd local/markup/dom-egor && npm i
+	cd local/markup/vuetify && npm i
 	cd local/markup/html && npm i
 
 markup-build:
-	cd local/markup/dom-egor && npm run build
+	cd local/markup/vuetify && npm run build
 	cd local/markup/html && npm run build
 
 markup-copy:

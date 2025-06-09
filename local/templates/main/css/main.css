@@ -832,5 +832,28 @@ html, body {
   flex: 1 1 auto;
   position: relative; }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  padding: 20px 0;
+  margin-bottom: 40px; }
+  .header-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; }
+    .header-menu-item {
+      font-size: 16px; }
+      .header-menu-item__link {
+        text-decoration: none; }
+
+.logo {
+  width: 100px; }
+  .logo__image {
+    width: 100%;
+    object-fit: cover; }
+
 
 /*# sourceMappingURL=main.css.map*/

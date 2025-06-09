@@ -159,7 +159,7 @@ class CraftViteComponent extends CBitrixComponent
 
 	protected function viteDir(): string
 	{
-		return '/local/markup/dom-egor';
+		return '/local/markup/vuetify';
 	}
 
 	protected function getManifestPath(): string

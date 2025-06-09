@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+
+  padding: 20px 0;
+
+  margin-bottom: 40px;
+
+  &-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    &-item {
+
+      font-size: 16px;
+
+      &__link {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -13,20 +13,4 @@ class BuildObjectFrontDto
 	)
 	{
 	}
-
-	public static function fromModel(BuildObject $developer): static
-	{
-		$file = \CFile::GetFileArray($developer->getPictureId());
-
-		if(!$file)
-		{
-			$file = [];
-		}
-
-		return new static(
-			$developer->getId(),
-			$developer->getName(),
-			$file
-		);
-	}
 }

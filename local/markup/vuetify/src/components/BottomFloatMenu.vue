@@ -10,9 +10,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-app>
+  <v-app class="d-flex d-sm-none">
     <v-container>
-      <v-app-bar location="bottom" :elevation="6">
+      <v-app-bar location="bottom" :elevation="6" >
 
         <v-btn
           v-for="menuItem in menuItems"

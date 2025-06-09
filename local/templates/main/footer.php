@@ -34,7 +34,7 @@ if(\Craft\Model\CraftUser::load()?->isAuthorized())
 </div>
 </div>
 <footer>
-	<div>
+	<div class="container">
 		footer
 	</div>
 </footer>
