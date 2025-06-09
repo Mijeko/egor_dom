@@ -1,7 +1,9 @@
 <?php
 
+use Craft\DDD\Objects\Domain\Entity\BuildObject;
 use Craft\DDD\Objects\Application\Service\BuildObjectService;
 use Craft\DDD\Objects\Application\Service\BuildObjectServiceFactory;
+use Craft\DDD\Objects\Infrastructure\Dto\BuildObjectFrontDto;
 
 class CraftBuildObjectsComponent extends CBitrixComponent
 {
@@ -9,6 +11,7 @@ class CraftBuildObjectsComponent extends CBitrixComponent
 
 	public function onPrepareComponentParams($arParams)
 	{
+		$arParams['FILTER'] = is_array($arParams['FILTER']) ? $arParams['FILTER'] : [];
 		return $arParams;
 	}
 
@@ -27,7 +30,17 @@ class CraftBuildObjectsComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['BUILD_OBJECTS'] = $this->service->findAll();
+		$this->arResult['BUILD_OBJECTS'] = array_map(
+			function(BuildObject $service) {
+				return BuildObjectFrontDto::fromModel($service);
+			},
+			$this->service->findAll([
+				'filter' => array_merge(
+					[],
+					$this->arParams['FILTER']
+				),
+			])
+		);
 	}
 
 	protected function loadService(): void

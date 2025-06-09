@@ -48,7 +48,10 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		return new Claim(
 			$claim->getId(),
 			$claim->getName(),
-			new BuildObject()
+			new BuildObject(
+				1,
+				'demo ' . rand()
+			)
 		);
 	}
 }

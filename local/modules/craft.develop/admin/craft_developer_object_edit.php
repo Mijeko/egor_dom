@@ -5,11 +5,12 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
  * @global CMain $APPLICATION
  */
 
-$APPLICATION->SetTitle("Застройщики");
+$APPLICATION->SetTitle("Объект");
 
 use Bitrix\Main\Loader;
-use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Bitrix\Main\Application;
+use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 foreach(['craft.develop'] as $module)
 {
@@ -21,7 +22,7 @@ foreach(['craft.develop'] as $module)
 
 $request = Application::getInstance()->getContext()->getRequest();
 $ID = $request->get('ID');
-$developerModel = $ID ? DeveloperTable::getById($ID)->fetchObject() : DeveloperTable::createObject();
+$buildObjectModel = $ID ? BuildObjectTable::getById($ID)->fetchObject() : BuildObjectTable::createObject();
 
 if($request->isPost())
 {
@@ -30,7 +31,7 @@ if($request->isPost())
 	{
 		try
 		{
-			$developerModel->set($name, $value);
+			$buildObjectModel->set($name, $value);
 		} catch(Exception $e)
 		{
 		}
@@ -42,22 +43,22 @@ if($request->isPost())
 	{
 		foreach($files as $propertyCode => $fileData)
 		{
-			$fileId = CFile::SaveFile($fileData, '/craft/develop/developers/');
+			$fileId = CFile::SaveFile($fileData, '/craft/develop/objects/');
 			if($fileId)
 			{
-				$developerModel->set($propertyCode, $fileId);
+				$buildObjectModel->set($propertyCode, $fileId);
 			}
 		}
 	}
 
-	$result = $developerModel->save();
+	$result = $buildObjectModel->save();
 
 	if(!$result->isSuccess())
 	{
 		\Bitrix\Main\Diag\Debug::dumpToFile($result->getErrorMessages());
 	}
 
-	$_GET['ID'] = $developerModel->getId();
+	$_GET['ID'] = $buildObjectModel->getId();
 	LocalRedirect($APPLICATION->GetCurPage() . "?" . http_build_query($_GET));
 }
 
@@ -67,7 +68,7 @@ $aTabs = [
 		"DIV"   => "edit1",
 		"TAB"   => 'Застройщик',
 		"ICON"  => "iblock_section",
-		"TITLE" => $developerModel ? 'Изменить: ' . $developerModel->getName() : 'Новый застройщик',
+		"TITLE" => $buildObjectModel ? 'Изменить: ' . $buildObjectModel->getName() : 'Новый застройщик',
 	],
 ];
 
@@ -88,54 +89,72 @@ $tabControl->Begin();
 
 $tabControl->BeginNextFormTab();
 
-$entity = DeveloperTable::getEntity();
+$entity = BuildObjectTable::getEntity();
 
-if($field = $entity->getField(DeveloperTable::F_ACTIVE))
+if($field = $entity->getField(BuildObjectTable::F_ACTIVE))
 {
 	$tabControl->AddCheckBoxField(
 		$field->getName(),
 		$field->getTitle(),
 		$field->isRequired(),
-		[DeveloperTable::ACTIVE_Y, DeveloperTable::ACTIVE_N],
-		$developerModel ? $developerModel->getActive() : true
+		[BuildObjectTable::ACTIVE_Y, BuildObjectTable::ACTIVE_N],
+		$buildObjectModel ? $buildObjectModel->getActive() : true
 	);
 }
 
-if($field = $entity->getField(DeveloperTable::F_NAME))
+if($field = $entity->getField(BuildObjectTable::F_NAME))
 {
 	$tabControl->AddEditField(
 		$field->getName(),
 		$field->getTitle(),
 		$field->isRequired(),
 		["size" => 35, "maxlength" => 255],
-		$developerModel ? $developerModel->getName() : null
+		$buildObjectModel ? $buildObjectModel->getName() : null
 	);
 }
 
-if($field = $entity->getField(DeveloperTable::F_SORT))
+if($field = $entity->getField(BuildObjectTable::F_SORT))
 {
 	$tabControl->AddEditField(
 		$field->getName(),
 		$field->getTitle(),
 		$field->isRequired(),
 		["size" => 35, "maxlength" => 255],
-		$developerModel ? $developerModel->getSort() : 500
+		$buildObjectModel ? $buildObjectModel->getSort() : 500
 	);
 }
 
-if($field = $entity->getField(DeveloperTable::F_PICTURE_ID))
+if($field = $entity->getField(BuildObjectTable::F_DEVELOPER_ID))
+{
+
+	$developers = ["" => 'Выбрать застройщика'];
+	$developersCollection = DeveloperTable::getList()->fetchCollection();
+	foreach($developersCollection as $developer)
+	{
+		$developers[$developer->getId()] = $developer->getName();
+	}
+
+	$tabControl->AddDropDownField(
+		$field->getName(),
+		$field->getTitle(),
+		$field->isRequired(),
+		$developers,
+		$buildObjectModel ? $buildObjectModel->getDeveloperId() : null
+	);
+}
+
+if($field = $entity->getField(BuildObjectTable::F_PICTURE_ID))
 {
 	$tabControl->AddFileField(
 		$field->getName(),
 		$field->getTitle(),
-		$developerModel?->getPictureId()
+		$buildObjectModel?->getPictureId()
 	);
 }
 
-
 $tabControl->Buttons([
 	"disabled" => false,
-	"back_url" => CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS . "?lang=" . LANG,
+	"back_url" => CRAFT_DEVELOP_ADMIN_URL_LIST_OBJECTS . "?lang=" . LANG,
 ]);
 
 $tabControl->Show();

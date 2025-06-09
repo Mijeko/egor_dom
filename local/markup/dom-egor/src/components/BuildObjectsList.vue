@@ -12,12 +12,10 @@ export default defineComponent({
 <template>
   <v-app>
     <v-container>
-      Квартиры
-
-      <v-card v-for="buildObject in BuildObjects">
+      <v-card v-for="buildObject in BuildObjects" class="mb-5">
         <v-row>
           <v-col md="3">
-            <v-img src=""></v-img>
+            <v-img :src="buildObject?.picture?.SRC" width="200" height="100" cover></v-img>
           </v-col>
           <v-col md="6">
             <v-card-text>{{ buildObject.name }}</v-card-text>

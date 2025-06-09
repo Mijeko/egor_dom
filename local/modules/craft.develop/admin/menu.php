@@ -10,18 +10,22 @@ $aMenu = [
 	"section"     => "craft.develop",
 	"sort"        => 1000,
 	"url"         => CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS . "?lang=" . LANG,
-	"text"        => '[craft] Застройщики',
-	"title"       => 'Застройщики',
+	"text"        => '[craft] АБН',
+	"title"       => 'АБН',
 	"icon"        => "iblock_menu_icon_settings",
 	"page_icon"   => "iblock_menu_icon_settings",
 	"items_id"    => "menu_craft_develop",
 	"items"       => [
-//		[
-//			"text"     => GetMessage("FORUM_LIST"),
-//			"url"      => "/bitrix/admin/forum_admin.php?lang=" . LANG,
-//			"more_url" => ["/bitrix/admin/forum_edit.php"],
-//			"title"    => GetMessage("FORUM_CONTROL_ALT"),
-//		],
+		[
+			"text"  => "Застройщики",
+			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS . "?lang=" . LANG,
+			"title" => "Застройщики",
+		],
+		[
+			"text"  => "Объекты",
+			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_OBJECTS . "?lang=" . LANG,
+			"title" => "Объекты",
+		],
 	],
 
 ];

@@ -14,6 +14,7 @@ class BuildObjectTable extends DataManager
 
 	const F_ID = 'ID';
 	const F_DEVELOPER_ID = 'DEVELOPER_ID';
+	const F_PICTURE_ID = 'PICTURE_ID';
 	const F_ACTIVE = 'ACTIVE';
 	const F_SORT = 'SORT';
 	const F_NAME = 'NAME';
@@ -35,11 +36,12 @@ class BuildObjectTable extends DataManager
 			(new IntegerField(self::F_ID))
 				->configureTitle('ID')
 				->configureAutocomplete()
-				->configureRequired()
 				->configurePrimary(),
 			(new IntegerField(self::F_DEVELOPER_ID))
 				->configureTitle('ID застройщик')
 				->configureRequired(),
+			(new IntegerField(self::F_PICTURE_ID))
+				->configureTitle('ID картинки'),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
 				->configureDefaultValue(self::ACTIVE_Y)

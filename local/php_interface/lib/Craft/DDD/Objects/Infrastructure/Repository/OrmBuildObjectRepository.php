@@ -21,6 +21,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			$result[] = new BuildObject(
 				$buildObject->getId(),
 				$buildObject->getName(),
+				$buildObject->getPictureId()
 			);
 		}
 

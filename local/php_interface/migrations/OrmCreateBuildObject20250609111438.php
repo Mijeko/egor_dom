@@ -18,6 +18,7 @@ class OrmCreateBuildObject20250609111438 extends Version
 CREATE TABLE `craft_build_objects` (
   `ID` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `DEVELOPER_ID` int NOT NULL,
+  `PICTURE_ID` int  NULL,
   `ACTIVE` int NOT NULL,
   `SORT` int NOT NULL,
   `NAME` varchar(128) NOT NULL,

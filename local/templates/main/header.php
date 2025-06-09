@@ -12,19 +12,8 @@
 
 	<title><?php $APPLICATION->ShowTitle(); ?></title>
 
-
 	<?php
-
 	$assets = \Bitrix\Main\Page\Asset::getInstance();
-	#$assets->addCss(SITE_TEMPLATE_PATH.'/css/main.css');
-	#$assets->addJs(SITE_TEMPLATE_PATH.'/js/bundle.js');
-
-
-	//	$assets->addJs('/local/markup/dom-egor/dist/my-lib-main.umd.js');
-	//	$assets->addJs('/local/markup/dom-egor/dist/my-lib-main.es.js');
-	//	$assets->addJs('/local/markup/dom-egor/dist/main-Dr_dCjtU.js');
-	//	$assets->addJs('/local/markup/dom-egor/dist/HelloWorld-bfuCe-r0.js');
-	//	$assets->addCss('/local/markup/dom-egor/dist/my-lib-style.css');
 
 	$APPLICATION->ShowHead();
 	?>
@@ -41,3 +30,6 @@
 	}
 	?>
 </div>
+
+
+<h1><?php $APPLICATION->ShowTitle(); ?></h1>

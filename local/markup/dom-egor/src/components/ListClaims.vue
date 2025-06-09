@@ -12,8 +12,6 @@ export default defineComponent({
 <template>
   <v-app>
     <v-container>
-      Список заявок
-
       <v-card v-for="claim in claims">
         <v-card-text>{{ claim.name }}</v-card-text>
       </v-card>
