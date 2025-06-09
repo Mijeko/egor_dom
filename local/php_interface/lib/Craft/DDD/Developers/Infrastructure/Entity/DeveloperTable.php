@@ -7,6 +7,7 @@ use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
+use Bitrix\Main\Type\DateTime;
 
 class DeveloperTable extends DataManager
 {
@@ -35,7 +36,8 @@ class DeveloperTable extends DataManager
 				->configurePrimary(),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
-				->configureDefaultValue(self::ACTIVE_Y),
+				->configureDefaultValue(self::ACTIVE_Y)
+				->configureValues(self::ACTIVE_N, self::ACTIVE_Y),
 			(new StringField(self::F_NAME))
 				->configureTitle('Название застройщика')
 				->configureRequired(),
@@ -44,8 +46,10 @@ class DeveloperTable extends DataManager
 				->configureDefaultValue(500),
 			(new IntegerField(self::F_PICTURE_ID))
 				->configureTitle('Изобращение'),
-			(new DatetimeField(self::F_CREATED_AT)),
-			(new DatetimeField(self::F_UPDATED_AT)),
+			(new DatetimeField(self::F_CREATED_AT))
+				->configureDefaultValue(new DateTime()),
+			(new DatetimeField(self::F_UPDATED_AT))
+				->configureDefaultValue(new DateTime()),
 		];
 	}
 

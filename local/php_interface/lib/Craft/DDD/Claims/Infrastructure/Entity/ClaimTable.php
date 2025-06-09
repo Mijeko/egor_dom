@@ -3,9 +3,11 @@
 namespace Craft\DDD\Claims\Infrastructure\Entity;
 
 use Bitrix\Main\ORM\Data\DataManager;
+use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\StringField;
+use Bitrix\Main\Type\DateTime;
 
 class ClaimTable extends DataManager
 {
@@ -40,13 +42,16 @@ class ClaimTable extends DataManager
 			(new IntegerField(self::F_BUILD_OBJECT_ID))
 				->configureTitle('ID объекта')
 				->configureRequired(),
-			(new IntegerField(self::F_ACTIVE))
+			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
-				->configureDefaultValue(self::ACTIVE_Y),
+				->configureDefaultValue(self::ACTIVE_Y)
+				->configureValues(self::ACTIVE_N, self::ACTIVE_Y),
 			(new DatetimeField(self::F_CREATED_AT))
-				->configureTitle('Дата создания'),
+				->configureTitle('Дата создания')
+				->configureDefaultValue(new DateTime()),
 			(new DatetimeField(self::F_UPDATED_AT))
-				->configureTitle('Дата обновления'),
+				->configureTitle('Дата обновления')
+				->configureDefaultValue(new DateTime()),
 		];
 	}
 
