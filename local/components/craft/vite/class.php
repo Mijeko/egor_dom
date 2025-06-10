@@ -80,7 +80,13 @@ class CraftViteComponent extends CBitrixComponent
 	{
 		if(empty($this->manifestList))
 		{
-			$manifestJson = json_decode(file_get_contents($this->getManifestPath()), true);
+			$content = file_get_contents($this->getManifestPath());
+			if(!$content || mb_strlen($content) == 0)
+			{
+				throw new Exception('Manifest file is empty');
+			}
+
+			$manifestJson = json_decode($content, true);
 			$this->manifestList = ManifestDto::fromJson($manifestJson);
 		}
 	}

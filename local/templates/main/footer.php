@@ -33,11 +33,15 @@ if(\Craft\Model\CraftUser::load()?->isAuthorized())
 
 </div>
 </div>
-<footer>
-	<div class="container">
-		footer
-	</div>
-</footer>
+
+<?php
+if(\Craft\Model\CraftUser::load()?->IsAuthorized())
+{
+	DevIncludeFile('footer', SITE_TEMPLATE_PATH . '/.include/');
+}
+
+?>
+
 </div>
 
 </body>

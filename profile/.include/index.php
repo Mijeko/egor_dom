@@ -7,4 +7,13 @@
 
 global $APPLICATION;
 
+
+$APPLICATION->IncludeComponent(
+	'craft:profile',
+	'.default',
+	[],
+	false,
+	['HIDE_ICONS' => 'Y']
+)
+
 ?>
