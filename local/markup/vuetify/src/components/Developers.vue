@@ -4,7 +4,7 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "Developers",
   mounted() {
-    console.log(this.developers)
+    // console.log(this.developers)
   },
   props: {
     developers: []

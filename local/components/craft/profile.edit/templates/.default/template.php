@@ -3,13 +3,21 @@
 
 /**
  * @global CMain $APPLICATION
+ * @var array $arResult
+ *
+ * @var \Craft\Dto\ProfileEditUserDataDto $userData
  */
+
+$userData = $arResult['USER_DATA'];
 
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
 		'SOURCE' => 'ProfileEditForm',
+		'PROPS'  => [
+			'userData' => $userData,
+		],
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

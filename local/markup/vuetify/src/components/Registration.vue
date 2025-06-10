@@ -18,7 +18,7 @@ export default defineComponent({
         service.execute(body)
           .then((response: any) => response.json())
           .then((data: object) => {
-            console.log(data)
+            // console.log(data)
           });
       }
     },

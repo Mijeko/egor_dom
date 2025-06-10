@@ -4,7 +4,7 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "Breadcrumbs",
   mounted() {
-    console.log(this.items);
+    // console.log(this.items);
   },
   props: {
     items: []
