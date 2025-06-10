@@ -26,7 +26,8 @@ if(\Craft\Model\CraftUser::load()?->isAuthorized())
 			"DELAY"                 => "N",
 			"ALLOW_MULTI_SELECT"    => "N",
 		],
-		false
+		false,
+		["HIDE_ICONS" => "Y"]
 	);
 }
 ?>

@@ -10,7 +10,7 @@ class CraftUserProfile extends CBitrixComponent
 	public function executeComponent()
 	{
 		$arDefaultUrlTemplates404 = [
-			'list'    => 'index.php',
+			'main'    => 'main.php',
 			'element' => '#ELEMENT_ID#.php',
 		];
 		$arDefaultVariableAliases404 = [];
@@ -67,7 +67,7 @@ class CraftUserProfile extends CBitrixComponent
 				$componentPage = 'element';
 			} else
 			{
-				$componentPage = 'list';
+				$componentPage = 'main';
 			}
 		}
 		$this->arResult = [

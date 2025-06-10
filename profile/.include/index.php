@@ -14,6 +14,5 @@ $APPLICATION->IncludeComponent(
 	[],
 	false,
 	['HIDE_ICONS' => 'Y']
-)
-
+);
 ?>
