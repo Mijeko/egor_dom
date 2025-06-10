@@ -855,5 +855,15 @@ html, body {
     width: 100%;
     object-fit: cover; }
 
+.profile-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start; }
+
+.profile-aside {
+  max-width: 30%;
+  width: 30%; }
+
 
 /*# sourceMappingURL=main.css.map*/

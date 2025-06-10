@@ -1,0 +1,16 @@
+.profile {
+  &-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  &-aside {
+    max-width: 30%;
+    width: 30%;
+  }
+
+  &-body {
+  }
+}

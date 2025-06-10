@@ -1,18 +1,18 @@
-<?
-$aMenuLinks = Array(
-	Array(
-		"1", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"2", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	)
-);
+<?php
+$aMenuLinks = [
+	[
+		"Заявки",
+		"/profile/orders/",
+		[],
+		[],
+		"",
+	],
+	[
+		"Настройки",
+		"/profile/settings/",
+		[],
+		[],
+		"",
+	],
+];
 ?>

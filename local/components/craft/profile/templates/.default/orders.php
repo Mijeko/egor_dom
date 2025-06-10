@@ -14,6 +14,6 @@
 		?>
 	</div>
 	<div class="profile-body">
-		<h1>Добро пожаловать</h1>
+		<h1>Заявки</h1>
 	</div>
 </div>

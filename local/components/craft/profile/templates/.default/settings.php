@@ -14,6 +14,16 @@
 		?>
 	</div>
 	<div class="profile-body">
-		<h1>Добро пожаловать</h1>
+		<h1>Настройки</h1>
+
+		<?php
+		$APPLICATION->IncludeComponent(
+			'craft:profile.edit',
+			'.default',
+			[],
+			false,
+			['HIDE_ICONS' => 'Y']
+		);
+		?>
 	</div>
 </div>

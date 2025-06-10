@@ -32,12 +32,28 @@ $arUrlRewrite=array (
     'PATH' => '/local/rest/index.php',
     'SORT' => 100,
   ),
+  5 => 
+  array (
+    'CONDITION' => '#^/profile/#',
+    'RULE' => '',
+    'ID' => 'craft:profile',
+    'PATH' => '/profile/index.php',
+    'SORT' => 100,
+  ),
   1 => 
   array (
     'CONDITION' => '#^/rest/#',
     'RULE' => '',
     'ID' => NULL,
     'PATH' => '/bitrix/services/rest/index.php',
+    'SORT' => 100,
+  ),
+  6 => 
+  array (
+    'CONDITION' => '#^/test/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/test/index.php',
     'SORT' => 100,
   ),
 );

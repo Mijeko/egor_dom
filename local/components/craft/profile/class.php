@@ -9,18 +9,19 @@ class CraftUserProfile extends CBitrixComponent
 
 	public function executeComponent()
 	{
-		$arDefaultUrlTemplates404 = [
-			'main'    => 'main.php',
-			'element' => '#ELEMENT_ID#.php',
-		];
+		$arDefaultUrlTemplates404 = [];
 		$arDefaultVariableAliases404 = [];
 		$arDefaultVariableAliases = [];
 		$arComponentVariables = ['IBLOCK_ID', 'ELEMENT_ID'];
 		$SEF_FOLDER = '';
-		$arUrlTemplates = [];
+		$arUrlTemplates = [
+			"list"     => "index.php",
+			"settings" => "settings.php",
+			"section"  => "section.php?IBLOCK_ID=#IBLOCK_ID#&SECTION_ID=#SECTION_ID#",
+			"element"  => "element.php?ELEMENT_ID=#ELEMENT_ID#",
+		];
 		if($this->arParams['SEF_MODE'] == 'Y')
 		{
-
 			$arVariables = [];
 			$arUrlTemplates = CComponentEngine::MakeComponentUrlTemplates(
 				$arDefaultUrlTemplates404,
@@ -31,20 +32,24 @@ class CraftUserProfile extends CBitrixComponent
 				$arDefaultVariableAliases404,
 				$this->arParams['VARIABLE_ALIASES']
 			);
+
 			$componentPage = CComponentEngine::ParseComponentPath(
 				$this->arParams['SEF_FOLDER'],
 				$arUrlTemplates,
 				$arVariables
 			);
+
 			if(strlen($componentPage) <= 0)
 			{
-				$componentPage = 'list';
+				$componentPage = 'main';
 			}
 			CComponentEngine::InitComponentVariables(
 				$componentPage,
 				$arComponentVariables,
 				$arVariableAliases,
-				$arVariables);
+				$arVariables
+			);
+
 			$SEF_FOLDER = $this->arParams['SEF_FOLDER'];
 		} else
 		{
