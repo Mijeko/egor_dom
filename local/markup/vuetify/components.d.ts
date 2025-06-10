@@ -13,6 +13,7 @@ declare module 'vue' {
     BuildObjectsList: typeof import('./src/components/BuildObjectsList.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']
+    ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
   }
 }

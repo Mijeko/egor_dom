@@ -865,5 +865,8 @@ html, body {
   max-width: 30%;
   width: 30%; }
 
+.profile-body {
+  flex: 1; }
+
 
 /*# sourceMappingURL=main.css.map*/
