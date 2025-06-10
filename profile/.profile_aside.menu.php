@@ -18,5 +18,14 @@ $aMenuLinks = [
 		],
 		"",
 	],
+	[
+		"Обучение",
+		"/profile/education/",
+		[],
+		[
+			'ICON' => 'mdi-account-multiple',
+		],
+		"",
+	],
 ];
 ?>

@@ -1,6 +1,0 @@
-<?php
-$sSectionName = "Заявки";
-$arDirProperties = [
-
-];
-?>
