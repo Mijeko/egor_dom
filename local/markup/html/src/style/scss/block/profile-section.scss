@@ -7,11 +7,13 @@
   }
 
   &-aside {
-    max-width: 30%;
-    width: 30%;
+    padding: 15px;
+    max-width: 20%;
+    width: 100%;
   }
 
   &-body {
+    padding: 15px;
     flex: 1;
   }
 }

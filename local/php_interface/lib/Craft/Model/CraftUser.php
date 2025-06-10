@@ -36,4 +36,24 @@ class CraftUser extends EO_CraftUser
 		global $USER;
 		return $USER->IsAuthorized();
 	}
+
+	public function getAvatarPath(): ?string
+	{
+		$file = \CFile::GetFileArray($this->getPersonalPhoto());
+		if(!$file)
+		{
+			return null;
+		}
+
+		return $file['SRC'];
+	}
+
+	public function getFullName(): string
+	{
+		return implode(' ', [
+			$this->getLastName(),
+			$this->getSecondName(),
+			$this->getName(),
+		]);
+	}
 }

@@ -8,7 +8,7 @@ export default defineComponent({
     userData: Object as PropType<ProfileEditUserDataDto>
   },
   mounted(): any {
-    // console.log(this.userData);
+    console.log(this.userData);
   },
   data: () => ({
     valid: false,

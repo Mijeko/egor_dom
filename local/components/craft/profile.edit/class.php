@@ -33,7 +33,7 @@ class CraftProfileEditComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $exception)
 		{
-
+			echo $exception->getMessage();
 		}
 	}
 
