@@ -2,6 +2,8 @@
 
 namespace Craft\Model;
 
+use Bitrix\Main\Diag\Debug;
+
 class CraftUser extends EO_CraftUser
 {
 	protected static ?CraftUser $instance = null;
@@ -35,6 +37,28 @@ class CraftUser extends EO_CraftUser
 	{
 		global $USER;
 		return $USER->IsAuthorized();
+	}
+
+	public function isStudent(): bool
+	{
+		if(!defined('USER_GROUP_STUDENT_ID'))
+		{
+			return false;
+		}
+
+		$groups = $this->fillGroups()->getGroupIdList();
+		return in_array(USER_GROUP_STUDENT_ID, $groups);
+	}
+
+	public function isRealtor(): bool
+	{
+		if(!defined('USER_GROUP_REALTOR_ID'))
+		{
+			return false;
+		}
+
+		$groups = $this->fillGroups()->getGroupIdList();
+		return in_array(USER_GROUP_REALTOR_ID, $groups);
 	}
 
 	public function getAvatarPath(): ?string
