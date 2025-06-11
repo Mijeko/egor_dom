@@ -10,6 +10,7 @@ class Handler
 	{
 		return [
 			static::SCOPE_CRAFT => [
+				'user.login'    => [AuthorizeRest::class, 'login'],
 				'user.register' => [RegistrationRest::class, 'register'],
 				'user.auth'     => [RegistrationRest::class, 'authorize'],
 			],

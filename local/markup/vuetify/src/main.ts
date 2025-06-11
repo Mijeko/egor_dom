@@ -14,7 +14,7 @@ export default class VueService {
       const module = await components[`./components/${name}.vue`]() as any;
       return module.default as any;
     } catch (e) {
-      console.log(name);
+      console.log(`Компонент ${name} не найден`);
     }
   }
 
