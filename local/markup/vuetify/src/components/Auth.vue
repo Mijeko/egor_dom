@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import {AuthService} from "@/service/Auth/AuthService.ts";
 import type AuthorizeDto from "@/dto/AuthorizeDto.ts";
+import UserService from "@/service/User/UserService.ts";
 
 export default defineComponent({
   name: "Auth",
@@ -15,9 +15,9 @@ export default defineComponent({
   },
   methods: {
     auth: function () {
-      let service = new AuthService();
+      let service = new UserService();
 
-      service.execute({
+      service.authorize({
         phone: this.form.phone,
         password: this.form.password,
       } as AuthorizeDto)

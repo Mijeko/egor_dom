@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from "vue";
-import RegisterService from "../service/Register/RegisterService.ts";
 import type RegisterRequestDto from "@/dto/RegisterRequestDto.ts";
+import UserService from "@/service/User/UserService.ts";
 
 export default defineComponent({
   methods: {
@@ -14,8 +14,8 @@ export default defineComponent({
           password: this.form.password
         };
 
-        let service = new RegisterService();
-        service.execute(body)
+        let service = new UserService();
+        service.registration(body)
           .then((response: any) => response.json())
           .then((data: object) => {
             // console.log(data)

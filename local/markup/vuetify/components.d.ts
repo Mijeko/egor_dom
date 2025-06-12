@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Alert: typeof import('./src/components/Alert.vue')['default']
     Auth: typeof import('./src/components/Auth.vue')['default']
     BottomFloatMenu: typeof import('./src/components/BottomFloatMenu.vue')['default']
     Breadcrumbs: typeof import('./src/components/Breadcrumbs.vue')['default']

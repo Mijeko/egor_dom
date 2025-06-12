@@ -2,10 +2,12 @@
 
 namespace Craft\Model;
 
-use Bitrix\Main\Diag\Debug;
-
 class CraftUser extends EO_CraftUser
 {
+	const PERSON_TYPE_PHYS = 'phys';
+	const PERSON_TYPE_JUR = 'jur';
+	const PERSON_TYPE_IP = 'ip';
+
 	protected static ?CraftUser $instance = null;
 
 	public static function load(?int $id = null): ?static
@@ -39,26 +41,41 @@ class CraftUser extends EO_CraftUser
 		return $USER->IsAuthorized();
 	}
 
-	public function isStudent(): bool
+	public function getPersonType(): ?string
 	{
-		if(!defined('USER_GROUP_STUDENT_ID'))
+		if($this->isPhysPerson())
 		{
-			return false;
+			return self::PERSON_TYPE_PHYS;
 		}
 
-		$groups = $this->fillGroups()->getGroupIdList();
-		return in_array(USER_GROUP_STUDENT_ID, $groups);
+		if($this->isJurPerson())
+		{
+			return self::PERSON_TYPE_JUR;
+		}
+
+		return null;
 	}
 
-	public function isRealtor(): bool
+	public function isPhysPerson(): bool
 	{
-		if(!defined('USER_GROUP_REALTOR_ID'))
+		if(!defined('USER_GROUP_PHYS_PERSON_ID'))
 		{
 			return false;
 		}
 
 		$groups = $this->fillGroups()->getGroupIdList();
-		return in_array(USER_GROUP_REALTOR_ID, $groups);
+		return in_array(USER_GROUP_PHYS_PERSON_ID, $groups);
+	}
+
+	public function isJurPerson(): bool
+	{
+		if(!defined('USER_GROUP_JUR_PERSON_ID'))
+		{
+			return false;
+		}
+
+		$groups = $this->fillGroups()->getGroupIdList();
+		return in_array(USER_GROUP_JUR_PERSON_ID, $groups);
 	}
 
 	public function getAvatarPath(): ?string

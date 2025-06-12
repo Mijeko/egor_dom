@@ -6,6 +6,7 @@ class ProfileEditUserDataDto
 {
 	public function __construct(
 		public ?string $profileType,
+		public ?string $id,
 		public ?string $name,
 		public ?string $family,
 		public ?string $last_name,

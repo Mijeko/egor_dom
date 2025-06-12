@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\User\Application\Service;
 
+use Craft\DDD\User\Application\Service\Interfaces\AutenficatorInterface;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 
 class AuthorizeService
@@ -10,6 +11,7 @@ class AuthorizeService
 
 	public function __construct(
 		protected UserRepositoryInterface $repository,
+		protected AutenficatorInterface   $autenficator,
 	)
 	{
 	}
@@ -27,7 +29,7 @@ class AuthorizeService
 			throw new \Exception('Wrong password');
 		}
 
-		global $USER;
-		return $USER->Authorize($user->getId(), true);
+
+		return $this->autenficator->loginById($user->getId());
 	}
 }

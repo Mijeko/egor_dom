@@ -15,9 +15,10 @@ $APPLICATION->IncludeComponent(
 		'SEF_FOLDER'        => '/profile/',
 		'SEF_MODE'          => 'Y',
 		'SEF_URL_TEMPLATES' => [
-			''         => 'main',
-			'orders'   => 'orders/',
-			'settings' => 'settings/',
+			''          => 'main',
+			'orders'    => 'orders/',
+			'settings'  => 'settings/',
+			'education' => 'education/',
 		],
 	],
 	false,

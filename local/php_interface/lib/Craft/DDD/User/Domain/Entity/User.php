@@ -2,8 +2,6 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-use Bitrix\Main\Diag\Debug;
-
 class User
 {
 	public function __construct(
@@ -18,8 +16,6 @@ class User
 
 	public function validatePassword(string $password): bool
 	{
-		Debug::dumpToFile($password);
-		Debug::dumpToFile($this->password);
 		return password_verify($password, $this->password);
 	}
 

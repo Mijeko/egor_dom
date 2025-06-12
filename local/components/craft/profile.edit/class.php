@@ -23,7 +23,8 @@ class CraftProfileEditComponent extends CBitrixComponent
 
 
 			$this->arResult['USER_DATA'] = new ProfileEditUserDataDto(
-				$user->isRealtor() ? 'realtor' : 'student',
+				$user->getPersonType(),
+				$user->getId(),
 				$user->fillName(),
 				$user->fillLastName(),
 				$user->fillSecondName(),

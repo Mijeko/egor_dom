@@ -1,6 +1,10 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type ProfileEditUserDataDto from "../dto/ProfileEditUserDataDto.ts";
+import UserService from "@/service/User/UserService.ts";
+import type ProfileUpdateDto from "@/dto/ProfileUpdateDto.ts";
+import {da} from "vuetify/locale";
+import AlertService from "@/service/AlertService.ts";
 
 export default defineComponent({
   name: "ProfileEditForm",
@@ -9,6 +13,33 @@ export default defineComponent({
       type: Object as PropType<ProfileEditUserDataDto>,
       default: {},
     }
+  },
+  methods: {
+    submitForm() {
+      if (!this.valid) {
+        return;
+      }
+
+      let service = new UserService();
+      let body: ProfileUpdateDto = {...this.form, profileId: this.userData.id};
+
+      service.profileUpdate(body)
+        .then((data: any) => {
+          let {result} = data;
+          let {success, error, message} = result;
+
+          if (success && message) {
+            AlertService.showAlert('Обновление профиля', message);
+          }
+
+          if (error) {
+            AlertService.showErrorAlert('Обновление профиля', error);
+          }
+        })
+    },
+    isJurPerson(): boolean {
+      return this.userData.profileType === 'jur';
+    },
   },
   mounted(): any {
     console.log(this.userData);
@@ -21,9 +52,15 @@ export default defineComponent({
         NAME: this.userData.name,
         LAST_NAME: this.userData.family,
         SECOND_NAME: this.userData.last_name,
+        UF_CURR_ACC: this.userData.uf_curr_acc,
         UF_CORR_ACC: this.userData.uf_corr_acc,
         UF_OGRN: this.userData.uf_ogrn,
         UF_INN: this.userData.uf_inn,
+        UF_KPP: this.userData.uf_kpp,
+        UF_BIK: this.userData.uf_bik,
+        UF_POST_ADDRESS: this.userData.uf_post_address,
+        UF_LEGAL_ADDRESS: this.userData.uf_legal_address,
+        UF_BANK_NAME: this.userData.uf_bank_name,
       },
       rules: {
         nameRules: [
@@ -57,7 +94,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-form v-model="valid">
+  <v-form v-model="valid" @submit.prevent="submitForm">
 
     <v-tabs
       v-model="tab"
@@ -65,7 +102,7 @@ export default defineComponent({
       color="deep-purple-accent-4"
     >
       <v-tab value="pers">Персональные данные</v-tab>
-      <v-tab v-if="userData.profileType =='realtor'" value="jur">Юридические данные</v-tab>
+      <v-tab v-if="isJurPerson()" value="jur">Юридические данные</v-tab>
     </v-tabs>
 
     <v-tabs-window v-model="tab">
@@ -91,38 +128,67 @@ export default defineComponent({
 
 
       <v-tabs-window-item
-        v-if="userData.profileType =='realtor'"
+        v-if="isJurPerson()"
         value="jur"
       >
         <v-text-field
           v-model="form.UF_INN"
-          :counter="11"
+          :counter="isJurPerson() ? 10 : 12"
           label="ИНН"
           required
         ></v-text-field>
         <v-text-field
+          v-model="form.UF_OGRN"
+          :counter="isJurPerson() ? 13 : 15"
+          label="ОГРН"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="form.UF_BIK"
+          :counter="9"
+          label="БИК"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="form.UF_KPP"
+          :counter="9"
+          label="КПП"
+          required
+        ></v-text-field>
+        <v-text-field
           v-model="form.UF_CORR_ACC"
-          :counter="10"
+          :counter="20"
+          label="Лицевой счёт"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="form.UF_CORR_ACC"
+          :counter="20"
           label="Корреспондентский счёт"
           required
         ></v-text-field>
         <v-text-field
-          v-model="form.UF_OGRN"
-          label="ОГРН"
+          v-model="form.UF_POST_ADDRESS"
+          label="Почтовый адрес"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="form.UF_LEGAL_ADDRESS"
+          label="Юридический адрес"
           required
         ></v-text-field>
       </v-tabs-window-item>
     </v-tabs-window>
 
 
+    <v-btn
+      class="me-4"
+      type="submit"
+    >
+      Изменить
+    </v-btn>
   </v-form>
 
-  <v-btn
-    class="me-4"
-    type="submit"
-  >
-    Изменить
-  </v-btn>
 </template>
 
 <style scoped>

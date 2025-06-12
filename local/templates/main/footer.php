@@ -45,5 +45,17 @@ if(\Craft\Model\CraftUser::load()?->IsAuthorized())
 
 </div>
 
+<?php
+$APPLICATION->IncludeComponent(
+	'craft:vite',
+	'vite',
+	[
+		'SOURCE' => 'Alert',
+	],
+	false,
+	['HIDE_ICONS' => 'Y']
+)
+?>
+
 </body>
 </html>
