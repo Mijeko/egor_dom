@@ -2,7 +2,10 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "ObjectDetail"
+  name: "ObjectDetail",
+  props: {
+    product: {}
+  }
 })
 </script>
 
@@ -12,7 +15,7 @@ export default defineComponent({
 
     </v-col>
     <v-col md="4">
-      
+
     </v-col>
   </v-row>
 </template>
