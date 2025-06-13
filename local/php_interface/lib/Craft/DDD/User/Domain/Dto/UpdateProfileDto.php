@@ -8,14 +8,15 @@ class UpdateProfileDto
 		protected ?string $name,
 		protected ?string $secondName,
 		protected ?string $lastName,
-		protected ?string $inn,
-		protected ?string $kpp,
-		protected ?string $bik,
-		protected ?string $ogrn,
-		protected ?string $currAcc,
-		protected ?string $corrAcc,
-		protected ?string $legalAddress,
-		protected ?string $postalAddress,
+		protected ?string $ufBankName,
+		protected ?string $ufInn,
+		protected ?string $ufKpp,
+		protected ?string $ufBik,
+		protected ?string $ufOgrn,
+		protected ?string $ufCurrAcc,
+		protected ?string $ufCorrAcc,
+		protected ?string $ufLegalAddress,
+		protected ?string $ufPostalAddress,
 	)
 	{
 	}
@@ -30,48 +31,53 @@ class UpdateProfileDto
 		return $this->lastName;
 	}
 
-	public function getBik(): ?string
+	public function getUfBik(): ?string
 	{
-		return $this->bik;
+		return $this->ufBik;
 	}
 
-	public function getCorrAcc(): ?string
+	public function getUfCorrAcc(): ?string
 	{
-		return $this->corrAcc;
+		return $this->ufCorrAcc;
 	}
 
-	public function getCurrAcc(): ?string
+	public function getUfCurrAcc(): ?string
 	{
-		return $this->currAcc;
+		return $this->ufCurrAcc;
 	}
 
-	public function getInn(): ?string
+	public function getUfInn(): ?string
 	{
-		return $this->inn;
+		return $this->ufInn;
 	}
 
-	public function getKpp(): ?string
+	public function getUfKpp(): ?string
 	{
-		return $this->kpp;
+		return $this->ufKpp;
 	}
 
-	public function getLegalAddress(): ?string
+	public function getUfLegalAddress(): ?string
 	{
-		return $this->legalAddress;
+		return $this->ufLegalAddress;
 	}
 
-	public function getOgrn(): ?string
+	public function getUfOgrn(): ?string
 	{
-		return $this->ogrn;
+		return $this->ufOgrn;
 	}
 
-	public function getPostalAddress(): ?string
+	public function getUfPostalAddress(): ?string
 	{
-		return $this->postalAddress;
+		return $this->ufPostalAddress;
 	}
 
 	public function getSecondName(): ?string
 	{
 		return $this->secondName;
+	}
+
+	public function getUfBankName(): ?string
+	{
+		return $this->ufBankName;
 	}
 }

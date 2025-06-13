@@ -52,15 +52,15 @@ export default defineComponent({
         NAME: this.userData.name,
         LAST_NAME: this.userData.family,
         SECOND_NAME: this.userData.last_name,
-        UF_CURR_ACC: this.userData.uf_curr_acc,
-        UF_CORR_ACC: this.userData.uf_corr_acc,
         UF_OGRN: this.userData.uf_ogrn,
         UF_INN: this.userData.uf_inn,
         UF_KPP: this.userData.uf_kpp,
         UF_BIK: this.userData.uf_bik,
-        UF_POST_ADDRESS: this.userData.uf_post_address,
+        UF_POSTAL_ADDRESS: this.userData.uf_post_address,
         UF_LEGAL_ADDRESS: this.userData.uf_legal_address,
         UF_BANK_NAME: this.userData.uf_bank_name,
+        UF_CURR_ACC: this.userData.uf_curr_acc,
+        UF_CORR_ACC: this.userData.uf_corr_acc,
       },
       rules: {
         nameRules: [
@@ -156,7 +156,7 @@ export default defineComponent({
           required
         ></v-text-field>
         <v-text-field
-          v-model="form.UF_CORR_ACC"
+          v-model="form.UF_CURR_ACC"
           :counter="20"
           label="Лицевой счёт"
           required
@@ -168,7 +168,12 @@ export default defineComponent({
           required
         ></v-text-field>
         <v-text-field
-          v-model="form.UF_POST_ADDRESS"
+          v-model="form.UF_BANK_NAME"
+          label="Наименование банка"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="form.UF_POSTAL_ADDRESS"
           label="Почтовый адрес"
           required
         ></v-text-field>

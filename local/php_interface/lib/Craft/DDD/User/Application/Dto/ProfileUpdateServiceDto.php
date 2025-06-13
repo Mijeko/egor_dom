@@ -9,17 +9,28 @@ class ProfileUpdateServiceDto extends DtoManager
 	protected ?string $name = null;
 	protected ?string $secondName = null;
 	protected ?string $lastName = null;
-	protected ?string $inn = null;
-	protected ?string $kpp = null;
-	protected ?string $bik = null;
-	protected ?string $ogrn = null;
-	protected ?string $currAcc = null;
-	protected ?string $corrAcc = null;
-	protected ?string $legalAddress = null;
-	protected ?string $postalAddress = null;
+	protected ?string $ufBankName = null;
+	protected ?int $ufInn = null;
+	protected ?int $ufKpp = null;
+	protected ?int $ufBik = null;
+	protected ?int $ufOgrn = null;
+	protected ?int $ufCurrAcc = null;
+	protected ?int $ufCorrAcc = null;
+	protected ?string $ufLegalAddress = null;
+	protected ?string $ufPostalAddress = null;
 
 	public function __construct()
 	{
+	}
+
+	public function setUfBankName(?string $ufBankName): void
+	{
+		$this->ufBankName = $ufBankName;
+	}
+
+	public function getUfBankName(): ?string
+	{
+		return $this->ufBankName;
 	}
 
 	public function getName(): ?string
@@ -32,44 +43,44 @@ class ProfileUpdateServiceDto extends DtoManager
 		return $this->lastName;
 	}
 
-	public function getBik(): ?string
+	public function getUfBik(): ?int
 	{
-		return $this->bik;
+		return $this->ufBik;
 	}
 
-	public function getCorrAcc(): ?string
+	public function getUfCorrAcc(): ?int
 	{
-		return $this->corrAcc;
+		return $this->ufCorrAcc;
 	}
 
-	public function getCurrAcc(): ?string
+	public function getUfCurrAcc(): ?int
 	{
-		return $this->currAcc;
+		return $this->ufCurrAcc;
 	}
 
-	public function getInn(): ?string
+	public function getUfInn(): ?int
 	{
-		return $this->inn;
+		return $this->ufInn;
 	}
 
-	public function getKpp(): ?string
+	public function getUfKpp(): ?int
 	{
-		return $this->kpp;
+		return $this->ufKpp;
 	}
 
-	public function getLegalAddress(): ?string
+	public function getUfLegalAddress(): ?string
 	{
-		return $this->legalAddress;
+		return $this->ufLegalAddress;
 	}
 
-	public function getOgrn(): ?string
+	public function getUfOgrn(): ?int
 	{
-		return $this->ogrn;
+		return $this->ufOgrn;
 	}
 
-	public function getPostalAddress(): ?string
+	public function getUfPostalAddress(): ?string
 	{
-		return $this->postalAddress;
+		return $this->ufPostalAddress;
 	}
 
 	public function getSecondName(): ?string
@@ -87,46 +98,46 @@ class ProfileUpdateServiceDto extends DtoManager
 		$this->lastName = $lastName;
 	}
 
-	public function setBik(?string $bik): void
+	public function setUfBik(?string $ufBik): void
 	{
-		$this->bik = $bik;
+		$this->ufBik = $ufBik;
 	}
 
-	public function setCorrAcc(?string $corrAcc): void
+	public function setUfCorrAcc(?int $ufCorrAcc): void
 	{
-		$this->corrAcc = $corrAcc;
-	}
-
-
-	public function setCurrAcc(?string $currAcc): void
-	{
-		$this->currAcc = $currAcc;
-	}
-
-	public function setInn(?string $inn): void
-	{
-		$this->inn = $inn;
-	}
-
-	public function setKpp(?string $kpp): void
-	{
-		$this->kpp = $kpp;
+		$this->ufCorrAcc = $ufCorrAcc;
 	}
 
 
-	public function setLegalAddress(?string $legalAddress): void
+	public function setUfCurrAcc(?int $ufCurrAcc): void
 	{
-		$this->legalAddress = $legalAddress;
+		$this->ufCurrAcc = $ufCurrAcc;
 	}
 
-	public function setOgrn(?string $ogrn): void
+	public function setUfInn(?int $ufInn): void
 	{
-		$this->ogrn = $ogrn;
+		$this->ufInn = $ufInn;
 	}
 
-	public function setPostalAddress(?string $postalAddress): void
+	public function setUfKpp(?int $ufKpp): void
 	{
-		$this->postalAddress = $postalAddress;
+		$this->ufKpp = $ufKpp;
+	}
+
+
+	public function setUfLegalAddress(?string $ufLegalAddress): void
+	{
+		$this->ufLegalAddress = $ufLegalAddress;
+	}
+
+	public function setUfOgrn(?int $ufOgrn): void
+	{
+		$this->ufOgrn = $ufOgrn;
+	}
+
+	public function setUfPostalAddress(?string $ufPostalAddress): void
+	{
+		$this->ufPostalAddress = $ufPostalAddress;
 	}
 
 	public function setSecondName(?string $secondName): void

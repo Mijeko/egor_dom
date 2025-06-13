@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-use Craft\DDD\User\Domain\Dto\UpdateProfileDto;
+use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
 
 class Profile
 {
@@ -11,6 +11,7 @@ class Profile
 		protected ?string $name,
 		protected ?string $secondName,
 		protected ?string $lastName,
+		protected ?string $bank,
 		protected ?int    $inn,
 		protected ?int    $kpp,
 		protected ?int    $bik,
@@ -23,21 +24,27 @@ class Profile
 	{
 	}
 
-	public function updateProfile(UpdateProfileDto $profileDto): void
+	public function updateProfile(ProfileUpdateServiceDto $profileDto): void
 	{
 		$this->name = $profileDto->getName();
 		$this->secondName = $profileDto->getSecondName();
 		$this->lastName = $profileDto->getLastName();
-		$this->inn = $profileDto->getInn();
-		$this->kpp = $profileDto->getKpp();
-		$this->bik = $profileDto->getBik();
-		$this->ogrn = $profileDto->getOgrn();
-		$this->currAcc = $profileDto->getCurrAcc();
-		$this->corrAcc = $profileDto->getCorrAcc();
-		$this->legalAddress = $profileDto->getLegalAddress();
-		$this->postalAddress = $profileDto->getPostalAddress();
+		$this->bank = $profileDto->getUfBankName();
+		$this->inn = $profileDto->getUfInn();
+		$this->kpp = $profileDto->getUfKpp();
+		$this->bik = $profileDto->getUfBik();
+		$this->ogrn = $profileDto->getUfOgrn();
+		$this->currAcc = $profileDto->getUfCurrAcc();
+		$this->corrAcc = $profileDto->getUfCorrAcc();
+		$this->legalAddress = $profileDto->getUfLegalAddress();
+		$this->postalAddress = $profileDto->getUfPostalAddress();
 	}
 
+
+	public function getBank(): ?string
+	{
+		return $this->bank;
+	}
 
 	public function getSecondName(): ?string
 	{

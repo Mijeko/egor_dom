@@ -3,7 +3,6 @@
 namespace Craft\DDD\User\Application\Service;
 
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
-use Craft\DDD\User\Domain\Dto\UpdateProfileDto;
 use Craft\DDD\User\Domain\Entity\Profile;
 use Craft\DDD\User\Domain\Repository\ProfileRepositoryInterface;
 
@@ -24,19 +23,7 @@ class UpdateProfileService
 			throw new \Exception("Profile not found");
 		}
 
-		$profile->updateProfile(new UpdateProfileDto(
-			$profileUpdateServiceDto->getName(),
-			$profileUpdateServiceDto->getSecondName(),
-			$profileUpdateServiceDto->getLastName(),
-			$profileUpdateServiceDto->getInn(),
-			$profileUpdateServiceDto->getKpp(),
-			$profileUpdateServiceDto->getBik(),
-			$profileUpdateServiceDto->getOgrn(),
-			$profileUpdateServiceDto->getCurrAcc(),
-			$profileUpdateServiceDto->getCorrAcc(),
-			$profileUpdateServiceDto->getLegalAddress(),
-			$profileUpdateServiceDto->getPostalAddress(),
-		));
+		$profile->updateProfile($profileUpdateServiceDto);
 
 		return $this->profileRepository->update($profile);
 	}
