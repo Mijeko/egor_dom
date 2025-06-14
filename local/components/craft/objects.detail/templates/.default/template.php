@@ -21,5 +21,16 @@
 $element = $arResult['ELEMENT'];
 
 ?>
-<h1><?=$element->name;?></h1>
+
+<?php
+$APPLICATION->IncludeComponent(
+	'craft:vite',
+	'vite',
+	[
+		'SOURCE' => 'ObjectDetail',
+	],
+	false,
+	['HIDE_ICONS' => 'Y']
+)
+?>
 

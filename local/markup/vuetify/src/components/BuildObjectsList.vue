@@ -20,7 +20,6 @@ export default defineComponent({
           <v-card-text>{{ buildObject.name }}</v-card-text>
         </v-col>
         <v-col md="3">
-          <v-btn>Купить</v-btn>
           <v-btn :href="buildObject.detailLink">Посмотреть</v-btn>
         </v-col>
       </v-row>
