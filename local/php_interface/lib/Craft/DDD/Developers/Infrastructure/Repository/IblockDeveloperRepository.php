@@ -17,7 +17,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 	{
 	}
 
-	public function findAll(array $criteria = []): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
 		if(!Loader::includeModule('iblock'))
 		{
@@ -27,11 +27,17 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 
 		$result = [];
 		$query = CIBlockElement::GetList(
-			[],
-			[
-				'ACTIVE'    => 'Y',
-				'IBLOCK_ID' => $this->iblockId,
-			],
+			array_merge(
+				[],
+				$order
+			),
+			array_merge(
+				[
+					'ACTIVE'    => 'Y',
+					'IBLOCK_ID' => $this->iblockId,
+				],
+				$filter
+			),
 		);
 		while($element = $query->GetNext())
 		{

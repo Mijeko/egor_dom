@@ -8,5 +8,5 @@ interface BuildObjectRepositoryInterface
 {
 	public function findById(int $id): ?BuildObject;
 
-	public function findAll(array $criteria = []): array;
+	public function findAll(array $order = [], array $filter = []): array;
 }

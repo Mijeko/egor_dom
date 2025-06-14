@@ -22,10 +22,13 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		return $this->mapElement($model);
 	}
 
-	public function findAll(array $criteria = []): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
 		$result = [];
-		$query = BuildObjectTable::getList($criteria);
+		$query = BuildObjectTable::getList([
+			'order'  => $order,
+			'filter' => $filter,
+		]);
 
 		foreach($query->fetchCollection() as $buildObject)
 		{

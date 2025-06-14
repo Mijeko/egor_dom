@@ -38,7 +38,7 @@ class IblockBuildOrmRepository implements BuildObjectRepositoryInterface
 		return $this->mapElement($query);
 	}
 
-	public function findAll(array $criteria = []): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
 		if(!Loader::includeModule('iblock'))
 		{
@@ -46,12 +46,15 @@ class IblockBuildOrmRepository implements BuildObjectRepositoryInterface
 		}
 
 		$query = \CIBlockElement::GetList(
-			[],
+			array_merge(
+				[],
+				$order
+			),
 			array_merge(
 				[
 					'IBLOCK_ID' => $this->iblockId,
 				],
-				$criteria
+				$filter
 			)
 		);
 

@@ -4,5 +4,5 @@ namespace Craft\DDD\Developers\Domain\Repository;
 
 interface DeveloperRepositoryInterface
 {
-	public function findAll(array $criteria = []): array;
+	public function findAll(array $order = [], array $filter = []): array;
 }

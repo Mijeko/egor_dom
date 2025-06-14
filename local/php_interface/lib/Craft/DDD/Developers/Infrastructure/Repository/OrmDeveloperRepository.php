@@ -9,10 +9,13 @@ use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
 {
-	public function findAll(array $criteria = []): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
 		$result = [];
-		$query = DeveloperTable::getList($criteria);
+		$query = DeveloperTable::getList([
+			'order'  => $order,
+			'filter' => $filter,
+		]);
 
 		foreach($query->fetchCollection() as $developer)
 		{
