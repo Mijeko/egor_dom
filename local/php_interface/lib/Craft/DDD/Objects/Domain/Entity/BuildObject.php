@@ -2,12 +2,14 @@
 
 namespace Craft\DDD\Objects\Domain\Entity;
 
+use Craft\Dto\BxImage;
+
 class BuildObject
 {
 	public function __construct(
-		public int    $id,
-		public string $name,
-		public ?int   $pictureId = null,
+		public int      $id,
+		public string   $name,
+		public ?BxImage $picture = null,
 	)
 	{
 	}
@@ -22,8 +24,8 @@ class BuildObject
 		return $this->id;
 	}
 
-	public function getPictureId(): ?int
+	public function getPicture(): ?BxImage
 	{
-		return $this->pictureId;
+		return $this->picture;
 	}
 }

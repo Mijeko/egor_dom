@@ -1,3 +1,4 @@
 export default interface BxImage {
-  SRC: string;
+  id: string;
+  src: string;
 }

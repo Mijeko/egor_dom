@@ -28,6 +28,9 @@ $APPLICATION->IncludeComponent(
 	'vite',
 	[
 		'SOURCE' => 'ObjectDetail',
+		'PROPS'  => [
+			'product' => $element,
+		],
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

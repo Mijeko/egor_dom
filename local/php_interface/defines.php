@@ -7,3 +7,10 @@ define('SMARTCAPTCHA_SERVER_KEY', 'ysc2_dRmWTVxaOLruU0d64eTtWu3xscbim7gcstgjCPkm
 // groups
 define('USER_GROUP_JUR_PERSON_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('HOME_SELLER'));
 define('USER_GROUP_PHYS_PERSON_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('STUDENT'));
+
+// iblock id
+
+
+# Недвижимость->Объекты
+define('BUILD_OBJECT_IBLOCK_ID', \Craft\Core\Helper\IblockHelper::getIblockIdByCode('immovables_objects'));
+define('BUILD_DEVELOPERS_IBLOCK_ID', \Craft\Core\Helper\IblockHelper::getIblockIdByCode('immovables_developers'));

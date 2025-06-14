@@ -1,10 +1,16 @@
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts">
+import {defineComponent, type PropType} from 'vue'
+import type BuildObjectDto from "@/dto/BuildObjectDto.ts";
 
 export default defineComponent({
   name: "BuildObjectsList",
   props: {
-    BuildObjects: []
+    BuildObjects: {
+      type: Array as PropType<BuildObjectDto[]>
+    }
+  },
+  mounted(): any {
+    console.log(this.BuildObjects);
   }
 })
 </script>
@@ -14,7 +20,7 @@ export default defineComponent({
     <v-card v-for="buildObject in BuildObjects" class="mb-5">
       <v-row>
         <v-col md="3">
-          <v-img :src="buildObject?.picture?.SRC" width="200" height="100" cover></v-img>
+          <v-img :src="buildObject?.picture?.src" width="200" height="100" cover></v-img>
         </v-col>
         <v-col md="6">
           <v-card-text>{{ buildObject.name }}</v-card-text>

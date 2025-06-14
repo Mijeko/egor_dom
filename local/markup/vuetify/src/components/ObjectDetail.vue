@@ -1,10 +1,13 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
+import type BuildObjectDetail from "@/dto/BuildObjectDetail.ts";
 
 export default defineComponent({
   name: "ObjectDetail",
   props: {
-    product: {}
+    product: {
+      type: Object as PropType<BuildObjectDetail>
+    }
   }
 })
 </script>

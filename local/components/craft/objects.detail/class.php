@@ -42,13 +42,12 @@ class CraftBuildObjectsDetailComponent extends CBitrixComponent
 
 	protected function loadService(): void
 	{
-		$this->service = BuildObjectServiceFactory::create();
+		$this->service = BuildObjectServiceFactory::createOnIblock(BUILD_OBJECT_IBLOCK_ID);
 	}
 
 	protected function loadData(): void
 	{
 		$element = $this->service->findById($this->arParams['ELEMENT_ID']);
-
 		if(!$element)
 		{
 			throw new Exception('Element not found');
@@ -57,6 +56,7 @@ class CraftBuildObjectsDetailComponent extends CBitrixComponent
 		$this->arResult['ELEMENT'] = new BuildObjectDetailDto(
 			$element->getId(),
 			$element->getName(),
+			$element->getPicture()
 		);
 	}
 }

@@ -13,6 +13,7 @@ class CraftDevelopersComponent extends CBitrixComponent
 
 	public function onPrepareComponentParams($arParams)
 	{
+		$arParams['IBLOCK_ID'] = intval($arParams['IBLOCK_ID']);
 		return $arParams;
 	}
 
@@ -31,7 +32,13 @@ class CraftDevelopersComponent extends CBitrixComponent
 
 	protected function loadServices(): void
 	{
-		$this->service = DeveloperServiceFactory::create();
+		if($this->arParams['IBLOCK_ID'])
+		{
+			$this->service = DeveloperServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
+		} else
+		{
+			$this->service = DeveloperServiceFactory::createOnOrm();
+		}
 	}
 
 	protected function loadData(): void

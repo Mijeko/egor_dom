@@ -11,6 +11,7 @@ class CraftBuildObjectsComponent extends CBitrixComponent
 
 	public function onPrepareComponentParams($arParams)
 	{
+		$arParams['IBLOCK_ID'] = intval($arParams['IBLOCK_ID']);
 		$arParams['FILTER'] = is_array($arParams['FILTER']) ? $arParams['FILTER'] : [];
 		return $arParams;
 	}
@@ -32,30 +33,24 @@ class CraftBuildObjectsComponent extends CBitrixComponent
 	{
 		$this->arResult['BUILD_OBJECTS'] = array_map(
 			function(BuildObject $buildObject) {
-
-				$file = \CFile::GetFileArray($buildObject->getPictureId());
-				if(!$file)
-				{
-					$file = [];
-				}
-
 				return new BuildObjectFrontDto(
 					$buildObject->getId(),
 					$buildObject->getName(),
-					$file
+					$buildObject->getPicture(),
 				);
 			},
-			$this->service->findAll([
-				'filter' => array_merge(
-					[],
-					$this->arParams['FILTER']
-				),
-			])
+			$this->service->findAll()
 		);
 	}
 
 	protected function loadService(): void
 	{
-		$this->service = BuildObjectServiceFactory::create();
+		if($this->arParams['IBLOCK_ID'])
+		{
+			$this->service = BuildObjectServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
+		} else
+		{
+			$this->service = BuildObjectServiceFactory::createOnOrm();
+		}
 	}
 }

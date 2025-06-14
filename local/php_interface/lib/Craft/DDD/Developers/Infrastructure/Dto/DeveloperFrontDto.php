@@ -3,25 +3,24 @@
 namespace Craft\DDD\Developers\Infrastructure\Dto;
 
 use Craft\DDD\Developers\Domain\Entity\Developer;
+use Craft\Dto\BxImage;
 
 class DeveloperFrontDto
 {
 	public function __construct(
-		public int    $id,
-		public string $name,
-		public ?array $picture = null
+		public int      $id,
+		public string   $name,
+		public ?BxImage $picture = null
 	)
 	{
 	}
 
 	public static function fromModel(Developer $developer): static
 	{
-		$file = \CFile::GetFileArray($developer->getPictureId());
-
 		return new static(
 			$developer->getId(),
 			$developer->getName(),
-			$file
+			$developer->getPicture(),
 		);
 	}
 }
