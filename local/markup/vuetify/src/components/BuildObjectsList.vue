@@ -1,6 +1,7 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import type BuildObjectDto from "@/dto/BuildObjectDto.ts";
+
+import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 
 export default defineComponent({
   name: "BuildObjectsList",

@@ -1,13 +1,15 @@
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts">
+import {defineComponent, type PropType} from 'vue'
+import type DeveloperDto from "@/dto/entity/DeveloperDto.ts";
 
 export default defineComponent({
   name: "Developers",
   mounted() {
-    // console.log(this.developers)
   },
   props: {
-    developers: []
+    developers: {
+      type: Array as PropType<DeveloperDto[]>
+    }
   }
 })
 </script>
@@ -17,7 +19,7 @@ export default defineComponent({
     <v-card v-for="developer in developers" class="mb-2">
       <v-row class="pa-2">
         <v-col md="2" sm="4">
-          <v-img :src="developer.picture.SRC" width="200" height="100%" cover></v-img>
+          <v-img :src="developer?.picture?.src" width="200" height="100%" cover></v-img>
         </v-col>
         <v-col md="10" sm="8">
           <v-card-text class="pb-1 text-subtitle-1 font-weight-bold">{{ developer.name }}</v-card-text>

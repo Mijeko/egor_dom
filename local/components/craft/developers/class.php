@@ -47,11 +47,7 @@ class CraftDevelopersComponent extends CBitrixComponent
 			function(Developer $developer) {
 				return DeveloperFrontDto::fromModel($developer);
 			},
-			$this->service->findAll([
-				'filter' => [
-					#DeveloperTable::F_ACTIVE => DeveloperTable::ACTIVE_Y,
-				],
-			])
+			$this->service->findAll()
 		);
 	}
 }

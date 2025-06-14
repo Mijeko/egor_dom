@@ -24,6 +24,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 			return [];
 		}
 
+
 		$result = [];
 		$query = CIBlockElement::GetList(
 			[],
@@ -32,7 +33,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 				'IBLOCK_ID' => $this->iblockId,
 			],
 		);
-		while($element = $query->fetch())
+		while($element = $query->GetNext())
 		{
 			$result[] = $this->mapElement($element);
 		}
@@ -40,7 +41,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 		return $result;
 	}
 
-	protected function mapElement(array $element): Developer
+	protected function mapElement(array $element)
 	{
 		$_picture = \CFile::GetFileArray($element['DETAIL_PICTURE']);
 		$picture = null;

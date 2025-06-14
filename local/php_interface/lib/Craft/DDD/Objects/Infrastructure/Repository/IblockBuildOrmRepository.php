@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\Objects\Infrastructure\Repository;
 
-use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Loader;
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
 use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
