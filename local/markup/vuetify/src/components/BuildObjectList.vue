@@ -4,7 +4,7 @@ import {defineComponent, type PropType} from 'vue'
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 
 export default defineComponent({
-  name: "BuildObjectsList",
+  name: "BuildObjectList",
   props: {
     BuildObjects: {
       type: Array as PropType<BuildObjectDto[]>

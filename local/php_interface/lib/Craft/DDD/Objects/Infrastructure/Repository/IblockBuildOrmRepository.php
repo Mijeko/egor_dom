@@ -28,14 +28,22 @@ class IblockBuildOrmRepository implements BuildObjectRepositoryInterface
 				'ID'        => $id,
 				'IBLOCK_ID' => $this->iblockId,
 			]
-		)->GetNext();
+		);
 
-		if(!$query['ID'])
+		if($query->SelectedRowsCount() != 1)
 		{
 			return null;
 		}
 
-		return $this->mapElement($query);
+		$el = $query->GetNext();
+
+		if(empty($el['ID']))
+		{
+			return null;
+		}
+
+		return $this->mapElement($el);
+
 	}
 
 	public function findAll(array $order = [], array $filter = []): array

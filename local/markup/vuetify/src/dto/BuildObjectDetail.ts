@@ -1,4 +1,5 @@
 import type BxImage from "../dto/bitrix/BxImage.ts";
+import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
 
 export default interface BuildObjectDetail {
@@ -7,4 +8,5 @@ export default interface BuildObjectDetail {
   detailLink: string;
   image: BxImage;
   gallery: BxImage[];
+  apartments?: ApartmentDto[]
 }

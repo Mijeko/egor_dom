@@ -13,22 +13,27 @@
  * @var string $templateFile
  * @var string $templateFolder
  * @var string $componentPath
- * @var CraftBuildObjectsComponent $component
+ * @var CraftBuildObjectDetailComponent $component
+ *
+ * @var \Craft\DDD\Objects\Infrastructure\Dto\BuildObjectDetailDto $element
  */
-?>
 
+$element = $arResult['ELEMENT'];
+
+?>
 
 <?php
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'BuildObjectsList',
+		'SOURCE' => 'BuildObjectDetail',
 		'PROPS'  => [
-			'BuildObjects' => $arResult['BUILD_OBJECTS'],
+			'product' => $element,
 		],
 	],
 	false,
 	['HIDE_ICONS' => 'Y']
 )
 ?>
+

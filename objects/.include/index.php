@@ -8,7 +8,7 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:objects',
+	'craft:object.list',
 	'.default',
 	[
 		'IBLOCK_ID' => BUILD_OBJECT_IBLOCK_ID,

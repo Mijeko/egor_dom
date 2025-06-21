@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Objects\Domain\Entity;
 
+use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
 use Craft\Dto\BxImage;
 
 class BuildObject
@@ -10,6 +11,7 @@ class BuildObject
 		public int      $id,
 		public string   $name,
 		public ?BxImage $picture = null,
+		public ?array   $apartments = null,
 	)
 	{
 	}
@@ -28,4 +30,14 @@ class BuildObject
 	{
 		return $this->picture;
 	}
+
+
+	/**
+	 * @return ApartmentEntity[] | null
+	 */
+	public function getApartments(): ?array
+	{
+		return $this->apartments;
+	}
+
 }

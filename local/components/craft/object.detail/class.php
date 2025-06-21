@@ -4,7 +4,7 @@ use Craft\DDD\Objects\Application\Service\BuildObjectService;
 use Craft\DDD\Objects\Infrastructure\Dto\BuildObjectDetailDto;
 use Craft\DDD\Objects\Application\Service\BuildObjectServiceFactory;
 
-class CraftBuildObjectsDetailComponent extends CBitrixComponent
+class CraftBuildObjectDetailComponent extends CBitrixComponent
 {
 
 	protected ?BuildObjectService $service;

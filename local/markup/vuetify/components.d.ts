@@ -9,13 +9,14 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Alert: typeof import('./src/components/Alert.vue')['default']
+    ApartmentList: typeof import('./src/components/ApartmentList.vue')['default']
     Auth: typeof import('./src/components/Auth.vue')['default']
     BottomFloatMenu: typeof import('./src/components/BottomFloatMenu.vue')['default']
     Breadcrumbs: typeof import('./src/components/Breadcrumbs.vue')['default']
-    BuildObjectsList: typeof import('./src/components/BuildObjectsList.vue')['default']
+    BuildObjectDetail: typeof import('./src/components/BuildObjectDetail.vue')['default']
+    BuildObjectList: typeof import('./src/components/BuildObjectList.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']
-    ObjectDetail: typeof import('./src/components/ObjectDetail.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
