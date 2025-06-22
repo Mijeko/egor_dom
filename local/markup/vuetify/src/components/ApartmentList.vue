@@ -14,11 +14,21 @@ export default defineComponent({
 </script>
 
 <template>
-  Квартирки
 
-  <v-card v-for="apart in apartments">
-    {{ apart.name }}
+
+  <v-card v-for="apart in apartments" class="mb-3">
+    <v-row>
+      <v-col md="9" class="pa-5">
+        <v-card-title>{{ apart.name }}</v-card-title>
+        <v-card-subtitle>{{ apart.price }}</v-card-subtitle>
+      </v-col>
+      <v-col md="3" class="pa-5">
+        <v-btn>Купить</v-btn>
+      </v-col>
+    </v-row>
   </v-card>
+
+
 </template>
 
 <style scoped>

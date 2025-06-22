@@ -39,7 +39,10 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 					$buildObject->getPicture(),
 				);
 			},
-			$this->service->findAll()
+			$this->service->findAll(
+				[],
+				$this->arParams['FILTER'],
+			)
 		);
 	}
 

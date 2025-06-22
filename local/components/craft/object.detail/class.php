@@ -1,5 +1,7 @@
 <?php
 
+use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Apartment\Infrastructure\Dto\ApartmentDto;
 use Craft\DDD\Objects\Application\Service\BuildObjectService;
 use Craft\DDD\Objects\Infrastructure\Dto\BuildObjectDetailDto;
 use Craft\DDD\Objects\Application\Service\BuildObjectServiceFactory;
@@ -58,7 +60,17 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 			$element->getId(),
 			$element->getName(),
 			$element->getPicture(),
-			$element->getGallery()
+			$element->getGallery(),
+			array_map(
+				function(ApartmentEntity $item) {
+					return new ApartmentDto(
+						$item->getId(),
+						$item->getName(),
+						$item->getPrice(),
+					);
+				},
+				$element->getApartments()
+			),
 		);
 	}
 }

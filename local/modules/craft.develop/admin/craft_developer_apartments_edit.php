@@ -52,7 +52,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_a
 $aTabs = [
 	[
 		"DIV"   => "edit1",
-		"TAB"   => 'Застройщик',
+		"TAB"   => 'Квартира',
 		"ICON"  => "iblock_section",
 		"TITLE" => $aparmentModel->getName() ? 'Изменить: ' . $aparmentModel->getName() : 'Новая квартира',
 	],

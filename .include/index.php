@@ -8,7 +8,7 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:objects',
+	'craft:object.list',
 	'.default',
 	[],
 	false,

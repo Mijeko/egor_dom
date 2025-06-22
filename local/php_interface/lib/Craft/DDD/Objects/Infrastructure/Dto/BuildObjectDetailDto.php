@@ -15,6 +15,7 @@ class BuildObjectDetailDto
 		public string   $name,
 		public ?BxImage $image = null,
 		public ?array   $gallery = null,
+		public ?array   $apartments = null,
 	)
 	{
 	}

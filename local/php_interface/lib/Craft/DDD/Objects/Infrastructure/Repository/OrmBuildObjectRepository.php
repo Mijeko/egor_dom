@@ -87,7 +87,6 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 		}
 
-
 		return new BuildObject(
 			$buildObject->getId(),
 			$buildObject->getName(),

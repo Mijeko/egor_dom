@@ -18,8 +18,8 @@ class BuildObjectService
 		return $this->repository->findById($id);
 	}
 
-	public function findAll(array $criteria = []): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
-		return $this->repository->findAll($criteria);
+		return $this->repository->findAll($order, $filter);
 	}
 }

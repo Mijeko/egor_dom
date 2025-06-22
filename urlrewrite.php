@@ -5,7 +5,7 @@ $arUrlRewrite=array (
     'CONDITION' => '#^/developers/([^/]+)/?(\\?[^/]*)?$#',
     'RULE' => 'ELEMENT_ID=$1',
     'ID' => '',
-    'PATH' => '/developers/detail/index.php',
+    'PATH' => '/developers/detail.php',
     'SORT' => 100,
   ),
   4 => 

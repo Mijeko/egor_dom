@@ -28,7 +28,7 @@ $APPLICATION->SetTitle('Строительные объекты компании
 $APPLICATION->AddChainItem('Строительные объекты компании: ' . $developer->getName(),$APPLICATION->GetCurPage());
 
 $APPLICATION->IncludeComponent(
-	'craft:objects',
+	'craft:object.list',
 	'.default',
 	[
 		'FILTER' => [
