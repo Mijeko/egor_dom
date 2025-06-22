@@ -2,6 +2,9 @@
 
 namespace Craft\DDD\Objects\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Apartment\Infrastructure\Entity\Apartment;
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
 use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
@@ -51,10 +54,46 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			);
 		}
 
+		$gallery = array_map(
+			function($fileId) {
+				$file = \CFile::GetFileArray($fileId);
+				if($file)
+				{
+					return new BxImage(
+						$file['ID'],
+						$file['SRC'],
+					);
+				}
+
+				return null;
+			},
+			$buildObject->getGalleryEx()
+		);
+		# clear null values
+		$gallery = array_filter($gallery);
+
+
+		$aps = $buildObject->fillApartments();
+		$_aps = [];
+		if($aps)
+		{
+			foreach($aps as $ap)
+			{
+				$_aps[] = new ApartmentEntity(
+					$ap->getId(),
+					$ap->getName(),
+					$ap->getPrice(),
+				);
+			}
+		}
+
+
 		return new BuildObject(
 			$buildObject->getId(),
 			$buildObject->getName(),
-			$picture
+			$picture,
+			$_aps,
+			$gallery
 		);
 	}
 }

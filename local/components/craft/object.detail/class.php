@@ -57,7 +57,8 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 		$this->arResult['ELEMENT'] = new BuildObjectDetailDto(
 			$element->getId(),
 			$element->getName(),
-			$element->getPicture()
+			$element->getPicture(),
+			$element->getGallery()
 		);
 	}
 }

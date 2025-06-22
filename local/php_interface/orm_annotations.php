@@ -6484,6 +6484,17 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetUpdatedAt()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillUpdatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection getApartments()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection requireApartments()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
+	 * @method bool hasApartments()
+	 * @method bool isApartmentsFilled()
+	 * @method bool isApartmentsChanged()
+	 * @method void addToApartments(\Craft\DDD\Apartment\Infrastructure\Entity\Apartment $apartment)
+	 * @method void removeFromApartments(\Craft\DDD\Apartment\Infrastructure\Entity\Apartment $apartment)
+	 * @method void removeAllApartments()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetApartments()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetApartments()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6544,6 +6555,9 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
 	 * @method \Bitrix\Main\Type\DateTime[] fillUpdatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection[] getApartmentsList()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection getApartmentsCollection()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
 	 *
 	 * Common methods:
 	 * ---------------

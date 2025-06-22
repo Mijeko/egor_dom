@@ -5,7 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
  * @global CMain $APPLICATION
  */
 
-$APPLICATION->SetTitle("Объекты");
+$APPLICATION->SetTitle("Квартиры");
 
 use Bitrix\Main\Loader;
 use Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable;
@@ -122,7 +122,7 @@ $lAdmin->AddGroupActionTable([
 
 $aContext = [
 	[
-		"TEXT"  => 'Добавить объект',
+		"TEXT"  => 'Добавить квартиру',
 		"LINK"  => CRAFT_DEVELOP_ADMIN_URL_EDIT_APARTMENTS . "?lang=" . LANG,
 		"TITLE" => 'Создать',
 		"ICON"  => "btn_new",

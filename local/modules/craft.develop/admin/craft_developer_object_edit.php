@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php");
 
 use Bitrix\Main\Application;
+use Craft\DDD\Objects\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
@@ -22,8 +23,6 @@ if($request->isPost())
 	$filesData = $request->getFileList()->toArray();
 	$postData = $request->getPostList()->toArray();
 
-	\Bitrix\Main\Diag\Debug::dumpToFile($filesData);
-
 	foreach($postData as $name => $value)
 	{
 		try
@@ -39,16 +38,20 @@ if($request->isPost())
 		switch($propertyCode)
 		{
 			case BuildObjectTable::F_PICTURE_ID:
-				$fileId = \CFile::SaveFile($fileData, '/craft/develop/objects/');
+				$fileId = \CFile::SaveFile($fileData, BuildObject::UPLOAD_PATH);
 				if($fileId)
 				{
 					$this->set($propertyCode, $fileId);
 				}
 				break;
-
-			case BuildObjectTable::F_GALLERY:
-				break;
 		}
+	}
+
+
+	//	костыль
+	if($galleryRawData = $_REQUEST[BuildObjectTable::F_GALLERY])
+	{
+		$buildObjectModel->setGalleryEx($galleryRawData);
 	}
 
 	$result = $buildObjectModel->save();
@@ -174,7 +177,7 @@ if($field = $entity->getField(BuildObjectTable::F_GALLERY))
 			{
 				foreach($content as $index => $imageData)
 				{
-					$inputName[$field->getName() . '[' . $index . ']'] = $imageData['ID'];
+					$inputName[$field->getName() . '[' . $index . ']'] = $imageData;
 					$id = $field->getName() . "[" . $index . "]_" . mt_rand(1, 1000000);
 				}
 			}
@@ -184,7 +187,7 @@ if($field = $entity->getField(BuildObjectTable::F_GALLERY))
 				"id"          => $id,
 				"description" => true,
 				"upload"      => true,
-				"allowUpload" => "A",
+				"allowUpload" => "I",
 				"medialib"    => true,
 				"fileDialog"  => true,
 				"cloud"       => true,

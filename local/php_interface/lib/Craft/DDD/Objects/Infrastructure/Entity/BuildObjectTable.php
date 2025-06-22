@@ -6,8 +6,10 @@ use Bitrix\Main\Entity\BooleanField;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
+use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\Type\DateTime;
+use Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable;
 
 class BuildObjectTable extends DataManager
 {
@@ -25,6 +27,8 @@ class BuildObjectTable extends DataManager
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';
+
+	const R_APARTMENTS = 'APARTMENTS';
 
 	public static function getTableName()
 	{
@@ -60,6 +64,13 @@ class BuildObjectTable extends DataManager
 				->configureDefaultValue(new DateTime()),
 			(new DatetimeField(self::F_UPDATED_AT))
 				->configureDefaultValue(new DateTime()),
+
+
+			(new OneToMany(
+				self::R_APARTMENTS,
+				ApartmentTable::class,
+				ApartmentTable::R_BUILD_OBJECT
+			)),
 		];
 	}
 

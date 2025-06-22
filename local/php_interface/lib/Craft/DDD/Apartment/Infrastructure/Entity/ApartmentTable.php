@@ -55,6 +55,7 @@ class ApartmentTable extends DataManager
 				->configureTitle('Сортировка')
 				->configureDefaultValue(500),
 			(new StringField(self::F_CODE))
+				->configureTitle('Символьный код')
 				->configureRequired(),
 			(new IntegerField(self::F_PRICE))
 				->configureRequired()

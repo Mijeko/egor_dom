@@ -5,25 +5,38 @@ namespace Craft\DDD\Objects\Infrastructure\Entity;
 class BuildObject extends EO_BuildObject
 {
 
-	public function setFiles($values): void
+	const UPLOAD_PATH = '/craft/develop/objects/';
+
+	public function setGalleryEx(array $galleryData): void
 	{
+		$files = [];
 
-		$entity = BuildObjectTable::getEntity();
-
-		foreach($values as $propertyCode => $value)
+		foreach($galleryData as $fileData)
 		{
+			$file = \CFile::makeFileArray($fileData);
+			$fileId = \CFile::SaveFile($file, self::UPLOAD_PATH);
+			if($fileId)
+			{
+				$files[] = $fileId;
+			}
 		}
 
-	}
-
-	public function setGalleryEx()
-	{
-
+		$this->setGallery(json_encode($files));
 	}
 
 	public function getGalleryEx(): array
 	{
 		$result = [];
+
+		try
+		{
+			if($this->getGallery())
+			{
+				$result = json_decode($this->getGallery(), true);
+			}
+		} catch(\Exception $e)
+		{
+		}
 
 		return $result;
 	}

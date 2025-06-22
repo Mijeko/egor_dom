@@ -5,7 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
  * @global CMain $APPLICATION
  */
 
-$APPLICATION->SetTitle("Застройщики");
+$APPLICATION->SetTitle("Квартиры");
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
@@ -37,19 +37,6 @@ if($request->isPost())
 	}
 
 
-	$files = $request->getFileList()->toArray();
-	if($files)
-	{
-		foreach($files as $propertyCode => $fileData)
-		{
-			$fileId = CFile::SaveFile($fileData, '/craft/develop/developers/');
-			if($fileId)
-			{
-				$aparmentModel->set($propertyCode, $fileId);
-			}
-		}
-	}
-
 	$result = $aparmentModel->save();
 
 	if(!$result->isSuccess())
@@ -67,7 +54,7 @@ $aTabs = [
 		"DIV"   => "edit1",
 		"TAB"   => 'Застройщик',
 		"ICON"  => "iblock_section",
-		"TITLE" => $aparmentModel ? 'Изменить: ' . $aparmentModel->getName() : 'Новый застройщик',
+		"TITLE" => $aparmentModel->getName() ? 'Изменить: ' . $aparmentModel->getName() : 'Новая квартира',
 	],
 ];
 
@@ -137,8 +124,19 @@ if($field = $entity->getField(ApartmentTable::F_NAME))
 		$field->getName(),
 		$field->getTitle(),
 		$field->isRequired(),
-		["size" => 35, "maxlength" => 255],
+		["size" => 35, "maxlength" => 255, 'id' => $field->getName()],
 		$aparmentModel ? $aparmentModel->getName() : null
+	);
+}
+
+if($field = $entity->getField(ApartmentTable::F_CODE))
+{
+	$tabControl->AddEditField(
+		$field->getName(),
+		$field->getTitle(),
+		$field->isRequired(),
+		["size" => 35, "maxlength" => 255, 'id' => $field->getName()],
+		$aparmentModel ? $aparmentModel->getCode() : null
 	);
 }
 
@@ -169,3 +167,7 @@ $tabControl->Buttons([
 ]);
 
 $tabControl->Show();
+
+bxTransliterate();
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");
+?>

@@ -67,7 +67,7 @@ $aTabs = [
 		"DIV"   => "edit1",
 		"TAB"   => 'Застройщик',
 		"ICON"  => "iblock_section",
-		"TITLE" => $developerModel ? 'Изменить: ' . $developerModel->getName() : 'Новый застройщик',
+		"TITLE" => $developerModel->getName() ? 'Изменить: ' . $developerModel->getName() : 'Новый застройщик',
 	],
 ];
 

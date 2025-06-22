@@ -12,6 +12,7 @@ class BuildObject
 		public string   $name,
 		public ?BxImage $picture = null,
 		public ?array   $apartments = null,
+		public ?array   $gallery = null,
 	)
 	{
 	}
@@ -38,6 +39,14 @@ class BuildObject
 	public function getApartments(): ?array
 	{
 		return $this->apartments;
+	}
+
+	/**
+	 * @return BxImage[]|null
+	 */
+	public function getGallery(): ?array
+	{
+		return $this->gallery;
 	}
 
 }
