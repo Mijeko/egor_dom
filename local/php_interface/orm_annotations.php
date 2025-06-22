@@ -6454,6 +6454,16 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetName()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetName()
 	 * @method \string fillName()
+	 * @method \string getGallery()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setGallery(\string|\Bitrix\Main\DB\SqlExpression $gallery)
+	 * @method bool hasGallery()
+	 * @method bool isGalleryFilled()
+	 * @method bool isGalleryChanged()
+	 * @method \string remindActualGallery()
+	 * @method \string requireGallery()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetGallery()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetGallery()
+	 * @method \string fillGallery()
 	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
 	 * @method bool hasCreatedAt()
@@ -6528,6 +6538,8 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \int[] fillSort()
 	 * @method \string[] getNameList()
 	 * @method \string[] fillName()
+	 * @method \string[] getGalleryList()
+	 * @method \string[] fillGallery()
 	 * @method \Bitrix\Main\Type\DateTime[] getCreatedAtList()
 	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
@@ -6600,4 +6612,252 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
 	 */
 	class EO_BuildObject_Entity extends \Bitrix\Main\ORM\Entity {}
+}
+/* ORMENTITYANNOTATION:Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable */
+namespace Craft\DDD\Apartment\Infrastructure\Entity {
+	/**
+	 * Apartment
+	 * @see \Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int getId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setId(\int|\Bitrix\Main\DB\SqlExpression $id)
+	 * @method bool hasId()
+	 * @method bool isIdFilled()
+	 * @method bool isIdChanged()
+	 * @method \string getName()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setName(\string|\Bitrix\Main\DB\SqlExpression $name)
+	 * @method bool hasName()
+	 * @method bool isNameFilled()
+	 * @method bool isNameChanged()
+	 * @method \string remindActualName()
+	 * @method \string requireName()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetName()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetName()
+	 * @method \string fillName()
+	 * @method \boolean getActive()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
+	 * @method bool hasActive()
+	 * @method bool isActiveFilled()
+	 * @method bool isActiveChanged()
+	 * @method \boolean remindActualActive()
+	 * @method \boolean requireActive()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetActive()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetActive()
+	 * @method \boolean fillActive()
+	 * @method \int getSort()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setSort(\int|\Bitrix\Main\DB\SqlExpression $sort)
+	 * @method bool hasSort()
+	 * @method bool isSortFilled()
+	 * @method bool isSortChanged()
+	 * @method \int remindActualSort()
+	 * @method \int requireSort()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetSort()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetSort()
+	 * @method \int fillSort()
+	 * @method \string getCode()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setCode(\string|\Bitrix\Main\DB\SqlExpression $code)
+	 * @method bool hasCode()
+	 * @method bool isCodeFilled()
+	 * @method bool isCodeChanged()
+	 * @method \string remindActualCode()
+	 * @method \string requireCode()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetCode()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetCode()
+	 * @method \string fillCode()
+	 * @method \int getPrice()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setPrice(\int|\Bitrix\Main\DB\SqlExpression $price)
+	 * @method bool hasPrice()
+	 * @method bool isPriceFilled()
+	 * @method bool isPriceChanged()
+	 * @method \int remindActualPrice()
+	 * @method \int requirePrice()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetPrice()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetPrice()
+	 * @method \int fillPrice()
+	 * @method \int getPlanImageId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setPlanImageId(\int|\Bitrix\Main\DB\SqlExpression $planImageId)
+	 * @method bool hasPlanImageId()
+	 * @method bool isPlanImageIdFilled()
+	 * @method bool isPlanImageIdChanged()
+	 * @method \int remindActualPlanImageId()
+	 * @method \int requirePlanImageId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetPlanImageId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetPlanImageId()
+	 * @method \int fillPlanImageId()
+	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
+	 * @method bool hasCreatedAt()
+	 * @method bool isCreatedAtFilled()
+	 * @method bool isCreatedAtChanged()
+	 * @method \Bitrix\Main\Type\DateTime remindActualCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime requireCreatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetCreatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime fillCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime getUpdatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setUpdatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $updatedAt)
+	 * @method bool hasUpdatedAt()
+	 * @method bool isUpdatedAtFilled()
+	 * @method bool isUpdatedAtChanged()
+	 * @method \Bitrix\Main\Type\DateTime remindActualUpdatedAt()
+	 * @method \Bitrix\Main\Type\DateTime requireUpdatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetUpdatedAt()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetUpdatedAt()
+	 * @method \Bitrix\Main\Type\DateTime fillUpdatedAt()
+	 * @method \int getBuildObjectId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setBuildObjectId(\int|\Bitrix\Main\DB\SqlExpression $buildObjectId)
+	 * @method bool hasBuildObjectId()
+	 * @method bool isBuildObjectIdFilled()
+	 * @method bool isBuildObjectIdChanged()
+	 * @method \int remindActualBuildObjectId()
+	 * @method \int requireBuildObjectId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetBuildObjectId()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetBuildObjectId()
+	 * @method \int fillBuildObjectId()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject getBuildObject()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject remindActualBuildObject()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject requireBuildObject()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment setBuildObject(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $object)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment resetBuildObject()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unsetBuildObject()
+	 * @method bool hasBuildObject()
+	 * @method bool isBuildObjectFilled()
+	 * @method bool isBuildObjectChanged()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject fillBuildObject()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @property-read array $primary
+	 * @property-read int $state @see \Bitrix\Main\ORM\Objectify\State
+	 * @property-read \Bitrix\Main\Type\Dictionary $customData
+	 * @property \Bitrix\Main\Authentication\Context $authContext
+	 * @method mixed get($fieldName)
+	 * @method mixed remindActual($fieldName)
+	 * @method mixed require($fieldName)
+	 * @method bool has($fieldName)
+	 * @method bool isFilled($fieldName)
+	 * @method bool isChanged($fieldName)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment set($fieldName, $value)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment reset($fieldName)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment unset($fieldName)
+	 * @method void addTo($fieldName, $value)
+	 * @method void removeFrom($fieldName, $value)
+	 * @method void removeAll($fieldName)
+	 * @method \Bitrix\Main\ORM\Data\Result delete()
+	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
+	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
+	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\Apartment wakeUp($data)
+	 */
+	class EO_Apartment {
+		/* @var \Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable */
+		static public $dataClass = '\Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable';
+		/**
+		 * @param bool|array $setDefaultValues
+		 */
+		public function __construct($setDefaultValues = true) {}
+	}
+}
+namespace Craft\DDD\Apartment\Infrastructure\Entity {
+	/**
+	 * EO_Apartment_Collection
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int[] getIdList()
+	 * @method \string[] getNameList()
+	 * @method \string[] fillName()
+	 * @method \boolean[] getActiveList()
+	 * @method \boolean[] fillActive()
+	 * @method \int[] getSortList()
+	 * @method \int[] fillSort()
+	 * @method \string[] getCodeList()
+	 * @method \string[] fillCode()
+	 * @method \int[] getPriceList()
+	 * @method \int[] fillPrice()
+	 * @method \int[] getPlanImageIdList()
+	 * @method \int[] fillPlanImageId()
+	 * @method \Bitrix\Main\Type\DateTime[] getCreatedAtList()
+	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
+	 * @method \Bitrix\Main\Type\DateTime[] fillUpdatedAt()
+	 * @method \int[] getBuildObjectIdList()
+	 * @method \int[] fillBuildObjectId()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject[] getBuildObjectList()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection getBuildObjectCollection()
+	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObject()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @method void add(\Craft\DDD\Apartment\Infrastructure\Entity\Apartment $object)
+	 * @method bool has(\Craft\DDD\Apartment\Infrastructure\Entity\Apartment $object)
+	 * @method bool hasByPrimary($primary)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment getByPrimary($primary)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment[] getAll()
+	 * @method bool remove(\Craft\DDD\Apartment\Infrastructure\Entity\Apartment $object)
+	 * @method void removeByPrimary($primary)
+	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection wakeUp($data)
+	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
+	 * @method void offsetSet() ArrayAccess
+	 * @method void offsetExists() ArrayAccess
+	 * @method void offsetUnset() ArrayAccess
+	 * @method void offsetGet() ArrayAccess
+	 * @method void rewind() Iterator
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment current() Iterator
+	 * @method mixed key() Iterator
+	 * @method void next() Iterator
+	 * @method bool valid() Iterator
+	 * @method int count() Countable
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection merge(?\Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection $collection)
+	 * @method bool isEmpty()
+	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
+	 */
+	class EO_Apartment_Collection implements \ArrayAccess, \Iterator, \Countable {
+		/* @var \Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable */
+		static public $dataClass = '\Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable';
+	}
+}
+namespace Craft\DDD\Apartment\Infrastructure\Entity {
+	/**
+	 * @method static EO_Apartment_Query query()
+	 * @method static EO_Apartment_Result getByPrimary($primary, array $parameters = [])
+	 * @method static EO_Apartment_Result getById($id)
+	 * @method static EO_Apartment_Result getList(array $parameters = [])
+	 * @method static EO_Apartment_Entity getEntity()
+	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\Apartment createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection createCollection()
+	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\Apartment wakeUpObject($row)
+	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
+	 */
+	class ApartmentTable extends \Bitrix\Main\ORM\Data\DataManager {}
+	/**
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @method EO_Apartment_Result exec()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment fetchObject()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fetchCollection()
+	 */
+	class EO_Apartment_Query extends \Bitrix\Main\ORM\Query\Query {}
+	/**
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment fetchObject()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fetchCollection()
+	 */
+	class EO_Apartment_Result extends \Bitrix\Main\ORM\Query\Result {}
+	/**
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection createCollection()
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\Apartment wakeUpObject($row)
+	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
+	 */
+	class EO_Apartment_Entity extends \Bitrix\Main\ORM\Entity {}
 }

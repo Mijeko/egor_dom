@@ -18,6 +18,7 @@ class BuildObjectTable extends DataManager
 	const F_ACTIVE = 'ACTIVE';
 	const F_SORT = 'SORT';
 	const F_NAME = 'NAME';
+	const F_GALLERY = 'GALLERY';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
@@ -52,6 +53,8 @@ class BuildObjectTable extends DataManager
 			(new StringField(self::F_NAME))
 				->configureTitle('Название объекта')
 				->configureRequired(),
+			(new StringField(self::F_GALLERY))
+				->configureTitle('Галерея'),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')
 				->configureDefaultValue(new DateTime()),

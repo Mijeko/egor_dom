@@ -23,10 +23,15 @@ foreach(['craft.develop'] as $module)
 $request = Application::getInstance()->getContext()->getRequest();
 $ID = $request->get('ID');
 $buildObjectModel = $ID ? BuildObjectTable::getById($ID)->fetchObject() : BuildObjectTable::createObject();
+$entity = BuildObjectTable::getEntity();
 
 if($request->isPost())
 {
+	$filesData = $request->getFileList()->toArray();
 	$postData = $request->getPostList()->toArray();
+
+	\Bitrix\Main\Diag\Debug::dumpToFile($filesData);
+
 	foreach($postData as $name => $value)
 	{
 		try
@@ -37,17 +42,20 @@ if($request->isPost())
 		}
 	}
 
-
-	$files = $request->getFileList()->toArray();
-	if($files)
+	foreach($filesData as $propertyCode => $fileData)
 	{
-		foreach($files as $propertyCode => $fileData)
+		switch($propertyCode)
 		{
-			$fileId = CFile::SaveFile($fileData, '/craft/develop/objects/');
-			if($fileId)
-			{
-				$buildObjectModel->set($propertyCode, $fileId);
-			}
+			case BuildObjectTable::F_PICTURE_ID:
+				$fileId = \CFile::SaveFile($fileData, '/craft/develop/objects/');
+				if($fileId)
+				{
+					$this->set($propertyCode, $fileId);
+				}
+				break;
+
+			case BuildObjectTable::F_GALLERY:
+				break;
 		}
 	}
 
@@ -88,8 +96,6 @@ $tabControl->EndEpilogContent();
 $tabControl->Begin();
 
 $tabControl->BeginNextFormTab();
-
-$entity = BuildObjectTable::getEntity();
 
 if($field = $entity->getField(BuildObjectTable::F_ACTIVE))
 {
@@ -148,8 +154,54 @@ if($field = $entity->getField(BuildObjectTable::F_PICTURE_ID))
 	$tabControl->AddFileField(
 		$field->getName(),
 		$field->getTitle(),
-		$buildObjectModel?->getPictureId()
+		$buildObjectModel?->getPictureId(),
+		[],
+		$field->isRequired()
 	);
+}
+
+
+if($field = $entity->getField(BuildObjectTable::F_GALLERY))
+{
+	$tabControl->BeginCustomField(
+		$field->getName(),
+		$field->getTitle(),
+	);
+	?>
+	<tr>
+		<td>Галерея</td>
+		<td>
+			<?php
+
+
+			$content = $buildObjectModel->getGalleryEx();
+			$inputName = [];
+			$id = $field->getName() . "[n#IND#]_" . mt_rand(1, 1000000);
+			if($content)
+			{
+				foreach($content as $index => $imageData)
+				{
+					$inputName[$field->getName() . '[' . $index . ']'] = $imageData['ID'];
+					$id = $field->getName() . "[" . $index . "]_" . mt_rand(1, 1000000);
+				}
+			}
+
+			echo \Bitrix\Main\UI\FileInput::createInstance([
+				"name"        => $field->getName() . '[n#IND#]',
+				"id"          => $id,
+				"description" => true,
+				"upload"      => true,
+				"allowUpload" => "A",
+				"medialib"    => true,
+				"fileDialog"  => true,
+				"cloud"       => true,
+				"delete"      => true,
+			])->show($inputName);
+			?>
+		</td>
+	</tr>
+	<?php
+	$tabControl->EndCustomField($field->getName());
 }
 
 $tabControl->Buttons([

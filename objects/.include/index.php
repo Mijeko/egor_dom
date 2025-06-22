@@ -11,7 +11,7 @@ $APPLICATION->IncludeComponent(
 	'craft:object.list',
 	'.default',
 	[
-		'IBLOCK_ID' => BUILD_OBJECT_IBLOCK_ID,
+		#'IBLOCK_ID' => BUILD_OBJECT_IBLOCK_ID,
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

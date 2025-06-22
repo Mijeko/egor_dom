@@ -26,6 +26,11 @@ $aMenu = [
 			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_OBJECTS . "?lang=" . LANG,
 			"title" => "Объекты",
 		],
+		[
+			"text"  => "Объекты продажи",
+			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_APARTMENTS . "?lang=" . LANG,
+			"title" => "Объекты продажи",
+		],
 	],
 
 ];

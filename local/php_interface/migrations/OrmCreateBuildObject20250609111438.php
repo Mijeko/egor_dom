@@ -21,7 +21,8 @@ CREATE TABLE `craft_build_objects` (
   `PICTURE_ID` int  NULL,
   `ACTIVE` int NOT NULL,
   `SORT` int NOT NULL,
-  `NAME` varchar(128) NOT NULL,
+  `NAME` varchar(128) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `GALLERY` longtext COLLATE 'utf8mb4_unicode_ci' NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL
 ) ENGINE='InnoDB';

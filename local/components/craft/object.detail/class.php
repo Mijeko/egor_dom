@@ -42,7 +42,8 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function loadService(): void
 	{
-		$this->service = BuildObjectServiceFactory::createOnIblock(BUILD_OBJECT_IBLOCK_ID);
+		$this->service = BuildObjectServiceFactory::createOnOrm();
+		//		$this->service = BuildObjectServiceFactory::createOnIblock(BUILD_OBJECT_IBLOCK_ID);
 	}
 
 	protected function loadData(): void

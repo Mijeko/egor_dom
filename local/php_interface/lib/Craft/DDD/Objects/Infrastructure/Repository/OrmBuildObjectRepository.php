@@ -19,7 +19,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			return null;
 		}
 
-		return $this->mapElement($model);
+		return $this->hydrateElement($model);
 	}
 
 	public function findAll(array $order = [], array $filter = []): array
@@ -33,13 +33,13 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		foreach($query->fetchCollection() as $buildObject)
 		{
 			/* @var \Craft\DDD\Objects\Infrastructure\Entity\BuildObject $buildObject */
-			$result[] = $this->mapElement($buildObject);
+			$result[] = $this->hydrateElement($buildObject);
 		}
 
 		return $result;
 	}
 
-	protected function mapElement(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $buildObject): BuildObject
+	protected function hydrateElement(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $buildObject): BuildObject
 	{
 		$_picture = \CFile::GetFileArray($buildObject->getPictureId());
 		$picture = null;
