@@ -1,24 +1,16 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php");
 
-/**
- * @global CMain $APPLICATION
- */
-
-$APPLICATION->SetTitle("Объект");
-
-use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
 use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
-foreach(['craft.develop'] as $module)
-{
-	if(!Loader::includeModule($module))
-	{
-		$APPLICATION->ThrowException('Не подключен модуль ' . $module);
-	};
-}
+/**
+ * @global CMain $APPLICATION
+ */
+
+$APPLICATION->SetTitle("Управление контентом");
+
 
 $request = Application::getInstance()->getContext()->getRequest();
 $ID = $request->get('ID');
@@ -71,6 +63,7 @@ if($request->isPost())
 }
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php");
+
 $aTabs = [
 	[
 		"DIV"   => "edit1",
@@ -210,3 +203,5 @@ $tabControl->Buttons([
 ]);
 
 $tabControl->Show();
+
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");
