@@ -38,6 +38,11 @@ class BuildObject extends EO_BuildObject
 		{
 		}
 
+		if(!is_array($result))
+		{
+			$result = [];
+		}
+
 		return $result;
 	}
 

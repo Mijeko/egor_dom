@@ -49,7 +49,27 @@ if($request->isPost())
 
 
 	//	костыль
-	if($galleryRawData = $_REQUEST[BuildObjectTable::F_GALLERY])
+	$galleryRawData = $_REQUEST[BuildObjectTable::F_GALLERY];
+	if($removeGalleryRawData = $_REQUEST[BuildObjectTable::F_GALLERY . '_del'])
+	{
+		if($galleryRawData)
+		{
+			foreach($removeGalleryRawData as $index => $agree)
+			{
+				if($agree == 'Y')
+				{
+					$fileId = $galleryRawData[$index];
+					if($fileId)
+					{
+						\Bitrix\Main\Diag\Debug::dumpToFile($fileId);
+						CFile::Delete($fileId);
+						unset($galleryRawData[$index]);
+					}
+				}
+			}
+		}
+	}
+	if($galleryRawData)
 	{
 		$buildObjectModel->setGalleryEx($galleryRawData);
 	}
