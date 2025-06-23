@@ -1,9 +1,16 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
+import BuyApartmentModal from "@/components/modal/BuyApartmentModal.vue";
 
 export default defineComponent({
   name: "ApartmentList",
+  components: {BuyApartmentModal},
+  data: function () {
+    return {
+      openModal: false,
+    };
+  },
   props: {
     apartments: {
       type: Array as PropType<ApartmentDto[]>,
@@ -23,11 +30,15 @@ export default defineComponent({
         <v-card-subtitle>{{ apart.price }}</v-card-subtitle>
       </v-col>
       <v-col md="3" class="pa-5">
-        <v-btn>Купить</v-btn>
+        <v-btn @click.prevent="()=>{openModal=true;}">Купить</v-btn>
       </v-col>
     </v-row>
   </v-card>
 
+
+  <BuyApartmentModal
+    v-model="openModal"
+  />
 
 </template>
 

@@ -15,6 +15,7 @@ declare module 'vue' {
     Breadcrumbs: typeof import('./src/components/Breadcrumbs.vue')['default']
     BuildObjectDetail: typeof import('./src/components/BuildObjectDetail.vue')['default']
     BuildObjectList: typeof import('./src/components/BuildObjectList.vue')['default']
+    BuyApartmentModal: typeof import('./src/components/modal/BuyApartmentModal.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']

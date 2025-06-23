@@ -13,7 +13,7 @@ class BuildObject extends EO_BuildObject
 
 		foreach($galleryData as $fileData)
 		{
-			$file = \CFile::makeFileArray($fileData);
+			$file = \CIBlock::makeFileArray($fileData);
 			$fileId = \CFile::SaveFile($file, self::UPLOAD_PATH);
 			if($fileId)
 			{
