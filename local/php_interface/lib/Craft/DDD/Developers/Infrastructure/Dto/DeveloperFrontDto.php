@@ -3,14 +3,14 @@
 namespace Craft\DDD\Developers\Infrastructure\Dto;
 
 use Craft\DDD\Developers\Domain\Entity\Developer;
-use Craft\Dto\BxImage;
+use Craft\Dto\BxImageDto;
 
 class DeveloperFrontDto
 {
 	public function __construct(
 		public int      $id,
 		public string   $name,
-		public ?BxImage $picture = null
+		public ?BxImageDto $picture = null
 	)
 	{
 	}

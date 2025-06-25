@@ -25,6 +25,22 @@
 </head>
 
 
+<?php
+$APPLICATION->IncludeComponent(
+	'craft:vite',
+	'vite',
+	[
+		'SOURCE' => 'system/Init',
+		'PROPS'  => [
+			'user' => \Craft\Dto\BxUserDto::fromGlobal(),
+		],
+	],
+	false,
+	['HIDE_ICONS' => true]
+);
+?>
+
+
 <body class="page">
 <div id="panel">
 	<?php

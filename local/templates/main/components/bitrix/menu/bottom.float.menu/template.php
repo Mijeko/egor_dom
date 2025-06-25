@@ -13,7 +13,7 @@ $APPLICATION->IncludeComponent(
 		'SOURCE' => 'BottomFloatMenu',
 		'PROPS'  => [
 			'menuItems' => array_map(function(array $item) {
-				return new \Craft\Dto\FloatBottomMenuItem(
+				return new \Craft\Dto\FloatBottomMenuItemDto(
 					$item['TEXT'],
 					$item['LINK'],
 					$item['PARAMS']['ICON'],

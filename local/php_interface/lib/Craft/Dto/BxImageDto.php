@@ -2,7 +2,7 @@
 
 namespace Craft\Dto;
 
-class BxImage
+class BxImageDto
 {
 	public function __construct(
 		public int    $id,

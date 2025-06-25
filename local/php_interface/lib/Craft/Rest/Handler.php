@@ -13,6 +13,9 @@ class Handler
 				'user.login'     => [UserRest::class, 'login'],
 				'user.register'  => [UserRest::class, 'register'],
 				'profile.update' => [UserRest::class, 'profileUpdate'],
+				'profile.find'   => [UserRest::class, 'findProfile'],
+
+				'claim.create' => [ClaimRest::class, 'create'],
 			],
 		];
 	}

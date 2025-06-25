@@ -8,7 +8,7 @@ use Craft\DDD\Apartment\Infrastructure\Entity\Apartment;
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
 use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
-use Craft\Dto\BxImage;
+use Craft\Dto\BxImageDto;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
@@ -48,7 +48,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		$picture = null;
 		if($_picture)
 		{
-			$picture = new BxImage(
+			$picture = new BxImageDto(
 				$_picture['ID'],
 				$_picture['SRC'],
 			);
@@ -59,7 +59,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 				$file = \CFile::GetFileArray($fileId);
 				if($file)
 				{
-					return new BxImage(
+					return new BxImageDto(
 						$file['ID'],
 						$file['SRC'],
 					);

@@ -6,7 +6,7 @@ use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Loader;
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
 use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
-use Craft\Dto\BxImage;
+use Craft\Dto\BxImageDto;
 
 class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 {
@@ -143,7 +143,7 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 		$picture = null;
 		if($_picture)
 		{
-			$picture = new BxImage(
+			$picture = new BxImageDto(
 				$_picture['ID'],
 				$_picture['SRC'],
 			);

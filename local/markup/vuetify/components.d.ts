@@ -17,6 +17,7 @@ declare module 'vue' {
     BuildObjectList: typeof import('./src/components/BuildObjectList.vue')['default']
     BuyApartmentModal: typeof import('./src/components/modal/BuyApartmentModal.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
+    Init: typeof import('./src/components/system/Init.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']

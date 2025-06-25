@@ -2,7 +2,7 @@
 
 namespace Craft\Dto;
 
-class FloatBottomMenuItem
+class FloatBottomMenuItemDto
 {
 	public function __construct(
 		public string  $title,

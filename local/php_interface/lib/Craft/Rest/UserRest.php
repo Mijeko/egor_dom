@@ -61,4 +61,16 @@ class UserRest extends \IRestService
 			];
 		}
 	}
+
+	public static function findProfile($query, $nav, \CRestServer $server)
+	{
+		$profileId = $query['profileId'];
+		if(!$profileId)
+		{
+			throw new \Exception('Profile id is required');
+		}
+
+		unset($query['profileId']);
+	}
+
 }

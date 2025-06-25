@@ -3,16 +3,16 @@
 namespace Craft\DDD\Objects\Domain\Entity;
 
 use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
-use Craft\Dto\BxImage;
+use Craft\Dto\BxImageDto;
 
 class BuildObject
 {
 	public function __construct(
-		public int      $id,
-		public string   $name,
-		public ?BxImage $picture = null,
-		public ?array   $apartments = null,
-		public ?array   $gallery = null,
+		public int         $id,
+		public string      $name,
+		public ?BxImageDto $picture = null,
+		public ?array      $apartments = null,
+		public ?array      $gallery = null,
 	)
 	{
 	}
@@ -27,7 +27,7 @@ class BuildObject
 		return $this->id;
 	}
 
-	public function getPicture(): ?BxImage
+	public function getPicture(): ?BxImageDto
 	{
 		return $this->picture;
 	}
@@ -42,7 +42,7 @@ class BuildObject
 	}
 
 	/**
-	 * @return BxImage[]|null
+	 * @return BxImageDto[]|null
 	 */
 	public function getGallery(): ?array
 	{

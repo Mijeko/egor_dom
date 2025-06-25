@@ -17,6 +17,11 @@ $aMenu = [
 	"items_id"    => "menu_craft_develop",
 	"items"       => [
 		[
+			"text"  => "Заявки",
+			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_CLAIMS . "?lang=" . LANG,
+			"title" => "Заявки",
+		],
+		[
 			"text"  => "Застройщики",
 			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS . "?lang=" . LANG,
 			"title" => "Застройщики",

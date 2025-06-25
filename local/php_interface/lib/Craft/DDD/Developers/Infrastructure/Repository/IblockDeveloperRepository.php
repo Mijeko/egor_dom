@@ -6,7 +6,7 @@ use Bitrix\Main\Loader;
 use CIBlockElement;
 use Craft\DDD\Developers\Domain\Entity\Developer;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
-use Craft\Dto\BxImage;
+use Craft\Dto\BxImageDto;
 
 class IblockDeveloperRepository implements DeveloperRepositoryInterface
 {
@@ -53,7 +53,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 		$picture = null;
 		if($_picture)
 		{
-			$picture = new BxImage(
+			$picture = new BxImageDto(
 				$_picture['ID'],
 				$_picture['SRC'],
 			);

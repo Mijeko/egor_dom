@@ -2,20 +2,20 @@
 
 namespace Craft\DDD\Objects\Infrastructure\Dto;
 
-use Craft\Dto\BxImage;
+use Craft\Dto\BxImageDto;
 
 
 /**
- * @var BxImage[] $gallery
+ * @var BxImageDto[] $gallery
  */
 class BuildObjectDetailDto
 {
 	public function __construct(
-		public string   $id,
-		public string   $name,
-		public ?BxImage $image = null,
-		public ?array   $gallery = null,
-		public ?array   $apartments = null,
+		public string      $id,
+		public string      $name,
+		public ?BxImageDto $image = null,
+		public ?array      $gallery = null,
+		public ?array      $apartments = null,
 	)
 	{
 	}
