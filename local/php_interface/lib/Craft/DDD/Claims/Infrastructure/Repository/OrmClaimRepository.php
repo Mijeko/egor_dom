@@ -10,6 +10,12 @@ use Craft\DDD\Objects\Domain\Entity\BuildObject;
 
 class OrmClaimRepository implements ClaimRepositoryInterface
 {
+
+	public function create(Claim $claim): ?Claim
+	{
+		return null;
+	}
+
 	public function getAll(): array
 	{
 		$result = [];

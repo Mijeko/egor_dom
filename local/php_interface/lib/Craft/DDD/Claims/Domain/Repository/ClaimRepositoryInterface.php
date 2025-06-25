@@ -6,6 +6,8 @@ use Craft\DDD\Claims\Domain\Entity\Claim;
 
 interface ClaimRepositoryInterface
 {
+	public function create(Claim $claim): ?Claim;
+
 	/**
 	 * @return Claim[]
 	 */

@@ -30,4 +30,9 @@ class ClaimService
 	{
 		return $this->repository->getAllByUserId($userId);
 	}
+
+	public function create(Claim $claim): ?Claim
+	{
+		return $this->repository->create($claim);
+	}
 }

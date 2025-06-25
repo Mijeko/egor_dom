@@ -3,15 +3,32 @@
 namespace Craft\DDD\Claims\Domain\Entity;
 
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
+use Craft\DDD\User\Domain\Entity\User;
 
 class Claim
 {
+
 	public function __construct(
-		public int         $id,
-		public string      $name,
-		public BuildObject $buildObject,
+		protected ?int         $id,
+		protected ?string      $name,
+		protected ?BuildObject $buildObject,
+		protected ?User        $user,
 	)
 	{
+	}
+
+	public static function createClaim(
+		string      $name,
+		BuildObject $buildObject,
+		User        $user,
+	): static
+	{
+		return new static(
+			null,
+			$name,
+			$buildObject,
+			$user
+		);
 	}
 
 	public function getName(): string
