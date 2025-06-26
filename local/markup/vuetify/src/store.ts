@@ -8,6 +8,9 @@ export const useAlertsStore = defineStore('alerts', {
     alerts: [] as AlertItemDto[],
   }),
   actions: {
+    clear() {
+      this.alerts = [];
+    },
     createAlert(title: string, text: string, type: "error" | "success" | "warning" | "info" | undefined = 'success') {
       let alert: AlertItemDto = {title: title, text: text, type: type};
       this.alerts.push(alert);

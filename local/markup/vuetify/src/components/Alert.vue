@@ -11,20 +11,20 @@ let alerts = ref(alertsStore.listAlert);
 
 onUpdated(() => {
   setTimeout(() => {
-    alerts.value = [];
+    alertsStore.clear()
   }, 7500)
 })
 
 </script>
 <template>
   <v-alert
-      v-for="(alert) in alerts as AlertItemDto[]"
-      max-width="400"
-      class="bottom-0 left-0 ml-3 mb-3"
-      position="fixed"
-      :text="alert.text"
-      :title="alert.title"
-      :type="alert.type"
+    v-for="(alert) in alerts as AlertItemDto[]"
+    max-width="400"
+    class="bottom-0 left-0 ml-3 mb-3"
+    position="fixed"
+    :text="alert.text"
+    :title="alert.title"
+    :type="alert.type"
   ></v-alert>
 </template>
 

@@ -4,7 +4,8 @@ import {useUserStore} from "@/store.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import CraftApi from "@/service/CraftApi.ts";
 import type ClaimCreateRequestDto from "@/dto/request/ClaimCreateRequestDto.ts";
-import {th} from "vuetify/locale";
+import {el, th} from "vuetify/locale";
+import AlertService from "@/service/AlertService.ts";
 
 export default defineComponent({
   name: "BuyApartmentModal",
@@ -68,9 +69,17 @@ export default defineComponent({
       api.post('claim.create', api.objectToFormData(body))
         .then((response: any) => response.json())
         .then((response: any) => {
-          console.log(response);
 
-          this.$emit('update:modelValue', false)
+          let {result} = response;
+          let {success, error} = result;
+
+          if (success) {
+            AlertService.showAlert('Отправка заявки', 'Ваша заявка успаешно отправлена');
+            this.$emit('update:modelValue', false);
+          } else if (error) {
+            AlertService.showErrorAlert('Отправка заявки', error);
+          }
+
         });
     },
   },
