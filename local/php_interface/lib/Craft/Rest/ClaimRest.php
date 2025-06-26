@@ -5,7 +5,7 @@ namespace Craft\Rest;
 use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
 use Craft\DDD\Claims\Domain\Entity\Claim;
 use Craft\DDD\Objects\Infrastructure\Repository\OrmBuildObjectRepository;
-use Craft\User\Infrastructure\Repository\UserRepository;
+use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 
 class ClaimRest extends \IRestService
 {
@@ -20,27 +20,32 @@ class ClaimRest extends \IRestService
 				throw new \Exception('Build object not found');
 			}
 
-			$userRepository = new UserRepository();
+			$userRepository = new BxUserRepository();
 			if(!$user = $userRepository->findById($query['userId']))
 			{
 				throw new \Exception('User not found');
 			}
 
 			$claim = Claim::createClaim(
-				'',
+				'Заявка от ' . date('d.m.Y H:i:s'),
 				$buildObject,
 				$user
 			);
 
 			$service = ClaimServiceFactory::getClaimService();
-			$service->create($claim);
+			$claim = $service->create($claim);
+
 
 			return [
-				rand() => rand(),
+				'success' => true,
+				'claim'   => $claim,
 			];
 		} catch(\Exception $e)
 		{
-
+			return [
+				'success' => false,
+				'error'   => $e->getMessage(),
+			];
 		}
 	}
 }

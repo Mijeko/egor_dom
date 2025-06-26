@@ -13,7 +13,24 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 	public function create(Claim $claim): ?Claim
 	{
-		return null;
+		$model = ClaimTable::createObject();
+		$model->setUserId($claim->getUser()->getId());
+		$model->setBuildObjectId($claim->getBuildObject()->getId());
+
+
+		$result = $model->save();
+
+		if($result->isSuccess())
+		{
+			return new Claim(
+				$model->getId(),
+				$claim->getName(),
+				$claim->getBuildObject(),
+				$claim->getUser()
+			);
+		}
+
+		throw new \Exception(implode("\n", $result->getErrors()));
 	}
 
 	public function getAll(): array

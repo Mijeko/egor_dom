@@ -45,4 +45,9 @@ class Claim
 	{
 		return $this->buildObject;
 	}
+
+	public function getUser(): ?User
+	{
+		return $this->user;
+	}
 }
