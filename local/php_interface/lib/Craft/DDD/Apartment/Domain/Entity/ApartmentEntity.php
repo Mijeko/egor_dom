@@ -6,6 +6,7 @@ class ApartmentEntity
 {
 	public function __construct(
 		protected int    $id,
+		protected int    $buildObjectId,
 		protected string $name,
 		protected int    $price,
 	)
@@ -25,5 +26,10 @@ class ApartmentEntity
 	public function getPrice(): int
 	{
 		return $this->price;
+	}
+
+	public function getBuildObjectId(): int
+	{
+		return $this->buildObjectId;
 	}
 }

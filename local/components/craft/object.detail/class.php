@@ -67,6 +67,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 						$item->getId(),
 						$item->getName(),
 						$item->getPrice(),
+						$item->getBuildObjectId(),
 					);
 				},
 				$element->getApartments()

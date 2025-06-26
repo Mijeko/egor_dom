@@ -74,13 +74,14 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 
 		$aps = $buildObject->fillApartments();
-		$_aps = [];
+		$childApartmentList = [];
 		if($aps)
 		{
 			foreach($aps as $ap)
 			{
-				$_aps[] = new ApartmentEntity(
+				$childApartmentList[] = new ApartmentEntity(
 					$ap->getId(),
+					$buildObject->getId(),
 					$ap->getName(),
 					$ap->getPrice(),
 				);
@@ -91,7 +92,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			$buildObject->getId(),
 			$buildObject->getName(),
 			$picture,
-			$_aps,
+			$childApartmentList,
 			$gallery
 		);
 	}

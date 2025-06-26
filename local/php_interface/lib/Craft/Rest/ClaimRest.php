@@ -28,6 +28,18 @@ class ClaimRest extends \IRestService
 
 			$claim = Claim::createClaim(
 				'Заявка от ' . date('d.m.Y H:i:s'),
+				$query['email'],
+				$query['phone'],
+				$query['client'],
+				$query['inn'],
+				$query['kpp'],
+				$query['bik'],
+				$query['ogrn'],
+				$query['currAcc'],
+				$query['corrAcc'],
+				$query['legalAddress'],
+				$query['postAddress'],
+				$query['bankName'],
 				$buildObject,
 				$user
 			);

@@ -93,8 +93,8 @@ class CraftUser extends EO_CraftUser
 	{
 		return implode(' ', [
 			$this->getLastName(),
-			$this->getSecondName(),
 			$this->getName(),
+			$this->getSecondName(),
 		]);
 	}
 }

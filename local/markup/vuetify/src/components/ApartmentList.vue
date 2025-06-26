@@ -8,6 +8,7 @@ export default defineComponent({
   components: {BuyApartmentModal},
   data: function () {
     return {
+      selectBuildObjectId: 0,
       openModal: false,
     };
   },
@@ -26,11 +27,11 @@ export default defineComponent({
   <v-card v-for="apart in apartments" class="mb-3">
     <v-row>
       <v-col md="9" class="pa-5">
-        <v-card-title>{{ apart.name }}</v-card-title>
+        <v-card-title>{{ apart.name }} {{apart.buildObjectId}}</v-card-title>
         <v-card-subtitle>{{ apart.price }}</v-card-subtitle>
       </v-col>
       <v-col md="3" class="pa-5">
-        <v-btn @click.prevent="()=>{openModal=true;}">Купить</v-btn>
+        <v-btn @click.prevent="()=>{ selectBuildObjectId=apart.buildObjectId;openModal=true;}">Купить</v-btn>
       </v-col>
     </v-row>
   </v-card>
@@ -38,6 +39,7 @@ export default defineComponent({
 
   <BuyApartmentModal
     v-model="openModal"
+    :build-object-id="selectBuildObjectId"
   />
 
 </template>
