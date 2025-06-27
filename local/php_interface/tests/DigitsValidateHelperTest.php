@@ -17,13 +17,13 @@ class DigitsValidateHelperTest extends TestCase
 		$this->assertTrue(
 			DigitsValidateHelper::validateDigits('12345', 5),
 		);
-		$this->assertTrue(
+		$this->assertFalse(
 			DigitsValidateHelper::validateDigits('-2-4-5', 3),
 		);
 		$this->assertTrue(
 			DigitsValidateHelper::validateDigits('1237700103277', 13),
 		);
-		$this->assertTrue(
+		$this->assertFalse(
 			DigitsValidateHelper::validateDigits('12ы37фв70фыв0в1фы0вфы3вфы277', 13),
 		);
 	}

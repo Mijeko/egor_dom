@@ -8,16 +8,13 @@ class DigitsValidateHelper
 {
 	public static function validateDigits(string $value, int $countDigits): bool
 	{
-		preg_match_all('/\d+/', $value, $matches);
+		$matchValue = preg_replace('/\D+/', '', $value);
 
-		Debug::dumpToFile($matches);
-
-		if(empty($matches[0]))
+		if(empty($matchValue))
 		{
 			return false;
 		}
 
-
-		return mb_strlen($matches[0]) == $countDigits;
+		return mb_strlen($matchValue) == $countDigits && mb_strlen($value) == $countDigits;
 	}
 }
