@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Craft\Helper\DigitsValidateHelper;
+
 class InnValueObject
 {
 	public function __construct(
@@ -14,9 +16,9 @@ class InnValueObject
 	protected function validate(int $value): void
 	{
 
-		if(mb_strlen($value) !== 12 || mb_strlen($value) !== 10)
+		if(!DigitsValidateHelper::validateDigits($value, 12) || !DigitsValidateHelper::validateDigits($value, 10))
 		{
-			throw new \Exception('Inn value must be 12 characters or 10 characters long');
+			throw new \Exception('ИНН должен содержать 12 или 10 цифр');
 		}
 
 		$this->value = $value;

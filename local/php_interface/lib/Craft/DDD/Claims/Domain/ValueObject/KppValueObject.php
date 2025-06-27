@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Craft\Helper\DigitsValidateHelper;
+
 class KppValueObject
 {
 	public function __construct(
@@ -14,9 +16,9 @@ class KppValueObject
 	protected function validate(int $value): void
 	{
 
-		if(mb_strlen($value) !== 9)
+		if(!DigitsValidateHelper::validateDigits($value, 9))
 		{
-			throw new \Exception('Kpp value must be 9 digits');
+			throw new \Exception('КПП должно содержать 9 цифр');
 		}
 
 		$this->value = $value;

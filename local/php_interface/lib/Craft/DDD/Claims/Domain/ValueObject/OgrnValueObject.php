@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Craft\Helper\DigitsValidateHelper;
+
 class OgrnValueObject
 {
 
@@ -15,9 +17,9 @@ class OgrnValueObject
 	protected function validate(int $value): void
 	{
 
-		if(mb_strlen($value) !== 13 || mb_strlen($value) !== 15)
+		if(!DigitsValidateHelper::validateDigits($value, 12) || !DigitsValidateHelper::validateDigits($value, 15))
 		{
-			throw new \Exception('Ogrn value must be 13-15 characters');
+			throw new \Exception('ОГРН/ОГРНИП должен содержать 13 или 15 цифр');
 		}
 
 		$this->value = $value;

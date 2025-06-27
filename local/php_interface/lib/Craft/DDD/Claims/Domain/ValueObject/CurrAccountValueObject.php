@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Craft\Helper\DigitsValidateHelper;
+
 class CurrAccountValueObject
 {
 	public function __construct(
@@ -14,9 +16,9 @@ class CurrAccountValueObject
 	protected function validate(int $value): void
 	{
 
-		if(mb_strlen($value) !== 20)
+		if(!DigitsValidateHelper::validateDigits($value, 20))
 		{
-			throw new \Exception('Curr account value must be 20');
+			throw new \Exception('Расчетный счет должен содержать 20 цифр');
 		}
 
 		$this->value = $value;

@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Craft\Helper\DigitsValidateHelper;
+
 class BikValueObject
 {
 	public function __construct(
@@ -13,10 +15,9 @@ class BikValueObject
 
 	protected function validate(int $value): void
 	{
-
-		if(mb_strlen($value) !== 9)
+		if(!DigitsValidateHelper::validateDigits($value, 9))
 		{
-			throw new \Exception('Bik value must be 9');
+			throw new \Exception('БИК должен содержать 9 цифр');
 		}
 
 		$this->value = $value;

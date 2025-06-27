@@ -21,6 +21,9 @@ composer-i:
 composer-dump:
 	cd local/php_interface && composer dump-autoload
 
+tests:
+	cd local/php_interface/vendor/phpunit/phpunit && php phpunit -c /var/www/dom.local/local/php_interface/phpunit.xml
+
 orm:
 	cd local/modules/craft.orm && composer i
 	cd local/modules/craft.orm && php run.php orm:annotate -m all
