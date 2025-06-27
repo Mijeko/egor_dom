@@ -33,7 +33,7 @@ class BxUserDto
 	{
 
 		$user = CraftUser::load();
-		if(!$user->IsAuthorized())
+		if(!$user || !$user->IsAuthorized())
 		{
 			return null;
 		}

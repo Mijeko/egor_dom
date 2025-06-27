@@ -43,7 +43,14 @@ export default defineComponent({
   <v-form @submit.prevent="auth">
     <v-text-field v-model="form.phone" label="Номер телефона"/>
     <v-text-field v-model="form.password" type="password" label="Пароль"/>
-    <v-btn type="submit">Войти</v-btn>
+    <v-row>
+      <v-col cols="6">
+        <v-btn type="submit">Войти</v-btn>
+      </v-col>
+      <v-col cols="6">
+        <a href="?register=yes">Регистрация</a>
+      </v-col>
+    </v-row>
   </v-form>
 </template>
 
