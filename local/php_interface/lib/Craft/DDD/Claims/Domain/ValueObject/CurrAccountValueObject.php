@@ -2,20 +2,20 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\Helper\DigitsValidateHelper;
 
 class CurrAccountValueObject
 {
 	public function __construct(
-		protected int $value
+		protected string $value
 	)
 	{
 		$this->validate($this->value);
 	}
 
-	protected function validate(int $value): void
+	protected function validate(string $value): void
 	{
-
 		if(!DigitsValidateHelper::validateDigits($value, 20))
 		{
 			throw new \Exception('Расчетный счет должен содержать 20 цифр');
@@ -24,7 +24,7 @@ class CurrAccountValueObject
 		$this->value = $value;
 	}
 
-	public function getValue(): int
+	public function getValue(): string
 	{
 		return $this->value;
 	}

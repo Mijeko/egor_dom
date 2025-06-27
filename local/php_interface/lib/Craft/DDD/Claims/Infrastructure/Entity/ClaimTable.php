@@ -62,9 +62,9 @@ class ClaimTable extends DataManager
 				->configureTitle('КПП'),
 			(new IntegerField(self::F_BIK))
 				->configureTitle('БИК'),
-			(new IntegerField(self::F_CURR_ACC))
+			(new StringField(self::F_CURR_ACC))
 				->configureTitle('Расчетный счет'),
-			(new IntegerField(self::F_CORR_ACC))
+			(new StringField(self::F_CORR_ACC))
 				->configureTitle('Корреспондентский счет'),
 			(new IntegerField(self::F_LEGAL_ADDRESS))
 				->configureTitle('Юридический адрес'),

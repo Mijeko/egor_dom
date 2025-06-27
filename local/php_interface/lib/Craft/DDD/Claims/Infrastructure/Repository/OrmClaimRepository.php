@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Claims\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Domain\Entity\Claim;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;

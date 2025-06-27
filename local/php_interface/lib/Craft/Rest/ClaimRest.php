@@ -2,6 +2,7 @@
 
 namespace Craft\Rest;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
 use Craft\DDD\Claims\Domain\Entity\Claim;
 use Craft\DDD\Objects\Infrastructure\Repository\OrmBuildObjectRepository;
@@ -31,10 +32,10 @@ class ClaimRest extends \IRestService
 				$query['email'],
 				$query['phone'],
 				$query['client'],
-				$query['inn'],
-				$query['kpp'],
-				$query['bik'],
-				$query['ogrn'],
+				intval($query['inn']),
+				intval($query['kpp']),
+				intval($query['bik']),
+				intval($query['ogrn']),
 				$query['currAccount'],
 				$query['corrAccount'],
 				$query['legalAddress'],

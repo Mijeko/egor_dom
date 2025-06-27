@@ -2,8 +2,6 @@
 
 namespace Craft\Helper;
 
-use Bitrix\Main\Diag\Debug;
-
 class DigitsValidateHelper
 {
 	public static function validateDigits(string $value, int $countDigits): bool

@@ -16,7 +16,7 @@ class InnValueObject
 	protected function validate(int $value): void
 	{
 
-		if(!DigitsValidateHelper::validateDigits($value, 12) || !DigitsValidateHelper::validateDigits($value, 10))
+		if(!DigitsValidateHelper::validateDigits($value, 12) && !DigitsValidateHelper::validateDigits($value, 10))
 		{
 			throw new \Exception('ИНН должен содержать 12 или 10 цифр');
 		}

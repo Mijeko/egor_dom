@@ -17,7 +17,7 @@ class OgrnValueObject
 	protected function validate(int $value): void
 	{
 
-		if(!DigitsValidateHelper::validateDigits($value, 12) || !DigitsValidateHelper::validateDigits($value, 15))
+		if(!DigitsValidateHelper::validateDigits($value, 13) && !DigitsValidateHelper::validateDigits($value, 15))
 		{
 			throw new \Exception('ОГРН/ОГРНИП должен содержать 13 или 15 цифр');
 		}

@@ -7,13 +7,13 @@ use Craft\Helper\DigitsValidateHelper;
 class CorrAccountValueObject
 {
 	public function __construct(
-		protected int $value
+		protected string $value
 	)
 	{
 		$this->validate($this->value);
 	}
 
-	protected function validate(int $value): void
+	protected function validate(string $value): void
 	{
 
 		if(!DigitsValidateHelper::validateDigits($value, 20))
@@ -24,7 +24,7 @@ class CorrAccountValueObject
 		$this->value = $value;
 	}
 
-	public function getValue(): int
+	public function getValue(): string
 	{
 		return $this->value;
 	}
