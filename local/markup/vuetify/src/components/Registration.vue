@@ -8,6 +8,7 @@ import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";
 import UserService from "@/service/User/UserService.ts";
 import type RegisterAgentResponseDto from "@/dto/response/RegisterAgentResponseDto.ts";
 import type RegisterAgentRequestDto from "@/dto/request/RegisterAgentRequestDto.ts";
+import AlertService from "@/service/AlertService.ts";
 
 export default defineComponent({
   name: "Registration",
@@ -144,9 +145,16 @@ export default defineComponent({
         postAddress: this.formAgent.postAddress,
       };
       api.registrationAgent(body)
-          .then((response: RegisterAgentResponseDto) => {
-            console.log(response);
-          });
+        .then((response: RegisterAgentResponseDto) => {
+          let {result} = response;
+          let {success, error} = result;
+
+          if (!success) {
+            AlertService.showErrorAlert('Регистрация', error);
+          } else {
+            window.location.href = '/';
+          }
+        });
     },
     handleLegalAddress(event: any) {
       let value = event.target.value;
@@ -166,18 +174,18 @@ export default defineComponent({
       this.timer = setTimeout(() => {
         let api = new DaDataApi();
         api.suggestionsCompany(value)
-            .then((response: DaDataSuggestionsCompanyDto) => {
+          .then((response: DaDataSuggestionsCompanyDto) => {
 
-              if (response.suggestions.length == 1) {
-                this.isFindByInn = 1;
-                this.formAgent.ogrn = response.suggestions[0].data.ogrn ?? '';
-                this.formAgent.kpp = response.suggestions[0].data.kpp ?? '';
-                this.formAgent.legalAddress = response.suggestions[0].data.address.value ?? '';
-              } else {
-                this.isFindByInn = 2;
-              }
+            if (response.suggestions.length == 1) {
+              this.isFindByInn = 1;
+              this.formAgent.ogrn = response.suggestions[0].data.ogrn ?? '';
+              this.formAgent.kpp = response.suggestions[0].data.kpp ?? '';
+              this.formAgent.legalAddress = response.suggestions[0].data.address.value ?? '';
+            } else {
+              this.isFindByInn = 2;
+            }
 
-            });
+          });
 
       }, 300)
 
@@ -193,17 +201,17 @@ export default defineComponent({
       this.timer = setTimeout(() => {
         let api = new DaDataApi();
         api.suggestionsBank(value)
-            .then((response: DaDataSuggestionsBankDto) => {
+          .then((response: DaDataSuggestionsBankDto) => {
 
-              if (response.suggestions.length == 1) {
-                this.isFindByBik = true;
-                this.formAgent.corrAcc = response.suggestions[0].data.correspondent_account ?? '';
-                this.formAgent.bankName = response.suggestions[0].data.name.payment ?? '';
-              } else {
-                this.isFindByBik = true;
-              }
+            if (response.suggestions.length == 1) {
+              this.isFindByBik = true;
+              this.formAgent.corrAcc = response.suggestions[0].data.correspondent_account ?? '';
+              this.formAgent.bankName = response.suggestions[0].data.name.payment ?? '';
+            } else {
+              this.isFindByBik = true;
+            }
 
-            });
+          });
 
       }, 300)
     },
@@ -224,10 +232,10 @@ export default defineComponent({
 
   <v-card>
     <v-tabs
-        align-tabs="center"
-        v-model="tab"
+      align-tabs="center"
+      v-model="tab"
 
-        color="deep-purple-accent-4"
+      color="deep-purple-accent-4"
     >
       <v-tab value="student">Как ученик</v-tab>
       <v-tab value="agent">Как агент</v-tab>
@@ -238,17 +246,17 @@ export default defineComponent({
       <v-tabs-window-item value="student">
         <v-form @submit.prevent="registrationStudent" v-model="isFormStudentValid">
           <v-text-field
-              v-model="formStudent.phone"
-              :rules="formStudentValidateRules.phone"
-              return-masked-value
-              mask="+# (###) ### ####"
-              label="Номер телефона"
+            v-model="formStudent.phone"
+            :rules="formStudentValidateRules.phone"
+            return-masked-value
+            mask="+# (###) ### ####"
+            label="Номер телефона"
           />
           <v-text-field
-              v-model="formStudent.password"
-              :rules="formStudentValidateRules.password"
-              type="password"
-              label="Пароль"
+            v-model="formStudent.password"
+            :rules="formStudentValidateRules.password"
+            type="password"
+            label="Пароль"
           />
 
           <v-divider/>
@@ -278,11 +286,11 @@ export default defineComponent({
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                      v-model="formAgent.phone"
-                      :rules="formAgentValidateRules.phone"
-                      return-masked-value
-                      mask="+# (###) ### ####"
-                      label="Телефон"
+                    v-model="formAgent.phone"
+                    :rules="formAgentValidateRules.phone"
+                    return-masked-value
+                    mask="+# (###) ### ####"
+                    label="Телефон"
                   />
                 </v-col>
               </v-row>
@@ -290,9 +298,9 @@ export default defineComponent({
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                      v-model="formAgent.password"
-                      :rules="formAgentValidateRules.password"
-                      label="Пароль"
+                    v-model="formAgent.password"
+                    :rules="formAgentValidateRules.password"
+                    label="Пароль"
                   />
                 </v-col>
               </v-row>
@@ -318,10 +326,10 @@ export default defineComponent({
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                      v-model="formAgent.legalAddress"
-                      :rules="formAgentValidateRules.legalAddress"
-                      @input="handleLegalAddress"
-                      label="Юридический адрес"
+                    v-model="formAgent.legalAddress"
+                    :rules="formAgentValidateRules.legalAddress"
+                    @input="handleLegalAddress"
+                    label="Юридический адрес"
                   />
                 </v-col>
               </v-row>
@@ -329,9 +337,9 @@ export default defineComponent({
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                      v-model="formAgent.postAddress"
-                      :rules="formAgentValidateRules.postAddress"
-                      label="Почтовый адрес"
+                    v-model="formAgent.postAddress"
+                    :rules="formAgentValidateRules.postAddress"
+                    label="Почтовый адрес"
                   />
                   <v-checkbox v-model="isPostIdenticalLegalAddress" label="Совпадает с юридическим адресом"/>
                 </v-col>
@@ -340,10 +348,10 @@ export default defineComponent({
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                      v-model="formAgent.bik"
-                      :rules="formAgentValidateRules.bik"
-                      @input="handleInputBik"
-                      label="БИК"
+                    v-model="formAgent.bik"
+                    :rules="formAgentValidateRules.bik"
+                    @input="handleInputBik"
+                    label="БИК"
                   />
                 </v-col>
               </v-row>
@@ -353,9 +361,9 @@ export default defineComponent({
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                          v-model="formAgent.currAcc"
-                          :rules="formAgentValidateRules.currAcc"
-                          label="Расчетный счет"
+                        v-model="formAgent.currAcc"
+                        :rules="formAgentValidateRules.currAcc"
+                        label="Расчетный счет"
                       />
                     </v-col>
                   </v-row>
@@ -363,9 +371,9 @@ export default defineComponent({
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                          v-model="formAgent.corrAcc"
-                          :rules="formAgentValidateRules.corrAcc"
-                          label="Кореспондентский счет"
+                        v-model="formAgent.corrAcc"
+                        :rules="formAgentValidateRules.corrAcc"
+                        label="Кореспондентский счет"
                       />
                     </v-col>
                   </v-row>
@@ -373,9 +381,9 @@ export default defineComponent({
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                          v-model="formAgent.bankName"
-                          :rules="formAgentValidateRules.bankName"
-                          label="Наименование банка"
+                        v-model="formAgent.bankName"
+                        :rules="formAgentValidateRules.bankName"
+                        label="Наименование банка"
                       />
                     </v-col>
                   </v-row>

@@ -2,12 +2,13 @@
 
 namespace Craft\DDD\User\Application\Service;
 
-use Craft\DDD\Claims\Domain\ValueObject\BikValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\CorrAccountValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\CurrAccountValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\InnValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\KppValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\OgrnValueObject;
+use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
@@ -22,6 +23,7 @@ class RegisterAgentService
 
 	public function execute(RegisterAgentDto $registerAgentDto): ?AgentEntity
 	{
+		Debug::dumpToFile($registerAgentDto->bik);
 		$agent = AgentEntity::register(
 			$registerAgentDto->phone,
 			$registerAgentDto->password,

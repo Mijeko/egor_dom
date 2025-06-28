@@ -2,12 +2,12 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-use Craft\DDD\Claims\Domain\ValueObject\BikValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\CorrAccountValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\CurrAccountValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\InnValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\KppValueObject;
-use Craft\DDD\Claims\Domain\ValueObject\OgrnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 
 class AgentEntity
 {

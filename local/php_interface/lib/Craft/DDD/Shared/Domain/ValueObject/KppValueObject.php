@@ -1,10 +1,10 @@
 <?php
 
-namespace Craft\DDD\Claims\Domain\ValueObject;
+namespace Craft\DDD\Shared\Domain\ValueObject;
 
 use Craft\Helper\DigitsValidateHelper;
 
-class InnValueObject
+class KppValueObject
 {
 	public function __construct(
 		protected int $value
@@ -16,9 +16,9 @@ class InnValueObject
 	protected function validate(int $value): void
 	{
 
-		if(!DigitsValidateHelper::validateDigits($value, 12) && !DigitsValidateHelper::validateDigits($value, 10))
+		if(!DigitsValidateHelper::validateDigits($value, 9))
 		{
-			throw new \Exception('ИНН должен содержать 12 или 10 цифр');
+			throw new \Exception('КПП должно содержать 9 цифр');
 		}
 
 		$this->value = $value;

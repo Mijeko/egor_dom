@@ -1,11 +1,10 @@
 <?php
 
-namespace Craft\DDD\Claims\Domain\ValueObject;
+namespace Craft\DDD\Shared\Domain\ValueObject;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\Helper\DigitsValidateHelper;
 
-class CurrAccountValueObject
+class BikValueObject
 {
 	public function __construct(
 		protected string $value
@@ -16,9 +15,9 @@ class CurrAccountValueObject
 
 	protected function validate(string $value): void
 	{
-		if(!DigitsValidateHelper::validateDigits($value, 20))
+		if(!DigitsValidateHelper::validateDigits($value, 9))
 		{
-			throw new \Exception('Расчетный счет должен содержать 20 цифр');
+			throw new \Exception('БИК должен содержать 9 цифр');
 		}
 
 		$this->value = $value;

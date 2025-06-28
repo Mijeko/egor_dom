@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Claims\Domain\ValueObject;
+namespace Craft\DDD\Shared\Domain\ValueObject;
 
 use Craft\Helper\DigitsValidateHelper;
 

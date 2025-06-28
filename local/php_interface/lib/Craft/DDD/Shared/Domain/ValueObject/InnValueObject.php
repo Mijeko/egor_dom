@@ -1,12 +1,11 @@
 <?php
 
-namespace Craft\DDD\Claims\Domain\ValueObject;
+namespace Craft\DDD\Shared\Domain\ValueObject;
 
 use Craft\Helper\DigitsValidateHelper;
 
-class OgrnValueObject
+class InnValueObject
 {
-
 	public function __construct(
 		protected int $value
 	)
@@ -17,9 +16,9 @@ class OgrnValueObject
 	protected function validate(int $value): void
 	{
 
-		if(!DigitsValidateHelper::validateDigits($value, 13) && !DigitsValidateHelper::validateDigits($value, 15))
+		if(!DigitsValidateHelper::validateDigits($value, 12) && !DigitsValidateHelper::validateDigits($value, 10))
 		{
-			throw new \Exception('ОГРН/ОГРНИП должен содержать 13 или 15 цифр');
+			throw new \Exception('ИНН должен содержать 12 или 10 цифр');
 		}
 
 		$this->value = $value;
