@@ -42,6 +42,15 @@ export default defineComponent({
       },
       isFormAgentValid: false,
       formAgentValidateRules: {
+        email: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните email';
+            }
+
+            return true;
+          }
+        ],
         phone: [
           (value: string) => {
             if (value.length <= 0) {
@@ -104,6 +113,7 @@ export default defineComponent({
       },
       formAgent: {
         phone: '',
+        email: '',
         password: '',
         inn: '',
         kpp: '',
@@ -291,6 +301,16 @@ export default defineComponent({
                     return-masked-value
                     mask="+# (###) ### ####"
                     label="Телефон"
+                  />
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="formAgent.email"
+                    :rules="formAgentValidateRules.email"
+                    label="E-Mail адрес"
                   />
                 </v-col>
               </v-row>
