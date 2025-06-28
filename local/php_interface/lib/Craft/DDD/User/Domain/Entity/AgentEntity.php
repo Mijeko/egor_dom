@@ -13,24 +13,26 @@ class AgentEntity
 {
 
 	public function __construct(
-		protected ?int   $id,
-		protected string $phone,
-		protected string $password,
-		protected string $inn,
-		protected string $kpp,
-		protected string $ogrn,
-		protected string $bik,
-		protected string $currAcc,
-		protected string $corrAcc,
-		protected string $postAddress,
-		protected string $legalAddress,
-		protected string $bankName,
+		protected ?int                   $id,
+		protected string                 $phone,
+		protected string                 $email,
+		protected string                 $password,
+		protected InnValueObject         $inn,
+		protected KppValueObject         $kpp,
+		protected OgrnValueObject        $ogrn,
+		protected BikValueObject         $bik,
+		protected CurrAccountValueObject $currAcc,
+		protected CorrAccountValueObject $corrAcc,
+		protected string                 $postAddress,
+		protected string                 $legalAddress,
+		protected string                 $bankName,
 	)
 	{
 	}
 
 	public static function register(
 		string                 $phone,
+		string                 $email,
 		string                 $password,
 		InnValueObject         $inn,
 		KppValueObject         $kpp,
@@ -46,13 +48,14 @@ class AgentEntity
 		return new static(
 			null,
 			$phone,
+			$email,
 			$password,
-			$inn->getValue(),
-			$kpp->getValue(),
-			$ogrn->getValue(),
-			$bik->getValue(),
-			$currAcc->getValue(),
-			$corrAcc->getValue(),
+			$inn,
+			$kpp,
+			$ogrn,
+			$bik,
+			$currAcc,
+			$corrAcc,
 			$postAddress,
 			$legalAddress,
 			$bankName,
@@ -63,5 +66,70 @@ class AgentEntity
 	{
 		$this->id = $id;
 		return $this;
+	}
+
+	public function getBik(): BikValueObject
+	{
+		return $this->bik;
+	}
+
+	public function getCorrAcc(): CorrAccountValueObject
+	{
+		return $this->corrAcc;
+	}
+
+	public function getCurrAcc(): CurrAccountValueObject
+	{
+		return $this->currAcc;
+	}
+
+	public function getInn(): InnValueObject
+	{
+		return $this->inn;
+	}
+
+	public function getKpp(): KppValueObject
+	{
+		return $this->kpp;
+	}
+
+	public function getOgrn(): OgrnValueObject
+	{
+		return $this->ogrn;
+	}
+
+	public function getPostAddress(): string
+	{
+		return $this->postAddress;
+	}
+
+	public function getLegalAddress(): string
+	{
+		return $this->legalAddress;
+	}
+
+	public function getBankName(): string
+	{
+		return $this->bankName;
+	}
+
+	public function getPhone(): string
+	{
+		return $this->phone;
+	}
+
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
+
+	public function getPassword(): string
+	{
+		return $this->password;
+	}
+
+	public function getEmail(): string
+	{
+		return $this->email;
 	}
 }

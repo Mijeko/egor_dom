@@ -11,16 +11,15 @@ class BxAgentRepository implements AgentRepositoryInterface
 {
 	public function create(AgentEntity $agent): ?AgentEntity
 	{
-		$model = CraftUserTable::createObject();
+		$model = new \CUser();
 
+		$result = $model->Add([
+			CraftUserTable::F_EMAIL => $agent->getEmail(),
+		]);
 
-		#$model->addToGroups();
-
-		$result = $model->save();
-
-		if($result->isSuccess())
+		if($result)
 		{
-			$agent->refreshIdAfterRegister($model->getId());
+			$agent->refreshIdAfterRegister($result);
 			return $agent;
 		}
 

@@ -84,6 +84,7 @@ class UserRest extends \IRestService
 			$service->execute(
 				new RegisterAgentDto(
 					$query['phone'],
+					$query['email'],
 					$query['password'],
 					$query['inn'],
 					$query['kpp'],

@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\User\Application\Service;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
@@ -25,6 +24,7 @@ class RegisterAgentService
 	{
 		$agent = AgentEntity::register(
 			$registerAgentDto->phone,
+			$registerAgentDto->email,
 			$registerAgentDto->password,
 			new InnValueObject($registerAgentDto->inn),
 			new KppValueObject($registerAgentDto->kpp),
