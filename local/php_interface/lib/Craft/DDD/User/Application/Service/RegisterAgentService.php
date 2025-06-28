@@ -23,7 +23,6 @@ class RegisterAgentService
 
 	public function execute(RegisterAgentDto $registerAgentDto): ?AgentEntity
 	{
-		Debug::dumpToFile($registerAgentDto->bik);
 		$agent = AgentEntity::register(
 			$registerAgentDto->phone,
 			$registerAgentDto->password,
