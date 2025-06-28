@@ -1,116 +1,400 @@
 <script lang="ts">
-import {defineComponent} from "vue";
-import type RegisterRequestDto from "@/dto/RegisterRequestDto.ts";
+import {defineComponent} from 'vue'
+import DaDataApi from "@/service/DaDataApi.ts";
+import type DaDataSuggestionsCompanyDto from "@/dto/response/api/dadata/company/DaDataSuggestionsCompanyDto.ts";
+import ValidateLegalData from "@/core/validate/ValidateLegalData.ts";
+import type DaDataSuggestionsBankDto from "@/dto/response/api/dadata/bank/DaDataSuggestionsBankDto.ts";
+import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";
 import UserService from "@/service/User/UserService.ts";
+import type RegisterAgentResponseDto from "@/dto/response/RegisterAgentResponseDto.ts";
+import type RegisterAgentRequestDto from "@/dto/request/RegisterAgentRequestDto.ts";
 
 export default defineComponent({
-  methods: {
-    submitForm: function () {
-      if (this.valid) {
-
-        let body: RegisterRequestDto = {
-          email: this.form.email,
-          phone: this.form.phone,
-          password: this.form.password
-        };
-
-        let service = new UserService();
-        service.registration(body)
-          .then((response: any) => response.json())
-          .then((data: object) => {
-            // console.log(data)
-          });
-      }
-    },
-  },
-  data: function () {
+  name: "Registration",
+  data: () => {
     return {
-      valid: false,
-      firstname: '',
-      lastname: '',
-      form: {
-        phone: '',
-        email: '',
-        password: '',
-      },
-      validate: {
+      isFindByInn: 0,
+      isFindByBik: false,
+      timer: 0,
+      tab: null,
+      isFormStudentValid: false,
+      formStudentValidateRules: {
         phone: [
           (value: string) => {
-            if (value) return true
+            if (value.length <= 0) {
+              return 'Заполните номер телефона';
+            }
 
-            return 'Телефон обязателен.'
+            return true;
           },
-          (value: string) => {
-            if (value?.length <= 11) return true
-
-            return 'Телефон должен быть 11 символов.'
-          },
+          ...ValidatePersonalData.phone
         ],
-        email: [
+        password: [
           (value: string) => {
-            if (value) return true
+            if (value.length <= 0) {
+              return 'Заполните пароль';
+            }
 
-            return 'Email обязателен.'
-          },
-          (value: string) => {
-            if (/.+@.+\..+/.test(value)) return true
-
-            return 'Неккоректное значение email.'
-          },
+            return true;
+          }
         ],
       },
+      isFormAgentValid: false,
+      formAgentValidateRules: {
+        phone: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните номер телефона';
+            }
+
+            return true;
+          },
+          ...ValidatePersonalData.phone
+        ],
+        password: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните пароль';
+            }
+
+            return true;
+          }
+        ],
+        inn: ValidateLegalData.inn,
+        kpp: ValidateLegalData.kpp,
+        ogrn: ValidateLegalData.ogrn,
+        bik: ValidateLegalData.bik,
+        currAcc: ValidateLegalData.currAcc,
+        corrAcc: ValidateLegalData.corrAcc,
+        bankName: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните наименование банка';
+            }
+
+            return true;
+          },
+          ...ValidateLegalData.bankName
+        ],
+        postAddress: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните почтовый адрес';
+            }
+
+            return true;
+          },
+          ...ValidateLegalData.postAddress
+        ],
+        legalAddress: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните юиридический адрес';
+            }
+
+            return true;
+          },
+          ...ValidateLegalData.legalAddress
+        ],
+      },
+      formStudent: {
+        phone: '',
+        password: '',
+      },
+      formAgent: {
+        phone: '',
+        password: '',
+        inn: '',
+        kpp: '',
+        ogrn: '',
+        bik: '',
+        currAcc: '',
+        corrAcc: '',
+        bankName: '',
+        legalAddress: '',
+        postAddress: '',
+      },
+      isPostIdenticalLegalAddress: false,
+    };
+  },
+  methods: {
+    registrationStudent: function () {
+      if (!this.isFormStudentValid) {
+        return;
+      }
+      // let api = new UserService();
+      // api.registrationStudent();
+    },
+    registrationAgent: function () {
+      if (!this.isFormAgentValid) {
+        return;
+      }
+      let api = new UserService();
+      let body: RegisterAgentRequestDto = {
+        phone: this.formAgent.phone,
+        password: this.formAgent.password,
+        inn: this.formAgent.inn,
+        kpp: this.formAgent.kpp,
+        ogrn: this.formAgent.ogrn,
+        bik: this.formAgent.bik,
+        currAcc: this.formAgent.currAcc,
+        corrAcc: this.formAgent.corrAcc,
+        bankName: this.formAgent.bankName,
+        legalAddress: this.formAgent.legalAddress,
+        postAddress: this.formAgent.postAddress,
+      };
+      api.registrationAgent(body)
+          .then((response: RegisterAgentResponseDto) => {
+            console.log(response);
+          });
+    },
+    handleLegalAddress(event: any) {
+      let value = event.target.value;
+      if (this.isPostIdenticalLegalAddress) {
+        this.formAgent.postAddress = value;
+      }
+    },
+    handleInputInn(event: any) {
+
+      let value = event.target.value;
+
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+
+      this.timer = setTimeout(() => {
+        let api = new DaDataApi();
+        api.suggestionsCompany(value)
+            .then((response: DaDataSuggestionsCompanyDto) => {
+
+              if (response.suggestions.length == 1) {
+                this.isFindByInn = 1;
+                this.formAgent.ogrn = response.suggestions[0].data.ogrn ?? '';
+                this.formAgent.kpp = response.suggestions[0].data.kpp ?? '';
+                this.formAgent.legalAddress = response.suggestions[0].data.address.value ?? '';
+              } else {
+                this.isFindByInn = 2;
+              }
+
+            });
+
+      }, 300)
+
+    },
+    handleInputBik(event: any) {
+
+      let value = event.target.value;
+
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      this.timer = setTimeout(() => {
+        let api = new DaDataApi();
+        api.suggestionsBank(value)
+            .then((response: DaDataSuggestionsBankDto) => {
+
+              if (response.suggestions.length == 1) {
+                this.isFindByBik = true;
+                this.formAgent.corrAcc = response.suggestions[0].data.correspondent_account ?? '';
+                this.formAgent.bankName = response.suggestions[0].data.name.payment ?? '';
+              } else {
+                this.isFindByBik = true;
+              }
+
+            });
+
+      }, 300)
+    },
+  },
+  watch: {
+    isPostIdenticalLegalAddress: function (newValue: boolean, oldValue: boolean) {
+      if (newValue) {
+        this.formAgent.postAddress = this.formAgent.legalAddress;
+      } else {
+        this.formAgent.postAddress = '';
+      }
     }
   },
 })
 </script>
 
 <template>
-  <v-app>
-    <v-form v-model="valid" @submit.prevent="submitForm">
-      <v-row>
-        <v-col
-          cols="12"
-          md="12"
-        >
+
+  <v-card>
+    <v-tabs
+        align-tabs="center"
+        v-model="tab"
+
+        color="deep-purple-accent-4"
+    >
+      <v-tab value="student">Как ученик</v-tab>
+      <v-tab value="agent">Как агент</v-tab>
+    </v-tabs>
+
+
+    <v-tabs-window v-model="tab">
+      <v-tabs-window-item value="student">
+        <v-form @submit.prevent="registrationStudent" v-model="isFormStudentValid">
           <v-text-field
-            v-model="form.phone"
-            :counter="11"
-            :rules="validate.phone"
-            label="Номер телефона"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="12"
-        >
+              v-model="formStudent.phone"
+              :rules="formStudentValidateRules.phone"
+              return-masked-value
+              mask="+# (###) ### ####"
+              label="Номер телефона"
+          />
           <v-text-field
-            v-model="form.email"
-            :rules="validate.email"
-            label="E-mail"
-            required
-          ></v-text-field>
-        </v-col>
+              v-model="formStudent.password"
+              :rules="formStudentValidateRules.password"
+              type="password"
+              label="Пароль"
+          />
+
+          <v-divider/>
+
+          <v-btn type="submit">Зарегистрироваться</v-btn>
+        </v-form>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="agent">
+        <v-form @submit.prevent="registrationAgent" v-model="isFormAgentValid">
+          <v-text-field v-model="formAgent.inn" label="ИНН" @input.prevent="handleInputInn"/>
 
 
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-text-field
-            v-model="form.password"
-            :counter="10"
-            label="Пароль"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
+          <v-row v-if="isFindByInn > 0">
+            <v-col cols="12">
+              <v-row>
+                <v-col cols="12">
+                  <v-card-text class="text-center" v-if="isFindByInn=1">
+                    Найдена инфомация о вас.<br>Измените или дополните информацию
+                  </v-card-text>
+                  <v-card-text class="text-center" v-else-if="isFindByInn=2">
+                    Мы не нашли инфомацию о вас.<br>Заполните всю информацию
+                  </v-card-text>
+                </v-col>
+              </v-row>
 
-      <v-btn class="mt-2" type="submit" block>Зарегистрироваться</v-btn>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                      v-model="formAgent.phone"
+                      :rules="formAgentValidateRules.phone"
+                      return-masked-value
+                      mask="+# (###) ### ####"
+                      label="Телефон"
+                  />
+                </v-col>
+              </v-row>
 
-    </v-form>
-  </v-app>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                      v-model="formAgent.password"
+                      :rules="formAgentValidateRules.password"
+                      label="Пароль"
+                  />
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="formAgent.inn" :rules="formAgentValidateRules.inn" label="ИНН"/>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="formAgent.kpp" :rules="formAgentValidateRules.kpp" label="КПП"/>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="formAgent.ogrn" :rules="formAgentValidateRules.ogrn" label="ОГРН/ОГРНИП"/>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                      v-model="formAgent.legalAddress"
+                      :rules="formAgentValidateRules.legalAddress"
+                      @input="handleLegalAddress"
+                      label="Юридический адрес"
+                  />
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                      v-model="formAgent.postAddress"
+                      :rules="formAgentValidateRules.postAddress"
+                      label="Почтовый адрес"
+                  />
+                  <v-checkbox v-model="isPostIdenticalLegalAddress" label="Совпадает с юридическим адресом"/>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                      v-model="formAgent.bik"
+                      :rules="formAgentValidateRules.bik"
+                      @input="handleInputBik"
+                      label="БИК"
+                  />
+                </v-col>
+              </v-row>
+
+              <v-row v-if="isFindByBik">
+                <v-col cols="12">
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field
+                          v-model="formAgent.currAcc"
+                          :rules="formAgentValidateRules.currAcc"
+                          label="Расчетный счет"
+                      />
+                    </v-col>
+                  </v-row>
+
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field
+                          v-model="formAgent.corrAcc"
+                          :rules="formAgentValidateRules.corrAcc"
+                          label="Кореспондентский счет"
+                      />
+                    </v-col>
+                  </v-row>
+
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field
+                          v-model="formAgent.bankName"
+                          :rules="formAgentValidateRules.bankName"
+                          label="Наименование банка"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+
+
+            </v-col>
+          </v-row>
+
+          <v-divider/>
+
+          <v-btn type="submit">Зарегистрироваться</v-btn>
+        </v-form>
+      </v-tabs-window-item>
+    </v-tabs-window>
+  </v-card>
+
+
 </template>
 
 <style scoped>

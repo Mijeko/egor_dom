@@ -9,7 +9,7 @@ use Craft\DDD\Claims\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Claims\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Claims\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
-use Craft\DDD\User\Domain\Entity\User;
+use Craft\DDD\User\Domain\Entity\UserEntity;
 
 class Claim
 {
@@ -30,7 +30,7 @@ class Claim
 		protected ?string                 $postAddress,
 		protected ?string                 $bankName,
 		protected ?BuildObject            $buildObject,
-		protected ?User                   $user,
+		protected ?UserEntity             $user,
 	)
 	{
 	}
@@ -50,7 +50,7 @@ class Claim
 		string      $postAddress,
 		string      $bankName,
 		BuildObject $buildObject,
-		User        $user,
+		UserEntity  $user,
 	): static
 	{
 		return new static(
@@ -94,7 +94,7 @@ class Claim
 		return $this->buildObject;
 	}
 
-	public function getUser(): ?User
+	public function getUser(): ?UserEntity
 	{
 		return $this->user;
 	}

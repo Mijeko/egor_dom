@@ -22,7 +22,6 @@ declare module 'vue' {
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
-    Register: typeof import('./src/components/Register.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
   }
 }

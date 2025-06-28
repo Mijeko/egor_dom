@@ -3,7 +3,7 @@
 namespace Craft\DDD\User\Application\Service;
 
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
-use Craft\DDD\User\Domain\Entity\Profile;
+use Craft\DDD\User\Domain\Entity\ProfileEntity;
 use Craft\DDD\User\Domain\Repository\ProfileRepositoryInterface;
 
 class UpdateProfileService
@@ -15,7 +15,7 @@ class UpdateProfileService
 	{
 	}
 
-	public function execute(int $profileId, ProfileUpdateServiceDto $profileUpdateServiceDto): ?Profile
+	public function execute(int $profileId, ProfileUpdateServiceDto $profileUpdateServiceDto): ?ProfileEntity
 	{
 		$profile = $this->profileRepository->findById($profileId);
 		if(!$profile)

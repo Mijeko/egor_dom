@@ -4,7 +4,7 @@ namespace Craft\DDD\User\Domain\Entity;
 
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
 
-class Profile
+class ProfileEntity
 {
 	public function __construct(
 		protected ?int    $id,

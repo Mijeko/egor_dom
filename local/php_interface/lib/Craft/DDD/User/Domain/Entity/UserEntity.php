@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-class User
+class UserEntity
 {
 	public function __construct(
 		protected string $id,

@@ -7,7 +7,7 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'Register',
+		'SOURCE' => 'Registration',
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

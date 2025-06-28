@@ -3,8 +3,11 @@
 namespace Craft\Rest;
 
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
+use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Application\Service\Factory\AuthorizeServiceFactory;
+use Craft\DDD\User\Application\Service\Factory\RegisterAgentServiceFactory;
 use Craft\DDD\User\Application\Service\Factory\UpdateProfileServiceFactory;
+use Craft\DDD\User\Application\Service\RegisterAgentService;
 
 class UserRest extends \IRestService
 {
@@ -71,6 +74,44 @@ class UserRest extends \IRestService
 		}
 
 		unset($query['profileId']);
+	}
+
+	public static function registerAgent($query, $nav, \CRestServer $server): array
+	{
+		try
+		{
+			$service = RegisterAgentServiceFactory::getService();
+			$service->execute(
+				new RegisterAgentDto(
+					$query['phone'],
+					$query['password'],
+					$query['inn'],
+					$query['kpp'],
+					$query['ogrn'],
+					$query['bik'],
+					$query['currAcc'],
+					$query['corrAcc'],
+					$query['postAddress'],
+					$query['legalAddress'],
+					$query['bankName'],
+				)
+			);
+
+			return [
+				'success' => true,
+			];
+
+		} catch(\Exception $e)
+		{
+			return [
+				'success' => false,
+				'error'   => $e->getMessage(),
+			];
+		}
+	}
+
+	public static function registerStudent($query, $nav, \CRestServer $server)
+	{
 	}
 
 }

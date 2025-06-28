@@ -6,14 +6,6 @@ export default class CraftApi {
   host: string = 'https://dom.local';
   key: string = 'ug4k7eew7wa5jnln';
 
-  // get(method: string, formData: FormData, headers: any) {
-  //   return fetch(`${this.host}/rest/1/${this.key}/${method}/`, {
-  //     method: 'GET',
-  //     body: formData,
-  //     headers: headers
-  //   });
-  // }
-
   post(method: string, body: FormData, headers: any = {}): Promise<Response> {
     return fetch(`${this.host}/rest/1/${this.key}/${method}/`, {
       method: 'POST',
@@ -21,14 +13,6 @@ export default class CraftApi {
       headers: headers
     });
   }
-
-  // formDataFromObject(body: object): FormData {
-  //   let formData: FormData = new FormData();
-  //   Object.keys(body).forEach((key: string) => {
-  //     formData.append(key, body[key] as string);
-  //   });
-  //   return formData;
-  // }
 
   objectToFormData(
     obj: Record<string, any>,

@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
-use Craft\DDD\User\Domain\Entity\User;
+use Craft\DDD\User\Domain\Entity\UserEntity;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
@@ -28,7 +28,7 @@ class BxUserRepository implements UserRepositoryInterface
 		];
 	}
 
-	public function findById(int $id): ?User
+	public function findById(int $id): ?UserEntity
 	{
 		$query = CraftUserTable::getList($this->prepareGetList(
 			[
@@ -46,7 +46,7 @@ class BxUserRepository implements UserRepositoryInterface
 		return $this->hydrateElement($bxUser);
 	}
 
-	public function findByPhoneNumber(string $phoneNumber): ?User
+	public function findByPhoneNumber(string $phoneNumber): ?UserEntity
 	{
 		$query = CraftUserTable::getList($this->prepareGetList(
 			[
@@ -65,9 +65,9 @@ class BxUserRepository implements UserRepositoryInterface
 
 	}
 
-	public function hydrateElement(CraftUser $bxUser): User
+	public function hydrateElement(CraftUser $bxUser): UserEntity
 	{
-		$user = new User(
+		$user = new UserEntity(
 			$bxUser[CraftUserTable::F_ID],
 			$bxUser[CraftUserTable::F_LOGIN],
 			$bxUser[CraftUserTable::F_PERSONAL_PHONE],

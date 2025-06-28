@@ -1,8 +1,10 @@
+import CoreHelper from "@/service/CoreHelper.ts";
+
 const ValidateLegalData = {
   inn: [
     (value: string) => {
 
-      if (!checkDig(value, 10) && !checkDig(value, 12)) {
+      if (!CoreHelper.checkDig(value, 10) && !CoreHelper.checkDig(value, 12)) {
         return 'ИНН должен содержать 10 или 12 символов';
       }
 
@@ -12,7 +14,7 @@ const ValidateLegalData = {
   bik: [
     (value: string) => {
 
-      if (!checkDig(value, 9)) {
+      if (!CoreHelper.checkDig(value, 9)) {
         return 'БИК должен содержать 9 символов';
       }
 
@@ -22,7 +24,7 @@ const ValidateLegalData = {
   ogrn: [
     (value: string) => {
 
-      if (!checkDig(value, 13) && !checkDig(value, 15)) {
+      if (!CoreHelper.checkDig(value, 13) && !CoreHelper.checkDig(value, 15)) {
         return 'ОГРН/ОГРНИП должен содержать 13 или 15 символов';
       }
 
@@ -32,7 +34,7 @@ const ValidateLegalData = {
   kpp: [
     (value: string) => {
 
-      if (!checkDig(value, 9)) {
+      if (!CoreHelper.checkDig(value, 9)) {
         return 'КПП должен содержать 9 символов';
       }
 
@@ -42,7 +44,7 @@ const ValidateLegalData = {
   currAcc: [
     (value: string) => {
 
-      if (!checkDig(value, 20)) {
+      if (!CoreHelper.checkDig(value, 20)) {
         return 'Расчетный счет должен содержать 20 символов';
       }
 
@@ -52,7 +54,7 @@ const ValidateLegalData = {
   corrAcc: [
     (value: string) => {
 
-      if (!checkDig(value, 20)) {
+      if (!CoreHelper.checkDig(value, 20)) {
         return 'Кореспондентский счет должен содержать 20 символов';
       }
 
@@ -64,10 +66,3 @@ const ValidateLegalData = {
   bankName: [],
 };
 export default ValidateLegalData;
-
-
-function checkDig(value: string, len: number) {
-  value = value.toString();
-  let checkValue = value.replace(/D+/g, '');
-  return checkValue.length === len || value.length === len;
-}

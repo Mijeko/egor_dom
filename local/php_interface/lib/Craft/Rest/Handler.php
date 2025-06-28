@@ -10,10 +10,11 @@ class Handler
 	{
 		return [
 			static::SCOPE_CRAFT => [
-				'user.login'     => [UserRest::class, 'login'],
-				'user.register'  => [UserRest::class, 'register'],
-				'profile.update' => [UserRest::class, 'profileUpdate'],
-				'profile.find'   => [UserRest::class, 'findProfile'],
+				'user.login'            => [UserRest::class, 'login'],
+				'user.register.student' => [UserRest::class, 'registerStudent'],
+				'user.register.agent'   => [UserRest::class, 'registerAgent'],
+				'profile.update'        => [UserRest::class, 'profileUpdate'],
+				'profile.find'          => [UserRest::class, 'findProfile'],
 
 				'claim.create' => [ClaimRest::class, 'create'],
 			],

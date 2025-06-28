@@ -3,7 +3,7 @@
 namespace Craft\DDD\User\Infrastructure\Repository;
 
 use Bitrix\Main\Diag\Debug;
-use Craft\DDD\User\Domain\Entity\Profile;
+use Craft\DDD\User\Domain\Entity\ProfileEntity;
 use Craft\DDD\User\Domain\Repository\ProfileRepositoryInterface;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
@@ -11,7 +11,7 @@ use Craft\Model\CraftUserTable;
 class BxProfileRepository implements ProfileRepositoryInterface
 {
 
-	public function findById(int $profileId): Profile
+	public function findById(int $profileId): ProfileEntity
 	{
 		$user = CraftUser::load($profileId);
 		if(!$user)
@@ -19,7 +19,7 @@ class BxProfileRepository implements ProfileRepositoryInterface
 			throw new \Exception('Profile not found');
 		}
 
-		return new Profile(
+		return new ProfileEntity(
 			$user->getId(),
 			$user->getName(),
 			$user->getSecondName(),
@@ -36,7 +36,7 @@ class BxProfileRepository implements ProfileRepositoryInterface
 		);
 	}
 
-	public function update(Profile $profile): Profile
+	public function update(ProfileEntity $profile): ProfileEntity
 	{
 
 		$user = CraftUser::load($profile->getId());
