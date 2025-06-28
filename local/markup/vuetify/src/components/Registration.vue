@@ -9,6 +9,9 @@ import UserService from "@/service/User/UserService.ts";
 import type RegisterAgentResponseDto from "@/dto/response/RegisterAgentResponseDto.ts";
 import type RegisterAgentRequestDto from "@/dto/request/RegisterAgentRequestDto.ts";
 import AlertService from "@/service/AlertService.ts";
+import RegisterStudentResponseDto from "@/dto/response/RegisterStudentResponseDto";
+import type RegisterStudentRequestDto from "@/dto/request/RegisterStudentRequestDto";
+import CoreHelper from "@/service/CoreHelper";
 
 export default defineComponent({
   name: "Registration",
@@ -20,6 +23,19 @@ export default defineComponent({
       tab: null,
       isFormStudentValid: false,
       formStudentValidateRules: {
+        email: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Заполните email';
+            }
+
+            if (!CoreHelper.emailIsValid(value)) {
+              return 'Неверный формат email';
+            }
+
+            return true;
+          }
+        ],
         phone: [
           (value: string) => {
             if (value.length <= 0) {
@@ -46,6 +62,10 @@ export default defineComponent({
           (value: string) => {
             if (value.length <= 0) {
               return 'Заполните email';
+            }
+
+            if (!CoreHelper.emailIsValid(value)) {
+              return 'Неверный формат email';
             }
 
             return true;
@@ -109,6 +129,7 @@ export default defineComponent({
       },
       formStudent: {
         phone: '',
+        email: '',
         password: '',
       },
       formAgent: {
@@ -133,8 +154,24 @@ export default defineComponent({
       if (!this.isFormStudentValid) {
         return;
       }
-      // let api = new UserService();
-      // api.registrationStudent();
+      let api = new UserService();
+      let body: RegisterStudentRequestDto = {
+        email: this.formStudent.email,
+        phone: this.formStudent.phone,
+        password: this.formStudent.password
+      };
+
+      api.registrationStudent(body)
+        .then((response: RegisterStudentResponseDto) => {
+          let {result} = response;
+          let {success, error} = result;
+
+          if (!success) {
+            AlertService.showErrorAlert('Регистрация', error);
+          } else {
+            window.location.href = '/';
+          }
+        });
     },
     registrationAgent: function () {
       if (!this.isFormAgentValid) {
@@ -262,6 +299,11 @@ export default defineComponent({
             return-masked-value
             mask="+# (###) ### ####"
             label="Номер телефона"
+          />
+          <v-text-field
+            v-model="formStudent.email"
+            :rules="formStudentValidateRules.email"
+            label="E-mail адрес"
           />
           <v-text-field
             v-model="formStudent.password"

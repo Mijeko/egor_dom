@@ -1,6 +1,3 @@
-export default interface RegisterAgentResponseDto {
-  result: {
-    success: boolean,
-    error?: string
-  }
-}
+import CommonApiResponseDto from "@/dto/response/CommonApiResponseDto";
+
+export default interface RegisterAgentResponseDto extends CommonApiResponseDto {}
