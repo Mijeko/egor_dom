@@ -1,5 +1,6 @@
 export default interface RegisterAgentRequestDto {
   phone: string;
+  email: string;
   password: string;
   inn: string;
   kpp: string;

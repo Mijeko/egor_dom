@@ -143,6 +143,7 @@ export default defineComponent({
       let api = new UserService();
       let body: RegisterAgentRequestDto = {
         phone: this.formAgent.phone,
+        email: this.formAgent.email,
         password: this.formAgent.password,
         inn: this.formAgent.inn,
         kpp: this.formAgent.kpp,
