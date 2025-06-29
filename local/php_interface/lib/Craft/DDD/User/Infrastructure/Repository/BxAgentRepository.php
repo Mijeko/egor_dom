@@ -23,6 +23,8 @@ class BxAgentRepository implements AgentRepositoryInterface
 			CraftUserTable::F_UF_INN           => $agent->getInn()->getValue(),
 			CraftUserTable::F_UF_OGRN          => $agent->getOgrn()->getValue(),
 			CraftUserTable::F_UF_BIK           => $agent->getBik()->getValue(),
+			CraftUserTable::F_UF_CURR_ACC      => $agent->getCurrAcc()->getValue(),
+			CraftUserTable::F_UF_CORR_ACC      => $agent->getCorrAcc()->getValue(),
 			CraftUserTable::F_UF_LEGAL_ADDRESS => $agent->getLegalAddress(),
 			CraftUserTable::F_UF_POST_ADDRESS  => $agent->getPostAddress(),
 			CraftUserTable::F_UF_BANK_NAME     => $agent->getBankName(),

@@ -311,10 +311,10 @@ export default defineComponent({
             <v-col cols="12">
               <v-row>
                 <v-col cols="12">
-                  <v-card-text class="text-center" v-if="isFindByInn=1">
+                  <v-card-text class="text-center" v-if="isFindByInn==1">
                     Найдена инфомация о вас.<br>Измените или дополните информацию
                   </v-card-text>
-                  <v-card-text class="text-center" v-else-if="isFindByInn=2">
+                  <v-card-text class="text-center" v-else-if="isFindByInn==2">
                     Мы не нашли инфомацию о вас.<br>Заполните всю информацию
                   </v-card-text>
                 </v-col>
@@ -349,12 +349,6 @@ export default defineComponent({
                     :rules="formAgentValidateRules.password"
                     label="Пароль"
                   />
-                </v-col>
-              </v-row>
-
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field v-model="formAgent.inn" :rules="formAgentValidateRules.inn" label="ИНН"/>
                 </v-col>
               </v-row>
 
