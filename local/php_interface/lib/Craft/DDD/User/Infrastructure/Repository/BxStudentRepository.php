@@ -26,16 +26,19 @@ class BxStudentRepository implements StudentRepositoryInterface
 
 
 		$resultId = $model->Add([
+			CraftUserTable::F_LOGIN          => $studentEntity->getEmail()->getValue(),
 			CraftUserTable::F_EMAIL          => $studentEntity->getEmail()->getValue(),
 			CraftUserTable::F_PASSWORD       => $studentEntity->getPassword()->getValue(),
 			CraftUserTable::F_PERSONAL_PHONE => $studentEntity->getPhone()->getValue(),
 		]);
 
-		if($resultId)
+		if(!$resultId)
 		{
-			$studentEntity->refreshIdAfterRegistration($resultId);
+			throw new \Exception($model->LAST_ERROR);
 		}
 
-		throw new \Exception($model->LAST_ERROR);
+		$studentEntity->refreshIdAfterRegistration($resultId);
+
+		return $studentEntity;
 	}
 }

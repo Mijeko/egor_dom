@@ -116,22 +116,22 @@ class AgentEntity
 		return $this->bankName;
 	}
 
-	public function getPhone(): string
-	{
-		return $this->phone;
-	}
-
 	public function getId(): ?int
 	{
 		return $this->id;
 	}
 
-	public function getPassword(): string
+	public function getPhone(): PhoneValueObject
+	{
+		return $this->phone;
+	}
+
+	public function getPassword(): ?PasswordValueObject
 	{
 		return $this->password;
 	}
 
-	public function getEmail(): string
+	public function getEmail(): EmailValueObject
 	{
 		return $this->email;
 	}

@@ -20,7 +20,7 @@ class UpdateProfileService
 		$profile = $this->profileRepository->findById($profileId);
 		if(!$profile)
 		{
-			throw new \Exception("Profile not found");
+			throw new \Exception("Профиль не найден");
 		}
 
 		$profile->updateProfile($profileUpdateServiceDto);

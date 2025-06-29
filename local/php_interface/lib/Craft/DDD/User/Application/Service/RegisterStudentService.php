@@ -8,20 +8,33 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
 use Craft\DDD\User\Domain\Entity\StudentEntity;
 use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
+use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 
 class RegisterStudentService
 {
 	public function __construct(
-		protected StudentRepositoryInterface $studentRepository
+		protected StudentRepositoryInterface $studentRepository,
+		protected AttachPhoneService         $attachPhoneService,
 	)
 	{
 	}
 
-	public function execute(RegisterStudentDto $registerStudentDto): ?StudentEntity
+	public function execute(RegisterStudentDto $registerStudentDto): StudentEntity
 	{
-		if($this->studentRepository->findByPhone(new PhoneValueObject($registerStudentDto->phone)))
+		$specialPhone = \COption::GetOptionString('main', 'new_user_phone_auth') == 'Y';
+
+		if($specialPhone)
 		{
-			throw new \Exception("Пользователь с таким номером телефона уже существует");
+			if($this->attachPhoneService->isExist($registerStudentDto->phone))
+			{
+				throw new \Exception("Пользователь с таким номером телефона уже существует");
+			}
+		} else
+		{
+			if($this->studentRepository->findByPhone(new PhoneValueObject($registerStudentDto->phone)))
+			{
+				throw new \Exception("Пользователь с таким номером телефона уже существует");
+			}
 		}
 
 
@@ -32,6 +45,17 @@ class RegisterStudentService
 		);
 
 
-		return $this->studentRepository->create($student);
+		$student = $this->studentRepository->create($student);
+
+		if($specialPhone)
+		{
+			$this->attachPhoneService->attach(
+				$student->getId(),
+				$student->getPhone()->getValue()
+			);
+		}
+
+
+		return $student;
 	}
 }

@@ -14,17 +14,35 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
+use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 
 class RegisterAgentService
 {
 	public function __construct(
-		protected AgentRepositoryInterface $agentRepository
+		protected AgentRepositoryInterface $agentRepository,
+		protected AttachPhoneService       $attachPhoneService,
 	)
 	{
 	}
 
 	public function execute(RegisterAgentDto $registerAgentDto): ?AgentEntity
 	{
+		$specialPhone = \COption::GetOptionString('main', 'new_user_phone_auth') == 'Y';
+
+		if($specialPhone)
+		{
+			if($this->attachPhoneService->isExist($registerAgentDto->phone))
+			{
+				throw new \Exception("Пользователь с таким номером телефона уже существует");
+			}
+		} else
+		{
+			if($this->agentRepository->findByPhone(new PhoneValueObject($registerAgentDto->phone)))
+			{
+				throw new \Exception("Пользователь с таким номером телефона уже существует");
+			}
+		}
+
 		if($this->agentRepository->findByInn(new InnValueObject($registerAgentDto->inn)))
 		{
 			throw new \Exception('Пользователь с таким ИНН уже существует');
@@ -44,6 +62,18 @@ class RegisterAgentService
 			$registerAgentDto->legalAddress,
 			$registerAgentDto->bankName,
 		);
-		return $this->agentRepository->create($agent);
+
+
+		$agent = $this->agentRepository->create($agent);
+
+		if($specialPhone)
+		{
+			$this->attachPhoneService->attach(
+				$agent->getId(),
+				$agent->getPhone()->getValue()
+			);
+		}
+
+		return $agent;
 	}
 }

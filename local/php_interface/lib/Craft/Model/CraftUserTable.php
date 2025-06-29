@@ -27,6 +27,7 @@ class CraftUserTable extends UserTable
 	const F_UF_POST_ADDRESS = 'UF_POST_ADDRESS';
 	const F_UF_CURR_ACC = 'UF_CURR_ACC';
 	const F_UF_CORR_ACC = 'UF_CORR_ACC';
+	const F_UF_BANK_NAME = 'UF_BANK_NAME';
 
 	public static function getMap()
 	{
