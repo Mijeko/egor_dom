@@ -15,7 +15,8 @@ class ImportService
 
 	public function execute(int $developerId, string $xmlBuildData): void
 	{
-		if(!$this->developerRepository->findById($developerId))
+		$developer = $this->developerRepository->findById($developerId);
+		if(!$developer)
 		{
 			throw new \Exception('Застройщик не найден');
 		}
