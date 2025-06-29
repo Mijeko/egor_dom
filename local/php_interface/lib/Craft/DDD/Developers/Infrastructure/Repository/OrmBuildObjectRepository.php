@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -11,6 +12,30 @@ use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
+
+	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
+	{
+		$model = BuildObjectTable::createObject();
+
+		$gallery = array_map(function(BxImageDto $image) {
+			return $image->id;
+		}, $buildObjectEntity->getGallery() ?? []);
+
+		$model->setName($buildObjectEntity->getName());
+		$model->setPictureId($buildObjectEntity->getPicture()->id);
+		$model->setGalleryEx($gallery);
+		$model->setDeveloperId($buildObjectEntity->getDeveloper()->getId());
+
+		$result = $model->save();
+
+		if($result->isSuccess())
+		{
+			$buildObjectEntity->refreshIdAfterCreate($model->getId());
+			return $buildObjectEntity;
+		}
+
+		throw new \Exception(implode("\n", $result->getErrorMessages()));
+	}
 
 	public function findByName(string $name): ?BuildObjectEntity
 	{
@@ -114,9 +139,16 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 		}
 
+		$developer = new DeveloperEntity(
+			0,
+			'',
+			null
+		);
+
 		return new BuildObjectEntity(
 			$buildObject->getId(),
 			$buildObject->getName(),
+			$developer,
 			$picture,
 			$childApartmentList,
 			$gallery

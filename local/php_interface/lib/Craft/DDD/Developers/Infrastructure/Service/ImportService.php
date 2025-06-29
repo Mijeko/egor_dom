@@ -49,7 +49,11 @@ class ImportService
 
 			if(!$buildObject = $this->buildObjectRepository->findByName($rawApartmentData['building-name']))
 			{
-				$buildObject = BuildObjectEntity::fromImport($rawApartmentData['building-name']);
+				$buildObject = BuildObjectEntity::fromImport(
+					$rawApartmentData['building-name'],
+					$developer
+				);
+				$this->buildObjectRepository->create($buildObject);
 			}
 
 
