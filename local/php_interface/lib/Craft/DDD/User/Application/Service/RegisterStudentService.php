@@ -57,6 +57,7 @@ class RegisterStudentService
 			);
 		}
 
+		$this->authenticator->loginById($student->getId());
 
 		return $student;
 	}
