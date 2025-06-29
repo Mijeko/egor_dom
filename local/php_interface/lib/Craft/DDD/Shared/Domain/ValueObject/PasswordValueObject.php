@@ -17,7 +17,7 @@ class PasswordValueObject
 
 		if(mb_strlen($value) <= 0)
 		{
-			throw new \Exception('Password must have at least one letter');
+			throw new \Exception('Пароль должен быть заполнен');
 		}
 
 		$this->value = $value;
