@@ -12,6 +12,7 @@ use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
+use Craft\DDD\User\Application\Service\Interfaces\AutenficatorInterface;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
@@ -21,6 +22,7 @@ class RegisterAgentService
 	public function __construct(
 		protected AgentRepositoryInterface $agentRepository,
 		protected AttachPhoneService       $attachPhoneService,
+		protected AutenficatorInterface    $autenficator,
 	)
 	{
 	}
@@ -73,6 +75,11 @@ class RegisterAgentService
 				$agent->getPhone()->getValue()
 			);
 		}
+
+
+		$this->autenficator->loginById(
+			$agent->getId(),
+		);
 
 		return $agent;
 	}
