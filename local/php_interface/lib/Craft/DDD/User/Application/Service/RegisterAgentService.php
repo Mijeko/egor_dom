@@ -5,10 +5,12 @@ namespace Craft\DDD\User\Application\Service;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
@@ -25,12 +27,12 @@ class RegisterAgentService
 	{
 		if($this->agentRepository->findByInn(new InnValueObject($registerAgentDto->inn)))
 		{
-			throw new \Exception('Agent already exists');
+			throw new \Exception('Пользователь с таким ИНН уже существует');
 		}
 
 		$agent = AgentEntity::register(
-			$registerAgentDto->phone,
-			$registerAgentDto->email,
+			new PhoneValueObject($registerAgentDto->phone),
+			new EmailValueObject($registerAgentDto->email),
 			new PasswordValueObject($registerAgentDto->password),
 			new InnValueObject($registerAgentDto->inn),
 			new KppValueObject($registerAgentDto->kpp),

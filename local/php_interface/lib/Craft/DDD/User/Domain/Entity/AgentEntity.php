@@ -5,18 +5,20 @@ namespace Craft\DDD\User\Domain\Entity;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
 class AgentEntity
 {
 
 	public function __construct(
 		protected ?int                   $id,
-		protected string                 $phone,
-		protected string                 $email,
+		protected PhoneValueObject       $phone,
+		protected EmailValueObject       $email,
 		protected ?PasswordValueObject   $password = null,
 		protected InnValueObject         $inn,
 		protected KppValueObject         $kpp,
@@ -32,8 +34,8 @@ class AgentEntity
 	}
 
 	public static function register(
-		string                 $phone,
-		string                 $email,
+		PhoneValueObject       $phone,
+		EmailValueObject       $email,
 		PasswordValueObject    $password,
 		InnValueObject         $inn,
 		KppValueObject         $kpp,

@@ -7,7 +7,7 @@ use Craft\DDD\User\Infrastructure\Repository\BxProfileRepository;
 
 class UpdateProfileServiceFactory
 {
-	public static function create(): UpdateProfileService
+	public static function getService(): UpdateProfileService
 	{
 		return new UpdateProfileService(
 			new BxProfileRepository()

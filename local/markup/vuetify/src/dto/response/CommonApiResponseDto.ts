@@ -1,6 +1,9 @@
 export default interface CommonApiResponseDto {
-  result: {
-    success: boolean,
-    error?: string
-  }
+  result: ResultBody
+}
+
+
+interface ResultBody {
+  success: boolean,
+  error?: string
 }

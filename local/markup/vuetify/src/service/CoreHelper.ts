@@ -5,7 +5,7 @@ export default class CoreHelper {
     return checkValue.length === len || value.length === len;
   }
 
-  static emailIsValid(email) {
+  static emailIsValid(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 

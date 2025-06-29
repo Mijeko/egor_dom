@@ -9,9 +9,9 @@ import UserService from "@/service/User/UserService.ts";
 import type RegisterAgentResponseDto from "@/dto/response/RegisterAgentResponseDto.ts";
 import type RegisterAgentRequestDto from "@/dto/request/RegisterAgentRequestDto.ts";
 import AlertService from "@/service/AlertService.ts";
-import RegisterStudentResponseDto from "@/dto/response/RegisterStudentResponseDto";
-import type RegisterStudentRequestDto from "@/dto/request/RegisterStudentRequestDto";
-import CoreHelper from "@/service/CoreHelper";
+import type RegisterStudentRequestDto from "@/dto/request/RegisterStudentRequestDto.ts";
+import type RegisterStudentResponseDto from "@/dto/response/RegisterStudentResponseDto.ts";
+import CoreHelper from "@/service/CoreHelper.ts";
 
 export default defineComponent({
   name: "Registration",
@@ -166,7 +166,7 @@ export default defineComponent({
           let {result} = response;
           let {success, error} = result;
 
-          if (!success) {
+          if (!success && error) {
             AlertService.showErrorAlert('Регистрация', error);
           } else {
             window.location.href = '/';
@@ -197,7 +197,7 @@ export default defineComponent({
           let {result} = response;
           let {success, error} = result;
 
-          if (!success) {
+          if (!success && error) {
             AlertService.showErrorAlert('Регистрация', error);
           } else {
             window.location.href = '/';

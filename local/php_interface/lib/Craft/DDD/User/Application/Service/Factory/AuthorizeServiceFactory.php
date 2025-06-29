@@ -8,7 +8,7 @@ use Craft\DDD\User\Infrastructure\Service\Autenficator;
 
 class AuthorizeServiceFactory
 {
-	public static function create(): AuthorizeService
+	public static function getService(): AuthorizeService
 	{
 		return new AuthorizeService(
 			new BxUserRepository(),

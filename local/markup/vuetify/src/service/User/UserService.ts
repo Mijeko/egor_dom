@@ -28,7 +28,8 @@ export default class UserService {
   }
 
   registrationStudent(body: RegisterStudentRequestDto): Promise<RegisterStudentResponseDto> {
-    return this.api.post('user.register.student', this.api.objectToFormData(body));
+    return this.api.post('user.register.student', this.api.objectToFormData(body))
+      .then((response: any) => response.json());
   }
 
   profileUpdate(body: ProfileUpdateDto) {
