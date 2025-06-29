@@ -73,10 +73,10 @@ export default defineComponent({
       label="Пароль"
     />
     <v-row>
-      <v-col cols="6">
+      <v-col cols="1">
         <v-btn type="submit">Войти</v-btn>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="2">
         <a href="?register=yes">Регистрация</a>
       </v-col>
     </v-row>
