@@ -2,20 +2,30 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
-use Bitrix\Main\Diag\Debug;
-use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
-use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
-use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
-use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\Dto\BxImageDto;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
 
 	public function findByName(string $name): ?BuildObjectEntity
 	{
-		return null;
+		$model = BuildObjectTable::getList([
+			'filter' => [
+				BuildObjectTable::F_NAME => $name,
+			],
+		])->fetchObject();
+
+		if(!$model)
+		{
+			return null;
+		}
+
+		return $this->hydrateElement($model);
 	}
 
 	public function findById(int $id): ?BuildObjectEntity
@@ -39,14 +49,14 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 		foreach($query->fetchCollection() as $buildObject)
 		{
-			/* @var \Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject */
+			/* @var BuildObject $buildObject */
 			$result[] = $this->hydrateElement($buildObject);
 		}
 
 		return $result;
 	}
 
-	protected function hydrateElement(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject): BuildObjectEntity
+	protected function hydrateElement(BuildObject $buildObject): BuildObjectEntity
 	{
 		$_picture = \CFile::GetFileArray($buildObject->getPictureId());
 		$picture = null;
@@ -77,17 +87,29 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		$gallery = array_filter($gallery);
 
 
-		$aps = $buildObject->fillApartments();
+		$apartments = $buildObject->fillApartments();
 		$childApartmentList = [];
-		if($aps)
+		if($apartments)
 		{
-			foreach($aps as $ap)
+			foreach($apartments as $apartment)
 			{
 				$childApartmentList[] = new ApartmentEntity(
-					$ap->getId(),
-					$buildObject->getId(),
-					$ap->getName(),
-					$ap->getPrice(),
+					$apartment->getId(),
+					null,
+					$apartment->getName(),
+					$apartment->getPrice(),
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
 				);
 			}
 		}

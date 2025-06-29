@@ -52,6 +52,7 @@ if($request->isPost())
 		);
 	} catch(Exception $e)
 	{
+		\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
 		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
 	}
 }

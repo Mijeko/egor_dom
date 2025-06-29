@@ -2,10 +2,11 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
-use Craft\DDD\Developers\Infrastructure\Entity\Developer as BxDeveloper;
+use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\Dto\BxImageDto;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
 {
@@ -19,15 +20,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 		foreach($query->fetchCollection() as $developer)
 		{
-			/**
-			 * @var BxDeveloper $developer
-			 */
-
-			$result[] = new DeveloperEntity(
-				$developer->getId(),
-				$developer->getName(),
-				$developer->getPictureId(),
-			);
+			$result[] = $this->hydrateElement($developer);
 		}
 
 		return $result;
@@ -35,6 +28,25 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 	public function findById(int $id): ?DeveloperEntity
 	{
-		return null;
+		$result = DeveloperTable::getById($id)->fetchObject();
+
+		return $this->hydrateElement($result);
+	}
+
+	protected function hydrateElement(Developer $developer): DeveloperEntity
+	{
+		$image = null;
+		$_image = \CFile::GetFileArray($developer->getPictureId());
+		if($_image)
+		{
+			$image = new BxImageDto($_image['ID'], $_image['SRC']);
+		}
+
+
+		return new DeveloperEntity(
+			$developer->getId(),
+			$developer->getName(),
+			$image,
+		);
 	}
 }

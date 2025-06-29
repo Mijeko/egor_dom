@@ -2,18 +2,12 @@
 
 namespace Craft\DDD\Developers\Domain\ValueObject;
 
-class KitchenSpaceValueObject
+class DistrictValueObject
 {
 	public function __construct(
 		protected ?string $value,
-		protected ?string $unit,
 	)
 	{
-	}
-
-	public function getUnit(): ?string
-	{
-		return $this->unit;
 	}
 
 	public function getValue(): ?string

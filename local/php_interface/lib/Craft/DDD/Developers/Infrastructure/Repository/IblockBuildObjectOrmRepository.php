@@ -155,4 +155,9 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 			$picture,
 		);
 	}
+
+	public function findByName(string $name): ?BuildObjectEntity
+	{
+		return null;
+	}
 }

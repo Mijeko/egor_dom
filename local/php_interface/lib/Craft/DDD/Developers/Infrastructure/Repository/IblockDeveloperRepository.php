@@ -65,4 +65,9 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 			$picture,
 		);
 	}
+
+	public function findById(int $id): ?DeveloperEntity
+	{
+		return null;
+	}
 }

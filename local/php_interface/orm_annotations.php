@@ -6535,7 +6535,7 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	class EO_Developer_Entity extends \Bitrix\Main\ORM\Entity {}
 }
 /* ORMENTITYANNOTATION:Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable */
-namespace Craft\DDD\Objects\Infrastructure\Entity {
+namespace Craft\DDD\Developers\Infrastructure\Entity {
 	/**
 	 * BuildObject
 	 * @see \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable
@@ -6668,14 +6668,14 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 */
 	class EO_BuildObject {
 		/* @var \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable */
-		static public $dataClass = '\Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable';
+		static public $dataClass = '\Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable';
 		/**
 		 * @param bool|array $setDefaultValues
 		 */
 		public function __construct($setDefaultValues = true) {}
 	}
 }
-namespace Craft\DDD\Objects\Infrastructure\Entity {
+namespace Craft\DDD\Developers\Infrastructure\Entity {
 	/**
 	 * EO_BuildObject_Collection
 	 *
@@ -6715,7 +6715,7 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method bool remove(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $object)
 	 * @method void removeByPrimary($primary)
 	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
-	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUp($data)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection wakeUp($data)
 	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
 	 * @method void offsetSet() ArrayAccess
 	 * @method void offsetExists() ArrayAccess
@@ -6727,16 +6727,16 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method void next() Iterator
 	 * @method bool valid() Iterator
 	 * @method int count() Countable
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection merge(?\Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection $collection)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection merge(?\Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection $collection)
 	 * @method bool isEmpty()
 	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
 	 */
 	class EO_BuildObject_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable */
-		static public $dataClass = '\Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable';
+		static public $dataClass = '\Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable';
 	}
 }
-namespace Craft\DDD\Objects\Infrastructure\Entity {
+namespace Craft\DDD\Developers\Infrastructure\Entity {
 	/**
 	 * @method static EO_BuildObject_Query query()
 	 * @method static EO_BuildObject_Result getByPrimary($primary, array $parameters = [])
@@ -6744,9 +6744,9 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method static EO_BuildObject_Result getList(array $parameters = [])
 	 * @method static EO_BuildObject_Entity getEntity()
 	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\BuildObject createObject($setDefaultValues = true)
-	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection createCollection()
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection createCollection()
 	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\BuildObject wakeUpObject($row)
-	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
 	 */
 	class BuildObjectTable extends \Bitrix\Main\ORM\Data\DataManager {}
 	/**
@@ -6755,19 +6755,19 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 *
 	 * @method EO_BuildObject_Result exec()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject fetchObject()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fetchCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fetchCollection()
 	 */
 	class EO_BuildObject_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject fetchObject()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fetchCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fetchCollection()
 	 */
 	class EO_BuildObject_Result extends \Bitrix\Main\ORM\Query\Result {}
 	/**
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject createObject($setDefaultValues = true)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection createCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection createCollection()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject wakeUpObject($row)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
 	 */
 	class EO_BuildObject_Entity extends \Bitrix\Main\ORM\Entity {}
 }
@@ -6949,7 +6949,7 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \int[] fillBuildObjectId()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject[] getBuildObjectList()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getBuildObjectCollection()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObject()
 	 *
 	 * Common methods:
 	 * ---------------
