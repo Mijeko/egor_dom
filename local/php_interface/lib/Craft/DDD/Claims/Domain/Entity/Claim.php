@@ -8,7 +8,7 @@ use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
-use Craft\DDD\Objects\Domain\Entity\BuildObject;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\User\Domain\Entity\UserEntity;
 
 class Claim
@@ -19,18 +19,18 @@ class Claim
 		protected ?string                 $name,
 		protected ?string                 $email,
 		protected ?string                 $phone,
-		protected ?string                 $client,
-		protected ?InnValueObject         $inn,
-		protected ?KppValueObject         $kpp,
-		protected ?BikValueObject         $bik,
-		protected ?OgrnValueObject        $ogrn,
-		protected ?CurrAccountValueObject $currAcc,
-		protected ?CorrAccountValueObject $corrAcc,
-		protected ?string                 $legalAddress,
-		protected ?string                 $postAddress,
-		protected ?string                 $bankName,
-		protected ?BuildObject            $buildObject,
-		protected ?UserEntity             $user,
+		protected ?string                                                $client,
+		protected ?InnValueObject                                        $inn,
+		protected ?KppValueObject                                        $kpp,
+		protected ?BikValueObject                                        $bik,
+		protected ?OgrnValueObject                                       $ogrn,
+		protected ?CurrAccountValueObject                                $currAcc,
+		protected ?CorrAccountValueObject                                $corrAcc,
+		protected ?string                                                $legalAddress,
+		protected ?string                                                $postAddress,
+		protected ?string                                                $bankName,
+		protected ?\Craft\DDD\Developers\Domain\Entity\BuildObjectEntity $buildObject,
+		protected ?UserEntity                                            $user,
 	)
 	{
 	}
@@ -39,18 +39,18 @@ class Claim
 		string      $name,
 		string      $email,
 		string      $phone,
-		string      $client,
-		int         $inn,
-		int         $kpp,
-		int         $bik,
-		int         $ogrn,
-		string      $currAcc,
-		string      $corrAcc,
-		string      $legalAddress,
-		string      $postAddress,
-		string      $bankName,
-		BuildObject $buildObject,
-		UserEntity  $user,
+		string            $client,
+		int               $inn,
+		int               $kpp,
+		int               $bik,
+		int               $ogrn,
+		string            $currAcc,
+		string            $corrAcc,
+		string            $legalAddress,
+		string            $postAddress,
+		string            $bankName,
+		BuildObjectEntity $buildObject,
+		UserEntity        $user,
 	): static
 	{
 		return new static(
@@ -89,7 +89,7 @@ class Claim
 		return $this->id;
 	}
 
-	public function getBuildObject(): BuildObject
+	public function getBuildObject(): \Craft\DDD\Developers\Domain\Entity\BuildObjectEntity
 	{
 		return $this->buildObject;
 	}

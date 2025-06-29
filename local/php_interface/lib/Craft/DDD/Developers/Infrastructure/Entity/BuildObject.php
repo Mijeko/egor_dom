@@ -1,6 +1,8 @@
 <?php
 
-namespace Craft\DDD\Objects\Infrastructure\Entity;
+namespace Craft\DDD\Developers\Infrastructure\Entity;
+
+use Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject;
 
 class BuildObject extends EO_BuildObject
 {

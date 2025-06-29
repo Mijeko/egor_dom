@@ -1,9 +1,9 @@
 <?php
 
-use Craft\DDD\Objects\Domain\Entity\BuildObject;
-use Craft\DDD\Objects\Application\Service\BuildObjectService;
-use Craft\DDD\Objects\Application\Service\BuildObjectServiceFactory;
-use Craft\DDD\Objects\Infrastructure\Dto\BuildObjectFrontDto;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Application\Service\BuildObjectService;
+use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
+use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectFrontDto;
 
 class CraftBuildObjectListComponent extends CBitrixComponent
 {
@@ -32,7 +32,7 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 	protected function loadData(): void
 	{
 		$this->arResult['BUILD_OBJECTS'] = array_map(
-			function(BuildObject $buildObject) {
+			function(BuildObjectEntity $buildObject) {
 				return new BuildObjectFrontDto(
 					$buildObject->getId(),
 					$buildObject->getName(),

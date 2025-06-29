@@ -24,7 +24,7 @@ $request = Application::getInstance()->getContext()->getRequest();
 if($request->isPost())
 {
 
-	$link = $request->getPost('source_link');
+	$link = $request->getPost('sourceLink');
 
 	$content = null;
 	$cache = \Bitrix\Main\Data\Cache::createInstance(); // получаем экземпляр класса
@@ -43,11 +43,17 @@ if($request->isPost())
 		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
 	}
 
-	$import = \Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory::getService();
-	$import->execute(
-		$request->getPost('developerId'),
-		$content
-	);
+	try
+	{
+		$import = \Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory::getService();
+		$import->execute(
+			$request->getPost('developerId'),
+			$content
+		);
+	} catch(Exception $e)
+	{
+		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
+	}
 }
 
 

@@ -6534,99 +6534,99 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 */
 	class EO_Developer_Entity extends \Bitrix\Main\ORM\Entity {}
 }
-/* ORMENTITYANNOTATION:Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable */
+/* ORMENTITYANNOTATION:Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable */
 namespace Craft\DDD\Objects\Infrastructure\Entity {
 	/**
 	 * BuildObject
-	 * @see \Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable
+	 * @see \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable
 	 *
 	 * Custom methods:
 	 * ---------------
 	 *
 	 * @method \int getId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setId(\int|\Bitrix\Main\DB\SqlExpression $id)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setId(\int|\Bitrix\Main\DB\SqlExpression $id)
 	 * @method bool hasId()
 	 * @method bool isIdFilled()
 	 * @method bool isIdChanged()
 	 * @method \int getDeveloperId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setDeveloperId(\int|\Bitrix\Main\DB\SqlExpression $developerId)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setDeveloperId(\int|\Bitrix\Main\DB\SqlExpression $developerId)
 	 * @method bool hasDeveloperId()
 	 * @method bool isDeveloperIdFilled()
 	 * @method bool isDeveloperIdChanged()
 	 * @method \int remindActualDeveloperId()
 	 * @method \int requireDeveloperId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetDeveloperId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetDeveloperId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetDeveloperId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetDeveloperId()
 	 * @method \int fillDeveloperId()
 	 * @method \int getPictureId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setPictureId(\int|\Bitrix\Main\DB\SqlExpression $pictureId)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setPictureId(\int|\Bitrix\Main\DB\SqlExpression $pictureId)
 	 * @method bool hasPictureId()
 	 * @method bool isPictureIdFilled()
 	 * @method bool isPictureIdChanged()
 	 * @method \int remindActualPictureId()
 	 * @method \int requirePictureId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetPictureId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetPictureId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetPictureId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetPictureId()
 	 * @method \int fillPictureId()
 	 * @method \boolean getActive()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
 	 * @method bool hasActive()
 	 * @method bool isActiveFilled()
 	 * @method bool isActiveChanged()
 	 * @method \boolean remindActualActive()
 	 * @method \boolean requireActive()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetActive()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetActive()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetActive()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetActive()
 	 * @method \boolean fillActive()
 	 * @method \int getSort()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setSort(\int|\Bitrix\Main\DB\SqlExpression $sort)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setSort(\int|\Bitrix\Main\DB\SqlExpression $sort)
 	 * @method bool hasSort()
 	 * @method bool isSortFilled()
 	 * @method bool isSortChanged()
 	 * @method \int remindActualSort()
 	 * @method \int requireSort()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetSort()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetSort()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetSort()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetSort()
 	 * @method \int fillSort()
 	 * @method \string getName()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setName(\string|\Bitrix\Main\DB\SqlExpression $name)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setName(\string|\Bitrix\Main\DB\SqlExpression $name)
 	 * @method bool hasName()
 	 * @method bool isNameFilled()
 	 * @method bool isNameChanged()
 	 * @method \string remindActualName()
 	 * @method \string requireName()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetName()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetName()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetName()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetName()
 	 * @method \string fillName()
 	 * @method \string getGallery()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setGallery(\string|\Bitrix\Main\DB\SqlExpression $gallery)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setGallery(\string|\Bitrix\Main\DB\SqlExpression $gallery)
 	 * @method bool hasGallery()
 	 * @method bool isGalleryFilled()
 	 * @method bool isGalleryChanged()
 	 * @method \string remindActualGallery()
 	 * @method \string requireGallery()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetGallery()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetGallery()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetGallery()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetGallery()
 	 * @method \string fillGallery()
 	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
 	 * @method bool hasCreatedAt()
 	 * @method bool isCreatedAtFilled()
 	 * @method bool isCreatedAtChanged()
 	 * @method \Bitrix\Main\Type\DateTime remindActualCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime requireCreatedAt()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetCreatedAt()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetCreatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetCreatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime getUpdatedAt()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject setUpdatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $updatedAt)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setUpdatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $updatedAt)
 	 * @method bool hasUpdatedAt()
 	 * @method bool isUpdatedAtFilled()
 	 * @method bool isUpdatedAtChanged()
 	 * @method \Bitrix\Main\Type\DateTime remindActualUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime requireUpdatedAt()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetUpdatedAt()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetUpdatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetUpdatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillUpdatedAt()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getApartments()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection requireApartments()
@@ -6637,8 +6637,8 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method void addToApartments(\Craft\DDD\Developers\Infrastructure\Entity\Apartment $apartment)
 	 * @method void removeFromApartments(\Craft\DDD\Developers\Infrastructure\Entity\Apartment $apartment)
 	 * @method void removeAllApartments()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetApartments()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetApartments()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6654,9 +6654,9 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method bool has($fieldName)
 	 * @method bool isFilled($fieldName)
 	 * @method bool isChanged($fieldName)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject set($fieldName, $value)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject reset($fieldName)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unset($fieldName)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject set($fieldName, $value)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject reset($fieldName)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unset($fieldName)
 	 * @method void addTo($fieldName, $value)
 	 * @method void removeFrom($fieldName, $value)
 	 * @method void removeAll($fieldName)
@@ -6664,10 +6664,10 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
 	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
 	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
-	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\BuildObject wakeUp($data)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\BuildObject wakeUp($data)
 	 */
 	class EO_BuildObject {
-		/* @var \Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable */
+		/* @var \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable */
 		static public $dataClass = '\Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable';
 		/**
 		 * @param bool|array $setDefaultValues
@@ -6707,12 +6707,12 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * ---------------
 	 *
 	 * @property-read \Bitrix\Main\ORM\Entity $entity
-	 * @method void add(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $object)
-	 * @method bool has(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $object)
+	 * @method void add(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $object)
+	 * @method bool has(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $object)
 	 * @method bool hasByPrimary($primary)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject getByPrimary($primary)
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject[] getAll()
-	 * @method bool remove(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $object)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject getByPrimary($primary)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject[] getAll()
+	 * @method bool remove(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $object)
 	 * @method void removeByPrimary($primary)
 	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
 	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUp($data)
@@ -6722,7 +6722,7 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method void offsetUnset() ArrayAccess
 	 * @method void offsetGet() ArrayAccess
 	 * @method void rewind() Iterator
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject current() Iterator
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject current() Iterator
 	 * @method mixed key() Iterator
 	 * @method void next() Iterator
 	 * @method bool valid() Iterator
@@ -6732,7 +6732,7 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
 	 */
 	class EO_BuildObject_Collection implements \ArrayAccess, \Iterator, \Countable {
-		/* @var \Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable */
+		/* @var \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable */
 		static public $dataClass = '\Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable';
 	}
 }
@@ -6743,9 +6743,9 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method static EO_BuildObject_Result getById($id)
 	 * @method static EO_BuildObject_Result getList(array $parameters = [])
 	 * @method static EO_BuildObject_Entity getEntity()
-	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\BuildObject createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\BuildObject createObject($setDefaultValues = true)
 	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection createCollection()
-	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\BuildObject wakeUpObject($row)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\BuildObject wakeUpObject($row)
 	 * @method static \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
 	 */
 	class BuildObjectTable extends \Bitrix\Main\ORM\Data\DataManager {}
@@ -6754,19 +6754,19 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * ---------------
 	 *
 	 * @method EO_BuildObject_Result exec()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject fetchObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject fetchObject()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fetchCollection()
 	 */
 	class EO_BuildObject_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject fetchObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject fetchObject()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fetchCollection()
 	 */
 	class EO_BuildObject_Result extends \Bitrix\Main\ORM\Query\Result {}
 	/**
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject createObject($setDefaultValues = true)
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection createCollection()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject wakeUpObject($row)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject wakeUpObject($row)
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection wakeUpCollection($rows)
 	 */
 	class EO_BuildObject_Entity extends \Bitrix\Main\ORM\Entity {}
@@ -6875,16 +6875,16 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment resetBuildObjectId()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment unsetBuildObjectId()
 	 * @method \int fillBuildObjectId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject getBuildObject()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject remindActualBuildObject()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject requireBuildObject()
-	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment setBuildObject(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $object)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject getBuildObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject remindActualBuildObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject requireBuildObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment setBuildObject(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $object)
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment resetBuildObject()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment unsetBuildObject()
 	 * @method bool hasBuildObject()
 	 * @method bool isBuildObjectFilled()
 	 * @method bool isBuildObjectChanged()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject fillBuildObject()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject fillBuildObject()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6947,7 +6947,7 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Bitrix\Main\Type\DateTime[] fillUpdatedAt()
 	 * @method \int[] getBuildObjectIdList()
 	 * @method \int[] fillBuildObjectId()
-	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject[] getBuildObjectList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject[] getBuildObjectList()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getBuildObjectCollection()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObject()
 	 *

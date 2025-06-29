@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Objects\Infrastructure\Dto;
+namespace Craft\DDD\Developers\Infrastructure\Dto;
 
 use Craft\Dto\BxImageDto;
 

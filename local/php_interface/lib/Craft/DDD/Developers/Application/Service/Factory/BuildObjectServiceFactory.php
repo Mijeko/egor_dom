@@ -1,9 +1,10 @@
 <?php
 
-namespace Craft\DDD\Objects\Application\Service;
+namespace Craft\DDD\Developers\Application\Service\Factory;
 
-use Craft\DDD\Objects\Infrastructure\Repository\IblockBuildObjectOrmRepository;
-use Craft\DDD\Objects\Infrastructure\Repository\OrmBuildObjectRepository;
+use Craft\DDD\Developers\Application\Service\BuildObjectService;
+use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepository;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 
 class BuildObjectServiceFactory
 {

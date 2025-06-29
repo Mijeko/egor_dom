@@ -7,7 +7,7 @@ use Craft\DDD\Claims\Domain\Entity\Claim;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Claims\Infrastructure\Entity\Claim as BxClaim;
-use Craft\DDD\Objects\Domain\Entity\BuildObject;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 
 class OrmClaimRepository implements ClaimRepositoryInterface
 {
@@ -81,7 +81,7 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		return new Claim(
 			$claim->getId(),
 			$claim->getName(),
-			new BuildObject(
+			new BuildObjectEntity(
 				1,
 				'demo ' . rand()
 			)

@@ -2,9 +2,9 @@
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Infrastructure\Dto\ApartmentDto;
-use Craft\DDD\Objects\Application\Service\BuildObjectService;
-use Craft\DDD\Objects\Infrastructure\Dto\BuildObjectDetailDto;
-use Craft\DDD\Objects\Application\Service\BuildObjectServiceFactory;
+use Craft\DDD\Developers\Application\Service\BuildObjectService;
+use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDetailDto;
+use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
 
 class CraftBuildObjectDetailComponent extends CBitrixComponent
 {
@@ -33,7 +33,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function meta(): void
 	{
-		/* @var $element BuildObjectDetailDto */
+		/* @var $element \Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDetailDto */
 		$element = $this->arResult['ELEMENT'];
 
 		global $APPLICATION;
@@ -67,7 +67,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 						$item->getId(),
 						$item->getName(),
 						$item->getPrice(),
-						$item->getBuildObjectId(),
+						$item->getBuildObject(),
 					);
 				},
 				$element->getApartments()

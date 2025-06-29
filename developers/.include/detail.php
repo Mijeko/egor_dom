@@ -6,7 +6,7 @@
  */
 
 
-use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 if(empty($_REQUEST['ELEMENT_ID']))

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Objects\Infrastructure\Entity;
+namespace Craft\DDD\Developers\Infrastructure\Entity;
 
 use Bitrix\Main\Entity\BooleanField;
 use Bitrix\Main\ORM\Data\DataManager;
@@ -10,6 +10,7 @@ use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\Type\DateTime;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 
 class BuildObjectTable extends DataManager
 {

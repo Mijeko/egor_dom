@@ -5,7 +5,7 @@ namespace Craft\Rest;
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
 use Craft\DDD\Claims\Domain\Entity\Claim;
-use Craft\DDD\Objects\Infrastructure\Repository\OrmBuildObjectRepository;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 
 class ClaimRest extends \IRestService

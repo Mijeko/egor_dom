@@ -2,8 +2,8 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php");
 
 use Bitrix\Main\Application;
-use Craft\DDD\Objects\Infrastructure\Entity\BuildObject;
-use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 /**

@@ -1,20 +1,25 @@
 <?php
 
-namespace Craft\DDD\Objects\Domain\Entity;
+namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\Dto\BxImageDto;
 
-class BuildObject
+class BuildObjectEntity
 {
 	public function __construct(
-		public int         $id,
+		public ?int        $id,
 		public string      $name,
 		public ?BxImageDto $picture = null,
 		public ?array      $apartments = null,
 		public ?array      $gallery = null,
 	)
 	{
+	}
+
+	public static function fromImport(string $name): static
+	{
+		return new static(null, $name);
 	}
 
 	public function getName(): string

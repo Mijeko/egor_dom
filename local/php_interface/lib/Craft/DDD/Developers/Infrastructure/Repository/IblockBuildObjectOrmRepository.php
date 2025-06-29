@@ -1,11 +1,11 @@
 <?php
 
-namespace Craft\DDD\Objects\Infrastructure\Repository;
+namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Loader;
-use Craft\DDD\Objects\Domain\Entity\BuildObject;
-use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\Dto\BxImageDto;
 
 class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
@@ -16,7 +16,7 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 	{
 	}
 
-	public function findById(int $id): ?BuildObject
+	public function findById(int $id): ?BuildObjectEntity
 	{
 		if(!Loader::includeModule('iblock'))
 		{
@@ -134,7 +134,7 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 		return $result;
 	}
 
-	protected function hydrateElement(array $element): BuildObject
+	protected function hydrateElement(array $element): BuildObjectEntity
 	{
 
 		Debug::dump($element);
@@ -149,7 +149,7 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 			);
 		}
 
-		return new BuildObject(
+		return new BuildObjectEntity(
 			$element['ID'],
 			$element['NAME'],
 			$picture,

@@ -1,9 +1,9 @@
 <?php
 
-namespace Craft\DDD\Objects\Application\Service;
+namespace Craft\DDD\Developers\Application\Service;
 
-use Craft\DDD\Objects\Domain\Entity\BuildObject;
-use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 
 class BuildObjectService
 {
@@ -13,7 +13,7 @@ class BuildObjectService
 	{
 	}
 
-	public function findById(int $id): ?BuildObject
+	public function findById(int $id): ?BuildObjectEntity
 	{
 		return $this->repository->findById($id);
 	}

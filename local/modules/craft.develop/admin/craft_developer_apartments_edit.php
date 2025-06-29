@@ -79,7 +79,7 @@ $entity = ApartmentTable::getEntity();
 
 if($field = $entity->getField(ApartmentTable::F_BUILD_OBJECT_ID))
 {
-	$buildObjectCollection = \Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable::getList()->fetchCollection();
+	$buildObjectCollection = \Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable::getList()->fetchCollection();
 	$buildObjectList = [null => 'Выбрать объект недвижимости'];
 
 	foreach($buildObjectCollection as $buildObject)

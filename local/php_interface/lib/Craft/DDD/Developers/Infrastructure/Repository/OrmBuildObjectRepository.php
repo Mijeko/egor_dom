@@ -1,20 +1,24 @@
 <?php
 
-namespace Craft\DDD\Objects\Infrastructure\Repository;
+namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
-use Craft\DDD\Objects\Domain\Entity\BuildObject;
-use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
-use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\Dto\BxImageDto;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
 
+	public function findByName(string $name): ?BuildObjectEntity
+	{
+		return null;
+	}
 
-	public function findById(int $id): ?BuildObject
+	public function findById(int $id): ?BuildObjectEntity
 	{
 		$model = BuildObjectTable::getByPrimary($id)->fetchObject();
 		if(!$model)
@@ -35,14 +39,14 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 		foreach($query->fetchCollection() as $buildObject)
 		{
-			/* @var \Craft\DDD\Objects\Infrastructure\Entity\BuildObject $buildObject */
+			/* @var \Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject */
 			$result[] = $this->hydrateElement($buildObject);
 		}
 
 		return $result;
 	}
 
-	protected function hydrateElement(\Craft\DDD\Objects\Infrastructure\Entity\BuildObject $buildObject): BuildObject
+	protected function hydrateElement(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject): BuildObjectEntity
 	{
 		$_picture = \CFile::GetFileArray($buildObject->getPictureId());
 		$picture = null;
@@ -88,7 +92,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 		}
 
-		return new BuildObject(
+		return new BuildObjectEntity(
 			$buildObject->getId(),
 			$buildObject->getName(),
 			$picture,

@@ -1,7 +1,8 @@
 <?php
 
-namespace Craft\DDD\Developers\Application\Service;
+namespace Craft\DDD\Developers\Application\Service\Factory;
 
+use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockDeveloperRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmDeveloperRepository;
 
