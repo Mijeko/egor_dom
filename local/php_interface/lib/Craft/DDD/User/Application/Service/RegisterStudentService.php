@@ -7,6 +7,7 @@ use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
+use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Domain\Entity\StudentEntity;
 use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
@@ -17,6 +18,7 @@ class RegisterStudentService
 		protected StudentRepositoryInterface $studentRepository,
 		protected AttachPhoneService         $attachPhoneService,
 		protected AuthenticatorInterface     $authenticator,
+		protected GroupAssignInterface       $groupAssignService,
 	)
 	{
 	}
@@ -56,6 +58,11 @@ class RegisterStudentService
 				$student->getPhone()->getValue()
 			);
 		}
+
+		$this->groupAssignService->assign(
+			[USER_GROUP_PHYS_PERSON_ID],
+			$student->getId(),
+		);
 
 		$this->authenticator->loginById($student->getId());
 

@@ -13,6 +13,7 @@ use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
+use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
@@ -23,6 +24,7 @@ class RegisterAgentService
 		protected AgentRepositoryInterface $agentRepository,
 		protected AttachPhoneService       $attachPhoneService,
 		protected AuthenticatorInterface   $authenticator,
+		protected GroupAssignInterface     $groupAssignService,
 	)
 	{
 	}
@@ -76,6 +78,10 @@ class RegisterAgentService
 			);
 		}
 
+		$this->groupAssignService->assign(
+			[USER_GROUP_JUR_PERSON_ID],
+			$agent->getId(),
+		);
 
 		$this->authenticator->loginById(
 			$agent->getId(),

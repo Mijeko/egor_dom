@@ -6,6 +6,7 @@ use Craft\DDD\User\Application\Service\RegisterAgentService;
 use Craft\DDD\User\Infrastructure\Repository\BxAgentRepository;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 use Craft\DDD\User\Infrastructure\Service\Authenticator;
+use Craft\DDD\User\Infrastructure\Service\GroupAssignService;
 
 class RegisterAgentServiceFactory
 {
@@ -15,6 +16,7 @@ class RegisterAgentServiceFactory
 			new BxAgentRepository(),
 			new AttachPhoneService(),
 			new Authenticator(),
+			new GroupAssignService(),
 		);
 	}
 }
