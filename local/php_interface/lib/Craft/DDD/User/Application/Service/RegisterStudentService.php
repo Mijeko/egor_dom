@@ -6,7 +6,7 @@ use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
-use Craft\DDD\User\Application\Service\Interfaces\AutenficatorInterface;
+use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Domain\Entity\StudentEntity;
 use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
@@ -16,7 +16,7 @@ class RegisterStudentService
 	public function __construct(
 		protected StudentRepositoryInterface $studentRepository,
 		protected AttachPhoneService         $attachPhoneService,
-		protected AutenficatorInterface      $autenficator,
+		protected AuthenticatorInterface     $authenticator,
 	)
 	{
 	}

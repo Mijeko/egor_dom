@@ -2,6 +2,8 @@
 import {defineComponent} from 'vue'
 import type AuthorizeDto from "@/dto/AuthorizeDto.ts";
 import UserService from "@/service/User/UserService.ts";
+import AlertService from "@/service/AlertService.ts";
+import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";
 
 export default defineComponent({
   name: "Auth",
@@ -10,25 +12,43 @@ export default defineComponent({
       form: {
         phone: '',
         password: '',
-      }
+      },
+      isValid: false,
+      validate: {
+        phone: ValidatePersonalData.phone,
+        password: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Введите пароль';
+            }
+            return true;
+          }
+        ],
+      },
     };
   },
   methods: {
     auth: function () {
-      let service = new UserService();
 
+      if (!this.isValid) {
+        return;
+      }
+
+      let service = new UserService();
       service.authorize({
         phone: this.form.phone,
         password: this.form.password,
       } as AuthorizeDto)
         .then((data: any) => {
           let {result} = data;
-          let {success, redirect} = result;
+          let {success, redirect, error} = result;
 
           if (success) {
             if (redirect) {
               window.location.href = redirect;
             }
+          } else if (!success && error) {
+            AlertService.showErrorAlert('Авторизация', error);
           }
         });
 
@@ -40,9 +60,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-form @submit.prevent="auth">
-    <v-text-field v-model="form.phone" label="Номер телефона"/>
-    <v-text-field v-model="form.password" type="password" label="Пароль"/>
+  <v-form @submit.prevent="auth" v-model="isValid">
+    <v-text-field
+      v-model="form.phone"
+      :rules="validate.phone"
+      label="Номер телефона"
+    />
+    <v-text-field
+      v-model="form.password"
+      :rules="validate.password"
+      type="password"
+      label="Пароль"
+    />
     <v-row>
       <v-col cols="6">
         <v-btn type="submit">Войти</v-btn>

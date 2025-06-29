@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Application\Service;
 
-use Craft\DDD\User\Application\Service\Interfaces\AutenficatorInterface;
+use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 
 class AuthorizeService
@@ -11,7 +11,7 @@ class AuthorizeService
 
 	public function __construct(
 		protected UserRepositoryInterface $repository,
-		protected AutenficatorInterface   $autenficator,
+		protected AuthenticatorInterface  $authenticator,
 	)
 	{
 	}
@@ -21,15 +21,15 @@ class AuthorizeService
 		$user = $this->repository->findByPhoneNumber($phone);
 		if(!$user)
 		{
-			throw new \Exception('User not found');
+			throw new \Exception('Пользователь не найден');
 		}
 
 		if(!$user->validatePassword($password))
 		{
-			throw new \Exception('Wrong password');
+			throw new \Exception('Пароль не верный');
 		}
 
 
-		return $this->autenficator->loginById($user->getId());
+		return $this->authenticator->loginById($user->getId());
 	}
 }

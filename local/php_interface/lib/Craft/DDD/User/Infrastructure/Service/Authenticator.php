@@ -2,9 +2,9 @@
 
 namespace Craft\DDD\User\Infrastructure\Service;
 
-use Craft\DDD\User\Application\Service\Interfaces\AutenficatorInterface;
+use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 
-class Autenficator implements AutenficatorInterface
+class Authenticator implements AuthenticatorInterface
 {
 	public function loginById(int $userId): bool
 	{

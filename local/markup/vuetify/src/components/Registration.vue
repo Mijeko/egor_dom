@@ -46,15 +46,7 @@ export default defineComponent({
           },
           ...ValidatePersonalData.phone
         ],
-        password: [
-          (value: string) => {
-            if (value.length <= 0) {
-              return 'Заполните пароль';
-            }
-
-            return true;
-          }
-        ],
+        password: ValidatePersonalData.password,
       },
       isFormAgentValid: false,
       formAgentValidateRules: {
@@ -81,15 +73,7 @@ export default defineComponent({
           },
           ...ValidatePersonalData.phone
         ],
-        password: [
-          (value: string) => {
-            if (value.length <= 0) {
-              return 'Заполните пароль';
-            }
-
-            return true;
-          }
-        ],
+        password: ValidatePersonalData.password,
         inn: ValidateLegalData.inn,
         kpp: ValidateLegalData.kpp,
         ogrn: ValidateLegalData.ogrn,

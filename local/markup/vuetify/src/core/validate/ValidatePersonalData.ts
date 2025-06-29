@@ -9,7 +9,19 @@ const ValidatePersonalData = {
 
       return true;
     }
-  ]
+  ],
+  password: [
+    (value: string) => {
+      if (value.length <= 0) {
+        return 'Введите пароль';
+      }
+
+      if (value.length < 6) {
+        return 'Пароль должен быть больше 6 символов';
+      }
+      return true;
+    }
+  ],
 };
 export default ValidatePersonalData;
 

@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Application\Service\Interfaces;
 
-interface AutenficatorInterface
+interface AuthenticatorInterface
 {
 	public function loginById(int $userId): bool;
 }
