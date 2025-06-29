@@ -4,7 +4,7 @@ namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Bitrix\Main\Loader;
 use CIBlockElement;
-use Craft\DDD\Developers\Domain\Entity\Developer;
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\Dto\BxImageDto;
 
@@ -59,7 +59,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 			);
 		}
 
-		return new Developer(
+		return new DeveloperEntity(
 			$element['ID'],
 			$element['NAME'],
 			$picture,

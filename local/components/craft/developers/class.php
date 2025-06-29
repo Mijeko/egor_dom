@@ -1,6 +1,6 @@
 <?php
 
-use Craft\DDD\Developers\Domain\Entity\Developer;
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Infrastructure\Dto\DeveloperFrontDto;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
@@ -44,7 +44,7 @@ class CraftDevelopersComponent extends CBitrixComponent
 	protected function loadData(): void
 	{
 		$this->arResult['DEVELOPERS'] = array_map(
-			function(Developer $developer) {
+			function(DeveloperEntity $developer) {
 				return DeveloperFrontDto::fromModel($developer);
 			},
 			$this->service->findAll()

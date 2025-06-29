@@ -9,7 +9,6 @@ use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Query\Join;
-use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;
 
 class ApartmentTable extends DataManager

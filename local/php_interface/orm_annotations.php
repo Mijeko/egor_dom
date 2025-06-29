@@ -6628,9 +6628,9 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject resetUpdatedAt()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject unsetUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillUpdatedAt()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection getApartments()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection requireApartments()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection requireApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
 	 * @method bool hasApartments()
 	 * @method bool isApartmentsFilled()
 	 * @method bool isApartmentsChanged()
@@ -6699,9 +6699,9 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
 	 * @method \Bitrix\Main\Type\DateTime[] fillUpdatedAt()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection[] getApartmentsList()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection getApartmentsCollection()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection[] getApartmentsList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getApartmentsCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6772,7 +6772,7 @@ namespace Craft\DDD\Objects\Infrastructure\Entity {
 	class EO_BuildObject_Entity extends \Bitrix\Main\ORM\Entity {}
 }
 /* ORMENTITYANNOTATION:Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable */
-namespace Craft\DDD\Apartment\Infrastructure\Entity {
+namespace Craft\DDD\Developers\Infrastructure\Entity {
 	/**
 	 * Apartment
 	 * @see \Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable
@@ -6914,14 +6914,14 @@ namespace Craft\DDD\Apartment\Infrastructure\Entity {
 	 */
 	class EO_Apartment {
 		/* @var \Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable */
-		static public $dataClass = '\Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable';
+		static public $dataClass = '\Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable';
 		/**
 		 * @param bool|array $setDefaultValues
 		 */
 		public function __construct($setDefaultValues = true) {}
 	}
 }
-namespace Craft\DDD\Apartment\Infrastructure\Entity {
+namespace Craft\DDD\Developers\Infrastructure\Entity {
 	/**
 	 * EO_Apartment_Collection
 	 *
@@ -6948,7 +6948,7 @@ namespace Craft\DDD\Apartment\Infrastructure\Entity {
 	 * @method \int[] getBuildObjectIdList()
 	 * @method \int[] fillBuildObjectId()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\BuildObject[] getBuildObjectList()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection getBuildObjectCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getBuildObjectCollection()
 	 * @method \Craft\DDD\Objects\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObject()
 	 *
 	 * Common methods:
@@ -6963,7 +6963,7 @@ namespace Craft\DDD\Apartment\Infrastructure\Entity {
 	 * @method bool remove(\Craft\DDD\Developers\Infrastructure\Entity\Apartment $object)
 	 * @method void removeByPrimary($primary)
 	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
-	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection wakeUp($data)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection wakeUp($data)
 	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
 	 * @method void offsetSet() ArrayAccess
 	 * @method void offsetExists() ArrayAccess
@@ -6975,16 +6975,16 @@ namespace Craft\DDD\Apartment\Infrastructure\Entity {
 	 * @method void next() Iterator
 	 * @method bool valid() Iterator
 	 * @method int count() Countable
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection merge(?\Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection $collection)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection merge(?\Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection $collection)
 	 * @method bool isEmpty()
 	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
 	 */
 	class EO_Apartment_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable */
-		static public $dataClass = '\Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable';
+		static public $dataClass = '\Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable';
 	}
 }
-namespace Craft\DDD\Apartment\Infrastructure\Entity {
+namespace Craft\DDD\Developers\Infrastructure\Entity {
 	/**
 	 * @method static EO_Apartment_Query query()
 	 * @method static EO_Apartment_Result getByPrimary($primary, array $parameters = [])
@@ -6992,9 +6992,9 @@ namespace Craft\DDD\Apartment\Infrastructure\Entity {
 	 * @method static EO_Apartment_Result getList(array $parameters = [])
 	 * @method static EO_Apartment_Entity getEntity()
 	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\Apartment createObject($setDefaultValues = true)
-	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection createCollection()
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection createCollection()
 	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\Apartment wakeUpObject($row)
-	 * @method static \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
+	 * @method static \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
 	 */
 	class ApartmentTable extends \Bitrix\Main\ORM\Data\DataManager {}
 	/**
@@ -7003,19 +7003,19 @@ namespace Craft\DDD\Apartment\Infrastructure\Entity {
 	 *
 	 * @method EO_Apartment_Result exec()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment fetchObject()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fetchCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection fetchCollection()
 	 */
 	class EO_Apartment_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment fetchObject()
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection fetchCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection fetchCollection()
 	 */
 	class EO_Apartment_Result extends \Bitrix\Main\ORM\Query\Result {}
 	/**
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment createObject($setDefaultValues = true)
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection createCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection createCollection()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Apartment wakeUpObject($row)
-	 * @method \Craft\DDD\Apartment\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
 	 */
 	class EO_Apartment_Entity extends \Bitrix\Main\ORM\Entity {}
 }

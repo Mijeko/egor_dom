@@ -43,17 +43,11 @@ if($request->isPost())
 		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
 	}
 
-	$read = new SimpleXMLElement($content);
-
-	foreach($read->offer as $offer)
-	{
-		$offer = json_decode(json_encode($offer), true);
-
-		\Bitrix\Main\Diag\Debug::dumpToFile($offer);
-
-		//		\Bitrix\Main\Diag\Debug::dumpToFile($offer['sales-agent']['name']);
-		//		\Bitrix\Main\Diag\Debug::dumpToFile($offer['sales-agent']['category']);
-	}
+	$import = \Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory::getService();
+	$import->execute(
+		$request->getPost('developerId'),
+		$content
+	);
 }
 
 

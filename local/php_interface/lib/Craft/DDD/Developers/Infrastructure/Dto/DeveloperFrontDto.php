@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Dto;
 
-use Craft\DDD\Developers\Domain\Entity\Developer;
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\Dto\BxImageDto;
 
 class DeveloperFrontDto
@@ -15,7 +15,7 @@ class DeveloperFrontDto
 	{
 	}
 
-	public static function fromModel(Developer $developer): static
+	public static function fromModel(DeveloperEntity $developer): static
 	{
 		return new static(
 			$developer->getId(),

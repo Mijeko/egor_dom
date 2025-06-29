@@ -4,7 +4,7 @@ namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\Dto\BxImageDto;
 
-class Developer
+class DeveloperEntity
 {
 	public function __construct(
 		public int      $id,

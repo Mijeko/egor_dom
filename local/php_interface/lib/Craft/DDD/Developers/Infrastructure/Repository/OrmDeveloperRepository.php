@@ -3,7 +3,7 @@
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Craft\DDD\Developers\Infrastructure\Entity\Developer as BxDeveloper;
-use Craft\DDD\Developers\Domain\Entity\Developer;
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
@@ -23,7 +23,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			 * @var BxDeveloper $developer
 			 */
 
-			$result[] = new Developer(
+			$result[] = new DeveloperEntity(
 				$developer->getId(),
 				$developer->getName(),
 				$developer->getPictureId(),
@@ -31,5 +31,10 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 		}
 
 		return $result;
+	}
+
+	public function findById(int $id): ?DeveloperEntity
+	{
+		return null;
 	}
 }
