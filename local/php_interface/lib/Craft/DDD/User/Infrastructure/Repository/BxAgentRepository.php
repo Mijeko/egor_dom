@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
 use Craft\Model\CraftUser;
@@ -23,6 +24,11 @@ class BxAgentRepository implements AgentRepositoryInterface
 			return $agent;
 		}
 
+		return null;
+	}
+
+	public function findByInn(InnValueObject $inn): ?AgentEntity
+	{
 		return null;
 	}
 }

@@ -22,6 +22,11 @@ class RegisterAgentService
 
 	public function execute(RegisterAgentDto $registerAgentDto): ?AgentEntity
 	{
+		if($this->agentRepository->findByInn(new InnValueObject($registerAgentDto->inn)))
+		{
+			throw new \Exception('Agent already exists');
+		}
+
 		$agent = AgentEntity::register(
 			$registerAgentDto->phone,
 			$registerAgentDto->email,
