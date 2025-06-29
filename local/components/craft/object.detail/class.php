@@ -1,7 +1,7 @@
 <?php
 
-use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Apartment\Infrastructure\Dto\ApartmentDto;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Developers\Infrastructure\Dto\ApartmentDto;
 use Craft\DDD\Objects\Application\Service\BuildObjectService;
 use Craft\DDD\Objects\Infrastructure\Dto\BuildObjectDetailDto;
 use Craft\DDD\Objects\Application\Service\BuildObjectServiceFactory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Apartment\Domain\Repository;
+namespace Craft\DDD\Developers\Domain\Repository;
 
 interface ApartmentRepositoryInterface
 {

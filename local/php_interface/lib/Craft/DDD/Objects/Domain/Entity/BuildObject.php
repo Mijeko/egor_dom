@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Objects\Domain\Entity;
 
-use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\Dto\BxImageDto;
 
 class BuildObject
@@ -34,7 +34,7 @@ class BuildObject
 
 
 	/**
-	 * @return ApartmentEntity[] | null
+	 * @return \Craft\DDD\Developers\Domain\Entity\ApartmentEntity[] | null
 	 */
 	public function getApartments(): ?array
 	{

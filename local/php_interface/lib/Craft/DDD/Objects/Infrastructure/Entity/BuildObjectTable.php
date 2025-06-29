@@ -9,7 +9,7 @@ use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\Type\DateTime;
-use Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 
 class BuildObjectTable extends DataManager
 {
@@ -68,7 +68,7 @@ class BuildObjectTable extends DataManager
 
 			(new OneToMany(
 				self::R_APARTMENTS,
-				ApartmentTable::class,
+				\Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable::class,
 				ApartmentTable::R_BUILD_OBJECT
 			)),
 		];

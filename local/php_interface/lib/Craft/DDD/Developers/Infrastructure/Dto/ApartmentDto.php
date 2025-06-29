@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Apartment\Infrastructure\Dto;
+namespace Craft\DDD\Developers\Infrastructure\Dto;
 
 class ApartmentDto
 {

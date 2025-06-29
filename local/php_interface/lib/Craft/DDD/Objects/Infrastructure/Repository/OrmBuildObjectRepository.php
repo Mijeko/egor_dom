@@ -3,8 +3,8 @@
 namespace Craft\DDD\Objects\Infrastructure\Repository;
 
 use Bitrix\Main\Diag\Debug;
-use Craft\DDD\Apartment\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Apartment\Infrastructure\Entity\Apartment;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Objects\Domain\Entity\BuildObject;
 use Craft\DDD\Objects\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Objects\Infrastructure\Entity\BuildObjectTable;

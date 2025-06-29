@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Квартиры");
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
-use Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 
 foreach(['craft.develop'] as $module)
 {

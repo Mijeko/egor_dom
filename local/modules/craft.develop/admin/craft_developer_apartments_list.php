@@ -8,7 +8,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
 $APPLICATION->SetTitle("Квартиры");
 
 use Bitrix\Main\Loader;
-use Craft\DDD\Apartment\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 
 foreach(['craft.develop'] as $module)
 {

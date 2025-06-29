@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Apartment\Domain\Entity;
+namespace Craft\DDD\Developers\Domain\Entity;
 
 class ApartmentEntity
 {

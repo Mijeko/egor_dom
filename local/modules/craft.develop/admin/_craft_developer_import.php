@@ -49,8 +49,6 @@ if($request->isPost())
 	{
 		$offer = json_decode(json_encode($offer), true);
 
-		\Bitrix\Main\Diag\Debug::dumpToFile($offer);
-
 		//		\Bitrix\Main\Diag\Debug::dumpToFile($offer['sales-agent']['name']);
 		//		\Bitrix\Main\Diag\Debug::dumpToFile($offer['sales-agent']['category']);
 	}
@@ -58,50 +56,29 @@ if($request->isPost())
 
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php");
-$aTabs = [
-	[
-		"DIV"   => "edit1",
-		"TAB"   => 'Импорт',
-		"ICON"  => "iblock_section",
-		"TITLE" => 'Импорт',
-	],
-];
 
 
-$tabControl = new CAdminForm('craftDeveloperEditTabControl', $aTabs);
-$tabControl->BeginEpilogContent();
-$tabControl->EndEpilogContent();
-$tabControl->Begin();
+?>
 
-$tabControl->BeginNextFormTab();
+	<form method="post">
 
+		<select name="developer_id">
+			<option>Застройщик</option>
+			<?php
+			foreach(DeveloperTable::getList()->fetchCollection() as $developer)
+			{
+				?>
+				<option value="<?=$developer->getId();?>"><?=$developer->getName();?></option>
+				<?php
+			}
+			?>
+		</select>
 
-$tabControl->AddDropDownField(
-	'developerId',
-	'Застройщик',
-	true,
-	(function() {
-		$result = [null => 'Выберите застройщика'];
+		<input type="text" value="<?=$request->getPost('source_link');?>" name="source_link"/>
 
-		foreach(DeveloperTable::getList()->fetchCollection() as $developer)
-		{
-			$result[$developer->getId()] = $developer->getName();
-		}
+		<button type="submit">Выполнить импорт</button>
+	</form>
 
-		return $result;
-	})()
-);
-$tabControl->AddEditField(
-	'sourceLink',
-	'Ссылка на источник',
-	true
-);
+<?php
 
-
-$tabControl->Buttons([
-	"disabled" => false,
-	"back_url" => CRAFT_DEVELOP_ADMIN_URL_IMPORT . "?lang=" . LANG,
-]);
-
-$tabControl->Show();
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");
