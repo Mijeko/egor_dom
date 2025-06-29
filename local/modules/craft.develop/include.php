@@ -25,6 +25,8 @@ if(!\Bitrix\Main\Loader::includeModule("craft.core"))
 }
 
 
+define('CRAFT_DEVELOP_ADMIN_URL_IMPORT', '/bitrix/admin/craft_developer_import.php');
+
 define('CRAFT_DEVELOP_ADMIN_URL_LIST_CLAIMS', '/bitrix/admin/craft_developer_claim_list.php');
 define('CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS', '/bitrix/admin/craft_developer_list.php');
 define('CRAFT_DEVELOP_ADMIN_URL_LIST_OBJECTS', '/bitrix/admin/craft_developer_object_list.php');
