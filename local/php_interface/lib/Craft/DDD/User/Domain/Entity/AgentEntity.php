@@ -8,6 +8,7 @@ use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 
 class AgentEntity
 {
@@ -16,7 +17,7 @@ class AgentEntity
 		protected ?int                   $id,
 		protected string                 $phone,
 		protected string                 $email,
-		protected string                 $password,
+		protected ?PasswordValueObject   $password = null,
 		protected InnValueObject         $inn,
 		protected KppValueObject         $kpp,
 		protected OgrnValueObject        $ogrn,
@@ -33,7 +34,7 @@ class AgentEntity
 	public static function register(
 		string                 $phone,
 		string                 $email,
-		string                 $password,
+		PasswordValueObject    $password,
 		InnValueObject         $inn,
 		KppValueObject         $kpp,
 		OgrnValueObject        $ogrn,

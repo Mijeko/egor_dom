@@ -8,6 +8,7 @@ use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
@@ -30,7 +31,7 @@ class RegisterAgentService
 		$agent = AgentEntity::register(
 			$registerAgentDto->phone,
 			$registerAgentDto->email,
-			$registerAgentDto->password,
+			new PasswordValueObject($registerAgentDto->password),
 			new InnValueObject($registerAgentDto->inn),
 			new KppValueObject($registerAgentDto->kpp),
 			new OgrnValueObject($registerAgentDto->ogrn),
