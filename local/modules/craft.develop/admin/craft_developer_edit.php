@@ -69,6 +69,12 @@ $aTabs = [
 		"ICON"  => "iblock_section",
 		"TITLE" => $developerModel->getName() ? 'Изменить: ' . $developerModel->getName() : 'Новый застройщик',
 	],
+	[
+		"DIV"   => "edit2",
+		"TAB"   => 'Настройки импорта',
+		"ICON"  => "iblock_section",
+		"TITLE" => 'Настройки импорта',
+	],
 ];
 
 
@@ -132,6 +138,12 @@ if($field = $entity->getField(DeveloperTable::F_PICTURE_ID))
 	);
 }
 
+
+$tabControl->BeginNextFormTab();
+
+$tabControl->BeginCustomField('import', 'import');
+echo 'xaxa 3 pa3a';
+$tabControl->EndCustomField('import');
 
 $tabControl->Buttons([
 	"disabled" => false,

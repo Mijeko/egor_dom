@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Domain\Entity;
 
+use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\Dto\BxImageDto;
 
 /**
@@ -11,19 +12,24 @@ use Craft\Dto\BxImageDto;
 class DeveloperEntity
 {
 	public function __construct(
-		public ?int        $id,
-		public ?string     $name,
-		public ?BxImageDto $picture = null,
-		protected ?array   $buildObjects
+		public ?int                         $id,
+		public ?string                      $name,
+		public ?BxImageDto                  $picture = null,
+		protected ?array                    $buildObjects,
+		protected ?ImportSettingValueObject $importSetting,
 	)
 	{
-
 	}
 
 	public function addBuildObject(BuildObjectEntity $buildObject): static
 	{
 		$this->buildObjects[$buildObject->getId()] = $buildObject;
 		return $this;
+	}
+
+	public function getImportSetting(): ?ImportSettingValueObject
+	{
+		return $this->importSetting;
 	}
 
 	public function getId(): int
