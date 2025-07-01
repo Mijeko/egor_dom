@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
+use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -12,6 +13,12 @@ use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
+
+	public function __construct(
+		protected DeveloperRepositoryInterface $developerRepository,
+	)
+	{
+	}
 
 	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
 	{
@@ -139,11 +146,8 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 		}
 
-		$developer = new DeveloperEntity(
-			0,
-			'',
-			null
-		);
+
+		$developer = $this->developerRepository->findById($buildObject->getDeveloperId());
 
 		return new BuildObjectEntity(
 			$buildObject->getId(),
