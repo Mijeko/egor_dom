@@ -5,12 +5,12 @@ namespace Craft\DDD\Shared\Domain\ValueObject;
 class LongitudeValueObject
 {
 	public function __construct(
-		protected ?float $value,
+		protected ?string $value,
 	)
 	{
 	}
 
-	public function getValue(): ?float
+	public function getValue(): ?string
 	{
 		return $this->value;
 	}

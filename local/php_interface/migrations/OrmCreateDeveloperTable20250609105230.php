@@ -21,6 +21,7 @@ CREATE TABLE `craft_developers` (
   `ACTIVE` int(1) NOT NULL,
   `SORT` int(11) NOT NULL,
   `PICTURE_ID` int(11) NULL,
+  `IMPORT_SETTINGS` longtext NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL
 ) ENGINE='InnoDB';

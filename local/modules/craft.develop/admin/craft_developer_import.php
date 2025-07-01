@@ -8,8 +8,9 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
 $APPLICATION->SetTitle("Импорт");
 
 use Bitrix\Main\Loader;
-use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Bitrix\Main\Application;
+use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
 
 foreach(['craft.develop'] as $module)
 {
@@ -23,32 +24,11 @@ $request = Application::getInstance()->getContext()->getRequest();
 
 if($request->isPost())
 {
-
-	$link = $request->getPost('sourceLink');
-
-	$content = null;
-	$cache = \Bitrix\Main\Data\Cache::createInstance(); // получаем экземпляр класса
-	if($cache->initCache(7200, "cache_key"))
-	{
-		$vars = $cache->getVars();
-		$content = $vars['xmlData'];
-	} elseif($cache->startDataCache())
-	{
-		$content = file_get_contents($link);
-		$cache->endDataCache(["xmlData" => $content]);
-	}
-
-	if(!$content)
-	{
-		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
-	}
-
 	try
 	{
-		$import = \Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory::getService();
+		$import = ImportServiceFactory::getService();
 		$import->execute(
-			$request->getPost('developerId'),
-			$content
+			$request->getPost('developerId')
 		);
 	} catch(Exception $e)
 	{
@@ -91,11 +71,6 @@ $tabControl->AddDropDownField(
 
 		return $result;
 	})()
-);
-$tabControl->AddEditField(
-	'sourceLink',
-	'Ссылка на источник',
-	true
 );
 
 

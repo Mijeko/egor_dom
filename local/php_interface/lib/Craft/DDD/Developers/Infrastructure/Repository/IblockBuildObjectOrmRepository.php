@@ -160,4 +160,9 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 	{
 		return null;
 	}
+
+	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
+	{
+		return null;
+	}
 }

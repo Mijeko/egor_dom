@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
@@ -35,19 +36,24 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 	protected function hydrateElement(Developer $developer): DeveloperEntity
 	{
-		$image = null;
+		$picture = null;
 		$_image = \CFile::GetFileArray($developer->getPictureId());
 		if($_image)
 		{
-			$image = new BxImageDto($_image['ID'], $_image['SRC']);
+			$picture = new BxImageDto($_image['ID'], $_image['SRC']);
 		}
 
 
 		return new DeveloperEntity(
 			$developer->getId(),
 			$developer->getName(),
-			$image,
+			$picture,
 			null,
+			new ImportSettingValueObject(
+				$developer->importSettings()->getHandler(),
+				$developer->importSettings()->getLinkSource(),
+				null
+			)
 		);
 	}
 }

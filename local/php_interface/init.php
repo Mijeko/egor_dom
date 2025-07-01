@@ -1,6 +1,6 @@
 <?php
 
-define('NEED_AUTH', true);
+//define('NEED_AUTH', true);
 if(\Bitrix\Main\Loader::includeModule('craft.core'))
 {
 	require_once __DIR__ . '/defines.php';

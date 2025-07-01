@@ -8,8 +8,9 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
 $APPLICATION->SetTitle("Застройщики");
 
 use Bitrix\Main\Loader;
-use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Bitrix\Main\Application;
+use Craft\DDD\Developers\Infrastructure\Entity\Developer;
+use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 foreach(['craft.develop'] as $module)
 {
@@ -48,6 +49,14 @@ if($request->isPost())
 				$developerModel->set($propertyCode, $fileId);
 			}
 		}
+	}
+
+	if($request->getPost('xmlHandler') || $request->getPost('linkSource'))
+	{
+		$developerModel->addImportSettings(
+			$request->getPost('xmlHandler'),
+			$request->getPost('linkSource')
+		);
 	}
 
 	$result = $developerModel->save();
@@ -141,9 +150,24 @@ if($field = $entity->getField(DeveloperTable::F_PICTURE_ID))
 
 $tabControl->BeginNextFormTab();
 
-$tabControl->BeginCustomField('import', 'import');
-echo 'xaxa 3 pa3a';
-$tabControl->EndCustomField('import');
+$tabControl->AddDropDownField(
+	'xmlHandler',
+	'Обработчик',
+	false,
+	array_merge(
+		[null => 'Выберите обработчик'],
+		Developer::getImportHandlers()
+	),
+	$developerModel->importSettings()->getHandler()
+);
+
+$tabControl->AddEditField(
+	'linkSource',
+	'Ссылка на данные',
+	false,
+	[],
+	$developerModel->importSettings()->getLinkSource()
+);
 
 $tabControl->Buttons([
 	"disabled" => false,

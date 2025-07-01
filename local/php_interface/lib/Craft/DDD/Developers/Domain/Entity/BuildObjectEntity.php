@@ -2,33 +2,43 @@
 
 namespace Craft\DDD\Developers\Domain\Entity;
 
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 
 class BuildObjectEntity
 {
 	public function __construct(
-		protected ?int             $id,
-		protected string           $name,
-		protected ?int             $developerId = null,
-		protected ?int             $pictureId = null,
-		protected ?DeveloperEntity $developer = null,
-		protected ?BxImageDto      $picture = null,
-		protected ?array           $apartments = null,
-		protected ?array           $gallery = null,
+		protected ?int              $id,
+		protected ?string           $name,
+		protected ?string           $type,
+		protected ?int              $floors,
+		protected ?int              $developerId = null,
+		protected ?int              $pictureId = null,
+		protected ?DeveloperEntity  $developer = null,
+		protected ?ImageValueObject $picture = null,
+		protected ?array            $apartments = null,
+		protected ?array            $gallery = null,
 	)
 	{
 	}
 
 	public static function fromImport(
-		string          $name,
-		DeveloperEntity $developer,
+		?string           $name,
+		?string           $type,
+		?int              $floors,
+		DeveloperEntity   $developer,
+		?ImageValueObject $picture,
 	): static
 	{
-		return new static(null,
+		return new static(
+			null,
 			$name,
-			null,
-			null,
-			$developer
+			$type,
+			$floors,
+			$developer->getId(),
+			$picture?->getId(),
+			$developer,
+			$picture,
 		);
 	}
 
@@ -41,6 +51,12 @@ class BuildObjectEntity
 	public function addDeveloper(DeveloperEntity $developer): static
 	{
 		$this->developer = $developer;
+		return $this;
+	}
+
+	public function addApartment(ApartmentEntity $apartmentEntity): static
+	{
+		$this->apartments[] = $apartmentEntity;
 		return $this;
 	}
 
@@ -59,7 +75,7 @@ class BuildObjectEntity
 		return $this->id;
 	}
 
-	public function getPicture(): ?BxImageDto
+	public function getPicture(): ?ImageValueObject
 	{
 		return $this->picture;
 	}

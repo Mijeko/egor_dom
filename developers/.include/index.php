@@ -11,7 +11,7 @@ $APPLICATION->IncludeComponent(
 	'craft:developers',
 	'.default',
 	[
-		'IBLOCK_ID' => BUILD_DEVELOPERS_IBLOCK_ID,
+		#'IBLOCK_ID' => BUILD_DEVELOPERS_IBLOCK_ID,
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

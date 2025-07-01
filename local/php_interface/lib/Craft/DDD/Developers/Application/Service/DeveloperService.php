@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
@@ -38,17 +39,23 @@ class DeveloperService
 		);
 
 
-		return array_map(function(DeveloperEntity $developer) use ($buildObjectList) {
+		$developerList = array_map(function(DeveloperEntity $developer) use ($buildObjectList) {
 
 			$currentBuildObject = array_filter($buildObjectList, function(BuildObjectEntity $buildObject) use ($developer) {
 				return $buildObject->getDeveloperId() === $developer->getId();
 			});
 
+
 			if(count($currentBuildObject) == 1)
 			{
-				$developer->addBuildObject($currentBuildObject[0]);
+				$currentBuildObject = array_shift($currentBuildObject);
+				$developer->addBuildObject($currentBuildObject);
 			}
 
-		}, $buildObjectList);
+			return $developer;
+
+		}, $developerList);
+
+		return $developerList;
 	}
 }

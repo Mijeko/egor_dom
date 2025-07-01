@@ -15,8 +15,8 @@ class DeveloperEntity
 		public ?int                         $id,
 		public ?string                      $name,
 		public ?BxImageDto                  $picture = null,
-		protected ?array                    $buildObjects,
-		protected ?ImportSettingValueObject $importSetting,
+		protected ?array                    $buildObjects = null,
+		protected ?ImportSettingValueObject $importSetting = null,
 	)
 	{
 	}

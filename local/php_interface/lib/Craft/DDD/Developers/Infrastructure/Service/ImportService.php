@@ -4,99 +4,92 @@ namespace Craft\DDD\Developers\Infrastructure\Service;
 
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\ApartmentService;
+use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
-use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
-use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
-use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
-use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\ApartmentValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\CityValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\CountryValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\DistrictValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\KitchenSpaceValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\LivingSpaceValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
+use Craft\DDD\Developers\Infrastructure\Entity\Developer;
+use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\FirstDevelopHandler;
+use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\ImportHandlerInterface;
 
 class ImportService
 {
 
+	protected ?DeveloperEntity $developer = null;
+
 	public function __construct(
-		protected DeveloperService               $developerService,
-		protected BuildObjectRepositoryInterface $buildObjectRepository,
-		protected ApartmentService               $apartmentService,
+		protected DeveloperService   $developerService,
+		protected BuildObjectService $buildObjectService,
+		protected ApartmentService   $apartmentService,
 	)
 	{
 	}
 
-	public function execute(int $developerId, string $xmlBuildData): void
+	public function execute(int $developerId): void
 	{
-		$developer = $this->developerService->findById($developerId);
-		if(!$developer)
+		$this->developer = $this->developerService->findById($developerId);
+		if(!$this->developer)
 		{
 			throw new \Exception('Застройщик не найден');
 		}
 
-		$read = new \SimpleXMLElement($xmlBuildData);
-		foreach($read->offer as $rawApartmentData)
+
+		$xmlBuildData = $this->readData($this->developer);
+		$handler = $this->getHandler($this->developer->getImportSetting());
+
+		if($handler)
 		{
-			$rawApartmentData = json_decode(json_encode($rawApartmentData), true);
-
-			if(!$buildObject = $this->buildObjectRepository->findByName($rawApartmentData['building-name']))
-			{
-				$buildObject = BuildObjectEntity::fromImport(
-					$rawApartmentData['building-name'],
-					$developer
-				);
-				$this->buildObjectRepository->create($buildObject);
-			}
-
-
-			$apartment = ApartmentEntity::fromImport(
-				$buildObject,
-				$rawApartmentData['description'][0],
-				$rawApartmentData['price']['value'],
-				$rawApartmentData['rooms'],
-				$rawApartmentData['floor'],
-				new AreaValueObject(
-					$rawApartmentData['area']['value'],
-					$rawApartmentData['area']['unit'],
-					new LivingSpaceValueObject(
-						$rawApartmentData['living-space']['value'],
-						$rawApartmentData['living-space']['unit'],
-					),
-					new KitchenSpaceValueObject(
-						$rawApartmentData['kitchen-space']['value'],
-						$rawApartmentData['kitchen-space']['unit'],
-					)
-				),
-				$rawApartmentData['renovation'],
-				new StringLogicValueObject($rawApartmentData['parking']),
-				new StringLogicValueObject($rawApartmentData['bathroom-unit']),
-				$rawApartmentData['floors-total'],
-				$rawApartmentData['mortgage'],
-				$rawApartmentData['built-year'],
-				new BuiltStateValueObject($rawApartmentData['building-state']),
-				new LocationValueObject(
-					new CountryValueObject($rawApartmentData['location']['country']),
-					new RegionValueObject($rawApartmentData['location']['region']),
-					new DistrictValueObject($rawApartmentData['location']['district']),
-					new CityValueObject($rawApartmentData['location']['locality-name']),
-					new AddressValueObject($rawApartmentData['location']['address']),
-					new ApartmentValueObject($rawApartmentData['location']['apartment']),
-					new LongitudeValueObject($rawApartmentData['location']['longitude']),
-					new LatitudeValueObject($rawApartmentData['location']['latitude']),
-				)
-			);
-
-			$apartment = $this->apartmentService->create($apartment);
+			$handler->execute($xmlBuildData);
 		}
+
+	}
+
+	public function getHandler(ImportSettingValueObject $setting): ?ImportHandlerInterface
+	{
+		switch($setting->getHandler())
+		{
+			case Developer::HANDLER_FIRST_DEVELOP:
+				return new FirstDevelopHandler(
+					$this->developerService,
+					$this->buildObjectService,
+					$this->apartmentService,
+					$this->developer
+				);
+			default:
+				return null;
+		}
+	}
+
+	public function readData(DeveloperEntity $developerEntity): string
+	{
+		if(!$developerEntity->getImportSetting()->getHandler())
+		{
+			throw new \Exception('Обработчик для выбранного застройщика не определен');
+		}
+
+		if(!$developerEntity->getImportSetting()->getSourceLink())
+		{
+			throw new \Exception('Ссылка на источник данных не определена');
+		}
+
+		$content = null;
+		$cache = \Bitrix\Main\Data\Cache::createInstance(); // получаем экземпляр класса
+		if($cache->initCache(7200, "importReadData_" . $developerEntity->getId()))
+		{
+			$vars = $cache->getVars();
+			$content = $vars['xmlData'];
+		} elseif($cache->startDataCache())
+		{
+			$content = file_get_contents($developerEntity->getImportSetting()->getSourceLink());
+			$cache->endDataCache(["xmlData" => $content]);
+		}
+
+		if(!$content)
+		{
+			throw new \Exception('Содержимое ответа источника данных пустое');
+		}
+
+		return $content;
 	}
 }

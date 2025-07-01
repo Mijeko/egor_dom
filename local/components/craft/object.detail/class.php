@@ -59,7 +59,10 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 		$this->arResult['ELEMENT'] = new BuildObjectDetailDto(
 			$element->getId(),
 			$element->getName(),
-			$element->getPicture(),
+			new \Craft\Dto\BxImageDto(
+				$element->getPicture()->getId(),
+				$element->getPicture()->getSrc(),
+			),
 			$element->getGallery(),
 			array_map(
 				function(ApartmentEntity $item) {
@@ -67,7 +70,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 						$item->getId(),
 						$item->getName(),
 						$item->getPrice(),
-						$item->getBuildObject(),
+						$item->getBuildObject()->getId(),
 					);
 				},
 				$element->getApartments()
