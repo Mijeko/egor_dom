@@ -3,6 +3,8 @@
 namespace Craft\DDD\Developers\Infrastructure\Service;
 
 use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Developers\Application\ApartmentService;
+use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
@@ -27,16 +29,16 @@ class ImportService
 {
 
 	public function __construct(
-		protected DeveloperRepositoryInterface   $developerRepository,
+		protected DeveloperService               $developerService,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
-		protected ApartmentRepositoryInterface   $apartmentRepository,
+		protected ApartmentService               $apartmentService,
 	)
 	{
 	}
 
 	public function execute(int $developerId, string $xmlBuildData): void
 	{
-		$developer = $this->developerRepository->findById($developerId);
+		$developer = $this->developerService->findById($developerId);
 		if(!$developer)
 		{
 			throw new \Exception('Застройщик не найден');
@@ -94,9 +96,7 @@ class ImportService
 				)
 			);
 
-			Debug::dumpToFile($apartment);
-
-			$apartment = $this->apartmentRepository->create($apartment);
+			$apartment = $this->apartmentService->create($apartment);
 		}
 	}
 }

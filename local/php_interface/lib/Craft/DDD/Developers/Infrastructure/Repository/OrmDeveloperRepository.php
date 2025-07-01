@@ -47,6 +47,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			$developer->getId(),
 			$developer->getName(),
 			$image,
+			null,
 		);
 	}
 }

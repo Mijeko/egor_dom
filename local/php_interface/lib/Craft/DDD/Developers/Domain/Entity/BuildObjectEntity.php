@@ -2,8 +2,6 @@
 
 namespace Craft\DDD\Developers\Domain\Entity;
 
-use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\Dto\BxImageDto;
 
 class BuildObjectEntity
@@ -11,6 +9,8 @@ class BuildObjectEntity
 	public function __construct(
 		protected ?int             $id,
 		protected string           $name,
+		protected ?int             $developerId = null,
+		protected ?int             $pictureId = null,
 		protected ?DeveloperEntity $developer = null,
 		protected ?BxImageDto      $picture = null,
 		protected ?array           $apartments = null,
@@ -24,12 +24,23 @@ class BuildObjectEntity
 		DeveloperEntity $developer,
 	): static
 	{
-		return new static(null, $name, $developer);
+		return new static(null,
+			$name,
+			null,
+			null,
+			$developer
+		);
 	}
 
 	public function refreshIdAfterCreate(int $id): static
 	{
 		$this->id = $id;
+		return $this;
+	}
+
+	public function addDeveloper(DeveloperEntity $developer): static
+	{
+		$this->developer = $developer;
 		return $this;
 	}
 
@@ -53,6 +64,15 @@ class BuildObjectEntity
 		return $this->picture;
 	}
 
+	public function getPictureId(): ?int
+	{
+		return $this->pictureId;
+	}
+
+	public function getDeveloperId(): ?int
+	{
+		return $this->developerId;
+	}
 
 	/**
 	 * @return \Craft\DDD\Developers\Domain\Entity\ApartmentEntity[] | null

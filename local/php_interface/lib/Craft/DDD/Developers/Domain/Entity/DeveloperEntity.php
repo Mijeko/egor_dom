@@ -20,6 +20,12 @@ class DeveloperEntity
 
 	}
 
+	public function addBuildObject(BuildObjectEntity $buildObject): static
+	{
+		$this->buildObjects[$buildObject->getId()] = $buildObject;
+		return $this;
+	}
+
 	public function getId(): int
 	{
 		return $this->id;

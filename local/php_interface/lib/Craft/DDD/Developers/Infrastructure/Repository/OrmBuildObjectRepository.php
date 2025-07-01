@@ -13,13 +13,6 @@ use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
-
-	public function __construct(
-		protected DeveloperRepositoryInterface $developerRepository,
-	)
-	{
-	}
-
 	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
 	{
 		$model = BuildObjectTable::createObject();
@@ -146,13 +139,12 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 		}
 
-
-		$developer = $this->developerRepository->findById($buildObject->getDeveloperId());
-
 		return new BuildObjectEntity(
 			$buildObject->getId(),
 			$buildObject->getName(),
-			$developer,
+			$buildObject->getDeveloperId(),
+			$buildObject->getPictureId(),
+			null,
 			$picture,
 			$childApartmentList,
 			$gallery

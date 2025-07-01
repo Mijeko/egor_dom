@@ -12,5 +12,8 @@ interface BuildObjectRepositoryInterface
 
 	public function findByName(string $name): ?BuildObjectEntity;
 
+	/**
+	 * @return BuildObjectEntity[]
+	 */
 	public function findAll(array $order = [], array $filter = []): array;
 }
