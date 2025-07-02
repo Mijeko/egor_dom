@@ -1,10 +1,12 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/iblock/prolog.php');
 
 /**
  * @global CMain $APPLICATION
+ * @global CAdminSidePanelHelper $adminSidePanelHelper
  */
-
+global $APPLICATION, $adminSidePanelHelper;
 $APPLICATION->SetTitle("Импорт");
 
 use Bitrix\Main\Loader;
@@ -12,7 +14,7 @@ use Bitrix\Main\Application;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
 
-foreach(['craft.develop'] as $module)
+foreach(['craft.develop', 'iblock'] as $module)
 {
 	if(!Loader::includeModule($module))
 	{
@@ -21,9 +23,10 @@ foreach(['craft.develop'] as $module)
 }
 
 $request = Application::getInstance()->getContext()->getRequest();
-
+$error = null;
 if($request->isPost())
 {
+	$adminSidePanelHelper->sendJsonErrorResponse(rand());
 	try
 	{
 		$import = ImportServiceFactory::getService();
@@ -32,8 +35,7 @@ if($request->isPost())
 		);
 	} catch(Exception $e)
 	{
-		\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
-		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
+		$error = $e->getMessage();
 	}
 }
 
@@ -53,7 +55,10 @@ $tabControl = new CAdminForm('craftDeveloperEditTabControl', $aTabs);
 $tabControl->BeginEpilogContent();
 $tabControl->EndEpilogContent();
 $tabControl->Begin();
-
+if($error)
+{
+	CAdminMessage::ShowOldStyleError($error);
+}
 $tabControl->BeginNextFormTab();
 
 
@@ -80,4 +85,15 @@ $tabControl->Buttons([
 ]);
 
 $tabControl->Show();
+
+
+echo
+BeginNote(),
+	'Время: ' . date("d.m.Y H:i"),
+'</a>',
+EndNote();
+
+
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_popup_admin.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin_js.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");

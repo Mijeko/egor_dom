@@ -7,9 +7,9 @@ use Craft\DDD\Developers\Application\ApartmentService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
-use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
+use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\BlossomHandler;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\FirstDevelopHandler;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\ImportHandlerInterface;
 
@@ -56,6 +56,9 @@ class ImportService
 					$this->apartmentService,
 					$this->developer
 				);
+
+			case Developer::HANDLER_RASCVET:
+				return new BlossomHandler();
 			default:
 				return null;
 		}
@@ -81,9 +84,11 @@ class ImportService
 			$content = $vars['xmlData'];
 		} elseif($cache->startDataCache())
 		{
-			$content = file_get_contents($developerEntity->getImportSetting()->getSourceLink());
+			$content = $this->reader($developerEntity->getImportSetting()->getSourceLink());
 			$cache->endDataCache(["xmlData" => $content]);
 		}
+
+		$content = $this->reader($developerEntity->getImportSetting()->getSourceLink());;
 
 		if(!$content)
 		{
@@ -91,5 +96,38 @@ class ImportService
 		}
 
 		return $content;
+	}
+
+	public function reader(string $url): ?string
+	{
+//		return file_get_contents($url);
+
+		$ch = curl_init($url);
+
+		// Базовые опции
+		curl_setopt_array($ch, [
+			CURLOPT_RETURNTRANSFER => true,     // Возвращать результат
+			CURLOPT_FOLLOWLOCATION => true,     // Следовать редиректам
+			CURLOPT_SSL_VERIFYPEER => true,     // Проверка SSL (для продакшена)
+			CURLOPT_TIMEOUT        => 30,              // Таймаут 30 секунд
+			CURLOPT_USERAGENT      => 'My-Custom-Agent/1.0', // Пользовательский агент
+		]);
+
+		// Выполнение запроса
+		$response = curl_exec($ch);
+
+		// Проверка HTTP-статуса
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if($httpCode !== 200)
+		{
+			throw new \Exception('Ошибка чтения выгрузки застройщика');
+		}
+
+		// Закрытие
+		curl_close($ch);
+
+		Debug::dumpToFile($response);
+
+		return $response;
 	}
 }
