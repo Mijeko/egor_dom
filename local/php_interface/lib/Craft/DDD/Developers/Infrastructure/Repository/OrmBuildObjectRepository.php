@@ -142,8 +142,8 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		return new BuildObjectEntity(
 			$buildObject->getId(),
 			$buildObject->getName(),
-			null,
-			null,
+			$buildObject->getType(),
+			$buildObject->getFloors(),
 			null,
 			null,
 			null,

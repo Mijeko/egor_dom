@@ -6,6 +6,7 @@ use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockDeveloperRepository;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmDeveloperRepository;
 
@@ -19,6 +20,7 @@ class BuildObjectServiceFactory
 				new OrmDeveloperRepository(),
 				new OrmBuildObjectRepository(),
 			),
+			new OrmApartmentRepository(),
 		);
 	}
 

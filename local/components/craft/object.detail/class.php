@@ -9,7 +9,7 @@ use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
 class CraftBuildObjectDetailComponent extends CBitrixComponent
 {
 
-	protected ?BuildObjectService $service;
+	protected ?BuildObjectService $buildObjectService;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -44,13 +44,12 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function loadService(): void
 	{
-		$this->service = BuildObjectServiceFactory::createOnOrm();
-		//		$this->service = BuildObjectServiceFactory::createOnIblock(BUILD_OBJECT_IBLOCK_ID);
+		$this->buildObjectService = BuildObjectServiceFactory::createOnOrm();
 	}
 
 	protected function loadData(): void
 	{
-		$element = $this->service->findById($this->arParams['ELEMENT_ID']);
+		$element = $this->buildObjectService->findById($this->arParams['ELEMENT_ID']);
 		if(!$element)
 		{
 			throw new Exception('Element not found');
@@ -59,10 +58,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 		$this->arResult['ELEMENT'] = new BuildObjectDetailDto(
 			$element->getId(),
 			$element->getName(),
-			new \Craft\Dto\BxImageDto(
-				$element->getPicture()->getId(),
-				$element->getPicture()->getSrc(),
-			),
+			null,
 			$element->getGallery(),
 			array_map(
 				function(ApartmentEntity $item) {
@@ -70,10 +66,10 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 						$item->getId(),
 						$item->getName(),
 						$item->getPrice(),
-						$item->getBuildObject()->getId(),
+						$item->getBuildObject()?->getId(),
 					);
 				},
-				$element->getApartments()
+				$element->getApartments() ?? []
 			),
 		);
 	}

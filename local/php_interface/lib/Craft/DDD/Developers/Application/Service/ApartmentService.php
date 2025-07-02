@@ -15,6 +15,11 @@ class ApartmentService
 	{
 	}
 
+	public function findAll(array $order = [], array $filters = []): array
+	{
+		return $this->apartmentRepository->findAll($filters, $order);
+	}
+
 	public function create(ApartmentEntity $apartment): ApartmentEntity
 	{
 

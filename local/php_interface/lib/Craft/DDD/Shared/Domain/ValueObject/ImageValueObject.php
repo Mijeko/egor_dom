@@ -30,6 +30,7 @@ class ImageValueObject
 
 	public static function fromUrl(?string $url, ?string $name = null): ?static
 	{
+		return null;
 		if(!$url)
 		{
 			return null;

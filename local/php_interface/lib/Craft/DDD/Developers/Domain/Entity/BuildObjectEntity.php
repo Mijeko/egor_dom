@@ -57,7 +57,7 @@ class BuildObjectEntity
 
 	public function addApartment(ApartmentEntity $apartmentEntity): static
 	{
-		$this->apartments[] = $apartmentEntity;
+		$this->apartments[$apartmentEntity->getId()] = $apartmentEntity;
 		return $this;
 	}
 

@@ -138,7 +138,7 @@ class ApartmentEntity
 		return $this->price;
 	}
 
-	public function getBuildObject(): BuildObjectEntity
+	public function getBuildObject(): ?BuildObjectEntity
 	{
 		return $this->buildObject;
 	}

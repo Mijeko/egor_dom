@@ -2,9 +2,12 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
+use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 
 class BuildObjectService
@@ -12,6 +15,7 @@ class BuildObjectService
 	public function __construct(
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
 		protected DeveloperService               $developerService,
+		protected ApartmentRepositoryInterface   $apartmentRepository,
 	)
 	{
 	}
@@ -23,7 +27,22 @@ class BuildObjectService
 
 	public function findById(int $id): ?BuildObjectEntity
 	{
-		return $this->buildObjectRepository->findById($id);
+
+		$buildObject = $this->buildObjectRepository->findById($id);
+
+		$apartmentList = $this->apartmentRepository->findAll(
+			[],
+			[
+				ApartmentTable::F_BUILD_OBJECT_ID => $buildObject->getId(),
+			]
+		);
+
+		foreach($apartmentList as $apartment)
+		{
+			$buildObject->addApartment($apartment);
+		}
+
+		return $buildObject;
 	}
 
 	public function findByName(string $name): ?BuildObjectEntity

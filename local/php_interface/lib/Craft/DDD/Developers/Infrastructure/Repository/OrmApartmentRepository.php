@@ -4,14 +4,26 @@ namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 
 class OrmApartmentRepository implements ApartmentRepositoryInterface
 {
 
-	public function findAll(array $filter = [], array $order = []): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
-		return [];
+		$result = [];
+		$aparmtnetList = ApartmentTable::getList([
+			'order'  => $order,
+			'filter' => $filter,
+		])->fetchCollection();
+
+		foreach($aparmtnetList as $apartment)
+		{
+			$result[] = $this->hydrateElement($apartment);
+		}
+
+		return $result;
 	}
 
 	public function create(ApartmentEntity $apartment): ApartmentEntity
@@ -34,5 +46,27 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 		$apartment->refreshId($model->getId());
 
 		return $apartment;
+	}
+
+	protected function hydrateElement(Apartment $apartment): ApartmentEntity
+	{
+		return new ApartmentEntity(
+			$apartment->getId(),
+			null,
+			$apartment->getName(),
+			null,
+			$apartment->getPrice(),
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+		);
 	}
 }
