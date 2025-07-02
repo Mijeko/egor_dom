@@ -23,7 +23,7 @@ class DeveloperEntity
 
 	public function addBuildObject(BuildObjectEntity $buildObject): static
 	{
-		$this->buildObjects[$buildObject->getId()] = $buildObject;
+		$this->buildObjects[] = $buildObject;
 		return $this;
 	}
 

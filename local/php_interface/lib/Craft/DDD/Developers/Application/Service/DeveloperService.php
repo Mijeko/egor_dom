@@ -38,18 +38,18 @@ class DeveloperService
 			]
 		);
 
-
 		$developerList = array_map(function(DeveloperEntity $developer) use ($buildObjectList) {
 
 			$currentBuildObject = array_filter($buildObjectList, function(BuildObjectEntity $buildObject) use ($developer) {
 				return $buildObject->getDeveloperId() === $developer->getId();
 			});
 
-
-			if(count($currentBuildObject) == 1)
+			if(count($currentBuildObject) > 0)
 			{
-				$currentBuildObject = array_shift($currentBuildObject);
-				$developer->addBuildObject($currentBuildObject);
+				foreach($currentBuildObject as $buildObject)
+				{
+					$developer->addBuildObject($buildObject);
+				}
 			}
 
 			return $developer;
