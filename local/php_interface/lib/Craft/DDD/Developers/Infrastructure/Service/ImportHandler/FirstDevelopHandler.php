@@ -2,14 +2,12 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service\ImportHandler;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\ApartmentService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
-use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ApartmentValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
@@ -26,17 +24,14 @@ use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
-use Craft\Dto\BxImageDto;
 
 class FirstDevelopHandler implements ImportHandlerInterface
 {
 
 
 	public function __construct(
-		protected DeveloperService   $developerService,
-		protected BuildObjectService $buildObjectService,
-		protected ApartmentService   $apartmentService,
-		protected DeveloperEntity    $developer,
+		protected ApartmentService $apartmentService,
+		protected DeveloperEntity  $developer,
 	)
 	{
 	}

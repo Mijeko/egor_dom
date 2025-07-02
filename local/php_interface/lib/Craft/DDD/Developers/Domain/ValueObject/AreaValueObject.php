@@ -5,11 +5,11 @@ namespace Craft\DDD\Developers\Domain\ValueObject;
 class AreaValueObject
 {
 	public function __construct(
-		protected int                     $totalValue,
-		protected string                  $unit,
+		protected int                      $totalValue,
+		protected string                   $unit,
 
-		protected LivingSpaceValueObject  $livingSpace,
-		protected KitchenSpaceValueObject $kitchenSpace,
+		protected ?LivingSpaceValueObject  $livingSpace,
+		protected ?KitchenSpaceValueObject $kitchenSpace,
 	)
 	{
 	}
@@ -24,12 +24,12 @@ class AreaValueObject
 		return $this->unit;
 	}
 
-	public function getLivingSpace(): LivingSpaceValueObject
+	public function getLivingSpace(): ?LivingSpaceValueObject
 	{
 		return $this->livingSpace;
 	}
 
-	public function getKitchenSpace(): KitchenSpaceValueObject
+	public function getKitchenSpace(): ?KitchenSpaceValueObject
 	{
 		return $this->kitchenSpace;
 	}

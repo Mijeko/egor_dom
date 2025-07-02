@@ -51,14 +51,15 @@ class ImportService
 		{
 			case Developer::HANDLER_FIRST_DEVELOP:
 				return new FirstDevelopHandler(
-					$this->developerService,
-					$this->buildObjectService,
 					$this->apartmentService,
-					$this->developer
+					$this->developer,
 				);
 
 			case Developer::HANDLER_RASCVET:
-				return new BlossomHandler();
+				return new BlossomHandler(
+					$this->apartmentService,
+					$this->developer,
+				);
 			default:
 				return null;
 		}
