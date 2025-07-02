@@ -44,6 +44,8 @@ class ApartmentEntity
 		protected ?int                    $builtYear,
 		protected ?BuiltStateValueObject  $buildingState,
 		protected ?LocationValueObject    $location,
+		protected ?array                  $planImages = null,
+		protected ?array                  $gallery = null,
 	)
 	{
 	}
@@ -84,6 +86,8 @@ class ApartmentEntity
 		?int                    $builtYear,
 		?BuiltStateValueObject  $buildingState,
 		?LocationValueObject    $location,
+		?array                  $planImages = null,
+		?array                  $gallery = null,
 
 	): static
 	{
@@ -104,6 +108,8 @@ class ApartmentEntity
 			$builtYear,
 			$buildingState,
 			$location,
+			$planImages,
+			$gallery,
 		);
 
 		$entity->generateName();

@@ -8,26 +8,24 @@ use Craft\Dto\BxImageDto;
 class BuildObjectEntity
 {
 	public function __construct(
-		protected ?int              $id,
-		protected ?string           $name,
-		protected ?string           $type,
-		protected ?int              $floors,
-		protected ?int              $developerId = null,
-		protected ?int              $pictureId = null,
-		protected ?DeveloperEntity  $developer = null,
-		protected ?ImageValueObject $picture = null,
-		protected ?array            $apartments = null,
-		protected ?array            $gallery = null,
+		protected ?int             $id,
+		protected ?string          $name,
+		protected ?string          $type,
+		protected ?int             $floors,
+		protected ?int             $developerId = null,
+		protected ?DeveloperEntity $developer = null,
+		protected ?array           $apartments = null,
+		protected ?array           $gallery = null,
 	)
 	{
 	}
 
 	public static function fromImport(
-		?string           $name,
-		?string           $type,
-		?int              $floors,
-		DeveloperEntity   $developer,
-		?ImageValueObject $picture,
+		?string         $name,
+		?string         $type,
+		?int            $floors,
+		DeveloperEntity $developer,
+		?array          $gallery,
 	): static
 	{
 		return new static(
@@ -36,9 +34,9 @@ class BuildObjectEntity
 			$type,
 			$floors,
 			$developer->getId(),
-			$picture?->getId(),
 			$developer,
-			$picture,
+			null,
+			$gallery,
 		);
 	}
 

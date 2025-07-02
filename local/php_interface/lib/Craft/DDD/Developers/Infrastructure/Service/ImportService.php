@@ -100,8 +100,6 @@ class ImportService
 
 	public function reader(string $url): ?string
 	{
-//		return file_get_contents($url);
-
 		$ch = curl_init($url);
 
 		// Базовые опции
@@ -125,8 +123,6 @@ class ImportService
 
 		// Закрытие
 		curl_close($ch);
-
-		Debug::dumpToFile($response);
 
 		return $response;
 	}

@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Infrastructure\Service\Factory;
 
 use Craft\DDD\Developers\Application\ApartmentService;
+use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
@@ -22,6 +23,13 @@ class ImportServiceFactory
 			BuildObjectServiceFactory::createOnOrm(),
 			new ApartmentService(
 				new OrmApartmentRepository(),
+				new BuildObjectService(
+					new OrmBuildObjectRepository(),
+					new DeveloperService(
+						new OrmDeveloperRepository(),
+						new OrmBuildObjectRepository(),
+					)
+				)
 			),
 		);
 	}

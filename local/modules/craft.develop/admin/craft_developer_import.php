@@ -33,6 +33,8 @@ if($request->isPost())
 		$import->execute(
 			$request->getPost('developerId')
 		);
+
+		LocalRedirect(CRAFT_DEVELOP_ADMIN_URL_IMPORT);
 	} catch(Exception $e)
 	{
 		$error = $e->getMessage();

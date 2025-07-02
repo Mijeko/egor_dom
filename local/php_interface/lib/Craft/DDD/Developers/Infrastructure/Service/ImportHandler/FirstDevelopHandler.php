@@ -45,118 +45,73 @@ class FirstDevelopHandler implements ImportHandlerInterface
 	{
 		$read = new \SimpleXMLElement($xmlData);
 
-		foreach($read->complex as $rawApartmentData)
+
+		foreach($read->offer as $offer)
 		{
-			foreach($rawApartmentData->buildings as $building)
+			$rawApartmentData = json_decode(json_encode($offer), true);
+
+
+			$listPlanImages = [];
+			$listGalleryImages = [];
+
+			foreach($offer->image as $image)
 			{
-				$building = $building->building;
-
-				$buildObject = BuildObjectEntity::fromImport(
-					(string)$building->name,
-					is_string((string)$building->building_type) ? (string)$building->building_type : null,
-					(int)$building->floors,
-					$this->developer,
-					ImageValueObject::fromUrl((string)$rawApartmentData->images->image)
-				);
-
-
-				foreach($building->flats as $flat)
+				$imageAttributes = $image->attributes();
+				if($imageAttributes['tag'] == 'plan')
 				{
-					$flat = $flat->flat;
-
-					$buildObject->addApartment(
-						new ApartmentEntity(
-							null,
-							null,
-							(string)$flat->name,
-							(string)$flat->description,
-							(int)$flat->price,
-							(int)$flat->rooms,
-							(int)$flat->floor,
-							new AreaValueObject(
-								(float)$flat->area,
-								'кв.м',
-								new LivingSpaceValueObject(
-									(float)$flat->living_area,
-									'кв.м'
-								),
-								new KitchenSpaceValueObject(
-									(float)$flat->kitchen_area,
-									'кв.м'
-								)
-							),
-							(string)$flat->renovation,
-							null,
-							null,
-							(int)$building->floors,
-							null,
-							(int)$building->built_year,
-							new BuiltStateValueObject(
-								(string)$building->building_state
-							),
-							new LocationValueObject(
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								new LongitudeValueObject(
-									$rawApartmentData->longitude
-								),
-								new LatitudeValueObject(
-									$rawApartmentData->latitude
-								)
-							),
-						)
-					);
+					$listPlanImages[] = (string)$image;
+				} else
+				{
+					$listGalleryImages[] = (string)$image;
 				}
-
-
-				$buildObject = $this->buildObjectService->create($buildObject);
 			}
 
 
-			//			$apartment = ApartmentEntity::fromImport(
-			//				$buildObject,
-			//				$rawApartmentData['description'][0],
-			//				$rawApartmentData['price']['value'],
-			//				$rawApartmentData['rooms'],
-			//				$rawApartmentData['floor'],
-			//				new AreaValueObject(
-			//					$rawApartmentData['area']['value'],
-			//					$rawApartmentData['area']['unit'],
-			//					new LivingSpaceValueObject(
-			//						$rawApartmentData['living-space']['value'],
-			//						$rawApartmentData['living-space']['unit'],
-			//					),
-			//					new KitchenSpaceValueObject(
-			//						$rawApartmentData['kitchen-space']['value'],
-			//						$rawApartmentData['kitchen-space']['unit'],
-			//					)
-			//				),
-			//				$rawApartmentData['renovation'],
-			//				new StringLogicValueObject($rawApartmentData['parking']),
-			//				new StringLogicValueObject($rawApartmentData['bathroom-unit']),
-			//				$rawApartmentData['floors-total'],
-			//				$rawApartmentData['mortgage'],
-			//				$rawApartmentData['built-year'],
-			//				new BuiltStateValueObject($rawApartmentData['building-state']),
-			//				new LocationValueObject(
-			//					new CountryValueObject($rawApartmentData['location']['country']),
-			//					new RegionValueObject($rawApartmentData['location']['region']),
-			//					new DistrictValueObject($rawApartmentData['location']['district']),
-			//					new CityValueObject($rawApartmentData['location']['locality-name']),
-			//					new AddressValueObject($rawApartmentData['location']['address']),
-			//					new ApartmentValueObject($rawApartmentData['location']['apartment']),
-			//					new LongitudeValueObject($rawApartmentData['location']['longitude']),
-			//					new LatitudeValueObject($rawApartmentData['location']['latitude']),
-			//				)
-			//			);
+			$apartment = ApartmentEntity::fromImport(
+				BuildObjectEntity::fromImport(
+					$rawApartmentData['building-name'],
+					$rawApartmentData['building-type'],
+					$rawApartmentData['floors-total'],
+					$this->developer,
+					$listGalleryImages,
+				),
+				$rawApartmentData['description'][0],
+				$rawApartmentData['price']['value'],
+				$rawApartmentData['rooms'],
+				$rawApartmentData['floor'],
+				new AreaValueObject(
+					$rawApartmentData['area']['value'],
+					$rawApartmentData['area']['unit'],
+					new LivingSpaceValueObject(
+						$rawApartmentData['living-space']['value'],
+						$rawApartmentData['living-space']['unit'],
+					),
+					new KitchenSpaceValueObject(
+						$rawApartmentData['kitchen-space']['value'],
+						$rawApartmentData['kitchen-space']['unit'],
+					)
+				),
+				$rawApartmentData['renovation'],
+				new StringLogicValueObject($rawApartmentData['parking']),
+				new StringLogicValueObject($rawApartmentData['bathroom-unit']),
+				$rawApartmentData['floors-total'],
+				$rawApartmentData['mortgage'],
+				$rawApartmentData['built-year'],
+				new BuiltStateValueObject($rawApartmentData['building-state']),
+				new LocationValueObject(
+					new CountryValueObject($rawApartmentData['location']['country']),
+					new RegionValueObject($rawApartmentData['location']['region']),
+					new DistrictValueObject($rawApartmentData['location']['district']),
+					new CityValueObject($rawApartmentData['location']['locality-name']),
+					new AddressValueObject($rawApartmentData['location']['address']),
+					new ApartmentValueObject($rawApartmentData['location']['apartment']),
+					new LongitudeValueObject($rawApartmentData['location']['longitude']),
+					new LatitudeValueObject($rawApartmentData['location']['latitude']),
+				)
+			);
 
-			//			Debug::dumpToFile($apartment);
 
-			//			$apartment = $this->apartmentService->create($apartment);
+			$apartment = $this->apartmentService->create($apartment);
 		}
 	}
 }

@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
@@ -17,7 +16,7 @@ class BuildObjectService
 	{
 	}
 
-	public function create(BuildObjectEntity $developer): ?BuildObjectEntity
+	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
 	{
 		return null;
 	}
