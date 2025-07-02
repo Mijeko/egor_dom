@@ -33,20 +33,6 @@ if($request->isPost())
 		}
 	}
 
-	foreach($filesData as $propertyCode => $fileData)
-	{
-		switch($propertyCode)
-		{
-			case BuildObjectTable::F_PICTURE_ID:
-				$fileId = \CFile::SaveFile($fileData, BuildObject::UPLOAD_PATH);
-				if($fileId)
-				{
-					$this->set($propertyCode, $fileId);
-				}
-				break;
-		}
-	}
-
 
 	//	костыль
 	$galleryRawData = $_REQUEST[BuildObjectTable::F_GALLERY];
@@ -164,18 +150,6 @@ if($field = $entity->getField(BuildObjectTable::F_DEVELOPER_ID))
 		$buildObjectModel ? $buildObjectModel->getDeveloperId() : null
 	);
 }
-
-if($field = $entity->getField(BuildObjectTable::F_PICTURE_ID))
-{
-	$tabControl->AddFileField(
-		$field->getName(),
-		$field->getTitle(),
-		$buildObjectModel?->getPictureId(),
-		[],
-		$field->isRequired()
-	);
-}
-
 
 if($field = $entity->getField(BuildObjectTable::F_GALLERY))
 {

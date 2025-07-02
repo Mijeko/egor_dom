@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service\ImportHandler;
 
-use Craft\DDD\Developers\Application\ApartmentService;
+use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;

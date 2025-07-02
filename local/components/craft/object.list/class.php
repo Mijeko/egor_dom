@@ -36,7 +36,6 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 				return new BuildObjectFrontDto(
 					$buildObject->getId(),
 					$buildObject->getName(),
-					$buildObject->getPicture(),
 				);
 			},
 			$this->service->findAll(

@@ -18,12 +18,17 @@ class BuildObjectService
 
 	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
 	{
-		return null;
+		return $this->buildObjectRepository->create($buildObjectEntity);
 	}
 
 	public function findById(int $id): ?BuildObjectEntity
 	{
 		return $this->buildObjectRepository->findById($id);
+	}
+
+	public function findByName(string $name): ?BuildObjectEntity
+	{
+		return $this->buildObjectRepository->findByName($name);
 	}
 
 	public function findAll(array $order = [], array $filter = []): array

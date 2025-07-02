@@ -3,7 +3,7 @@
 namespace Craft\DDD\Developers\Infrastructure\Service;
 
 use Bitrix\Main\Diag\Debug;
-use Craft\DDD\Developers\Application\ApartmentService;
+use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;

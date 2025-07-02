@@ -9,6 +9,7 @@ use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Query\Join;
+use Bitrix\Main\Type\DateTime;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 
 class ApartmentTable extends DataManager
@@ -63,9 +64,11 @@ class ApartmentTable extends DataManager
 			(new IntegerField(self::F_PLAN_IMAGE_ID))
 				->configureTitle('План квартиры'),
 			(new DatetimeField(self::F_CREATED_AT))
-				->configureTitle('Дата создания'),
+				->configureTitle('Дата создания')
+				->configureDefaultValue(new DateTime()),
 			(new DatetimeField(self::F_UPDATED_AT))
-				->configureTitle('Дата обновления'),
+				->configureTitle('Дата обновления')
+				->configureDefaultValue(new DateTime()),
 
 			(new IntegerField(self::F_BUILD_OBJECT_ID))
 				->configureRequired()

@@ -8,23 +8,6 @@ use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
-
-/**
- * @property  BuildObjectEntity $buildObject
- * @property  string $name Название
- * @property  string|null $description Описание
- * @property  int $price Цена
- * @property  int $rooms Комнаты
- * @property  int $floor Этаж
- * @property  AreaValueObject $area Площадь
- * @property  string $renovation Отделка
- * @property  StringLogicValueObject|null $parking Парковка
- * @property  StringLogicValueObject|null $bathroomUnit Сануазел раздельный/совместный
- * @property  int|null $floorsTotal Всего этажей
- * @property  int|null $mortgage Ипотека ?
- * @property  int|null $builtYear Год постройки
- * @property  BuiltStateValueObject|null $buildingState Статус постройки
- */
 class ApartmentEntity
 {
 	public function __construct(
@@ -123,9 +106,20 @@ class ApartmentEntity
 			$resultName .= 'Квартира';
 		}
 
+		if($buildObject = $this->getBuildObject())
+		{
+			$resultName .= ' в ' . $buildObject->getName();
+		}
+
 
 		$this->name = $resultName;
 
+		return $this;
+	}
+
+	public function refreshId(int $id): static
+	{
+		$this->id = $id;
 		return $this;
 	}
 

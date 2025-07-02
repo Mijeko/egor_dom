@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Entity;
 
+use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
+
 class BuildObject extends EO_BuildObject
 {
 
@@ -9,19 +11,27 @@ class BuildObject extends EO_BuildObject
 
 	public function setGalleryEx(array $galleryData): void
 	{
-		$files = [];
+		$listFileId = [];
 
 		foreach($galleryData as $fileData)
 		{
-			$file = \CIBlock::makeFileArray($fileData);
-			$fileId = \CFile::SaveFile($file, self::UPLOAD_PATH);
+			if(empty($fileData['ID']))
+			{
+				$file = \CIBlock::makeFileArray($fileData);
+				$fileId = \CFile::SaveFile($file, self::UPLOAD_PATH);
+			} else
+			{
+				$fileId = $fileData['ID'];
+			}
+
+
 			if($fileId)
 			{
-				$files[] = $fileId;
+				$listFileId[] = $fileId;
 			}
 		}
 
-		$this->setGallery(json_encode($files));
+		$this->setGallery(json_encode($listFileId));
 	}
 
 	public function getGalleryEx(): array
@@ -44,6 +54,28 @@ class BuildObject extends EO_BuildObject
 		}
 
 		return $result;
+	}
+
+	public function setLocationEx(?LocationValueObject $locationData): static
+	{
+
+		if(!$locationData)
+		{
+			return $this;
+		}
+
+		$this->setLocation(json_encode([
+			'latitude'  => $locationData->getLatitude(),
+			'longitude' => $locationData->getLongitude(),
+			'country'   => $locationData->getCountry(),
+			'region'    => $locationData->getRegion(),
+			'district'  => $locationData->getDistrict(),
+			'city'      => $locationData->getLocalityName(),
+			'address'   => $locationData->getAddress(),
+			'apartment' => $locationData->getApartment(),
+		]));
+
+		return $this;
 	}
 
 }

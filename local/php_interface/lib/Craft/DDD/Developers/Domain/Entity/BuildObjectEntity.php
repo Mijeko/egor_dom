@@ -43,7 +43,7 @@ class BuildObjectEntity
 		);
 	}
 
-	public function refreshIdAfterCreate(int $id): static
+	public function refreshId(int $id): static
 	{
 		$this->id = $id;
 		return $this;
@@ -95,4 +95,19 @@ class BuildObjectEntity
 		return $this->gallery;
 	}
 
+	public function getLocation(): ?LocationValueObject
+	{
+		return $this->location;
+	}
+
+
+	public function getFloors(): ?int
+	{
+		return $this->floors;
+	}
+
+	public function getType(): ?string
+	{
+		return $this->type;
+	}
 }

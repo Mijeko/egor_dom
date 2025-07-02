@@ -4,6 +4,7 @@ namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -17,20 +18,29 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 	{
 		$model = BuildObjectTable::createObject();
 
-		$gallery = array_map(function(BxImageDto $image) {
-			return $image->id;
-		}, $buildObjectEntity->getGallery() ?? []);
+		$gallery = array_map(function(?ImageGalleryValueObject $image) {
+			if($image)
+			{
+				return ['ID' => $image->getId()];
+			}
+
+			return null;
+		}, $buildObjectEntity->getGallery()->getImages() ?? []);
+
+		$model->setGalleryEx($gallery);
+		$model->setLocationEx($buildObjectEntity->getLocation());
 
 		$model->setName($buildObjectEntity->getName());
-		$model->setPictureId($buildObjectEntity->getPicture()->id);
-		$model->setGalleryEx($gallery);
 		$model->setDeveloperId($buildObjectEntity->getDeveloper()->getId());
+		$model->setFloors($buildObjectEntity->getFloors());
+		$model->setType($buildObjectEntity->getType());
+
 
 		$result = $model->save();
 
 		if($result->isSuccess())
 		{
-			$buildObjectEntity->refreshIdAfterCreate($model->getId());
+			$buildObjectEntity->refreshId($model->getId());
 			return $buildObjectEntity;
 		}
 
@@ -83,16 +93,6 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 	protected function hydrateElement(BuildObject $buildObject): BuildObjectEntity
 	{
-		$_picture = \CFile::GetFileArray($buildObject->getPictureId());
-		$picture = null;
-		if($_picture)
-		{
-			$picture = new BxImageDto(
-				$_picture['ID'],
-				$_picture['SRC'],
-			);
-		}
-
 		$gallery = array_map(
 			function($fileId) {
 				$file = \CFile::GetFileArray($fileId);
@@ -142,12 +142,13 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		return new BuildObjectEntity(
 			$buildObject->getId(),
 			$buildObject->getName(),
-			$buildObject->getDeveloperId(),
-			$buildObject->getPictureId(),
 			null,
-			$picture,
-			$childApartmentList,
-			$gallery
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
 		);
 	}
 }

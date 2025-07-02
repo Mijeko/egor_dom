@@ -17,11 +17,13 @@ class BuildObjectTable extends DataManager
 
 	const F_ID = 'ID';
 	const F_DEVELOPER_ID = 'DEVELOPER_ID';
-	const F_PICTURE_ID = 'PICTURE_ID';
 	const F_ACTIVE = 'ACTIVE';
 	const F_SORT = 'SORT';
 	const F_NAME = 'NAME';
 	const F_GALLERY = 'GALLERY';
+	const F_FLOORS = 'FLOORS';
+	const F_TYPE = 'TYPE';
+	const F_LOCATION = 'LOCATION';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
@@ -46,8 +48,6 @@ class BuildObjectTable extends DataManager
 			(new IntegerField(self::F_DEVELOPER_ID))
 				->configureTitle('ID застройщик')
 				->configureRequired(),
-			(new IntegerField(self::F_PICTURE_ID))
-				->configureTitle('ID картинки'),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
 				->configureDefaultValue(self::ACTIVE_Y)
@@ -60,6 +60,12 @@ class BuildObjectTable extends DataManager
 				->configureRequired(),
 			(new StringField(self::F_GALLERY))
 				->configureTitle('Галерея'),
+			(new IntegerField(self::F_FLOORS))
+				->configureTitle('Количество этажей'),
+			(new StringField(self::F_TYPE))
+				->configureTitle('Тип постройки'),
+			(new StringField(self::F_LOCATION))
+				->configureTitle('Геопозиция'),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')
 				->configureDefaultValue(new DateTime()),
