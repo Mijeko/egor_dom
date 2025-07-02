@@ -22,6 +22,7 @@ use Craft\DDD\Developers\Domain\ValueObject\LivingSpaceValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
@@ -72,8 +73,23 @@ class FirstDevelopHandler implements ImportHandlerInterface
 					$rawApartmentData['building-name'],
 					$rawApartmentData['building-type'],
 					$rawApartmentData['floors-total'],
+					new LocationValueObject(
+						new CountryValueObject($rawApartmentData['location']['country']),
+						new RegionValueObject($rawApartmentData['location']['region']),
+						new DistrictValueObject($rawApartmentData['location']['district']),
+						new CityValueObject($rawApartmentData['location']['locality-name']),
+						new AddressValueObject($rawApartmentData['location']['address']),
+						new ApartmentValueObject($rawApartmentData['location']['apartment']),
+						new LongitudeValueObject($rawApartmentData['location']['longitude']),
+						new LatitudeValueObject($rawApartmentData['location']['latitude']),
+					),
 					$this->developer,
-					$listGalleryImages,
+					new ImageGalleryValueObject(
+						array_map(function(string $imageUrl) {
+							return ImageValueObject::fromUrl($imageUrl);
+						}, $listGalleryImages)
+					),
+
 				),
 				$rawApartmentData['description'][0],
 				$rawApartmentData['price']['value'],
@@ -94,19 +110,13 @@ class FirstDevelopHandler implements ImportHandlerInterface
 				$rawApartmentData['renovation'],
 				new StringLogicValueObject($rawApartmentData['parking']),
 				new StringLogicValueObject($rawApartmentData['bathroom-unit']),
-				$rawApartmentData['floors-total'],
 				$rawApartmentData['mortgage'],
 				$rawApartmentData['built-year'],
 				new BuiltStateValueObject($rawApartmentData['building-state']),
-				new LocationValueObject(
-					new CountryValueObject($rawApartmentData['location']['country']),
-					new RegionValueObject($rawApartmentData['location']['region']),
-					new DistrictValueObject($rawApartmentData['location']['district']),
-					new CityValueObject($rawApartmentData['location']['locality-name']),
-					new AddressValueObject($rawApartmentData['location']['address']),
-					new ApartmentValueObject($rawApartmentData['location']['apartment']),
-					new LongitudeValueObject($rawApartmentData['location']['longitude']),
-					new LatitudeValueObject($rawApartmentData['location']['latitude']),
+				new ImageGalleryValueObject(
+					array_map(function(string $imageUrl) {
+						return ImageValueObject::fromUrl($imageUrl);
+					}, $listPlanImages)
 				)
 			);
 

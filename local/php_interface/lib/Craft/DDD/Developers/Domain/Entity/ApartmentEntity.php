@@ -6,6 +6,7 @@ use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 
 /**
@@ -23,29 +24,26 @@ use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
  * @property  int|null $mortgage Ипотека ?
  * @property  int|null $builtYear Год постройки
  * @property  BuiltStateValueObject|null $buildingState Статус постройки
- * @property  LocationValueObject|null $location Локация
  */
 class ApartmentEntity
 {
 	public function __construct(
-		protected ?int                    $id,
-		protected ?BuildObjectEntity      $buildObject,
-		protected ?string                 $name,
-		protected ?string                 $description,
-		protected ?int                    $price,
-		protected ?int                    $rooms,
-		protected ?int                    $floor,
-		protected ?AreaValueObject        $area,
-		protected ?string                 $renovation,
-		protected ?StringLogicValueObject $parking,
-		protected ?StringLogicValueObject $bathroomUnit,
-		protected ?int                    $floorsTotal,
-		protected ?int                    $mortgage,
-		protected ?int                    $builtYear,
-		protected ?BuiltStateValueObject  $buildingState,
-		protected ?LocationValueObject    $location,
-		protected ?array                  $planImages = null,
-		protected ?array                  $gallery = null,
+		protected ?int                     $id,
+		protected ?BuildObjectEntity       $buildObject,
+		protected ?string                  $name,
+		protected ?string                  $description,
+		protected ?int                     $price,
+		protected ?int                     $rooms,
+		protected ?int                     $floor,
+		protected ?AreaValueObject         $area,
+		protected ?string                  $renovation,
+		protected ?StringLogicValueObject  $parking,
+		protected ?StringLogicValueObject  $bathroomUnit,
+		protected ?int                     $mortgage,
+		protected ?int                     $builtYear,
+		protected ?BuiltStateValueObject   $buildingState,
+		protected ?ImageGalleryValueObject $planImages = null,
+		protected ?ImageGalleryValueObject $gallery = null,
 	)
 	{
 	}
@@ -72,22 +70,20 @@ class ApartmentEntity
 	 * @return ApartmentEntity
 	 */
 	public static function fromImport(
-		?BuildObjectEntity      $buildObject,
-		?string                 $description,
-		?int                    $price,
-		?int                    $rooms,
-		?int                    $floor,
-		?AreaValueObject        $area,
-		?string                 $renovation,
-		?StringLogicValueObject $parking,
-		?StringLogicValueObject $bathroomUnit,
-		?int                    $floorsTotal,
-		?int                    $mortgage,
-		?int                    $builtYear,
-		?BuiltStateValueObject  $buildingState,
-		?LocationValueObject    $location,
-		?array                  $planImages = null,
-		?array                  $gallery = null,
+		?BuildObjectEntity       $buildObject,
+		?string                  $description,
+		?int                     $price,
+		?int                     $rooms,
+		?int                     $floor,
+		?AreaValueObject         $area,
+		?string                  $renovation,
+		?StringLogicValueObject  $parking,
+		?StringLogicValueObject  $bathroomUnit,
+		?int                     $mortgage,
+		?int                     $builtYear,
+		?BuiltStateValueObject   $buildingState,
+		?ImageGalleryValueObject $planImages = null,
+		?ImageGalleryValueObject $gallery = null,
 
 	): static
 	{
@@ -103,11 +99,9 @@ class ApartmentEntity
 			$renovation,
 			$parking,
 			$bathroomUnit,
-			$floorsTotal,
 			$mortgage,
 			$builtYear,
 			$buildingState,
-			$location,
 			$planImages,
 			$gallery,
 		);
@@ -129,11 +123,6 @@ class ApartmentEntity
 			$resultName .= 'Квартира';
 		}
 
-
-		if($apart = $this->location->getApartment()->getValue())
-		{
-			$resultName .= ' ' . $apart;
-		}
 
 		$this->name = $resultName;
 

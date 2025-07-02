@@ -2,30 +2,32 @@
 
 namespace Craft\DDD\Developers\Domain\Entity;
 
-use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\Dto\BxImageDto;
+use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 class BuildObjectEntity
 {
 	public function __construct(
-		protected ?int             $id,
-		protected ?string          $name,
-		protected ?string          $type,
-		protected ?int             $floors,
-		protected ?int             $developerId = null,
-		protected ?DeveloperEntity $developer = null,
-		protected ?array           $apartments = null,
-		protected ?array           $gallery = null,
+		protected ?int                     $id,
+		protected ?string                  $name,
+		protected ?string                  $type,
+		protected ?int                     $floors,
+		protected ?LocationValueObject     $location,
+		protected ?int                     $developerId = null,
+		protected ?DeveloperEntity         $developer = null,
+		protected ?array                   $apartments = null,
+		protected ?ImageGalleryValueObject $gallery = null,
 	)
 	{
 	}
 
 	public static function fromImport(
-		?string         $name,
-		?string         $type,
-		?int            $floors,
-		DeveloperEntity $developer,
-		?array          $gallery,
+		?string                  $name,
+		?string                  $type,
+		?int                     $floors,
+		?LocationValueObject     $location,
+		DeveloperEntity          $developer,
+		?ImageGalleryValueObject $gallery,
 	): static
 	{
 		return new static(
@@ -33,6 +35,7 @@ class BuildObjectEntity
 			$name,
 			$type,
 			$floors,
+			$location,
 			$developer->getId(),
 			$developer,
 			null,
@@ -73,15 +76,6 @@ class BuildObjectEntity
 		return $this->id;
 	}
 
-	public function getPicture(): ?ImageValueObject
-	{
-		return $this->picture;
-	}
-
-	public function getPictureId(): ?int
-	{
-		return $this->pictureId;
-	}
 
 	public function getDeveloperId(): ?int
 	{
@@ -96,10 +90,7 @@ class BuildObjectEntity
 		return $this->apartments;
 	}
 
-	/**
-	 * @return BxImageDto[]|null
-	 */
-	public function getGallery(): ?array
+	public function getGallery(): ?ImageGalleryValueObject
 	{
 		return $this->gallery;
 	}
