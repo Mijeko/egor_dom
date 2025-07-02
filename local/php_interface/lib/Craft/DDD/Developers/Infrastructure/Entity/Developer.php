@@ -5,11 +5,13 @@ class Developer extends EO_Developer
 {
 
 	const HANDLER_FIRST_DEVELOP = 'firstDevelop';
+	const HANDLER_RASCVET = 'rasvet';
 
 	public static function getImportHandlers(): array
 	{
 		return [
 			self::HANDLER_FIRST_DEVELOP => 'Первый строительный',
+			self::HANDLER_RASCVET       => 'ГК Расцветай',
 		];
 	}
 
