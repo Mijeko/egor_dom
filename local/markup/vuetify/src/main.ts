@@ -3,7 +3,6 @@ import {createPinia, defineStore} from 'pinia';
 import {registerPlugins} from "@/plugins";
 import './store.ts';
 
-const pinia = createPinia();
 
 export default class VueService {
 
@@ -42,8 +41,6 @@ export default class VueService {
 
     const app = createApp(component, {...params});
     registerPlugins(app);
-    app.use(pinia);
-
 
     app.mount(`#${selectors}`);
   }
