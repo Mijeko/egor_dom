@@ -4,8 +4,17 @@ namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
+use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\ApartmentValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\CityValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\CountryValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DistrictValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -122,12 +131,23 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 		}
 
+		$location = $buildObject->getLocationEx();
+
 		return new BuildObjectEntity(
 			$buildObject->getId(),
 			$buildObject->getName(),
 			$buildObject->getType(),
 			$buildObject->getFloors(),
-			null,
+			new LocationValueObject(
+				new CountryValueObject($location['country']),
+				new RegionValueObject($location['region']),
+				new DistrictValueObject($location['district']),
+				new CityValueObject($location['city']),
+				new AddressValueObject($location['address']),
+				new ApartmentValueObject($location['apartment']),
+				new LongitudeValueObject($location['longitude']),
+				new LatitudeValueObject($location['latitude']),
+			),
 			$buildObject->getDeveloperId(),
 			null,
 			null,

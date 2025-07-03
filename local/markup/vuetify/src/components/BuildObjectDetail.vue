@@ -3,10 +3,11 @@ import {defineComponent, type PropType} from 'vue'
 import type BuildObjectDetailDto from "@/dto/present/BuildObjectDetailDto.ts";
 import ApartmentList from "@/components/ApartmentList.vue";
 import type BuildObjectDetailInfo from "@/dto/present/component/buildObjectDetailInfo.ts";
+import Map from "@/components/Map.vue";
 
 export default defineComponent({
   name: "BuildObjectDetail",
-  components: {ApartmentList},
+  components: {Map, ApartmentList},
   props: {
     product: {
       type: Object as PropType<BuildObjectDetailDto>
@@ -22,6 +23,14 @@ export default defineComponent({
         {
           title: 'Колличество этажей',
           value: String(this.product?.floors),
+        },
+        {
+          title: 'Адрес',
+          value: `${this.product?.location?.country}, ${this.product?.location?.localityName}, ${this.product?.location?.address}`
+        },
+        {
+          title: 'Тип дома',
+          value: String(this.product?.type)
         }
       ]
     }
@@ -51,6 +60,15 @@ export default defineComponent({
               :subtitle="String(info.value)"
               class="mb-3"
       ></v-card>
+    </v-col>
+  </v-row>
+
+  <v-row>
+    <v-col cols="12">
+      <Map
+        :lat="Number(product?.location?.latitude)"
+        :lon="Number(product?.location?.longitude)"
+      />
     </v-col>
   </v-row>
 

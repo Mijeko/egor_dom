@@ -33,13 +33,7 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 	{
 		$this->arResult['BUILD_OBJECTS'] = array_map(
 			function(BuildObjectEntity $buildObject) {
-				return new BuildObjectDto(
-					0,
-					null,
-					null,
-					null,
-					null,
-				);
+				return BuildObjectDto::fromModel($buildObject);
 			},
 			$this->service->findAll(
 				[],

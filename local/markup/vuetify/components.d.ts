@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Alert: typeof import('./src/components/Alert.vue')['default']
+    ApartmentItem: typeof import('./src/components/ApartmentItem.vue')['default']
     ApartmentList: typeof import('./src/components/ApartmentList.vue')['default']
     Auth: typeof import('./src/components/Auth.vue')['default']
     BottomFloatMenu: typeof import('./src/components/BottomFloatMenu.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     Developers: typeof import('./src/components/Developers.vue')['default']
     Init: typeof import('./src/components/system/Init.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']
+    Map: typeof import('./src/components/Map.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
