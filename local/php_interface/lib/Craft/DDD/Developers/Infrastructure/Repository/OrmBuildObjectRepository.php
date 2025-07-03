@@ -5,6 +5,7 @@ namespace Craft\DDD\Developers\Infrastructure\Repository;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -18,7 +19,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 	{
 		$model = BuildObjectTable::createObject();
 
-		$gallery = array_map(function(?ImageGalleryValueObject $image) {
+		$gallery = array_map(function(?ImageValueObject $image) {
 			if($image)
 			{
 				return ['ID' => $image->getId()];
@@ -93,25 +94,6 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 	protected function hydrateElement(BuildObject $buildObject): BuildObjectEntity
 	{
-		$gallery = array_map(
-			function($fileId) {
-				$file = \CFile::GetFileArray($fileId);
-				if($file)
-				{
-					return new BxImageDto(
-						$file['ID'],
-						$file['SRC'],
-					);
-				}
-
-				return null;
-			},
-			$buildObject->getGalleryEx()
-		);
-		# clear null values
-		$gallery = array_filter($gallery);
-
-
 		$apartments = $buildObject->fillApartments();
 		$childApartmentList = [];
 		if($apartments)
@@ -120,6 +102,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			{
 				$childApartmentList[] = new ApartmentEntity(
 					$apartment->getId(),
+					$apartment->getBuildObjectId(),
 					null,
 					$apartment->getName(),
 					$apartment->getPrice(),
@@ -148,7 +131,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			$buildObject->getDeveloperId(),
 			null,
 			null,
-			null,
+			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
 		);
 	}
 }

@@ -3,7 +3,7 @@
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
-use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectFrontDto;
+use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto;
 
 class CraftBuildObjectListComponent extends CBitrixComponent
 {
@@ -33,9 +33,12 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 	{
 		$this->arResult['BUILD_OBJECTS'] = array_map(
 			function(BuildObjectEntity $buildObject) {
-				return new BuildObjectFrontDto(
-					$buildObject->getId(),
-					$buildObject->getName(),
+				return new BuildObjectDto(
+					0,
+					null,
+					null,
+					null,
+					null,
 				);
 			},
 			$this->service->findAll(

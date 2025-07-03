@@ -1,4 +1,4 @@
-import type AuthorizeDto from "@/dto/AuthorizeDto.ts";
+import type AuthorizeDto from "@/dto/request/AuthorizeDto.ts";
 import CraftApi from "@/service/CraftApi.ts";
 import type ProfileUpdateDto from "@/dto/ProfileUpdateDto.ts";
 import type RegisterAgentRequestDto from "@/dto/request/RegisterAgentRequestDto.ts";

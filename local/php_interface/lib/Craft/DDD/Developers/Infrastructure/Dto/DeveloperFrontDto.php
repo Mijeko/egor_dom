@@ -24,12 +24,12 @@ class DeveloperFrontDto
 			$developer->getId(),
 			$developer->getName(),
 			$developer->getPicture(),
-			array_map(function(BuildObjectEntity $buildObject) {
-				return new BuildObjectFrontDto(
-					$buildObject->getId(),
-					$buildObject->getName(),
-				);
-			}, $developer->getBuildObjects() ?? []),
+			array_map(
+				function(BuildObjectEntity $buildObject) {
+					return BuildObjectDto::fromModel($buildObject);
+				},
+				$developer->getBuildObjects() ?? []
+			),
 		);
 	}
 }

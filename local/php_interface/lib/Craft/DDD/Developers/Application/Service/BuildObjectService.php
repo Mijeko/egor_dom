@@ -30,6 +30,11 @@ class BuildObjectService
 
 		$buildObject = $this->buildObjectRepository->findById($id);
 
+		if(!$buildObject)
+		{
+			throw new \Exception('Объект недвижимости не найден');
+		}
+
 		$apartmentList = $this->apartmentRepository->findAll(
 			[],
 			[
@@ -41,6 +46,13 @@ class BuildObjectService
 		{
 			$buildObject->addApartment($apartment);
 		}
+
+		$developer = $this->developerService->findById($buildObject->getDeveloperId());
+		if($developer)
+		{
+			$buildObject->addDeveloper($developer);
+		}
+
 
 		return $buildObject;
 	}

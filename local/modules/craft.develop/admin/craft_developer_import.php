@@ -14,7 +14,7 @@ use Bitrix\Main\Application;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
 
-foreach(['craft.develop', 'iblock'] as $module)
+foreach(['craft.core', 'craft.develop', 'iblock'] as $module)
 {
 	if(!Loader::includeModule($module))
 	{

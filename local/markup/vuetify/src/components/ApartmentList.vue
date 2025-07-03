@@ -14,6 +14,7 @@ export default defineComponent({
   components: {BuyApartmentModal},
   data: function () {
     return {
+      show: false,
       selectBuildObjectId: 0,
       openModal: false,
     };
@@ -30,17 +31,58 @@ export default defineComponent({
 <template>
 
 
-  <v-card v-for="apart in apartments" class="mb-3">
-    <v-row>
-      <v-col md="9" class="pa-5">
-        <v-card-title>{{ apart.name }} {{apart.buildObjectId}}</v-card-title>
-        <v-card-subtitle>{{ Price.format(apart.price) }}</v-card-subtitle>
-      </v-col>
-      <v-col md="3" class="pa-5">
-        <v-btn @click.prevent="()=>{ selectBuildObjectId=apart.buildObjectId;openModal=true;}">Купить</v-btn>
-      </v-col>
-    </v-row>
-  </v-card>
+  <v-row>
+    <v-col cols="3" v-for="apart in apartments">
+      <v-card
+        class="mx-auto"
+        max-width="344"
+      >
+        <v-carousel>
+          <v-carousel-item
+            v-for="galleryItem in apart.buildObject?.gallery"
+            :src="galleryItem.src"
+            cover
+          ></v-carousel-item>
+        </v-carousel>
+
+        <v-card-title>
+          {{ apart.name }}
+        </v-card-title>
+
+        <v-card-subtitle>
+          {{ Price.format(apart.price) }}
+        </v-card-subtitle>
+
+        <v-card-actions>
+          <v-btn
+            color="orange-lighten-2"
+            text="Explore"
+          ></v-btn>
+
+          <v-spacer></v-spacer>
+
+          <v-btn
+            :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+            @click="show = !show"
+          ></v-btn>
+        </v-card-actions>
+
+        <v-expand-transition>
+          <div v-show="show">
+            <v-divider></v-divider>
+
+            <v-card-text>
+              I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for
+              sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey,
+              you
+              add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to
+              escape.
+            </v-card-text>
+          </div>
+        </v-expand-transition>
+      </v-card>
+    </v-col>
+  </v-row>
 
 
   <BuyApartmentModal

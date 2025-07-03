@@ -27,3 +27,6 @@ tests:
 orm:
 	cd local/modules/craft.orm && composer i
 	cd local/modules/craft.orm && php run.php orm:annotate -m all
+
+import:
+	php local/php_interface/console/import.php

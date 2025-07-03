@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import type AuthorizeDto from "@/dto/AuthorizeDto.ts";
+import type AuthorizeDto from "@/dto/request/AuthorizeDto.ts";
 import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
 import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";

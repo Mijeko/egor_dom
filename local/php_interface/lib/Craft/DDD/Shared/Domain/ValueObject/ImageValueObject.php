@@ -28,9 +28,36 @@ class ImageValueObject
 		return time();
 	}
 
+	protected static function prepareFolders(): void
+	{
+
+		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . static::sourceFolder()))
+		{
+			mkdir($_SERVER['DOCUMENT_ROOT'] . static::sourceFolder());
+		}
+
+		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . static::imageFolder()))
+		{
+			mkdir($_SERVER['DOCUMENT_ROOT'] . static::imageFolder());
+		}
+
+	}
+
+	protected static function getExtension($url): ?string
+	{
+		preg_match('/(\.png|\.jpg|\.webp|\.jpeg)$/iu', $url, $matches);
+
+		if(!empty($matches[0]))
+		{
+			return $matches[0];
+		}
+
+		return null;
+	}
+
 	public static function fromUrl(?string $url, ?string $name = null): ?static
 	{
-		return null;
+//		return null;
 		if(!$url)
 		{
 			return null;
@@ -41,13 +68,18 @@ class ImageValueObject
 			$name = self::generateImageName();
 		}
 
-		file_put_contents(self::sourceFolder() . $name, file_get_contents($url));
+		self::prepareFolders();
+
+
+		$fileName = $_SERVER['DOCUMENT_ROOT'] . self::sourceFolder() . $name . self::getExtension($url);
+
+		file_put_contents($fileName, file_get_contents($url));
 
 
 		$fileData = null;
-		if(is_file($_SERVER['DOCUMENT_ROOT'] . self::sourceFolder() . $name))
+		if(is_file($fileName))
 		{
-			$file = \CFile::MakeFileArray($_SERVER['DOCUMENT_ROOT'] . self::sourceFolder() . $name);
+			$file = \CFile::MakeFileArray($fileName);
 			if($file)
 			{
 				$fileId = CFile::SaveFile($file, self::imageFolder());

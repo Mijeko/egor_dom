@@ -3,7 +3,9 @@
 namespace Craft\DDD\Developers\Application\Service;
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 
 class ApartmentService
 {
@@ -17,7 +19,36 @@ class ApartmentService
 
 	public function findAll(array $order = [], array $filters = []): array
 	{
-		return $this->apartmentRepository->findAll($filters, $order);
+		$apartmentList = $this->apartmentRepository->findAll($filters, $order);
+
+		$apartmentListId = array_map(function(ApartmentEntity $apartment) {
+			return $apartment->getId();
+		}, $apartmentList);
+
+		$buildObjectList = $this->buildObjectService->findAll(
+			[],
+			[
+				BuildObjectTable::F_ID => $apartmentListId,
+			]
+		);
+
+		$apartmentList = array_map(function(ApartmentEntity $apartment) use ($buildObjectList) {
+
+			$currentBuildObject = array_filter($buildObjectList, function(BuildObjectEntity $buildObjectTable) use ($apartment) {
+				return $buildObjectTable->getId() == $apartment->getBuildObjectId();
+			});
+
+			if(count($currentBuildObject) == 1)
+			{
+				$currentBuildObject = array_shift($buildObjectList);
+				$apartment->setBuildObject($currentBuildObject);
+			}
+
+			return $apartment;
+
+		}, $apartmentList);
+
+		return $apartmentList;
 	}
 
 	public function create(ApartmentEntity $apartment): ApartmentEntity

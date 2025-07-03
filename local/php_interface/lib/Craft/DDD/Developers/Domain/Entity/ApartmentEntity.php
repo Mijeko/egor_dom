@@ -12,6 +12,7 @@ class ApartmentEntity
 {
 	public function __construct(
 		protected ?int                     $id,
+		protected ?int                     $buildObjectId,
 		protected ?BuildObjectEntity       $buildObject,
 		protected ?string                  $name,
 		protected ?string                  $description,
@@ -71,6 +72,7 @@ class ApartmentEntity
 	): static
 	{
 		$entity = new static(
+			null,
 			null,
 			$buildObject,
 			null,
@@ -141,5 +143,10 @@ class ApartmentEntity
 	public function getBuildObject(): ?BuildObjectEntity
 	{
 		return $this->buildObject;
+	}
+
+	public function getBuildObjectId(): ?int
+	{
+		return $this->buildObjectId;
 	}
 }

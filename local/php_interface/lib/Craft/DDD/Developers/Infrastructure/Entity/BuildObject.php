@@ -65,14 +65,14 @@ class BuildObject extends EO_BuildObject
 		}
 
 		$this->setLocation(json_encode([
-			'latitude'  => $locationData->getLatitude(),
-			'longitude' => $locationData->getLongitude(),
-			'country'   => $locationData->getCountry(),
-			'region'    => $locationData->getRegion(),
-			'district'  => $locationData->getDistrict(),
-			'city'      => $locationData->getLocalityName(),
-			'address'   => $locationData->getAddress(),
-			'apartment' => $locationData->getApartment(),
+			'latitude'  => $locationData->getLatitude()->getValue(),
+			'longitude' => $locationData->getLongitude()->getValue(),
+			'country'   => $locationData->getCountry()->getValue(),
+			'region'    => $locationData->getRegion()->getValue(),
+			'district'  => $locationData->getDistrict()->getValue(),
+			'city'      => $locationData->getLocalityName()->getValue(),
+			'address'   => $locationData->getAddress()->getValue(),
+			'apartment' => $locationData->getApartment()->getValue(),
 		]));
 
 		return $this;

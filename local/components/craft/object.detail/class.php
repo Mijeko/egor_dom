@@ -1,9 +1,12 @@
 <?php
 
+use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Developers\Infrastructure\Dto\ApartmentDto;
+use Craft\DDD\Developers\Infrastructure\Dto\DeveloperFrontDto;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
-use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDetailDto;
+use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto;
 use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
 
 class CraftBuildObjectDetailComponent extends CBitrixComponent
@@ -33,7 +36,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function meta(): void
 	{
-		/* @var $element \Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDetailDto */
+		/* @var $element \Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto */
 		$element = $this->arResult['ELEMENT'];
 
 		global $APPLICATION;
@@ -55,22 +58,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 			throw new Exception('Element not found');
 		}
 
-		$this->arResult['ELEMENT'] = new BuildObjectDetailDto(
-			$element->getId(),
-			$element->getName(),
-			null,
-			$element->getGallery(),
-			array_map(
-				function(ApartmentEntity $item) {
-					return new ApartmentDto(
-						$item->getId(),
-						$item->getName(),
-						$item->getPrice(),
-						$item->getBuildObject()?->getId(),
-					);
-				},
-				$element->getApartments() ?? []
-			),
-		);
+
+		$this->arResult['ELEMENT'] = BuildObjectDto::fromModel($element);
 	}
 }

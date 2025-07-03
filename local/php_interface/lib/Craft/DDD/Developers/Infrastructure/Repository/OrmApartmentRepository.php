@@ -13,12 +13,12 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 	public function findAll(array $order = [], array $filter = []): array
 	{
 		$result = [];
-		$aparmtnetList = ApartmentTable::getList([
+		$apartmentList = ApartmentTable::getList([
 			'order'  => $order,
 			'filter' => $filter,
 		])->fetchCollection();
 
-		foreach($aparmtnetList as $apartment)
+		foreach($apartmentList as $apartment)
 		{
 			$result[] = $this->hydrateElement($apartment);
 		}
@@ -52,6 +52,7 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 	{
 		return new ApartmentEntity(
 			$apartment->getId(),
+			null,
 			null,
 			$apartment->getName(),
 			null,
