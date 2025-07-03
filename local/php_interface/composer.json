@@ -9,6 +9,7 @@
   },
   "minimum-stability": "dev",
   "require": {
+    "php-amqplib/php-amqplib": "^3.2",
     "yiisoft/validator": "dev-master",
     "phpoffice/phpword": "dev-master",
     "dompdf/dompdf": "dev-master"
