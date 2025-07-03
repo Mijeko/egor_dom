@@ -28,7 +28,8 @@ class ImportServiceFactory
 					new DeveloperService(
 						new OrmDeveloperRepository(),
 						new OrmBuildObjectRepository(),
-					)
+					),
+					new OrmApartmentRepository(),
 				)
 			),
 		);

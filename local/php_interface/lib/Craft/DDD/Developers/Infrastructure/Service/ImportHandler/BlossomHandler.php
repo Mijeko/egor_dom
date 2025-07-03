@@ -69,7 +69,7 @@ class BlossomHandler implements ImportHandlerInterface
 						new RegionValueObject($rawApartmentData['location']['region']),
 						new DistrictValueObject($rawApartmentData['location']['district']),
 						new CityValueObject($rawApartmentData['location']['locality-name']),
-						new AddressValueObject($rawApartmentData['location']['address']),
+						new AddressValueObject(is_string($rawApartmentData['location']['address']) ? $rawApartmentData['location']['address'] : null),
 						new ApartmentValueObject($rawApartmentData['location']['apartment']),
 						new LongitudeValueObject($rawApartmentData['location']['longitude']),
 						new LatitudeValueObject($rawApartmentData['location']['latitude']),
@@ -98,7 +98,7 @@ class BlossomHandler implements ImportHandlerInterface
 						$rawApartmentData['kitchen-space']['unit'],
 					)
 				),
-				$rawApartmentData['renovation'],
+				is_string($rawApartmentData['renovation']) ? $rawApartmentData['renovation'] : null,
 				new StringLogicValueObject($rawApartmentData['parking']),
 				new StringLogicValueObject($rawApartmentData['bathroom-unit']),
 				$rawApartmentData['mortgage'],
