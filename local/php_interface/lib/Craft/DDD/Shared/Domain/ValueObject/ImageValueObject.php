@@ -55,9 +55,23 @@ class ImageValueObject
 		return null;
 	}
 
+	public static function fromId(int $id): ?static
+	{
+		$file = CFile::GetFileArray($id);
+		if(!$file)
+		{
+			return null;
+		}
+
+		return new static(
+			$file['ID'],
+			$file['SRC']
+		);
+	}
+
 	public static function fromUrl(?string $url, ?string $name = null): ?static
 	{
-//		return null;
+		//		return null;
 		if(!$url)
 		{
 			return null;

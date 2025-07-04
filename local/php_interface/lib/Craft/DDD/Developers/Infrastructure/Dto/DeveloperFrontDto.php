@@ -23,7 +23,10 @@ class DeveloperFrontDto
 		return new static(
 			$developer->getId(),
 			$developer->getName(),
-			$developer->getPicture(),
+			new BxImageDto(
+				$developer->getPicture()->getId(),
+				$developer->getPicture()->getSrc()
+			),
 			array_map(
 				function(BuildObjectEntity $buildObject) {
 					return BuildObjectDto::fromModel($buildObject);

@@ -7,7 +7,9 @@ use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
@@ -32,6 +34,7 @@ class BuildObjectTable extends DataManager
 	const ACTIVE_N = 'N';
 
 	const R_APARTMENTS = 'APARTMENTS';
+	const R_DEVELOPER = 'DEVELOPER';
 
 	public static function getTableName()
 	{
@@ -75,9 +78,16 @@ class BuildObjectTable extends DataManager
 
 			(new OneToMany(
 				self::R_APARTMENTS,
-				\Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable::class,
+				ApartmentTable::class,
 				ApartmentTable::R_BUILD_OBJECT
 			)),
+
+			(new Reference(
+				self::R_DEVELOPER,
+				DeveloperTable::class,
+				Join::on('this.' . self::F_DEVELOPER_ID, 'ref.' . DeveloperTable::F_ID)
+			))
+				->configureJoinType('left'),
 		];
 	}
 

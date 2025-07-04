@@ -6419,6 +6419,17 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer resetUpdatedAt()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer unsetUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillUpdatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection requireBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObjects()
+	 * @method bool hasBuildObjects()
+	 * @method bool isBuildObjectsFilled()
+	 * @method bool isBuildObjectsChanged()
+	 * @method void addToBuildObjects(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject)
+	 * @method void removeFromBuildObjects(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject)
+	 * @method void removeAllBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer resetBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer unsetBuildObjects()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6477,6 +6488,9 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
 	 * @method \Bitrix\Main\Type\DateTime[] fillUpdatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection[] getBuildObjectsList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getBuildObjectsCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObjects()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6671,6 +6685,16 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method void removeAllApartments()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetApartments()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer getDeveloper()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer remindActualDeveloper()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer requireDeveloper()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setDeveloper(\Craft\DDD\Developers\Infrastructure\Entity\Developer $object)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetDeveloper()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetDeveloper()
+	 * @method bool hasDeveloper()
+	 * @method bool isDeveloperFilled()
+	 * @method bool isDeveloperChanged()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer fillDeveloper()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6738,6 +6762,9 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection[] getApartmentsList()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection getApartmentsCollection()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection fillApartments()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer[] getDeveloperList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getDeveloperCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection fillDeveloper()
 	 *
 	 * Common methods:
 	 * ---------------

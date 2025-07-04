@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 class BuildObjectEntity
@@ -19,6 +20,22 @@ class BuildObjectEntity
 		protected ?ImageGalleryValueObject $gallery = null,
 	)
 	{
+	}
+
+
+	public static function hydrateFromModel(BuildObject $buildObject)
+	{
+		return new static(
+			$buildObject->getId(),
+			$buildObject->getName(),
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+		);
 	}
 
 	public static function fromImport(

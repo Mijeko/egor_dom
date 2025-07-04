@@ -2,11 +2,14 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
@@ -36,19 +39,19 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 	protected function hydrateElement(Developer $developer): DeveloperEntity
 	{
-		$picture = null;
-		$_image = \CFile::GetFileArray($developer->getPictureId());
-		if($_image)
-		{
-			$picture = new BxImageDto($_image['ID'], $_image['SRC']);
-		}
 
+		$buildObjects = [];
+
+		foreach($developer->fillBuildObjects() as $buildObject)
+		{
+			$buildObjects[] = BuildObjectEntity::hydrateFromModel($buildObject);
+		}
 
 		return new DeveloperEntity(
 			$developer->getId(),
 			$developer->getName(),
-			$picture,
-			null,
+			ImageValueObject::fromId($developer->getPictureId()),
+			$buildObjects,
 			new ImportSettingValueObject(
 				$developer->importSettings()->getHandler(),
 				$developer->importSettings()->getLinkSource(),

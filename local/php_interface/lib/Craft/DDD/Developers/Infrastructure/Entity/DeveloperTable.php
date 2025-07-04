@@ -7,6 +7,7 @@ use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
+use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\Type\DateTime;
 
 class DeveloperTable extends DataManager
@@ -19,6 +20,9 @@ class DeveloperTable extends DataManager
 	const F_PICTURE_ID = 'PICTURE_ID';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
+
+
+	const R_BUILD_OBJECTS = 'BUILD_OBJECTS';
 
 
 	const ACTIVE_Y = 'Y';
@@ -53,6 +57,14 @@ class DeveloperTable extends DataManager
 				->configureDefaultValue(new DateTime()),
 			(new DatetimeField(self::F_UPDATED_AT))
 				->configureDefaultValue(new DateTime()),
+
+
+			(new OneToMany(
+				self::R_BUILD_OBJECTS,
+				BuildObjectTable::class,
+				BuildObjectTable::R_DEVELOPER
+			))
+				->configureJoinType('left'),
 		];
 	}
 

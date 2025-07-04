@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 
 /**
@@ -14,7 +15,7 @@ class DeveloperEntity
 	public function __construct(
 		public ?int                         $id,
 		public ?string                      $name,
-		public ?BxImageDto                  $picture = null,
+		public ?ImageValueObject            $picture = null,
 		protected ?array                    $buildObjects = null,
 		protected ?ImportSettingValueObject $importSetting = null,
 	)
@@ -42,7 +43,7 @@ class DeveloperEntity
 		return $this->name;
 	}
 
-	public function getPicture(): BxImageDto
+	public function getPicture(): ImageValueObject
 	{
 		return $this->picture;
 	}
