@@ -23,7 +23,7 @@ class BuildObjectEntity
 	}
 
 
-	public static function hydrateFromModel(BuildObject $buildObject)
+	public static function fromModel(BuildObject $buildObject)
 	{
 		return new static(
 			$buildObject->getId(),

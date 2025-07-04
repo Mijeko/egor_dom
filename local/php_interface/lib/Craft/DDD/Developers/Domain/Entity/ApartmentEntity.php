@@ -6,6 +6,7 @@ use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
+use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 class ApartmentEntity
@@ -94,6 +95,30 @@ class ApartmentEntity
 		$entity->generateName();
 
 		return $entity;
+	}
+
+	public static function fromModel(Apartment $apartment): static
+	{
+		$buildObject = $apartment->fillBuildObject();
+		return new static(
+			$apartment->getId(),
+			$apartment->getBuildObjectId(),
+			BuildObjectEntity::fromModel($buildObject),
+			$apartment->getName(),
+			$apartment->getDescription(),
+			$apartment->getPrice(),
+			$apartment->getRooms(),
+			$apartment->getFloor(),
+			null,
+			$apartment->getRenovation(),
+			new StringLogicValueObject($apartment->getParking()),
+			new StringLogicValueObject($apartment->getBathroomUnit()),
+			$apartment->getMortgage(),
+			$apartment->getBuiltYear(),
+			new BuiltStateValueObject($apartment->getBuildingState()),
+			ImageGalleryValueObject::fillFromId($apartment->getPlanImageEx()),
+			ImageGalleryValueObject::fillFromId($apartment->getGalleryEx()),
+		);
 	}
 
 	public function generateName(): static

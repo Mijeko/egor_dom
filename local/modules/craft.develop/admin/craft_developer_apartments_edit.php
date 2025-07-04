@@ -151,7 +151,7 @@ if($field = $entity->getField(ApartmentTable::F_PRICE))
 	);
 }
 
-if($field = $entity->getField(ApartmentTable::F_PLAN_IMAGE_ID))
+if($field = $entity->getField(ApartmentTable::F_PLAN_IMAGE))
 {
 	$tabControl->AddFileField(
 		$field->getName(),

@@ -3,6 +3,9 @@
 namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
+use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
+use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 
@@ -20,6 +23,28 @@ class DeveloperEntity
 		protected ?ImportSettingValueObject $importSetting = null,
 	)
 	{
+	}
+
+	public static function fromModel(Developer $developer): DeveloperEntity
+	{
+		$buildObjects = [];
+
+		foreach($developer->fillBuildObjects() as $buildObject)
+		{
+			$buildObjects[] = BuildObjectEntity::fromModel($buildObject);
+		}
+
+		return new static(
+			$developer->getId(),
+			$developer->getName(),
+			ImageValueObject::fromId($developer->getPictureId()),
+			$buildObjects,
+			new ImportSettingValueObject(
+				$developer->importSettings()->getHandler(),
+				$developer->importSettings()->getLinkSource(),
+				null
+			)
+		);
 	}
 
 	public function addBuildObject(BuildObjectEntity $buildObject): static

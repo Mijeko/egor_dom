@@ -21,7 +21,17 @@ class ApartmentTable extends DataManager
 	const F_SORT = 'SORT';
 	const F_CODE = 'CODE';
 	const F_PRICE = 'PRICE';
-	const F_PLAN_IMAGE_ID = 'PLAN_IMAGE_ID';
+	const F_ROOMS = 'ROOMS';
+	const F_FLOOR = 'FLOOR';
+	const F_DESCRIPTION = 'DESCRIPTION';
+	const F_RENOVATION = 'RENOVATION';
+	const F_BUILT_YEAR = 'BUILT_YEAR';
+	const F_BUILDING_STATE = 'BUILDING_STATE';
+	const F_MORTGAGE = 'MORTGAGE';
+	const F_PARKING = 'PARKING';
+	const F_PLAN_IMAGE = 'PLAN_IMAGE';
+	const F_GALLERY = 'GALLERY';
+	const F_BATHROOM_UNIT = 'BATHROOM_UNIT';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
@@ -48,6 +58,12 @@ class ApartmentTable extends DataManager
 			(new StringField(self::F_NAME))
 				->configureTitle('Название')
 				->configureRequired(),
+			(new StringField(self::F_CODE))
+				->configureTitle('Символьный код')
+				->configureRequired(),
+			(new StringField(self::F_DESCRIPTION))
+				->configureTitle('Описание')
+				->configureRequired(),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
 				->configureDefaultValue(self::ACTIVE_Y)
@@ -55,14 +71,29 @@ class ApartmentTable extends DataManager
 			(new IntegerField(self::F_SORT))
 				->configureTitle('Сортировка')
 				->configureDefaultValue(500),
-			(new StringField(self::F_CODE))
-				->configureTitle('Символьный код')
-				->configureRequired(),
+			(new IntegerField(self::F_ROOMS))
+				->configureTitle('Количество комнат'),
+			(new IntegerField(self::F_FLOOR))
+				->configureTitle('Этаж'),
 			(new IntegerField(self::F_PRICE))
 				->configureRequired()
 				->configureTitle('Цена квартиры'),
-			(new IntegerField(self::F_PLAN_IMAGE_ID))
+			(new StringField(self::F_PLAN_IMAGE))
 				->configureTitle('План квартиры'),
+			(new StringField(self::F_GALLERY))
+				->configureTitle('Изображения'),
+			(new StringField(self::F_RENOVATION))
+				->configureTitle('Отделка'),
+			(new StringField(self::F_BUILT_YEAR))
+				->configureTitle('Год постройки'),
+			(new StringField(self::F_BUILDING_STATE))
+				->configureTitle('Статус постройки'),
+			(new StringField(self::F_MORTGAGE))
+				->configureTitle('Ипотека'),
+			(new StringField(self::F_PARKING))
+				->configureTitle('Парковка'),
+			(new StringField(self::F_BATHROOM_UNIT))
+				->configureTitle('Раздельный санузел'),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')
 				->configureDefaultValue(new DateTime()),

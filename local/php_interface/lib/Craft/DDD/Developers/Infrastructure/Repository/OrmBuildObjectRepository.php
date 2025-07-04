@@ -109,28 +109,11 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		{
 			foreach($apartments as $apartment)
 			{
-				$childApartmentList[] = new ApartmentEntity(
-					$apartment->getId(),
-					$apartment->getBuildObjectId(),
-					null,
-					$apartment->getName(),
-					$apartment->getPrice(),
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-				);
+				$childApartmentList[] = ApartmentEntity::fromModel($apartment);
 			}
 		}
 
+		$developer = $buildObject->fillDeveloper() ? DeveloperEntity::fromModel($buildObject->getDeveloper()) : null;
 		$location = $buildObject->getLocationEx();
 
 		return new BuildObjectEntity(
@@ -149,8 +132,8 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 				new LatitudeValueObject($location['latitude']),
 			),
 			$buildObject->getDeveloperId(),
-			null,
-			null,
+			$developer,
+			$childApartmentList,
 			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
 		);
 	}

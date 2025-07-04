@@ -39,24 +39,6 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 	protected function hydrateElement(Developer $developer): DeveloperEntity
 	{
-
-		$buildObjects = [];
-
-		foreach($developer->fillBuildObjects() as $buildObject)
-		{
-			$buildObjects[] = BuildObjectEntity::hydrateFromModel($buildObject);
-		}
-
-		return new DeveloperEntity(
-			$developer->getId(),
-			$developer->getName(),
-			ImageValueObject::fromId($developer->getPictureId()),
-			$buildObjects,
-			new ImportSettingValueObject(
-				$developer->importSettings()->getHandler(),
-				$developer->importSettings()->getLinkSource(),
-				null
-			)
-		);
+		return DeveloperEntity::fromModel($developer);
 	}
 }

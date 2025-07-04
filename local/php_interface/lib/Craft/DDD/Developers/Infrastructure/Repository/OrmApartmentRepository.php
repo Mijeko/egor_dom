@@ -3,9 +3,13 @@
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
+use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 class OrmApartmentRepository implements ApartmentRepositoryInterface
 {
@@ -50,24 +54,6 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	protected function hydrateElement(Apartment $apartment): ApartmentEntity
 	{
-		return new ApartmentEntity(
-			$apartment->getId(),
-			null,
-			null,
-			$apartment->getName(),
-			null,
-			$apartment->getPrice(),
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-		);
+		return ApartmentEntity::fromModel($apartment);
 	}
 }
