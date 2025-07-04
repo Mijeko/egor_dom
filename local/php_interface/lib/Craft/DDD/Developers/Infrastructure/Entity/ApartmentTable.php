@@ -30,6 +30,7 @@ class ApartmentTable extends DataManager
 	const F_MORTGAGE = 'MORTGAGE';
 	const F_PARKING = 'PARKING';
 	const F_PLAN_IMAGE = 'PLAN_IMAGE';
+	const F_AREA = 'AREA';
 	const F_GALLERY = 'GALLERY';
 	const F_BATHROOM_UNIT = 'BATHROOM_UNIT';
 	const F_CREATED_AT = 'CREATED_AT';
@@ -92,6 +93,8 @@ class ApartmentTable extends DataManager
 				->configureTitle('Ипотека'),
 			(new StringField(self::F_PARKING))
 				->configureTitle('Парковка'),
+			(new StringField(self::F_AREA))
+				->configureTitle('Площадь квартиры'),
 			(new StringField(self::F_BATHROOM_UNIT))
 				->configureTitle('Раздельный санузел'),
 			(new DatetimeField(self::F_CREATED_AT))
