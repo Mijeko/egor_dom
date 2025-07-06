@@ -63,8 +63,7 @@ class ApartmentTable extends DataManager
 				->configureTitle('Символьный код')
 				->configureRequired(),
 			(new StringField(self::F_DESCRIPTION))
-				->configureTitle('Описание')
-				->configureRequired(),
+				->configureTitle('Описание'),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
 				->configureDefaultValue(self::ACTIVE_Y)
@@ -91,11 +90,11 @@ class ApartmentTable extends DataManager
 				->configureTitle('Статус постройки'),
 			(new StringField(self::F_MORTGAGE))
 				->configureTitle('Ипотека'),
-			(new StringField(self::F_PARKING))
+			(new IntegerField(self::F_PARKING))
 				->configureTitle('Парковка'),
 			(new StringField(self::F_AREA))
 				->configureTitle('Площадь квартиры'),
-			(new StringField(self::F_BATHROOM_UNIT))
+			(new IntegerField(self::F_BATHROOM_UNIT))
 				->configureTitle('Раздельный санузел'),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')

@@ -2,7 +2,11 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Dto;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\Dto\BxImageDto;
 
 class ApartmentDto
 {
@@ -12,7 +16,10 @@ class ApartmentDto
 		public ?string         $price,
 		public ?int            $rooms,
 		public ?int            $floor,
+		public ?int            $builtYear,
+		public ?string         $builtState,
 		public ?BuildObjectDto $buildObject,
+		public ?array          $planImages,
 	)
 	{
 	}
@@ -27,7 +34,15 @@ class ApartmentDto
 			$model->getPrice(),
 			$model->getRooms(),
 			$model->getFloor(),
+			$model->getBuiltYear(),
+			$model->getBuildingState()->getLabel(),
 			$buildObject,
+			array_map(function(ImageValueObject $imageGallery) {
+				return new BxImageDto(
+					$imageGallery->getId(),
+					$imageGallery->getSrc(),
+				);
+			}, $model->getPlanImages()->getImages())
 		);
 	}
 }

@@ -26,9 +26,9 @@ export default defineComponent({
 
 
   <v-row>
-    <v-col cols="3" v-for="apart in apartments">
+    <v-col cols="3" v-for="apartment in apartments">
       <ApartmentItem
-        :apart
+        :apartment
       />
     </v-col>
   </v-row>

@@ -18,6 +18,7 @@ foreach($developers as $developer)
 		$service->execute($developer->getId());
 	} catch(Exception $e)
 	{
+		\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
 	}
 }
 

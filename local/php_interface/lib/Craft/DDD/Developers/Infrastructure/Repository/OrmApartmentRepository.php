@@ -39,6 +39,16 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 		$model->setCode(md5(rand()));
 		$model->setBuildObjectId($apartment->getBuildObject()->getId());
 		$model->setPrice($apartment->getPrice());
+		$model->setFloor($apartment->getFloor());
+		$model->setRooms($apartment->getRooms());
+		$model->setParking($apartment->getParking()->getBoolValue());
+		$model->setBuiltYear($apartment->getBuiltYear());
+		$model->setBuildingState($apartment->getBuildingState()->getValue());
+		$model->setMortgage($apartment->getMortgage());
+		$model->setBathroomUnit($apartment->getBathroomUnit()->getValue());
+		$model->setRenovation($apartment->getRenovation());
+		$model->setAreaEx($apartment->getArea());
+		$model->setPlanImageEx($apartment->getPlanImages());
 
 		$result = $model->save();
 

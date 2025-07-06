@@ -89,8 +89,8 @@ class FirstDevelopHandler implements ImportHandlerInterface
 				),
 				$rawApartmentData['description'][0],
 				$rawApartmentData['price']['value'],
-				$rawApartmentData['rooms'],
-				$rawApartmentData['floor'],
+				intval($rawApartmentData['rooms']),
+				intval($rawApartmentData['floor']),
 				new AreaValueObject(
 					$rawApartmentData['area']['value'],
 					$rawApartmentData['area']['unit'],

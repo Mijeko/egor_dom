@@ -24,7 +24,8 @@ export default defineComponent({
           <v-img :src="buildObject?.picture?.src" width="200" height="100" cover></v-img>
         </v-col>
         <v-col md="6">
-          <v-card-text>{{ buildObject.name }}</v-card-text>
+          <v-card-title>{{ buildObject.name }}</v-card-title>
+          <v-card-subtitle>Квартир: {{ buildObject?.apartments?.length }}</v-card-subtitle>
         </v-col>
         <v-col md="3">
           <v-btn :href="buildObject.detailLink">Посмотреть</v-btn>

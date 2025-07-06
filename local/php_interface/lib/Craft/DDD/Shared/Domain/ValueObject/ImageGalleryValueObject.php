@@ -2,8 +2,6 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-use Bitrix\Main\Diag\Debug;
-
 class ImageGalleryValueObject
 {
 	public function __construct(
@@ -25,6 +23,18 @@ class ImageGalleryValueObject
 	public function getImages(): ?array
 	{
 		return $this->images;
+	}
+
+	public function getImageIdList(): array
+	{
+		$result = [];
+
+		foreach($this->images as $image)
+		{
+			$result[] = $image->getId();
+		}
+
+		return $result;
 	}
 
 

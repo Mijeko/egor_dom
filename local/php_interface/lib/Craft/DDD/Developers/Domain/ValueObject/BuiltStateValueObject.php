@@ -6,7 +6,8 @@ class BuiltStateValueObject
 {
 
 	protected array $status = [
-		'built' => 'Построено',
+		'built'      => 'Построено',
+		'unfinished' => 'Не завершено',
 	];
 
 	public function __construct(

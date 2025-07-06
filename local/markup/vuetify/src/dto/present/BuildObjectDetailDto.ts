@@ -6,6 +6,7 @@ import type LocationDto from "@/dto/LocationDto.ts";
 export default interface BuildObjectDetailDto {
   id: number;
   name?: string;
+  description?: string;
   type?: string;
   floors?: number;
   developer?: DeveloperDto;

@@ -16,13 +16,14 @@ export default defineComponent({
   },
   data: function () {
     return {
+      isRunFilter: false,
       filteredApartments: [],
     };
   },
   computed: {
     computedApartments: function () {
 
-      if (this.filteredApartments && this.filteredApartments.length > 0) {
+      if (this.isRunFilter) {
         return this.filteredApartments;
       }
 
@@ -77,6 +78,8 @@ export default defineComponent({
     </v-col>
   </v-row>
 
+  <v-divider class="mt-15 mb-15"/>
+
   <v-row>
     <v-col cols="12">
       <Map
@@ -87,16 +90,20 @@ export default defineComponent({
     </v-col>
   </v-row>
 
+  <v-divider class="mt-15 mb-15"/>
+
   <v-row>
     <v-col cols="12">
       <v-row>
         <v-col cols="2">
-          <h3>Купить квартиру</h3>
+          <h2 class="pt-2">Купить квартиру</h2>
         </v-col>
         <v-col cols="10">
           <ApartmentFilter
+            :is-run-filter="isRunFilter"
             :filtered-apartments="filteredApartments"
             @update:filteredApartments="filteredApartments = $event"
+            @update:isRunFilter="isRunFilter = $event"
             :apartments="product?.apartments"
           />
 

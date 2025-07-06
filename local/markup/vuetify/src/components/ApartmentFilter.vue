@@ -22,6 +22,7 @@ export default defineComponent({
         return minPrice < apart.price && apart.price < maxPrice;
       });
 
+      this.$emit('update:isRunFilter', true);
       this.$emit('update:filteredApartments', filtered);
     },
     'filter.rooms': function (newVal: any, oldVal: any) {
@@ -29,22 +30,28 @@ export default defineComponent({
       let rooms = newVal;
 
       let filtered = this.apartments.filter((apart: ApartmentDto) => {
-        return apart.rooms >= rooms;
+        return apart.rooms == rooms;
       });
 
+      this.$emit('update:isRunFilter', true);
       this.$emit('update:filteredApartments', filtered);
     },
     'filter.floor': function (newVal: any, oldVal: any) {
 
       let floor = newVal;
       let filtered = this.apartments.filter((apart: ApartmentDto) => {
-        return apart.floor >= floor;
+        return apart.floor == floor;
       });
 
+      this.$emit('update:isRunFilter', true);
       this.$emit('update:filteredApartments', filtered);
     },
   },
   props: {
+    isRunFilter: {
+      type: Boolean,
+      default: false,
+    },
     filteredApartments: {
       type: Array as PropType<ApartmentDto[]>,
       default: []
@@ -100,7 +107,7 @@ export default defineComponent({
         :max="maxPrice"
         :min="minPrice"
         :step="1"
-        class="align-center"
+        class="align-center pt-2"
         hide-details
       >
         <template v-slot:prepend>

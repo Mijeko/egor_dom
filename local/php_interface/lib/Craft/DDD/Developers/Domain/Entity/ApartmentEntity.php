@@ -184,4 +184,69 @@ class ApartmentEntity
 	{
 		return $this->floor;
 	}
+
+	public function getParking(): ?StringLogicValueObject
+	{
+		return $this->parking;
+	}
+
+	/**
+	 * @return AreaValueObject|null
+	 */
+	public function getArea(): ?AreaValueObject
+	{
+		return $this->area;
+	}
+
+	/**
+	 * @return StringLogicValueObject|null
+	 */
+	public function getBathroomUnit(): ?StringLogicValueObject
+	{
+		return $this->bathroomUnit;
+	}
+
+	/**
+	 * @return BuiltStateValueObject|null
+	 */
+	public function getBuildingState(): ?BuiltStateValueObject
+	{
+		return $this->buildingState;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getBuiltYear(): ?int
+	{
+		return $this->builtYear;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
+
+	public function getGallery(): ?ImageGalleryValueObject
+	{
+		return $this->gallery;
+	}
+
+	public function getMortgage(): ?string
+	{
+		return $this->mortgage;
+	}
+
+	public function getPlanImages(): ?ImageGalleryValueObject
+	{
+		return $this->planImages;
+	}
+
+	public function getRenovation(): ?string
+	{
+		return $this->renovation;
+	}
 }
