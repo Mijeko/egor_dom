@@ -4,16 +4,30 @@ import type BuildObjectDetailDto from "@/dto/present/BuildObjectDetailDto.ts";
 import ApartmentList from "@/components/ApartmentList.vue";
 import type BuildObjectDetailInfo from "@/dto/present/component/buildObjectDetailInfo.ts";
 import Map from "@/components/Map.vue";
+import ApartmentListFilter from "@/components/ApartmentListFilter.vue";
 
 export default defineComponent({
   name: "BuildObjectDetail",
-  components: {Map, ApartmentList},
+  components: {ApartmentListFilter, Map, ApartmentList},
   props: {
     product: {
       type: Object as PropType<BuildObjectDetailDto>
     }
   },
+  data: function () {
+    return {
+      filteredApartments: [],
+    };
+  },
   computed: {
+    computedApartments: function () {
+
+      if (this.filteredApartments && this.filteredApartments.length > 0) {
+        return this.filteredApartments;
+      }
+
+      return this.product?.apartments;
+    },
     buildObjectDetailInfo: function (): BuildObjectDetailInfo[] {
       return [
         {
@@ -75,10 +89,22 @@ export default defineComponent({
 
   <v-row>
     <v-col cols="12">
-      <h3>Купить квартиру</h3>
+      <v-row>
+        <v-col cols="2">
+          <h3>Купить квартиру</h3>
+        </v-col>
+        <v-col cols="10">
+          <ApartmentListFilter
+            :filtered-apartments="filteredApartments"
+            @update:filteredApartments="filteredApartments = $event"
+            :apartments="product?.apartments"
+          />
+        </v-col>
+      </v-row>
+
       <ApartmentList
         v-if="product?.apartments"
-        :apartments="product?.apartments"
+        :apartments="computedApartments"
       />
     </v-col>
   </v-row>

@@ -52,12 +52,12 @@ class BuildObjectDto
 			$element->getFloors(),
 			$developer,
 			$gallery,
-			array_map(
+			array_values(array_map(
 				function(ApartmentEntity $item) {
 					return ApartmentDto::fromModel($item);
 				},
 				$element->getApartments() ?? []
-			),
+			)),
 			$location,
 			'/objects/' . $element->getId() . '/'
 		);

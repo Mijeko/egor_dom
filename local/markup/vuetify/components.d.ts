@@ -11,6 +11,7 @@ declare module 'vue' {
     Alert: typeof import('./src/components/Alert.vue')['default']
     ApartmentItem: typeof import('./src/components/ApartmentItem.vue')['default']
     ApartmentList: typeof import('./src/components/ApartmentList.vue')['default']
+    ApartmentListFilter: typeof import('./src/components/ApartmentListFilter.vue')['default']
     Auth: typeof import('./src/components/Auth.vue')['default']
     BottomFloatMenu: typeof import('./src/components/BottomFloatMenu.vue')['default']
     Breadcrumbs: typeof import('./src/components/Breadcrumbs.vue')['default']
