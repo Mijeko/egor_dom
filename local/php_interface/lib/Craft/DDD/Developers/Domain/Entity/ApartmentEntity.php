@@ -174,4 +174,14 @@ class ApartmentEntity
 	{
 		return $this->buildObjectId;
 	}
+
+	public function getRooms(): ?int
+	{
+		return $this->rooms;
+	}
+
+	public function getFloor(): ?int
+	{
+		return $this->floor;
+	}
 }

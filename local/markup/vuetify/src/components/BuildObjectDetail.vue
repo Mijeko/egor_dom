@@ -4,11 +4,11 @@ import type BuildObjectDetailDto from "@/dto/present/BuildObjectDetailDto.ts";
 import ApartmentList from "@/components/ApartmentList.vue";
 import type BuildObjectDetailInfo from "@/dto/present/component/buildObjectDetailInfo.ts";
 import Map from "@/components/Map.vue";
-import ApartmentListFilter from "@/components/ApartmentListFilter.vue";
+import ApartmentFilter from "@/components/ApartmentFilter.vue";
 
 export default defineComponent({
   name: "BuildObjectDetail",
-  components: {ApartmentListFilter, Map, ApartmentList},
+  components: {ApartmentFilter, Map, ApartmentList},
   props: {
     product: {
       type: Object as PropType<BuildObjectDetailDto>
@@ -94,11 +94,12 @@ export default defineComponent({
           <h3>Купить квартиру</h3>
         </v-col>
         <v-col cols="10">
-          <ApartmentListFilter
+          <ApartmentFilter
             :filtered-apartments="filteredApartments"
             @update:filteredApartments="filteredApartments = $event"
             :apartments="product?.apartments"
           />
+
         </v-col>
       </v-row>
 

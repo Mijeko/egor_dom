@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Dto;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 
 class ApartmentDto
@@ -11,6 +10,8 @@ class ApartmentDto
 		public ?string         $id,
 		public ?string         $name,
 		public ?string         $price,
+		public ?int            $rooms,
+		public ?int            $floor,
 		public ?BuildObjectDto $buildObject,
 	)
 	{
@@ -24,6 +25,8 @@ class ApartmentDto
 			$model->getId(),
 			$model->getName(),
 			$model->getPrice(),
+			$model->getRooms(),
+			$model->getFloor(),
 			$buildObject,
 		);
 	}

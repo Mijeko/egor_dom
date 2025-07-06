@@ -5,5 +5,7 @@ export default interface ApartmentDto {
   buildObjectId: number;
   name: string;
   price: number;
+  rooms: number;
+  floor: number;
   buildObject: BuildObjectDetailDto
 }
