@@ -66,6 +66,7 @@ export default defineComponent({
   <v-row>
     <v-col cols="12">
       <Map
+        :apartment-list="product?.apartments"
         :lat="Number(product?.location?.latitude)"
         :lon="Number(product?.location?.longitude)"
       />
