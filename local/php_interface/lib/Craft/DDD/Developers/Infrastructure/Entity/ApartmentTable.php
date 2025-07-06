@@ -85,7 +85,7 @@ class ApartmentTable extends DataManager
 				->configureTitle('Изображения'),
 			(new StringField(self::F_RENOVATION))
 				->configureTitle('Отделка'),
-			(new StringField(self::F_BUILT_YEAR))
+			(new IntegerField(self::F_BUILT_YEAR))
 				->configureTitle('Год постройки'),
 			(new StringField(self::F_BUILDING_STATE))
 				->configureTitle('Статус постройки'),

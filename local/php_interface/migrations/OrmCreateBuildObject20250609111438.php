@@ -24,6 +24,7 @@ CREATE TABLE `craft_build_objects` (
   `NAME` varchar(128) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `TYPE` varchar(128) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `GALLERY` longtext COLLATE 'utf8mb4_unicode_ci' NULL,
+  `DESCRIPTION` longtext COLLATE 'utf8mb4_unicode_ci' NULL,
   `LOCATION` longtext COLLATE 'utf8mb4_unicode_ci' NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL

@@ -24,7 +24,7 @@ class ApartmentEntity
 		protected ?string                  $renovation,
 		protected ?StringLogicValueObject  $parking,
 		protected ?StringLogicValueObject  $bathroomUnit,
-		protected ?int                     $mortgage,
+		protected ?string                  $mortgage,
 		protected ?int                     $builtYear,
 		protected ?BuiltStateValueObject   $buildingState,
 		protected ?ImageGalleryValueObject $planImages = null,

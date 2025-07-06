@@ -34,18 +34,24 @@ class BuildObjectDto
 		$location = $element->getLocation() ? LocationDto::fromModel($element->getLocation()) : null;
 		$developer = $element->getDeveloper() ? DeveloperFrontDto::fromModel($element->getDeveloper()) : null;
 
+		$gallery = [];
+		if($element->getGallery())
+		{
+			$gallery = array_map(function(ImageValueObject $image) {
+				return new BxImageDto(
+					$image->getId(),
+					$image->getSrc()
+				);
+			}, $element->getGallery()->getImages());
+		}
+
 		return new static(
 			$element->getId(),
 			$element->getName(),
 			$element->getType(),
 			$element->getFloors(),
 			$developer,
-			array_map(function(ImageValueObject $image) {
-				return new BxImageDto(
-					$image->getId(),
-					$image->getSrc()
-				);
-			}, $element->getGallery()->getImages()),
+			$gallery,
 			array_map(
 				function(ApartmentEntity $item) {
 					return ApartmentDto::fromModel($item);
