@@ -1,6 +1,6 @@
 export default interface ClaimCreateRequestDto {
   userId: number;
-  buildObjectId: number;
+  apartmentId: number;
   phone: string;
   email: string;
   client: string;

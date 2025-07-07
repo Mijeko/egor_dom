@@ -23,6 +23,10 @@ export default defineComponent({
     };
   },
   props: {
+    showModal: {
+      type: Boolean,
+      default: false,
+    },
     apartment: {
       type: Object as PropType<ApartmentDto>,
       default: null
@@ -38,7 +42,7 @@ export default defineComponent({
   <v-card
     class="mx-auto"
   >
-    <v-carousel :show-arrows="countImages > 1">
+    <v-carousel :show-arrows="countImages > 1" :hide-delimiters="true">
       <v-carousel-item
         v-for="galleryItem in apartment?.planImages"
         :src="galleryItem.src"
@@ -74,9 +78,19 @@ export default defineComponent({
       Состояние: {{ apartment.builtState }}
     </v-card-subtitle>
 
+    <div class="pa-3 mt-3 mb-2">
+      <v-btn
+        variant="flat"
+        class="font-weight-medium text-green-lighten-5"
+        color="green-accent-4"
+        @click="$emit('update:showModal',true)"
+      >Купить квартиру
+      </v-btn>
+    </div>
+
     <v-card-actions>
       <v-btn
-        color="orange-lighten-2"
+        color="indigo"
         text="Описание"
       ></v-btn>
 
@@ -98,8 +112,6 @@ export default defineComponent({
       </div>
     </v-expand-transition>
 
-
-    <v-btn color="second">Купить квартиру</v-btn>
   </v-card>
 </template>
 

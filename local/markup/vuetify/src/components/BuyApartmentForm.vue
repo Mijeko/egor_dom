@@ -41,7 +41,7 @@ export default defineComponent({
     };
   },
   props: {
-    buildObjectId: {
+    apartmentId: {
       type: Number,
       default: 0,
     },
@@ -73,7 +73,7 @@ export default defineComponent({
 
 
       let body: ClaimCreateRequestDto = {
-        buildObjectId: this.buildObjectId,
+        apartmentId: this.apartmentId,
         userId: this.user.id,
         email: this.form.email,
         phone: this.form.phone,
@@ -250,7 +250,7 @@ export default defineComponent({
 
       <v-btn
         text="Отмена"
-        @click="()=>{$emit('update:modelValue', false)}"
+        @click="$emit('update:modelValue', false)"
       ></v-btn>
     </v-card-actions>
   </v-form>

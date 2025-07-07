@@ -3,14 +3,15 @@ import {defineComponent, type PropType} from 'vue'
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import BuyApartmentModal from "@/components/modal/BuyApartmentModal.vue";
 import ApartmentItem from "@/components/ApartmentItem.vue";
+import ApartmentFilter from "@/components/ApartmentFilter.vue";
 
 export default defineComponent({
   name: "ApartmentList",
-  components: {ApartmentItem, BuyApartmentModal},
+  components: {ApartmentFilter, ApartmentItem, BuyApartmentModal},
   data: function () {
     return {
       selectBuildObjectId: 0,
-      openModal: false,
+      showModal: false,
     };
   },
   props: {
@@ -29,13 +30,16 @@ export default defineComponent({
     <v-col cols="3" v-for="apartment in apartments">
       <ApartmentItem
         :apartment
+        :show-modal="showModal"
+        @update:showModal="showModal = $event"
       />
     </v-col>
   </v-row>
 
 
   <BuyApartmentModal
-    v-model="openModal"
+    :show-modal="showModal"
+    @update:showModal="showModal = $event"
     :build-object-id="selectBuildObjectId"
   />
 
