@@ -97,6 +97,9 @@ export default defineComponent({
         </v-card-text>
       </div>
     </v-expand-transition>
+
+
+    <v-btn color="second">Купить квартиру</v-btn>
   </v-card>
 </template>
 
