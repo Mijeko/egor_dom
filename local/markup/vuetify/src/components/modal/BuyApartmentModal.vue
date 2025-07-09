@@ -6,11 +6,11 @@ export default defineComponent({
   name: "BuyApartmentModal",
   components: {BuyApartmentForm},
   props: {
-    buildObjectId: {
+    apartmentId: {
       type: Number,
       default: 0,
     },
-    modelValue: {
+    showModal: {
       type: Boolean,
       default: false,
     },
@@ -19,13 +19,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-dialog max-width="500" v-model="modelValue">
+  <v-dialog max-width="500" v-model="showModal">
     <template v-slot:default="{ isActive }">
       <v-card title="Заявка на покупку квартиры">
 
 
         <BuyApartmentForm
-          :build-object-id="buildObjectId"
+          :apartment-id="apartmentId"
         />
 
       </v-card>
