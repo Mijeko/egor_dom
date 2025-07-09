@@ -31,7 +31,7 @@ CREATE TABLE `craft_claims` (
   `POST_ADDRESS` varchar(128) NOT NULL,
   `BANK_NAME` varchar(128) NOT NULL,
   `USER_ID` int NOT NULL,
-  `BUILD_OBJECT_ID` int NOT NULL,
+  `APARTMENT_ID` int NOT NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL
 ) ENGINE='InnoDB';

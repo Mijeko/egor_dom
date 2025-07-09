@@ -3,8 +3,10 @@
 namespace Craft\Rest;
 
 use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
+use Craft\DDD\Claims\Application\Factory\ClaimCreateUseCaseFactory;
 use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
-use Craft\DDD\Claims\Domain\Entity\Claim;
+use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 
@@ -14,39 +16,24 @@ class ClaimRest extends \IRestService
 	{
 		try
 		{
-			$buildObjectRepository = new OrmBuildObjectRepository();
-			$buildObject = $buildObjectRepository->findById($query['buildObjectId']);
-			if(!$buildObject)
-			{
-				throw new \Exception('Build object not found');
-			}
 
-			$userRepository = new BxUserRepository();
-			if(!$user = $userRepository->findById($query['userId']))
-			{
-				throw new \Exception('User not found');
-			}
-
-			$claim = Claim::createClaim(
-				'Заявка от ' . date('d.m.Y H:i:s'),
+			$useCase = ClaimCreateUseCaseFactory::getService();
+			$claim = $useCase->execute(new ClaimCreateDto(
+				$query['apartmentId'],
+				$query['userId'],
 				$query['email'],
 				$query['phone'],
 				$query['client'],
-				intval($query['inn']),
-				intval($query['kpp']),
-				intval($query['bik']),
-				intval($query['ogrn']),
+				$query['inn'],
+				$query['kpp'],
+				$query['bik'],
+				$query['ogrn'],
 				$query['currAccount'],
 				$query['corrAccount'],
 				$query['legalAddress'],
 				$query['postAddress'],
 				$query['bankName'],
-				$buildObject,
-				$user
-			);
-
-			$service = ClaimServiceFactory::getClaimService();
-			$claim = $service->create($claim);
+			));
 
 
 			return [

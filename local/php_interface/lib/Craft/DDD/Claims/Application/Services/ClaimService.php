@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Claims\Application\Services;
 
-use Craft\DDD\Claims\Domain\Entity\Claim;
+use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 
 class ClaimService
@@ -16,7 +16,7 @@ class ClaimService
 
 
 	/**
-	 * @return Claim[]
+	 * @return ClaimEntity[]
 	 */
 	public function getAllClaim(): array
 	{
@@ -24,14 +24,14 @@ class ClaimService
 	}
 
 	/**
-	 * @return Claim[]
+	 * @return ClaimEntity[]
 	 */
 	public function getAllByUserId(int $userId): array
 	{
 		return $this->repository->getAllByUserId($userId);
 	}
 
-	public function create(Claim $claim): ?Claim
+	public function create(ClaimEntity $claim): ?ClaimEntity
 	{
 		return $this->repository->create($claim);
 	}

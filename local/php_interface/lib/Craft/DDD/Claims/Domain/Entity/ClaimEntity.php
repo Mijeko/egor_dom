@@ -2,16 +2,16 @@
 
 namespace Craft\DDD\Claims\Domain\Entity;
 
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
-use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\User\Domain\Entity\UserEntity;
 
-class Claim
+class ClaimEntity
 {
 
 	public function __construct(
@@ -19,40 +19,42 @@ class Claim
 		protected ?string                 $name,
 		protected ?string                 $email,
 		protected ?string                 $phone,
-		protected ?string                                                $client,
-		protected ?InnValueObject                                        $inn,
-		protected ?KppValueObject                                        $kpp,
-		protected ?BikValueObject                                        $bik,
-		protected ?OgrnValueObject                                       $ogrn,
-		protected ?CurrAccountValueObject                                $currAcc,
-		protected ?CorrAccountValueObject                                $corrAcc,
-		protected ?string                                                $legalAddress,
-		protected ?string                                                $postAddress,
-		protected ?string                                                $bankName,
-		protected ?\Craft\DDD\Developers\Domain\Entity\BuildObjectEntity $buildObject,
-		protected ?UserEntity                                            $user,
+		protected ?string                 $client,
+		protected ?InnValueObject         $inn,
+		protected ?KppValueObject         $kpp,
+		protected ?BikValueObject         $bik,
+		protected ?OgrnValueObject        $ogrn,
+		protected ?CurrAccountValueObject $currAcc,
+		protected ?CorrAccountValueObject $corrAcc,
+		protected ?string                 $legalAddress,
+		protected ?string                 $postAddress,
+		protected ?string                 $bankName,
+		protected ?ApartmentEntity        $apartmentEntity,
+		protected ?UserEntity             $user,
 	)
 	{
 	}
 
 	public static function createClaim(
-		string      $name,
-		string      $email,
-		string      $phone,
-		string            $client,
-		int               $inn,
-		int               $kpp,
-		int               $bik,
-		int               $ogrn,
-		string            $currAcc,
-		string            $corrAcc,
-		string            $legalAddress,
-		string            $postAddress,
-		string            $bankName,
-		BuildObjectEntity $buildObject,
-		UserEntity        $user,
+		string          $email,
+		string          $phone,
+		string          $client,
+		int             $inn,
+		int             $kpp,
+		int             $bik,
+		int             $ogrn,
+		string          $currAcc,
+		string          $corrAcc,
+		string          $legalAddress,
+		string          $postAddress,
+		string          $bankName,
+		ApartmentEntity $apartmentEntity,
+		UserEntity      $user,
 	): static
 	{
+
+		$name = 'Новая заявка от ' . date('d.m.Y H:i:s');
+
 		return new static(
 			null,
 			$name,
@@ -68,7 +70,7 @@ class Claim
 			$legalAddress,
 			$postAddress,
 			$bankName,
-			$buildObject,
+			$apartmentEntity,
 			$user
 		);
 	}
@@ -89,9 +91,9 @@ class Claim
 		return $this->id;
 	}
 
-	public function getBuildObject(): \Craft\DDD\Developers\Domain\Entity\BuildObjectEntity
+	public function getApartmentEntity(): ApartmentEntity
 	{
-		return $this->buildObject;
+		return $this->apartmentEntity;
 	}
 
 	public function getUser(): ?UserEntity

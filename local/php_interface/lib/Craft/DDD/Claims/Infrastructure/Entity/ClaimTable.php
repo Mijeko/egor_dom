@@ -27,7 +27,7 @@ class ClaimTable extends DataManager
 	const F_POST_ADDRESS = 'POST_ADDRESS';
 	const F_BANK_NAME = 'BANK_NAME';
 	const F_USER_ID = 'USER_ID';
-	const F_BUILD_OBJECT_ID = 'BUILD_OBJECT_ID';
+	const F_APARTMENT_ID = 'APARTMENT_ID';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
@@ -75,7 +75,7 @@ class ClaimTable extends DataManager
 			(new IntegerField(self::F_USER_ID))
 				->configureTitle('ID пользователя')
 				->configureRequired(),
-			(new IntegerField(self::F_BUILD_OBJECT_ID))
+			(new IntegerField(self::F_APARTMENT_ID))
 				->configureTitle('ID объекта')
 				->configureRequired(),
 			(new BooleanField(self::F_ACTIVE))

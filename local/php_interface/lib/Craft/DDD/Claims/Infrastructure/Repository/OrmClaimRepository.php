@@ -3,7 +3,7 @@
 namespace Craft\DDD\Claims\Infrastructure\Repository;
 
 use Bitrix\Main\Diag\Debug;
-use Craft\DDD\Claims\Domain\Entity\Claim;
+use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Claims\Infrastructure\Entity\Claim as BxClaim;
@@ -12,11 +12,11 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 class OrmClaimRepository implements ClaimRepositoryInterface
 {
 
-	public function create(Claim $claim): ?Claim
+	public function create(ClaimEntity $claim): ?ClaimEntity
 	{
 		$model = ClaimTable::createObject();
 		$model->setUserId($claim->getUser()->getId());
-		$model->setBuildObjectId($claim->getBuildObject()->getId());
+		$model->setApartmentId($claim->getApartmentEntity()->getId());
 		$model->setClient($claim->getClient());
 		$model->setName($claim->getName());
 		$model->setPhone($claim->getPhone());
@@ -76,9 +76,9 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 	}
 
 
-	protected function mapObject(BxClaim $claim): Claim
+	protected function mapObject(BxClaim $claim): ClaimEntity
 	{
-		return new Claim(
+		return new ClaimEntity(
 			$claim->getId(),
 			$claim->getName(),
 			new BuildObjectEntity(

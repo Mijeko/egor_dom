@@ -66,4 +66,10 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 	{
 		return ApartmentEntity::fromModel($apartment);
 	}
+
+	public function findById(int $id): ?ApartmentEntity
+	{
+		$model = ApartmentTable::getByPrimary($id)->fetchObject();
+		return $this->hydrateElement($model);
+	}
 }

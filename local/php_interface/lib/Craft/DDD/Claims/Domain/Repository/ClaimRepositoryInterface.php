@@ -2,20 +2,20 @@
 
 namespace Craft\DDD\Claims\Domain\Repository;
 
-use Craft\DDD\Claims\Domain\Entity\Claim;
+use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 
 interface ClaimRepositoryInterface
 {
-	public function create(Claim $claim): ?Claim;
+	public function create(ClaimEntity $claim): ?ClaimEntity;
 
 	/**
-	 * @return Claim[]
+	 * @return ClaimEntity[]
 	 */
 	public function getAll(): array;
 
 
 	/**
-	 * @return Claim[]
+	 * @return ClaimEntity[]
 	 */
 	public function getAllByUserId(int $userId): array;
 }
