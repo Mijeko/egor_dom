@@ -1,5 +1,7 @@
 <?php
 
+use Craft\DDD\Claims\Present\Dto\ClaimDto;
+use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Application\Services\ClaimService;
 use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
 
@@ -37,7 +39,14 @@ class CraftClaimsComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['CLAIMS'] = $this->claimService->getAllByUserId($this->arParams["USER_ID"]);
+		$this->arResult['CLAIMS'] = array_map(
+			function(ClaimEntity $claim) {
+				return new ClaimDto(
+					$claim->getId(),
+					$claim->getName(),
+				);
+			},
+			$this->claimService->getAllByUserId($this->arParams["USER_ID"]));
 	}
 
 	protected function validateParams(): void

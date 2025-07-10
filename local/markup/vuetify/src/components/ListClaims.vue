@@ -1,10 +1,14 @@
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts">
+import {defineComponent, type PropType} from 'vue'
+import type ClaimDto from "@/dto/entity/ClaimDto.ts";
 
 export default defineComponent({
   name: "ListClaims",
   props: {
-    claims: []
+    claims: {
+      type: Array as PropType<ClaimDto[]>,
+      default: [],
+    }
   }
 })
 </script>
@@ -21,7 +25,7 @@ export default defineComponent({
         <v-col md="5">
           <v-card-text>
             <span class="text-decoration-underline">
-              Объект: 3-х комнатная квартира в Барнауле
+              {{ claim.name }}
             </span>
           </v-card-text>
         </v-col>
@@ -31,7 +35,7 @@ export default defineComponent({
           </v-chip>
         </v-col>
         <v-col md="2">
-          <v-btn>
+          <v-btn :href="`/profile/orders/${claim.id}/`">
             Подробнее
           </v-btn>
         </v-col>

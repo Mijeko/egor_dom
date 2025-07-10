@@ -34,7 +34,13 @@ export default defineComponent({
   },
   mounted(): any {
     console.log(this.apartment);
-  }
+  },
+  methods: {
+    buy() {
+      this.$emit('update:showModal', true)
+      this.$emit('update:apartmentId', this.apartment.id)
+    }
+  },
 })
 </script>
 
@@ -83,7 +89,7 @@ export default defineComponent({
         variant="flat"
         class="font-weight-medium text-green-lighten-5"
         color="green-accent-4"
-        @click="$emit('update:showModal',true)"
+        @click="buy"
       >Купить квартиру
       </v-btn>
     </div>

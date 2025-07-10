@@ -50,7 +50,9 @@ class ClaimCreateUseCase
 			$user
 		);
 
-		$this->claimRepository->create($claim);
+		$claim = $this->claimRepository->create($claim);
 
+
+		return $claim;
 	}
 }

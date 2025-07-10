@@ -61,23 +61,23 @@ class ClaimTable extends DataManager
 				->configureTitle('Телефон клиента'),
 			(new StringField(self::F_CLIENT))
 				->configureTitle('ФИО клиента'),
-			(new IntegerField(self::F_INN))
+			(new StringField(self::F_INN))
 				->configureTitle('ИНН'),
-			(new IntegerField(self::F_OGRN))
+			(new StringField(self::F_OGRN))
 				->configureTitle('ОГРН'),
-			(new IntegerField(self::F_KPP))
+			(new StringField(self::F_KPP))
 				->configureTitle('КПП'),
-			(new IntegerField(self::F_BIK))
+			(new StringField(self::F_BIK))
 				->configureTitle('БИК'),
 			(new StringField(self::F_CURR_ACC))
 				->configureTitle('Расчетный счет'),
 			(new StringField(self::F_CORR_ACC))
 				->configureTitle('Корреспондентский счет'),
-			(new IntegerField(self::F_LEGAL_ADDRESS))
+			(new StringField(self::F_LEGAL_ADDRESS))
 				->configureTitle('Юридический адрес'),
-			(new IntegerField(self::F_POST_ADDRESS))
+			(new StringField(self::F_POST_ADDRESS))
 				->configureTitle('Почтовый адрес'),
-			(new IntegerField(self::F_BANK_NAME))
+			(new StringField(self::F_BANK_NAME))
 				->configureTitle('Имя банка'),
 			(new IntegerField(self::F_USER_ID))
 				->configureTitle('ID пользователя')

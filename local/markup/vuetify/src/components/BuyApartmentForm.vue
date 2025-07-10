@@ -128,7 +128,7 @@ export default defineComponent({
     <v-card-text>
       Заполните недостающие данные и отправьте заявку нажав кнопку "Отправить"
     </v-card-text>
-    {{ apartmentId }}
+
     <v-container>
       <v-row>
         <v-col cols="12">

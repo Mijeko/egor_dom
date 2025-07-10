@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Claims\Domain\Entity;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Infrastructure\Entity\Claim;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
@@ -40,10 +41,10 @@ class ClaimEntity
 		string          $email,
 		string          $phone,
 		string          $client,
-		int             $inn,
-		int             $kpp,
-		int             $bik,
-		int             $ogrn,
+		string          $inn,
+		string          $kpp,
+		string          $bik,
+		string          $ogrn,
 		string          $currAcc,
 		string          $corrAcc,
 		string          $legalAddress,
