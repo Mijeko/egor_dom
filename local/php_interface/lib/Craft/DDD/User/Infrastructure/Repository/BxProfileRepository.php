@@ -60,8 +60,6 @@ class BxProfileRepository implements ProfileRepositoryInterface
 			CraftUserTable::F_UF_POST_ADDRESS  => $profile->getPostalAddress(),
 		];
 
-		Debug::dumpToFile($updateParams);
-
 		$model = new \CUser();
 		$result = $model->Update(
 			$user->getId(),

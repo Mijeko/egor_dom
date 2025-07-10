@@ -2,16 +2,29 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
+use Craft\Model\CraftUser;
+
 class UserEntity
 {
 	public function __construct(
-		protected string $id,
-		protected string $login,
-		protected string $phone,
-		protected string $email,
-		protected string $password,
+		protected string  $id,
+		protected string  $login,
+		protected string  $phone,
+		protected string  $email,
+		protected ?string $password = null,
 	)
 	{
+	}
+
+	public static function hydrate(CraftUser $user): static
+	{
+		return new static(
+			$user->getId(),
+			$user->getLogin(),
+			$user->getPersonalPhone(),
+			$user->getEmail(),
+			null,
+		);
 	}
 
 	public function validatePassword(string $password): bool

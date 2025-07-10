@@ -2,6 +2,8 @@
 
 namespace Craft\Core\Helper;
 
+use Bitrix\Main\Diag\Debug;
+
 class DtoManager
 {
 
@@ -41,8 +43,13 @@ class DtoManager
 			if(method_exists(static::class, $methodName))
 			{
 				call_user_func([$obj, $methodName], $value);
+			} else
+			{
+				if(property_exists($obj, $key))
+				{
+					$obj->{$key} = $value;
+				}
 			}
-
 		}
 
 		return $obj;
@@ -63,6 +70,7 @@ class DtoManager
 		$splitKeyParts = explode('_', $key);
 		foreach($splitKeyParts as $index => &$keyPart)
 		{
+			$keyPart = strtolower($keyPart);
 			if($index > 0)
 			{
 				$keyPart = ucfirst($keyPart);

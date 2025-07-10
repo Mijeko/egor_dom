@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Claims\Domain\Entity;
 
+use Craft\DDD\Claims\Infrastructure\Entity\Claim;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
@@ -72,6 +73,42 @@ class ClaimEntity
 			$bankName,
 			$apartmentEntity,
 			$user
+		);
+	}
+
+	public static function hydrate(Claim $claim): static
+	{
+
+		$apartment = null;
+		$user = null;
+
+		if($claim->fillApartment())
+		{
+			$apartment = ApartmentEntity::fromModel($claim->fillApartment());
+		}
+
+		if($claim->fillUser())
+		{
+			$user = UserEntity::hydrate($claim->fillUser());
+		}
+
+		return new static(
+			$claim->getId(),
+			$claim->getName(),
+			$claim->getEmail(),
+			$claim->getPhone(),
+			$claim->getClient(),
+			new InnValueObject($claim->getInn()),
+			new KppValueObject($claim->getKpp()),
+			new BikValueObject($claim->getBik()),
+			new OgrnValueObject($claim->getOgrn()),
+			new CurrAccountValueObject($claim->getCurrAcc()),
+			new CorrAccountValueObject($claim->getCorrAcc()),
+			$claim->getLegalAddress(),
+			$claim->getPostAddress(),
+			$claim->getBankName(),
+			$apartment,
+			$user,
 		);
 	}
 

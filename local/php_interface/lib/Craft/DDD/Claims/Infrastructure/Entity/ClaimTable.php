@@ -6,8 +6,12 @@ use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
+use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\Model\CraftUserTable;
 
 class ClaimTable extends DataManager
 {
@@ -31,6 +35,9 @@ class ClaimTable extends DataManager
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
+
+	const R_APARTMENT = 'APARTMENT';
+	const R_USER = 'USER';
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';
@@ -88,6 +95,20 @@ class ClaimTable extends DataManager
 			(new DatetimeField(self::F_UPDATED_AT))
 				->configureTitle('Дата обновления')
 				->configureDefaultValue(new DateTime()),
+
+			(new Reference(
+				self::R_APARTMENT,
+				ApartmentTable::class,
+				Join::on('this.' . self::F_APARTMENT_ID, 'ref.' . ApartmentTable::F_ID)
+			))
+				->configureJoinType('left'),
+
+			(new Reference(
+				self::R_USER,
+				CraftUserTable::class,
+				Join::on('this.' . self::F_USER_ID, 'ref.' . CraftUserTable::F_ID)
+			))
+				->configureJoinType('left'),
 		];
 	}
 

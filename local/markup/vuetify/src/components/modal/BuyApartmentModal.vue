@@ -5,6 +5,22 @@ import BuyApartmentForm from "@/components/BuyApartmentForm.vue";
 export default defineComponent({
   name: "BuyApartmentModal",
   components: {BuyApartmentForm},
+  data: function () {
+    return {
+      selectApartmentId: null,
+    };
+  },
+  computed: {
+    selectApartmentId: {
+      set(val: number) {
+        this.selectApartmentId = val;
+        this.$emit('@update:apartmentId', val);
+      },
+      get(): number {
+        return this.selectApartmentId;
+      },
+    }
+  },
   props: {
     apartmentId: {
       type: Number,
@@ -25,7 +41,8 @@ export default defineComponent({
 
 
         <BuyApartmentForm
-          :apartment-id="apartmentId"
+          :apartment-id="selectApartmentId"
+          @update:apartmentId="selectApartmentId = $event"
         />
 
       </v-card>

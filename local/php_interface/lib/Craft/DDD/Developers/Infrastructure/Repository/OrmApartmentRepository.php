@@ -70,6 +70,12 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 	public function findById(int $id): ?ApartmentEntity
 	{
 		$model = ApartmentTable::getByPrimary($id)->fetchObject();
+		if(!$model)
+		{
+			throw new \Exception('Квартира не найдена');
+		}
+
+
 		return $this->hydrateElement($model);
 	}
 }

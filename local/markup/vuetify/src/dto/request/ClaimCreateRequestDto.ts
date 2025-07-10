@@ -4,12 +4,12 @@ export default interface ClaimCreateRequestDto {
   phone: string;
   email: string;
   client: string;
-  bik: number,
-  kpp: number,
-  inn: number,
-  ogrn: number,
-  currAccount: number,
-  corrAccount: number,
+  bik: string,
+  kpp: string,
+  inn: string,
+  ogrn: string,
+  currAccount: string,
+  corrAccount: string,
   legalAddress: string,
   postAddress: string,
   bankName: string,

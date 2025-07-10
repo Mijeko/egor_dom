@@ -8,6 +8,7 @@ use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
+use function Symfony\Component\String\b;
 
 class ApartmentEntity
 {
@@ -99,11 +100,17 @@ class ApartmentEntity
 
 	public static function fromModel(Apartment $apartment): static
 	{
-		$buildObject = $apartment->fillBuildObject();
+		$buildObject = null;
+		if($apartment->fillBuildObject())
+		{
+			$buildObject = BuildObjectEntity::fromModel($apartment->getBuildObject());
+		}
+
+
 		return new static(
 			$apartment->getId(),
 			$apartment->getBuildObjectId(),
-			BuildObjectEntity::fromModel($buildObject),
+			$buildObject,
 			$apartment->getName(),
 			$apartment->getDescription(),
 			$apartment->getPrice(),

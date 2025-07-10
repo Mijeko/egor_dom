@@ -2,7 +2,9 @@
 
 namespace Craft\Model;
 
+use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\UserTable;
+use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 
 class CraftUserTable extends UserTable
 {
@@ -29,10 +31,21 @@ class CraftUserTable extends UserTable
 	const F_UF_CORR_ACC = 'UF_CORR_ACC';
 	const F_UF_BANK_NAME = 'UF_BANK_NAME';
 
+	const R_ORDERS = 'ORDERS';
+
 	public static function getMap()
 	{
 		$map = parent::getMap();
-		return $map;
+		return array_merge($map, [
+
+
+			(new OneToMany(
+				self::R_ORDERS,
+				ClaimTable::class,
+				ClaimTable::R_USER
+			))
+				->configureJoinType('left'),
+		]);
 	}
 
 	public static function getObjectClass()

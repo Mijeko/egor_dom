@@ -15,12 +15,12 @@ export default defineComponent({
         email: '',
         phone: '',
         client: '',
-        bik: 0,
-        kpp: 0,
-        inn: 0,
-        ogrn: 0,
-        currAccount: 0,
-        corrAccount: 0,
+        bik: '',
+        kpp: '',
+        inn: '',
+        ogrn: '',
+        currAccount: '',
+        corrAccount: '',
         legalAddress: '',
         postAddress: '',
         bankName: '',
@@ -52,12 +52,12 @@ export default defineComponent({
 
     this.form.email = this.user.email ?? '';
     this.form.client = this.user.fullName ?? '';
-    this.form.inn = this.user.inn ?? 0;
-    this.form.bik = this.user.bik ?? 0;
-    this.form.kpp = this.user.kpp ?? 0;
-    this.form.ogrn = this.user.ogrn ?? 0;
-    this.form.currAccount = this.user.currAccount ?? 0;
-    this.form.corrAccount = this.user.corrAccount ?? 0;
+    this.form.inn = this.user.inn ?? '';
+    this.form.bik = this.user.bik ?? '';
+    this.form.kpp = this.user.kpp ?? '';
+    this.form.ogrn = this.user.ogrn ?? '';
+    this.form.currAccount = this.user.currAccount ?? '';
+    this.form.corrAccount = this.user.corrAccount ?? '';
     this.form.postAddress = this.user.postAddress ?? '';
     this.form.legalAddress = this.user.legalAddress ?? '';
     this.form.bankName = this.user.bankName ?? '';
@@ -78,12 +78,12 @@ export default defineComponent({
         email: this.form.email,
         phone: this.form.phone,
         client: this.form.client,
-        bik: this.form.bik ?? 0,
-        kpp: this.form.kpp ?? 0,
-        inn: this.form.inn ?? 0,
-        ogrn: this.form.ogrn ?? 0,
-        currAccount: this.form.currAccount ?? 0,
-        corrAccount: this.form.corrAccount ?? 0,
+        bik: this.form.bik ?? '',
+        kpp: this.form.kpp ?? '',
+        inn: this.form.inn ?? '',
+        ogrn: this.form.ogrn ?? '',
+        currAccount: this.form.currAccount ?? '',
+        corrAccount: this.form.corrAccount ?? '',
         legalAddress: this.form.legalAddress ?? '',
         postAddress: this.form.postAddress ?? '',
         bankName: this.form.bankName ?? '',
@@ -103,12 +103,12 @@ export default defineComponent({
 
             this.form.email = '';
             this.form.client = '';
-            this.form.inn = 0;
-            this.form.bik = 0;
-            this.form.kpp = 0;
-            this.form.ogrn = 0;
-            this.form.currAccount = 0;
-            this.form.corrAccount = 0;
+            this.form.inn = '';
+            this.form.bik = '';
+            this.form.kpp = '';
+            this.form.ogrn = '';
+            this.form.currAccount = '';
+            this.form.corrAccount = '';
             this.form.postAddress = '';
             this.form.legalAddress = '';
             this.form.bankName = '';
@@ -128,7 +128,7 @@ export default defineComponent({
     <v-card-text>
       Заполните недостающие данные и отправьте заявку нажав кнопку "Отправить"
     </v-card-text>
-
+    {{ apartmentId }}
     <v-container>
       <v-row>
         <v-col cols="12">

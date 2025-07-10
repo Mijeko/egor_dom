@@ -6,10 +6,12 @@ use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
+use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
+use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 
 class ApartmentTable extends DataManager
@@ -40,6 +42,7 @@ class ApartmentTable extends DataManager
 	const F_BUILD_OBJECT_ID = 'BUILD_OBJECT_ID';
 
 	const R_BUILD_OBJECT = 'BUILD_OBJECT';
+	const R_ORDERS = 'ORDERS';
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';
@@ -113,6 +116,13 @@ class ApartmentTable extends DataManager
 				BuildObjectTable::class,
 				Join::on('this.' . self::F_BUILD_OBJECT_ID, 'ref.' . BuildObjectTable::F_ID)
 			)),
+
+			(new OneToMany(
+				self::R_ORDERS,
+				ClaimTable::class,
+				ClaimTable::R_APARTMENT
+			))
+				->configureJoinType('left'),
 
 		];
 	}

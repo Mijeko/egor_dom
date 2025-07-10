@@ -10,7 +10,7 @@ export default defineComponent({
   components: {ApartmentFilter, ApartmentItem, BuyApartmentModal},
   data: function () {
     return {
-      selectBuildObjectId: 0,
+      selectApartmentId: 0,
       showModal: false,
     };
   },
@@ -40,7 +40,8 @@ export default defineComponent({
   <BuyApartmentModal
     :show-modal="showModal"
     @update:showModal="showModal = $event"
-    :build-object-id="selectBuildObjectId"
+    @update:apartmentId="selectApartmentId = $event"
+    :apartment-id="selectApartmentId"
   />
 
 </template>

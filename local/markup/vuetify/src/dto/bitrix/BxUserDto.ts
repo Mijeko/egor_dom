@@ -6,12 +6,12 @@ export default interface BxUserDto {
   lastName?: string;
   secondName?: string;
   fullName?: string;
-  bik?: number,
-  kpp?: number,
-  inn?: number,
-  ogrn?: number,
-  currAccount?: number,
-  corrAccount?: number,
+  bik?: string,
+  kpp?: string,
+  inn?: string,
+  ogrn?: string,
+  currAccount?: string,
+  corrAccount?: string,
   legalAddress?: string,
   postAddress?: string,
   bankName?: string,

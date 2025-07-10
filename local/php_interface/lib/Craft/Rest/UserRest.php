@@ -2,6 +2,7 @@
 
 namespace Craft\Rest;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
@@ -49,6 +50,8 @@ class UserRest extends \IRestService
 			}
 
 			unset($query['profileId']);
+
+			Debug::dumpToFile(ProfileUpdateServiceDto::fromArray($query));
 
 			$service = UpdateProfileServiceFactory::getService();
 			$service->execute(intval($profileId), ProfileUpdateServiceDto::fromArray($query));
