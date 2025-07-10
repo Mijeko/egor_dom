@@ -7,14 +7,14 @@ export default defineComponent({
   components: {BuyApartmentForm},
   data: function () {
     return {
-      selectApartmentId: null,
+      selectApartmentId: 0,
     };
   },
   computed: {
-    selectApartmentId: {
+    valApartmentId: {
       set(val: number) {
         this.selectApartmentId = val;
-        this.$emit('@update:apartmentId', val);
+        this.$emit('update:apartmentId', val);
       },
       get(): number {
         return this.selectApartmentId;
@@ -42,7 +42,7 @@ export default defineComponent({
 
         <BuyApartmentForm
           :apartment-id="selectApartmentId"
-          @update:apartmentId="selectApartmentId = $event"
+          @update:apartment-id="valApartmentId = $event"
         />
 
       </v-card>

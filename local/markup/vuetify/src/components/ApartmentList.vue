@@ -40,7 +40,7 @@ export default defineComponent({
   <BuyApartmentModal
     :show-modal="showModal"
     @update:showModal="showModal = $event"
-    @update:apartmentId="selectApartmentId = $event"
+    @update:apartment-id="selectApartmentId = $event"
     :apartment-id="selectApartmentId"
   />
 
