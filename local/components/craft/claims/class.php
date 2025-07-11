@@ -23,6 +23,7 @@ class CraftClaimsComponent extends CBitrixComponent
 			$this->validateParams();
 			$this->loadServices();
 			$this->loadData();
+			$this->meta();
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
@@ -44,6 +45,12 @@ class CraftClaimsComponent extends CBitrixComponent
 				return ClaimDto::fromEntity($claim);
 			},
 			$this->claimService->getAllByUserId($this->arParams["USER_ID"]));
+	}
+
+	protected function meta(): void
+	{
+		global $APPLICATION;
+		$APPLICATION->SetTitle('Заявки');
 	}
 
 	protected function validateParams(): void

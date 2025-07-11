@@ -39,11 +39,19 @@ class CraftProfileEditComponent extends CBitrixComponent
 				$user->fillUfLegalAddress(),
 			);
 
+			$this->meta();
+
 			$this->includeComponentTemplate();
 		} catch(Exception $exception)
 		{
 			echo $exception->getMessage();
 		}
+	}
+
+	protected function meta(): void
+	{
+		global $APPLICATION;
+		$APPLICATION->SetTitle('Настройки личного профиля');
 	}
 
 }
