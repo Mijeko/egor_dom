@@ -2,14 +2,9 @@
 
 namespace Craft\Rest;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
 use Craft\DDD\Claims\Application\Factory\ClaimCreateUseCaseFactory;
 use Craft\DDD\Claims\Application\Factory\NotifyManagerAboutFreshClaimFactory;
-use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
-use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
-use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
-use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 
 class ClaimRest extends \IRestService
 {
