@@ -11,11 +11,13 @@ interface ClaimRepositoryInterface
 	/**
 	 * @return ClaimEntity[]
 	 */
-	public function getAll(): array;
+	public function findAll(): array;
 
 
 	/**
 	 * @return ClaimEntity[]
 	 */
-	public function getAllByUserId(int $userId): array;
+	public function findAllByUserId(int $userId): array;
+
+	public function findById(int $claimId): ?ClaimEntity;
 }

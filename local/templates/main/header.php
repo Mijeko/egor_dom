@@ -71,19 +71,26 @@ $APPLICATION->IncludeComponent(
 			<?php
 			if($APPLICATION->GetCurPage() != '/')
 			{
-//				$APPLICATION->IncludeComponent(
-//					"bitrix:breadcrumb",
-//					"breadcrumbs",
-//					[
-//						"COMPONENT_TEMPLATE" => ".default",
-//						"START_FROM"         => "0",
-//						"PATH"               => "",
-//						"SITE_ID"            => "s1",
-//					],
-//					false,
-//					['HIDE_ICONS' => 'Y']
-//				);
+				//				$APPLICATION->IncludeComponent(
+				//					"bitrix:breadcrumb",
+				//					"breadcrumbs",
+				//					[
+				//						"COMPONENT_TEMPLATE" => ".default",
+				//						"START_FROM"         => "0",
+				//						"PATH"               => "",
+				//						"SITE_ID"            => "s1",
+				//					],
+				//					false,
+				//					['HIDE_ICONS' => 'Y']
+				//				);
 			}
 			?>
 
-			<h1><?php $APPLICATION->ShowTitle(); ?></h1>
+			<?php
+			if(!\Craft\Service\SkipPageTitle::skip())
+			{
+				?>
+				<h1><?php $APPLICATION->ShowTitle(); ?></h1>
+				<?php
+			}
+			?>

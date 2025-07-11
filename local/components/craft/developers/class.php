@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
-use Craft\DDD\Developers\Infrastructure\Dto\DeveloperFrontDto;
+use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Application\Service\Factory\DeveloperServiceFactory;
@@ -45,7 +45,7 @@ class CraftDevelopersComponent extends CBitrixComponent
 	{
 		$this->arResult['DEVELOPERS'] = array_map(
 			function(DeveloperEntity $developer) {
-				return DeveloperFrontDto::fromModel($developer);
+				return DeveloperDto::fromModel($developer);
 			},
 			$this->service->findAll()
 		);

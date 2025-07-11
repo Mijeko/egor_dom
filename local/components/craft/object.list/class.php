@@ -3,7 +3,7 @@
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
-use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto;
+use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 
 class CraftBuildObjectListComponent extends CBitrixComponent
 {

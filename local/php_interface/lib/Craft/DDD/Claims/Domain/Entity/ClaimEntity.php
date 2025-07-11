@@ -33,6 +33,7 @@ class ClaimEntity
 		protected ?string                 $bankName,
 		protected ?ApartmentEntity        $apartmentEntity,
 		protected ?UserEntity             $user,
+		protected ?string                 $createdAt = null,
 	)
 	{
 	}
@@ -110,6 +111,7 @@ class ClaimEntity
 			$claim->getBankName(),
 			$apartment,
 			$user,
+			$claim->getCreatedAt()->format('d.m.Y H:i:s'),
 		);
 	}
 
@@ -197,5 +199,10 @@ class ClaimEntity
 	public function getLegalAddress(): ?string
 	{
 		return $this->legalAddress;
+	}
+
+	public function getCreatedAt(): string
+	{
+		return $this->createdAt;
 	}
 }

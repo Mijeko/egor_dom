@@ -14,7 +14,7 @@
 		?>
 	</div>
 	<div class="profile-body">
-		<h1>Настройки</h1>
+		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
 
 		<?php
 		$APPLICATION->IncludeComponent(

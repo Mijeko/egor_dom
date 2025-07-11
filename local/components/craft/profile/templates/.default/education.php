@@ -14,6 +14,6 @@
 		?>
 	</div>
 	<div class="profile-body">
-		<h1>Обучение</h1>
+		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
 	</div>
 </div>

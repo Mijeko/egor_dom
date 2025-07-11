@@ -19,6 +19,7 @@ declare module 'vue' {
     BuildObjectList: typeof import('./src/components/BuildObjectList.vue')['default']
     BuyApartmentForm: typeof import('./src/components/BuyApartmentForm.vue')['default']
     BuyApartmentModal: typeof import('./src/components/modal/BuyApartmentModal.vue')['default']
+    ClaimDetail: typeof import('./src/components/ClaimDetail.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
     Init: typeof import('./src/components/system/Init.vue')['default']
     ListClaims: typeof import('./src/components/ListClaims.vue')['default']

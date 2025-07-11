@@ -15,7 +15,7 @@
  * @var string $componentPath
  * @var CraftBuildObjectDetailComponent $component
  *
- * @var \Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto $element
+ * @var \Craft\DDD\Developers\Present\Dto\BuildObjectDto $element
  */
 
 $element = $arResult['ELEMENT'];

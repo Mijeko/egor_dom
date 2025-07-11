@@ -1,9 +1,11 @@
 <?php
 
-namespace Craft\DDD\Developers\Infrastructure\Dto;
+namespace Craft\DDD\Developers\Present\Dto;
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Present\Dto\ApartmentDto;
+use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Infrastructure\LocationDto;
 use Craft\Dto\BxImageDto;
@@ -15,15 +17,15 @@ use Craft\Dto\BxImageDto;
 class BuildObjectDto
 {
 	public function __construct(
-		public int                $id,
-		public ?string            $name,
-		public ?string            $type,
-		public ?int               $floors,
-		public ?DeveloperFrontDto $developer,
-		public ?array             $gallery = null,
-		public ?array             $apartments = null,
-		public ?LocationDto       $location = null,
-		public ?string            $detailLink = null,
+		public int           $id,
+		public ?string       $name,
+		public ?string       $type,
+		public ?int          $floors,
+		public ?DeveloperDto $developer,
+		public ?array        $gallery = null,
+		public ?array        $apartments = null,
+		public ?LocationDto  $location = null,
+		public ?string       $detailLink = null,
 	)
 	{
 	}
@@ -32,7 +34,7 @@ class BuildObjectDto
 	public static function fromModel(BuildObjectEntity $element): static
 	{
 		$location = $element->getLocation() ? LocationDto::fromModel($element->getLocation()) : null;
-		$developer = $element->getDeveloper() ? DeveloperFrontDto::fromModel($element->getDeveloper()) : null;
+		$developer = $element->getDeveloper() ? DeveloperDto::fromModel($element->getDeveloper()) : null;
 
 		$gallery = [];
 		if($element->getGallery())
@@ -54,7 +56,7 @@ class BuildObjectDto
 			$gallery,
 			array_values(array_map(
 				function(ApartmentEntity $item) {
-					return ApartmentDto::fromModel($item);
+					return ApartmentDto::fromEntity($item);
 				},
 				$element->getApartments() ?? []
 			)),

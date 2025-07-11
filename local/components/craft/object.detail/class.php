@@ -3,10 +3,10 @@
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\DDD\Developers\Infrastructure\Dto\ApartmentDto;
-use Craft\DDD\Developers\Infrastructure\Dto\DeveloperFrontDto;
+use Craft\DDD\Developers\Present\Dto\ApartmentDto;
+use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
-use Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto;
+use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
 
 class CraftBuildObjectDetailComponent extends CBitrixComponent
@@ -36,7 +36,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function meta(): void
 	{
-		/* @var $element \Craft\DDD\Developers\Infrastructure\Dto\BuildObjectDto */
+		/* @var $element \Craft\DDD\Developers\Present\Dto\BuildObjectDto */
 		$element = $this->arResult['ELEMENT'];
 
 		global $APPLICATION;

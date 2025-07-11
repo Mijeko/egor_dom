@@ -20,7 +20,7 @@ class ClaimService
 	 */
 	public function getAllClaim(): array
 	{
-		return $this->repository->getAll();
+		return $this->repository->findAll();
 	}
 
 	/**
@@ -28,7 +28,7 @@ class ClaimService
 	 */
 	public function getAllByUserId(int $userId): array
 	{
-		return $this->repository->getAllByUserId($userId);
+		return $this->repository->findAllByUserId($userId);
 	}
 
 	public function create(ClaimEntity $claim): ?ClaimEntity

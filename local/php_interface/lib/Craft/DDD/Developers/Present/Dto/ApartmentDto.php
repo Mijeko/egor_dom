@@ -1,10 +1,8 @@
 <?php
 
-namespace Craft\DDD\Developers\Infrastructure\Dto;
+namespace Craft\DDD\Developers\Present\Dto;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 
@@ -24,7 +22,7 @@ class ApartmentDto
 	{
 	}
 
-	public static function fromModel(ApartmentEntity $model): static
+	public static function fromEntity(ApartmentEntity $model): static
 	{
 		$buildObject = $model->getBuildObject() ? BuildObjectDto::fromModel($model->getBuildObject()) : null;
 

@@ -19,14 +19,14 @@ $orderId = $arResult['VARIABLES']['ORDER_ID'];
 		?>
 	</div>
 	<div class="profile-body">
-		<h1>Заявки</h1>
+		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
 
 		<?php
 		$APPLICATION->IncludeComponent(
 			'craft:claims.detail',
 			'.default',
 			[
-				'ORDER_ID' => $orderId,
+				'ID' => $orderId,
 			],
 			false,
 			['HIDE_ICONS' => 'Y']

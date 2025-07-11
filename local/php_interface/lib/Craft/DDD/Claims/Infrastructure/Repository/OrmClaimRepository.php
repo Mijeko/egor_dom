@@ -41,7 +41,7 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		throw new \Exception(implode("\n", $result->getErrors()));
 	}
 
-	public function getAll(): array
+	public function findAll(): array
 	{
 		$result = [];
 
@@ -49,13 +49,24 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 		foreach($query->fetchCollection() as $claim)
 		{
-			$result[] = $this->mapObject($claim);
+			$result[] = $this->hydrate($claim);
 		}
 
 		return $result;
 	}
 
-	public function getAllByUserId(int $userId): array
+	public function findById(int $claimId): ?ClaimEntity
+	{
+		$object = ClaimTable::getByPrimary($claimId)->fetchObject();
+		if(!$object)
+		{
+			throw new \Exception("Заявка не найдена");
+		}
+
+		return $this->hydrate($object);
+	}
+
+	public function findAllByUserId(int $userId): array
 	{
 		$result = [];
 
@@ -67,14 +78,14 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 		foreach($query->fetchCollection() as $claim)
 		{
-			$result[] = $this->mapObject($claim);
+			$result[] = $this->hydrate($claim);
 		}
 
 		return $result;
 	}
 
 
-	protected function mapObject(Claim $claim): ClaimEntity
+	protected function hydrate(Claim $claim): ClaimEntity
 	{
 		return ClaimEntity::hydrate($claim);
 	}
