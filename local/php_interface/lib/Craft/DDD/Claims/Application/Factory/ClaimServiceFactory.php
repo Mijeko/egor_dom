@@ -1,7 +1,9 @@
 <?php
 
-namespace Craft\DDD\Claims\Application\Services;
+namespace Craft\DDD\Claims\Application\Factory;
 
+
+use Craft\DDD\Claims\Application\Services\ClaimService;
 use Craft\DDD\Claims\Infrastructure\Repository\OrmClaimRepository;
 
 class ClaimServiceFactory

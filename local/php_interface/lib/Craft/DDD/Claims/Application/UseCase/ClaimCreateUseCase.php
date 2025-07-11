@@ -3,6 +3,7 @@
 namespace Craft\DDD\Claims\Application\UseCase;
 
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
+use Craft\DDD\Claims\Application\Interfaces\TgNotifyInterface;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
@@ -14,7 +15,7 @@ class ClaimCreateUseCase
 	public function __construct(
 		protected ApartmentRepositoryInterface $apartmentRepository,
 		protected ClaimRepositoryInterface     $claimRepository,
-		protected UserRepositoryInterface      $userRepository
+		protected UserRepositoryInterface      $userRepository,
 	)
 	{
 	}
@@ -51,7 +52,6 @@ class ClaimCreateUseCase
 		);
 
 		$claim = $this->claimRepository->create($claim);
-
 
 		return $claim;
 	}

@@ -5,6 +5,7 @@ namespace Craft\Rest;
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
 use Craft\DDD\Claims\Application\Factory\ClaimCreateUseCaseFactory;
+use Craft\DDD\Claims\Application\Factory\NotifyManagerAboutFreshClaimFactory;
 use Craft\DDD\Claims\Application\Services\ClaimServiceFactory;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
@@ -17,8 +18,10 @@ class ClaimRest extends \IRestService
 		try
 		{
 
-			$useCase = ClaimCreateUseCaseFactory::getService();
-			$claim = $useCase->execute(new ClaimCreateDto(
+			$claimCreateUseCase = ClaimCreateUseCaseFactory::getService();
+			$notifyManagerAboutFreshClaim = NotifyManagerAboutFreshClaimFactory::getService();
+
+			$claim = $claimCreateUseCase->execute(new ClaimCreateDto(
 				$query['apartmentId'],
 				$query['userId'],
 				$query['email'],
@@ -35,6 +38,7 @@ class ClaimRest extends \IRestService
 				$query['bankName'],
 			));
 
+			$notifyManagerAboutFreshClaim->execute($claim);
 
 			return [
 				'success' => true,
