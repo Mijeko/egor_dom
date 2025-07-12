@@ -85,6 +85,7 @@ class FirstDevelopHandler implements ImportHandlerInterface
 							return ImageValueObject::fromUrl($imageUrl);
 						}, $listGalleryImages)
 					),
+					$this->developer->getCity()
 
 				),
 				$rawApartmentData['description'][0],

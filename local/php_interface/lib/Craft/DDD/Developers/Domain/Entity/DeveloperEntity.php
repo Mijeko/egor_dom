@@ -80,4 +80,9 @@ class DeveloperEntity
 	{
 		return $this->buildObjects;
 	}
+
+	public function getCity(): ?CityEntity
+	{
+		return $this->city;
+	}
 }

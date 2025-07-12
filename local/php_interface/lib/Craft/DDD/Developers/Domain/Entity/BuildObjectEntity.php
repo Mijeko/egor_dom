@@ -78,6 +78,7 @@ class BuildObjectEntity
 		?LocationValueObject     $location,
 		DeveloperEntity          $developer,
 		?ImageGalleryValueObject $gallery,
+		?CityEntity              $city,
 	): static
 	{
 		return new static(
@@ -90,6 +91,7 @@ class BuildObjectEntity
 			$developer,
 			null,
 			$gallery,
+			$city,
 		);
 	}
 
@@ -159,5 +161,10 @@ class BuildObjectEntity
 	public function getType(): ?string
 	{
 		return $this->type;
+	}
+
+	public function getCity(): ?CityEntity
+	{
+		return $this->city;
 	}
 }

@@ -45,6 +45,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		$model->setDeveloperId($buildObjectEntity->getDeveloper()->getId());
 		$model->setFloors($buildObjectEntity->getFloors());
 		$model->setType($buildObjectEntity->getType());
+		$model->setCityId($buildObjectEntity->getCity()->getId());
 
 
 		$result = $model->save();

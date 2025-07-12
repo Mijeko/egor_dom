@@ -28,4 +28,29 @@ class CityEntity
 			new SortValueObject($city->getSort()),
 		);
 	}
+
+	public function getId(): int
+	{
+		return $this->id;
+	}
+
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
+
+	public function getCode(): ?string
+	{
+		return $this->code;
+	}
+
+	public function getActive(): ?ActiveValueObject
+	{
+		return $this->active;
+	}
+
+	public function getSort(): ?SortValueObject
+	{
+		return $this->sort;
+	}
 }
