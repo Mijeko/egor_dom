@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
@@ -115,6 +116,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 		$developer = $buildObject->fillDeveloper() ? DeveloperEntity::fromModel($buildObject->getDeveloper()) : null;
 		$location = $buildObject->getLocationEx();
+		$city = $buildObject->fillCity() ? CityEntity::fromModel($buildObject->getCity()) : null;
 
 		return new BuildObjectEntity(
 			$buildObject->getId(),
@@ -135,6 +137,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			$developer,
 			$childApartmentList,
 			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
+			$city
 		);
 	}
 }

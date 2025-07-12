@@ -6439,6 +6439,16 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer resetImportSettings()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer unsetImportSettings()
 	 * @method \string fillImportSettings()
+	 * @method \int getCityId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer setCityId(\int|\Bitrix\Main\DB\SqlExpression $cityId)
+	 * @method bool hasCityId()
+	 * @method bool isCityIdFilled()
+	 * @method bool isCityIdChanged()
+	 * @method \int remindActualCityId()
+	 * @method \int requireCityId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer resetCityId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer unsetCityId()
+	 * @method \int fillCityId()
 	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
 	 * @method bool hasCreatedAt()
@@ -6470,6 +6480,16 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method void removeAllBuildObjects()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer resetBuildObjects()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer unsetBuildObjects()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City getCity()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City remindActualCity()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City requireCity()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer setCity(\Craft\DDD\City\Infrastructure\Entity\City $object)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer resetCity()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer unsetCity()
+	 * @method bool hasCity()
+	 * @method bool isCityFilled()
+	 * @method bool isCityChanged()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City fillCity()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6524,6 +6544,8 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \int[] fillPictureId()
 	 * @method \string[] getImportSettingsList()
 	 * @method \string[] fillImportSettings()
+	 * @method \int[] getCityIdList()
+	 * @method \int[] fillCityId()
 	 * @method \Bitrix\Main\Type\DateTime[] getCreatedAtList()
 	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
@@ -6531,6 +6553,9 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection[] getBuildObjectsList()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getBuildObjectsCollection()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObjects()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City[] getCityList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection getCityCollection()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection fillCity()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6624,6 +6649,16 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetDeveloperId()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetDeveloperId()
 	 * @method \int fillDeveloperId()
+	 * @method \int getCityId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setCityId(\int|\Bitrix\Main\DB\SqlExpression $cityId)
+	 * @method bool hasCityId()
+	 * @method bool isCityIdFilled()
+	 * @method bool isCityIdChanged()
+	 * @method \int remindActualCityId()
+	 * @method \int requireCityId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetCityId()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetCityId()
+	 * @method \int fillCityId()
 	 * @method \boolean getActive()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
 	 * @method bool hasActive()
@@ -6735,6 +6770,16 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method bool isDeveloperFilled()
 	 * @method bool isDeveloperChanged()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer fillDeveloper()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City getCity()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City remindActualCity()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City requireCity()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject setCity(\Craft\DDD\City\Infrastructure\Entity\City $object)
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject resetCity()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\BuildObject unsetCity()
+	 * @method bool hasCity()
+	 * @method bool isCityFilled()
+	 * @method bool isCityChanged()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City fillCity()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -6781,6 +6826,8 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \int[] getIdList()
 	 * @method \int[] getDeveloperIdList()
 	 * @method \int[] fillDeveloperId()
+	 * @method \int[] getCityIdList()
+	 * @method \int[] fillCityId()
 	 * @method \boolean[] getActiveList()
 	 * @method \boolean[] fillActive()
 	 * @method \int[] getSortList()
@@ -6805,6 +6852,9 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\Developer[] getDeveloperList()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getDeveloperCollection()
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection fillDeveloper()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City[] getCityList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getCityCollection()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection fillCity()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -7267,4 +7317,219 @@ namespace Craft\DDD\Developers\Infrastructure\Entity {
 	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Apartment_Collection wakeUpCollection($rows)
 	 */
 	class EO_Apartment_Entity extends \Bitrix\Main\ORM\Entity {}
+}
+/* ORMENTITYANNOTATION:Craft\DDD\City\Infrastructure\Entity\CityTable */
+namespace Craft\DDD\City\Infrastructure\Entity {
+	/**
+	 * City
+	 * @see \Craft\DDD\City\Infrastructure\Entity\CityTable
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int getId()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City setId(\int|\Bitrix\Main\DB\SqlExpression $id)
+	 * @method bool hasId()
+	 * @method bool isIdFilled()
+	 * @method bool isIdChanged()
+	 * @method \string getName()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City setName(\string|\Bitrix\Main\DB\SqlExpression $name)
+	 * @method bool hasName()
+	 * @method bool isNameFilled()
+	 * @method bool isNameChanged()
+	 * @method \string remindActualName()
+	 * @method \string requireName()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetName()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetName()
+	 * @method \string fillName()
+	 * @method \string getCode()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City setCode(\string|\Bitrix\Main\DB\SqlExpression $code)
+	 * @method bool hasCode()
+	 * @method bool isCodeFilled()
+	 * @method bool isCodeChanged()
+	 * @method \string remindActualCode()
+	 * @method \string requireCode()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetCode()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetCode()
+	 * @method \string fillCode()
+	 * @method \boolean getActive()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
+	 * @method bool hasActive()
+	 * @method bool isActiveFilled()
+	 * @method bool isActiveChanged()
+	 * @method \boolean remindActualActive()
+	 * @method \boolean requireActive()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetActive()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetActive()
+	 * @method \boolean fillActive()
+	 * @method \int getSort()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City setSort(\int|\Bitrix\Main\DB\SqlExpression $sort)
+	 * @method bool hasSort()
+	 * @method bool isSortFilled()
+	 * @method bool isSortChanged()
+	 * @method \int remindActualSort()
+	 * @method \int requireSort()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetSort()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetSort()
+	 * @method \int fillSort()
+	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
+	 * @method bool hasCreatedAt()
+	 * @method bool isCreatedAtFilled()
+	 * @method bool isCreatedAtChanged()
+	 * @method \Bitrix\Main\Type\DateTime remindActualCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime requireCreatedAt()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetCreatedAt()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime fillCreatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection requireBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObjects()
+	 * @method bool hasBuildObjects()
+	 * @method bool isBuildObjectsFilled()
+	 * @method bool isBuildObjectsChanged()
+	 * @method void addToBuildObjects(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject)
+	 * @method void removeFromBuildObjects(\Craft\DDD\Developers\Infrastructure\Entity\BuildObject $buildObject)
+	 * @method void removeAllBuildObjects()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetBuildObjects()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection getDevelopers()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection requireDevelopers()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection fillDevelopers()
+	 * @method bool hasDevelopers()
+	 * @method bool isDevelopersFilled()
+	 * @method bool isDevelopersChanged()
+	 * @method void addToDevelopers(\Craft\DDD\Developers\Infrastructure\Entity\Developer $developer)
+	 * @method void removeFromDevelopers(\Craft\DDD\Developers\Infrastructure\Entity\Developer $developer)
+	 * @method void removeAllDevelopers()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City resetDevelopers()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unsetDevelopers()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @property-read array $primary
+	 * @property-read int $state @see \Bitrix\Main\ORM\Objectify\State
+	 * @property-read \Bitrix\Main\Type\Dictionary $customData
+	 * @property \Bitrix\Main\Authentication\Context $authContext
+	 * @method mixed get($fieldName)
+	 * @method mixed remindActual($fieldName)
+	 * @method mixed require($fieldName)
+	 * @method bool has($fieldName)
+	 * @method bool isFilled($fieldName)
+	 * @method bool isChanged($fieldName)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City set($fieldName, $value)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City reset($fieldName)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City unset($fieldName)
+	 * @method void addTo($fieldName, $value)
+	 * @method void removeFrom($fieldName, $value)
+	 * @method void removeAll($fieldName)
+	 * @method \Bitrix\Main\ORM\Data\Result delete()
+	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
+	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
+	 * @method static \Craft\DDD\City\Infrastructure\Entity\City wakeUp($data)
+	 */
+	class EO_City {
+		/* @var \Craft\DDD\City\Infrastructure\Entity\CityTable */
+		static public $dataClass = '\Craft\DDD\City\Infrastructure\Entity\CityTable';
+		/**
+		 * @param bool|array $setDefaultValues
+		 */
+		public function __construct($setDefaultValues = true) {}
+	}
+}
+namespace Craft\DDD\City\Infrastructure\Entity {
+	/**
+	 * EO_City_Collection
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int[] getIdList()
+	 * @method \string[] getNameList()
+	 * @method \string[] fillName()
+	 * @method \string[] getCodeList()
+	 * @method \string[] fillCode()
+	 * @method \boolean[] getActiveList()
+	 * @method \boolean[] fillActive()
+	 * @method \int[] getSortList()
+	 * @method \int[] fillSort()
+	 * @method \Bitrix\Main\Type\DateTime[] getCreatedAtList()
+	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection[] getBuildObjectsList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection getBuildObjectsCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject_Collection fillBuildObjects()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection[] getDevelopersList()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection getDevelopersCollection()
+	 * @method \Craft\DDD\Developers\Infrastructure\Entity\EO_Developer_Collection fillDevelopers()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @method void add(\Craft\DDD\City\Infrastructure\Entity\City $object)
+	 * @method bool has(\Craft\DDD\City\Infrastructure\Entity\City $object)
+	 * @method bool hasByPrimary($primary)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City getByPrimary($primary)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City[] getAll()
+	 * @method bool remove(\Craft\DDD\City\Infrastructure\Entity\City $object)
+	 * @method void removeByPrimary($primary)
+	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method static \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection wakeUp($data)
+	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
+	 * @method void offsetSet() ArrayAccess
+	 * @method void offsetExists() ArrayAccess
+	 * @method void offsetUnset() ArrayAccess
+	 * @method void offsetGet() ArrayAccess
+	 * @method void rewind() Iterator
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City current() Iterator
+	 * @method mixed key() Iterator
+	 * @method void next() Iterator
+	 * @method bool valid() Iterator
+	 * @method int count() Countable
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection merge(?\Craft\DDD\City\Infrastructure\Entity\EO_City_Collection $collection)
+	 * @method bool isEmpty()
+	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
+	 */
+	class EO_City_Collection implements \ArrayAccess, \Iterator, \Countable {
+		/* @var \Craft\DDD\City\Infrastructure\Entity\CityTable */
+		static public $dataClass = '\Craft\DDD\City\Infrastructure\Entity\CityTable';
+	}
+}
+namespace Craft\DDD\City\Infrastructure\Entity {
+	/**
+	 * @method static EO_City_Query query()
+	 * @method static EO_City_Result getByPrimary($primary, array $parameters = [])
+	 * @method static EO_City_Result getById($id)
+	 * @method static EO_City_Result getList(array $parameters = [])
+	 * @method static EO_City_Entity getEntity()
+	 * @method static \Craft\DDD\City\Infrastructure\Entity\City createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection createCollection()
+	 * @method static \Craft\DDD\City\Infrastructure\Entity\City wakeUpObject($row)
+	 * @method static \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection wakeUpCollection($rows)
+	 */
+	class CityTable extends \Bitrix\Main\ORM\Data\DataManager {}
+	/**
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @method EO_City_Result exec()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City fetchObject()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection fetchCollection()
+	 */
+	class EO_City_Query extends \Bitrix\Main\ORM\Query\Query {}
+	/**
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City fetchObject()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection fetchCollection()
+	 */
+	class EO_City_Result extends \Bitrix\Main\ORM\Query\Result {}
+	/**
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection createCollection()
+	 * @method \Craft\DDD\City\Infrastructure\Entity\City wakeUpObject($row)
+	 * @method \Craft\DDD\City\Infrastructure\Entity\EO_City_Collection wakeUpCollection($rows)
+	 */
+	class EO_City_Entity extends \Bitrix\Main\ORM\Entity {}
 }

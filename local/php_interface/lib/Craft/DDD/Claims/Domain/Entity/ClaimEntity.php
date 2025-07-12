@@ -86,12 +86,12 @@ class ClaimEntity
 
 		if($claim->fillApartment())
 		{
-			$apartment = ApartmentEntity::fromModel($claim->fillApartment());
+			$apartment = ApartmentEntity::fromModel($claim->getApartment());
 		}
 
 		if($claim->fillUser())
 		{
-			$user = UserEntity::hydrate($claim->fillUser());
+			$user = UserEntity::fromModel($claim->fillUser());
 		}
 
 		return new static(

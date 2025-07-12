@@ -41,11 +41,14 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		throw new \Exception(implode("\n", $result->getErrors()));
 	}
 
-	public function findAll(): array
+	public function findAll(array $order = [], array $filter = []): array
 	{
 		$result = [];
 
-		$query = ClaimTable::getList();
+		$query = ClaimTable::getList([
+			'order'  => $order,
+			'filter' => $filter,
+		]);
 
 		foreach($query->fetchCollection() as $claim)
 		{

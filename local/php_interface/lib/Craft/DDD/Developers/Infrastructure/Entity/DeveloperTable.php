@@ -8,7 +8,10 @@ use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
+use Craft\DDD\City\Infrastructure\Entity\CityTable;
 
 class DeveloperTable extends DataManager
 {
@@ -18,11 +21,13 @@ class DeveloperTable extends DataManager
 	const F_SORT = 'SORT';
 	const F_IMPORT_SETTINGS = 'IMPORT_SETTINGS';
 	const F_PICTURE_ID = 'PICTURE_ID';
+	const F_CITY_ID = 'CITY_ID';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
 
 	const R_BUILD_OBJECTS = 'BUILD_OBJECTS';
+	const R_CITY = 'CITY';
 
 
 	const ACTIVE_Y = 'Y';
@@ -53,6 +58,9 @@ class DeveloperTable extends DataManager
 				->configureTitle('Изобращение'),
 			(new StringField(self::F_IMPORT_SETTINGS))
 				->configureTitle('Настройки импорта'),
+			(new IntegerField(self::F_CITY_ID))
+				->configureTitle('ID города')
+				->configureRequired(),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureDefaultValue(new DateTime()),
 			(new DatetimeField(self::F_UPDATED_AT))
@@ -63,6 +71,13 @@ class DeveloperTable extends DataManager
 				self::R_BUILD_OBJECTS,
 				BuildObjectTable::class,
 				BuildObjectTable::R_DEVELOPER
+			))
+				->configureJoinType('left'),
+
+			(new Reference(
+				self::R_CITY,
+				CityTable::class,
+				Join::on('this.' . self::F_CITY_ID, 'ref.' . CityTable::F_ID)
 			))
 				->configureJoinType('left'),
 		];

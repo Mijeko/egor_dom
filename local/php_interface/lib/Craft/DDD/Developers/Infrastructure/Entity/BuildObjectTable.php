@@ -11,6 +11,7 @@ use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
+use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 
@@ -19,6 +20,7 @@ class BuildObjectTable extends DataManager
 
 	const F_ID = 'ID';
 	const F_DEVELOPER_ID = 'DEVELOPER_ID';
+	const F_CITY_ID = 'CITY_ID';
 	const F_ACTIVE = 'ACTIVE';
 	const F_SORT = 'SORT';
 	const F_NAME = 'NAME';
@@ -35,6 +37,7 @@ class BuildObjectTable extends DataManager
 
 	const R_APARTMENTS = 'APARTMENTS';
 	const R_DEVELOPER = 'DEVELOPER';
+	const R_CITY = 'CITY';
 
 	public static function getTableName()
 	{
@@ -49,7 +52,10 @@ class BuildObjectTable extends DataManager
 				->configureAutocomplete()
 				->configurePrimary(),
 			(new IntegerField(self::F_DEVELOPER_ID))
-				->configureTitle('ID застройщик')
+				->configureTitle('ID застройщика')
+				->configureRequired(),
+			(new IntegerField(self::F_CITY_ID))
+				->configureTitle('ID города')
 				->configureRequired(),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')
@@ -86,6 +92,13 @@ class BuildObjectTable extends DataManager
 				self::R_DEVELOPER,
 				DeveloperTable::class,
 				Join::on('this.' . self::F_DEVELOPER_ID, 'ref.' . DeveloperTable::F_ID)
+			))
+				->configureJoinType('left'),
+
+			(new Reference(
+				self::R_CITY,
+				CityTable::class,
+				Join::on('this.' . self::F_CITY_ID, 'ref.' . CityTable::F_ID)
 			))
 				->configureJoinType('left'),
 		];

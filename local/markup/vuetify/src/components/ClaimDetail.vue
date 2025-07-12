@@ -63,6 +63,10 @@ export default defineComponent({
         <v-card-subtitle>Находится на рассмотрении</v-card-subtitle>
         <v-card-title>Стоимость</v-card-title>
         <v-card-subtitle>{{ Price.format(claim.apartment.price) }}</v-card-subtitle>
+        <v-card-title>Жилой объект</v-card-title>
+        <v-card-subtitle>
+          <a :href="`/objects/${claim.apartment.buildObject.id}/`">{{ claim.apartment.buildObject.name }}</a>
+        </v-card-subtitle>
       </v-card>
     </v-col>
 

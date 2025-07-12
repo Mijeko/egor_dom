@@ -37,6 +37,11 @@ $aMenu = [
 			"title" => "Объекты продажи",
 		],
 		[
+			"text"  => "Города",
+			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_CITY . "?lang=" . LANG,
+			"title" => "Города",
+		],
+		[
 			"text"  => "Импорт",
 			"url"   => CRAFT_DEVELOP_ADMIN_URL_IMPORT . "?lang=" . LANG,
 			"title" => "Импорт",

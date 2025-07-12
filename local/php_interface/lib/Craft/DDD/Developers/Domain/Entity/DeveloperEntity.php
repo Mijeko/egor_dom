@@ -2,12 +2,10 @@
 
 namespace Craft\DDD\Developers\Domain\Entity;
 
+use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
-use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
-use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\Dto\BxImageDto;
 
 /**
  *
@@ -21,14 +19,15 @@ class DeveloperEntity
 		public ?ImageValueObject            $picture = null,
 		protected ?array                    $buildObjects = null,
 		protected ?ImportSettingValueObject $importSetting = null,
+		protected ?CityEntity               $city = null,
 	)
 	{
 	}
 
 	public static function fromModel(Developer $developer): DeveloperEntity
 	{
+		$city = $developer->fillCity() ? CityEntity::fromModel($developer->getCity()) : null;
 		$buildObjects = [];
-
 		foreach($developer->fillBuildObjects() as $buildObject)
 		{
 			$buildObjects[] = BuildObjectEntity::fromModel($buildObject);
@@ -43,7 +42,8 @@ class DeveloperEntity
 				$developer->importSettings()->getHandler(),
 				$developer->importSettings()->getLinkSource(),
 				null
-			)
+			),
+			$city,
 		);
 	}
 

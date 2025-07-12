@@ -2,9 +2,18 @@
 
 namespace Craft\DDD\Developers\Domain\Entity;
 
+use Craft\DDD\City\Domain\Entity\CityEntity;
+use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\ApartmentValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\CityValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\CountryValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DistrictValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
 
 class BuildObjectEntity
 {
@@ -18,23 +27,47 @@ class BuildObjectEntity
 		protected ?DeveloperEntity         $developer = null,
 		protected ?array                   $apartments = null,
 		protected ?ImageGalleryValueObject $gallery = null,
+		protected ?CityEntity              $city = null,
 	)
 	{
 	}
 
 
-	public static function fromModel(BuildObject $buildObject)
+	public static function fromModel(BuildObject $buildObject): static
 	{
+		$apartments = [];
+		if($buildObject->fillApartments())
+		{
+			foreach($buildObject->getApartments() as $apartment)
+			{
+				$apartments[] = ApartmentEntity::fromModel($apartment);
+			}
+		}
+
+		$developer = $buildObject->fillDeveloper() ? DeveloperEntity::fromModel($buildObject->getDeveloper()) : null;
+		$location = $buildObject->getLocationEx();
+		$city = $buildObject->fillCity() ? CityEntity::fromModel($buildObject->getCity()) : null;
+
 		return new static(
 			$buildObject->getId(),
 			$buildObject->getName(),
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
+			$buildObject->getType(),
+			$buildObject->getFloors(),
+			new LocationValueObject(
+				new CountryValueObject($location['country']),
+				new RegionValueObject($location['region']),
+				new DistrictValueObject($location['district']),
+				new CityValueObject($location['city']),
+				new AddressValueObject($location['address']),
+				new ApartmentValueObject($location['apartment']),
+				new LongitudeValueObject($location['longitude']),
+				new LatitudeValueObject($location['latitude']),
+			),
+			$buildObject->getDeveloperId(),
+			$developer,
+			$apartments,
+			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
+			$city
 		);
 	}
 

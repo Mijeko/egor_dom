@@ -16,7 +16,7 @@ class OrmCreateClaimTable20250608215116 extends Version
 		$sql = <<<SQL
 CREATE TABLE `craft_claims` (
   `ID` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `ACTIVE` int NOT NULL,
+  `ACTIVE` char(1) NOT NULL,
   `NAME` varchar(128) NOT NULL,
   `PHONE` varchar(128) NOT NULL,
   `EMAIL` varchar(128) NOT NULL,

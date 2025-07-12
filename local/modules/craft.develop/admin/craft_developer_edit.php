@@ -9,6 +9,7 @@ $APPLICATION->SetTitle("Застройщики");
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
+use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
@@ -124,6 +125,26 @@ if($field = $entity->getField(DeveloperTable::F_NAME))
 		$field->isRequired(),
 		["size" => 35, "maxlength" => 255],
 		$developerModel ? $developerModel->getName() : null
+	);
+}
+
+if($field = $entity->getField(DeveloperTable::F_CITY_ID))
+{
+	$tabControl->AddDropDownField(
+		$field->getName(),
+		$field->getTitle(),
+		$field->isRequired(),
+		(function() {
+			$res = [];
+
+			$res[] = 'Выбрать город';
+			foreach(CityTable::getList()->fetchCollection() as $city)
+			{
+				$res[$city->getId()] = $city->getName();
+			}
+
+			return $res;
+		})(),
 	);
 }
 

@@ -3,7 +3,7 @@
 namespace Sprint\Migration;
 
 
-class OrmCreateDeveloperTable20250609105230 extends Version
+class OrmCreateCity20250712035612 extends Version
 {
 	protected $author = "admin";
 
@@ -14,20 +14,21 @@ class OrmCreateDeveloperTable20250609105230 extends Version
 	public function up()
 	{
 		global $DB;
+
 		$sql = <<<SQL
-CREATE TABLE `craft_developers` (
+CREATE TABLE `craft_city` (
   `ID` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `NAME` varchar(128) NOT NULL,
+  `CODE` varchar(128) NOT NULL,
   `ACTIVE` char(1) NOT NULL,
   `SORT` int(11) NOT NULL,
-  `PICTURE_ID` int(11) NULL,
-  `IMPORT_SETTINGS` longtext NULL,
   `CREATED_AT` datetime NOT NULL,
-  `UPDATED_AT` datetime NOT NULL
+  `UPDATED_AT` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE='InnoDB';
 SQL;
 
 		$DB->Query($sql);
+
 	}
 
 	public function down()

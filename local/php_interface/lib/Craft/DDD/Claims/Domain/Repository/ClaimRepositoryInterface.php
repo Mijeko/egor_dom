@@ -11,7 +11,7 @@ interface ClaimRepositoryInterface
 	/**
 	 * @return ClaimEntity[]
 	 */
-	public function findAll(): array;
+	public function findAll(array $order = [], array $filter = []): array;
 
 
 	/**

@@ -16,7 +16,7 @@ class UserEntity
 	{
 	}
 
-	public static function hydrate(CraftUser $user): static
+	public static function fromModel(CraftUser $user): static
 	{
 		return new static(
 			$user->getId(),
