@@ -8,11 +8,9 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:developers',
+	'craft:developer.list',
 	'.default',
-	[
-		#'IBLOCK_ID' => BUILD_DEVELOPERS_IBLOCK_ID,
-	],
+	[],
 	false,
 	['HIDE_ICONS' => 'Y']
 );

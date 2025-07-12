@@ -80,7 +80,7 @@ class BlossomHandler implements ImportHandlerInterface
 							return ImageValueObject::fromUrl($imageUrl);
 						}, $listGalleryImages)
 					),
-
+					$this->developer->getCity()
 				),
 				$rawApartmentData['description'][0],
 				$rawApartmentData['price']['value'],

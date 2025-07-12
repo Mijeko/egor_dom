@@ -64,7 +64,26 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	protected function hydrateElement(Apartment $apartment): ApartmentEntity
 	{
-		return ApartmentEntity::fromModel($apartment);
+		$buildObject = null;
+		return new ApartmentEntity(
+			$apartment->getId(),
+			$apartment->getBuildObjectId(),
+			$buildObject,
+			$apartment->getName(),
+			$apartment->getDescription(),
+			$apartment->getPrice(),
+			$apartment->getRooms(),
+			$apartment->getFloor(),
+			null,
+			$apartment->getRenovation(),
+			new StringLogicValueObject($apartment->getParking()),
+			new StringLogicValueObject($apartment->getBathroomUnit()),
+			$apartment->getMortgage(),
+			$apartment->getBuiltYear(),
+			new BuiltStateValueObject($apartment->getBuildingState()),
+			ImageGalleryValueObject::fillFromId($apartment->getPlanImageEx()),
+			ImageGalleryValueObject::fillFromId($apartment->getGalleryEx()),
+		);
 	}
 
 	public function findById(int $id): ?ApartmentEntity

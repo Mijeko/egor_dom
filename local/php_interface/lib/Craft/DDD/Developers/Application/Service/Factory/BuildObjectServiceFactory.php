@@ -16,10 +16,7 @@ class BuildObjectServiceFactory
 	{
 		return new BuildObjectService(
 			new OrmBuildObjectRepository(),
-			new DeveloperService(
-				new OrmDeveloperRepository(),
-				new OrmBuildObjectRepository(),
-			),
+			new OrmDeveloperRepository(),
 			new OrmApartmentRepository(),
 		);
 	}

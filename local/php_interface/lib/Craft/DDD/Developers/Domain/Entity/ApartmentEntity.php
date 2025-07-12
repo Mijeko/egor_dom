@@ -100,32 +100,6 @@ class ApartmentEntity
 
 	public static function fromModel(Apartment $apartment): static
 	{
-		$buildObject = null;
-		if($apartment->fillBuildObject())
-		{
-			$buildObject = BuildObjectEntity::fromModel($apartment->getBuildObject());
-		}
-
-
-		return new static(
-			$apartment->getId(),
-			$apartment->getBuildObjectId(),
-			$buildObject,
-			$apartment->getName(),
-			$apartment->getDescription(),
-			$apartment->getPrice(),
-			$apartment->getRooms(),
-			$apartment->getFloor(),
-			null,
-			$apartment->getRenovation(),
-			new StringLogicValueObject($apartment->getParking()),
-			new StringLogicValueObject($apartment->getBathroomUnit()),
-			$apartment->getMortgage(),
-			$apartment->getBuiltYear(),
-			new BuiltStateValueObject($apartment->getBuildingState()),
-			ImageGalleryValueObject::fillFromId($apartment->getPlanImageEx()),
-			ImageGalleryValueObject::fillFromId($apartment->getGalleryEx()),
-		);
 	}
 
 	public function generateName(): static

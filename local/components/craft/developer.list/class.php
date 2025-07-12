@@ -6,10 +6,10 @@ use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Application\Service\Factory\DeveloperServiceFactory;
 
-class CraftDevelopersComponent extends CBitrixComponent
+class CraftDeveloperListComponent extends CBitrixComponent
 {
 
-	protected ?DeveloperService $service = null;
+	protected ?DeveloperService $developerService = null;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -34,10 +34,10 @@ class CraftDevelopersComponent extends CBitrixComponent
 	{
 		if($this->arParams['IBLOCK_ID'])
 		{
-			$this->service = DeveloperServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
+			$this->developerService = DeveloperServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
 		} else
 		{
-			$this->service = DeveloperServiceFactory::createOnOrm();
+			$this->developerService = DeveloperServiceFactory::createOnOrm();
 		}
 	}
 
@@ -47,7 +47,7 @@ class CraftDevelopersComponent extends CBitrixComponent
 			function(DeveloperEntity $developer) {
 				return DeveloperDto::fromModel($developer);
 			},
-			$this->service->findAll()
+			$this->developerService->findAll()
 		);
 	}
 }

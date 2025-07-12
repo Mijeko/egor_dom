@@ -44,7 +44,7 @@ class BuildObjectEntity
 			}
 		}
 
-		$developer = $buildObject->fillDeveloper() ? DeveloperEntity::fromModel($buildObject->getDeveloper()) : null;
+		$developer = null;
 		$location = $buildObject->getLocationEx();
 		$city = $buildObject->fillCity() ? CityEntity::fromModel($buildObject->getCity()) : null;
 
@@ -110,6 +110,12 @@ class BuildObjectEntity
 	public function addApartment(ApartmentEntity $apartmentEntity): static
 	{
 		$this->apartments[$apartmentEntity->getId()] = $apartmentEntity;
+		return $this;
+	}
+
+	public function addApartments(array $apartments): static
+	{
+		$this->apartments = $apartments;
 		return $this;
 	}
 

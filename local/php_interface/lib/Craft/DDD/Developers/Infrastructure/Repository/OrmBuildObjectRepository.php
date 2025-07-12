@@ -105,19 +105,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 	protected function hydrateElement(BuildObject $buildObject): BuildObjectEntity
 	{
-		$apartments = $buildObject->fillApartments();
-		$childApartmentList = [];
-		if($apartments)
-		{
-			foreach($apartments as $apartment)
-			{
-				$childApartmentList[] = ApartmentEntity::fromModel($apartment);
-			}
-		}
-
-		$developer = $buildObject->fillDeveloper() ? DeveloperEntity::fromModel($buildObject->getDeveloper()) : null;
 		$location = $buildObject->getLocationEx();
-		$city = $buildObject->fillCity() ? CityEntity::fromModel($buildObject->getCity()) : null;
 
 		return new BuildObjectEntity(
 			$buildObject->getId(),
@@ -135,10 +123,10 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 				new LatitudeValueObject($location['latitude']),
 			),
 			$buildObject->getDeveloperId(),
-			$developer,
-			$childApartmentList,
+			null,
+			null,
 			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
-			$city
+			null
 		);
 	}
 }

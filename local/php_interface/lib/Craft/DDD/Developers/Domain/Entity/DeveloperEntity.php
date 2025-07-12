@@ -24,29 +24,6 @@ class DeveloperEntity
 	{
 	}
 
-	public static function fromModel(Developer $developer): DeveloperEntity
-	{
-		$city = $developer->fillCity() ? CityEntity::fromModel($developer->getCity()) : null;
-		$buildObjects = [];
-		foreach($developer->fillBuildObjects() as $buildObject)
-		{
-			$buildObjects[] = BuildObjectEntity::fromModel($buildObject);
-		}
-
-		return new static(
-			$developer->getId(),
-			$developer->getName(),
-			ImageValueObject::fromId($developer->getPictureId()),
-			$buildObjects,
-			new ImportSettingValueObject(
-				$developer->importSettings()->getHandler(),
-				$developer->importSettings()->getLinkSource(),
-				null
-			),
-			$city,
-		);
-	}
-
 	public function addBuildObject(BuildObjectEntity $buildObject): static
 	{
 		$this->buildObjects[] = $buildObject;
