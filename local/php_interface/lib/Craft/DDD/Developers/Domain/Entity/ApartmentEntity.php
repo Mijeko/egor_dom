@@ -102,6 +102,13 @@ class ApartmentEntity
 	{
 	}
 
+
+	public function addBuildObject(BuildObjectEntity $buildObject): static
+	{
+		$this->buildObject = $buildObject;
+		return $this;
+	}
+
 	public function generateName(): static
 	{
 		$resultName = '';

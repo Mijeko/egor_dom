@@ -79,7 +79,7 @@ class BuildObjectService
 		);
 		if($developers)
 		{
-			array_map(function(BuildObjectEntity $buildObjectEntity) use ($developers) {
+			$buildObjectList = array_map(function(BuildObjectEntity $buildObjectEntity) use ($developers) {
 
 				$currentDeveloper = array_filter($developers, function(DeveloperEntity $developer) use ($buildObjectEntity) {
 					return $buildObjectEntity->getDeveloperId() === $developer->getId();
@@ -109,7 +109,7 @@ class BuildObjectService
 		);
 		if($apartments)
 		{
-			array_map(function(BuildObjectEntity $buildObjectEntity) use ($apartments) {
+			$buildObjectList = array_map(function(BuildObjectEntity $buildObjectEntity) use ($apartments) {
 
 				$currentApartment = array_filter($apartments, function(ApartmentEntity $apartment) use ($buildObjectEntity) {
 					return $buildObjectEntity->getId() === $apartment->getBuildObjectId();

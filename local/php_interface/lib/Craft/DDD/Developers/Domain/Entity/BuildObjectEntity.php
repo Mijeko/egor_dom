@@ -33,44 +33,6 @@ class BuildObjectEntity
 	}
 
 
-	public static function fromModel(BuildObject $buildObject): static
-	{
-		$apartments = [];
-		if($buildObject->fillApartments())
-		{
-			foreach($buildObject->getApartments() as $apartment)
-			{
-				$apartments[] = ApartmentEntity::fromModel($apartment);
-			}
-		}
-
-		$developer = null;
-		$location = $buildObject->getLocationEx();
-		$city = $buildObject->fillCity() ? CityEntity::fromModel($buildObject->getCity()) : null;
-
-		return new static(
-			$buildObject->getId(),
-			$buildObject->getName(),
-			$buildObject->getType(),
-			$buildObject->getFloors(),
-			new LocationValueObject(
-				new CountryValueObject($location['country']),
-				new RegionValueObject($location['region']),
-				new DistrictValueObject($location['district']),
-				new CityValueObject($location['city']),
-				new AddressValueObject($location['address']),
-				new ApartmentValueObject($location['apartment']),
-				new LongitudeValueObject($location['longitude']),
-				new LatitudeValueObject($location['latitude']),
-			),
-			$buildObject->getDeveloperId(),
-			$developer,
-			$apartments,
-			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
-			$city
-		);
-	}
-
 	public static function fromImport(
 		?string                  $name,
 		?string                  $type,

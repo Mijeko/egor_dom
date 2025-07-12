@@ -31,8 +31,10 @@ class ClaimEntity
 		protected ?string                 $legalAddress,
 		protected ?string                 $postAddress,
 		protected ?string                 $bankName,
-		protected ?ApartmentEntity        $apartmentEntity,
-		protected ?UserEntity             $user,
+		protected ?int                    $apartmentId,
+		protected ?int                    $userId,
+		protected ?ApartmentEntity        $apartmentEntity = null,
+		protected ?UserEntity             $user = null,
 		protected ?string                 $createdAt = null,
 	)
 	{
@@ -73,46 +75,23 @@ class ClaimEntity
 			$legalAddress,
 			$postAddress,
 			$bankName,
+			null,
+			null,
 			$apartmentEntity,
 			$user
 		);
 	}
 
-	public static function hydrate(Claim $claim): static
+	public function addApartment(ApartmentEntity $apartmentEntity): static
 	{
+		$this->apartmentEntity = $apartmentEntity;
+		return $this;
+	}
 
-		$apartment = null;
-		$user = null;
-
-		if($claim->fillApartment())
-		{
-			$apartment = ApartmentEntity::fromModel($claim->getApartment());
-		}
-
-		if($claim->fillUser())
-		{
-			$user = UserEntity::fromModel($claim->fillUser());
-		}
-
-		return new static(
-			$claim->getId(),
-			$claim->getName(),
-			$claim->getEmail(),
-			$claim->getPhone(),
-			$claim->getClient(),
-			new InnValueObject($claim->getInn()),
-			new KppValueObject($claim->getKpp()),
-			new BikValueObject($claim->getBik()),
-			new OgrnValueObject($claim->getOgrn()),
-			new CurrAccountValueObject($claim->getCurrAcc()),
-			new CorrAccountValueObject($claim->getCorrAcc()),
-			$claim->getLegalAddress(),
-			$claim->getPostAddress(),
-			$claim->getBankName(),
-			$apartment,
-			$user,
-			$claim->getCreatedAt()->format('d.m.Y H:i:s'),
-		);
+	public function addUser(UserEntity $user): static
+	{
+		$this->user = $user;
+		return $this;
 	}
 
 	public function refreshIdAfterCreate(int $id): static
@@ -204,5 +183,15 @@ class ClaimEntity
 	public function getCreatedAt(): string
 	{
 		return $this->createdAt;
+	}
+
+	public function getApartmentId(): ?int
+	{
+		return $this->apartmentId;
+	}
+
+	public function getUserId(): ?int
+	{
+		return $this->userId;
 	}
 }

@@ -6,6 +6,12 @@ use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Infrastructure\Entity\Claim;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
+use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 
 class OrmClaimRepository implements ClaimRepositoryInterface
 {
@@ -90,6 +96,26 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 	protected function hydrate(Claim $claim): ClaimEntity
 	{
-		return ClaimEntity::hydrate($claim);
+		return new ClaimEntity(
+			$claim->getId(),
+			$claim->getName(),
+			$claim->getEmail(),
+			$claim->getPhone(),
+			$claim->getClient(),
+			new InnValueObject($claim->getInn()),
+			new KppValueObject($claim->getKpp()),
+			new BikValueObject($claim->getBik()),
+			new OgrnValueObject($claim->getOgrn()),
+			new CurrAccountValueObject($claim->getCurrAcc()),
+			new CorrAccountValueObject($claim->getCorrAcc()),
+			$claim->getLegalAddress(),
+			$claim->getPostAddress(),
+			$claim->getBankName(),
+			$claim->getApartmentId(),
+			$claim->getUserId(),
+			null,
+			null,
+			$claim->getCreatedAt()->format('d.m.Y H:i:s'),
+		);
 	}
 }

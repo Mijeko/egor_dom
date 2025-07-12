@@ -44,7 +44,8 @@ class CraftClaimsComponent extends CBitrixComponent
 			function(ClaimEntity $claim) {
 				return ClaimDto::fromEntity($claim);
 			},
-			$this->claimService->getAllByUserId($this->arParams["USER_ID"]));
+			$this->claimService->findAllByUserId($this->arParams["USER_ID"]) ?? []
+		);
 	}
 
 	protected function meta(): void

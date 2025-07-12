@@ -1,12 +1,12 @@
 <?php
 
-use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
-use Craft\DDD\Claims\Infrastructure\Repository\OrmClaimRepository;
+use Craft\DDD\Claims\Application\Services\ClaimService;
+use Craft\DDD\Claims\Application\Factory\ClaimServiceFactory;
 
 class CraftClaimsDetailComponent extends CBitrixComponent
 {
 
-	protected ClaimRepositoryInterface $claimRepository;
+	protected ClaimService $claimRepository;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -33,7 +33,7 @@ class CraftClaimsDetailComponent extends CBitrixComponent
 
 	protected function loadServices(): void
 	{
-		$this->claimRepository = new OrmClaimRepository();
+		$this->claimRepository = ClaimServiceFactory::getClaimService();
 	}
 
 	protected function loadData(): void
