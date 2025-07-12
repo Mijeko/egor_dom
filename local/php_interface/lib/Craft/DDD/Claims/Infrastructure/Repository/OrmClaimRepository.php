@@ -4,6 +4,7 @@ namespace Craft\DDD\Claims\Infrastructure\Repository;
 
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
+use Craft\DDD\Claims\Domain\ValueObject\StatusValueObject;
 use Craft\DDD\Claims\Infrastructure\Entity\Claim;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
@@ -23,6 +24,7 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		$model->setApartmentId($claim->getApartmentEntity()->getId());
 		$model->setClient($claim->getClient());
 		$model->setName($claim->getName());
+		$model->setStatus($claim->getStatus()->getCode());
 		$model->setPhone($claim->getPhone());
 		$model->setEmail($claim->getEmail());
 		$model->setOgrn($claim->getOgrn()->getValue());
@@ -99,6 +101,7 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		return new ClaimEntity(
 			$claim->getId(),
 			$claim->getName(),
+			new StatusValueObject($claim->getStatus()),
 			$claim->getEmail(),
 			$claim->getPhone(),
 			$claim->getClient(),

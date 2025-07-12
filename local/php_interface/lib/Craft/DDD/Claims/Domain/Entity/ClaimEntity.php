@@ -2,8 +2,7 @@
 
 namespace Craft\DDD\Claims\Domain\Entity;
 
-use Bitrix\Main\Diag\Debug;
-use Craft\DDD\Claims\Infrastructure\Entity\Claim;
+use Craft\DDD\Claims\Domain\ValueObject\StatusValueObject;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
@@ -19,6 +18,7 @@ class ClaimEntity
 	public function __construct(
 		protected ?int                    $id,
 		protected ?string                 $name,
+		protected ?StatusValueObject      $status,
 		protected ?string                 $email,
 		protected ?string                 $phone,
 		protected ?string                 $client,
@@ -41,20 +41,21 @@ class ClaimEntity
 	}
 
 	public static function createClaim(
-		string          $email,
-		string          $phone,
-		string          $client,
-		string          $inn,
-		string          $kpp,
-		string          $bik,
-		string          $ogrn,
-		string          $currAcc,
-		string          $corrAcc,
-		string          $legalAddress,
-		string          $postAddress,
-		string          $bankName,
-		ApartmentEntity $apartmentEntity,
-		UserEntity      $user,
+		StatusValueObject $status,
+		string            $email,
+		string            $phone,
+		string            $client,
+		string            $inn,
+		string            $kpp,
+		string            $bik,
+		string            $ogrn,
+		string            $currAcc,
+		string            $corrAcc,
+		string            $legalAddress,
+		string            $postAddress,
+		string            $bankName,
+		ApartmentEntity   $apartmentEntity,
+		UserEntity        $user,
 	): static
 	{
 
@@ -63,6 +64,7 @@ class ClaimEntity
 		return new static(
 			null,
 			$name,
+			$status,
 			$email,
 			$phone,
 			$client,
@@ -193,5 +195,10 @@ class ClaimEntity
 	public function getUserId(): ?int
 	{
 		return $this->userId;
+	}
+
+	public function getStatus(): ?StatusValueObject
+	{
+		return $this->status;
 	}
 }

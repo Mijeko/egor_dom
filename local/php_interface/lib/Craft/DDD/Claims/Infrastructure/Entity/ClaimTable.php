@@ -16,6 +16,7 @@ use Craft\Model\CraftUserTable;
 class ClaimTable extends DataManager
 {
 	const F_ID = 'ID';
+	const F_STATUS = 'STATUS';
 	const F_ACTIVE = 'ACTIVE';
 	const F_NAME = 'NAME';
 	const F_EMAIL = 'EMAIL';
@@ -55,6 +56,8 @@ class ClaimTable extends DataManager
 				->configureTitle('ID'),
 			(new StringField(self::F_NAME))
 				->configureTitle('Название'),
+			(new StringField(self::F_STATUS))
+				->configureTitle('Статус'),
 			(new StringField(self::F_EMAIL))
 				->configureTitle('E-mail клиента'),
 			(new StringField(self::F_PHONE))

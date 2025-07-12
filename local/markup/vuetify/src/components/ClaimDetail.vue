@@ -60,7 +60,7 @@ export default defineComponent({
         <v-card-title>Дата создания</v-card-title>
         <v-card-subtitle>{{ claim.createdAt }}</v-card-subtitle>
         <v-card-title>Статус</v-card-title>
-        <v-card-subtitle>Находится на рассмотрении</v-card-subtitle>
+        <v-card-subtitle>{{ claim.status.label }}</v-card-subtitle>
         <v-card-title>Стоимость</v-card-title>
         <v-card-subtitle>{{ Price.format(claim.apartment.price) }}</v-card-subtitle>
         <v-card-title>Жилой объект</v-card-title>

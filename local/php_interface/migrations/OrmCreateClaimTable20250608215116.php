@@ -18,6 +18,7 @@ CREATE TABLE `craft_claims` (
   `ID` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `ACTIVE` char(1) NOT NULL,
   `NAME` varchar(128) NOT NULL,
+  `STATUS` varchar(128) NOT NULL,
   `PHONE` varchar(128) NOT NULL,
   `EMAIL` varchar(128) NOT NULL,
   `CLIENT` varchar(128) NOT NULL,

@@ -3,6 +3,7 @@ import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 export default interface ClaimDto {
   id: number;
   name: string;
+  status: ClaimStatus;
   clientName: string;
   phone: string;
   email: string;
@@ -16,4 +17,11 @@ export default interface ClaimDto {
   postAddress: string;
   apartment: ApartmentDto;
   createdAt: string;
+}
+
+
+interface ClaimStatus {
+  label: string;
+  icon: string;
+  code: string;
 }
