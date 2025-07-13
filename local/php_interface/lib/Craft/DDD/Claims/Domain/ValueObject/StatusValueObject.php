@@ -2,17 +2,38 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Shared\Domain\Exceptions\FailedValueObjectValidateValueException;
 
 class StatusValueObject
 {
 	const STATUS_NEW = 'new';
+	const STATUS_WAIT_DOCS = 'wait_docs';
+	const STATUS_FINISH = 'finish';
 
 	private function statues(): array
 	{
 		return [
-			self::STATUS_NEW => 'Заявка создана',
+			self::STATUS_NEW       => 'Заявка создана',
+			self::STATUS_WAIT_DOCS => 'Ожидание документов',
+			self::STATUS_FINISH    => 'Заявка завершена',
+		];
+	}
+
+	private function icons(): array
+	{
+		return [
+			self::STATUS_NEW       => '$invoicePlus',
+			self::STATUS_FINISH    => '$success',
+			self::STATUS_WAIT_DOCS => '$waitDocument',
+		];
+	}
+
+	private function colors(): array
+	{
+		return [
+			self::STATUS_NEW       => 'teal',
+			self::STATUS_FINISH    => 'green-darken-1',
+			self::STATUS_WAIT_DOCS => 'orange',
 		];
 	}
 
@@ -48,6 +69,10 @@ class StatusValueObject
 
 	public function getIcon(): ?string
 	{
+		if(array_key_exists($this->code, $this->icons()))
+		{
+			return $this->icons()[$this->code];
+		}
 		return null;
 	}
 
@@ -56,6 +81,16 @@ class StatusValueObject
 		if(array_key_exists($this->code, $this->statues()))
 		{
 			return $this->statues()[$this->code];
+		}
+
+		return null;
+	}
+
+	public function getColor(): ?string
+	{
+		if(array_key_exists($this->code, $this->colors()))
+		{
+			return $this->colors()[$this->code];
 		}
 
 		return null;

@@ -23,7 +23,7 @@ $orderId = $arResult['VARIABLES']['ORDER_ID'];
 
 		<?php
 		$APPLICATION->IncludeComponent(
-			'craft:claims.detail',
+			'craft:claim.detail',
 			'.default',
 			[
 				'ID' => $orderId,

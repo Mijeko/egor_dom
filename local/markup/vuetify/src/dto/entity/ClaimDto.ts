@@ -20,8 +20,9 @@ export default interface ClaimDto {
 }
 
 
-interface ClaimStatus {
+export interface ClaimStatus {
   label: string;
   icon: string;
   code: string;
+  color: string;
 }

@@ -3,9 +3,11 @@ import {defineComponent, type PropType} from 'vue'
 import type ClaimDto from "@/dto/entity/ClaimDto.ts";
 import Price from "../core/Price.ts";
 import {th} from "vuetify/locale";
+import ClaimStatus from "@/components/part/ClaimStatus.vue";
 
 export default defineComponent({
   name: "ClaimDetail",
+  components: {ClaimStatus},
   props: {
     claim: {
       type: Object as PropType<ClaimDto>,
@@ -60,7 +62,9 @@ export default defineComponent({
         <v-card-title>Дата создания</v-card-title>
         <v-card-subtitle>{{ claim.createdAt }}</v-card-subtitle>
         <v-card-title>Статус</v-card-title>
-        <v-card-subtitle>{{ claim.status.label }}</v-card-subtitle>
+        <v-card-subtitle>
+          <ClaimStatus :status="claim.status"/>
+        </v-card-subtitle>
         <v-card-title>Стоимость</v-card-title>
         <v-card-subtitle>{{ Price.format(claim.apartment.price) }}</v-card-subtitle>
         <v-card-title>Жилой объект</v-card-title>

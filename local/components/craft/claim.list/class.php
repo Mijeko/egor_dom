@@ -5,7 +5,7 @@ use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Application\Services\ClaimService;
 use Craft\DDD\Claims\Application\Factory\ClaimServiceFactory;
 
-class CraftClaimsComponent extends CBitrixComponent
+class CraftClaimListComponent extends CBitrixComponent
 {
 
 	protected ?ClaimService $claimService = null;

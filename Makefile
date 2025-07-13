@@ -1,4 +1,4 @@
-markup: npm-i markup-build markup-copy
+webpack: npm-i markup-build markup-copy
 composer: composer-i
 
 npm-i:

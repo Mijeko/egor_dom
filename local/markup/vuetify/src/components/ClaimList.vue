@@ -1,9 +1,11 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type ClaimDto from "@/dto/entity/ClaimDto.ts";
+import ClaimStatus from "@/components/part/ClaimStatus.vue";
 
 export default defineComponent({
-  name: "ListClaims",
+  name: "ClaimList",
+  components: {ClaimStatus},
   props: {
     claims: {
       type: Array as PropType<ClaimDto[]>,
@@ -30,9 +32,7 @@ export default defineComponent({
           </v-card-text>
         </v-col>
         <v-col md="3">
-          <v-chip prepend-icon="$vuetify">
-            Ожидаются документы
-          </v-chip>
+          <ClaimStatus :status="claim.status"/>
         </v-col>
         <v-col md="2">
           <v-btn :href="`/profile/orders/${claim.id}/`">

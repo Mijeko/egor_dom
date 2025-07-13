@@ -3,7 +3,7 @@
 use Craft\DDD\Claims\Application\Services\ClaimService;
 use Craft\DDD\Claims\Application\Factory\ClaimServiceFactory;
 
-class CraftClaimsDetailComponent extends CBitrixComponent
+class CraftClaimDetailComponent extends CBitrixComponent
 {
 
 	protected ClaimService $claimRepository;

@@ -23,7 +23,7 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'ListClaims',
+		'SOURCE' => 'ClaimList',
 		'PROPS'  => [
 			'claims' => $arResult['CLAIMS'],
 		],

@@ -18,7 +18,7 @@
 
 		<?php
 		$APPLICATION->IncludeComponent(
-			'craft:claims',
+			'craft:claim.list',
 			'.default',
 			[
 				'USER_ID' => \Craft\Model\CraftUser::load()?->getId(),

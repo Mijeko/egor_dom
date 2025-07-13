@@ -10,6 +10,7 @@ class StatusClaimDto
 		public ?string $code,
 		public ?string $label,
 		public ?string $icon,
+		public ?string $color,
 	)
 	{
 	}
@@ -19,7 +20,8 @@ class StatusClaimDto
 		return new static(
 			$status->getCode(),
 			$status->getLabel(),
-			$status->getIcon()
+			$status->getIcon(),
+			$status->getColor(),
 		);
 	}
 }
