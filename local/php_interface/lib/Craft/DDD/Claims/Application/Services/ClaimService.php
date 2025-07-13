@@ -2,6 +2,11 @@
 
 namespace Craft\DDD\Claims\Application\Services;
 
+use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
+use Craft\DDD\Claims\Application\Factory\ClaimCreateUseCaseFactory;
+use Craft\DDD\Claims\Application\Factory\NotifyManagerAboutFreshClaimFactory;
+use Craft\DDD\Claims\Application\UseCase\ClaimCreateUseCase;
+use Craft\DDD\Claims\Application\UseCase\NotifyManagerAboutFreshClaim;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
@@ -9,7 +14,6 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
-use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
@@ -22,8 +26,18 @@ class ClaimService
 		protected ApartmentRepositoryInterface   $apartmentRepository,
 		protected UserRepositoryInterface        $userRepository,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
+		protected ClaimCreateUseCase             $claimCreateUseCase,
+		protected NotifyManagerAboutFreshClaim   $notifyManagerAboutFreshClaim,
 	)
 	{
+	}
+
+	public function createClientClaim(ClaimCreateDto $s): ClaimEntity
+	{
+		$claim = $this->claimCreateUseCase->execute($s);
+		$this->notifyManagerAboutFreshClaim->execute($claim);
+
+		return $claim;
 	}
 
 
@@ -40,9 +54,9 @@ class ClaimService
 	/**
 	 * @return ClaimEntity[]
 	 */
-	public function findAllByUserId(int $userId): array
+	public function findAllByUserId(int $userId, array $order = []): array
 	{
-		$claims = $this->repository->findAllByUserId($userId);
+		$claims = $this->repository->findAllByUserId($userId, $order);
 		if(!$claims)
 		{
 			throw new NotFoundOrmElement('Заявки не найдены');

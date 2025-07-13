@@ -56,7 +56,7 @@ export default defineComponent({
 
 
 
-    <v-card min-width="300" class="pa-4">
+    <v-card min-width="320" class="pa-4">
       <v-row>
         <v-col>
           <v-text-field

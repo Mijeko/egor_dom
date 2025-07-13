@@ -182,7 +182,7 @@ class ClaimEntity
 		return $this->legalAddress;
 	}
 
-	public function getCreatedAt(): string
+	public function getCreatedAt(): ?string
 	{
 		return $this->createdAt;
 	}

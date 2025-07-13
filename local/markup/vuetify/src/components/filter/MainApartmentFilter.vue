@@ -98,7 +98,7 @@ export default defineComponent({
               v-model="filter.floor"
               color="light-blue"
               label="Этаж"
-              icon="$bed"
+              icon="$homeFloorNegative"
             />
           </v-col>
         </v-row>

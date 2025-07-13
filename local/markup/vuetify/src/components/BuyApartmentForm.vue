@@ -28,6 +28,33 @@ export default defineComponent({
       user: {} as BxUserDto,
       isFormValid: false,
       validate: {
+        phone: [
+          (value: string) => {
+            if (!value || value.length <= 0) {
+              return 'Заполните телефон';
+            }
+
+            return true;
+          },
+        ],
+        email: [
+          (value: string) => {
+            if (!value || value.length <= 0) {
+              return 'Заполните email';
+            }
+
+            return true;
+          },
+        ],
+        client: [
+          (value: string) => {
+            if (!value || value.length <= 0) {
+              return 'Заполните фио';
+            }
+
+            return true;
+          },
+        ],
         inn: ValidateLegalData.inn,
         bik: ValidateLegalData.bik,
         ogrn: ValidateLegalData.ogrn,
@@ -132,17 +159,17 @@ export default defineComponent({
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-text-field type="text" label="Телефон" v-model="form.phone" required/>
+          <v-text-field type="text" label="Телефон" v-model="form.phone" :rules="validate.phone" required/>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-text-field type="text" label="E-Mail" v-model="form.email" required/>
+          <v-text-field type="text" label="E-Mail" v-model="form.email" :rules="validate.email" required/>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-text-field type="text" label="ФИО" v-model="form.client" required/>
+          <v-text-field type="text" label="ФИО" v-model="form.client" :rules="validate.client" required/>
         </v-col>
       </v-row>
 

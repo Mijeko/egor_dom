@@ -4,7 +4,9 @@ namespace Craft\Rest;
 
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
 use Craft\DDD\Claims\Application\Factory\ClaimCreateUseCaseFactory;
+use Craft\DDD\Claims\Application\Factory\ClaimServiceFactory;
 use Craft\DDD\Claims\Application\Factory\NotifyManagerAboutFreshClaimFactory;
+use Craft\DDD\Claims\Present\Dto\ClaimDto;
 
 class ClaimRest extends \IRestService
 {
@@ -12,11 +14,8 @@ class ClaimRest extends \IRestService
 	{
 		try
 		{
-
-			$claimCreateUseCase = ClaimCreateUseCaseFactory::getService();
-			$notifyManagerAboutFreshClaim = NotifyManagerAboutFreshClaimFactory::getService();
-
-			$claim = $claimCreateUseCase->execute(new ClaimCreateDto(
+			$service = ClaimServiceFactory::getClaimService();
+			$claim = $service->createClientClaim(new ClaimCreateDto(
 				$query['apartmentId'],
 				$query['userId'],
 				$query['email'],
@@ -33,11 +32,9 @@ class ClaimRest extends \IRestService
 				$query['bankName'],
 			));
 
-			$notifyManagerAboutFreshClaim->execute($claim);
-
 			return [
 				'success' => true,
-				'claim'   => $claim,
+				'claim'   => ClaimDto::fromEntity($claim),
 			];
 		} catch(\Exception $e)
 		{

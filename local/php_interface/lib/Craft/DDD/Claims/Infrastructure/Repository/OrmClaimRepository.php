@@ -17,7 +17,7 @@ use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 class OrmClaimRepository implements ClaimRepositoryInterface
 {
 
-	public function create(ClaimEntity $claim): ?ClaimEntity
+	public function create(ClaimEntity $claim): ClaimEntity
 	{
 		$model = ClaimTable::createObject();
 		$model->setUserId($claim->getUser()->getId());
@@ -77,11 +77,12 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		return $this->hydrate($object);
 	}
 
-	public function findAllByUserId(int $userId): array
+	public function findAllByUserId(int $userId, array $order = []): array
 	{
 		$result = [];
 
 		$query = ClaimTable::getList([
+			'order'  => $order,
 			'filter' => [
 				ClaimTable::F_USER_ID => $userId,
 			],

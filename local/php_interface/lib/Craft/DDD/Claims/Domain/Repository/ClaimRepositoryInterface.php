@@ -6,7 +6,7 @@ use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 
 interface ClaimRepositoryInterface
 {
-	public function create(ClaimEntity $claim): ?ClaimEntity;
+	public function create(ClaimEntity $claim): ClaimEntity;
 
 	/**
 	 * @return ClaimEntity[]
@@ -15,9 +15,10 @@ interface ClaimRepositoryInterface
 
 
 	/**
+	 * @param array $order
 	 * @return ClaimEntity[]
 	 */
-	public function findAllByUserId(int $userId): array;
+	public function findAllByUserId(int $userId, array $order = []): array;
 
 	public function findById(int $claimId): ?ClaimEntity;
 }

@@ -2,6 +2,7 @@
 
 use Craft\DDD\Claims\Present\Dto\ClaimDto;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
+use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Claims\Application\Services\ClaimService;
 use Craft\DDD\Claims\Application\Factory\ClaimServiceFactory;
 
@@ -44,7 +45,7 @@ class CraftClaimListComponent extends CBitrixComponent
 			function(ClaimEntity $claim) {
 				return ClaimDto::fromEntity($claim);
 			},
-			$this->claimService->findAllByUserId($this->arParams["USER_ID"]) ?? []
+			$this->claimService->findAllByUserId($this->arParams["USER_ID"], [ClaimTable::F_ID => 'DESC']) ?? []
 		);
 	}
 

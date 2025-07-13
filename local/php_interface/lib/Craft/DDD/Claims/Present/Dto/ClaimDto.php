@@ -23,7 +23,7 @@ class ClaimDto
 		public string          $currAcc,
 		public string          $corrAcc,
 		public ApartmentDto    $apartment,
-		public string          $createdAt,
+		public ?string         $createdAt = null,
 	)
 	{
 	}
