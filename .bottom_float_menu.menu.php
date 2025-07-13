@@ -1,20 +1,20 @@
 <?php
 $aMenuLinks = [
 	[
-		"Объекты",
+		"Квартиры",
 		"/objects/",
 		[],
 		[
-			'ICON' => 'mdi-menu',
+			'ICON' => '$domain',
 		],
 		"",
 	],
 	[
 		"Заявки",
-		"/claims/",
+		"/profile/orders/",
 		[],
 		[
-			'ICON' => 'mdi-menu',
+			'ICON' => '$listBoxOutline',
 		],
 		"",
 	],
@@ -23,7 +23,7 @@ $aMenuLinks = [
 		"/developers/",
 		[],
 		[
-			'ICON' => 'mdi-crosshairs-gps',
+			'ICON' => '$homeGroup',
 		],
 		"",
 	],
@@ -32,7 +32,7 @@ $aMenuLinks = [
 		"/profile/",
 		[],
 		[
-			'ICON' => 'mdi-crosshairs-gps',
+			'ICON' => '$cardAccount',
 		],
 		"",
 	],
@@ -41,7 +41,7 @@ $aMenuLinks = [
 		"/help/",
 		[],
 		[
-			'ICON' => 'mdi-crosshairs-gps',
+			'ICON' => '$chatQuestion',
 		],
 		"",
 	],

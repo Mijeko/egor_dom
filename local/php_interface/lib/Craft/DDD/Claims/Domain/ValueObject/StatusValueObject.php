@@ -10,6 +10,11 @@ class StatusValueObject
 	const STATUS_WAIT_DOCS = 'wait_docs';
 	const STATUS_FINISH = 'finish';
 
+	public function getStatusList(): array
+	{
+		return $this->statues();
+	}
+
 	private function statues(): array
 	{
 		return [

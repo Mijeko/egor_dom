@@ -3,10 +3,12 @@
   align-items: center;
   justify-content: flex-start;
   gap: 40px;
-
   padding: 20px 0;
-
   margin-bottom: 15px;
+
+  @include _640 {
+    display: none;
+  }
 
   &-menu {
     display: flex;

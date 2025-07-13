@@ -55,7 +55,7 @@ export default defineComponent({
 <template>
 
   <v-row>
-    <v-col cols="4">
+    <v-col md="4" cols="12">
       <v-card class="pa-3">
         <v-card-title>№ заявки</v-card-title>
         <v-card-subtitle>{{ claim.id }}</v-card-subtitle>
@@ -74,7 +74,7 @@ export default defineComponent({
       </v-card>
     </v-col>
 
-    <v-col cols="4">
+    <v-col cols="12" md="4">
       <v-card class="pa-3">
         <h2>Ваши данные</h2>
 
@@ -86,7 +86,7 @@ export default defineComponent({
       </v-card>
     </v-col>
 
-    <v-col cols="4">
+    <v-col cols="12" md="4">
       <v-card class="pa-3">
         <h2>Покупаемый объект</h2>
         <v-img v-if="currentImage" :src="currentImage"></v-img>
