@@ -17,6 +17,18 @@ global $APPLICATION;
 	<div>
 		<?php
 		$APPLICATION->IncludeComponent(
+			'craft:city.current',
+			'.default',
+			[],
+			false,
+			['HIDE_ICONS' => 'Y']
+		);
+		?>
+	</div>
+
+	<div>
+		<?php
+		$APPLICATION->IncludeComponent(
 			"bitrix:menu",
 			"header.menu",
 			[

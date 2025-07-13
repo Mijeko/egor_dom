@@ -15,8 +15,8 @@ class Handler
 				'user.register.agent'   => [UserRest::class, 'registerAgent'],
 				'profile.update'        => [UserRest::class, 'profileUpdate'],
 				'profile.find'          => [UserRest::class, 'findProfile'],
-
-				'claim.create' => [ClaimRest::class, 'create'],
+				'claim.create'          => [ClaimRest::class, 'create'],
+				'city.current.store'    => [CityRest::class, 'storeCurrentCity'],
 			],
 		];
 	}

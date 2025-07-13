@@ -21,6 +21,7 @@ CREATE TABLE `craft_city` (
   `NAME` varchar(128) NOT NULL,
   `CODE` varchar(128) NOT NULL,
   `ACTIVE` char(1) NOT NULL,
+  `IS_DEFAULT` char(1) NOT NULL,
   `SORT` int(11) NOT NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP

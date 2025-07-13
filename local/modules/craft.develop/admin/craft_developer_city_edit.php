@@ -85,7 +85,18 @@ if($field = $entity->getField(CityTable::F_ACTIVE))
 		$field->getTitle(),
 		$field->isRequired(),
 		[CityTable::ACTIVE_Y, CityTable::ACTIVE_N],
-		$cityModel ? $cityModel->getActive() : true
+		!$cityModel || $cityModel->getActive()
+	);
+}
+
+if($field = $entity->getField(CityTable::F_IS_DEFAULT))
+{
+	$tabControl->AddCheckBoxField(
+		$field->getName(),
+		$field->getTitle(),
+		$field->isRequired(),
+		[CityTable::DEFAULT_Y, CityTable::DEFAULT_N],
+		!$cityModel || $cityModel->getIsDefault()
 	);
 }
 

@@ -4,6 +4,7 @@ namespace Craft\DDD\City\Infrastructure\Repository;
 
 use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\City\Domain\Repository\CityRepositoryInterface;
+use Craft\DDD\City\Domain\ValueObject\DefaultValueObject;
 use Craft\DDD\City\Infrastructure\Entity\City;
 use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
@@ -52,7 +53,24 @@ class OrmCityRepository implements CityRepositoryInterface
 			$city->getName(),
 			$city->getCode(),
 			new ActiveValueObject($city->getActive()),
+			new DefaultValueObject($city->getIsDefault()),
 			new SortValueObject($city->getSort()),
 		);
+	}
+
+	public function findDefault(): CityEntity
+	{
+		$city = CityTable::getList([
+			'filter' => [
+				CityTable::F_IS_DEFAULT => CityTable::DEFAULT_Y,
+			],
+		])->fetchObject();
+
+		if(!$city)
+		{
+			throw new NotFoundOrmElement('Гороод по умолчанию не найден');
+		}
+
+		return $this->hydrate($city);
 	}
 }

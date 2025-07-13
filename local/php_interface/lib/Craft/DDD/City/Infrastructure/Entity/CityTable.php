@@ -19,12 +19,16 @@ class CityTable extends DataManager
 	const F_NAME = 'NAME';
 	const F_CODE = 'CODE';
 	const F_ACTIVE = 'ACTIVE';
+	const F_IS_DEFAULT = 'IS_DEFAULT';
 	const F_SORT = 'SORT';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';
+
+	const DEFAULT_Y = 'Y';
+	const DEFAULT_N = 'N';
 
 	const R_BUILD_OBJECTS = 'BUILD_OBJECTS';
 	const R_DEVELOPERS = 'DEVELOPERS';
@@ -51,6 +55,10 @@ class CityTable extends DataManager
 				->configureDefaultValue(self::ACTIVE_Y)
 				->configureRequired()
 				->configureTitle('Активность'),
+			(new BooleanField(self::F_IS_DEFAULT))
+				->configureValues(self::DEFAULT_N, self::DEFAULT_Y)
+				->configureDefaultValue(self::DEFAULT_Y)
+				->configureTitle('Город по умолчанию'),
 			(new IntegerField(self::F_SORT))
 				->configureDefaultValue(500)
 				->configureTitle('Сортировка'),
@@ -58,7 +66,7 @@ class CityTable extends DataManager
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')
 				->configureDefaultValue(new DateTime()),
-			(new DatetimeField(self::F_CREATED_AT))
+			(new DatetimeField(self::F_UPDATED_AT))
 				->configureTitle('Дата обновления')
 				->configureDefaultValue(new DateTime()),
 

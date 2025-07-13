@@ -11,4 +11,6 @@ interface CityRepositoryInterface
 	public function findById(int $id): ?CityEntity;
 
 	public function findAll(array $order = [], array $filter = []): array;
+
+	public function findDefault(): CityEntity;
 }
