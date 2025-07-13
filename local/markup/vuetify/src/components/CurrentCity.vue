@@ -23,6 +23,15 @@ export default defineComponent({
     },
   },
   methods: {
+    label: function (city: CityDto) {
+      let label: string = city.name;
+
+      if (city.id == this.currentCity.id) {
+        label += ' (текущий)';
+      }
+
+      return label;
+    },
     select: function (city: CityDto) {
       let service = new CurrentCityService();
       service.saveCity(city).then((response: CurrentCityResponseDto) => {
@@ -65,7 +74,7 @@ export default defineComponent({
 
         <v-list>
           <v-list-item v-for="(city, i) in cityList" :key="i" :value="city" @click="select(city)">
-            <v-list-item-title v-text="city.name"></v-list-item-title>
+            <v-list-item-title>{{ label(city) }}</v-list-item-title>
           </v-list-item>
         </v-list>
 
