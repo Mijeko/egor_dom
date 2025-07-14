@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Developers\Application\Service\Factory;
+namespace Craft\DDD\Developers\Application\Factory;
 
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepository;

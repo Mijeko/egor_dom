@@ -4,14 +4,14 @@ namespace Craft\DDD\City\Application\UseCase;
 
 use Craft\DDD\City\Application\Dto\StoreCurrentCityDto;
 use Craft\DDD\City\Domain\Repository\CityRepositoryInterface;
-use Craft\DDD\City\Infrastructure\Service\CurrentCity;
+use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 
 class StoreCurrentCityUseCase
 {
 
 	public function __construct(
 		protected CityRepositoryInterface $cityRepository,
-		protected CurrentCity             $currentCity,
+		protected CurrentCityService      $currentCity,
 	)
 	{
 	}

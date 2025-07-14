@@ -7,7 +7,7 @@ use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\City\Domain\Repository\CityRepositoryInterface;
 use Craft\DDD\City\Infrastructure\Interfaces\City\CurrentCityStorageInterface;
 
-class CurrentCity
+class CurrentCityService
 {
 
 	public function __construct(

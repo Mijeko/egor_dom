@@ -43,3 +43,7 @@ if(file_exists(__DIR__ . '/events.php'))
 {
 	require_once __DIR__ . '/events.php';
 }
+
+
+//$city = CurrentCityFactory::getService();
+//$city->current();

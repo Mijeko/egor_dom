@@ -4,7 +4,7 @@ use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
-use Craft\DDD\Developers\Application\Service\Factory\DeveloperServiceFactory;
+use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 
 class CraftDeveloperListComponent extends CBitrixComponent
 {

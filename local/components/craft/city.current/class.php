@@ -1,6 +1,6 @@
 <?php
 
-use Craft\DDD\City\Infrastructure\Service\CurrentCity;
+use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 use Craft\DDD\City\Present\Dto\CityDto;
 use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\City\Infrastructure\Entity\CityTable;
@@ -12,7 +12,7 @@ class CraftCityCurrentComponent extends CBitrixComponent
 {
 
 	protected CityRepositoryInterface $cityRepository;
-	protected CurrentCity $currentCity;
+	protected CurrentCityService $currentCity;
 
 	public function onPrepareComponentParams($arParams)
 	{

@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
+use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
@@ -9,6 +10,7 @@ use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 class BuildObjectService
@@ -17,6 +19,7 @@ class BuildObjectService
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
 		protected DeveloperRepositoryInterface   $developerRepository,
 		protected ApartmentRepositoryInterface   $apartmentRepository,
+		protected CurrentCityService             $currentCityService,
 	)
 	{
 	}
@@ -56,7 +59,12 @@ class BuildObjectService
 
 	public function findAll(array $order = [], array $filter = []): array
 	{
-		$buildObjectList = $this->buildObjectRepository->findAll($order, $filter);
+		$buildObjectList = $this->buildObjectRepository->findAll($order, array_merge(
+			[
+				BuildObjectTable::F_CITY_ID => $this->currentCityService->current()->getId(),
+			],
+			$filter
+		));
 
 		$this->loadRelations($buildObjectList);
 

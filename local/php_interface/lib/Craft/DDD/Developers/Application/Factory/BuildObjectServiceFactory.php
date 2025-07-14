@@ -1,7 +1,8 @@
 <?php
 
-namespace Craft\DDD\Developers\Application\Service\Factory;
+namespace Craft\DDD\Developers\Application\Factory;
 
+use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepository;
@@ -18,6 +19,7 @@ class BuildObjectServiceFactory
 			new OrmBuildObjectRepository(),
 			new OrmDeveloperRepository(),
 			new OrmApartmentRepository(),
+			CurrentCityFactory::getService(),
 		);
 	}
 
@@ -28,7 +30,9 @@ class BuildObjectServiceFactory
 			new DeveloperService(
 				new IblockDeveloperRepository($iblockId),
 				new IblockBuildObjectOrmRepository($iblockId),
-			)
+			),
+			null,
+			CurrentCityFactory::getService(),
 		);
 	}
 }

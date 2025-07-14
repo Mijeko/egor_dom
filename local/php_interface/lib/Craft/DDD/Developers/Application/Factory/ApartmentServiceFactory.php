@@ -1,8 +1,9 @@
 <?php
 
-namespace Craft\DDD\Developers\Application\Service\Factory;
+namespace Craft\DDD\Developers\Application\Factory;
 
 use Craft\DDD\Developers\Application\Service\ApartmentService;
+use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 
 class ApartmentServiceFactory

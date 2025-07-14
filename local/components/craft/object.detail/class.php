@@ -7,7 +7,7 @@ use Craft\DDD\Developers\Present\Dto\ApartmentDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
-use Craft\DDD\Developers\Application\Service\Factory\BuildObjectServiceFactory;
+use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 
 class CraftBuildObjectDetailComponent extends CBitrixComponent
 {

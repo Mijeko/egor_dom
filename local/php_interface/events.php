@@ -15,7 +15,7 @@ $eventManager->registerEventHandlerCompatible(
 
 $eventManager->registerEventHandlerCompatible(
 	"main",
-	"OnPageStart",
+	"OnProlog",
 	"main",
 	OnPageStartHandler::class,
 	"execute",

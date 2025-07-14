@@ -57,7 +57,7 @@ class CookieCurrentCityStorage implements CurrentCityStorageInterface
 		$rawJsonData = Context::getCurrent()->getRequest()->getCookie(self::SESSION_KEY);
 		if(!json_validate($rawJsonData))
 		{
-			throw new \Exception('Некорректное значение сессии: ' . $rawJsonData);
+			return [];
 		}
 
 		return json_decode($rawJsonData, true);
