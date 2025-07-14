@@ -37,9 +37,9 @@ if(file_exists(__DIR__ . '/../js/config.php'))
 	require_once __DIR__ . '/../js/config.php';
 }
 
-//if(file_exists(__DIR__ . '/events.php'))
-//{
-//	require_once __DIR__ . '/events.php';
-//}
+if(file_exists(__DIR__ . '/events.php'))
+{
+	require_once __DIR__ . '/events.php';
+}
 
 
