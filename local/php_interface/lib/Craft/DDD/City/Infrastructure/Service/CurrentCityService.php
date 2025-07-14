@@ -62,6 +62,11 @@ class CurrentCityService
 		return $this->storage->has();
 	}
 
+	public function clean(): void
+	{
+		$this->storage->clean();
+	}
+
 	public function setDefault(): void
 	{
 		$default = $this->repository->findDefault();

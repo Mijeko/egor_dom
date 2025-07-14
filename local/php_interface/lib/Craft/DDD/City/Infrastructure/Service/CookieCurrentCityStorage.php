@@ -3,6 +3,7 @@
 namespace Craft\DDD\City\Infrastructure\Service;
 
 use Bitrix\Main\Context;
+use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Web\Cookie;
 use Bitrix\Main\Application;
 use Bitrix\Main\Session\SessionInterface;
@@ -24,9 +25,10 @@ class CookieCurrentCityStorage implements CurrentCityStorageInterface
 
 	public function store(CityEntity $cityEntity): void
 	{
-		$cookie = new Cookie(self::SESSION_KEY, json_encode(['id' => $cityEntity->getId(), 'name' => $cityEntity->getName()]), time() + 60 * 60 * 24 * 30 * 12 * 2);
-		$cookie->setHttpOnly(false);
-		$this->storeCookie($cookie);
+		$this->buildCookie(
+			['id' => $cityEntity->getId(), 'name' => $cityEntity->getName()],
+			time() + 60 * 60 * 24 * 30 * 12 * 2
+		);
 	}
 
 	public function get(): int
@@ -42,8 +44,10 @@ class CookieCurrentCityStorage implements CurrentCityStorageInterface
 
 	public function clean(): void
 	{
-		$cookie = new Cookie(self::SESSION_KEY, null, time() - 3600);
-		$this->storeCookie($cookie);
+		$this->buildCookie(
+			[null => rand()],
+			time() - 3600
+		);
 	}
 
 	public function has(): bool
@@ -61,6 +65,16 @@ class CookieCurrentCityStorage implements CurrentCityStorageInterface
 		}
 
 		return json_decode($rawJsonData, true);
+	}
+
+	private function buildCookie(array $data, $time): void
+	{
+
+		$cookie = new Cookie(self::SESSION_KEY, json_encode($data), $time);
+		$cookie->setHttpOnly(false)
+			->setSecure(false);
+
+		$this->storeCookie($cookie);
 	}
 
 	private function storeCookie(Cookie $cookie): void

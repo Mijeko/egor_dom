@@ -13,11 +13,11 @@ $eventManager->registerEventHandlerCompatible(
 	"onRestServiceBuildDescription"
 );
 
-$eventManager->registerEventHandlerCompatible(
-	"main",
-	"OnProlog",
-	"main",
-	OnPageStartHandler::class,
-	"execute",
-	"100"
-);
+//$eventManager->registerEventHandlerCompatible(
+//	"main",
+//	"OnProlog",
+//	"main",
+//	OnPageStartHandler::class,
+//	"execute",
+//	"100"
+//);

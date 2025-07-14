@@ -61,7 +61,7 @@ class BuildObjectService
 	{
 		$buildObjectList = $this->buildObjectRepository->findAll($order, array_merge(
 			[
-				BuildObjectTable::F_CITY_ID => $this->currentCityService->current()->getId(),
+				BuildObjectTable::F_CITY_ID => $this->currentCityService?->current()?->getId(),
 			],
 			$filter
 		));

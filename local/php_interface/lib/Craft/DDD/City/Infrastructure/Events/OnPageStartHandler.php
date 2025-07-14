@@ -6,7 +6,7 @@ use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
 
 class OnPageStartHandler
 {
-	public static function execute()
+	public static function execute(): void
 	{
 		$city = CurrentCityFactory::getService();
 		$city->current();
