@@ -9,6 +9,6 @@ class OnPageStartHandler
 	public static function execute(): void
 	{
 		$city = CurrentCityFactory::getService();
-		$city->current();
+		$city->currentOrDefault();
 	}
 }

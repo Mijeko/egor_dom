@@ -1,7 +1,6 @@
 <?php
 
 //define('NEED_AUTH', true);
-use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
 
 if(\Bitrix\Main\Loader::includeModule('craft.core'))
 {
@@ -38,11 +37,9 @@ if(file_exists(__DIR__ . '/../js/config.php'))
 	require_once __DIR__ . '/../js/config.php';
 }
 
-$city = CurrentCityFactory::getService();
-$city->current();
+//if(file_exists(__DIR__ . '/events.php'))
+//{
+//	require_once __DIR__ . '/events.php';
+//}
 
-if(file_exists(__DIR__ . '/events.php'))
-{
-	require_once __DIR__ . '/events.php';
-}
 

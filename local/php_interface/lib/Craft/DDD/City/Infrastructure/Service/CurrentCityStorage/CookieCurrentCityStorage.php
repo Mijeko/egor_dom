@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\City\Infrastructure\Service;
+namespace Craft\DDD\City\Infrastructure\Service\CurrentCityStorage;
 
 use Bitrix\Main\Context;
 use Bitrix\Main\Diag\Debug;
@@ -14,14 +14,6 @@ class CookieCurrentCityStorage implements CurrentCityStorageInterface
 {
 
 	const SESSION_KEY = 'currentCity';
-
-	protected SessionInterface $session;
-
-	public function __construct()
-	{
-		session_start();
-		$this->session = Application::getInstance()->getSession();
-	}
 
 	public function store(CityEntity $cityEntity): void
 	{

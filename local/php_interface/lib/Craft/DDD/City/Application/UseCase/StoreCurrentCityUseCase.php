@@ -11,7 +11,7 @@ class StoreCurrentCityUseCase
 
 	public function __construct(
 		protected CityRepositoryInterface $cityRepository,
-		protected CurrentCityService      $currentCity,
+		protected CurrentCityService      $currentCityService,
 	)
 	{
 	}
@@ -24,6 +24,7 @@ class StoreCurrentCityUseCase
 			throw new \Exception('Город не найден');
 		}
 
-		$this->currentCity->save($city);
+		$this->currentCityService->clean();
+//		$this->currentCityService->save($city);
 	}
 }

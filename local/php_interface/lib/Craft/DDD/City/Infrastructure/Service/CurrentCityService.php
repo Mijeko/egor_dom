@@ -36,16 +36,34 @@ class CurrentCityService
 		{
 			if(!$this->has())
 			{
-				$this->setDefault();
+				return null;
 			}
 
 			$currentCityId = $this->storage->get();
-
 			$current = $this->repository->findById($currentCityId);
 
 			if(!$current)
 			{
-				throw new \Exception("Такого города не существует");
+				return null;
+			}
+
+			return $current;
+		} catch(\Exception $e)
+		{
+			Debug::dumpToFile($e->getMessage(), '', '__critError.log');
+		}
+
+		return null;
+	}
+
+	public function currentOrDefault(): ?CityEntity
+	{
+		try
+		{
+			$current = $this->current();
+			if(!$current)
+			{
+				$this->setDefault();
 			}
 
 			return $current;

@@ -3,8 +3,9 @@
 namespace Craft\DDD\City\Infrastructure\Factory;
 
 use Craft\DDD\City\Infrastructure\Repository\OrmCityRepository;
-use Craft\DDD\City\Infrastructure\Service\CookieCurrentCityStorage;
+use Craft\DDD\City\Infrastructure\Service\CurrentCityStorage\CookieCurrentCityStorage;
 use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
+use Craft\DDD\City\Infrastructure\Service\CurrentCityStorage\SessionCurrentCityStorage;
 
 class CurrentCityFactory
 {
@@ -13,7 +14,8 @@ class CurrentCityFactory
 	{
 		return new CurrentCityService(
 			new OrmCityRepository(),
-			new CookieCurrentCityStorage(),
+			new SessionCurrentCityStorage(),
+		//			new CookieCurrentCityStorage(),
 		);
 	}
 }
