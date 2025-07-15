@@ -26,7 +26,7 @@ class ImportService
 	{
 	}
 
-	public function execute(int $developerId): void
+	public function executeById(int $developerId): void
 	{
 		$this->developer = $this->developerService->findById($developerId);
 		if(!$this->developer)
@@ -45,7 +45,22 @@ class ImportService
 
 	}
 
-	public function getHandler(ImportSettingValueObject $setting): ?ImportHandlerInterface
+	public function executeAll(): void
+	{
+		try
+		{
+			$developers = $this->developerService->findAll();
+			foreach($developers as $developer)
+			{
+				$this->executeById($developer->getId());
+			}
+		} catch(\Exception $exception)
+		{
+
+		}
+	}
+
+	private function getHandler(ImportSettingValueObject $setting): ?ImportHandlerInterface
 	{
 		switch($setting->getHandler())
 		{
@@ -65,7 +80,7 @@ class ImportService
 		}
 	}
 
-	public function readData(DeveloperEntity $developerEntity): string
+	private function readData(DeveloperEntity $developerEntity): string
 	{
 		if(!$developerEntity->getImportSetting()->getHandler())
 		{
@@ -99,7 +114,7 @@ class ImportService
 		return $content;
 	}
 
-	public function reader(string $url): ?string
+	private function reader(string $url): ?string
 	{
 		$ch = curl_init($url);
 

@@ -30,7 +30,7 @@ if($request->isPost())
 	try
 	{
 		$import = ImportServiceFactory::getService();
-		$import->execute(
+		$import->executeById(
 			$request->getPost('developerId')
 		);
 

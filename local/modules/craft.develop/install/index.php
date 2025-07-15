@@ -59,6 +59,11 @@ class craft_develop extends CModule
 
 	function DoInstall()
 	{
+		if(!\Bitrix\Main\Loader::includeModule('craft.core'))
+		{
+			throw new Exception('Модуль craft.core не установлен');
+		}
+
 		$this->InstallDB();
 		$this->InstallEvents();
 		$this->InstallFiles();

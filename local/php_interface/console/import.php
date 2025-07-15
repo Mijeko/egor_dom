@@ -8,17 +8,6 @@ if(empty($_SERVER['DOCUMENT_ROOT']))
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
 
-$developers = \Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable::getList()->fetchCollection();
 $service = \Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory::getService();
-
-foreach($developers as $developer)
-{
-	try
-	{
-		$service->execute($developer->getId());
-	} catch(Exception $e)
-	{
-		\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
-	}
-}
+$service->executeAll();
 
