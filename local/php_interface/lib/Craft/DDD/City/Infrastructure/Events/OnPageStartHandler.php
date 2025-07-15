@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\City\Infrastructure\Events;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
 
 class OnPageStartHandler
@@ -11,7 +10,5 @@ class OnPageStartHandler
 	{
 //		$city = CurrentCityFactory::getService();
 //		$city->currentOrDefault();
-
-		Debug::dumpToFile(rand());
 	}
 }

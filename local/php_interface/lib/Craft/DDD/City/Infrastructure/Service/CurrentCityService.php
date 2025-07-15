@@ -19,9 +19,7 @@ class CurrentCityService
 
 	public function save(CityEntity $city): CityEntity
 	{
-
 		$this->storage->store($city);
-
 
 		if(!$this->storage->has())
 		{
@@ -41,8 +39,6 @@ class CurrentCityService
 			}
 
 			$currentCityId = $this->storage->get();
-			Debug::dumpToFile($currentCityId, '', '__asd.log');
-			Debug::dumpToFile($_SESSION, '', '__asd.log');
 			$current = $this->repository->findById($currentCityId);
 
 			if(!$current)
@@ -97,7 +93,5 @@ class CurrentCityService
 		}
 
 		$this->storage->store($default);
-
-		Debug::dumpToFile($default, '', '__asd11111111111111111.log');
 	}
 }
