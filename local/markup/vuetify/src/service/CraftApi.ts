@@ -5,10 +5,11 @@ import Env from "@/core/Env.ts";
 export default class CraftApi {
 
   host: string = window.location.host;
-  key: string = Env.get();
+  apiKey: string = Env.get().apiKey;
+  apiUserId: string = Env.get().apiUserId;
 
   post(method: string, body: FormData, headers: any = {}): Promise<Response> {
-    return fetch(`${this.host}/rest/1/${this.key}/${method}/`, {
+    return fetch(`${this.host}/rest/1/${this.apiKey}/${method}/`, {
       method: 'POST',
       body: body,
       headers: headers
