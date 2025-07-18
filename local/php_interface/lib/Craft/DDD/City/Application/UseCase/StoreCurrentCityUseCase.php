@@ -25,9 +25,6 @@ class StoreCurrentCityUseCase
 			throw new \Exception('Город не найден');
 		}
 
-		session_start();
-		Debug::dumpToFile($this->currentCityService->current());
 		$this->currentCityService->save($city);
-		Debug::dumpToFile($this->currentCityService->current());
 	}
 }
