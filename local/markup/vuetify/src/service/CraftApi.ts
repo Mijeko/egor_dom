@@ -1,13 +1,15 @@
 import type RegisterResponseDto from "@/dto/response/RegisterResponseDto.ts";
 import {th} from "vuetify/locale";
+import Env from "@/core/Env.ts";
 
 export default class CraftApi {
 
-  host: string = 'https://dom.local';
-  key: string = 'ug4k7eew7wa5jnln';
+  host: string = window.location.host;
+  apiKey: string = Env.get().apiKey;
+  apiUserId: string = Env.get().apiUserId;
 
   post(method: string, body: FormData, headers: any = {}): Promise<Response> {
-    return fetch(`${this.host}/rest/1/${this.key}/${method}/`, {
+    return fetch(`${this.host}/rest/1/${this.apiKey}/${method}/`, {
       method: 'POST',
       body: body,
       headers: headers
