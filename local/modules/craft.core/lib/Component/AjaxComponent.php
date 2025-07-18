@@ -3,10 +3,8 @@
 namespace Craft\Core\Component;
 
 use Bitrix\Main\Component\ParameterSigner;
-use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Engine\ActionFilter\Csrf;
 use Bitrix\Main\Engine\ActionFilter\HttpMethod;
-use Bitrix\Main\Security\Sign\Signer;
 use CFile;
 use Bitrix\Main\Errorable;
 use Bitrix\Main\Engine\Contract\Controllerable;
@@ -26,7 +24,6 @@ abstract class AjaxComponent extends LoadableComponent implements Controllerable
 
 		$arParams['SUCCESS_MESSAGE'] = $arParams['SUCCESS_MESSAGE'] ? $arParams['SUCCESS_MESSAGE'] : 'Форма успешно отправлена';
 		$arParams['IBLOCK_ID'] = intval($arParams['IBLOCK_ID']);
-		$arParams['FORM_KEY'] = $arParams['FORM_KEY'];
 		return $arParams;
 	}
 
@@ -52,7 +49,13 @@ abstract class AjaxComponent extends LoadableComponent implements Controllerable
 
 	public function executeAction($signedParameters = '')
 	{
-		$componentParams = ParameterSigner::unsignParameters($this->getName(), $signedParameters);
+		$componentParams = [];
+		if($signedParameters)
+		{
+			$componentParams = ParameterSigner::unsignParameters($this->getName(), $signedParameters);
+		}
+
+
 		$template = $componentParams['TEMPLATE'] ?? null;
 
 		try

@@ -5,6 +5,7 @@ import type RegisterAgentRequestDto from "@/dto/request/RegisterAgentRequestDto.
 import type RegisterAgentResponseDto from "@/dto/response/RegisterAgentResponseDto.ts";
 import type RegisterStudentRequestDto from "@/dto/request/RegisterStudentRequestDto.ts";
 import type RegisterStudentResponseDto from "@/dto/response/RegisterStudentResponseDto.ts";
+import ObjectMap from "@/core/ObjectMap.ts";
 
 export default class UserService {
 
@@ -15,7 +16,7 @@ export default class UserService {
   }
 
   authorize(authData: AuthorizeDto) {
-    return this.api.post('user.login', this.api.objectToFormData({
+    return this.api.post('user.login', ObjectMap.objectToFormData({
       phone: authData.phone,
       password: authData.password
     }))
@@ -23,17 +24,17 @@ export default class UserService {
   }
 
   registrationAgent(body: RegisterAgentRequestDto): Promise<RegisterAgentResponseDto> {
-    return this.api.post('user.register.agent', this.api.objectToFormData(body))
+    return this.api.post('user.register.agent', ObjectMap.objectToFormData(body))
       .then((response: any) => response.json());
   }
 
   registrationStudent(body: RegisterStudentRequestDto): Promise<RegisterStudentResponseDto> {
-    return this.api.post('user.register.student', this.api.objectToFormData(body))
+    return this.api.post('user.register.student', ObjectMap.objectToFormData(body))
       .then((response: any) => response.json());
   }
 
   profileUpdate(body: ProfileUpdateDto) {
-    return this.api.post('profile.update', this.api.objectToFormData(body))
+    return this.api.post('profile.update', ObjectMap.objectToFormData(body))
       .then((response: any) => response.json());
   }
 }

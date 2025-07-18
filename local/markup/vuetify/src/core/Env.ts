@@ -8,12 +8,14 @@ export default class Env {
     if (host === 'dom.local') {
       return {
         apiKey: 'ug4k7eew7wa5jnln',
+        apiUserId: 1,
       };
     }
 
     // is production
     return {
       apiKey: '',
+      apiUserId: 1,
     };
   }
 }

@@ -6,6 +6,7 @@ import AlertService from "@/service/AlertService.ts";
 import {useUserStore} from "@/store.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import ValidateLegalData from "@/core/validate/ValidateLegalData.ts";
+import ObjectMap from "@/core/ObjectMap.ts";
 
 export default defineComponent({
   name: "BuyApartmentForm",
@@ -116,7 +117,7 @@ export default defineComponent({
         bankName: this.form.bankName ?? '',
       };
 
-      api.post('claim.create', api.objectToFormData(body))
+      api.post('claim.create', ObjectMap.objectToFormData(body))
         .then((response: any) => response.json())
         .then((response: any) => {
 

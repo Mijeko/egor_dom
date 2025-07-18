@@ -34,20 +34,26 @@ export default defineComponent({
     },
     select: function (city: CityDto) {
       let service = new CurrentCityService();
-      service.saveCity(city).then((response: CurrentCityResponseDto) => {
+      service.saveCity(city).then((r: any) => {
+        let {status} = r;
 
-        let {result} = response;
-        let {success, error} = result;
-
-        if (success) {
+        if (status === 'success') {
           this.showModal = false;
           window.location.href = '/';
-        } else {
-          if (error) {
-            AlertService.showErrorAlert('Смена города', error);
-          }
         }
       });
+
+      // let {result} = response;
+      // let {success, error} = result;
+      //
+      // if (success) {
+      //   this.showModal = false;
+      //   window.location.href = '/';
+      // } else {
+      //   if (error) {
+      //     AlertService.showErrorAlert('Смена города', error);
+      //   }
+      // }
     }
   },
   mounted(): any {

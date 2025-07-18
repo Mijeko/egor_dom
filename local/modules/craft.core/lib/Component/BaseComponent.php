@@ -17,6 +17,12 @@ abstract class BaseComponent extends \CBitrixComponent
 {
 	protected ErrorCollection $errorCollection;
 
+	public function __construct($component = null)
+	{
+		parent::__construct($component);
+		$this->errorCollection = new ErrorCollection();
+	}
+
 	public function getErrors(): array
 	{
 		return $this->errorCollection->toArray();
@@ -185,10 +191,18 @@ abstract class BaseComponent extends \CBitrixComponent
 	protected function validateCsrf(): void
 	{
 		$token = $this->request->getPost('_csrf');
-
-		if(!Csrf::getInstance()->validateToken($token))
+		if(!$token)
 		{
-			throw new CsrfValidateException();
+			if(!check_bitrix_sessid())
+			{
+				throw new CsrfValidateException();
+			}
+		} else
+		{
+			if(!Csrf::getInstance()->validateToken($token))
+			{
+				throw new CsrfValidateException();
+			}
 		}
 	}
 
