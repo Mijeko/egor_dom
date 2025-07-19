@@ -46,9 +46,6 @@ export default defineComponent({
       return personal;
     }
   },
-  mounted(): any {
-    console.log(this.claim);
-  }
 })
 </script>
 

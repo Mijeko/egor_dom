@@ -32,9 +32,6 @@ export default defineComponent({
       default: null
     }
   },
-  mounted(): any {
-    console.log(this.apartment);
-  },
   methods: {
     buy() {
       this.$emit('update:showModal', true)

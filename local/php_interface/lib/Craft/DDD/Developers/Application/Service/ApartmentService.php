@@ -5,14 +5,15 @@ namespace Craft\DDD\Developers\Application\Service;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 
 class ApartmentService
 {
 
 	public function __construct(
-		protected ApartmentRepositoryInterface $apartmentRepository,
-		protected BuildObjectService           $buildObjectService,
+		protected ApartmentRepositoryInterface   $apartmentRepository,
+		protected BuildObjectRepositoryInterface $buildObjectRepository,
 	)
 	{
 	}
@@ -21,26 +22,27 @@ class ApartmentService
 	{
 		$apartmentList = $this->apartmentRepository->findAll($order, $filters);
 
-		$apartmentListId = array_map(function(ApartmentEntity $apartment) {
-			return $apartment->getId();
+		$buildObjectIdList = array_map(function(ApartmentEntity $apartment) {
+			return $apartment->getBuildObjectId();
 		}, $apartmentList);
 
-		$buildObjectList = $this->buildObjectService->findAll(
+		$buildObjectList = $this->buildObjectRepository->findAll(
 			[],
 			[
-				BuildObjectTable::F_ID => $apartmentListId,
+				BuildObjectTable::F_ID => $buildObjectIdList,
 			]
 		);
 
+
 		$apartmentList = array_map(function(ApartmentEntity $apartment) use ($buildObjectList) {
 
-			$currentBuildObject = array_filter($buildObjectList, function(BuildObjectEntity $buildObjectTable) use ($apartment) {
-				return $buildObjectTable->getId() == $apartment->getBuildObjectId();
+			$currentBuildObject = array_filter($buildObjectList, function(BuildObjectEntity $buildObjectEntity) use ($apartment) {
+				return $buildObjectEntity->getId() == $apartment->getBuildObjectId();
 			});
 
 			if(count($currentBuildObject) == 1)
 			{
-				$currentBuildObject = array_shift($buildObjectList);
+				$currentBuildObject = array_shift($currentBuildObject);
 				$apartment->setBuildObject($currentBuildObject);
 			}
 
@@ -56,11 +58,11 @@ class ApartmentService
 
 		if($buildObjectEntity = $apartment->getBuildObject())
 		{
-			$_buildObject = $this->buildObjectService->findByName($buildObjectEntity->getName());
+			$_buildObject = $this->buildObjectRepository->findByName($buildObjectEntity->getName());
 
 			if(!$_buildObject)
 			{
-				$_buildObject = $this->buildObjectService->create($buildObjectEntity);
+				$_buildObject = $this->buildObjectRepository->create($buildObjectEntity);
 				if(!$_buildObject)
 				{
 					throw new \RuntimeException("Ошибка создания объекта недвижимости");

@@ -2,7 +2,7 @@ import type BxImage from "@/dto/bitrix/BxImage.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 
 export default interface ApartmentDto {
-  id: string;
+  id: number;
   buildObjectId: number;
   name: string;
   description?: string;

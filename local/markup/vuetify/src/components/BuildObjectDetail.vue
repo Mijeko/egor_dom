@@ -50,9 +50,6 @@ export default defineComponent({
       ]
     }
   },
-  mounted(): any {
-    console.log(this.product);
-  }
 })
 </script>
 

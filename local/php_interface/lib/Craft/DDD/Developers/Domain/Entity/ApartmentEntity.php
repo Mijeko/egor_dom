@@ -237,4 +237,9 @@ class ApartmentEntity
 	{
 		return $this->renovation;
 	}
+
+	public function setBuildObject(?BuildObjectEntity $buildObject): void
+	{
+		$this->buildObject = $buildObject;
+	}
 }

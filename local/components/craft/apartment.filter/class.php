@@ -60,7 +60,6 @@ class CraftApartmentFilterComponent extends AjaxComponent
 					)
 				);
 
-
 				ResponseBx::success($apartments);
 
 				break;

@@ -4,6 +4,7 @@ import {defineComponent, type PropType} from 'vue'
 import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
+import {th} from "vuetify/locale";
 
 export default defineComponent({
   name: "BuildObjectList",
@@ -18,22 +19,48 @@ export default defineComponent({
       type: Array as PropType<BuildObjectDto[]>
     }
   },
-  mounted(): any {
-    console.log(this.BuildObjects);
-  },
   computed: {
     buildObjectList: function (): BuildObjectDto[] {
 
       if (this.filterApartmentList.length > 0) {
-        let objects = this.filterApartmentList.map(function (apartment: ApartmentDto) {
+
+        let objects: null[] | BuildObjectDto[] = this.filterApartmentList.map(function (apartment: ApartmentDto) {
           return apartment.buildObject;
         });
 
         objects = objects.filter(n => n);
 
-        console.log(objects);
+        let _idObjects: number[] = [];
 
-        return objects;
+        objects = objects.filter(function (buildObject: BuildObjectDto) {
+
+          let buildObjectId: number = buildObject.id;
+
+          if (_idObjects.includes(buildObjectId)) {
+            return null;
+          }
+          _idObjects.push(buildObjectId);
+          return buildObject;
+        });
+
+        objects = objects.filter(n => n);
+
+        objects = objects.map((buildObject: BuildObjectDto) => {
+
+          let _apartments = this.filterApartmentList.filter((apartment: ApartmentDto) => {
+            return apartment.buildObjectId === buildObject.id;
+          });
+
+
+          if (_apartments.length > 0) {
+            buildObject.apartments = _apartments;
+          }
+
+          return buildObject;
+        });
+
+
+        return objects as BuildObjectDto[];
 
       }
 

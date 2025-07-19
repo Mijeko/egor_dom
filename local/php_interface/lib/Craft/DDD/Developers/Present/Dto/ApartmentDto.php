@@ -9,7 +9,8 @@ use Craft\Dto\BxImageDto;
 class ApartmentDto
 {
 	public function __construct(
-		public ?string         $id,
+		public ?int            $id,
+		public ?int            $buildObjectId,
 		public ?string         $name,
 		public ?string         $price,
 		public ?int            $rooms,
@@ -28,6 +29,7 @@ class ApartmentDto
 
 		return new static(
 			$model->getId(),
+			$model->getBuildObjectId(),
 			$model->getName(),
 			$model->getPrice(),
 			$model->getRooms(),

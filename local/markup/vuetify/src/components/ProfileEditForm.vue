@@ -41,9 +41,6 @@ export default defineComponent({
       return this.userData.profileType === 'jur';
     },
   },
-  mounted(): any {
-    console.log(this.userData);
-  },
   data() {
     return {
       tab: null,

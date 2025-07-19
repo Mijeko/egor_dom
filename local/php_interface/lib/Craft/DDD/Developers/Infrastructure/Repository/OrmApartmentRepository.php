@@ -17,10 +17,6 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	public function findAll(array $order = [], array $filter = []): array
 	{
-		Debug::dumpToFile([
-			'order'  => $order,
-			'filter' => $filter,
-		]);
 		$result = [];
 		$apartmentList = ApartmentTable::getList([
 			'order'  => $order,
