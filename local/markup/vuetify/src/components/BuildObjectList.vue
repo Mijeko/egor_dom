@@ -1,30 +1,56 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 
-import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
-import type BuildObjectDetailDto from "@/dto/present/BuildObjectDetailDto.ts";
 import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
+import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
+import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 
 export default defineComponent({
   name: "BuildObjectList",
   components: {MainApartmentFilter},
+  data: function () {
+    return {
+      filterApartmentList: [] as ApartmentDto[]
+    };
+  },
   props: {
     BuildObjects: {
-      type: Array as PropType<BuildObjectDetailDto[]>
+      type: Array as PropType<BuildObjectDto[]>
     }
   },
   mounted(): any {
     console.log(this.BuildObjects);
+  },
+  computed: {
+    buildObjectList: function (): BuildObjectDto[] {
+
+      if (this.filterApartmentList.length > 0) {
+        let objects = this.filterApartmentList.map(function (apartment: ApartmentDto) {
+          return apartment.buildObject;
+        });
+
+        objects = objects.filter(n => n);
+
+        console.log(objects);
+
+        return objects;
+
+      }
+
+      return this.BuildObjects as BuildObjectDto[];
+    }
   }
 })
 </script>
 
 <template>
 
-  <MainApartmentFilter/>
+  <MainApartmentFilter
+    v-model="filterApartmentList"
+  />
 
   <v-row>
-    <v-col cols="12" sm="3" v-for="buildObject in BuildObjects" class="mb-5">
+    <v-col cols="12" sm="3" v-for="buildObject in buildObjectList" class="mb-5">
       <v-card>
 
         <v-carousel :show-arrows="false" :hide-delimiters="true" :touch="true">

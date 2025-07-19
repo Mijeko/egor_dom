@@ -16,26 +16,17 @@ class SessionCurrentCityStorage implements CurrentCityStorageInterface
 
 	public function __construct()
 	{
-		//		session_start();
 		$this->session = Application::getInstance()->getSession();
-		$this->session->start();
 	}
 
 	public function store(CityEntity $cityEntity): void
 	{
-		session_start();
-
-
-		//		$_SESSION[self::SESSION_KEY] = json_encode(['id' => $cityEntity->getId(), 'name' => $cityEntity->getName()]);
-
 		$this->session->set(static::SESSION_KEY, json_encode(['id' => $cityEntity->getId(), 'name' => $cityEntity->getName()]));
 	}
 
 	public function get(): int
 	{
-		//		session_start();
 		$rawJson = $this->session->get(static::SESSION_KEY);
-		//		$rawJson = $_SESSION[self::SESSION_KEY];
 		if(!json_validate($rawJson))
 		{
 			throw new \Exception('Некорректное значение города в сессии');
@@ -54,19 +45,11 @@ class SessionCurrentCityStorage implements CurrentCityStorageInterface
 
 	public function clean(): void
 	{
-		//		session_start();
 		$this->session->remove(static::SESSION_KEY);
-		//		unset($_SESSION[static::SESSION_KEY]);
 	}
 
 	public function has(): bool
 	{
-		//		session_start();
-		//		return array_key_exists(self::SESSION_KEY, $_SESSION);
-		if(Application::getInstance()->getContext()->getRequest()->isPost())
-		{
-			Debug::dumpToFile($this->session);
-		}
 		return $this->session->has(static::SESSION_KEY);
 	}
 }

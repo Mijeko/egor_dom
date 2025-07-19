@@ -1,14 +1,30 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
 import CheckboxDropdown from "@/components/filter/part/CheckboxDropdown.vue";
 import InputDropdown from "@/components/filter/part/InputDropdown.vue";
 import MinMaxInputDropdown from "@/components/filter/part/MinMaxInputDropdown.vue";
+import ApartmentFilterService from "@/service/ApartmentFilterService.ts";
+import type ApartmentFilterDto from "@/dto/ApartmentFilterDto.ts";
+import type ApartmentPreFilterRequestDto from "@/dto/request/ApartmentPreFilterRequestDto.ts";
+import type ApartmentPrefilterResponseDto from "@/dto/response/ApartmentPrefilterResponseDto.ts";
+import type ApartmentFilterRequestDto from "@/dto/request/ApartmentFilterRequestDto.ts";
+import type ApartmentFilterResponseDto from "@/dto/response/ApartmentFilterResponseDto.ts";
+import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
 export default defineComponent({
   name: "MainApartmentFilter",
   components: {MinMaxInputDropdown, InputDropdown, CheckboxDropdown},
+  props: {
+    filterApartmentList: {
+      type: Array as PropType<ApartmentDto[]>,
+      default: []
+    }
+  },
   data: function () {
     return {
+      filterTimeout: 0,
+      preFilterTimeout: 0,
+      preFilterCount: -1,
       filter: {
         price: {
           min: null,
@@ -19,8 +35,67 @@ export default defineComponent({
         floorsTotal: null,
         roomsTotal: null,
         floor: null,
-      }
+      } as ApartmentFilterDto
     };
+  },
+  methods: {
+    clearFilter: function () {
+
+    },
+    runFilter: function () {
+      let service = new ApartmentFilterService();
+      let body: ApartmentFilterRequestDto = {
+        action: 'filter',
+        ...this.filter
+      };
+
+
+      if (this.filterTimeout) {
+        clearTimeout(this.filterTimeout);
+      }
+
+      this.filterTimeout = setTimeout(() => {
+        service.filterAction(body).then((response: ApartmentFilterResponseDto) => {
+          let {data} = response;
+
+          if (data.length > 0) {
+            this.$emit('update:modelValue', data);
+          }
+
+        });
+
+      }, 400);
+    }
+  },
+  watch: {
+    'filter': {
+      handler(v, nv) {
+        let service = new ApartmentFilterService();
+        let body: ApartmentPreFilterRequestDto = {
+          action: 'prefilter',
+          ...this.filter
+        };
+
+
+        if (this.preFilterTimeout) {
+          clearTimeout(this.preFilterTimeout);
+        }
+
+        this.preFilterTimeout = setTimeout(() => {
+          service.preFilterAction(body).then((response: ApartmentPrefilterResponseDto) => {
+            let {data} = response;
+            if (data) {
+              let {count} = data;
+              if (count !== undefined) {
+                this.preFilterCount = count;
+              }
+            }
+          });
+        }, 400);
+
+      },
+      deep: true
+    }
   }
 })
 </script>
@@ -100,6 +175,19 @@ export default defineComponent({
               label="Этаж"
               icon="$homeFloorNegative"
             />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn @click.prevent="runFilter">
+              <span>Подобрать</span>
+              <span v-if="preFilterCount >= 0">(найдено {{ preFilterCount }})</span>
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-btn @click.prevent="clearFilter">
+              <span>Сбросить</span>
+            </v-btn>
           </v-col>
         </v-row>
       </v-card>

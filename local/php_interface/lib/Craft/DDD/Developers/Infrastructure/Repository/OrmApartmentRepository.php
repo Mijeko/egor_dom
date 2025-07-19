@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
@@ -16,6 +17,10 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	public function findAll(array $order = [], array $filter = []): array
 	{
+		Debug::dumpToFile([
+			'order'  => $order,
+			'filter' => $filter,
+		]);
 		$result = [];
 		$apartmentList = ApartmentTable::getList([
 			'order'  => $order,

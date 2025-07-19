@@ -19,7 +19,7 @@ class ApartmentService
 
 	public function findAll(array $order = [], array $filters = []): array
 	{
-		$apartmentList = $this->apartmentRepository->findAll($filters, $order);
+		$apartmentList = $this->apartmentRepository->findAll($order, $filters);
 
 		$apartmentListId = array_map(function(ApartmentEntity $apartment) {
 			return $apartment->getId();

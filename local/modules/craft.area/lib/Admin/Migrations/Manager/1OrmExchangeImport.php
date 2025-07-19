@@ -49,8 +49,6 @@ class QOrmExchangeImport implements ReaderHelperInterface
 				return $field['value'][0]['orm'] === $key;
 			});
 
-			Debug::dumpToFile($collectedData,'','__asdasd.log');
-
 			$collectedData = array_map(function($field) {
 
 				# is image

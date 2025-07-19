@@ -1,17 +1,17 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import type BuildObjectDetailDto from "@/dto/present/BuildObjectDetailDto.ts";
 import ApartmentList from "@/components/ApartmentList.vue";
 import type BuildObjectDetailInfo from "@/dto/present/component/buildObjectDetailInfo.ts";
 import Map from "@/components/Map.vue";
 import ApartmentFilter from "@/components/ApartmentFilter.vue";
+import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 
 export default defineComponent({
   name: "BuildObjectDetail",
   components: {ApartmentFilter, Map, ApartmentList},
   props: {
     product: {
-      type: Object as PropType<BuildObjectDetailDto>
+      type: Object as PropType<BuildObjectDto>
     }
   },
   data: function () {
