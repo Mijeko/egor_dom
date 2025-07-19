@@ -6,6 +6,7 @@ import type RegisterAgentResponseDto from "@/dto/response/RegisterAgentResponseD
 import type RegisterStudentRequestDto from "@/dto/request/RegisterStudentRequestDto.ts";
 import type RegisterStudentResponseDto from "@/dto/response/RegisterStudentResponseDto.ts";
 import ObjectMap from "@/core/ObjectMap.ts";
+import ControllerApi from "@/service/ControllerApi.ts";
 
 export default class UserService {
 
@@ -15,26 +16,19 @@ export default class UserService {
 
   }
 
-  authorize(authData: AuthorizeDto) {
-    return this.api.post('user.login', ObjectMap.objectToFormData({
-      phone: authData.phone,
-      password: authData.password
-    }))
-      .then((response: any) => response.json());
+  authorize(body: AuthorizeDto) {
+    return ControllerApi.post('craft:auth', body);
   }
 
   registrationAgent(body: RegisterAgentRequestDto): Promise<RegisterAgentResponseDto> {
-    return this.api.post('user.register.agent', ObjectMap.objectToFormData(body))
-      .then((response: any) => response.json());
+    return ControllerApi.post('craft:register.agent', body);
   }
 
   registrationStudent(body: RegisterStudentRequestDto): Promise<RegisterStudentResponseDto> {
-    return this.api.post('user.register.student', ObjectMap.objectToFormData(body))
-      .then((response: any) => response.json());
+    return ControllerApi.post('craft:register.student', body);
   }
 
   profileUpdate(body: ProfileUpdateDto) {
-    return this.api.post('profile.update', ObjectMap.objectToFormData(body))
-      .then((response: any) => response.json());
+    return ControllerApi.post('craft:profile.update', body);
   }
 }

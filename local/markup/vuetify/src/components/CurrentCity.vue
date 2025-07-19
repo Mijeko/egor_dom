@@ -3,7 +3,6 @@ import {defineComponent, type PropType} from 'vue'
 import type CityDto from "@/dto/entity/CityDto.ts";
 import CurrentCityService from "@/service/CurrentCityService.ts";
 import type CurrentCityResponseDto from "@/dto/response/CurrentCityResponseDto.ts";
-import AlertService from "@/service/AlertService.ts";
 
 export default defineComponent({
   name: "CurrentCity",
@@ -34,32 +33,22 @@ export default defineComponent({
     },
     select: function (city: CityDto) {
       let service = new CurrentCityService();
-      service.saveCity(city).then((r: any) => {
-        let {status} = r;
+      service.saveCity(city).then((response: CurrentCityResponseDto) => {
+        let {status, data} = response;
 
         if (status === 'success') {
-          this.showModal = false;
-          window.location.href = '/';
+          if (data) {
+            let {redirect} = data;
+            if (redirect) {
+              window.location.href = redirect;
+            }
+          }
         }
+
       });
 
-      // let {result} = response;
-      // let {success, error} = result;
-      //
-      // if (success) {
-      //   this.showModal = false;
-      //   window.location.href = '/';
-      // } else {
-      //   if (error) {
-      //     AlertService.showErrorAlert('Смена города', error);
-      //   }
-      // }
     }
   },
-  mounted(): any {
-    console.log(this.currentCity);
-    console.log(this.cityList);
-  }
 })
 </script>
 

@@ -138,14 +138,14 @@ export default defineComponent({
       if (!this.isFormStudentValid) {
         return;
       }
-      let api = new UserService();
+      let userService = new UserService();
       let body: RegisterStudentRequestDto = {
         email: this.formStudent.email,
         phone: this.formStudent.phone,
         password: this.formStudent.password
       };
 
-      api.registrationStudent(body)
+      userService.registrationStudent(body)
         .then((response: RegisterStudentResponseDto) => {
           let {result} = response;
           let {success, error} = result;

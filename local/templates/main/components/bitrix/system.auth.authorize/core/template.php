@@ -3,12 +3,12 @@
 /**
  * @global CMain $APPLICATION
  */
+
+
 $APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'Auth',
-	],
+	'craft:auth',
+	'.default',
+	[],
 	false,
 	['HIDE_ICONS' => 'Y']
 )

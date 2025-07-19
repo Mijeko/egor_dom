@@ -60,12 +60,12 @@ class CraftCityCurrentComponent extends \Craft\Core\Component\AjaxComponent
 		{
 			$service = StoreCurrentCityUseCaseFactory::getService();
 			$service->execute(new StoreCurrentCityDto(intval($formData['id'])));
+			\Craft\Core\Rest\ResponseBx::success([
+				'redirect' => '/',
+			]);
 		} catch(Exception $exception)
 		{
-			$this->addError(
-				$exception->getCode(),
-				$exception->getMessage()
-			);
+			\Craft\Core\Rest\ResponseBx::badRequest($exception->getMessage());
 		}
 	}
 
