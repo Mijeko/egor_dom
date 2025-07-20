@@ -94,7 +94,7 @@ class DeveloperService
 		$developerList = array_map(function(DeveloperEntity $developer) use ($cityList) {
 
 			$currentCity = array_filter($cityList, function(CityEntity $city) use ($developer) {
-				return $city->getId() === $developer->getId();
+				return $city->getId() === $developer->getCityId();
 			});
 
 			if(count($currentCity) == 1)
