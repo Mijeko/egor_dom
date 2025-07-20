@@ -32,6 +32,6 @@ class ImportAgent
 			Debug::dumpToFile($e->getMessage(), '', '__check_agent_err.log');
 		}
 
-		return '\Craft\DDD\Developers\Infrastructure\Agents\ImportAgent::execute();';
+		return "\\Craft\\DDD\\Developers\\Infrastructure\\Agents\\ImportAgent::execute();";
 	}
 }
