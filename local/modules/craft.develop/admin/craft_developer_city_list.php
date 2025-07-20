@@ -65,6 +65,7 @@ $lAdmin->AddHeaders([
 	['id' => CityTable::F_ID, 'content' => 'ID', 'default' => true],
 	['id' => CityTable::F_NAME, 'content' => 'Название', 'default' => true],
 	['id' => CityTable::F_ACTIVE, 'content' => 'Активность', 'default' => true],
+	['id' => CityTable::F_IS_DEFAULT, 'content' => 'Город по умолчанию', 'default' => true],
 ]);
 
 $data = new CAdminResult($res, $table_id);
@@ -84,6 +85,7 @@ while($element = $data->NavNext(true, "f_"))
 	$row =& $lAdmin->AddRow($f_ID, $element);
 
 	$row->AddCheckField(CityTable::F_ACTIVE);
+	$row->AddCheckField(CityTable::F_IS_DEFAULT);
 
 
 	$arActions = [];
