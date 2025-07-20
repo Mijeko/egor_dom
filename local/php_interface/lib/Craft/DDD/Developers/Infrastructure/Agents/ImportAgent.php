@@ -20,7 +20,7 @@ class ImportAgent
 	 * 30
 	 * );
 	 */
-	public static function execute(): void
+	public static function execute(): string
 	{
 		try
 		{
@@ -31,5 +31,7 @@ class ImportAgent
 		{
 			Debug::dumpToFile($e->getMessage(), '', '__check_agent_err.log');
 		}
+
+		return '\Craft\DDD\Developers\Infrastructure\Agents\ImportAgent::execute();';
 	}
 }
