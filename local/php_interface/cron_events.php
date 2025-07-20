@@ -7,6 +7,5 @@ define('BX_NO_ACCELERATOR_RESET', true);
 define('CHK_EVENT', true);
 define('BX_WITH_ON_AFTER_EPILOG', true);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-\Bitrix\Main\Diag\Debug::dumpToFile(rand(), '', '__check_cron.log');
 @set_time_limit(0);
 @ignore_user_abort(true);
