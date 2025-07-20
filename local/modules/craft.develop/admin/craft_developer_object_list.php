@@ -27,23 +27,29 @@ if($request->getPost('action_button'))
 	{
 		if(is_array($elementIdList))
 		{
-			$areaList = BuildObjectTable::getList([
+			$buildObjectList = BuildObjectTable::getList([
 				'filter' => [
 					'ID' => $elementIdList,
 				],
 			])->fetchCollection();
 
-			foreach($areaList as $area)
+			foreach($buildObjectList as $buildObject)
 			{
 				try
 				{
-					$area->delete();
+					$apartments = $buildObject->fillApartments();
+					foreach($apartments as $apartment)
+					{
+						$apartment->delete();
+					}
+
+					$buildObject->delete();
 				} catch(\Bitrix\Main\ArgumentException $e)
 				{
-
+					\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
 				} catch(\Bitrix\Main\SystemException $e)
 				{
-
+					\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
 				}
 			}
 		}
@@ -78,7 +84,7 @@ while($element = $data->NavNext(true, "f_"))
 	 */
 
 
-	$area = BuildObjectTable::getByPrimary($f_ID)->fetchObject();
+	$buildObject = BuildObjectTable::getByPrimary($f_ID)->fetchObject();
 
 	// создание строки (экземпляра класса CAdminListRow)
 	$row =& $lAdmin->AddRow($f_ID, $element);

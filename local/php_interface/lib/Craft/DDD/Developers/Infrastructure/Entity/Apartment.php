@@ -63,5 +63,4 @@ class Apartment extends EO_Apartment
 	{
 		return [];
 	}
-
 }
