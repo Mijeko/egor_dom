@@ -4,7 +4,6 @@ namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
-use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
 /**

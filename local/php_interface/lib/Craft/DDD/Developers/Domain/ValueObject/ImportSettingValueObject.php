@@ -6,7 +6,7 @@ class ImportSettingValueObject
 {
 	public function __construct(
 		protected ?string                    $handler,
-		protected ?string                    $sourceLink,
+		protected ?array                     $sourceLink,
 		protected ?ImportScheduleValueObject $schedule,
 	)
 	{
@@ -22,7 +22,10 @@ class ImportSettingValueObject
 		return $this->schedule;
 	}
 
-	public function getSourceLink(): ?string
+	/**
+	 * @return UrlValueObject[] | null
+	 */
+	public function getSourceLink(): ?array
 	{
 		return $this->sourceLink;
 	}

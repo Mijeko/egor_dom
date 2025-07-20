@@ -26,6 +26,9 @@ class ImportService
 	{
 	}
 
+	/**
+	 * @throws \Exception
+	 */
 	public function executeById(int $developerId): void
 	{
 		$this->developer = $this->developerService->findById($developerId);
@@ -35,12 +38,17 @@ class ImportService
 		}
 
 
-		$xmlBuildData = $this->readData($this->developer);
-		$handler = $this->getHandler($this->developer->getImportSetting());
+		$sourceLinkList = $this->developer->getImportSetting()->getSourceLink();
 
-		if($handler)
+		foreach($sourceLinkList as $sourceLink)
 		{
-			$handler->execute($xmlBuildData);
+			$xmlBuildData = $this->readData($sourceLink);
+			$handler = $this->getHandler($this->developer->getImportSetting());
+
+			if($handler)
+			{
+				$handler->execute($xmlBuildData);
+			}
 		}
 
 	}
@@ -80,31 +88,19 @@ class ImportService
 		}
 	}
 
-	private function readData(DeveloperEntity $developerEntity): string
+	private function readData(string $sourceLink): string
 	{
-		if(!$developerEntity->getImportSetting()->getHandler())
-		{
-			throw new \Exception('Обработчик для выбранного застройщика не определен');
-		}
-
-		if(!$developerEntity->getImportSetting()->getSourceLink())
-		{
-			throw new \Exception('Ссылка на источник данных не определена');
-		}
-
 		$content = null;
 		$cache = \Bitrix\Main\Data\Cache::createInstance(); // получаем экземпляр класса
-		if($cache->initCache(7200, "importReadData_" . $developerEntity->getId()))
+		if($cache->initCache(7200, "importReadData_" . md5($sourceLink)))
 		{
 			$vars = $cache->getVars();
 			$content = $vars['xmlData'];
 		} elseif($cache->startDataCache())
 		{
-			$content = $this->reader($developerEntity->getImportSetting()->getSourceLink());
+			$content = $this->reader($sourceLink);
 			$cache->endDataCache(["xmlData" => $content]);
 		}
-
-		$content = $this->reader($developerEntity->getImportSetting()->getSourceLink());;
 
 		if(!$content)
 		{
