@@ -30,6 +30,7 @@ class ApartmentEntity
 		protected ?BuiltStateValueObject   $buildingState,
 		protected ?ImageGalleryValueObject $planImages = null,
 		protected ?ImageGalleryValueObject $gallery = null,
+		protected ?string                  $externalId = null,
 	)
 	{
 	}
@@ -55,7 +56,7 @@ class ApartmentEntity
 	 * @param LocationValueObject|null $location Локация
 	 * @return ApartmentEntity
 	 */
-	public static function fromImport(
+	public static function createFromImport(
 		?BuildObjectEntity       $buildObject,
 		?string                  $description,
 		?int                     $price,
@@ -68,6 +69,7 @@ class ApartmentEntity
 		?int                     $mortgage,
 		?int                     $builtYear,
 		?BuiltStateValueObject   $buildingState,
+		string                   $externalId,
 		?ImageGalleryValueObject $planImages = null,
 		?ImageGalleryValueObject $gallery = null,
 
@@ -91,6 +93,7 @@ class ApartmentEntity
 			$buildingState,
 			$planImages,
 			$gallery,
+			$externalId,
 		);
 
 		$entity->generateName();
@@ -98,10 +101,40 @@ class ApartmentEntity
 		return $entity;
 	}
 
-	public static function fromModel(Apartment $apartment): static
+	public function updateFromImport(
+		?BuildObjectEntity       $buildObject,
+		?string                  $description,
+		?int                     $price,
+		?int                     $rooms,
+		?int                     $floor,
+		?AreaValueObject         $area,
+		?string                  $renovation,
+		?StringLogicValueObject  $parking,
+		?StringLogicValueObject  $bathroomUnit,
+		?int                     $mortgage,
+		?int                     $builtYear,
+		?BuiltStateValueObject   $buildingState,
+		?ImageGalleryValueObject $planImages = null,
+		?ImageGalleryValueObject $gallery = null,
+	): static
 	{
-	}
 
+		$this->buildObject = $buildObject;
+		$this->description = $description;
+		$this->price = $price;
+		$this->rooms = $rooms;
+		$this->floor = $floor;
+		$this->area = $area;
+		$this->renovation = $renovation;
+		$this->parking = $parking;
+		$this->bathroomUnit = $bathroomUnit;
+		$this->mortgage = $mortgage;
+		$this->builtYear = $builtYear;
+		$this->buildingState = $buildingState;
+		$this->planImages = $planImages;
+		$this->gallery = $gallery;
+		return $this;
+	}
 
 	public function addBuildObject(BuildObjectEntity $buildObject): static
 	{
@@ -242,4 +275,10 @@ class ApartmentEntity
 	{
 		$this->buildObject = $buildObject;
 	}
+
+	public function getExternalId(): ?string
+	{
+		return $this->externalId;
+	}
+
 }

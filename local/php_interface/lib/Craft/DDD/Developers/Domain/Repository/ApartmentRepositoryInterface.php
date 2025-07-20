@@ -11,4 +11,6 @@ interface ApartmentRepositoryInterface
 	public function findAll(array $order = [], array $filter = []): array;
 
 	public function create(ApartmentEntity $apartment): ApartmentEntity;
+
+	public function update(ApartmentEntity $apartment): ApartmentEntity;
 }

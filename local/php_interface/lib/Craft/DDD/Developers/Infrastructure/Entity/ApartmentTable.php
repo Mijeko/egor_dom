@@ -18,6 +18,7 @@ class ApartmentTable extends DataManager
 {
 
 	const F_ID = 'ID';
+	const F_EXTERNAL_ID = 'EXTERNAL_ID';
 	const F_NAME = 'NAME';
 	const F_ACTIVE = 'ACTIVE';
 	const F_SORT = 'SORT';
@@ -62,6 +63,8 @@ class ApartmentTable extends DataManager
 			(new StringField(self::F_NAME))
 				->configureTitle('Название')
 				->configureRequired(),
+			(new StringField(self::F_EXTERNAL_ID))
+				->configureTitle('Внешний ID'),
 			(new StringField(self::F_CODE))
 				->configureTitle('Символьный код')
 				->configureRequired(),

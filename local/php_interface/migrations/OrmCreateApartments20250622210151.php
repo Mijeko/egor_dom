@@ -19,6 +19,7 @@ class OrmCreateApartments20250622210151 extends Version
 CREATE TABLE `craft_apartment` (
 	`ID` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`NAME` varchar(256) NOT NULL,
+	`EXTERNAL_ID` varchar(256) NOT NULL,
 	`CODE` varchar(256) NOT NULL,
 	`ACTIVE` char(1) NOT NULL DEFAULT '1',
 	`SORT` int(11) NOT NULL DEFAULT '500',

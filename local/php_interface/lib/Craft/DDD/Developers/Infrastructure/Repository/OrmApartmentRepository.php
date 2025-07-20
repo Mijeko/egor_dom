@@ -2,9 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
@@ -63,6 +61,11 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 		return $apartment;
 	}
 
+	public function update(ApartmentEntity $apartment): ApartmentEntity
+	{
+		return $apartment;
+	}
+
 	protected function hydrateElement(Apartment $apartment): ApartmentEntity
 	{
 		$buildObject = null;
@@ -84,6 +87,7 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 			new BuiltStateValueObject($apartment->getBuildingState()),
 			ImageGalleryValueObject::fillFromId($apartment->getPlanImageEx()),
 			ImageGalleryValueObject::fillFromId($apartment->getGalleryEx()),
+			$apartment->getExternalId(),
 		);
 	}
 
