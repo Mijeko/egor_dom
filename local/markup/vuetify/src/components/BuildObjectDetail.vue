@@ -55,8 +55,7 @@ export default defineComponent({
 
 <template>
   <v-row>
-    <v-col md="8" class="px-2">
-
+    <v-col cols="12" md="8" class="px-2">
       <v-carousel>
         <v-carousel-item
           v-for="galleryItem in product?.gallery"
@@ -64,9 +63,8 @@ export default defineComponent({
           cover
         ></v-carousel-item>
       </v-carousel>
-
     </v-col>
-    <v-col md="4" class="px-2">
+    <v-col cols="12" md="4" class="px-2">
       <v-card v-for="info in buildObjectDetailInfo"
               :title="String(info.title)"
               :subtitle="String(info.value)"

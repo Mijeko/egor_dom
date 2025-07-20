@@ -27,7 +27,7 @@ export default defineComponent({
 
 
   <v-row>
-    <v-col cols="3" v-for="apartment in apartments">
+    <v-col cols="12" sm="6" md="4" lg="3" v-for="apartment in apartments">
       <ApartmentItem
         :apartment
         :show-modal="showModal"
