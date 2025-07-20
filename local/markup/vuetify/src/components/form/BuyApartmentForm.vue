@@ -7,6 +7,8 @@ import {useUserStore} from "@/store.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import ValidateLegalData from "@/core/validate/ValidateLegalData.ts";
 import ObjectMap from "@/core/ObjectMap.ts";
+import ClaimService from "@/service/ClaimService.ts";
+import type ClaimCreateResponseDto from "@/dto/response/ClaimCreateResponseDto.ts";
 
 export default defineComponent({
   name: "BuyApartmentForm",
@@ -97,9 +99,6 @@ export default defineComponent({
         return;
       }
 
-      let api = new CraftApi();
-
-
       let body: ClaimCreateRequestDto = {
         apartmentId: this.apartmentId,
         userId: this.user.id,
@@ -117,14 +116,13 @@ export default defineComponent({
         bankName: this.form.bankName ?? '',
       };
 
-      api.post('claim.create', ObjectMap.objectToFormData(body))
-        .then((response: any) => response.json())
-        .then((response: any) => {
+      let service = new ClaimService();
+      service.createClaim(body)
+        .then((response: ClaimCreateResponseDto) => {
 
-          let {result} = response;
-          let {success, error} = result;
+          let {status, error} = response;
 
-          if (success) {
+          if (status === 'success') {
             AlertService.showAlert('Отправка заявки', 'Ваша заявка успаешно отправлена');
             this.$emit('update:modelValue', false);
 
@@ -141,7 +139,7 @@ export default defineComponent({
             this.form.legalAddress = '';
             this.form.bankName = '';
           } else if (error) {
-            AlertService.showErrorAlert('Отправка заявки', error);
+            AlertService.showErrorAlert('Отправка заявки', error.message);
           }
 
         });

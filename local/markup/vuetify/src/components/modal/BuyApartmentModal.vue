@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import BuyApartmentForm from "@/components/BuyApartmentForm.vue";
+import BuyApartmentForm from "@/components/form/BuyApartmentForm.vue";
 
 export default defineComponent({
   name: "BuyApartmentModal",

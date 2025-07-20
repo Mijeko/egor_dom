@@ -12,6 +12,7 @@ use Bitrix\Main\Application;
 use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Bitrix\Main\Page\Asset;
 
 foreach(['craft.develop'] as $module)
 {
@@ -20,6 +21,8 @@ foreach(['craft.develop'] as $module)
 		$APPLICATION->ThrowException('Не подключен модуль ' . $module);
 	};
 }
+
+Asset::getInstance()->addJs('/bitrix/js/iblock/iblock_edit.js');
 
 $request = Application::getInstance()->getContext()->getRequest();
 $ID = $request->get('ID');
@@ -182,13 +185,45 @@ $tabControl->AddDropDownField(
 	$developerModel->importSettings()->getHandler()
 );
 
-$tabControl->AddEditField(
-	'linkSource',
-	'Ссылка на данные',
-	false,
-	[],
-	$developerModel->importSettings()->getLinkSource()
-);
+$tabControl->BeginCustomField('linkSource', 'asd');
+?>
+	<tr>
+		<td></td>
+		<td>
+			<table id="multiLinkSource">
+
+				<?php
+				foreach($developerModel->importSettings()->getLinkSource() as $link)
+				{
+					?>
+					<tr>
+						<td>
+							<input name="linkSource[]" type="text" value="<?=$link;?>">
+						</td>
+
+					</tr>
+					<?php
+				}
+				?>
+
+				<tr>
+					<td>
+						<input name="linkSource[]" type="text" value="">
+					</td>
+
+				</tr>
+
+				<tr>
+					<td>
+						<input type="button" value="Добавить еще" onClick="BX.IBlock.Tools.addNewRow('multiLinkSource')">
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+<?php
+$tabControl->EndCustomField('linkSource');
 
 $tabControl->Buttons([
 	"disabled" => false,

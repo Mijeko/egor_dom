@@ -1,6 +1,9 @@
 <?php
 
 namespace Craft\DDD\Developers\Infrastructure\Entity;
+
+use Bitrix\Main\Diag\Debug;
+
 class Developer extends EO_Developer
 {
 
@@ -15,8 +18,17 @@ class Developer extends EO_Developer
 		];
 	}
 
-	public function addImportSettings(?string $handler, ?string $linkSource): static
+	public function addImportSettings(?string $handler, ?array $linkSource): static
 	{
+		foreach($linkSource as $index => $link)
+		{
+			if(mb_strlen($link) <= 0)
+			{
+				unset($linkSource[$index]);
+			}
+		}
+
+
 		$this->setImportSettings(json_encode([
 			'handler'    => $handler,
 			'linkSource' => $linkSource,
@@ -30,7 +42,7 @@ class Developer extends EO_Developer
 		$rawData = json_decode($this->getImportSettings(), true);
 		return new ImportSettings(
 			$rawData['handler'],
-			$rawData['linkSource']
+			is_array($rawData['linkSource']) ? $rawData['linkSource'] : []
 		);
 	}
 }
@@ -40,7 +52,7 @@ class ImportSettings
 {
 	public function __construct(
 		protected ?string $handler,
-		protected ?string $linkSource
+		protected ?array  $linkSource
 	)
 	{
 	}
@@ -50,7 +62,7 @@ class ImportSettings
 		return $this->handler;
 	}
 
-	public function getLinkSource(): ?string
+	public function getLinkSource(): ?array
 	{
 		return $this->linkSource;
 	}
