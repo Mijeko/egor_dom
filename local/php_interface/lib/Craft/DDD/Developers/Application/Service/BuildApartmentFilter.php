@@ -5,6 +5,7 @@ namespace Craft\DDD\Developers\Application\Service;
 use Craft\DDD\Developers\Application\Dto\ApartmentFilterDto;
 use Craft\DDD\Developers\Application\Dto\ApartmentPreFilterDto;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 
 class BuildApartmentFilter
 {
@@ -15,7 +16,7 @@ class BuildApartmentFilter
 
 		if($filterBody->floorsTotal)
 		{
-			//			$filter[ApartmentTable::F_FLOOR] = $filterBody->floorsTotal;
+			$filter[ApartmentTable::R_BUILD_OBJECT . '.' . BuildObjectTable::F_FLOORS] = $filterBody->floorsTotal;
 		}
 
 		if($filterBody->floor)

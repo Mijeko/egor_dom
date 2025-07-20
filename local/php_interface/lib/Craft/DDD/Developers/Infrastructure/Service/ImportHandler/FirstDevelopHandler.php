@@ -64,7 +64,8 @@ class FirstDevelopHandler implements ImportHandlerInterface
 			}
 
 			$existApartment = $this->apartmentService->findByExternalId($externalId);
-			if(!$existApartment)
+			Debug::dumpToFile($existApartment);
+			if($existApartment)
 			{
 				$existApartment->updateFromImport(
 					BuildObjectEntity::fromImport(
