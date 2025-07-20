@@ -77,7 +77,7 @@ export default defineComponent({
   />
 
   <v-row>
-    <v-col cols="12" sm="3" v-for="buildObject in buildObjectList" class="mb-5">
+    <v-col cols="12" sm="6" md="4" lg="3" v-for="buildObject in buildObjectList" class="mb-5">
       <v-card>
 
         <v-carousel :show-arrows="false" :hide-delimiters="true" :touch="true">

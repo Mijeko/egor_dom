@@ -1,0 +1,8 @@
+name: Deploy production
+
+on: push
+jobs:
+  deploy:
+    runs-on: ['ubuntu-22.04']
+    steps:
+      - uses: ls
