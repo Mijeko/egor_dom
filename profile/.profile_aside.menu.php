@@ -5,7 +5,7 @@ $aMenuLinks = [
 		"/profile/orders/",
 		[],
 		[
-			'ICON' => 'mdi-star',
+			'ICON' => '$listBoxOutline',
 		],
 		"",
 	],
@@ -14,7 +14,7 @@ $aMenuLinks = [
 		"/profile/settings/",
 		[],
 		[
-			'ICON' => 'mdi-account-multiple',
+			'ICON' => '$tune',
 		],
 		"",
 	],
@@ -23,7 +23,7 @@ $aMenuLinks = [
 		"/profile/education/",
 		[],
 		[
-			'ICON' => 'mdi-account-multiple',
+			'ICON' => '$school',
 		],
 		"",
 	],

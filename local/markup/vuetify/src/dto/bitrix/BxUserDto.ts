@@ -2,6 +2,7 @@ export default interface BxUserDto {
   id: number;
   phone?: string;
   email?: string;
+  avatar?: string;
   name?: string;
   lastName?: string;
   secondName?: string;

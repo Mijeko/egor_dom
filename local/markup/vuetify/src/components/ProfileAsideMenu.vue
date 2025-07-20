@@ -1,11 +1,19 @@
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts">
+import {defineComponent, type PropType} from 'vue'
+import type AsideMenuItemDto from "@/dto/present/AsideMenuItemDto.ts";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({
   name: "ProfileAsideMenu",
   props: {
-    user: {},
-    items: [],
+    user: {
+      type: Object as PropType<BxUserDto>,
+      default: null,
+    },
+    items: {
+      type: Array as PropType<AsideMenuItemDto[]>,
+      default: []
+    },
   },
 })
 </script>
