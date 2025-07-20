@@ -2,39 +2,62 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
-use Bitrix\Main\Diag\Debug;
+use Craft\DDD\City\Domain\Entity\CityEntity;
+use Craft\DDD\City\Domain\Repository\CityRepositoryInterface;
+use Craft\DDD\City\Infrastructure\Entity\CityTable;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
 
 class DeveloperService
 {
 	public function __construct(
 		protected DeveloperRepositoryInterface   $developerRepository,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
+		protected CityRepositoryInterface        $cityRepository,
 	)
 	{
 	}
 
 	public function findById(int $id): ?DeveloperEntity
 	{
-		return $this->developerRepository->findById($id);
+		$developer = $this->developerRepository->findById($id);
+
+		if(!$developer)
+		{
+			throw new NotFoundOrmElement('Застройщик не найден');
+		}
+
+		$developer = [$developer];
+		$this->loadRelations($developer);
+
+		return array_shift($developer);
 	}
 
 	public function findAll(array $order = [], array $filter = []): array
 	{
 		$developerList = $this->developerRepository->findAll($order, $filter);
-		$idList = array_map(function(DeveloperEntity $developer) {
+
+		$this->loadRelations($developerList);
+
+		return $developerList;
+	}
+
+	public function loadRelations(array &$developerList): void
+	{
+
+		$developerIdList = array_map(function(DeveloperEntity $developer) {
 			return $developer->getId();
 		}, $developerList);
-
 
 		$buildObjectList = $this->buildObjectRepository->findAll(
 			[],
 			[
-				BuildObjectTable::F_DEVELOPER_ID => $idList,
+				BuildObjectTable::F_DEVELOPER_ID => $developerIdList,
 			]
 		);
 
@@ -56,6 +79,31 @@ class DeveloperService
 
 		}, $developerList);
 
-		return $developerList;
+
+		$cityIdList = array_map(function(DeveloperEntity $developerEntity) {
+			return $developerEntity->getCityId();
+		}, $developerList);
+
+		$cityList = $this->cityRepository->findAll(
+			[],
+			[
+				CityTable::F_ID => $cityIdList,
+			]
+		);
+
+		$developerList = array_map(function(DeveloperEntity $developer) use ($cityList) {
+
+			$currentCity = array_filter($cityList, function(CityEntity $city) use ($developer) {
+				return $city->getId() === $developer->getId();
+			});
+
+			if(count($currentCity) == 1)
+			{
+				$currentCity = array_shift($currentCity);
+				$developer->addCity($currentCity);
+			}
+
+			return $developer;
+		}, $developerList);
 	}
 }

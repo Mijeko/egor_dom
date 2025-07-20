@@ -43,6 +43,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			$developer->getId(),
 			$developer->getName(),
 			ImageValueObject::fromId($developer->getPictureId()),
+			$developer->getCityId(),
 			null,
 			new ImportSettingValueObject(
 				$developer->importSettings()->getHandler(),

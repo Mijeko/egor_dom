@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Factory;
 
+use Craft\DDD\City\Infrastructure\Repository\OrmCityRepository;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockDeveloperRepository;
@@ -15,6 +16,7 @@ class DeveloperServiceFactory
 		return new DeveloperService(
 			new OrmDeveloperRepository(),
 			new OrmBuildObjectRepository(),
+			new OrmCityRepository(),
 		);
 	}
 

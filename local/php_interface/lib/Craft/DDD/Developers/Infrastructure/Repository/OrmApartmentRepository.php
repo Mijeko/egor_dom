@@ -48,6 +48,7 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 		$model->setRenovation($apartment->getRenovation());
 		$model->setAreaEx($apartment->getArea());
 		$model->setPlanImageEx($apartment->getPlanImages());
+		$model->setExternalId($apartment->getExternalId());
 
 		$result = $model->save();
 

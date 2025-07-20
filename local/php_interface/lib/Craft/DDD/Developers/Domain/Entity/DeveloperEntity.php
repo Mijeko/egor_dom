@@ -16,11 +16,18 @@ class DeveloperEntity
 		public ?int                         $id,
 		public ?string                      $name,
 		public ?ImageValueObject            $picture = null,
+		public ?int                         $cityId = null,
 		protected ?array                    $buildObjects = null,
 		protected ?ImportSettingValueObject $importSetting = null,
 		protected ?CityEntity               $city = null,
 	)
 	{
+	}
+
+	public function addCity(CityEntity $city): static
+	{
+		$this->city = $city;
+		return $this;
 	}
 
 	public function addBuildObject(BuildObjectEntity $buildObject): static
@@ -60,5 +67,10 @@ class DeveloperEntity
 	public function getCity(): ?CityEntity
 	{
 		return $this->city;
+	}
+
+	public function getCityId(): ?int
+	{
+		return $this->cityId;
 	}
 }

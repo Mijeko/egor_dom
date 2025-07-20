@@ -148,6 +148,7 @@ if($field = $entity->getField(DeveloperTable::F_CITY_ID))
 
 			return $res;
 		})(),
+		$developerModel ? $developerModel->getCityId() : null
 	);
 }
 
