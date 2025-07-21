@@ -3,7 +3,7 @@
 namespace Craft\DDD\Claims\Application\UseCase;
 
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
-use Craft\DDD\Claims\Application\Interfaces\TgNotifyInterface;
+use Craft\DDD\Claims\Application\Interfaces\TgSenderInterface;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Domain\ValueObject\StatusValueObject;

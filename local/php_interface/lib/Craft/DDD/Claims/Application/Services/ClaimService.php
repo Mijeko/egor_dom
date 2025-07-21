@@ -3,10 +3,7 @@
 namespace Craft\DDD\Claims\Application\Services;
 
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
-use Craft\DDD\Claims\Application\Factory\ClaimCreateUseCaseFactory;
-use Craft\DDD\Claims\Application\Factory\NotifyManagerAboutFreshClaimFactory;
 use Craft\DDD\Claims\Application\UseCase\ClaimCreateUseCase;
-use Craft\DDD\Claims\Application\UseCase\NotifyManagerAboutFreshClaim;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
@@ -27,7 +24,7 @@ class ClaimService
 		protected UserRepositoryInterface        $userRepository,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
 		protected ClaimCreateUseCase             $claimCreateUseCase,
-		protected NotifyManagerAboutFreshClaim   $notifyManagerAboutFreshClaim,
+		protected ManagerNotificatorService      $managerNotificatorService,
 	)
 	{
 	}
@@ -35,7 +32,7 @@ class ClaimService
 	public function createClientClaim(ClaimCreateDto $s): ClaimEntity
 	{
 		$claim = $this->claimCreateUseCase->execute($s);
-		$this->notifyManagerAboutFreshClaim->execute($claim);
+		$this->managerNotificatorService->aboutNewClaim($claim);
 
 		return $claim;
 	}

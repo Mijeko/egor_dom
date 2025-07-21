@@ -19,7 +19,7 @@ class ClaimServiceFactory
 			new BxUserRepository(),
 			new OrmBuildObjectRepository(),
 			ClaimCreateUseCaseFactory::getService(),
-			NotifyManagerAboutFreshClaimFactory::getService()
+			ManagerNotificatorServiceFactory::getService()
 		);
 	}
 }
