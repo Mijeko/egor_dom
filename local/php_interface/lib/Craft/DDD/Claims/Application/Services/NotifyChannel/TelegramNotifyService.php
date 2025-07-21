@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Claims\Application\Services\NotifyChannel;
 
+use Bitrix\Main\Application;
 use Craft\DDD\Claims\Application\Interfaces\TgSenderInterface;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Entity\ManagerEntity;
@@ -21,7 +22,20 @@ class TelegramNotifyService
 	 */
 	public function aboutNewClaim(array $members, ClaimEntity $claimEntity): void
 	{
-		$message = "";
+		$message = "На сайте %s новый заказ №%s\n
+		Клиент: %s (%s)\n\n
+		Рег данные:\n
+		ИНН: %s\n
+		ОГРН: %s\n
+		";
+		$message = sprintf($message,
+			Application::getInstance()->getContext()->getServer()->getServerName(),
+			$claimEntity->getId(),
+			$claimEntity->getClient(),
+			$claimEntity->getPhone(),
+			$claimEntity->getInn(),
+			$claimEntity->getOgrn(),
+		);
 
 		foreach($members as $member)
 		{
