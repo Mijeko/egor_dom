@@ -31,6 +31,7 @@ class CraftApartmentFilterComponent extends AjaxComponent
 
 				$apartmentsCount = $this->apartmentPreFilterService->execute(
 					new ApartmentPreFilterDto(
+						$formData['buildObjectId'],
 						$formData['price']['min'],
 						$formData['price']['max'],
 						$formData['bathroom'],
@@ -50,6 +51,7 @@ class CraftApartmentFilterComponent extends AjaxComponent
 
 				$apartments = $this->apartmentFilterUseCase->execute(
 					new ApartmentFilterDto(
+						$formData['buildObjectId'],
 						$formData['price']['min'],
 						$formData['price']['max'],
 						$formData['bathroom'],
@@ -60,7 +62,18 @@ class CraftApartmentFilterComponent extends AjaxComponent
 					)
 				);
 
-				ResponseBx::success($apartments);
+				unset($formData['action']);
+
+				$_filter = [];
+				foreach($formData as $key => $value)
+				{
+					$_filter['filter'][$key] = $value;
+				}
+
+				ResponseBx::success([
+					'filterUrl' => '?' . http_build_query($_filter),
+					'items'     => $apartments,
+				]);
 
 				break;
 		}

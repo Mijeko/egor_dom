@@ -15,6 +15,10 @@ export default defineComponent({
   name: "MainApartmentFilter",
   components: {MinMaxInputDropdown, InputDropdown, CheckboxDropdown},
   props: {
+    baseFilterData: {
+      type: Object as PropType<ApartmentFilterRequestDto>,
+      default: null,
+    },
     filterApartmentList: {
       type: Array as PropType<ApartmentDto[]>,
       default: []
@@ -25,6 +29,7 @@ export default defineComponent({
       filterTimeout: 0,
       preFilterTimeout: 0,
       preFilterCount: -1,
+      initialFilter: {} as ApartmentFilterDto,
       filter: {
         price: {
           min: null,
@@ -58,14 +63,17 @@ export default defineComponent({
         service.filterAction(body).then((response: ApartmentFilterResponseDto) => {
           let {data} = response;
 
-          if (data.length > 0) {
-            this.$emit('update:modelValue', data);
+          let {items, filterUrl} = data;
+
+          if (items.length > 0) {
+            this.$emit('update:modelValue', items);
+            window.history.pushState(null, '', filterUrl);
           }
 
         });
 
       }, 400);
-    }
+    },
   },
   watch: {
     'filter': {
@@ -96,14 +104,13 @@ export default defineComponent({
       },
       deep: true
     }
-  }
+  },
 })
 </script>
 
 <template>
 
   <div class="container">
-    {{ filter }}
     <v-form>
       <v-card class="mt-3 mb-5 pa-4">
         <v-row>
@@ -178,13 +185,15 @@ export default defineComponent({
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
+          <v-col cols="1">
             <v-btn @click.prevent="runFilter">
-              <span>Подобрать</span>
-              <span v-if="preFilterCount >= 0">(найдено {{ preFilterCount }})</span>
+              <div class="flex-column">
+                <div style="font-size:12px;">Подобрать</div>
+                <div style="font-size:10px;" v-if="preFilterCount >= 0">(найдено {{ preFilterCount }})</div>
+              </div>
             </v-btn>
           </v-col>
-          <v-col>
+          <v-col cols="1">
             <v-btn @click.prevent="clearFilter">
               <span>Сбросить</span>
             </v-btn>

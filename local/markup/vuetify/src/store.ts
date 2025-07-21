@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import type AlertItemDto from "@/dto/AlertItemDto.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import {th} from "vuetify/locale";
+import type ApartmentFilterDto from "@/dto/ApartmentFilterDto.ts";
 
 export const useAlertsStore = defineStore('alerts', {
   state: () => ({
@@ -37,5 +37,22 @@ export const useUserStore = defineStore('user', {
     getUser(state) {
       return state.user;
     },
+  }
+});
+
+
+export const useApartmentFilterStore = defineStore('apartmentFilter', {
+  state: () => ({
+    filterData: {} as ApartmentFilterDto
+  }),
+  actions: {
+    pushFilterData(data: ApartmentFilterDto) {
+      this.filterData = data;
+    }
+  },
+  getters: {
+    getFilterData(state) {
+      return state.filterData;
+    }
   }
 });

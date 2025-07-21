@@ -2,6 +2,9 @@
 /**
  * @global CMain $APPLICATION
  */
+
+use Craft\Dto\BxUserDto;
+use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 ?>
 <!doctype html>
 <html lang="<?=LANGUAGE_ID;?>">
@@ -37,7 +40,8 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'system/Init',
 		'PROPS'  => [
-			'user' => \Craft\Dto\BxUserDto::fromGlobal(),
+			'user' => BxUserDto::fromGlobal(),
+			'apartmentFilter'=>ApartmentFilterBuilder::fromUrl()->toArray(),
 		],
 	],
 	false,

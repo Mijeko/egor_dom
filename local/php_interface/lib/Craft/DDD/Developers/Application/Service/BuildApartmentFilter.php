@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Dto\ApartmentFilterDto;
 use Craft\DDD\Developers\Application\Dto\ApartmentPreFilterDto;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
@@ -13,6 +14,10 @@ class BuildApartmentFilter
 	{
 		$filter = [];
 
+		if($filterBody->buildObjectId)
+		{
+			$filter[ApartmentTable::F_BUILD_OBJECT_ID] = $filterBody->buildObjectId;
+		}
 
 		if($filterBody->floorsTotal)
 		{
@@ -38,6 +43,8 @@ class BuildApartmentFilter
 		{
 			$filter[ApartmentTable::F_BATHROOM_UNIT] = $filterBody->bathroom;
 		}
+
+		Debug::dumpToFile($filter);
 
 		return $filter;
 	}

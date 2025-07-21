@@ -8,4 +8,5 @@ export default interface ApartmentFilterDto {
   floorsTotal: number | null,
   roomsTotal: number | null,
   floor: number | null,
+  buildObjectId?: number | null,
 }

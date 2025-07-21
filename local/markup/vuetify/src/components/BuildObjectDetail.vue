@@ -5,10 +5,11 @@ import type BuildObjectDetailInfo from "@/dto/present/component/buildObjectDetai
 import Map from "@/components/Map.vue";
 import ApartmentFilter from "@/components/ApartmentFilter.vue";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
+import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
 
 export default defineComponent({
   name: "BuildObjectDetail",
-  components: {ApartmentFilter, Map, ApartmentList},
+  components: {MainApartmentFilter, ApartmentFilter, Map, ApartmentList},
   props: {
     product: {
       type: Object as PropType<BuildObjectDto>
@@ -18,6 +19,7 @@ export default defineComponent({
     return {
       isRunFilter: false,
       filteredApartments: [],
+      filterApartmentList: [],
     };
   },
   computed: {
@@ -75,6 +77,7 @@ export default defineComponent({
 
   <v-divider class="mt-15 mb-15"/>
 
+  <h2>Объект на карте</h2>
   <v-row>
     <v-col cols="12">
       <Map
@@ -90,18 +93,15 @@ export default defineComponent({
   <v-row>
     <v-col cols="12">
       <v-row>
-        <v-col cols="2">
+        <v-col>
           <h2 class="pt-2">Купить квартиру</h2>
         </v-col>
-        <v-col cols="10">
-          <ApartmentFilter
-            :is-run-filter="isRunFilter"
-            :filtered-apartments="filteredApartments"
-            @update:filteredApartments="filteredApartments = $event"
-            @update:isRunFilter="isRunFilter = $event"
-            :apartments="product?.apartments"
+      </v-row>
+      <v-row>
+        <v-col>
+          <MainApartmentFilter
+            v-model="filterApartmentList"
           />
-
         </v-col>
       </v-row>
 

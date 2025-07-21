@@ -2,5 +2,8 @@ import type ControllerApiResponseDto from "@/dto/response/ControllerApiResponseD
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
 export default interface ApartmentFilterResponseDto extends ControllerApiResponseDto {
-  data: ApartmentDto[]
+  data: {
+    filterUrl: string;
+    items: ApartmentDto[];
+  }
 }
