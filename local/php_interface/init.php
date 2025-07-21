@@ -2,11 +2,7 @@
 
 define('NEED_AUTH', $_SERVER['SERVER_NAME'] === 'abn.dev-kvsn.ru');
 
-function testAgent()
-{
-//	\Bitrix\Main\Diag\Debug::dumpToFile('demo_agent', '', '__agent.log');
-	return "testAgent();";
-}
+
 
 if(\Bitrix\Main\Loader::includeModule('craft.core'))
 {
