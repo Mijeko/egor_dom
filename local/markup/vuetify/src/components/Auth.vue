@@ -39,9 +39,9 @@ export default defineComponent({
         phone: this.form.phone,
         password: this.form.password,
       } as AuthorizeDto)
-        .then((data: any) => {
-          let {result} = data;
-          let {success, redirect, error} = result;
+        .then((response: any) => {
+          let {data} = response;
+          let {success, redirect, error} = data;
 
           if (success) {
             if (redirect) {
@@ -73,7 +73,7 @@ export default defineComponent({
       label="Пароль"
     />
     <v-row>
-      <v-col cols="1">
+      <v-col cols="2">
         <v-btn type="submit">Войти</v-btn>
       </v-col>
       <v-col cols="2">

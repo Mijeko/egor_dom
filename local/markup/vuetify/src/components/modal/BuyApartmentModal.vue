@@ -5,6 +5,11 @@ import BuyApartmentForm from "@/components/form/BuyApartmentForm.vue";
 export default defineComponent({
   name: "BuyApartmentModal",
   components: {BuyApartmentForm},
+  data: function () {
+    return {
+      _showModalData: false
+    };
+  },
   props: {
     apartmentId: {
       type: Number,
@@ -14,6 +19,17 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+  },
+  computed: {
+    _showModal: {
+      get(): boolean {
+        return this._showModalData;
+      },
+      set(value: boolean) {
+        this._showModalData = value;
+        this.$emit('update:modelValue', value);
+      }
+    }
   }
 })
 </script>
@@ -26,6 +42,7 @@ export default defineComponent({
 
         <BuyApartmentForm
           :apartment-id="apartmentId"
+          v-model="_showModal"
         />
 
       </v-card>

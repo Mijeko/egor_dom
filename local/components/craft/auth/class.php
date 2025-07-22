@@ -13,24 +13,24 @@ class CraftAuthComponent extends \Craft\Core\Component\AjaxComponent
 	{
 	}
 
+
 	protected function store(array $formData): void
 	{
 		try
 		{
 			$service = AuthorizeServiceFactory::getService();
-			if($service->execute($formData['phone'], $formData['password']))
-			{
-				\Craft\Core\Rest\Response::success([
-					'success'  => true,
-					'redirect' => '/',
-				]);
-			}
+			$service->execute($formData['phone'], $formData['password']);
+
+
+			\Craft\Core\Rest\ResponseBx::success([
+				'success'  => true,
+				'redirect' => '/',
+			]);
 		} catch(\Exception $e)
 		{
-			\Craft\Core\Rest\Response::badRequest($e->getMessage());
+			\Craft\Core\Rest\ResponseBx::badRequest($e->getMessage());
 		}
 
-		\Craft\Core\Rest\Response::success();
 	}
 
 	protected function modules(): ?array

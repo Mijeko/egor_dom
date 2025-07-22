@@ -10,15 +10,12 @@ import type ApartmentPrefilterResponseDto from "@/dto/response/ApartmentPrefilte
 import type ApartmentFilterRequestDto from "@/dto/request/ApartmentFilterRequestDto.ts";
 import type ApartmentFilterResponseDto from "@/dto/response/ApartmentFilterResponseDto.ts";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
+import {useApartmentFilterStore} from "@/store.ts";
 
 export default defineComponent({
   name: "MainApartmentFilter",
   components: {MinMaxInputDropdown, InputDropdown, CheckboxDropdown},
   props: {
-    baseFilterData: {
-      type: Object as PropType<ApartmentFilterRequestDto>,
-      default: null,
-    },
     filterApartmentList: {
       type: Array as PropType<ApartmentDto[]>,
       default: []
@@ -29,7 +26,6 @@ export default defineComponent({
       filterTimeout: 0,
       preFilterTimeout: 0,
       preFilterCount: -1,
-      initialFilter: {} as ApartmentFilterDto,
       filter: {
         price: {
           min: null,
@@ -42,6 +38,11 @@ export default defineComponent({
         floor: null,
       } as ApartmentFilterDto
     };
+  },
+  mounted(): any {
+    let store = useApartmentFilterStore();
+    let defStore = store.getFilterData;
+    this.filter = {...defStore};
   },
   methods: {
     clearFilter: function () {
@@ -185,7 +186,7 @@ export default defineComponent({
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="4" md="2">
             <v-btn @click.prevent="runFilter">
               <div class="flex-column">
                 <div style="font-size:12px;">Подобрать</div>
@@ -193,7 +194,7 @@ export default defineComponent({
               </div>
             </v-btn>
           </v-col>
-          <v-col cols="1">
+          <v-col cols="4" md="2">
             <v-btn @click.prevent="clearFilter">
               <span>Сбросить</span>
             </v-btn>

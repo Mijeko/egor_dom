@@ -40,7 +40,7 @@ export default defineComponent({
 
   <BuyApartmentModal
     :show-modal="showModal"
-    @update:showModal="showModal = $event"
+    v-model="showModal"
     :apartment-id="selectApartmentId"
   />
 

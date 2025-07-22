@@ -7,7 +7,16 @@
   margin-bottom: 15px;
 
   @include _640 {
-    display: none;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  &-union {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   &-menu {

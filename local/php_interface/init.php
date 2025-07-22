@@ -1,6 +1,7 @@
 <?php
 
-define('NEED_AUTH', $_SERVER['SERVER_NAME'] === 'abn.dev-kvsn.ru');
+//define('NEED_AUTH', $_SERVER['SERVER_NAME'] === 'abn.dev-kvsn.ru');
+define('NEED_AUTH', true);
 
 
 

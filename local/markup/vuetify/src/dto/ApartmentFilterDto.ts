@@ -1,4 +1,6 @@
 export default interface ApartmentFilterDto {
+  [key: string]: any;
+
   price: {
     min: number | null,
     max: number | null,

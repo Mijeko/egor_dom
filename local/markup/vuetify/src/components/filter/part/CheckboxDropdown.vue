@@ -28,10 +28,18 @@ export default defineComponent({
 
       let currentValues: CheckboxDropdownItemDto[] | undefined = this.values;
       let selectValues: string[] = this.modelValue as string[];
-      if (!currentValues || selectValues.length == 0) {
+
+      if (!selectValues) {
         return null;
       }
 
+      if (!currentValues || (Array.isArray(selectValues) && selectValues.length == 0)) {
+        return null;
+      }
+
+      if (!(0 in selectValues)) {
+        return null;
+      }
 
       let _firstItem: string = selectValues[0];
 
