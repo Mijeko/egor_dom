@@ -12,5 +12,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo -u www-root bash -c "cd /var/repo/router/abn.dev-kvsn.ru && git pull"
+            sudo -u www-root bash -c "cd /var/repo/www/abn.dev-kvsn.ru && git pull"
             docker exec -t router-markup-18-16-0 sh -c "cd abn.dev-kvsn.ru && make webpack"
