@@ -7,6 +7,7 @@ define('SMARTCAPTCHA_SERVER_KEY', 'ysc2_dRmWTVxaOLruU0d64eTtWu3xscbim7gcstgjCPkm
 // groups
 define('USER_GROUP_JUR_PERSON_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('HOME_SELLER'));
 define('USER_GROUP_PHYS_PERSON_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('STUDENT'));
+define('USER_GROUP_MANAGER_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('MANAGER'));
 
 // iblock id
 

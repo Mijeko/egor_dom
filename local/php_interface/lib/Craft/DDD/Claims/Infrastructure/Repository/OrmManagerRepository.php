@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Claims\Infrastructure\Repository;
 
+use Bitrix\Main\UserGroupTable;
 use Craft\DDD\Claims\Domain\Entity\ManagerEntity;
 use Craft\DDD\Claims\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\Shared\Domain\ValueObject\AvailChannelContactValueObject;
@@ -16,8 +17,36 @@ class OrmManagerRepository implements ManagerRepositoryInterface
 	{
 		$managers = [];
 
+		if(!defined('USER_GROUP_MANAGER_ID') || !USER_GROUP_MANAGER_ID)
+		{
+			return $managers;
+		}
 
-		$userList = CraftUserTable::getList(['order' => $order, 'filter' => $filter])->fetchCollection();
+		$managersAssignGroup = UserGroupTable::getList([
+			'filter' => [
+				'=GROUP_ID' => USER_GROUP_MANAGER_ID,
+			],
+			'select' => [
+				'USER_ID',
+			],
+			'cache'  => ['ttl' => 3600 * 48],
+		])->fetchCollection();
+
+		$userIdList = [];
+
+		foreach($managersAssignGroup as $managerGroup)
+		{
+			$userIdList[] = $managerGroup->getUserId();
+		}
+
+		$userList = CraftUserTable::getList([
+			'order'  => $order,
+			'filter' => array_merge(
+				['ID' => $userIdList],
+				$filter
+			),
+			'cache'  => ['ttl' => 3600 * 48],
+		])->fetchCollection();
 
 		foreach($userList as $user)
 		{
@@ -33,8 +62,14 @@ class OrmManagerRepository implements ManagerRepositoryInterface
 			$user->getId(),
 			$user->getName(),
 			new AvailChannelContactValueObject(
-				new ChannelEmailValueObject($user->getEmail()),
-				new ChannelTgValueObject($user->getUfTgId())
+				new ChannelEmailValueObject(
+					$user->getUfTgNotifyClaim(),
+					$user->getEmail()
+				),
+				new ChannelTgValueObject(
+					$user->getUfEmailNotifyClaim(),
+					$user->getUfTgId()
+				)
 			),
 		);
 	}

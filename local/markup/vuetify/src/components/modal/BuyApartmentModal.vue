@@ -11,31 +11,33 @@ export default defineComponent({
     };
   },
   props: {
+    showModal: {
+      type: Boolean,
+    },
     apartmentId: {
       type: Number,
       default: 0,
-    },
-    showModal: {
-      type: Boolean,
-      default: false,
     },
   },
   computed: {
     _showModal: {
       get(): boolean {
-        return this._showModalData;
+        return this.showModal;
       },
       set(value: boolean) {
+        console.log('asd', value);
         this._showModalData = value;
         this.$emit('update:modelValue', value);
       }
     }
-  }
+  },
 })
 </script>
 
 <template>
-  <v-dialog max-width="500" v-model="showModal">
+  {{ showModal }}
+  {{ _showModal }}
+  <v-dialog max-width="500" v-model="_showModal">
     <template v-slot:default="{ isActive }">
       <v-card title="Заявка на покупку квартиры">
 
