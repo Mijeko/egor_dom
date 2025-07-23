@@ -135,6 +135,21 @@ class ApartmentTable extends DataManager
 		return Apartment::class;
 	}
 
+	public static function update($primary, array $data)
+	{
+		if($data[self::F_PLAN_IMAGE])
+		{
+			$model = self::getByPrimary($primary)->fetchObject();
+			$planImageIdList = $model->getPlanImageEx();
+			foreach($planImageIdList as $imageId)
+			{
+				\CFile::Delete($imageId);
+			}
+		}
+
+		return parent::update($primary, $data);
+	}
+
 	public static function delete($primary)
 	{
 		$model = self::getByPrimary($primary)->fetchObject();

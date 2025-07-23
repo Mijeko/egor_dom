@@ -110,10 +110,25 @@ class BuildObjectTable extends DataManager
 		return BuildObject::class;
 	}
 
+	public static function update($primary, array $data)
+	{
+
+		if($data[self::F_GALLERY])
+		{
+			$model = self::getByPrimary($primary)->fetchObject();
+			$galleryIdList = $model->getGalleryEx();
+			foreach($galleryIdList as $galleryId)
+			{
+				\CFile::Delete($galleryId);
+			}
+		}
+
+		return parent::update($primary, $data);
+	}
+
 	public static function delete($primary)
 	{
 		$model = self::getByPrimary($primary)->fetchObject();
-
 		$galleryIdList = $model->getGalleryEx();
 		foreach($galleryIdList as $galleryId)
 		{
