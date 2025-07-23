@@ -3,6 +3,14 @@ name: Deploy production
 on: push
 jobs:
   deploy:
-    runs-on: ['ubuntu-22.04']
+    runs-on: ['ubuntu-latest']
     steps:
-      - uses: ls
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo -u www-root bash -c "cd /var/repo/router/abn.dev-kvsn.ru && git pull"
+            docker exec -t router-markup-18-16-0 sh -c "cd abn.dev-kvsn.ru && make webpack"
