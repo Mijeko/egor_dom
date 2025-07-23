@@ -1,6 +1,6 @@
 <?php
 
-use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
+use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 ?>

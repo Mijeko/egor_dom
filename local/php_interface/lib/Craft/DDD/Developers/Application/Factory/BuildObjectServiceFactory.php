@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Factory;
 
-use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
+use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepository;
@@ -19,7 +19,7 @@ class BuildObjectServiceFactory
 			new OrmBuildObjectRepository(),
 			new OrmDeveloperRepository(),
 			new OrmApartmentRepository(),
-			CurrentCityFactory::getService(),
+			CurrentCityServiceFactory::getService(),
 		);
 	}
 
@@ -32,7 +32,7 @@ class BuildObjectServiceFactory
 				new IblockBuildObjectOrmRepository($iblockId),
 			),
 			null,
-			CurrentCityFactory::getService(),
+			CurrentCityServiceFactory::getService(),
 		);
 	}
 }

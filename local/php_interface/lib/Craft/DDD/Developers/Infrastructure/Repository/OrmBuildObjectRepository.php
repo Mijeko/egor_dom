@@ -92,6 +92,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		$query = BuildObjectTable::getList([
 			'order'  => $order,
 			'filter' => $filter,
+			'cache'  => ['ttl' => 3600 * 48],
 		]);
 
 		foreach($query->fetchCollection() as $buildObject)
