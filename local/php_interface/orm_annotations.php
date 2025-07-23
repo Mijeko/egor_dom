@@ -2802,6 +2802,15 @@ namespace Bitrix\Main {
 	 * @method \string fillUfBankName()
 	 * @method \Bitrix\Main\EO_User setUfBankName(\string $ufBankName)
 	 * @method bool isUfBankNameChanged()
+	 * @method \string getUfTgId()
+	 * @method \string remindActualUfTgId()
+	 * @method \string requireUfTgId()
+	 * @method bool hasUfTgId()
+	 * @method bool isUfTgIdFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfTgId()
+	 * @method \string fillUfTgId()
+	 * @method \Bitrix\Main\EO_User setUfTgId(\string $ufTgId)
+	 * @method bool isUfTgIdChanged()
 	 */
 	class EO_User {
 		/* @var \Bitrix\Main\UserTable */
@@ -2837,6 +2846,8 @@ namespace Bitrix\Main {
 	 * @method \string[] fillUfLegalAddress()
 	 * @method \string[] getUfBankNameList()
 	 * @method \string[] fillUfBankName()
+	 * @method \string[] getUfTgIdList()
+	 * @method \string[] fillUfTgId()
 	 */
 	class EO_User_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Bitrix\Main\UserTable */
@@ -5719,6 +5730,15 @@ namespace Craft\Model {
 	 * @method \string fillUfBankName()
 	 * @method \Craft\Model\CraftUser setUfBankName(\string $ufBankName)
 	 * @method bool isUfBankNameChanged()
+	 * @method \string getUfTgId()
+	 * @method \string remindActualUfTgId()
+	 * @method \string requireUfTgId()
+	 * @method bool hasUfTgId()
+	 * @method bool isUfTgIdFilled()
+	 * @method \Craft\Model\CraftUser unsetUfTgId()
+	 * @method \string fillUfTgId()
+	 * @method \Craft\Model\CraftUser setUfTgId(\string $ufTgId)
+	 * @method bool isUfTgIdChanged()
 	 * @method \Craft\Model\EO_CraftUserUts getUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts remindActualUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts requireUtsObjectInner()
@@ -5934,6 +5954,8 @@ namespace Craft\Model {
 	 * @method \string[] fillUfLegalAddress()
 	 * @method \string[] getUfBankNameList()
 	 * @method \string[] fillUfBankName()
+	 * @method \string[] getUfTgIdList()
+	 * @method \string[] fillUfTgId()
 	 * @method \Craft\Model\EO_CraftUserUts[] getUtsObjectInnerList()
 	 * @method \Craft\Model\EO_CraftUser_Collection getUtsObjectInnerCollection()
 	 * @method \Craft\Model\EO_CraftUserUts_Collection fillUtsObjectInner()
