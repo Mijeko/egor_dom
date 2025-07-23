@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service;
+namespace Craft\DDD\User\Application\UseCase;
 
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;

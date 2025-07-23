@@ -1,11 +1,11 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service;
+namespace Craft\DDD\User\Application\UseCase;
 
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 
-class AuthorizeService
+class AuthorizeUseCase
 {
 
 

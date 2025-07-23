@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
-use Craft\DDD\User\Application\Service\Factory\RegisterStudentServiceFactory;
+use Craft\DDD\User\Application\Factory\RegisterStudentServiceFactory;
 
 class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 {

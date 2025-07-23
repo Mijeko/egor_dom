@@ -29,6 +29,21 @@ class PhoneValueObject
 
 	public function getValue(): string
 	{
-		return $this->value;
+		return $this->normalize($this->value);
+	}
+
+	private function normalize(string $value): string
+	{
+		if(str_starts_with($value, '+7'))
+		{
+			return $value;
+		}
+
+		if(str_starts_with($value, '8'))
+		{
+			return '+7' . substr($value, 1, strlen($value) - 1);
+		}
+
+		return $value;
 	}
 }

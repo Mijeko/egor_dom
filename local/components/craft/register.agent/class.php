@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
-use Craft\DDD\User\Application\Service\Factory\RegisterAgentServiceFactory;
+use Craft\DDD\User\Application\Factory\RegisterAgentServiceFactory;
 
 class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 {

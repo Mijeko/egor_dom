@@ -1,8 +1,8 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service\Factory;
+namespace Craft\DDD\User\Application\Factory;
 
-use Craft\DDD\User\Application\Service\RegisterAgentService;
+use Craft\DDD\User\Application\UseCase\RegisterAgentService;
 use Craft\DDD\User\Infrastructure\Repository\BxAgentRepository;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 use Craft\DDD\User\Infrastructure\Service\Authenticator;

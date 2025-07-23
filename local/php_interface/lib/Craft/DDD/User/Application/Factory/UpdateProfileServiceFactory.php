@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service\Factory;
+namespace Craft\DDD\User\Application\Factory;
 
 use Craft\DDD\User\Application\Service\UpdateProfileService;
 use Craft\DDD\User\Infrastructure\Repository\BxProfileRepository;

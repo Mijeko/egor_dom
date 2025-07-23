@@ -1,6 +1,6 @@
 <?php
 
-use Craft\DDD\User\Application\Service\Factory\AuthorizeServiceFactory;
+use Craft\DDD\User\Application\Factory\AuthorizeServiceFactory;
 
 class CraftAuthComponent extends \Craft\Core\Component\AjaxComponent
 {

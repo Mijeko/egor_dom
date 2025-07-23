@@ -1,16 +1,16 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service\Factory;
+namespace Craft\DDD\User\Application\Factory;
 
-use Craft\DDD\User\Application\Service\AuthorizeService;
+use Craft\DDD\User\Application\UseCase\AuthorizeUseCase;
 use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 use Craft\DDD\User\Infrastructure\Service\Authenticator;
 
 class AuthorizeServiceFactory
 {
-	public static function getService(): AuthorizeService
+	public static function getService(): AuthorizeUseCase
 	{
-		return new AuthorizeService(
+		return new AuthorizeUseCase(
 			new BxUserRepository(),
 			new Authenticator()
 		);
