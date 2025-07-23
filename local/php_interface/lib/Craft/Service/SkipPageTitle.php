@@ -6,6 +6,14 @@ class SkipPageTitle
 {
 	public static function skip(): bool
 	{
+		if(defined('NEED_AUTH'))
+		{
+			if(NEED_AUTH === true)
+			{
+				return true;
+			}
+		}
+
 		if(self::checkFullPath())
 		{
 			return true;

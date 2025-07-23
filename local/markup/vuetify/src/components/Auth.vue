@@ -60,27 +60,30 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-form @submit.prevent="auth" v-model="isValid">
-    <v-text-field
-      v-model="form.phone"
-      :rules="validate.phone"
-      label="Номер телефона"
-    />
-    <v-text-field
-      v-model="form.password"
-      :rules="validate.password"
-      type="password"
-      label="Пароль"
-    />
-    <v-row>
-      <v-col cols="2">
-        <v-btn type="submit">Войти</v-btn>
-      </v-col>
-      <v-col cols="2">
-        <a href="?register=yes">Регистрация</a>
-      </v-col>
-    </v-row>
-  </v-form>
+  <div class="mt-16 w-75 w-md-50 ml-auto mr-auto">
+    <h1 class="mb-3">Войти на сайт</h1>
+    <v-form @submit.prevent="auth" v-model="isValid">
+      <v-text-field
+        v-model="form.phone"
+        :rules="validate.phone"
+        label="Номер телефона"
+      />
+      <v-text-field
+        v-model="form.password"
+        :rules="validate.password"
+        type="password"
+        label="Пароль"
+      />
+      <v-row>
+        <v-col cols="6" md="2">
+          <v-btn type="submit">Войти</v-btn>
+        </v-col>
+        <v-col cols="6" md="2">
+          <a href="?register=yes">Регистрация</a>
+        </v-col>
+      </v-row>
+    </v-form>
+  </div>
 </template>
 
 <style scoped>

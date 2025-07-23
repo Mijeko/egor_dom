@@ -15,6 +15,7 @@ export default defineComponent({
       <v-app-bar location="bottom" :elevation="6" >
 
         <v-btn
+          class="pa-0"
           v-for="menuItem in menuItems"
           :href="menuItem.link"
           :prepend-icon="menuItem.icon"
@@ -23,7 +24,7 @@ export default defineComponent({
           stacked
         >
           <template v-slot:prepend>
-            <v-icon color="success"></v-icon>
+            <v-icon color="light-blue"></v-icon>
           </template>
 
           <v-card elevation="0" class="ma-0 pa-0">
