@@ -437,7 +437,14 @@ export default defineComponent({
 
           <v-divider/>
 
-          <v-btn type="submit">Зарегистрироваться</v-btn>
+          <v-row>
+            <v-col cols="6" md="2">
+              <v-btn type="submit">Зарегистрироваться</v-btn>
+            </v-col>
+            <v-col cols="6" md="2">
+              <v-btn :href="`/`">Войти на сайт</v-btn>
+            </v-col>
+          </v-row>
         </v-form>
       </v-tabs-window-item>
     </v-tabs-window>
