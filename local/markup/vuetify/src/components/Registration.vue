@@ -262,7 +262,8 @@ export default defineComponent({
 
 <template>
 
-  <v-card>
+  <v-card class="mt-16">
+    <h1>Регистрация</h1>
     <v-tabs
       align-tabs="center"
       v-model="tab"
