@@ -1,15 +1,18 @@
 <?php
 
-use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Present\Dto\DeveloperDto;
+use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
+use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 
 class CraftDeveloperListComponent extends CBitrixComponent
 {
 
 	protected ?DeveloperService $developerService = null;
+	protected ?CurrentCityService $currentCityService = null;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -32,6 +35,9 @@ class CraftDeveloperListComponent extends CBitrixComponent
 
 	protected function loadServices(): void
 	{
+
+		$this->currentCityService = CurrentCityServiceFactory::getService();
+
 		if($this->arParams['IBLOCK_ID'])
 		{
 			$this->developerService = DeveloperServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
@@ -47,7 +53,12 @@ class CraftDeveloperListComponent extends CBitrixComponent
 			function(DeveloperEntity $developer) {
 				return DeveloperDto::fromModel($developer);
 			},
-			$this->developerService->findAll()
+			$this->developerService->findAll(
+				[],
+				[
+					DeveloperTable::F_CITY_ID => $this->currentCityService->current()->getId(),
+				]
+			)
 		);
 	}
 }

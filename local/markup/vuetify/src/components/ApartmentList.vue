@@ -25,13 +25,14 @@ export default defineComponent({
 
 <template>
 
+  {{ showModal }}
+  {{ selectApartmentId }}
 
   <v-row>
     <v-col cols="12" sm="6" md="4" lg="3" v-for="apartment in apartments">
       <ApartmentItem
         :apartment
-        :show-modal="showModal"
-        @update:showModal="showModal = $event"
+        v-model="showModal"
         @update:apartment-id="selectApartmentId = $event"
       />
     </v-col>
@@ -39,8 +40,8 @@ export default defineComponent({
 
 
   <BuyApartmentModal
-    :show-modal="showModal"
     v-model="showModal"
+    :show-modal
     :apartment-id="selectApartmentId"
   />
 

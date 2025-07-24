@@ -19,6 +19,7 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 		$apartmentList = ApartmentTable::getList([
 			'order'  => $order,
 			'filter' => $filter,
+			'cache'  => ['ttl' => 3600 * 48],
 		])->fetchCollection();
 
 		foreach($apartmentList as $apartment)

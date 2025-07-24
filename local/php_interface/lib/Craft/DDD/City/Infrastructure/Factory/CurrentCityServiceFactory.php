@@ -7,7 +7,7 @@ use Craft\DDD\City\Infrastructure\Service\CurrentCityStorage\CookieCurrentCitySt
 use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 use Craft\DDD\City\Infrastructure\Service\CurrentCityStorage\SessionCurrentCityStorage;
 
-class CurrentCityFactory
+class CurrentCityServiceFactory
 {
 
 	public static function getService(): CurrentCityService

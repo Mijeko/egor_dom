@@ -5,6 +5,7 @@ namespace Craft\DDD\Shared\Domain\ValueObject;
 class ChannelEmailValueObject
 {
 	public function __construct(
+		protected ?string $enable,
 		protected ?string $email,
 	)
 	{
@@ -29,5 +30,10 @@ class ChannelEmailValueObject
 	public function getEmail(): ?string
 	{
 		return $this->email;
+	}
+
+	public function isEnabled(): ?bool
+	{
+		return true;
 	}
 }

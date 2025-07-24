@@ -2,13 +2,13 @@
 
 namespace Craft\DDD\City\Infrastructure\Events;
 
-use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
+use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 
 class OnPageStartHandler
 {
 	public static function execute(): void
 	{
-		$city = CurrentCityFactory::getService();
+		$city = CurrentCityServiceFactory::getService();
 		$city->currentOrDefault();
 	}
 }

@@ -23,10 +23,6 @@ export default defineComponent({
     };
   },
   props: {
-    showModal: {
-      type: Boolean,
-      default: false,
-    },
     apartment: {
       type: Object as PropType<ApartmentDto>,
       default: null
@@ -34,8 +30,9 @@ export default defineComponent({
   },
   methods: {
     buy() {
-      this.$emit('update:showModal', true)
-      this.$emit('update:apartmentId', this.apartment.id)
+      console.log('asd');
+      this.$emit('update:modelValue', true);
+      this.$emit('update:apartmentId', this.apartment.id);
     }
   },
 })

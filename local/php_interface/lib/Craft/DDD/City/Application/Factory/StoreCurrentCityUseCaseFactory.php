@@ -3,7 +3,7 @@
 namespace Craft\DDD\City\Application\Factory;
 
 use Craft\DDD\City\Application\UseCase\StoreCurrentCityUseCase;
-use Craft\DDD\City\Infrastructure\Factory\CurrentCityFactory;
+use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\City\Infrastructure\Repository\OrmCityRepository;
 
 class StoreCurrentCityUseCaseFactory
@@ -12,7 +12,7 @@ class StoreCurrentCityUseCaseFactory
 	{
 		return new StoreCurrentCityUseCase(
 			new OrmCityRepository(),
-			CurrentCityFactory::getService(),
+			CurrentCityServiceFactory::getService(),
 		);
 	}
 }

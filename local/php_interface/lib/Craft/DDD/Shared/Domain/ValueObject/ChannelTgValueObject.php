@@ -5,6 +5,7 @@ namespace Craft\DDD\Shared\Domain\ValueObject;
 class ChannelTgValueObject
 {
 	public function __construct(
+		protected ?string $enable,
 		protected ?string $tgId = null,
 	)
 	{
@@ -19,5 +20,10 @@ class ChannelTgValueObject
 	public function getTgId(): ?string
 	{
 		return $this->tgId;
+	}
+
+	public function isEnabled(): ?bool
+	{
+		return true;
 	}
 }
