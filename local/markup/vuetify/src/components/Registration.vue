@@ -262,8 +262,8 @@ export default defineComponent({
 
 <template>
 
-  <v-card class="mt-16">
-    <h1>Регистрация</h1>
+  <v-card class="mt-16 " :border="false" elevation="0">
+    <h1 class="text-center">Регистрация</h1>
     <v-tabs
       align-tabs="center"
       v-model="tab"
@@ -276,7 +276,7 @@ export default defineComponent({
 
 
     <v-tabs-window v-model="tab">
-      <v-tabs-window-item value="student">
+      <v-tabs-window-item value="student" class="pa-3">
         <v-form @submit.prevent="registrationStudent" v-model="isFormStudentValid">
           <v-text-field
             v-model="formStudent.phone"
@@ -297,13 +297,18 @@ export default defineComponent({
             label="Пароль"
           />
 
-          <v-divider/>
-
-          <v-btn type="submit">Зарегистрироваться</v-btn>
+          <v-row>
+            <v-col cols="6" md="2">
+              <v-btn type="submit">Зарегистрироваться</v-btn>
+            </v-col>
+            <v-col cols="6" md="2">
+              <a href="/">Войти на сайт</a>
+            </v-col>
+          </v-row>
         </v-form>
       </v-tabs-window-item>
 
-      <v-tabs-window-item value="agent">
+      <v-tabs-window-item value="agent" class="pa-3">
         <v-form @submit.prevent="registrationAgent" v-model="isFormAgentValid">
           <v-text-field v-model="formAgent.inn" label="ИНН" @input.prevent="handleInputInn"/>
 
@@ -436,14 +441,13 @@ export default defineComponent({
             </v-col>
           </v-row>
 
-          <v-divider/>
 
           <v-row>
             <v-col cols="6" md="2">
               <v-btn type="submit">Зарегистрироваться</v-btn>
             </v-col>
             <v-col cols="6" md="2">
-              <v-btn :href="`/`">Войти на сайт</v-btn>
+              <a href="/">Войти на сайт</a>
             </v-col>
           </v-row>
         </v-form>

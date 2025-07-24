@@ -80,6 +80,7 @@ export default defineComponent({
     let userStore = useUserStore();
     this.user = userStore.getUser;
 
+    this.form.phone = this.user.phone ?? '';
     this.form.email = this.user.email ?? '';
     this.form.client = this.user.fullName ?? '';
     this.form.inn = this.user.inn ?? '';
@@ -123,7 +124,7 @@ export default defineComponent({
           let {status, error} = response;
 
           if (status === 'success') {
-            AlertService.showAlert('Отправка заявки', 'Ваша заявка успаешно отправлена');
+            AlertService.showAlert('Отправка заявки', 'Ваша заявка успешно отправлена');
             this.$emit('update:modelValue', false);
 
 
