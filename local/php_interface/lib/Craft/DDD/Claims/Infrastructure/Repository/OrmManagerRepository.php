@@ -26,23 +26,18 @@ class OrmManagerRepository implements ManagerRepositoryInterface
 			'filter' => [
 				'=GROUP_ID' => USER_GROUP_MANAGER_ID,
 			],
-			'select' => [
-				'USER_ID',
-			],
 			'cache'  => ['ttl' => 3600 * 48],
 		])->fetchCollection();
 
-		$userIdList = [];
-
-		foreach($managersAssignGroup as $managerGroup)
+		if(count($managersAssignGroup->getUserIdList()) <= 0)
 		{
-			$userIdList[] = $managerGroup->getUserId();
+			return $managers;
 		}
 
 		$userList = CraftUserTable::getList([
 			'order'  => $order,
 			'filter' => array_merge(
-				['ID' => $userIdList],
+				['ID' => $managersAssignGroup->getUserIdList()],
 				$filter
 			),
 			'cache'  => ['ttl' => 3600 * 48],

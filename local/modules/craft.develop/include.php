@@ -32,9 +32,11 @@ define('CRAFT_DEVELOP_ADMIN_URL_LIST_DEVELOPERS', '/bitrix/admin/craft_developer
 define('CRAFT_DEVELOP_ADMIN_URL_LIST_OBJECTS', '/bitrix/admin/craft_developer_object_list.php');
 define('CRAFT_DEVELOP_ADMIN_URL_LIST_APARTMENTS', '/bitrix/admin/craft_developer_apartments_list.php');
 define('CRAFT_DEVELOP_ADMIN_URL_LIST_CITY', '/bitrix/admin/craft_developer_city_list.php');
+define('CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER', '/bitrix/admin/craft_developer_manager_list.php');
 
 define('CRAFT_DEVELOP_ADMIN_URL_EDIT_CLAIMS', '/bitrix/admin/craft_developer_claim_edit.php');
 define('CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS', '/bitrix/admin/craft_developer_edit.php');
 define('CRAFT_DEVELOP_ADMIN_URL_EDIT_OBJECTS', '/bitrix/admin/craft_developer_object_edit.php');
 define('CRAFT_DEVELOP_ADMIN_URL_EDIT_APARTMENTS', '/bitrix/admin/craft_developer_apartments_edit.php');
 define('CRAFT_DEVELOP_ADMIN_URL_EDIT_CITY', '/bitrix/admin/craft_developer_city_edit.php');
+define('CRAFT_DEVELOP_ADMIN_URL_EDIT_MANAGER', '/bitrix/admin/craft_developer_manager_edit.php');

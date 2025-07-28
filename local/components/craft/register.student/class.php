@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
-use Craft\DDD\User\Application\Factory\RegisterStudentServiceFactory;
+use Craft\DDD\User\Application\Factory\RegisterStudentUseCaseFactory;
 
 class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 {
@@ -18,7 +18,7 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$service = RegisterStudentServiceFactory::getService();
+			$service = RegisterStudentUseCaseFactory::getService();
 			$service->execute(
 				new RegisterStudentDto(
 					$formData['phone'],

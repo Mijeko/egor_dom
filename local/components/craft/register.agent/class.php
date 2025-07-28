@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\User\Application\Dto\RegisterAgentDto;
-use Craft\DDD\User\Application\Factory\RegisterAgentServiceFactory;
+use Craft\DDD\User\Application\Factory\RegisterAgentUseCaseFactory;
 
 class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 {
@@ -18,7 +18,7 @@ class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$service = RegisterAgentServiceFactory::getService();
+			$service = RegisterAgentUseCaseFactory::getService();
 			$service->execute(
 				new RegisterAgentDto(
 					$formData['phone'],

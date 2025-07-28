@@ -1,13 +1,13 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service;
+namespace Craft\DDD\User\Application\UseCase;
 
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
 use Craft\DDD\User\Domain\Entity\ProfileEntity;
 use Craft\DDD\User\Domain\Repository\ProfileRepositoryInterface;
 
-class UpdateProfileService
+class UpdateProfileUseCase
 {
 
 	public function __construct(

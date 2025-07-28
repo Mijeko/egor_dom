@@ -10,6 +10,8 @@ interface AgentRepositoryInterface
 {
 	public function create(AgentEntity $agent): ?AgentEntity;
 
+	public function update(AgentEntity $agent): ?AgentEntity;
+
 	public function findByInn(InnValueObject $inn): ?AgentEntity;
 
 	public function findByPhone(PhoneValueObject $phone): ?AgentEntity;

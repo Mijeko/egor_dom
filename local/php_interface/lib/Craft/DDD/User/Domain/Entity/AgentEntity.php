@@ -29,6 +29,7 @@ class AgentEntity
 		protected string                 $postAddress,
 		protected string                 $legalAddress,
 		protected string                 $bankName,
+		protected ?int                   $personalManagerId = null
 	)
 	{
 	}
@@ -63,6 +64,12 @@ class AgentEntity
 			$legalAddress,
 			$bankName,
 		);
+	}
+
+	public function assignManager(ManagerEntity $manager): static
+	{
+		$this->personalManagerId = $manager->getId();
+		return $this;
 	}
 
 	public function refreshIdAfterRegister(int $id): static
@@ -134,5 +141,10 @@ class AgentEntity
 	public function getEmail(): EmailValueObject
 	{
 		return $this->email;
+	}
+
+	public function getPersonalManagerId(): ?int
+	{
+		return $this->personalManagerId;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service;
+namespace Craft\DDD\User\Application\UseCase;
 
 use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
@@ -12,7 +12,7 @@ use Craft\DDD\User\Domain\Entity\StudentEntity;
 use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 
-class RegisterStudentService
+class RegisterStudentUseCase
 {
 	public function __construct(
 		protected StudentRepositoryInterface $studentRepository,

@@ -2,7 +2,9 @@
 
 namespace Craft\Model;
 
+use Bitrix\Iblock\ORM\Query;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\UserGroupTable;
 use Bitrix\Main\UserTable;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 
@@ -10,6 +12,7 @@ class CraftUserTable extends UserTable
 {
 
 	const F_ID = 'ID';
+	const F_ACTIVE = 'F_ACTIVE';
 	const F_LOGIN = 'LOGIN';
 	const F_EMAIL = 'EMAIL';
 	const F_PASSWORD = 'PASSWORD';
@@ -30,6 +33,13 @@ class CraftUserTable extends UserTable
 	const F_UF_CURR_ACC = 'UF_CURR_ACC';
 	const F_UF_CORR_ACC = 'UF_CORR_ACC';
 	const F_UF_BANK_NAME = 'UF_BANK_NAME';
+	const F_UF_TG_ID = 'UF_TG_ID';
+	const F_UF_TG_NOTIFY_CLAIM = 'UF_TG_NOTIFY_CLAIM';
+	const F_UF_EMAIL_NOTIFY_CLAIM = 'UF_EMAIL_NOTIFY_CLAIM';
+	const F_UF_PERSONAL_MANAGER = 'UF_PERSONAL_MANAGER';
+
+	const ACTIVE_Y = 'Y';
+	const ACTIVE_N = 'N';
 
 	const R_ORDERS = 'ORDERS';
 
