@@ -4,9 +4,11 @@ import type AuthorizeDto from "@/dto/request/AuthorizeDto.ts";
 import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
 import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";
+import MaskInput from "@/components/part/form/MaskInput.vue";
 
 export default defineComponent({
   name: "Auth",
+  components: {MaskInput},
   data: () => {
     return {
       form: {
@@ -63,11 +65,18 @@ export default defineComponent({
   <div class="mt-16 w-75 w-md-50 ml-auto mr-auto">
     <h1 class="mb-3">Войти на сайт</h1>
     <v-form @submit.prevent="auth" v-model="isValid">
-      <v-text-field
+
+      <MaskInput
         v-model="form.phone"
         :rules="validate.phone"
         label="Номер телефона"
       />
+
+<!--      <v-text-field-->
+<!--        v-model="form.phone"-->
+<!--        :rules="validate.phone"-->
+<!--        label="Номер телефона"-->
+<!--      />-->
       <v-text-field
         v-model="form.password"
         :rules="validate.password"

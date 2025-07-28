@@ -1,8 +1,7 @@
 import {createApp, createSSRApp} from 'vue';
-import {createPinia, defineStore} from 'pinia';
 import {registerPlugins} from "@/plugins";
+import {VueMaskDirective} from 'v-mask';
 import './store.ts';
-
 
 export default class VueService {
 
@@ -41,6 +40,8 @@ export default class VueService {
 
     const app = createApp(component, {...params});
     registerPlugins(app);
+
+    app.directive('mask', VueMaskDirective);
 
     app.mount(`#${selectors}`);
   }

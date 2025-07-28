@@ -29,6 +29,7 @@ declare module 'vue' {
     InputDropdown: typeof import('./src/components/filter/part/InputDropdown.vue')['default']
     MainApartmentFilter: typeof import('./src/components/filter/MainApartmentFilter.vue')['default']
     Map: typeof import('./src/components/Map.vue')['default']
+    MaskInput: typeof import('./src/components/part/form/MaskInput.vue')['default']
     MinMaxInputDropdown: typeof import('./src/components/filter/part/MinMaxInputDropdown.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
