@@ -1,18 +1,25 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import ShortOrderInfo from "@/components/profile/ShortOrderInfo.vue";
+import PersonalManager from "@/components/profile/PersonalManager.vue";
 
 export default defineComponent({
-  name: "ProfileIndex"
+  name: "ProfileIndex",
+  components: {PersonalManager, ShortOrderInfo}
 })
 </script>
 
 <template>
-  немного про персонального...
+
+  <PersonalManager/>
   <v-divider></v-divider>
-  немного про покупки...
+
+  <ShortOrderInfo/>
   <v-divider></v-divider>
+
   немного про настройки
   <v-divider></v-divider>
+
   немного про обучение
 </template>
 
