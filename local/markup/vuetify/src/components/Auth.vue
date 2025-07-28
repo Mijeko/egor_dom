@@ -66,17 +66,17 @@ export default defineComponent({
     <h1 class="mb-3">Войти на сайт</h1>
     <v-form @submit.prevent="auth" v-model="isValid">
 
-      <MaskInput
-        v-model="form.phone"
-        :rules="validate.phone"
-        label="Номер телефона"
-      />
-
-<!--      <v-text-field-->
+<!--      <MaskInput-->
 <!--        v-model="form.phone"-->
 <!--        :rules="validate.phone"-->
 <!--        label="Номер телефона"-->
 <!--      />-->
+
+      <v-text-field
+        v-model="form.phone"
+        :rules="validate.phone"
+        label="Номер телефона"
+      />
       <v-text-field
         v-model="form.password"
         :rules="validate.password"
