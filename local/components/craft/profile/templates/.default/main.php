@@ -15,5 +15,17 @@
 	</div>
 	<div class="profile-body">
 		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
+
+		<?php
+		$APPLICATION->IncludeComponent(
+			'craft:vite',
+			'vite',
+			[
+				'SOURCE' => 'ProfileIndex',
+			],
+			false,
+			['HIDE_ICONS' => 'Y']
+		);
+		?>
 	</div>
 </div>
