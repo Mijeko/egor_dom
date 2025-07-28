@@ -1,3 +1,5 @@
+import type ManagerDto from "@/dto/entity/ManagerDto.ts";
+
 export default interface BxUserDto {
   id: number;
   phone?: string;
@@ -16,4 +18,5 @@ export default interface BxUserDto {
   legalAddress?: string,
   postAddress?: string,
   bankName?: string,
+  manager?: ManagerDto
 }

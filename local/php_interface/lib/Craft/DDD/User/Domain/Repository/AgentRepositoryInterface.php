@@ -12,6 +12,8 @@ interface AgentRepositoryInterface
 
 	public function update(AgentEntity $agent): ?AgentEntity;
 
+	public function findById(int $id): ?AgentEntity;
+
 	public function findByInn(InnValueObject $inn): ?AgentEntity;
 
 	public function findByPhone(PhoneValueObject $phone): ?AgentEntity;

@@ -41,11 +41,16 @@ class CraftClaimListComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
+		$claims = $this->claimService->findAllByUserId($this->arParams["USER_ID"], [ClaimTable::F_ID => 'DESC']) ?? [];
+		$claims = array_filter($claims, function(ClaimEntity $claim) {
+			return $claim->getApartmentEntity() !== null;
+		});
+
 		$this->arResult['CLAIMS'] = array_map(
 			function(ClaimEntity $claim) {
 				return ClaimDto::fromEntity($claim);
 			},
-			$this->claimService->findAllByUserId($this->arParams["USER_ID"], [ClaimTable::F_ID => 'DESC']) ?? []
+			$claims
 		);
 	}
 

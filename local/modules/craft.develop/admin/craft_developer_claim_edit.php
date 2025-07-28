@@ -29,7 +29,6 @@ $claimModel = \Craft\DDD\Claims\Infrastructure\Entity\ClaimTable::getById($ID)->
 if($request->isPost())
 {
 	$postData = $request->getPostList()->toArray();
-	\Bitrix\Main\Diag\Debug::dumpToFile($postData);
 	foreach($postData as $name => $value)
 	{
 		try
@@ -128,9 +127,10 @@ if($field = $entity->getField(ClaimTable::F_STATUS))
 	);
 }
 
-if($field = $entity->getField(ClaimTable::F_APARTMENT_ID))
+$apartment = $claimModel->fillApartment();
+if($field = $entity->getField(ClaimTable::F_APARTMENT_ID) && $apartment)
 {
-	$apartment = $claimModel->fillApartment();
+
 
 	$tabControl->BeginCustomField(ClaimTable::F_APARTMENT_ID, ClaimTable::F_APARTMENT_ID . rand());
 	?>
@@ -288,7 +288,7 @@ if($field = $entity->getField(ClaimTable::F_POST_ADDRESS))
 
 $tabControl->Buttons([
 	"disabled" => false,
-	"back_url" => CRAFT_DEVELOP_ADMIN_URL_LIST_CITY . "?lang=" . LANG,
+	"back_url" => CRAFT_DEVELOP_ADMIN_URL_LIST_CLAIMS . "?lang=" . LANG,
 ]);
 
 $tabControl->Show();

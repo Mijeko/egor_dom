@@ -57,10 +57,11 @@ export default defineComponent({
     <v-divider></v-divider>
 
     <v-list-item
-      append-icon="mdi-chevron-right"
+      append-icon="$expand"
       lines="two"
       subtitle="Посмотреть все покупки"
       link
+      href="/profile/orders/"
     ></v-list-item>
   </v-card>
 </template>

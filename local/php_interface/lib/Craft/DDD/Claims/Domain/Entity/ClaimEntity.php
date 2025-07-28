@@ -112,7 +112,7 @@ class ClaimEntity
 		return $this->id;
 	}
 
-	public function getApartmentEntity(): ApartmentEntity
+	public function getApartmentEntity(): ?ApartmentEntity
 	{
 		return $this->apartmentEntity;
 	}

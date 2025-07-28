@@ -2,10 +2,18 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
+use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
 
 class BxAgentRepository implements AgentRepositoryInterface
@@ -22,6 +30,19 @@ class BxAgentRepository implements AgentRepositoryInterface
 		}
 
 		return null;
+	}
+
+
+	public function findById(int $id): ?AgentEntity
+	{
+		$model = CraftUserTable::getList([
+			'filter' => [
+				CraftUserTable::F_ID => $id,
+			],
+		])
+			->fetchObject();
+
+		return $this->hydrate($model);
 	}
 
 	public function findByInn(InnValueObject $inn): ?AgentEntity
@@ -68,5 +89,25 @@ class BxAgentRepository implements AgentRepositoryInterface
 			CraftUserTable::F_UF_BANK_NAME        => $agent->getBankName(),
 			CraftUserTable::F_UF_PERSONAL_MANAGER => $agent->getPersonalManagerId(),
 		];
+	}
+
+	private function hydrate(CraftUser $model): AgentEntity
+	{
+		return new AgentEntity(
+			$model->getId(),
+			new PhoneValueObject($model->getPersonalPhone()),
+			new EmailValueObject($model->getEmail()),
+			new PasswordValueObject(rand()),
+			new InnValueObject($model->fillUfInn()),
+			new KppValueObject($model->fillUfKpp()),
+			new OgrnValueObject($model->fillUfOgrn()),
+			new BikValueObject($model->fillUfBik()),
+			new CurrAccountValueObject($model->fillUfCurrAcc()),
+			new CorrAccountValueObject($model->fillUfCorrAcc()),
+			$model->fillUfPostAddress(),
+			$model->fillUfLegalAddress(),
+			$model->fillUfBankName(),
+			$model->fillUfPersonalManager(),
+		);
 	}
 }

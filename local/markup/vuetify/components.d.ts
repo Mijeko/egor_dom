@@ -23,6 +23,7 @@ declare module 'vue' {
     ClaimDetail: typeof import('./src/components/ClaimDetail.vue')['default']
     ClaimList: typeof import('./src/components/ClaimList.vue')['default']
     ClaimStatus: typeof import('./src/components/part/ClaimStatus.vue')['default']
+    ContactPersonalManager: typeof import('./src/components/modal/ContactPersonalManager.vue')['default']
     CurrentCity: typeof import('./src/components/CurrentCity.vue')['default']
     Developers: typeof import('./src/components/Developers.vue')['default']
     Init: typeof import('./src/components/system/Init.vue')['default']

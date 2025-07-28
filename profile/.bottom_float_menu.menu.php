@@ -5,7 +5,7 @@ $aMenuLinks = [
 		"/profile/",
 		[],
 		[
-			'ICON' => '$listBoxOutline',
+			'ICON' => '$home',
 		],
 		"",
 	],

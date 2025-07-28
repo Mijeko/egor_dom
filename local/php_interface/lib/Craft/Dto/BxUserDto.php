@@ -3,6 +3,7 @@
 namespace Craft\Dto;
 
 use Bitrix\Main\Diag\Debug;
+use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
 use Craft\Model\CraftUser;
 
 class BxUserDto
@@ -10,21 +11,22 @@ class BxUserDto
 
 
 	public function __construct(
-		public int     $id,
-		public string  $name,
-		public string  $lastName,
-		public string  $secondName,
-		public string  $fullName,
-		public string  $email,
-		public ?string $inn = null,
-		public ?string $ogrn = null,
-		public ?string $kpp = null,
-		public ?string $bik = null,
-		public ?string $currAccount = null,
-		public ?string $corrAccount = null,
-		public ?string $legalAddress = null,
-		public ?string $postAddress = null,
-		public ?string $bankName = null,
+		public int         $id,
+		public string      $name,
+		public string      $lastName,
+		public string      $secondName,
+		public string      $fullName,
+		public string      $email,
+		public ?string     $inn = null,
+		public ?string     $ogrn = null,
+		public ?string     $kpp = null,
+		public ?string     $bik = null,
+		public ?string     $currAccount = null,
+		public ?string     $corrAccount = null,
+		public ?string     $legalAddress = null,
+		public ?string     $postAddress = null,
+		public ?string     $bankName = null,
+		public ?ManagerDto $manager = null,
 	)
 	{
 	}

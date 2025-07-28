@@ -1,6 +1,15 @@
 <?php
 $aMenuLinks = [
 	[
+		"Профиль",
+		"/profile/",
+		[],
+		[
+			'ICON' => '$home',
+		],
+		"",
+	],
+	[
 		"Заявки",
 		"/profile/orders/",
 		[],

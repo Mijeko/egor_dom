@@ -63,6 +63,7 @@ $lAdmin = new CAdminList($table_id);
 // Какие поля выводить
 $lAdmin->AddHeaders([
 	['id' => ClaimTable::F_ID, 'content' => 'ID', 'default' => true],
+	['id' => ClaimTable::F_APARTMENT_ID, 'content' => 'ID квартиры', 'default' => true],
 	['id' => ClaimTable::F_NAME, 'content' => 'Название', 'default' => true],
 	['id' => ClaimTable::F_ACTIVE, 'content' => 'Активность', 'default' => true],
 	['id' => ClaimTable::F_USER_ID, 'content' => 'Пользователь', 'default' => true],

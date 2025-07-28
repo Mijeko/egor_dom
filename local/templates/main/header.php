@@ -1,6 +1,7 @@
 <?php
 /**
  * @global CMain $APPLICATION
+ * @global CUser $USER
  */
 
 use Craft\Dto\BxUserDto;
@@ -35,18 +36,14 @@ use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 
 <?php
 $APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
+	'craft:init',
+	'.default',
 	[
-		'SOURCE' => 'system/Init',
-		'PROPS'  => [
-			'user' => BxUserDto::fromGlobal(),
-			'apartmentFilter'=>ApartmentFilterBuilder::fromUrl()->toArray(),
-		],
+		'USER_ID'=>$USER->GetID(),
 	],
 	false,
-	['HIDE_ICONS' => true]
-);
+	['HIDE_ICONS' => 'Y']
+)
 ?>
 
 

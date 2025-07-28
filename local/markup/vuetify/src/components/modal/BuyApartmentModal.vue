@@ -35,8 +35,6 @@ export default defineComponent({
 </script>
 
 <template>
-  {{ showModal }}
-  {{ _showModal }}
   <v-dialog max-width="500" v-model="_showModal">
     <template v-slot:default="{ isActive }">
       <v-card title="Заявка на покупку квартиры">
