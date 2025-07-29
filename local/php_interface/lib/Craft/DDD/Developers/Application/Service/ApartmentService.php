@@ -21,6 +21,20 @@ class ApartmentService
 	{
 	}
 
+	public function findAllByBuildObjectId(int $buildObjectId): array
+	{
+		$apartmentList = $this->findAll(
+			[],
+			[
+				ApartmentTable::F_BUILD_OBJECT_ID => $buildObjectId,
+			]
+		);
+
+		$this->loadRelations($apartmentList);
+
+		return $apartmentList;
+	}
+
 	public function findAll(array $order = [], array $filters = []): array
 	{
 		$apartmentList = $this->apartmentRepository->findAll($order, $filters);

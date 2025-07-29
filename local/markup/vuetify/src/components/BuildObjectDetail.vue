@@ -11,7 +11,7 @@ export default defineComponent({
   name: "BuildObjectDetail",
   components: {MainApartmentFilter, ApartmentFilter, Map, ApartmentList},
   props: {
-    product: {
+    buildObject: {
       type: Object as PropType<BuildObjectDto>
     }
   },
@@ -29,25 +29,25 @@ export default defineComponent({
         return this.filteredApartments;
       }
 
-      return this.product?.apartments;
+      return this.buildObject?.apartments;
     },
     buildObjectDetailInfo: function (): BuildObjectDetailInfo[] {
       return [
         {
           title: 'Застройщик',
-          value: String(this.product?.developer?.name),
+          value: String(this.buildObject?.developer?.name),
         },
         {
           title: 'Колличество этажей',
-          value: String(this.product?.floors),
+          value: String(this.buildObject?.floors),
         },
         {
           title: 'Адрес',
-          value: `${this.product?.location?.country}, ${this.product?.location?.localityName}, ${this.product?.location?.address}`
+          value: `${this.buildObject?.location?.country}, ${this.buildObject?.location?.localityName}, ${this.buildObject?.location?.address}`
         },
         {
           title: 'Тип дома',
-          value: String(this.product?.type)
+          value: String(this.buildObject?.type)
         }
       ]
     }
@@ -60,7 +60,7 @@ export default defineComponent({
     <v-col cols="12" md="8" class="px-2">
       <v-carousel>
         <v-carousel-item
-          v-for="galleryItem in product?.gallery"
+          v-for="galleryItem in buildObject?.gallery"
           :src="galleryItem.src"
           cover
         ></v-carousel-item>
@@ -81,9 +81,9 @@ export default defineComponent({
   <v-row>
     <v-col cols="12">
       <Map
-        :apartment-list="product?.apartments"
-        :lat="Number(product?.location?.latitude)"
-        :lon="Number(product?.location?.longitude)"
+        :apartment-list="buildObject?.apartments"
+        :lat="Number(buildObject?.location?.latitude)"
+        :lon="Number(buildObject?.location?.longitude)"
       />
     </v-col>
   </v-row>
@@ -106,7 +106,7 @@ export default defineComponent({
       </v-row>
 
       <ApartmentList
-        v-if="product?.apartments"
+        v-if="buildObject?.apartments"
         :apartments="computedApartments"
       />
     </v-col>
