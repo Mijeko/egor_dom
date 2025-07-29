@@ -9,6 +9,8 @@ use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
 class ApartmentService
 {
@@ -128,26 +130,28 @@ class ApartmentService
 
 			$planImagesIdList = $apartment->getPlanImagesIdList();
 			$planImages = array_map(function(int $imageId) {
-				return $this->imageService->fromId($imageId);
+				$image = $this->imageService->fromId($imageId);
+				return new ImageValueObject(
+					$image->id,
+					$image->src,
+				);
 			}, $planImagesIdList);
 			$planImages = array_filter($planImages);
 
-			foreach($planImages as $image)
-			{
-				$apartment->addPlanImage($image);
-			}
+			$apartment->addPlanImage(new ImageGalleryValueObject($planImages));
 
 
-			$galleryImagesIdList = $apartment->getGalleryImagesIdList();
+			$galleryImagesIdList = $apartment->getGalleryIdList();
 			$galleryImages = array_map(function(int $imageId) {
-				return $this->imageService->fromId($imageId);
+				$image = $this->imageService->fromId($imageId);
+				return new ImageValueObject(
+					$image->id,
+					$image->src,
+				);
 			}, $galleryImagesIdList);
 			$galleryImages = array_filter($galleryImages);
 
-			foreach($galleryImages as $image)
-			{
-				$apartment->addGalleryImage($image);
-			}
+			$apartment->addGalleryImage(new ImageGalleryValueObject($galleryImages));
 
 
 			return $apartment;

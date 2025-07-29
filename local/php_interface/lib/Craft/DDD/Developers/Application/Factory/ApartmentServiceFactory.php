@@ -6,6 +6,7 @@ use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 
 class ApartmentServiceFactory
 {
@@ -13,7 +14,8 @@ class ApartmentServiceFactory
 	{
 		return new ApartmentService(
 			new OrmApartmentRepository(),
-			new OrmBuildObjectRepository()
+			new OrmBuildObjectRepository(),
+			new ImageService()
 		);
 	}
 }

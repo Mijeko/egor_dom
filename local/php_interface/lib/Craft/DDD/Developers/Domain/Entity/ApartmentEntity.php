@@ -6,9 +6,7 @@ use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
-use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
-use function Symfony\Component\String\b;
 
 final class ApartmentEntity
 {
@@ -78,7 +76,7 @@ final class ApartmentEntity
 
 	): ApartmentEntity
 	{
-		$entity = new static(
+		$entity = new ApartmentEntity(
 			null,
 			null,
 			$buildObject,
@@ -119,7 +117,7 @@ final class ApartmentEntity
 		?BuiltStateValueObject  $buildingState,
 		?array                  $planImagesIdList,
 		?array                  $galleryIdList,
-	): static
+	): ApartmentEntity
 	{
 
 		$this->buildObject = $buildObject;
@@ -139,25 +137,25 @@ final class ApartmentEntity
 		return $this;
 	}
 
-	public function addGalleryImage(ImageGalleryValueObject $gallery): static
+	public function addGalleryImage(ImageGalleryValueObject $gallery): ApartmentEntity
 	{
-		$this->gallery[] = $gallery;
+		$this->gallery = $gallery;
 		return $this;
 	}
 
-	public function addPlanImage(ImageGalleryValueObject $planImage): static
+	public function addPlanImage(ImageGalleryValueObject $planImage): ApartmentEntity
 	{
-		$this->planImages[] = $planImage;
+		$this->planImages = $planImage;
 		return $this;
 	}
 
-	public function addBuildObject(BuildObjectEntity $buildObject): static
+	public function addBuildObject(BuildObjectEntity $buildObject): ApartmentEntity
 	{
 		$this->buildObject = $buildObject;
 		return $this;
 	}
 
-	public function generateName(): static
+	public function generateName(): ApartmentEntity
 	{
 		$resultName = '';
 
@@ -180,7 +178,7 @@ final class ApartmentEntity
 		return $this;
 	}
 
-	public function refreshId(int $id): static
+	public function refreshId(int $id): ApartmentEntity
 	{
 		$this->id = $id;
 		return $this;

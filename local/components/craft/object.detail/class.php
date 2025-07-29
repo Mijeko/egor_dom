@@ -1,11 +1,15 @@
 <?php
 
-use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
-use Craft\DDD\Developers\Application\Service\DeveloperService;
+use Craft\DDD\Developers\Present\Dto\ApartmentDto;
+use Craft\DDD\Shared\Presentation\Dto\LocationDto;
+use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
+use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Factory\ApartmentServiceFactory;
+use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 
 class CraftBuildObjectDetailComponent extends CBitrixComponent
@@ -65,16 +69,17 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 		$apartmentList = $this->apartmentService->findAllByBuildObjectId($buildObjectEntity->getId());
 		$developer = $this->developerService->findById($buildObjectEntity->getDeveloperId());
 
-
 		$this->arResult['BUILD_OBJECT_DTO'] = new BuildObjectDto(
 			$buildObjectEntity->getId(),
 			$buildObjectEntity->getName(),
 			$buildObjectEntity->getType(),
 			$buildObjectEntity->getFloors(),
-			$developer,
-			$buildObjectEntity->getGallery(),
-			$apartmentList,
-			$buildObjectEntity->getLocation(),
+			DeveloperDto::fromModel($developer),
+			$buildObjectEntity->getGallery()->getImages(),
+			array_map(function(ApartmentEntity $apartment) {
+				return ApartmentDto::fromEntity($apartment);
+			}, $apartmentList),
+			LocationDto::fromModel($buildObjectEntity->getLocation()),
 			'/objects/' . $buildObjectEntity->getId() . '/'
 		);
 	}
