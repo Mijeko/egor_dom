@@ -8,12 +8,12 @@ use Craft\Dto\BxImageDto;
 class ManagerDto
 {
 	public function __construct(
-		public int            $id,
-		public string         $name,
-		protected ?string     $lastName,
-		protected ?string     $secondName,
-		protected ?array      $phones,
-		protected ?BxImageDto $avatar,
+		public int         $id,
+		public string      $name,
+		public ?string     $lastName,
+		public ?string     $secondName,
+		public ?array      $phones,
+		public ?BxImageDto $avatar,
 	)
 	{
 	}
