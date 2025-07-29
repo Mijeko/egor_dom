@@ -20,6 +20,8 @@ export default defineComponent({
 
     if (manager !== undefined) {
       this.manager = manager;
+
+      console.log(this.manager);
     }
   }
 })
@@ -32,7 +34,7 @@ export default defineComponent({
         <v-avatar size="100" image="https://shapka-youtube.ru/wp-content/uploads/2024/08/avatarka-bryunetka.jpg"/>
       </v-col>
       <v-col cols="4">
-        <v-card-title>{{ manager.name }} {{ manager.lastName }}</v-card-title>
+        <v-card-title>{{ manager.lastName }} {{ manager.name }} {{ manager.secondName }}</v-card-title>
         <v-card-subtitle>Ваш персональный менеджер</v-card-subtitle>
       </v-col>
       <v-col cols="7" class="d-flex">
