@@ -35,7 +35,7 @@ CREATE TABLE `craft_claims` (
   `APARTMENT_ID` int NOT NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL
-) ENGINE='InnoDB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 SQL;
 
 

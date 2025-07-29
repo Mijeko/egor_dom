@@ -10,6 +10,7 @@ use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\DDD\Shared\Infrastructure\Dto\ResultImageSaveDto;
 use Craft\Dto\BxImageDto;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
@@ -42,7 +43,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 		return new DeveloperEntity(
 			$developer->getId(),
 			$developer->getName(),
-			ImageValueObject::fromImageResult($developer->getPictureId()),
+			$developer->getPictureId(),
 			$developer->getCityId(),
 			null,
 			new ImportSettingValueObject(
@@ -50,6 +51,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 				$developer->importSettings()->getLinkSource(),
 				null
 			),
+			null,
 			null,
 		);
 	}

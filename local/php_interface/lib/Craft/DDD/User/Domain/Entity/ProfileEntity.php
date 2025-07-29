@@ -5,7 +5,7 @@ namespace Craft\DDD\User\Domain\Entity;
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
 
-class ProfileEntity
+final class ProfileEntity
 {
 	public function __construct(
 		protected ?int    $id,

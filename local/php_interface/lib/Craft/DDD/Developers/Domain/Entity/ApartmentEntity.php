@@ -10,27 +10,30 @@ use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use function Symfony\Component\String\b;
 
-class ApartmentEntity
+final class ApartmentEntity
 {
+	protected ?ImageGalleryValueObject $planImages = null;
+	protected ?ImageGalleryValueObject $gallery = null;
+
 	public function __construct(
-		protected ?int                     $id,
-		protected ?int                     $buildObjectId,
-		protected ?BuildObjectEntity       $buildObject,
-		protected ?string                  $name,
-		protected ?string                  $description,
-		protected ?int                     $price,
-		protected ?int                     $rooms,
-		protected ?int                     $floor,
-		protected ?AreaValueObject         $area,
-		protected ?string                  $renovation,
-		protected ?StringLogicValueObject  $parking,
-		protected ?StringLogicValueObject  $bathroomUnit,
-		protected ?string                  $mortgage,
-		protected ?int                     $builtYear,
-		protected ?BuiltStateValueObject   $buildingState,
-		protected ?ImageGalleryValueObject $planImages = null,
-		protected ?ImageGalleryValueObject $gallery = null,
-		protected ?string                  $externalId = null,
+		protected ?int                    $id,
+		protected ?int                    $buildObjectId,
+		protected ?BuildObjectEntity      $buildObject,
+		protected ?string                 $name,
+		protected ?string                 $description,
+		protected ?int                    $price,
+		protected ?int                    $rooms,
+		protected ?int                    $floor,
+		protected ?AreaValueObject        $area,
+		protected ?string                 $renovation,
+		protected ?StringLogicValueObject $parking,
+		protected ?StringLogicValueObject $bathroomUnit,
+		protected ?string                 $mortgage,
+		protected ?int                    $builtYear,
+		protected ?array                  $planImagesIdList,
+		protected ?array                  $galleryIdList,
+		protected ?BuiltStateValueObject  $buildingState,
+		protected ?string                 $externalId = null,
 	)
 	{
 	}
@@ -57,23 +60,23 @@ class ApartmentEntity
 	 * @return ApartmentEntity
 	 */
 	public static function createFromImport(
-		?BuildObjectEntity       $buildObject,
-		?string                  $description,
-		?int                     $price,
-		?int                     $rooms,
-		?int                     $floor,
-		?AreaValueObject         $area,
-		?string                  $renovation,
-		?StringLogicValueObject  $parking,
-		?StringLogicValueObject  $bathroomUnit,
-		?int                     $mortgage,
-		?int                     $builtYear,
-		?BuiltStateValueObject   $buildingState,
-		string                   $externalId,
-		?ImageGalleryValueObject $planImages = null,
-		?ImageGalleryValueObject $gallery = null,
+		?BuildObjectEntity      $buildObject,
+		?string                 $description,
+		?int                    $price,
+		?int                    $rooms,
+		?int                    $floor,
+		?AreaValueObject        $area,
+		?string                 $renovation,
+		?StringLogicValueObject $parking,
+		?StringLogicValueObject $bathroomUnit,
+		?int                    $mortgage,
+		?int                    $builtYear,
+		?array                  $planImagesIdList,
+		?array                  $galleryIdList,
+		?BuiltStateValueObject  $buildingState,
+		string                  $externalId,
 
-	): static
+	): ApartmentEntity
 	{
 		$entity = new static(
 			null,
@@ -90,9 +93,9 @@ class ApartmentEntity
 			$bathroomUnit,
 			$mortgage,
 			$builtYear,
+			$planImagesIdList,
+			$galleryIdList,
 			$buildingState,
-			$planImages,
-			$gallery,
 			$externalId,
 		);
 
@@ -102,20 +105,20 @@ class ApartmentEntity
 	}
 
 	public function updateFromImport(
-		?BuildObjectEntity       $buildObject,
-		?string                  $description,
-		?int                     $price,
-		?int                     $rooms,
-		?int                     $floor,
-		?AreaValueObject         $area,
-		?string                  $renovation,
-		?StringLogicValueObject  $parking,
-		?StringLogicValueObject  $bathroomUnit,
-		?int                     $mortgage,
-		?int                     $builtYear,
-		?BuiltStateValueObject   $buildingState,
-		?ImageGalleryValueObject $planImages = null,
-		?ImageGalleryValueObject $gallery = null,
+		?BuildObjectEntity      $buildObject,
+		?string                 $description,
+		?int                    $price,
+		?int                    $rooms,
+		?int                    $floor,
+		?AreaValueObject        $area,
+		?string                 $renovation,
+		?StringLogicValueObject $parking,
+		?StringLogicValueObject $bathroomUnit,
+		?int                    $mortgage,
+		?int                    $builtYear,
+		?BuiltStateValueObject  $buildingState,
+		?array                  $planImagesIdList,
+		?array                  $galleryIdList,
 	): static
 	{
 
@@ -131,8 +134,20 @@ class ApartmentEntity
 		$this->mortgage = $mortgage;
 		$this->builtYear = $builtYear;
 		$this->buildingState = $buildingState;
-		$this->planImages = $planImages;
-		$this->gallery = $gallery;
+		$this->planImagesIdList = $planImagesIdList;
+		$this->galleryIdList = $galleryIdList;
+		return $this;
+	}
+
+	public function addGalleryImage(ImageGalleryValueObject $gallery): static
+	{
+		$this->gallery[] = $gallery;
+		return $this;
+	}
+
+	public function addPlanImage(ImageGalleryValueObject $planImage): static
+	{
+		$this->planImages[] = $planImage;
 		return $this;
 	}
 
@@ -279,6 +294,16 @@ class ApartmentEntity
 	public function getExternalId(): ?string
 	{
 		return $this->externalId;
+	}
+
+	public function getPlanImagesIdList(): ?array
+	{
+		return $this->planImagesIdList;
+	}
+
+	public function getGalleryIdList(): ?array
+	{
+		return $this->galleryIdList;
 	}
 
 }

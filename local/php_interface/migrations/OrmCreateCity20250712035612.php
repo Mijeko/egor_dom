@@ -22,10 +22,10 @@ CREATE TABLE `craft_city` (
   `CODE` varchar(128) NOT NULL,
   `ACTIVE` char(1) NOT NULL,
   `IS_DEFAULT` char(1) NOT NULL,
-  `SORT` int(11) NOT NULL,
+  `SORT` int NOT NULL,
   `CREATED_AT` datetime NOT NULL,
   `UPDATED_AT` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE='InnoDB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 SQL;
 
 		$DB->Query($sql);

@@ -39,7 +39,7 @@ CREATE TABLE `craft_apartment` (
 	`DESCRIPTION` varchar(255) NULL,
 	`CREATED_AT` int NOT NULL,
 	`UPDATED_AT` datetime NOT NULL
-) ENGINE='InnoDB';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 SQL;
 
 

@@ -15,13 +15,20 @@ class DeveloperEntity
 	public function __construct(
 		public ?int                         $id,
 		public ?string                      $name,
-		public ?ImageValueObject            $picture = null,
+		public ?int                         $pictureId = null,
 		public ?int                         $cityId = null,
 		protected ?array                    $buildObjects = null,
 		protected ?ImportSettingValueObject $importSetting = null,
 		protected ?CityEntity               $city = null,
+		public ?ImageValueObject            $picture = null,
 	)
 	{
+	}
+
+	public function addPicture(ImageValueObject $picture): static
+	{
+		$this->picture = $picture;
+		return $this;
 	}
 
 	public function addCity(CityEntity $city): static
@@ -51,7 +58,7 @@ class DeveloperEntity
 		return $this->name;
 	}
 
-	public function getPicture(): ImageValueObject
+	public function getPicture(): ?ImageValueObject
 	{
 		return $this->picture;
 	}
@@ -72,5 +79,10 @@ class DeveloperEntity
 	public function getCityId(): ?int
 	{
 		return $this->cityId;
+	}
+
+	public function getPictureId(): ?int
+	{
+		return $this->pictureId;
 	}
 }

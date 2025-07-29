@@ -12,7 +12,7 @@ use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
-class AgentEntity
+final class AgentEntity
 {
 
 	public function __construct(

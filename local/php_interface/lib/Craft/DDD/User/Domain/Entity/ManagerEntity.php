@@ -6,7 +6,7 @@ use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
-class ManagerEntity
+final class ManagerEntity
 {
 	public function __construct(
 		protected int               $id,

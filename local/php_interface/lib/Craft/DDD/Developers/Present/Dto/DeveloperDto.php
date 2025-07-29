@@ -23,10 +23,7 @@ class DeveloperDto
 		return new static(
 			$developer->getId(),
 			$developer->getName(),
-			new BxImageDto(
-				$developer->getPicture()->getId(),
-				$developer->getPicture()->getSrc()
-			),
+			null,
 			array_map(
 				function(BuildObjectEntity $buildObject) {
 					return BuildObjectDto::fromModel($buildObject);

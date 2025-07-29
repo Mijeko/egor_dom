@@ -42,7 +42,7 @@ class ApartmentDto
 					$imageGallery->getId(),
 					$imageGallery->getSrc(),
 				);
-			}, $model->getPlanImages()->getImages())
+			}, $model->getPlanImages()?->getImages() ?? [])
 		);
 	}
 }

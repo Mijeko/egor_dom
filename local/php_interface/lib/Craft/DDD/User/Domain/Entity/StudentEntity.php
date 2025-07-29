@@ -6,7 +6,7 @@ use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
-class StudentEntity
+final class StudentEntity
 {
 	public function __construct(
 		protected ?int                 $id,

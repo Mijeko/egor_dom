@@ -62,7 +62,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 		return new DeveloperEntity(
 			$element['ID'],
 			$element['NAME'],
-			$picture,
+			null, null, null, null, $picture,
 		);
 	}
 

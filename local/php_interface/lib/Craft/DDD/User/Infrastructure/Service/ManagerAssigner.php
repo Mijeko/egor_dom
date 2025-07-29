@@ -27,17 +27,16 @@ class ManagerAssigner implements ManagerAssignerInterface
 			]
 		);
 
-		$randomIndex = rand(0, count($managers) - 1);
-
-		$manager = $managers[$randomIndex];
-
-		if(!$manager)
+		if(count($managers) == 0)
 		{
 			return;
 		}
 
-		$agent->assignManager($manager);
+		$randomIndex = rand(0, count($managers) - 1);
 
+		$manager = $managers[$randomIndex];
+
+		$agent->assignManager($manager);
 		$this->agentRepository->update($agent);
 	}
 }

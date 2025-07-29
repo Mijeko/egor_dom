@@ -8,7 +8,6 @@ use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
-use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 class OrmApartmentRepository implements ApartmentRepositoryInterface
 {
@@ -86,9 +85,11 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 			new StringLogicValueObject($apartment->getBathroomUnit()),
 			$apartment->getMortgage(),
 			$apartment->getBuiltYear(),
+			$apartment->getPlanImageEx(),
+			$apartment->getGalleryEx(),
 			new BuiltStateValueObject($apartment->getBuildingState()),
-			ImageGalleryValueObject::fillFromId($apartment->getPlanImageEx()),
-			ImageGalleryValueObject::fillFromId($apartment->getGalleryEx()),
+			null,
+			null,
 			$apartment->getExternalId(),
 		);
 	}

@@ -5,12 +5,13 @@ namespace Craft\DDD\Developers\Application\Service;
 use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\City\Domain\Repository\CityRepositoryInterface;
 use Craft\DDD\City\Infrastructure\Entity\CityTable;
-use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
 
 class DeveloperService
@@ -19,6 +20,7 @@ class DeveloperService
 		protected DeveloperRepositoryInterface   $developerRepository,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
 		protected CityRepositoryInterface        $cityRepository,
+		protected ImageServiceInterface          $imageService,
 	)
 	{
 	}
@@ -104,6 +106,18 @@ class DeveloperService
 			}
 
 			return $developer;
+		}, $developerList);
+
+
+		$developerList = array_map(function(DeveloperEntity $developerEntity) {
+
+			$image = $this->imageService->fromId($developerEntity->getPictureId());
+			if($image)
+			{
+				$developerEntity->addPicture(new ImageValueObject($image->id, $image->src));
+			}
+
+			return $developerEntity;
 		}, $developerList);
 	}
 }

@@ -4,7 +4,7 @@ namespace Craft\DDD\User\Domain\Entity;
 
 use Craft\Model\CraftUser;
 
-class UserEntity
+final class UserEntity
 {
 	public function __construct(
 		protected string  $id,

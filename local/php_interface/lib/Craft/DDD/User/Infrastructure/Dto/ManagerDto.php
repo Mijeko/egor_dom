@@ -41,7 +41,7 @@ class ManagerDto
 			$entity->getLastName(),
 			$entity->getSecondName(),
 			array_map(function(PhoneValueObject $phone) {
-				return new PhoneDto($phone->getPhone());
+				return new PhoneDto($phone->getValue());
 			}, $entity->getPhones() ?? []),
 			[
 				new EmailDto(

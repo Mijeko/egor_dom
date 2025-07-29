@@ -8,6 +8,7 @@ use Craft\DDD\Developers\Infrastructure\Repository\IblockBuildObjectOrmRepositor
 use Craft\DDD\Developers\Infrastructure\Repository\IblockDeveloperRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmDeveloperRepository;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 
 class DeveloperServiceFactory
 {
@@ -17,6 +18,7 @@ class DeveloperServiceFactory
 			new OrmDeveloperRepository(),
 			new OrmBuildObjectRepository(),
 			new OrmCityRepository(),
+			new ImageService()
 		);
 	}
 

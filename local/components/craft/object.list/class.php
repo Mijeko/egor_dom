@@ -23,9 +23,9 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 			$this->loadService();
 			$this->loadData();
 			$this->includeComponentTemplate();
-		} catch(Exception $e)
+		} catch(Exception $exception)
 		{
-			echo $e->getMessage();
+			echo $exception->getMessage();
 		}
 	}
 
