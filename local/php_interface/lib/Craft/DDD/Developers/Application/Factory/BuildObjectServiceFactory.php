@@ -10,6 +10,7 @@ use Craft\DDD\Developers\Infrastructure\Repository\IblockDeveloperRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmDeveloperRepository;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 
 class BuildObjectServiceFactory
 {
@@ -20,6 +21,7 @@ class BuildObjectServiceFactory
 			new OrmDeveloperRepository(),
 			new OrmApartmentRepository(),
 			CurrentCityServiceFactory::getService(),
+			new ImageService(),
 		);
 	}
 

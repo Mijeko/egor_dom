@@ -12,6 +12,9 @@ use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
 class BuildObjectService
 {
@@ -20,6 +23,7 @@ class BuildObjectService
 		protected DeveloperRepositoryInterface   $developerRepository,
 		protected ApartmentRepositoryInterface   $apartmentRepository,
 		protected CurrentCityService             $currentCityService,
+		protected ImageServiceInterface          $imageService,
 	)
 	{
 	}
@@ -74,6 +78,30 @@ class BuildObjectService
 
 	private function loadRelations(array &$buildObjectList): void
 	{
+
+		// ===============================GALLERY:==============================================
+		$buildObjectList = array_map(function(BuildObjectEntity $buildObjectEntity) {
+
+			$images = array_map(function(int $imageId) {
+
+				$image = $this->imageService->fromId($imageId);
+
+				return new ImageValueObject(
+					$image->id,
+					$image->src,
+				);
+			}, $buildObjectEntity->getGalleryIdList());
+			$images = array_filter($images);
+
+
+			$vo = new ImageGalleryValueObject($images);
+			$buildObjectEntity->addGalleryImage($vo);
+
+			return $buildObjectEntity;
+
+		}, $buildObjectList);
+		// ===============================GALLERY;==============================================
+
 
 		// ===============================DEVELOPERS:==============================================
 		$developerIdList = array_map(function(BuildObjectEntity $buildObjectEntity) {

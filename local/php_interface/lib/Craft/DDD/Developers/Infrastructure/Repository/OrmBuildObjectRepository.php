@@ -2,9 +2,6 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
-use Craft\DDD\City\Domain\Entity\CityEntity;
-use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
-use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ApartmentValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\CityValueObject;
@@ -12,12 +9,9 @@ use Craft\DDD\Developers\Domain\ValueObject\CountryValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\DistrictValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
-use Craft\Dto\BxImageDto;
-use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
@@ -123,10 +117,11 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 				new LongitudeValueObject($location['longitude']),
 				new LatitudeValueObject($location['latitude']),
 			),
+			$buildObject->getGalleryEx(),
 			$buildObject->getDeveloperId(),
 			null,
 			null,
-			ImageGalleryValueObject::fillFromId($buildObject->getGalleryEx()),
+			null,
 			null
 		);
 	}
