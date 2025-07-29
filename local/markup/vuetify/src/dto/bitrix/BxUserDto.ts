@@ -18,5 +18,6 @@ export default interface BxUserDto {
   legalAddress?: string,
   postAddress?: string,
   bankName?: string,
-  manager?: ManagerDto
+  manager?: ManagerDto,
+  type?: 'manager' | 'agent' | 'student'
 }
