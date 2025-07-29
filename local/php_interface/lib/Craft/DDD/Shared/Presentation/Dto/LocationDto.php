@@ -4,7 +4,7 @@ namespace Craft\DDD\Shared\Presentation\Dto;
 
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 
-class LocationDto
+final class LocationDto
 {
 	public function __construct(
 		public ?string $country,
@@ -20,9 +20,9 @@ class LocationDto
 	}
 
 
-	public static function fromModel(LocationValueObject $locationValueObject): static
+	public static function fromModel(LocationValueObject $locationValueObject): LocationDto
 	{
-		return new static(
+		return new LocationDto(
 			$locationValueObject->getCountry()->getValue(),
 			$locationValueObject->getRegion()->getValue(),
 			$locationValueObject->getDistrict()->getValue(),

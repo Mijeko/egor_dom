@@ -14,7 +14,7 @@ use Craft\Dto\BxImageDto;
 /**
  * @var BxImageDto[] $gallery
  */
-class BuildObjectDto
+final class BuildObjectDto
 {
 	public function __construct(
 		public int           $id,
@@ -31,7 +31,7 @@ class BuildObjectDto
 	}
 
 
-	public static function fromModel(BuildObjectEntity $element): static
+	public static function fromModel(BuildObjectEntity $element): BuildObjectDto
 	{
 		$location = $element->getLocation() ? LocationDto::fromModel($element->getLocation()) : null;
 		$developer = $element->getDeveloper() ? DeveloperDto::fromModel($element->getDeveloper()) : null;
@@ -47,7 +47,7 @@ class BuildObjectDto
 			}, $element->getGallery()->getImages());
 		}
 
-		return new static(
+		return new BuildObjectDto(
 			$element->getId(),
 			$element->getName(),
 			$element->getType(),

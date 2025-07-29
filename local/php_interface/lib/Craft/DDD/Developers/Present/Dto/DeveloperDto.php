@@ -7,7 +7,7 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\Dto\BxImageDto;
 
-class DeveloperDto
+final class DeveloperDto
 {
 	public function __construct(
 		public int         $id,
@@ -18,12 +18,21 @@ class DeveloperDto
 	{
 	}
 
-	public static function fromModel(DeveloperEntity $developer): static
+	public static function fromModel(DeveloperEntity $developer): DeveloperDto
 	{
-		return new static(
+		$pictureDto = null;
+		if($picture = $developer->getPicture())
+		{
+			$pictureDto = new BxImageDto(
+				$picture->getId(),
+				$picture->getSrc()
+			);
+		}
+
+		return new DeveloperDto(
 			$developer->getId(),
 			$developer->getName(),
-			null,
+			$pictureDto,
 			array_map(
 				function(BuildObjectEntity $buildObject) {
 					return BuildObjectDto::fromModel($buildObject);

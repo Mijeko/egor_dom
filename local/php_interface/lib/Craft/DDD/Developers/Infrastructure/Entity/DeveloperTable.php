@@ -55,7 +55,7 @@ class DeveloperTable extends DataManager
 				->configureTitle('Сортировка')
 				->configureDefaultValue(500),
 			(new IntegerField(self::F_PICTURE_ID))
-				->configureTitle('Изобращение'),
+				->configureTitle('Изображение'),
 			(new StringField(self::F_IMPORT_SETTINGS))
 				->configureTitle('Настройки импорта'),
 			(new IntegerField(self::F_CITY_ID))

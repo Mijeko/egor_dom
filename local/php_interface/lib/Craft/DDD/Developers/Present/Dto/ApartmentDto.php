@@ -6,7 +6,7 @@ use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\Dto\BxImageDto;
 
-class ApartmentDto
+final class ApartmentDto
 {
 	public function __construct(
 		public ?int            $id,
@@ -23,11 +23,11 @@ class ApartmentDto
 	{
 	}
 
-	public static function fromEntity(ApartmentEntity $model): static
+	public static function fromEntity(ApartmentEntity $model): ApartmentDto
 	{
 		$buildObject = $model->getBuildObject() ? BuildObjectDto::fromModel($model->getBuildObject()) : null;
 
-		return new static(
+		return new ApartmentDto(
 			$model->getId(),
 			$model->getBuildObjectId(),
 			$model->getName(),
