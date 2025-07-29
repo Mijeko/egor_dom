@@ -51,7 +51,9 @@ class Apartment extends EO_Apartment
 		return $this;
 	}
 
-
+	/**
+	 * @return int[]
+	 */
 	public function getPlanImageEx(): array
 	{
 		$unJsonedData = json_decode($this->getPlanImage(), true);
@@ -59,6 +61,9 @@ class Apartment extends EO_Apartment
 		return $unJsonedData;
 	}
 
+	/**
+	 * @return int[]
+	 */
 	public function getGalleryEx(): array
 	{
 		return [];

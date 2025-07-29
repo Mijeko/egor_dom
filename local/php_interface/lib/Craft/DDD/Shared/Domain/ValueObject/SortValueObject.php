@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-class SortValueObject
+final class SortValueObject
 {
 	public function __construct(
 		protected int $value
@@ -15,8 +15,8 @@ class SortValueObject
 		return $this->value;
 	}
 
-	public static function default(): static
+	public static function default(): SortValueObject
 	{
-		return new static(500);
+		return new SortValueObject(500);
 	}
 }

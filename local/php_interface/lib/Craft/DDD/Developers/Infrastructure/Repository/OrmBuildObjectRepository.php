@@ -103,9 +103,13 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		$location = $buildObject->getLocationEx();
 
 		return new BuildObjectEntity(
+		// @phpstan-ignore method.notFound
 			$buildObject->getId(),
+			// @phpstan-ignore method.notFound
 			$buildObject->getName(),
+			// @phpstan-ignore method.notFound
 			$buildObject->getType(),
+			// @phpstan-ignore method.notFound
 			$buildObject->getFloors(),
 			new LocationValueObject(
 				new CountryValueObject($location['country']),
@@ -118,8 +122,8 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 				new LatitudeValueObject($location['latitude']),
 			),
 			$buildObject->getGalleryEx(),
+			// @phpstan-ignore method.notFound
 			$buildObject->getDeveloperId(),
-			null,
 			null,
 			null,
 			null

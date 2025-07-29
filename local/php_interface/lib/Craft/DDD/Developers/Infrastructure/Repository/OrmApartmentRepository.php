@@ -71,25 +71,44 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 	{
 		$buildObject = null;
 		return new ApartmentEntity(
+			// @phpstan-ignore method.notFound
 			$apartment->getId(),
+			// @phpstan-ignore method.notFound
 			$apartment->getBuildObjectId(),
+			// @phpstan-ignore method.notFound
 			$buildObject,
+			// @phpstan-ignore method.notFound
 			$apartment->getName(),
+			// @phpstan-ignore method.notFound
 			$apartment->getDescription(),
+			// @phpstan-ignore method.notFound
 			$apartment->getPrice(),
+			// @phpstan-ignore method.notFound
 			$apartment->getRooms(),
+			// @phpstan-ignore method.notFound
 			$apartment->getFloor(),
 			null,
+			// @phpstan-ignore method.notFound
 			$apartment->getRenovation(),
-			new StringLogicValueObject($apartment->getParking()),
-			new StringLogicValueObject($apartment->getBathroomUnit()),
+			new StringLogicValueObject(
+				// @phpstan-ignore method.notFound
+				$apartment->getParking()
+			),
+			new StringLogicValueObject(
+				// @phpstan-ignore method.notFound
+				$apartment->getBathroomUnit()
+			),
+			// @phpstan-ignore method.notFound
 			$apartment->getMortgage(),
+			// @phpstan-ignore method.notFound
 			$apartment->getBuiltYear(),
 			$apartment->getPlanImageEx(),
 			$apartment->getGalleryEx(),
-			new BuiltStateValueObject($apartment->getBuildingState()),
-			null,
-			null,
+			new BuiltStateValueObject(
+				// @phpstan-ignore method.notFound
+				$apartment->getBuildingState()
+			),
+			// @phpstan-ignore method.notFound
 			$apartment->getExternalId(),
 		);
 	}

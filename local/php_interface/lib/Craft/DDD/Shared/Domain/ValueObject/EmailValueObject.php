@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-class EmailValueObject
+final class EmailValueObject
 {
 	public function __construct(
 		protected string $value

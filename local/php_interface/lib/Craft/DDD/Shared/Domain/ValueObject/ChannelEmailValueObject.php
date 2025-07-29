@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-class ChannelEmailValueObject
+final class ChannelEmailValueObject
 {
 	public function __construct(
 		protected ?string $enable,

@@ -2,10 +2,9 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\Helper\DigitsValidateHelper;
 
-class CurrAccountValueObject
+final class CurrAccountValueObject
 {
 	public function __construct(
 		protected string $value

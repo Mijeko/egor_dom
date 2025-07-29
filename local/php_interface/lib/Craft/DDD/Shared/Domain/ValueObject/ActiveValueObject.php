@@ -2,4 +2,4 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-class ActiveValueObject extends ABoolValueObject {}
+final class ActiveValueObject extends ABoolValueObject {}

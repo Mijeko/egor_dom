@@ -10,7 +10,7 @@ use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
  *
  * @property BuildObjectEntity[] $buildObjects
  */
-class DeveloperEntity
+final class DeveloperEntity
 {
 	protected ?ImageValueObject $picture = null;
 	protected ?CityEntity $city = null;
@@ -26,19 +26,19 @@ class DeveloperEntity
 	{
 	}
 
-	public function addPicture(ImageValueObject $picture): static
+	public function addPicture(ImageValueObject $picture): DeveloperEntity
 	{
 		$this->picture = $picture;
 		return $this;
 	}
 
-	public function addCity(CityEntity $city): static
+	public function addCity(CityEntity $city): DeveloperEntity
 	{
 		$this->city = $city;
 		return $this;
 	}
 
-	public function addBuildObject(BuildObjectEntity $buildObject): static
+	public function addBuildObject(BuildObjectEntity $buildObject): DeveloperEntity
 	{
 		$this->buildObjects[] = $buildObject;
 		return $this;

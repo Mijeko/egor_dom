@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
 
 final class ProfileEntity
@@ -57,7 +56,7 @@ final class ProfileEntity
 		return $this->postalAddress;
 	}
 
-	public function getOgrn(): ?int
+	public function getOgrn(): ?string
 	{
 		return $this->ogrn;
 	}

@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-class LongitudeValueObject
+final class LongitudeValueObject
 {
 	public function __construct(
 		protected ?string $value,

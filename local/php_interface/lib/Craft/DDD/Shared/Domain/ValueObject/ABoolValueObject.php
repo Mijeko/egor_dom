@@ -20,11 +20,6 @@ abstract class ABoolValueObject
 		}
 	}
 
-	public static function fromBx(string $value): static
-	{
-		return new static($value);
-	}
-
 	public function getValue(): bool
 	{
 		return $this->value;

@@ -4,7 +4,7 @@ namespace Craft\DDD\Shared\Domain\ValueObject;
 
 use Craft\Helper\DigitsValidateHelper;
 
-class CorrAccountValueObject
+final class CorrAccountValueObject
 {
 	public function __construct(
 		protected string $value

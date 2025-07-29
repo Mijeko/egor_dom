@@ -4,16 +4,16 @@ namespace Craft\DDD\Shared\Domain\ValueObject;
 
 use Craft\Helper\DigitsValidateHelper;
 
-class InnValueObject
+final class InnValueObject
 {
 	public function __construct(
-		protected int $value
+		protected string $value
 	)
 	{
 		$this->validate($this->value);
 	}
 
-	protected function validate(int $value): void
+	protected function validate(string $value): void
 	{
 
 		if(!DigitsValidateHelper::validateDigits($value, 12) && !DigitsValidateHelper::validateDigits($value, 10))
@@ -24,7 +24,7 @@ class InnValueObject
 		$this->value = $value;
 	}
 
-	public function getValue(): int
+	public function getValue(): string
 	{
 		return $this->value;
 	}

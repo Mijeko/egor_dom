@@ -94,23 +94,56 @@ class BxAgentRepository implements AgentRepositoryInterface
 	private function hydrate(CraftUser $model): AgentEntity
 	{
 		return new AgentEntity(
+		// @phpstan-ignore method.notFound
 			$model->getId(),
+			// @phpstan-ignore method.notFound
 			$model->getName(),
+			// @phpstan-ignore method.notFound
 			$model->getLastName(),
+			// @phpstan-ignore method.notFound
 			$model->getSecondName(),
 			new PasswordValueObject(rand()),
-			new PhoneValueObject($model->getPersonalPhone()),
-			new EmailValueObject($model->getEmail()),
-			new InnValueObject($model->fillUfInn()),
-			new KppValueObject($model->fillUfKpp()),
-			new OgrnValueObject($model->fillUfOgrn()),
-			new BikValueObject($model->fillUfBik()),
-			new CurrAccountValueObject($model->fillUfCurrAcc()),
-			new CorrAccountValueObject($model->fillUfCorrAcc()),
+			new PhoneValueObject(
+				// @phpstan-ignore method.notFound
+				$model->getPersonalPhone()
+			),
+			new EmailValueObject(
+				// @phpstan-ignore method.notFound
+				$model->getEmail()
+			),
+			new InnValueObject(
+				// @phpstan-ignore method.notFound
+				$model->fillUfInn()
+			),
+			new KppValueObject(
+				// @phpstan-ignore method.notFound
+				$model->fillUfKpp()
+			),
+			new OgrnValueObject(
+				// @phpstan-ignore method.notFound
+				$model->fillUfOgrn()
+			),
+			new BikValueObject(
+				// @phpstan-ignore method.notFound
+				$model->fillUfBik()
+			),
+			new CurrAccountValueObject(
+				// @phpstan-ignore method.notFound
+				$model->fillUfCurrAcc()
+			),
+			new CorrAccountValueObject(
+				// @phpstan-ignore method.notFound
+				$model->fillUfCorrAcc()
+			),
+			// @phpstan-ignore method.notFound
 			$model->fillUfPostAddress(),
+			// @phpstan-ignore method.notFound
 			$model->fillUfLegalAddress(),
+			// @phpstan-ignore method.notFound
 			$model->fillUfBankName(),
+			// @phpstan-ignore method.notFound
 			$model->fillUfPersonalManager(),
+
 		);
 	}
 }

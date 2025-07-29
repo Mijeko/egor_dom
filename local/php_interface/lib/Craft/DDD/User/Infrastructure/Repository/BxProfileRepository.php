@@ -20,18 +20,31 @@ class BxProfileRepository implements ProfileRepositoryInterface
 		}
 
 		return new ProfileEntity(
+			// @phpstan-ignore method.notFound
 			$user->getId(),
+			// @phpstan-ignore method.notFound
 			$user->getName(),
+			// @phpstan-ignore method.notFound
 			$user->getSecondName(),
+			// @phpstan-ignore method.notFound
 			$user->getLastName(),
+			// @phpstan-ignore method.notFound
 			$user->getUfBankName(),
+			// @phpstan-ignore method.notFound
 			$user->getUfInn(),
+			// @phpstan-ignore method.notFound
 			$user->getUfKpp(),
+			// @phpstan-ignore method.notFound
 			$user->getUfBik(),
+			// @phpstan-ignore method.notFound
 			$user->getUfOgrn(),
+			// @phpstan-ignore method.notFound
 			$user->getUfCurrAcc(),
+			// @phpstan-ignore method.notFound
 			$user->getUfCorrAcc(),
+			// @phpstan-ignore method.notFound
 			$user->getUfLegalAddress(),
+			// @phpstan-ignore method.notFound
 			$user->getUfPostAddress()
 		);
 	}

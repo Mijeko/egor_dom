@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-class ChannelTgValueObject
+final class ChannelTgValueObject
 {
 	public function __construct(
 		protected ?string $enable,

@@ -2,8 +2,6 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-use Craft\Model\CraftUser;
-
 final class UserEntity
 {
 	public function __construct(
@@ -14,17 +12,6 @@ final class UserEntity
 		protected ?string $password = null,
 	)
 	{
-	}
-
-	public static function fromModel(CraftUser $user): static
-	{
-		return new static(
-			$user->getId(),
-			$user->getLogin(),
-			$user->getPersonalPhone(),
-			$user->getEmail(),
-			null,
-		);
 	}
 
 	public function validatePassword(string $password): bool

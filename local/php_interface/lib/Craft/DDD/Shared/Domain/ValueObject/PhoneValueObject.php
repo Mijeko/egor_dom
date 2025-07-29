@@ -4,15 +4,16 @@ namespace Craft\DDD\Shared\Domain\ValueObject;
 
 use Craft\Helper\DigitsValidateHelper;
 
-class PhoneValueObject
+final class PhoneValueObject
 {
 	public function __construct(
 		protected string $value
 	)
 	{
+		$this->validate($this->value);
 	}
 
-	protected function validate($value): void
+	protected function validate(string $value): void
 	{
 		if(mb_strlen($value) === 0)
 		{

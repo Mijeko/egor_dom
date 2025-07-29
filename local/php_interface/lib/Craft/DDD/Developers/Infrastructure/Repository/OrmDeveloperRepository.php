@@ -41,9 +41,13 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 	protected function hydrateElement(Developer $developer): DeveloperEntity
 	{
 		return new DeveloperEntity(
+			// @phpstan-ignore method.notFound
 			$developer->getId(),
+			// @phpstan-ignore method.notFound
 			$developer->getName(),
+			// @phpstan-ignore method.notFound
 			$developer->getPictureId(),
+			// @phpstan-ignore method.notFound
 			$developer->getCityId(),
 			null,
 			new ImportSettingValueObject(
