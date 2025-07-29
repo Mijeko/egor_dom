@@ -1,10 +1,12 @@
 <?php
 
+use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Present\Dto\ApartmentDto;
 use Craft\DDD\Shared\Presentation\Dto\LocationDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
+use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
@@ -75,7 +77,12 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 			$buildObjectEntity->getType(),
 			$buildObjectEntity->getFloors(),
 			DeveloperDto::fromModel($developer),
-			$buildObjectEntity->getGallery()->getImages(),
+			array_map(function(ImageValueObject $image) {
+				return new BxImageDto(
+					$image->getId(),
+					$image->getSrc(),
+				);
+			}, $buildObjectEntity->getGallery()->getImages()),
 			array_map(function(ApartmentEntity $apartment) {
 				return ApartmentDto::fromEntity($apartment);
 			}, $apartmentList),
