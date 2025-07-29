@@ -2,10 +2,10 @@
 
 namespace Craft\DDD\Shared\Dto;
 
-class PhoneDto
+class EmailDto
 {
 	public function __construct(
-		public string  $phone,
+		public string  $email,
 		public ?string $label = null,
 	)
 	{

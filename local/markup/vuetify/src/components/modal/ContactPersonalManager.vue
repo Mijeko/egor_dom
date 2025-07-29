@@ -42,8 +42,15 @@ export default defineComponent({
       </v-card-subtitle>
 
       <v-card-text class="mt-5">
+
+
+        <div>
+          <div>График работы</div>
+          <div>с 9:00 до 20:00</div>
+        </div>
+
         <v-list>
-          <v-list-item v-for="phone in manager?.phones">
+          <v-list-item v-for="phone in manager?.phoneList">
             <template v-slot:prepend>
               <v-avatar
                 class="me-4 mt-2"
@@ -59,6 +66,25 @@ export default defineComponent({
             ></v-list-item-title>
           </v-list-item>
         </v-list>
+
+        <v-list>
+          <v-list-item v-for="phone in manager?.emailList">
+            <template v-slot:prepend>
+              <v-avatar
+                class="me-4 mt-2"
+                rounded="0"
+              >
+                <v-icon icon="$phone"/>
+              </v-avatar>
+            </template>
+
+            <v-list-item-title
+              class="text-uppercase font-weight-regular text-caption"
+              v-text="phone.email"
+            ></v-list-item-title>
+          </v-list-item>
+        </v-list>
+
       </v-card-text>
     </v-card>
   </v-dialog>

@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
@@ -12,6 +13,7 @@ class ManagerEntity
 		protected ?string           $name,
 		protected ?string           $lastName,
 		protected ?string           $secondName,
+		protected ?EmailValueObject $email,
 		protected ?array            $phones,
 		protected ?ImageValueObject $avatar,
 	)
@@ -54,5 +56,10 @@ class ManagerEntity
 	public function getAvatar(): ?ImageValueObject
 	{
 		return $this->avatar;
+	}
+
+	public function getEmail(): ?EmailValueObject
+	{
+		return $this->email;
 	}
 }
