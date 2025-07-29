@@ -6,7 +6,7 @@ use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 
 class GroupAssignService implements GroupAssignInterface
 {
-	public function assign(array $groupId, $userId): void
+	public function assign(array $groupId, int $userId): void
 	{
 		$model = new \CUser();
 		$model->Update($userId, [

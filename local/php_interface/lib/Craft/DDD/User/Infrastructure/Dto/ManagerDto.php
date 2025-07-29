@@ -3,8 +3,8 @@
 namespace Craft\DDD\User\Infrastructure\Dto;
 
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
-use Craft\DDD\Shared\Dto\EmailDto;
-use Craft\DDD\Shared\Dto\PhoneDto;
+use Craft\DDD\Shared\Presentation\Dto\EmailDto;
+use Craft\DDD\Shared\Presentation\Dto\PhoneDto;
 use Craft\DDD\User\Domain\Entity\ManagerEntity;
 use Craft\Dto\BxImageDto;
 

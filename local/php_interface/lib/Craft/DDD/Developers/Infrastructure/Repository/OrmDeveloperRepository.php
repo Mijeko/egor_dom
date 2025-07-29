@@ -42,7 +42,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 		return new DeveloperEntity(
 			$developer->getId(),
 			$developer->getName(),
-			ImageValueObject::fromId($developer->getPictureId()),
+			ImageValueObject::fromImageResult($developer->getPictureId()),
 			$developer->getCityId(),
 			null,
 			new ImportSettingValueObject(

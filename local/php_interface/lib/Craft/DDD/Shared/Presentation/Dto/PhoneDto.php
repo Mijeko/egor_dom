@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Shared\Dto;
+namespace Craft\DDD\Shared\Presentation\Dto;
 
 class PhoneDto
 {

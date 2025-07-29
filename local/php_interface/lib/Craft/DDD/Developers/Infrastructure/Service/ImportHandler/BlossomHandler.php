@@ -18,6 +18,7 @@ use Craft\DDD\Developers\Domain\ValueObject\LivingSpaceValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
@@ -29,8 +30,9 @@ use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
 class BlossomHandler implements ImportHandlerInterface
 {
 	public function __construct(
-		protected ApartmentService $apartmentService,
-		protected DeveloperEntity  $developer,
+		protected ApartmentService      $apartmentService,
+		protected DeveloperEntity       $developer,
+		protected ImageServiceInterface $imageSaver,
 	)
 	{
 	}
@@ -81,7 +83,17 @@ class BlossomHandler implements ImportHandlerInterface
 						$this->developer,
 						new ImageGalleryValueObject(
 							array_map(function(string $imageUrl) {
-								return ImageValueObject::fromUrl($imageUrl);
+
+								$image = $this->imageSaver->fromUrl($imageUrl);
+								if(!$image)
+								{
+									return null;
+								}
+
+								return new ImageValueObject(
+									$image->id,
+									$image->src,
+								);
 							}, $listGalleryImages)
 						),
 						$this->developer->getCity()
@@ -110,9 +122,19 @@ class BlossomHandler implements ImportHandlerInterface
 					new BuiltStateValueObject($rawApartmentData['building-state']),
 					new ImageGalleryValueObject(
 						array_map(function(string $imageUrl) {
-							return ImageValueObject::fromUrl($imageUrl);
-						}, $listPlanImages)
-					)
+
+							$image = $this->imageSaver->fromUrl($imageUrl);
+							if(!$image)
+							{
+								return null;
+							}
+
+							return new ImageValueObject(
+								$image->id,
+								$image->src,
+							);
+						}, $listGalleryImages)
+					),
 				);
 
 				$this->apartmentService->update($existApartment);
@@ -136,7 +158,17 @@ class BlossomHandler implements ImportHandlerInterface
 						$this->developer,
 						new ImageGalleryValueObject(
 							array_map(function(string $imageUrl) {
-								return ImageValueObject::fromUrl($imageUrl);
+
+								$image = $this->imageSaver->fromUrl($imageUrl);
+								if(!$image)
+								{
+									return null;
+								}
+
+								return new ImageValueObject(
+									$image->id,
+									$image->src,
+								);
 							}, $listGalleryImages)
 						),
 						$this->developer->getCity()
@@ -166,9 +198,19 @@ class BlossomHandler implements ImportHandlerInterface
 					$externalId,
 					new ImageGalleryValueObject(
 						array_map(function(string $imageUrl) {
-							return ImageValueObject::fromUrl($imageUrl);
-						}, $listPlanImages)
-					)
+
+							$image = $this->imageSaver->fromUrl($imageUrl);
+							if(!$image)
+							{
+								return null;
+							}
+
+							return new ImageValueObject(
+								$image->id,
+								$image->src,
+							);
+						}, $listGalleryImages)
+					),
 				);
 
 				$apartment = $this->apartmentService->create($apartment);

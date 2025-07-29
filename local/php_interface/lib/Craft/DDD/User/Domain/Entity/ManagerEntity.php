@@ -14,10 +14,17 @@ class ManagerEntity
 		protected ?string           $lastName,
 		protected ?string           $secondName,
 		protected ?EmailValueObject $email,
+		protected ?int              $avatarId,
 		protected ?array            $phones,
-		protected ?ImageValueObject $avatar,
+		protected ?ImageValueObject $avatar = null,
 	)
 	{
+	}
+
+	public function setAvatar(ImageValueObject $avatar): static
+	{
+		$this->avatar = $avatar;
+		return $this;
 	}
 
 	public function getName(): ?string
@@ -61,5 +68,10 @@ class ManagerEntity
 	public function getEmail(): ?EmailValueObject
 	{
 		return $this->email;
+	}
+
+	public function getAvatarId(): ?int
+	{
+		return $this->avatarId;
 	}
 }

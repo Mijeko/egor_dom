@@ -7,7 +7,7 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Present\Dto\ApartmentDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\DDD\Shared\Infrastructure\LocationDto;
+use Craft\DDD\Shared\Presentation\Dto\LocationDto;
 use Craft\Dto\BxImageDto;
 
 

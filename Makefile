@@ -30,3 +30,6 @@ orm:
 
 import:
 	php local/php_interface/console/import.php
+
+phpstan:
+	cd local/php_interface && php vendor/phpstan/phpstan/phpstan analyze

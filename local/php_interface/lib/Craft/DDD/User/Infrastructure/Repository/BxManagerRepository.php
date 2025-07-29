@@ -2,12 +2,12 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
-use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
-use Craft\DDD\User\Domain\Entity\ManagerEntity;
-use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
+use Craft\DDD\User\Domain\Entity\ManagerEntity;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
+use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 
 class BxManagerRepository implements ManagerRepositoryInterface
 {
@@ -61,12 +61,11 @@ class BxManagerRepository implements ManagerRepositoryInterface
 			$craftUser->getName(),
 			$craftUser->getLastName(),
 			$craftUser->getSecondName(),
+			new EmailValueObject($craftUser->getEmail()),
+			$craftUser->getPersonalPhoto(),
 			[
 				new PhoneValueObject($craftUser->getPersonalPhone()),
-			],
-			ImageValueObject::fromId(
-				$craftUser->getPersonalPhoto()
-			)
+			]
 		);
 	}
 }

@@ -19,6 +19,7 @@ use Craft\DDD\Developers\Domain\ValueObject\LivingSpaceValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
@@ -29,8 +30,9 @@ class FirstDevelopHandler implements ImportHandlerInterface
 
 
 	public function __construct(
-		protected ApartmentService $apartmentService,
-		protected DeveloperEntity  $developer,
+		protected ApartmentService      $apartmentService,
+		protected DeveloperEntity       $developer,
+		protected ImageServiceInterface $imageSaver,
 	)
 	{
 	}
@@ -84,7 +86,17 @@ class FirstDevelopHandler implements ImportHandlerInterface
 						$this->developer,
 						new ImageGalleryValueObject(
 							array_map(function(string $imageUrl) {
-								return ImageValueObject::fromUrl($imageUrl);
+
+								$image = $this->imageSaver->fromUrl($imageUrl);
+								if(!$image)
+								{
+									return null;
+								}
+
+								return new ImageValueObject(
+									$image->id,
+									$image->src,
+								);
 							}, $listGalleryImages)
 						),
 						$this->developer->getCity()
@@ -114,9 +126,19 @@ class FirstDevelopHandler implements ImportHandlerInterface
 					new BuiltStateValueObject($rawApartmentData['building-state']),
 					new ImageGalleryValueObject(
 						array_map(function(string $imageUrl) {
-							return ImageValueObject::fromUrl($imageUrl);
-						}, $listPlanImages)
-					)
+
+							$image = $this->imageSaver->fromUrl($imageUrl);
+							if(!$image)
+							{
+								return null;
+							}
+
+							return new ImageValueObject(
+								$image->id,
+								$image->src,
+							);
+						}, $listGalleryImages)
+					),
 				);
 
 
@@ -141,7 +163,17 @@ class FirstDevelopHandler implements ImportHandlerInterface
 						$this->developer,
 						new ImageGalleryValueObject(
 							array_map(function(string $imageUrl) {
-								return ImageValueObject::fromUrl($imageUrl);
+
+								$image = $this->imageSaver->fromUrl($imageUrl);
+								if(!$image)
+								{
+									return null;
+								}
+
+								return new ImageValueObject(
+									$image->id,
+									$image->src,
+								);
 							}, $listGalleryImages)
 						),
 						$this->developer->getCity()
@@ -172,9 +204,19 @@ class FirstDevelopHandler implements ImportHandlerInterface
 					$externalId,
 					new ImageGalleryValueObject(
 						array_map(function(string $imageUrl) {
-							return ImageValueObject::fromUrl($imageUrl);
-						}, $listPlanImages)
-					)
+
+							$image = $this->imageSaver->fromUrl($imageUrl);
+							if(!$image)
+							{
+								return null;
+							}
+
+							return new ImageValueObject(
+								$image->id,
+								$image->src,
+							);
+						}, $listGalleryImages)
+					),
 				);
 				$apartment = $this->apartmentService->create($apartment);
 			}

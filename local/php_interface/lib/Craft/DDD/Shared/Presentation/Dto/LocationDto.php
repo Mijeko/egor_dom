@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Shared\Infrastructure;
+namespace Craft\DDD\Shared\Presentation\Dto;
 
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 
