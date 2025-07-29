@@ -38,19 +38,37 @@ export default defineComponent({
     <v-card>
       <v-card-title class="text-center">Нужна помощь?</v-card-title>
       <v-card-subtitle class="text-center">
-        Можете заказать звонок, позвонить напрямую или найти ответ самостоятельно
+        Можете заказать звонок, позвонить напрямую<br>или найти ответ самостоятельно
       </v-card-subtitle>
 
       <v-card-text class="mt-5">
 
 
-        <div>
-          <div>График работы</div>
-          <div>с 9:00 до 20:00</div>
-        </div>
+        <v-list>
+          <v-list-item>
+            <template v-slot:prepend>
+              <v-avatar
+                class="me-4 mt-2"
+                rounded="0"
+              >
+                <v-icon icon="$calendarAndClock"/>
+              </v-avatar>
+            </template>
+
+            <v-list-item-title
+              class="text-uppercase font-weight-regular text-caption"
+              v-text="`График работы`"
+            ></v-list-item-title>
+
+            <v-list-item-subtitle
+              v-text="`с 9:00 до 20:00`"
+            >
+            </v-list-item-subtitle>
+          </v-list-item>
+        </v-list>
 
         <v-list>
-          <v-list-item v-for="phone in manager?.phoneList">
+          <v-list-item v-for="phone in manager?.phoneList" link :href="`tel:${phone.phone}`">
             <template v-slot:prepend>
               <v-avatar
                 class="me-4 mt-2"
@@ -68,19 +86,19 @@ export default defineComponent({
         </v-list>
 
         <v-list>
-          <v-list-item v-for="phone in manager?.emailList">
+          <v-list-item v-for="email in manager?.emailList" link :href="`mailto:${email.email}`">
             <template v-slot:prepend>
               <v-avatar
                 class="me-4 mt-2"
                 rounded="0"
               >
-                <v-icon icon="$phone"/>
+                <v-icon icon="$email"/>
               </v-avatar>
             </template>
 
             <v-list-item-title
               class="text-uppercase font-weight-regular text-caption"
-              v-text="phone.email"
+              v-text="email.email"
             ></v-list-item-title>
           </v-list-item>
         </v-list>

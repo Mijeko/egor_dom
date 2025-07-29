@@ -28,7 +28,7 @@ class CraftInitComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $exception)
 		{
-
+//			\Bitrix\Main\Diag\Debug::dumpToFile($exception->getMessage());
 		}
 	}
 
@@ -52,6 +52,7 @@ class CraftInitComponent extends CBitrixComponent
 		$agent = $this->agentRepository->findById($this->arParams['USER_ID']);
 		if($agent)
 		{
+
 			$managerDto = null;
 			$manager = $this->managerRepository->findById($agent->getPersonalManagerId());
 			if($manager)

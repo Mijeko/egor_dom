@@ -14,10 +14,12 @@ class BxManagerRepository implements ManagerRepositoryInterface
 
 	public function findById(int $id): ?ManagerEntity
 	{
-
-		$managerList = $this->findAll([], [
-			CraftUserTable::F_ID => $id,
-		]);
+		$managerList = $this->findAll(
+			[],
+			[
+				CraftUserTable::F_ID => $id,
+			]
+		);
 
 		if(count($managerList) !== 1)
 		{
@@ -74,7 +76,7 @@ class BxManagerRepository implements ManagerRepositoryInterface
 			[
 				new PhoneValueObject(
 					// @phpstan-ignore method.notFound
-					$craftUser->getPersonalPhone()
+					$craftUser->fillPersonalPhone()
 				),
 			]
 		);

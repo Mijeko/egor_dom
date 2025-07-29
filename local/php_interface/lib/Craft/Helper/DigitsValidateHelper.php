@@ -13,6 +13,6 @@ class DigitsValidateHelper
 			return false;
 		}
 
-		return mb_strlen($matchValue) == $countDigits && mb_strlen($value) == $countDigits;
+		return mb_strlen($matchValue) == $countDigits;
 	}
 }
