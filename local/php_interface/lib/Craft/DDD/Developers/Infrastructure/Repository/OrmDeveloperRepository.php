@@ -50,9 +50,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 				$developer->importSettings()->getHandler(),
 				$developer->importSettings()->getLinkSource(),
 				null
-			),
-			null,
-			null,
+			)
 		);
 	}
 }

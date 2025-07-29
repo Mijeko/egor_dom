@@ -12,15 +12,16 @@ use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
  */
 class DeveloperEntity
 {
+	protected ?ImageValueObject $picture = null;
+	protected ?CityEntity $city = null;
+
 	public function __construct(
-		public ?int                         $id,
-		public ?string                      $name,
-		public ?int                         $pictureId = null,
-		public ?int                         $cityId = null,
+		protected ?int                      $id,
+		protected ?string                   $name,
+		protected ?int                      $pictureId = null,
+		protected ?int                      $cityId = null,
 		protected ?array                    $buildObjects = null,
 		protected ?ImportSettingValueObject $importSetting = null,
-		protected ?CityEntity               $city = null,
-		public ?ImageValueObject            $picture = null,
 	)
 	{
 	}

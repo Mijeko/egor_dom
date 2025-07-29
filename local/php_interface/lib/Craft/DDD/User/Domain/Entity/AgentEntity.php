@@ -16,23 +16,23 @@ final class AgentEntity
 {
 
 	public function __construct(
-		protected ?int                   $id,
-		protected ?string                $name,
-		protected ?string                $lastName,
-		protected ?string                $secondName,
-		protected PhoneValueObject       $phone,
-		protected EmailValueObject       $email,
-		protected ?PasswordValueObject   $password = null,
-		protected InnValueObject         $inn,
-		protected KppValueObject         $kpp,
-		protected OgrnValueObject        $ogrn,
-		protected BikValueObject         $bik,
-		protected CurrAccountValueObject $currAcc,
-		protected CorrAccountValueObject $corrAcc,
-		protected string                 $postAddress,
-		protected string                 $legalAddress,
-		protected string                 $bankName,
-		protected ?int                   $personalManagerId = null
+		protected ?int                    $id,
+		protected ?string                 $name,
+		protected ?string                 $lastName,
+		protected ?string                 $secondName,
+		protected ?PasswordValueObject    $password = null,
+		protected ?PhoneValueObject       $phone = null,
+		protected ?EmailValueObject       $email = null,
+		protected ?InnValueObject         $inn = null,
+		protected ?KppValueObject         $kpp = null,
+		protected ?OgrnValueObject        $ogrn = null,
+		protected ?BikValueObject         $bik = null,
+		protected ?CurrAccountValueObject $currAcc = null,
+		protected ?CorrAccountValueObject $corrAcc = null,
+		protected ?string                 $postAddress = null,
+		protected ?string                 $legalAddress = null,
+		protected ?string                 $bankName = null,
+		protected ?int                    $personalManagerId = null
 	)
 	{
 	}
@@ -50,16 +50,16 @@ final class AgentEntity
 		string                 $postAddress,
 		string                 $legalAddress,
 		string                 $bankName,
-	): static
+	): AgentEntity
 	{
-		return new static(
+		return new AgentEntity(
 			null,
 			null,
 			null,
 			null,
+			$password,
 			$phone,
 			$email,
-			$password,
 			$inn,
 			$kpp,
 			$ogrn,
@@ -72,13 +72,13 @@ final class AgentEntity
 		);
 	}
 
-	public function assignManager(ManagerEntity $manager): static
+	public function assignManager(ManagerEntity $manager): AgentEntity
 	{
 		$this->personalManagerId = $manager->getId();
 		return $this;
 	}
 
-	public function refreshIdAfterRegister(int $id): static
+	public function refreshIdAfterRegister(int $id): AgentEntity
 	{
 		$this->id = $id;
 		return $this;
