@@ -1,9 +1,11 @@
 <?php
 
+use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Repository\BxAgentRepository;
 use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Repository\BxManagerRepository;
+use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 
 class CraftInitComponent extends CBitrixComponent
 {
@@ -19,7 +21,7 @@ class CraftInitComponent extends CBitrixComponent
 	{
 		try
 		{
-
+			$this->check();
 			$this->loadServices();
 			$this->loadData();
 
@@ -27,6 +29,14 @@ class CraftInitComponent extends CBitrixComponent
 		} catch(Exception $exception)
 		{
 
+		}
+	}
+
+	private function check(): void
+	{
+		if(!$this->arParams['USER_ID'])
+		{
+			throw new Exception('');
 		}
 	}
 
@@ -42,14 +52,23 @@ class CraftInitComponent extends CBitrixComponent
 		$agent = $this->agentRepository->findById($this->arParams['USER_ID']);
 		if($agent)
 		{
+			$managerDto = null;
 			$manager = $this->managerRepository->findById($agent->getPersonalManagerId());
+			if($manager)
+			{
+				$managerDto = ManagerDto::fromEntity($manager);
+			}
 
 			$dto = new \Craft\Dto\BxUserDto(
 				$agent->getId(),
-				'',
-				'',
-				'',
-				'',
+				$agent->getName(),
+				$agent->getLastName(),
+				$agent->getSecondName(),
+				implode(' ', [
+					$agent->getName(),
+					$agent->getLastName(),
+					$agent->getSecondName(),
+				]),
 				$agent->getEmail()->getValue(),
 				$agent->getInn()->getValue(),
 				$agent->getOgrn()->getValue(),
@@ -60,14 +79,13 @@ class CraftInitComponent extends CBitrixComponent
 				$agent->getLegalAddress(),
 				$agent->getPostAddress(),
 				$agent->getBankName(),
-				$manager,
+				$managerDto,
 			);
 		}
 
 
-
 		$this->arResult['USER'] = $dto;
 
-		$this->arResult['APARTMENT_FILTER'] = \Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder::fromUrl()->toArray();
+		$this->arResult['APARTMENT_FILTER'] = ApartmentFilterBuilder::fromUrl()->toArray();
 	}
 }

@@ -17,6 +17,9 @@ class AgentEntity
 
 	public function __construct(
 		protected ?int                   $id,
+		protected ?string                $name,
+		protected ?string                $lastName,
+		protected ?string                $secondName,
 		protected PhoneValueObject       $phone,
 		protected EmailValueObject       $email,
 		protected ?PasswordValueObject   $password = null,
@@ -50,6 +53,9 @@ class AgentEntity
 	): static
 	{
 		return new static(
+			null,
+			null,
+			null,
 			null,
 			$phone,
 			$email,
@@ -146,5 +152,20 @@ class AgentEntity
 	public function getPersonalManagerId(): ?int
 	{
 		return $this->personalManagerId;
+	}
+
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
+
+	public function getLastName(): ?string
+	{
+		return $this->lastName;
+	}
+
+	public function getSecondName(): ?string
+	{
+		return $this->secondName;
 	}
 }

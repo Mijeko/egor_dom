@@ -26,7 +26,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card class="pa-3 mb-3 mt-3" v-if="manager">
+  <v-card class="pa-3 mb-3 mt-3" v-if="manager.id">
     <v-row>
       <v-col cols="1">
         <v-avatar size="100" image="https://shapka-youtube.ru/wp-content/uploads/2024/08/avatarka-bryunetka.jpg"/>

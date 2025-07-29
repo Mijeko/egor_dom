@@ -2,11 +2,42 @@
 
 namespace Craft\DDD\User\Infrastructure\Dto;
 
+use Craft\DDD\User\Domain\Entity\ManagerEntity;
+use Craft\Dto\BxImageDto;
+
 class ManagerDto
 {
 	public function __construct(
-		public int $id,
+		public int            $id,
+		public string         $name,
+		protected ?string     $lastName,
+		protected ?string     $secondName,
+		protected ?array      $phones,
+		protected ?BxImageDto $avatar,
 	)
 	{
+	}
+
+	public static function fromEntity(ManagerEntity $entity): static
+	{
+		$avatarDto = null;
+
+		$avatar = $entity->getAvatar();
+		if($avatar)
+		{
+			$avatarDto = new BxImageDto(
+				$avatar->getId(),
+				$avatar->getSrc(),
+			);
+		}
+
+		return new static(
+			$entity->getId(),
+			$entity->getName(),
+			$entity->getLastName(),
+			$entity->getSecondName(),
+			$entity->getPhones(),
+			$avatarDto
+		);
 	}
 }
