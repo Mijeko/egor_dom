@@ -43,7 +43,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 	protected function meta(): void
 	{
 		/* @var $element \Craft\DDD\Developers\Present\Dto\BuildObjectDto */
-		$element = $this->arResult['ELEMENT'];
+		$element = $this->arResult['BUILD_OBJECT_DTO'];
 
 		global $APPLICATION;
 
