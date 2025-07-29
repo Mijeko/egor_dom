@@ -95,6 +95,9 @@ class BxAgentRepository implements AgentRepositoryInterface
 	{
 		return new AgentEntity(
 			$model->getId(),
+			$model->getName(),
+			$model->getLastName(),
+			$model->getSecondName(),
 			new PhoneValueObject($model->getPersonalPhone()),
 			new EmailValueObject($model->getEmail()),
 			new PasswordValueObject(rand()),
