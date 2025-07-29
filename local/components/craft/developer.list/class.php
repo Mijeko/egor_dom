@@ -1,24 +1,20 @@
 <?php
 
-use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
+use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 
 class CraftDeveloperListComponent extends CBitrixComponent
 {
-
 	protected ?DeveloperService $developerService = null;
+	protected ?BuildObjectService $buildObjectService = null;
 	protected ?CurrentCityService $currentCityService = null;
-
-	public function onPrepareComponentParams($arParams)
-	{
-		$arParams['IBLOCK_ID'] = intval($arParams['IBLOCK_ID']);
-		return $arParams;
-	}
 
 	public function executeComponent()
 	{
@@ -29,36 +25,57 @@ class CraftDeveloperListComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
-
+			\Bitrix\Main\Diag\Debug::dump($e->getMessage());
 		}
 	}
 
 	protected function loadServices(): void
 	{
-
 		$this->currentCityService = CurrentCityServiceFactory::getService();
-
-		if($this->arParams['IBLOCK_ID'])
-		{
-			$this->developerService = DeveloperServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
-		} else
-		{
-			$this->developerService = DeveloperServiceFactory::createOnOrm();
-		}
+		$this->developerService = DeveloperServiceFactory::createOnOrm();
+		$this->buildObjectService = BuildObjectServiceFactory::createOnOrm();
 	}
 
 	protected function loadData(): void
 	{
-		$this->arResult['DEVELOPERS'] = array_map(
-			function(DeveloperEntity $developer) {
-				return DeveloperDto::fromModel($developer);
-			},
-			$this->developerService->findAll(
-				[],
-				[
-					DeveloperTable::F_CITY_ID => $this->currentCityService->current()->getId(),
-				]
-			)
+
+		$developerList = $this->developerService->findAll(
+			[],
+			[
+				DeveloperTable::F_CITY_ID => $this->currentCityService->current()->getId(),
+			]
 		);
+
+
+		$developerIdList = array_map(function(DeveloperEntity $developer) {
+			return $developer->getId();
+		}, $developerList);
+
+		$buildObjectList = $this->buildObjectService->findAllByDeveloperIds($developerIdList);
+		$buildObjectListReduced = array_reduce($buildObjectList, function(array $carry, BuildObjectEntity $item) {
+			$carry[$item->getDeveloperId()][] = $item;
+			return $carry;
+		}, []);
+
+
+		$this->arResult['DEVELOPERS'] = array_map(function(DeveloperEntity $developer) use ($buildObjectListReduced) {
+
+			$imageDto = null;
+			if($picture = $developer->getPicture())
+			{
+				$imageDto = new \Craft\Dto\BxImageDto(
+					$picture->getId(),
+					$picture->getSrc()
+				);
+			}
+
+			return new \Craft\DDD\Developers\Present\Dto\DeveloperListItemDto(
+				$developer->getId(),
+				$developer->getName(),
+				$imageDto,
+				count($buildObjectListReduced[$developer->getId()]),
+			);
+		}, $developerList);
+
 	}
 }

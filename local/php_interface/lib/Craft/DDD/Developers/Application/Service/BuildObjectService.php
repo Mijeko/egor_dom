@@ -61,6 +61,16 @@ class BuildObjectService
 		return $buildObjectList[0];
 	}
 
+	public function findAllByDeveloperIds(array $developerIds): array
+	{
+		return $this->findAll(
+			[],
+			[
+				BuildObjectTable::F_DEVELOPER_ID => $developerIds,
+			]
+		);
+	}
+
 	public function findAll(array $order = [], array $filter = []): array
 	{
 		$buildObjectList = $this->buildObjectRepository->findAll($order, array_merge(

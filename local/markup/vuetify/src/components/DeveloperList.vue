@@ -1,14 +1,14 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import type DeveloperDto from "@/dto/entity/DeveloperDto.ts";
+import type DeveloperListItemDto from "@/dto/entity/DeveloperListItemDto.ts";
 
 export default defineComponent({
-  name: "Developers",
+  name: "DeveloperList",
   mounted() {
   },
   props: {
     developers: {
-      type: Array as PropType<DeveloperDto[]>
+      type: Array as PropType<DeveloperListItemDto[]>
     }
   }
 })
@@ -25,7 +25,7 @@ export default defineComponent({
           <v-card-text class="pb-1 text-subtitle-1 font-weight-bold">{{ developer.name }}</v-card-text>
           <v-row>
             <v-col sm="12" md="4" class="pb-sm-0">
-              <v-card-text class="pt-2 pb-sm-0">Объектов в продаже: {{ developer.buildObjects.length }}</v-card-text>
+              <v-card-text class="pt-2 pb-sm-0">Объектов в продаже: {{ developer.buildObjectsCount }}</v-card-text>
             </v-col>
             <v-col sm="12" md="8" class="pl-sm-7">
               <v-btn :href="`/developers/${developer.id}/`">смотреть</v-btn>

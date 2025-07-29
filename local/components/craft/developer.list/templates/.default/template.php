@@ -20,7 +20,7 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'Developers',
+		'SOURCE' => 'DeveloperList',
 		'PROPS'  => [
 			'developers' => $arResult['DEVELOPERS'],
 		],
