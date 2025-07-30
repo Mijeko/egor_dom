@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
-use Craft\DDD\User\Application\Factory\UpdateProfileServiceFactory;
+use Craft\DDD\User\Application\Factory\UpdateProfileUseCaseFactory;
 
 class CraftProfileUpdateComponent extends \Craft\Core\Component\AjaxComponent
 {
@@ -27,7 +27,7 @@ class CraftProfileUpdateComponent extends \Craft\Core\Component\AjaxComponent
 
 			unset($formData['profileId']);
 
-			$service = UpdateProfileServiceFactory::getService();
+			$service = UpdateProfileUseCaseFactory::getService();
 			$service->execute(intval($profileId), ProfileUpdateServiceDto::fromArray($formData));
 
 			\Craft\Core\Rest\Response::success([

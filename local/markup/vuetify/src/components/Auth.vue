@@ -5,6 +5,8 @@ import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
 import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";
 import MaskInput from "@/components/part/form/MaskInput.vue";
+import type AuthResponseDto from "@/dto/response/AuthResponseDto.ts";
+import type {ComponentControllerApiErrorDto} from "@/dto/response/ComponentControllerApiResponseDto.ts";
 
 export default defineComponent({
   name: "Auth",
@@ -36,23 +38,34 @@ export default defineComponent({
         return;
       }
 
-      let service = new UserService();
-      service.authorize({
+      let body: AuthorizeDto = {
         phone: this.form.phone,
         password: this.form.password,
-      } as AuthorizeDto)
-        .then((response: any) => {
-          let {data} = response;
-          let {success, redirect, error} = data;
+      };
 
-          if (success) {
+      let service = new UserService();
+      service.authorize(body)
+        .then((response: AuthResponseDto) => {
+
+          let {status, data} = response;
+
+          let {redirect} = data;
+
+          if (status === 'success') {
             if (redirect) {
               window.location.href = redirect;
             }
-          } else if (!success && error) {
-            AlertService.showErrorAlert('Авторизация', error);
           }
-        });
+
+        }, function (errorResponse: ComponentControllerApiErrorDto) {
+          let {data} = errorResponse;
+          let {ajaxRejectData} = data;
+          let {error} = ajaxRejectData;
+
+          if (error.message) {
+            AlertService.showErrorAlert('Авторизация', error.message);
+          }
+        })
 
 
       return true;
@@ -66,11 +79,11 @@ export default defineComponent({
     <h1 class="mb-3">Войти на сайт</h1>
     <v-form @submit.prevent="auth" v-model="isValid">
 
-<!--      <MaskInput-->
-<!--        v-model="form.phone"-->
-<!--        :rules="validate.phone"-->
-<!--        label="Номер телефона"-->
-<!--      />-->
+      <!--      <MaskInput-->
+      <!--        v-model="form.phone"-->
+      <!--        :rules="validate.phone"-->
+      <!--        label="Номер телефона"-->
+      <!--      />-->
 
       <v-text-field
         v-model="form.phone"

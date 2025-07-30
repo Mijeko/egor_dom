@@ -1,4 +1,4 @@
-import type ControllerApiResponseDto from "@/dto/response/ControllerApiResponseDto.ts";
+import type {ComponentControllerApiResponseDto} from "@/dto/response/ComponentControllerApiResponseDto.ts";
 
-export default interface CurrentCityResponseDto extends ControllerApiResponseDto {
+export default interface CurrentCityResponseDto extends ComponentControllerApiResponseDto {
 }

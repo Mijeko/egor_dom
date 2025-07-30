@@ -1,12 +1,10 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import CraftApi from "@/service/CraftApi.ts";
 import type ClaimCreateRequestDto from "@/dto/request/ClaimCreateRequestDto.ts";
 import AlertService from "@/service/AlertService.ts";
 import {useUserStore} from "@/store.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import ValidateLegalData from "@/core/validate/ValidateLegalData.ts";
-import ObjectMap from "@/core/ObjectMap.ts";
 import ClaimService from "@/service/ClaimService.ts";
 import type ClaimCreateResponseDto from "@/dto/response/ClaimCreateResponseDto.ts";
 
@@ -121,12 +119,11 @@ export default defineComponent({
       service.createClaim(body)
         .then((response: ClaimCreateResponseDto) => {
 
-          let {status, error} = response;
+          let {status} = response;
 
           if (status === 'success') {
             AlertService.showAlert('Отправка заявки', 'Ваша заявка успешно отправлена');
             this.$emit('update:modelValue', false);
-
 
             this.form.email = '';
             this.form.client = '';
@@ -139,10 +136,7 @@ export default defineComponent({
             this.form.postAddress = '';
             this.form.legalAddress = '';
             this.form.bankName = '';
-          } else if (error) {
-            AlertService.showErrorAlert('Отправка заявки', error.message);
           }
-
         });
     },
   },

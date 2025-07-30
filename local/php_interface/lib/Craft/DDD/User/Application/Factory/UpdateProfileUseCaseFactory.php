@@ -5,7 +5,7 @@ namespace Craft\DDD\User\Application\Factory;
 use Craft\DDD\User\Application\UseCase\UpdateProfileUseCase;
 use Craft\DDD\User\Infrastructure\Repository\BxProfileRepository;
 
-class UpdateProfileServiceFactory
+class UpdateProfileUseCaseFactory
 {
 	public static function getService(): UpdateProfileUseCase
 	{

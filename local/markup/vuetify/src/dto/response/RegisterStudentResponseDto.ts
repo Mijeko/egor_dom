@@ -1,5 +1,5 @@
-import type CommonApiResponseDto from "@/dto/response/CommonApiResponseDto.ts";
+import type RestApiResponseDto from "@/dto/response/RestApiResponseDto.ts";
 
-export default interface RegisterStudentResponseDto extends CommonApiResponseDto {
+export default interface RegisterStudentResponseDto extends RestApiResponseDto {
 
 }

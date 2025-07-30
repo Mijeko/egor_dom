@@ -1,7 +1,7 @@
-import type ControllerApiResponseDto from "@/dto/response/ControllerApiResponseDto.ts";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
+import type {ComponentControllerApiResponseDto} from "@/dto/response/ComponentControllerApiResponseDto.ts";
 
-export default interface ApartmentFilterResponseDto extends ControllerApiResponseDto {
+export default interface ApartmentFilterResponseDto extends ComponentControllerApiResponseDto {
   data: {
     filterUrl: string;
     items: ApartmentDto[];

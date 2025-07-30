@@ -1,4 +1,4 @@
-export default interface CommonApiResponseDto {
+export default interface RestApiResponseDto {
   result: ResultBody
 }
 

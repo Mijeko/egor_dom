@@ -1,9 +1,15 @@
 <?php
 
-use Craft\DDD\User\Application\Factory\AuthorizeServiceFactory;
+use Craft\Core\Rest\ResponseBx;
+use Craft\Core\Component\AjaxComponent;
+use Craft\DDD\User\Application\Factory\AuthorizeUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\AuthorizeUseCase;
 
-class CraftAuthComponent extends \Craft\Core\Component\AjaxComponent
+class CraftAuthComponent extends AjaxComponent
 {
+
+	protected ?AuthorizeUseCase $authorizeUseCase = null;
+
 	function componentNamespace(): string
 	{
 		return 'craftAuthComponent';
@@ -18,17 +24,14 @@ class CraftAuthComponent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$service = AuthorizeServiceFactory::getService();
-			$service->execute($formData['phone'], $formData['password']);
+			$this->authorizeUseCase->execute($formData['phone'], $formData['password']);
 
-
-			\Craft\Core\Rest\ResponseBx::success([
-				'success'  => true,
+			ResponseBx::success([
 				'redirect' => '/',
 			]);
 		} catch(\Exception $e)
 		{
-			\Craft\Core\Rest\ResponseBx::badRequest($e->getMessage());
+			ResponseBx::badRequest($e->getMessage());
 		}
 
 	}
@@ -44,5 +47,6 @@ class CraftAuthComponent extends \Craft\Core\Component\AjaxComponent
 
 	public function loadServices(): void
 	{
+		$this->authorizeUseCase = AuthorizeUseCaseFactory::getService();
 	}
 }
