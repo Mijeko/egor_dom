@@ -235,38 +235,26 @@ export default defineComponent({
       <v-tabs-window-item value="agent" class="pa-3">
         <v-form @submit.prevent="registrationAgent" v-model="isFormAgentValid">
 
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                  v-model="formAgent.phone"
-                  :rules="formAgentValidateRules.phone"
-                  return-masked-value
-                  mask="+# (###) ### ####"
-                  label="Телефон"
-              />
-            </v-col>
-          </v-row>
+          <v-text-field
+              v-model="formAgent.phone"
+              :rules="formAgentValidateRules.phone"
+              return-masked-value
+              mask="+# (###) ### ####"
+              label="Телефон"
+          />
 
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                  v-model="formAgent.email"
-                  :rules="formAgentValidateRules.email"
-                  label="E-Mail адрес"
-              />
-            </v-col>
-          </v-row>
+          <v-text-field
+              v-model="formAgent.email"
+              :rules="formAgentValidateRules.email"
+              label="E-Mail адрес"
+          />
 
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                  type="password"
-                  v-model="formAgent.password"
-                  :rules="formAgentValidateRules.password"
-                  label="Пароль"
-              />
-            </v-col>
-          </v-row>
+          <v-text-field
+              type="password"
+              v-model="formAgent.password"
+              :rules="formAgentValidateRules.password"
+              label="Пароль"
+          />
 
 
           <v-row>
