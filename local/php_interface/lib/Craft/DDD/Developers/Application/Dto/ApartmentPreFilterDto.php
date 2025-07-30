@@ -2,4 +2,4 @@
 
 namespace Craft\DDD\Developers\Application\Dto;
 
-class ApartmentPreFilterDto extends ApartmentFilterDto {}
+final class ApartmentPreFilterDto extends ApartmentFilterDto {}

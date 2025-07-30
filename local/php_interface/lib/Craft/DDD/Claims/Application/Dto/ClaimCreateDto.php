@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Claims\Application\Dto;
 
-class ClaimCreateDto
+final class ClaimCreateDto
 {
 	public function __construct(
 		public int    $apartmentId,

@@ -11,7 +11,7 @@ use Craft\DDD\User\Infrastructure\Service\GroupAssignService;
 
 class RegisterAgentUseCaseFactory
 {
-	public static function getService(): RegisterAgentUseCase
+	public static function getUseCase(): RegisterAgentUseCase
 	{
 		return new RegisterAgentUseCase(
 			new BxAgentRepository(),

@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Presentation\Dto;
 
-class PhoneDto
+final class PhoneDto
 {
 	public function __construct(
 		public string  $phone,

@@ -4,7 +4,7 @@ namespace Craft\DDD\User\Application\Dto;
 
 use Craft\Core\Helper\DtoManager;
 
-class ProfileUpdateServiceDto extends DtoManager
+final class ProfileUpdateServiceDto extends DtoManager
 {
 
 	public function __construct(

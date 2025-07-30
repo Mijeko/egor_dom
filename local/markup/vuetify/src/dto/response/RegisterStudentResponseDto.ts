@@ -1,5 +1,7 @@
-import type RestApiResponseDto from "@/dto/response/RestApiResponseDto.ts";
+import type {ComponentControllerApiResponseDto} from "@/dto/response/ComponentControllerApiResponseDto.ts";
 
-export default interface RegisterStudentResponseDto extends RestApiResponseDto {
-
+export default interface RegisterStudentResponseDto extends ComponentControllerApiResponseDto {
+  data: {
+    redirect: string;
+  }
 }

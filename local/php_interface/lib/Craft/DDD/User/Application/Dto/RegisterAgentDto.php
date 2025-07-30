@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Application\Dto;
 
-class RegisterAgentDto
+final class RegisterAgentDto
 {
 	public function __construct(
 		public string $phone,

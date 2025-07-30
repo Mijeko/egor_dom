@@ -1,10 +1,14 @@
 <?php
 
-use Craft\DDD\User\Application\Dto\RegisterAgentDto;
+use Craft\Core\Rest\ResponseBx;
+use Craft\DDD\User\Application\Dto\RegisterSimpleAgentDto;
+use Craft\DDD\User\Application\UseCase\RegisterAgentUseCase;
 use Craft\DDD\User\Application\Factory\RegisterAgentUseCaseFactory;
 
 class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 {
+	protected RegisterAgentUseCase $registerAgentUseCase;
+
 	function componentNamespace(): string
 	{
 		return "craftRegisterAgent";
@@ -18,34 +22,21 @@ class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$service = RegisterAgentUseCaseFactory::getService();
-			$service->execute(
-				new RegisterAgentDto(
+			$this->registerAgentUseCase->execute(
+				new RegisterSimpleAgentDto(
 					$formData['phone'],
 					$formData['email'],
 					$formData['password'],
-					$formData['inn'],
-					$formData['kpp'],
-					$formData['ogrn'],
-					$formData['bik'],
-					$formData['currAcc'],
-					$formData['corrAcc'],
-					$formData['postAddress'],
-					$formData['legalAddress'],
-					$formData['bankName'],
 				)
 			);
 
-			\Craft\Core\Rest\Response::success([
-				'success' => true,
+			ResponseBx::success([
+				'redirect' => '/',
 			]);
 
 		} catch(\Exception $e)
 		{
-			\Craft\Core\Rest\Response::badRequest([
-				'success' => false,
-				'error'   => $e->getMessage(),
-			]);
+			ResponseBx::badRequest($e->getMessage());
 		}
 	}
 
@@ -60,5 +51,6 @@ class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 
 	public function loadServices(): void
 	{
+		$this->registerAgentUseCase = RegisterAgentUseCaseFactory::getUseCase();
 	}
 }

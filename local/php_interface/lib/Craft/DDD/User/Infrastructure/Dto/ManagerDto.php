@@ -8,7 +8,7 @@ use Craft\DDD\Shared\Presentation\Dto\PhoneDto;
 use Craft\DDD\User\Domain\Entity\ManagerEntity;
 use Craft\Dto\BxImageDto;
 
-class ManagerDto
+final class ManagerDto
 {
 	public function __construct(
 		public int         $id,
@@ -22,7 +22,7 @@ class ManagerDto
 	{
 	}
 
-	public static function fromEntity(ManagerEntity $entity): static
+	public static function fromEntity(ManagerEntity $entity): ManagerDto
 	{
 		$avatarDto = null;
 
@@ -35,7 +35,7 @@ class ManagerDto
 			);
 		}
 
-		return new static(
+		return new ManagerDto(
 			$entity->getId(),
 			$entity->getName(),
 			$entity->getLastName(),

@@ -72,6 +72,23 @@ final class AgentEntity
 		);
 	}
 
+	public static function simpleRegister(
+		PhoneValueObject    $phone,
+		EmailValueObject    $email,
+		PasswordValueObject $password,
+	): AgentEntity
+	{
+		return new AgentEntity(
+			null,
+			null,
+			null,
+			null,
+			$password,
+			$phone,
+			$email,
+		);
+	}
+
 	public function assignManager(ManagerEntity $manager): AgentEntity
 	{
 		$this->personalManagerId = $manager->getId();

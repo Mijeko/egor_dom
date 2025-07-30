@@ -5,7 +5,7 @@ namespace Craft\DDD\User\Domain\Entity;
 final class UserEntity
 {
 	public function __construct(
-		protected string  $id,
+		protected int     $id,
 		protected string  $login,
 		protected string  $phone,
 		protected string  $email,
@@ -25,7 +25,7 @@ final class UserEntity
 		return $this->email;
 	}
 
-	public function getId(): string
+	public function getId(): int
 	{
 		return $this->id;
 	}

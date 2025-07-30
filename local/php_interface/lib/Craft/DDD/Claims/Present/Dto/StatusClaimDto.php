@@ -4,7 +4,7 @@ namespace Craft\DDD\Claims\Present\Dto;
 
 use Craft\DDD\Claims\Domain\ValueObject\StatusValueObject;
 
-class StatusClaimDto
+final class StatusClaimDto
 {
 	public function __construct(
 		public ?string $code,
@@ -15,9 +15,9 @@ class StatusClaimDto
 	{
 	}
 
-	public static function fromVO(StatusValueObject $status): static
+	public static function fromVO(StatusValueObject $status): StatusClaimDto
 	{
-		return new static(
+		return new StatusClaimDto(
 			$status->getCode(),
 			$status->getLabel(),
 			$status->getIcon(),

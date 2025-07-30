@@ -2,16 +2,11 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
-use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
-use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
-use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\DDD\Shared\Infrastructure\Dto\ResultImageSaveDto;
-use Craft\Dto\BxImageDto;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
 {

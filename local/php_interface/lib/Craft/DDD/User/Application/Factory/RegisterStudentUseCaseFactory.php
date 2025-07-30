@@ -10,7 +10,7 @@ use Craft\DDD\User\Infrastructure\Service\GroupAssignService;
 
 class RegisterStudentUseCaseFactory
 {
-	public static function getService(): RegisterStudentUseCase
+	public static function getUseCase(): RegisterStudentUseCase
 	{
 		return new RegisterStudentUseCase(
 			new BxStudentRepository(),

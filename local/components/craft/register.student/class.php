@@ -1,10 +1,14 @@
 <?php
 
+use Craft\Core\Rest\ResponseBx;
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
+use Craft\DDD\User\Application\UseCase\RegisterStudentUseCase;
 use Craft\DDD\User\Application\Factory\RegisterStudentUseCaseFactory;
 
 class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 {
+	protected ?RegisterStudentUseCase $registerStudentUseCase = null;
+
 	function componentNamespace(): string
 	{
 		return "craftRegisterStudent";
@@ -18,7 +22,7 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$service = RegisterStudentUseCaseFactory::getService();
+			$service = RegisterStudentUseCaseFactory::getUseCase();
 			$service->execute(
 				new RegisterStudentDto(
 					$formData['phone'],
@@ -27,16 +31,13 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 				)
 			);
 
-			\Craft\Core\Rest\Response::success([
-				'success' => true,
+			ResponseBx::success([
+				'redirect' => '/',
 			]);
 
 		} catch(\Exception $e)
 		{
-			\Craft\Core\Rest\Response::badRequest([
-				'success' => false,
-				'error'   => $e->getMessage(),
-			]);
+			ResponseBx::badRequest($e->getMessage());
 		}
 	}
 
@@ -51,5 +52,6 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 
 	public function loadServices(): void
 	{
+		$this->registerStudentUseCase = RegisterStudentUseCaseFactory::getUseCase();
 	}
 }

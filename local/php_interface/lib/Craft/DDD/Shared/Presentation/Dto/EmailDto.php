@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Presentation\Dto;
 
-class EmailDto
+final class EmailDto
 {
 	public function __construct(
 		public string  $email,

@@ -1,7 +1,6 @@
-export default interface RegisterAgentRequestDto {
-  phone: string;
-  email: string;
-  password: string;
+import type RegisterSimpleAgentRequestDto from "@/dto/request/RegisterSimpleAgentRequestDto.ts";
+
+export default interface RegisterAgentRequestDto extends RegisterSimpleAgentRequestDto {
   inn: string;
   kpp: string;
   ogrn: string;

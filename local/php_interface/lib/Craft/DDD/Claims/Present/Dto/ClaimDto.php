@@ -5,7 +5,7 @@ namespace Craft\DDD\Claims\Present\Dto;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Developers\Present\Dto\ApartmentDto;
 
-class ClaimDto
+final class ClaimDto
 {
 	public function __construct(
 		public int             $id,
@@ -28,9 +28,9 @@ class ClaimDto
 	{
 	}
 
-	public static function fromEntity(ClaimEntity $claim): static
+	public static function fromEntity(ClaimEntity $claim): ClaimDto
 	{
-		return new static(
+		return new ClaimDto(
 			$claim->getId(),
 			StatusClaimDto::fromVO($claim->getStatus()),
 			$claim->getName(),

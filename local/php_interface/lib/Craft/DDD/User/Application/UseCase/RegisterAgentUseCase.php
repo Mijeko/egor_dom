@@ -11,7 +11,7 @@ use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
-use Craft\DDD\User\Application\Dto\RegisterAgentDto;
+use Craft\DDD\User\Application\Dto\RegisterSimpleAgentDto;
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Application\Service\Interfaces\ManagerAssignerInterface;
@@ -31,7 +31,7 @@ class RegisterAgentUseCase
 	{
 	}
 
-	public function execute(RegisterAgentDto $registerAgentDto): ?AgentEntity
+	public function execute(RegisterSimpleAgentDto $registerAgentDto): ?AgentEntity
 	{
 		$specialPhone = \COption::GetOptionString('main', 'new_user_phone_auth') == 'Y';
 
@@ -49,25 +49,27 @@ class RegisterAgentUseCase
 			}
 		}
 
-		if($this->agentRepository->findByInn(new InnValueObject($registerAgentDto->inn)))
-		{
-			throw new \Exception('Пользователь с таким ИНН уже существует');
-		}
 
-		$agent = AgentEntity::register(
+		$agent = AgentEntity::simpleRegister(
 			new PhoneValueObject($registerAgentDto->phone),
 			new EmailValueObject($registerAgentDto->email),
 			new PasswordValueObject($registerAgentDto->password),
-			new InnValueObject($registerAgentDto->inn),
-			new KppValueObject($registerAgentDto->kpp),
-			new OgrnValueObject($registerAgentDto->ogrn),
-			new BikValueObject($registerAgentDto->bik),
-			new CurrAccountValueObject($registerAgentDto->currAcc),
-			new CorrAccountValueObject($registerAgentDto->corrAcc),
-			$registerAgentDto->postAddress,
-			$registerAgentDto->legalAddress,
-			$registerAgentDto->bankName,
 		);
+
+		//		$agent = AgentEntity::simpleRegister(
+		//			new PhoneValueObject($registerAgentDto->phone),
+		//			new EmailValueObject($registerAgentDto->email),
+		//			new PasswordValueObject($registerAgentDto->password),
+		//			new InnValueObject($registerAgentDto->inn),
+		//			new KppValueObject($registerAgentDto->kpp),
+		//			new OgrnValueObject($registerAgentDto->ogrn),
+		//			new BikValueObject($registerAgentDto->bik),
+		//			new CurrAccountValueObject($registerAgentDto->currAcc),
+		//			new CorrAccountValueObject($registerAgentDto->corrAcc),
+		//			$registerAgentDto->postAddress,
+		//			$registerAgentDto->legalAddress,
+		//			$registerAgentDto->bankName,
+		//		);
 
 
 		$agent = $this->agentRepository->create($agent);

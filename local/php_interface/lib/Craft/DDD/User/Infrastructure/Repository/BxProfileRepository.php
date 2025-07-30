@@ -52,8 +52,8 @@ class BxProfileRepository implements ProfileRepositoryInterface
 	public function update(ProfileEntity $profile): ProfileEntity
 	{
 
-		$user = CraftUser::load($profile->getId());
-		if(!$user)
+		$craftUser = CraftUser::load($profile->getId());
+		if(!$craftUser)
 		{
 			throw new \Exception('Profile not found');
 		}
@@ -75,7 +75,8 @@ class BxProfileRepository implements ProfileRepositoryInterface
 
 		$model = new \CUser();
 		$result = $model->Update(
-			$user->getId(),
+			// @phpstan-ignore method.notFound
+			$craftUser->getId(),
 			$updateParams
 		);
 
