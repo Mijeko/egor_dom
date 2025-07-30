@@ -1,7 +1,7 @@
 <?php
-
-define('NEED_AUTH', true);
-//define('NEED_AUTH', $_SERVER['SERVER_NAME'] === 'abn.dev-kvsn.ru');
+$sapi = php_sapi_name();
+$bIsConsole = ($sapi == 'cli');
+define('NEED_AUTH', !$bIsConsole);
 
 
 if(\Bitrix\Main\Loader::includeModule('craft.core'))
