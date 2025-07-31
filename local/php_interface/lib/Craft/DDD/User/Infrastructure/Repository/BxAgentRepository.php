@@ -93,7 +93,7 @@ class BxAgentRepository implements AgentRepositoryInterface
 
 	private function hydrate(CraftUser $model): AgentEntity
 	{
-		return new AgentEntity(
+		return AgentEntity::fromFind(
 		// @phpstan-ignore method.notFound
 			$model->getId(),
 			// @phpstan-ignore method.notFound
@@ -104,35 +104,35 @@ class BxAgentRepository implements AgentRepositoryInterface
 			$model->getSecondName(),
 			new PasswordValueObject(rand()),
 			new PhoneValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->getPersonalPhone()
 			),
 			new EmailValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->getEmail()
 			),
 			new InnValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->fillUfInn()
 			),
 			new KppValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->fillUfKpp()
 			),
 			new OgrnValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->fillUfOgrn()
 			),
 			new BikValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->fillUfBik()
 			),
 			new CurrAccountValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->fillUfCurrAcc()
 			),
 			new CorrAccountValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$model->fillUfCorrAcc()
 			),
 			// @phpstan-ignore method.notFound

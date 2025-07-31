@@ -15,27 +15,24 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 final class AgentEntity
 {
 
-	public function __construct(
-		protected ?int                    $id,
-		protected ?string                 $name,
-		protected ?string                 $lastName,
-		protected ?string                 $secondName,
-		protected ?PasswordValueObject    $password = null,
-		protected ?PhoneValueObject       $phone = null,
-		protected ?EmailValueObject       $email = null,
-		protected ?InnValueObject         $inn = null,
-		protected ?KppValueObject         $kpp = null,
-		protected ?OgrnValueObject        $ogrn = null,
-		protected ?BikValueObject         $bik = null,
-		protected ?CurrAccountValueObject $currAcc = null,
-		protected ?CorrAccountValueObject $corrAcc = null,
-		protected ?string                 $postAddress = null,
-		protected ?string                 $legalAddress = null,
-		protected ?string                 $bankName = null,
-		protected ?int                    $personalManagerId = null
-	)
-	{
-	}
+
+	protected ?int $id;
+	protected ?string $name;
+	protected ?string $lastName;
+	protected ?string $secondName;
+	protected ?PasswordValueObject $password = null;
+	protected ?PhoneValueObject $phone = null;
+	protected ?EmailValueObject $email = null;
+	protected ?InnValueObject $inn = null;
+	protected ?KppValueObject $kpp = null;
+	protected ?OgrnValueObject $ogrn = null;
+	protected ?BikValueObject $bik = null;
+	protected ?CurrAccountValueObject $currAcc = null;
+	protected ?CorrAccountValueObject $corrAcc = null;
+	protected ?string $postAddress = null;
+	protected ?string $legalAddress = null;
+	protected ?string $bankName = null;
+	protected ?int $personalManagerId = null;
 
 	public static function register(
 		PhoneValueObject       $phone,
@@ -52,24 +49,65 @@ final class AgentEntity
 		string                 $bankName,
 	): AgentEntity
 	{
-		return new AgentEntity(
-			null,
-			null,
-			null,
-			null,
-			$password,
-			$phone,
-			$email,
-			$inn,
-			$kpp,
-			$ogrn,
-			$bik,
-			$currAcc,
-			$corrAcc,
-			$postAddress,
-			$legalAddress,
-			$bankName,
-		);
+
+		$obj = new self();
+		$obj->phone = $phone;
+		$obj->email = $email;
+		$obj->password = $password;
+		$obj->inn = $inn;
+		$obj->kpp = $kpp;
+		$obj->ogrn = $ogrn;
+		$obj->bik = $bik;
+		$obj->currAcc = $currAcc;
+		$obj->corrAcc = $corrAcc;
+		$obj->postAddress = $postAddress;
+		$obj->legalAddress = $legalAddress;
+		$obj->bankName = $bankName;
+		return $obj;
+
+	}
+
+	public static function fromFind(
+		?int                    $id,
+		?string                 $name,
+		?string                 $lastName,
+		?string                 $secondName,
+		?PasswordValueObject    $password = null,
+		?PhoneValueObject       $phone = null,
+		?EmailValueObject       $email = null,
+		?InnValueObject         $inn = null,
+		?KppValueObject         $kpp = null,
+		?OgrnValueObject        $ogrn = null,
+		?BikValueObject         $bik = null,
+		?CurrAccountValueObject $currAcc = null,
+		?CorrAccountValueObject $corrAcc = null,
+		?string                 $postAddress = null,
+		?string                 $legalAddress = null,
+		?string                 $bankName = null,
+		?int                    $personalManagerId = null
+	): AgentEntity
+	{
+		$obj = new self();
+
+		$obj->id = $id;
+		$obj->name = $name;
+		$obj->lastName = $lastName;
+		$obj->secondName = $secondName;
+		$obj->password = $password;
+		$obj->phone = $phone;
+		$obj->email = $email;
+		$obj->inn = $inn;
+		$obj->kpp = $kpp;
+		$obj->ogrn = $ogrn;
+		$obj->bik = $bik;
+		$obj->currAcc = $currAcc;
+		$obj->corrAcc = $corrAcc;
+		$obj->postAddress = $postAddress;
+		$obj->legalAddress = $legalAddress;
+		$obj->bankName = $bankName;
+		$obj->personalManagerId = $personalManagerId;
+
+		return $obj;
 	}
 
 	public static function simpleRegister(

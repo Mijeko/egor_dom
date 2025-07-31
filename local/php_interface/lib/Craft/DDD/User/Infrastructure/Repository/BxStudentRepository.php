@@ -26,6 +26,7 @@ class BxStudentRepository implements StudentRepositoryInterface
 
 
 		$resultId = $model->Add([
+			CraftUserTable::F_ACTIVE         => $studentEntity->getActive()->getValue(),
 			CraftUserTable::F_LOGIN          => $studentEntity->getEmail()->getValue(),
 			CraftUserTable::F_EMAIL          => $studentEntity->getEmail()->getValue(),
 			CraftUserTable::F_PASSWORD       => $studentEntity->getPassword()->getValue(),

@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Dto;
 
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\Shared\Presentation\Dto\EmailDto;
 use Craft\DDD\Shared\Presentation\Dto\PhoneDto;
@@ -43,11 +44,11 @@ final class ManagerDto
 			array_map(function(PhoneValueObject $phone) {
 				return new PhoneDto($phone->getValue());
 			}, $entity->getPhones() ?? []),
-			[
-				new EmailDto(
-					$entity->getEmail()->getValue(),
-				),
-			],
+			array_map(function(EmailValueObject $email) {
+				return new EmailDto(
+					$email->getValue(),
+				);
+			}, $entity->getEmail()),
 			$avatarDto
 		);
 	}

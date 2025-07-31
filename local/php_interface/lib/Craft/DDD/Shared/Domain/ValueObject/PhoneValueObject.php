@@ -7,14 +7,19 @@ use Craft\Helper\DigitsValidateHelper;
 final class PhoneValueObject
 {
 	public function __construct(
-		protected string $value
+		protected ?string $value
 	)
 	{
 		$this->validate($this->value);
 	}
 
-	protected function validate(string $value): void
+	protected function validate(?string $value): void
 	{
+		if(is_null($value))
+		{
+			return;
+		}
+
 		if(mb_strlen($value) === 0)
 		{
 			throw new \Exception('Номер телефона должен быть заполнен');
@@ -28,8 +33,13 @@ final class PhoneValueObject
 		$this->value = $value;
 	}
 
-	public function getValue(): string
+	public function getValue(): ?string
 	{
+		if(is_null($this->value))
+		{
+			return null;
+		}
+
 		return $this->normalize($this->value);
 	}
 

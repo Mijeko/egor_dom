@@ -58,8 +58,8 @@ class BxManagerRepository implements ManagerRepositoryInterface
 
 	private function hydrate(CraftUser $craftUser): ManagerEntity
 	{
-		return new ManagerEntity(
-			// @phpstan-ignore method.notFound
+		return ManagerEntity::fromFind(
+		// @phpstan-ignore method.notFound
 			$craftUser->getId(),
 			// @phpstan-ignore method.notFound
 			$craftUser->getName(),
@@ -67,16 +67,26 @@ class BxManagerRepository implements ManagerRepositoryInterface
 			$craftUser->getLastName(),
 			// @phpstan-ignore method.notFound
 			$craftUser->getSecondName(),
-			new EmailValueObject(
+			[
+				new EmailValueObject(
 				// @phpstan-ignore method.notFound
-				$craftUser->getEmail()
-			),
+					$craftUser->getEmail()
+				),
+				new EmailValueObject(
+				// @phpstan-ignore method.notFound
+					$craftUser->fillUfEmailTwo()
+				),
+			],
 			// @phpstan-ignore method.notFound
 			$craftUser->getPersonalPhoto(),
 			[
 				new PhoneValueObject(
-					// @phpstan-ignore method.notFound
+				// @phpstan-ignore method.notFound
 					$craftUser->fillPersonalPhone()
+				),
+				new PhoneValueObject(
+				// @phpstan-ignore method.notFound
+					$craftUser->fillUfPhoneTwo()
 				),
 			]
 		);

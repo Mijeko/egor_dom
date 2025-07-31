@@ -2838,6 +2838,24 @@ namespace Bitrix\Main {
 	 * @method \int fillUfPersonalManager()
 	 * @method \Bitrix\Main\EO_User setUfPersonalManager(\int $ufPersonalManager)
 	 * @method bool isUfPersonalManagerChanged()
+	 * @method \string getUfPhoneTwo()
+	 * @method \string remindActualUfPhoneTwo()
+	 * @method \string requireUfPhoneTwo()
+	 * @method bool hasUfPhoneTwo()
+	 * @method bool isUfPhoneTwoFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfPhoneTwo()
+	 * @method \string fillUfPhoneTwo()
+	 * @method \Bitrix\Main\EO_User setUfPhoneTwo(\string $ufPhoneTwo)
+	 * @method bool isUfPhoneTwoChanged()
+	 * @method \string getUfEmailTwo()
+	 * @method \string remindActualUfEmailTwo()
+	 * @method \string requireUfEmailTwo()
+	 * @method bool hasUfEmailTwo()
+	 * @method bool isUfEmailTwoFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfEmailTwo()
+	 * @method \string fillUfEmailTwo()
+	 * @method \Bitrix\Main\EO_User setUfEmailTwo(\string $ufEmailTwo)
+	 * @method bool isUfEmailTwoChanged()
 	 */
 	class EO_User {
 		/* @var \Bitrix\Main\UserTable */
@@ -2881,6 +2899,10 @@ namespace Bitrix\Main {
 	 * @method \boolean[] fillUfEmailNotifyClaim()
 	 * @method \int[] getUfPersonalManagerList()
 	 * @method \int[] fillUfPersonalManager()
+	 * @method \string[] getUfPhoneTwoList()
+	 * @method \string[] fillUfPhoneTwo()
+	 * @method \string[] getUfEmailTwoList()
+	 * @method \string[] fillUfEmailTwo()
 	 */
 	class EO_User_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Bitrix\Main\UserTable */
@@ -5832,6 +5854,24 @@ namespace Craft\Model {
 	 * @method \int fillUfPersonalManager()
 	 * @method \Craft\Model\CraftUser setUfPersonalManager(\int $ufPersonalManager)
 	 * @method bool isUfPersonalManagerChanged()
+	 * @method \string getUfPhoneTwo()
+	 * @method \string remindActualUfPhoneTwo()
+	 * @method \string requireUfPhoneTwo()
+	 * @method bool hasUfPhoneTwo()
+	 * @method bool isUfPhoneTwoFilled()
+	 * @method \Craft\Model\CraftUser unsetUfPhoneTwo()
+	 * @method \string fillUfPhoneTwo()
+	 * @method \Craft\Model\CraftUser setUfPhoneTwo(\string $ufPhoneTwo)
+	 * @method bool isUfPhoneTwoChanged()
+	 * @method \string getUfEmailTwo()
+	 * @method \string remindActualUfEmailTwo()
+	 * @method \string requireUfEmailTwo()
+	 * @method bool hasUfEmailTwo()
+	 * @method bool isUfEmailTwoFilled()
+	 * @method \Craft\Model\CraftUser unsetUfEmailTwo()
+	 * @method \string fillUfEmailTwo()
+	 * @method \Craft\Model\CraftUser setUfEmailTwo(\string $ufEmailTwo)
+	 * @method bool isUfEmailTwoChanged()
 	 * @method \Craft\Model\EO_CraftUserUts getUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts remindActualUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts requireUtsObjectInner()
@@ -6055,6 +6095,10 @@ namespace Craft\Model {
 	 * @method \boolean[] fillUfEmailNotifyClaim()
 	 * @method \int[] getUfPersonalManagerList()
 	 * @method \int[] fillUfPersonalManager()
+	 * @method \string[] getUfPhoneTwoList()
+	 * @method \string[] fillUfPhoneTwo()
+	 * @method \string[] getUfEmailTwoList()
+	 * @method \string[] fillUfEmailTwo()
 	 * @method \Craft\Model\EO_CraftUserUts[] getUtsObjectInnerList()
 	 * @method \Craft\Model\EO_CraftUser_Collection getUtsObjectInnerCollection()
 	 * @method \Craft\Model\EO_CraftUserUts_Collection fillUtsObjectInner()
@@ -6112,11 +6156,6 @@ namespace Craft\Model {
 	 * @method EO_CraftUser_Result exec()
 	 * @method \Craft\Model\CraftUser fetchObject()
 	 * @method \Craft\Model\EO_CraftUser_Collection fetchCollection()
-	 *
-	 * Custom methods:
-	 * ---------------
-	 *
-Array
 	 */
 	class EO_CraftUser_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**
