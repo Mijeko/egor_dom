@@ -62,9 +62,14 @@ class StatusValueObject
 		}
 	}
 
-	public static function newClaim(): static
+	public static function newClaim(): StatusValueObject
 	{
-		return new static(self::STATUS_NEW);
+		return new self(self::STATUS_NEW);
+	}
+
+	public static function closeClaim(): StatusValueObject
+	{
+		return new self(self::STATUS_FINISH);
 	}
 
 	public function getCode(): string

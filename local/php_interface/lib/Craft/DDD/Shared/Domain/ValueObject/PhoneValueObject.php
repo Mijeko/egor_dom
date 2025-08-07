@@ -45,6 +45,8 @@ final class PhoneValueObject
 
 	private function normalize(string $value): string
 	{
+		$value = str_replace([' ', '-', '(', ')'], '', $value);
+		
 		if(str_starts_with($value, '+7'))
 		{
 			return $value;
@@ -54,6 +56,7 @@ final class PhoneValueObject
 		{
 			return '+7' . substr($value, 1, strlen($value) - 1);
 		}
+
 
 		return $value;
 	}

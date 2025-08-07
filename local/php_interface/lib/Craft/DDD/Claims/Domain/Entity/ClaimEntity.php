@@ -15,30 +15,28 @@ use Craft\DDD\User\Domain\Entity\UserEntity;
 class ClaimEntity
 {
 
-	public function __construct(
-		protected ?int                    $id,
-		protected ?string                 $name,
-		protected ?StatusValueObject      $status,
-		protected ?string                 $email,
-		protected ?string                 $phone,
-		protected ?string                 $client,
-		protected ?InnValueObject         $inn,
-		protected ?KppValueObject         $kpp,
-		protected ?BikValueObject         $bik,
-		protected ?OgrnValueObject        $ogrn,
-		protected ?CurrAccountValueObject $currAcc,
-		protected ?CorrAccountValueObject $corrAcc,
-		protected ?string                 $legalAddress,
-		protected ?string                 $postAddress,
-		protected ?string                 $bankName,
-		protected ?int                    $apartmentId,
-		protected ?int                    $userId,
-		protected ?ApartmentEntity        $apartmentEntity = null,
-		protected ?UserEntity             $user = null,
-		protected ?string                 $createdAt = null,
-	)
-	{
-	}
+
+	protected ?int $id;
+	protected ?string $name;
+	protected ?StatusValueObject $status;
+	protected ?string $email;
+	protected ?string $phone;
+	protected ?string $client;
+	protected ?InnValueObject $inn;
+	protected ?KppValueObject $kpp;
+	protected ?BikValueObject $bik;
+	protected ?OgrnValueObject $ogrn;
+	protected ?CurrAccountValueObject $currAcc;
+	protected ?CorrAccountValueObject $corrAcc;
+	protected ?string $legalAddress;
+	protected ?string $postAddress;
+	protected ?string $bankName;
+	protected ?int $apartmentId;
+	protected ?int $userId;
+	protected ?ApartmentEntity $apartmentEntity = null;
+	protected ?UserEntity $user = null;
+	protected ?string $createdAt = null;
+
 
 	public static function createClaim(
 		StatusValueObject $status,
@@ -58,30 +56,35 @@ class ClaimEntity
 		UserEntity        $user,
 	): static
 	{
+		$self = new self();
 
-		$name = 'Новая заявка от ' . date('d.m.Y H:i:s');
+		$self->name = 'Новая заявка от ' . date('d.m.Y H:i:s');
+		$self->status = $status;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->client = $client;
+		$self->inn = new InnValueObject($inn);
+		$self->kpp = new KppValueObject($kpp);
+		$self->bik = new BikValueObject($bik);
+		$self->ogrn = new OgrnValueObject($ogrn);
+		$self->currAcc = new CurrAccountValueObject($currAcc);
+		$self->corrAcc = new CorrAccountValueObject($corrAcc);
+		$self->legalAddress = $legalAddress;
+		$self->postAddress = $postAddress;
+		$self->bankName = $bankName;
+		$self->apartmentEntity = $apartmentEntity;
+		$self->user = $user;
 
-		return new static(
-			null,
-			$name,
-			$status,
-			$email,
-			$phone,
-			$client,
-			new InnValueObject($inn),
-			new KppValueObject($kpp),
-			new BikValueObject($bik),
-			new OgrnValueObject($ogrn),
-			new CurrAccountValueObject($currAcc),
-			new CorrAccountValueObject($corrAcc),
-			$legalAddress,
-			$postAddress,
-			$bankName,
-			null,
-			null,
-			$apartmentEntity,
-			$user
-		);
+		return $self;
+
+	}
+
+	public static function closeClaim(): ClaimEntity
+	{
+		$self = new self;
+		$self->status = StatusValueObject::closeClaim();
+
+		return $self;
 	}
 
 	public function addApartment(ApartmentEntity $apartmentEntity): static

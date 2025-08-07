@@ -7,10 +7,11 @@ import ValidatePersonalData from "@/core/validate/ValidatePersonalData.ts";
 import MaskInput from "@/components/part/form/MaskInput.vue";
 import type AuthResponseDto from "@/dto/response/AuthResponseDto.ts";
 import type {ComponentControllerApiErrorDto} from "@/dto/response/ComponentControllerApiResponseDto.ts";
+import PhoneInput from "@/components/html/PhoneInput.vue";
 
 export default defineComponent({
   name: "Auth",
-  components: {MaskInput},
+  components: {PhoneInput, MaskInput},
   data: () => {
     return {
       form: {
@@ -79,13 +80,7 @@ export default defineComponent({
     <h1 class="mb-3">Войти на сайт</h1>
     <v-form @submit.prevent="auth" v-model="isValid">
 
-      <!--      <MaskInput-->
-      <!--        v-model="form.phone"-->
-      <!--        :rules="validate.phone"-->
-      <!--        label="Номер телефона"-->
-      <!--      />-->
-
-      <v-text-field
+      <PhoneInput
         v-model="form.phone"
         :rules="validate.phone"
         label="Номер телефона"

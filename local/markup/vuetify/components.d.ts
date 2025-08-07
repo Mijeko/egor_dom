@@ -33,10 +33,12 @@ declare module 'vue' {
     MaskInput: typeof import('./src/components/part/form/MaskInput.vue')['default']
     MinMaxInputDropdown: typeof import('./src/components/filter/part/MinMaxInputDropdown.vue')['default']
     PersonalManager: typeof import('./src/components/profile/PersonalManager.vue')['default']
+    PhoneInput: typeof import('./src/components/html/PhoneInput.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
     ProfileIndex: typeof import('./src/components/ProfileIndex.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
+    SelectWithSearch: typeof import('./src/components/filter/part/SelectWithSearch.vue')['default']
     ShortOrderInfo: typeof import('./src/components/profile/ShortOrderInfo.vue')['default']
   }
 }

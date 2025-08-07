@@ -116,6 +116,9 @@ export default defineComponent({
       <v-card class="mt-3 mb-5 pa-4">
         <v-row>
           <v-col>
+
+          </v-col>
+          <v-col>
             <MinMaxInputDropdown
               color="light-blue"
               label="Стомость"

@@ -2,77 +2,79 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Domain\Entity\UserEntity;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
+use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
 
 class BxUserRepository implements UserRepositoryInterface
 {
 
-	protected function prepareGetList(array $filter, array $select = []): array
+	public function findAll(Criteria $criteria): array
 	{
-		return [
-			'filter'         => $filter,
-			'select'         => array_merge(
-				[
+		$result = [];
+		$userList = CraftUserTable::getList(
+			$criteria
+				->useSecureFields()
+				->select([
 					CraftUserTable::F_ID,
 					CraftUserTable::F_LOGIN,
 					CraftUserTable::F_EMAIL,
 					CraftUserTable::F_PERSONAL_PHONE,
+					CraftUserTable::F_PERSONAL_MOBILE,
 					CraftUserTable::F_PASSWORD,
-				],
-				$select
-			),
-			'private_fields' => true,
-		];
+				])
+				->construct()
+		)
+			->fetchCollection();
+
+		foreach($userList as $user)
+		{
+			$result[] = $this->hydrateElement($user);
+		}
+
+		return $result;
+
 	}
 
 	public function findById(int $id): ?UserEntity
 	{
-		$query = CraftUserTable::getList($this->prepareGetList(
-			[
-				CraftUserTable::F_ID => $id,
-			]
-		));
+		$users = $this->findAll(Criteria::build()->filter([
+			CraftUserTable::F_ID => $id,
+		]));
 
-		if($query->getSelectedRowsCount() != 1)
+		if(count($users) != 1)
 		{
 			return null;
 		}
 
-		$bxUser = $query->fetchObject();
-
-		return $this->hydrateElement($bxUser);
+		return array_shift($users);
 	}
 
-	public function findByPhoneNumber(string $phoneNumber): ?UserEntity
+	public function findByPhoneNumber(PhoneValueObject $phoneNumber): ?UserEntity
 	{
-		$query = CraftUserTable::getList($this->prepareGetList(
-			[
-				CraftUserTable::F_PERSONAL_PHONE => $phoneNumber,
-			]
-		));
+		$users = $this->findAll(Criteria::build()->filter([
+			CraftUserTable::F_PERSONAL_MOBILE => $phoneNumber->getValue(),
+		]));
 
-		if($query->getSelectedRowsCount() != 1)
+		if(count($users) != 1)
 		{
 			return null;
 		}
 
-		$bxUser = $query->fetchObject();
-
-		return $this->hydrateElement($bxUser);
-
+		return array_shift($users);
 	}
 
 	public function hydrateElement(CraftUser $bxUser): UserEntity
 	{
 		$user = new UserEntity(
-			$bxUser[CraftUserTable::F_ID],
-			$bxUser[CraftUserTable::F_LOGIN],
-			$bxUser[CraftUserTable::F_PERSONAL_PHONE],
-			$bxUser[CraftUserTable::F_EMAIL],
-			$bxUser[CraftUserTable::F_PASSWORD],
+			$bxUser->getId(),
+			$bxUser->getLogin(),
+			$bxUser->getPersonalMobile(),
+			$bxUser->getEmail(),
+			$bxUser->getPassword(),
 		);
 
 		return $user;

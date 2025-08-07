@@ -1,0 +1,20 @@
+<?php
+
+namespace Craft\DDD\User\Application\Service;
+
+use Craft\DDD\User\Application\Service\Interfaces\PasswordVerificator;
+
+class PasswordManager
+{
+
+	public function __construct(
+		protected PasswordVerificator $verificator
+	)
+	{
+	}
+
+	public function verifyPassword($password, $hash): bool
+	{
+		return $this->verificator->verify($password, $hash);
+	}
+}

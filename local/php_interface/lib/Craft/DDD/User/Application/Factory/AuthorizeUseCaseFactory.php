@@ -12,7 +12,8 @@ class AuthorizeUseCaseFactory
 	{
 		return new AuthorizeUseCase(
 			new BxUserRepository(),
-			new Authenticator()
+			new Authenticator(),
+			PasswordManagerFactory::getManager()
 		);
 	}
 }

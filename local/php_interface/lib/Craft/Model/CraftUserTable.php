@@ -21,6 +21,7 @@ class CraftUserTable extends UserTable
 	const F_LAST_NAME = 'LAST_NAME';
 	const F_SECOND_NAME = 'SECOND_NAME';
 	const F_PERSONAL_PHONE = 'PERSONAL_PHONE';
+	const F_PERSONAL_MOBILE = 'PERSONAL_MOBILE';
 
 
 	const F_UF_INN = 'UF_INN';

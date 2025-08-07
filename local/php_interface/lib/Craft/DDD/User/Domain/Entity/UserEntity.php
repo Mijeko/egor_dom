@@ -14,12 +14,6 @@ final class UserEntity
 	{
 	}
 
-	public function validatePassword(string $password): bool
-	{
-		return password_verify($password, $this->password);
-	}
-
-
 	public function getEmail(): string
 	{
 		return $this->email;

@@ -10,9 +10,11 @@ import type RegisterStudentResponseDto from "@/dto/response/RegisterStudentRespo
 import CoreHelper from "@/service/CoreHelper.ts";
 import type RegisterSimpleAgentRequestDto from "@/dto/request/RegisterSimpleAgentRequestDto.ts";
 import type {ComponentControllerApiErrorDto} from "@/dto/response/ComponentControllerApiResponseDto.ts";
+import PhoneInput from "@/components/html/PhoneInput.vue";
 
 export default defineComponent({
   name: "Registration",
+  components: {PhoneInput},
   data: () => {
     return {
       isFindByInn: 0,
@@ -135,22 +137,22 @@ export default defineComponent({
       };
 
       userService.registrationStudent(body)
-          .then((response: RegisterStudentResponseDto) => {
-            let {status, data} = response;
-            let {redirect} = data;
+        .then((response: RegisterStudentResponseDto) => {
+          let {status, data} = response;
+          let {redirect} = data;
 
-            if (status === 'success' && redirect) {
-              window.location.href = redirect;
-            }
-          }, function (errorResponse: ComponentControllerApiErrorDto) {
-            let {data} = errorResponse;
-            let {ajaxRejectData} = data;
-            let {error} = ajaxRejectData;
+          if (status === 'success' && redirect) {
+            window.location.href = redirect;
+          }
+        }, function (errorResponse: ComponentControllerApiErrorDto) {
+          let {data} = errorResponse;
+          let {ajaxRejectData} = data;
+          let {error} = ajaxRejectData;
 
-            if (error.message) {
-              AlertService.showErrorAlert('Регистрация', error.message);
-            }
-          });
+          if (error.message) {
+            AlertService.showErrorAlert('Регистрация', error.message);
+          }
+        });
     },
     registrationAgent: function () {
       if (!this.isFormAgentValid) {
@@ -163,22 +165,22 @@ export default defineComponent({
         password: this.formAgent.password,
       };
       api.registrationAgent(body)
-          .then((response: RegisterAgentResponseDto) => {
-            let {status, data} = response;
-            let {redirect} = data;
+        .then((response: RegisterAgentResponseDto) => {
+          let {status, data} = response;
+          let {redirect} = data;
 
-            if (status === 'success' && redirect) {
-              window.location.href = redirect;
-            }
-          }, function (errorResponse: ComponentControllerApiErrorDto) {
-            let {data} = errorResponse;
-            let {ajaxRejectData} = data;
-            let {error} = ajaxRejectData;
+          if (status === 'success' && redirect) {
+            window.location.href = redirect;
+          }
+        }, function (errorResponse: ComponentControllerApiErrorDto) {
+          let {data} = errorResponse;
+          let {ajaxRejectData} = data;
+          let {error} = ajaxRejectData;
 
-            if (error.message) {
-              AlertService.showErrorAlert('Регистрация', error.message);
-            }
-          });
+          if (error.message) {
+            AlertService.showErrorAlert('Регистрация', error.message);
+          }
+        });
     },
   },
 })
@@ -189,10 +191,10 @@ export default defineComponent({
   <v-card class="mt-16 " :border="false" elevation="0">
     <h1 class="text-center">Регистрация</h1>
     <v-tabs
-        align-tabs="center"
-        v-model="tab"
+      align-tabs="center"
+      v-model="tab"
 
-        color="deep-purple-accent-4"
+      color="deep-purple-accent-4"
     >
       <v-tab value="student">Как ученик</v-tab>
       <v-tab value="agent">Как агент</v-tab>
@@ -202,23 +204,22 @@ export default defineComponent({
     <v-tabs-window v-model="tab">
       <v-tabs-window-item value="student" class="pa-3">
         <v-form @submit.prevent="registrationStudent" v-model="isFormStudentValid">
-          <v-text-field
-              v-model="formStudent.phone"
-              :rules="formStudentValidateRules.phone"
-              return-masked-value
-              mask="+# (###) ### ####"
-              label="Номер телефона"
+
+          <PhoneInput
+            v-model="formStudent.phone"
+            :rules="formStudentValidateRules.phone"
+            label="Номер телефона"
           />
           <v-text-field
-              v-model="formStudent.email"
-              :rules="formStudentValidateRules.email"
-              label="E-mail адрес"
+            v-model="formStudent.email"
+            :rules="formStudentValidateRules.email"
+            label="E-mail адрес"
           />
           <v-text-field
-              v-model="formStudent.password"
-              :rules="formStudentValidateRules.password"
-              type="password"
-              label="Пароль"
+            v-model="formStudent.password"
+            :rules="formStudentValidateRules.password"
+            type="password"
+            label="Пароль"
           />
 
           <v-row>
@@ -235,25 +236,23 @@ export default defineComponent({
       <v-tabs-window-item value="agent" class="pa-3">
         <v-form @submit.prevent="registrationAgent" v-model="isFormAgentValid">
 
-          <v-text-field
-              v-model="formAgent.phone"
-              :rules="formAgentValidateRules.phone"
-              return-masked-value
-              mask="+# (###) ### ####"
-              label="Телефон"
+          <PhoneInput
+            v-model="formAgent.phone"
+            :rules="formAgentValidateRules.phone"
+            label="Телефон"
           />
 
           <v-text-field
-              v-model="formAgent.email"
-              :rules="formAgentValidateRules.email"
-              label="E-Mail адрес"
+            v-model="formAgent.email"
+            :rules="formAgentValidateRules.email"
+            label="E-Mail адрес"
           />
 
           <v-text-field
-              type="password"
-              v-model="formAgent.password"
-              :rules="formAgentValidateRules.password"
-              label="Пароль"
+            type="password"
+            v-model="formAgent.password"
+            :rules="formAgentValidateRules.password"
+            label="Пароль"
           />
 
 
