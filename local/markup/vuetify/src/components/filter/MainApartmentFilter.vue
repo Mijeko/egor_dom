@@ -12,6 +12,8 @@ import type ApartmentFilterResponseDto from "@/dto/response/ApartmentFilterRespo
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import {useApartmentFilterStore} from "@/store.ts";
 import SelectWithSearch from "@/components/filter/part/SelectWithSearch.vue";
+import type CheckboxDropdownItemDto from "@/dto/present/CheckboxDropdownItemDto.ts";
+import type {ApartmentFilterData, ApartmentFilterProp} from "@/dto/ApartmentFilterData.ts";
 
 export default defineComponent({
   name: "MainApartmentFilter",
@@ -20,10 +22,14 @@ export default defineComponent({
     filterApartmentList: {
       type: Array as PropType<ApartmentDto[]>,
       default: []
+    },
+    filterData: {
+      type: Object as PropType<ApartmentFilterData>
     }
   },
   data: function () {
     return {
+      canFilter: false,
       filterTimeout: 0,
       preFilterTimeout: 0,
       preFilterCount: -1,
@@ -46,6 +52,7 @@ export default defineComponent({
     let store = useApartmentFilterStore();
     let defStore = store.getFilterData;
     this.filter = {...defStore};
+    this.canFilter = true;
   },
   methods: {
     clearFilter: function () {
@@ -78,10 +85,27 @@ export default defineComponent({
 
       }, 400);
     },
+    getAr: function (code: string): CheckboxDropdownItemDto[] {
+
+      let prop: ApartmentFilterProp | undefined = this.filterData?.propertyList.filter((item: ApartmentFilterProp) => {
+        return item.code === code;
+      }).shift()
+
+      if (prop === undefined) {
+        return [];
+      }
+
+      return prop.value as CheckboxDropdownItemDto[];
+    }
   },
   watch: {
     'filter': {
       handler(v, nv) {
+
+        if (!this.canFilter) {
+          return;
+        }
+
         let service = new ApartmentFilterService();
         let body: ApartmentPreFilterRequestDto = {
           action: 'prefilter',
@@ -120,6 +144,7 @@ export default defineComponent({
         <v-row>
           <v-col>
             <SelectWithSearch
+              :values="getAr('developer')"
               color="light-blue"
               label="Застройщик"
               icon="$cash"
@@ -141,16 +166,7 @@ export default defineComponent({
               label="Сан-узел"
               icon="$shower"
               v-model="filter.bathroom"
-              :values="[
-                {
-                  label:'Совмещенный',
-                  value:'union'
-                },
-                {
-                  label:'Раздельный',
-                  value:'split'
-                }
-              ]"
+              :values="getAr('bathroom')"
             />
           </v-col>
           <v-col>
@@ -159,16 +175,7 @@ export default defineComponent({
               label="Отделка"
               icon="$hammer"
               v-model="filter.renovation"
-              :values="[
-                {
-                  label:'Чистовая',
-                  value:'clean'
-                },
-                {
-                  label:'С ремонтом',
-                  value:'repair'
-                }
-              ]"
+              :values="getAr('renovation')"
             />
           </v-col>
           <v-col>

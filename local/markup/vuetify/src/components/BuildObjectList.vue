@@ -4,14 +4,15 @@ import {defineComponent, type PropType} from 'vue'
 import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
-import {th} from "vuetify/locale";
+import type {ApartmentFilterData} from "@/dto/ApartmentFilterData.ts";
 
 export default defineComponent({
   name: "BuildObjectList",
   components: {MainApartmentFilter},
   data: function () {
     return {
-      filterApartmentList: [] as ApartmentDto[]
+      filterApartmentList: [] as ApartmentDto[],
+      filterData: {} as ApartmentFilterData
     };
   },
   props: {
@@ -66,6 +67,30 @@ export default defineComponent({
 
       return this.BuildObjects as BuildObjectDto[];
     }
+  },
+  mounted(): any {
+    this.filterData = {
+      propertyList: [
+        {
+          name: 'Сан-узел', code: 'bathroom', value: [
+            {label: 'Совмещенный', value: 'union'},
+            {label: 'Раздельный', value: 'split'}
+          ]
+        },
+        {
+          name: 'Застройщик', code: 'developer', value: [
+            {label: 'Градостроительный', value: '1'},
+            {label: 'Градостроительный 22', value: '2'},
+          ]
+        },
+        {
+          name: 'Отделка', code: 'renovation', value: [
+            {label: 'Чистовая', value: 'clean'},
+            {label: 'С ремонтом', value: 'repair'}
+          ]
+        }
+      ]
+    };
   }
 })
 </script>
@@ -74,6 +99,7 @@ export default defineComponent({
 
   <MainApartmentFilter
     v-model="filterApartmentList"
+    :filter-data="filterData"
   />
 
   <v-row>

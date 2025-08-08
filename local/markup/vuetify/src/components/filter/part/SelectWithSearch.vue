@@ -10,6 +10,10 @@ export default defineComponent({
     modelValue: {
       type: [Boolean, String, Object, Array, null],
       default: null
+    },
+    values: {
+      type: [Array],
+      default: []
     }
   },
   data: function () {
@@ -17,54 +21,7 @@ export default defineComponent({
       searchText: null,
       searchResult: [] as string[],
       selectedFruits: [],
-      fruits: [
-        'Apples',
-        'Apricots',
-        'Avocado',
-        'Bananas',
-        'Blueberries',
-        'Blackberries',
-        'Boysenberries',
-        'Bread fruit',
-        'Cantaloupes (cantalope)',
-        'Cherries',
-        'Cranberries',
-        'Cucumbers',
-        'Currants',
-        'Dates',
-        'Eggplant',
-        'Figs',
-        'Grapes',
-        'Grapefruit',
-        'Guava',
-        'Honeydew melons',
-        'Huckleberries',
-        'Kiwis',
-        'Kumquat',
-        'Lemons',
-        'Limes',
-        'Mangos',
-        'Mulberries',
-        'Muskmelon',
-        'Nectarines',
-        'Olives',
-        'Oranges',
-        'Papaya',
-        'Peaches',
-        'Pears',
-        'Persimmon',
-        'Pineapple',
-        'Plums',
-        'Pomegranate',
-        'Raspberries',
-        'Rose Apple',
-        'Starfruit',
-        'Strawberries',
-        'Tangerines',
-        'Tomatoes',
-        'Watermelons',
-        'Zucchini',
-      ]
+      fruits: []
     };
   },
   methods: {
