@@ -18,7 +18,7 @@ class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 	{
 	}
 
-	protected function store(array $formData): void
+	protected function work(array $formData): void
 	{
 		try
 		{

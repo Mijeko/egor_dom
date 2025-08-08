@@ -18,7 +18,7 @@ class DevelopFormComponent extends AjaxComponent
 	}
 
 
-	protected function store(array $formData): void
+	protected function work(array $formData): void
 	{
 
 		$model = new CIBlockElement();

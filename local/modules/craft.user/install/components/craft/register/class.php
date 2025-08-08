@@ -18,7 +18,7 @@ class JediUserRegisterComponent extends AjaxComponent
 		return parent::onPrepareComponentParams($arParams);
 	}
 
-	protected function store(array $formData): void
+	protected function work(array $formData): void
 	{
 
 		$phone = $formData['PHONE'];

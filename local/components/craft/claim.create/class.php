@@ -17,7 +17,7 @@ class CraftClaimCreateComponent extends AjaxComponent
 	{
 	}
 
-	protected function store(array $formData): void
+	protected function work(array $formData): void
 	{
 		try
 		{

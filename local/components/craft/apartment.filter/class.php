@@ -23,7 +23,7 @@ class CraftApartmentFilterComponent extends AjaxComponent
 	{
 	}
 
-	protected function store(array $formData): void
+	protected function work(array $formData): void
 	{
 		switch($formData['action'])
 		{

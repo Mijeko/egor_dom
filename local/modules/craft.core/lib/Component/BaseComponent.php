@@ -51,7 +51,7 @@ abstract class BaseComponent extends \CBitrixComponent
 
 	abstract public function executeAction();
 
-	abstract protected function store(array $formData): void;
+	abstract protected function work(array $formData): void;
 
 	protected function _validate(array $formData)
 	{
@@ -95,7 +95,7 @@ abstract class BaseComponent extends \CBitrixComponent
 
 		}
 
-		$this->store($formData);
+		$this->work($formData);
 
 
 		$event = new Event($this->componentNamespace(), 'afterElementAdd', [
