@@ -11,4 +11,5 @@ export default interface ApartmentFilterDto {
   roomsTotal: number | null,
   floor: number | null,
   buildObjectId?: number | null,
+  developerId: number[],
 }

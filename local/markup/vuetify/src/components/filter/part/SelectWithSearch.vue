@@ -1,10 +1,21 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
 
 export default defineComponent({
   name: "SelectWithSearch",
+  props: {
+    icon: String,
+    label: String,
+    color: String,
+    modelValue: {
+      type: [Boolean, String, Object, Array, null],
+      default: null
+    }
+  },
   data: function () {
     return {
+      searchText: null,
+      searchResult: [] as string[],
       selectedFruits: [],
       fruits: [
         'Apples',
@@ -57,73 +68,62 @@ export default defineComponent({
     };
   },
   methods: {
-    toggle: function () {
-      if (this.likesAllFruit.value) {
-        this.selectedFruits.value = []
+    doFilterItems: function (event: any) {
+      this.searchText = event.target.value;
+
+      if (!this.searchText) {
+        this.searchResult = this.fruits;
       } else {
-        this.selectedFruits.value = this.fruits.slice()
+        this.searchResult = (this.fruits.filter((phrase: string) => {
+          return phrase.toLowerCase().indexOf(String(this.searchText)) != -1;
+        })) as string[]
       }
     }
   },
-  computed: {
-    title: function () {
-      if (this.likesAllFruit.value) return 'Holy smokes, someone call the fruit police!';
-      if (this.likesSomeFruit.value) return 'Fruit Count';
-      return 'How could you not like fruit?';
-    },
-    likesSomeFruit: function () {
-      return this.selectedFruits.value.length > 0;
-    },
-    likesAllFruit: function () {
-      return this.selectedFruits.value.length === this.fruits.length;
-    },
-    subtitle: function () {
-      if (this.likesAllFruit.value) return undefined;
-      if (this.likesSomeFruit.value) return this.selectedFruits.value.length;
-      return 'Go ahead, make a selection above!'
+  mounted(): any {
+    if (!this.searchText) {
+      this.searchResult = this.fruits;
     }
   }
 })
 </script>
 
 <template>
-  <v-select
-    v-model="selectedFruits"
-    :items="fruits"
-    label="Favorite Fruits"
-    multiple
+  <v-menu
+    :close-on-content-click="false"
   >
-    <template v-slot:prepend-item>
-      <v-list-item
-        title="Select All"
-        @click="toggle"
+    <template v-slot:activator="{ props }">
+      <v-btn
+        :prepend-icon="icon"
+        :color
+        variant="tonal"
+        v-bind="props"
       >
-        <template v-slot:prepend>
-          <v-checkbox-btn
-            :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
-            :indeterminate="likesSomeFruit && !likesAllFruit"
-            :model-value="likesAllFruit"
-          ></v-checkbox-btn>
-        </template>
-      </v-list-item>
-
-      <v-divider class="mt-2"></v-divider>
+        <span>{{ label }}</span>
+      </v-btn>
     </template>
 
-    <template v-slot:append-item>
-      <v-divider class="mb-2"></v-divider>
 
-      <v-list-item
-        :subtitle="subtitle"
-        :title="title"
-        disabled
+    <v-card min-width="300" class="pa-4">
+      <v-select
+        v-model="selectedFruits"
+        :items="searchResult"
+        :label
+        multiple
       >
-        <template v-slot:prepend>
-          <v-avatar color="primary" icon="mdi-food-apple"></v-avatar>
+        <template v-slot:prepend-item>
+          <v-row>
+            <v-col class="pa-4">
+              <v-text-field label="Поиск" @keyup.prevent.stop="doFilterItems"/>
+            </v-col>
+          </v-row>
+          <v-divider class="mt-2"></v-divider>
         </template>
-      </v-list-item>
-    </template>
-  </v-select>
+
+      </v-select>
+    </v-card>
+
+  </v-menu>
 </template>
 
 <style scoped>

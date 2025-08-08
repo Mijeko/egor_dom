@@ -11,10 +11,11 @@ import type ApartmentFilterRequestDto from "@/dto/request/ApartmentFilterRequest
 import type ApartmentFilterResponseDto from "@/dto/response/ApartmentFilterResponseDto.ts";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import {useApartmentFilterStore} from "@/store.ts";
+import SelectWithSearch from "@/components/filter/part/SelectWithSearch.vue";
 
 export default defineComponent({
   name: "MainApartmentFilter",
-  components: {MinMaxInputDropdown, InputDropdown, CheckboxDropdown},
+  components: {SelectWithSearch, MinMaxInputDropdown, InputDropdown, CheckboxDropdown},
   props: {
     filterApartmentList: {
       type: Array as PropType<ApartmentDto[]>,
@@ -36,6 +37,8 @@ export default defineComponent({
         floorsTotal: null,
         roomsTotal: null,
         floor: null,
+        developerId: [],
+        buildObjectId: null,
       } as ApartmentFilterDto
     };
   },
@@ -116,7 +119,12 @@ export default defineComponent({
       <v-card class="mt-3 mb-5 pa-4">
         <v-row>
           <v-col>
-
+            <SelectWithSearch
+              color="light-blue"
+              label="Застройщик"
+              icon="$cash"
+              v-model="filter.developerId"
+            />
           </v-col>
           <v-col>
             <MinMaxInputDropdown
