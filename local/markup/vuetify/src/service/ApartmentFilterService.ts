@@ -10,4 +10,8 @@ export default class ApartmentFilterService {
   filterAction(body: ApartmentFilterRequestDto) {
     return ControllerApi.post('craft:apartment.filter', body);
   }
+
+  static filterData() {
+    return ControllerApi.post('craft:apartment.filter.data');
+  }
 }

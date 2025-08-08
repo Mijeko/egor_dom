@@ -5,6 +5,7 @@ import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import type {ApartmentFilterData} from "@/dto/ApartmentFilterData.ts";
+import ApartmentFilterService from "@/service/ApartmentFilterService.ts";
 
 export default defineComponent({
   name: "BuildObjectList",
@@ -69,6 +70,11 @@ export default defineComponent({
     }
   },
   mounted(): any {
+
+
+    ApartmentFilterService.filterData().then(function (r: any) {
+    });
+
     this.filterData = {
       propertyList: [
         {
