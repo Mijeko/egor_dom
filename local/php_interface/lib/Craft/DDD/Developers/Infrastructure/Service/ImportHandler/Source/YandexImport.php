@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service\ImportHandler\Source;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -42,6 +43,7 @@ class YandexImport implements ImportHandlerInterface
 		{
 			$rawApartmentData = json_decode(json_encode($offer), true);
 			$offerAttributes = $offer->attributes();
+
 
 			$externalId = (string)$offerAttributes['internal-id'];
 
