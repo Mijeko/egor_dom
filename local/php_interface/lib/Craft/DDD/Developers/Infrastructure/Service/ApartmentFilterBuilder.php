@@ -12,6 +12,7 @@ class ApartmentFilterBuilder
 		$request = Application::getInstance()->getContext()->getRequest();
 
 		return new ApartmentFilterDto(
+			$request['filter']['developerId'],
 			$request['filter']['buildObjectId'],
 			$request['filter']['minPrice'],
 			$request['filter']['maxPrice'],
