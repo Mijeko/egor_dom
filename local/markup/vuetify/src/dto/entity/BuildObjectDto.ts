@@ -13,5 +13,6 @@ export default interface BuildObjectDto {
   detailLink?: string;
   gallery?: BxImage[];
   apartments?: ApartmentDto[],
-  location?: LocationDto
+  location?: LocationDto,
+  countApartments?: number;
 }

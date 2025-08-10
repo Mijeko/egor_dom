@@ -1,7 +1,9 @@
 <?php
 
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
+use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
@@ -11,6 +13,7 @@ use Craft\Dto\BxImageDto;
 
 class CraftBuildObjectListComponent extends CBitrixComponent
 {
+	protected ApartmentRepositoryInterface $apartmentRepository;
 	protected ?BuildObjectRepositoryInterface $buildObjectRepository = null;
 	protected ImageServiceInterface $imageService;
 
@@ -38,15 +41,13 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 	{
 
 		$buildObjectList = $this->buildObjectRepository->findAll();
-		$apartmentList = [];
-		$developerList = [];
 
-		$buildObjectListDto = array_map(function(BuildObjectEntity $bo) {
+		$buildObjectListDto = array_map(function(BuildObjectEntity $buildObjectEntity) {
 			return new BuildObjectDto(
-				$bo->getId(),
-				$bo->getName(),
-				$bo->getType(),
-				$bo->getFloors(),
+				$buildObjectEntity->getId(),
+				$buildObjectEntity->getName(),
+				$buildObjectEntity->getType(),
+				$buildObjectEntity->getFloors(),
 				null,
 				array_map(function(int $imageId) {
 					$res = $this->imageService->fromId($imageId);
@@ -54,10 +55,11 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 						$res->id,
 						$res->src,
 					);
-				}, $bo->getGalleryIdList()),
+				}, $buildObjectEntity->getGalleryIdList()),
 				null,
-				LocationDto::fromModel($bo->getLocation()),
-				'/objects/' . $bo->getId() . '/',
+				LocationDto::fromModel($buildObjectEntity->getLocation()),
+				'/objects/' . $buildObjectEntity->getId() . '/',
+				$this->apartmentRepository->countByBuildObjectId($buildObjectEntity->getId()),
 			);
 		}, $buildObjectList);
 
@@ -66,7 +68,8 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 
 	protected function loadService(): void
 	{
-		$this->buildObjectRepository = new OrmBuildObjectRepository();
 		$this->imageService = new ImageService();
+		$this->apartmentRepository = new OrmApartmentRepository();
+		$this->buildObjectRepository = new OrmBuildObjectRepository();
 	}
 }

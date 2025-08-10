@@ -126,4 +126,14 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 		return array_shift($apartmentList);
 	}
+
+	public function countByBuildObjectId(int $buildObjectId): int
+	{
+		return ApartmentTable::getList([
+			'filter' => [
+				ApartmentTable::F_ACTIVE          => ApartmentTable::ACTIVE_Y,
+				ApartmentTable::F_BUILD_OBJECT_ID => $buildObjectId,
+			],
+		])->getSelectedRowsCount();
+	}
 }

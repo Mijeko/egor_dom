@@ -59,7 +59,7 @@ export default defineComponent({
         <div class="pa-3">
 
           <v-card-title>{{ buildObject.name }}</v-card-title>
-          <v-card-subtitle>Квартир: {{ buildObject?.apartments?.length }}</v-card-subtitle>
+          <v-card-subtitle>Квартир: {{ buildObject?.countApartments }}</v-card-subtitle>
 
           <v-btn class="mt-5" :href="buildObject.detailLink">Посмотреть</v-btn>
         </div>

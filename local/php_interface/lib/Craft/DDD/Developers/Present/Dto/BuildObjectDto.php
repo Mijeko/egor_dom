@@ -26,6 +26,7 @@ final class BuildObjectDto
 		public ?array        $apartments = null,
 		public ?LocationDto  $location = null,
 		public ?string       $detailLink = null,
+		public ?int          $countApartments = null,
 	)
 	{
 	}

@@ -15,4 +15,6 @@ interface ApartmentRepositoryInterface
 	public function update(ApartmentEntity $apartment): ApartmentEntity;
 
 	public function findByExternalId(string $externalId): ?ApartmentEntity;
+
+	public function countByBuildObjectId(int $buildObjectId): int;
 }
