@@ -100,11 +100,11 @@ class ImageService implements ImageServiceInterface
 
 	protected function sourceFolder(): string
 	{
-		return '/upload/import_aparts/source/';
+		return '/import_aparts/source/';
 	}
 
 	protected function imageFolder(): string
 	{
-		return '/upload/import_aparts/';
+		return '/import_aparts/';
 	}
 }

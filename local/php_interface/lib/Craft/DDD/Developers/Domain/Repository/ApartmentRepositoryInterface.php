@@ -13,4 +13,6 @@ interface ApartmentRepositoryInterface
 	public function create(ApartmentEntity $apartment): ApartmentEntity;
 
 	public function update(ApartmentEntity $apartment): ApartmentEntity;
+
+	public function findByExternalId(string $externalId): ?ApartmentEntity;
 }

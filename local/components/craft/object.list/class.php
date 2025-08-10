@@ -1,13 +1,18 @@
 <?php
 
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
-use Craft\DDD\Developers\Application\Service\BuildObjectService;
-use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
+use Craft\DDD\Shared\Presentation\Dto\LocationDto;
+use Craft\Dto\BxImageDto;
 
 class CraftBuildObjectListComponent extends CBitrixComponent
 {
-	protected ?BuildObjectService $service = null;
+	protected ?BuildObjectRepositoryInterface $buildObjectRepository = null;
+	protected ImageServiceInterface $imageService;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -31,25 +36,37 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['BUILD_OBJECTS'] = array_map(
-			function(BuildObjectEntity $buildObject) {
-				return BuildObjectDto::fromModel($buildObject);
-			},
-			$this->service->findAll(
-				[],
-				$this->arParams['FILTER'],
-			)
-		);
+
+		$buildObjectList = $this->buildObjectRepository->findAll();
+		$apartmentList = [];
+		$developerList = [];
+
+		$buildObjectListDto = array_map(function(BuildObjectEntity $bo) {
+			return new BuildObjectDto(
+				$bo->getId(),
+				$bo->getName(),
+				$bo->getType(),
+				$bo->getFloors(),
+				null,
+				array_map(function(int $imageId) {
+					$res = $this->imageService->fromId($imageId);
+					return new BxImageDto(
+						$res->id,
+						$res->src,
+					);
+				}, $bo->getGalleryIdList()),
+				null,
+				LocationDto::fromModel($bo->getLocation()),
+				'/objects/' . $bo->getId() . '/',
+			);
+		}, $buildObjectList);
+
+		$this->arResult['BUILD_OBJECTS'] = $buildObjectListDto;
 	}
 
 	protected function loadService(): void
 	{
-		if($this->arParams['IBLOCK_ID'])
-		{
-			$this->service = BuildObjectServiceFactory::createOnIblock($this->arParams['IBLOCK_ID']);
-		} else
-		{
-			$this->service = BuildObjectServiceFactory::createOnOrm();
-		}
+		$this->buildObjectRepository = new OrmBuildObjectRepository();
+		$this->imageService = new ImageService();
 	}
 }

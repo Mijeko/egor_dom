@@ -27,17 +27,17 @@ final class BuildObjectEntity
 	}
 
 
-	public static function fromImport(
+	public static function createFromImport(
 		?string              $name,
 		?string              $type,
 		?int                 $floors,
 		?LocationValueObject $location,
 		DeveloperEntity      $developer,
 		?array               $galleryIdList,
-		?CityEntity          $city,
-	): static
+		CityEntity           $city,
+	): BuildObjectEntity
 	{
-		return new static(
+		return new BuildObjectEntity(
 			null,
 			$name,
 			$type,
@@ -47,9 +47,28 @@ final class BuildObjectEntity
 			$developer->getId(),
 			$developer,
 			null,
-			null,
 			$city,
 		);
+	}
+
+	public function updateFromImport(
+		?string              $name,
+		?string              $type,
+		?int                 $floors,
+		?LocationValueObject $location,
+		DeveloperEntity      $developer,
+		?array               $galleryIdList,
+		CityEntity           $city,
+	): BuildObjectEntity
+	{
+		$this->name = $name;
+		$this->type = $type;
+		$this->floors = $floors;
+		$this->location = $location;
+		$this->developer = $developer;
+		$this->galleryIdList = $galleryIdList;
+		$this->city = $city;
+		return $this;
 	}
 
 	public function refreshId(int $id): BuildObjectEntity

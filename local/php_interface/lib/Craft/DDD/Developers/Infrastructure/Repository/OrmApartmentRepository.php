@@ -72,59 +72,58 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	protected function hydrateElement(Apartment $apartment): ApartmentEntity
 	{
-		$buildObject = null;
-		return new ApartmentEntity(
-		// @phpstan-ignore method.notFound
+		return ApartmentEntity::hydrate(
 			$apartment->getId(),
-			// @phpstan-ignore method.notFound
 			$apartment->getBuildObjectId(),
-			// @phpstan-ignore method.notFound
-			$buildObject,
-			// @phpstan-ignore method.notFound
 			$apartment->getName(),
-			// @phpstan-ignore method.notFound
 			$apartment->getDescription(),
-			// @phpstan-ignore method.notFound
 			$apartment->getPrice(),
-			// @phpstan-ignore method.notFound
 			$apartment->getRooms(),
-			// @phpstan-ignore method.notFound
 			$apartment->getFloor(),
 			null,
-			// @phpstan-ignore method.notFound
 			$apartment->getRenovation(),
-			new StringLogicValueObject(
-			// @phpstan-ignore method.notFound
-				$apartment->getParking()
-			),
-			new StringLogicValueObject(
-			// @phpstan-ignore method.notFound
-				$apartment->getBathroomUnit()
-			),
-			// @phpstan-ignore method.notFound
+			new  StringLogicValueObject($apartment->getParking()),
+			new  StringLogicValueObject($apartment->getBathroomUnit()),
 			$apartment->getMortgage(),
-			// @phpstan-ignore method.notFound
 			$apartment->getBuiltYear(),
 			$apartment->getPlanImageEx(),
-			$apartment->getGalleryEx(),
-			new BuiltStateValueObject(
-			// @phpstan-ignore method.notFound
-				$apartment->getBuildingState()
-			),
-			// @phpstan-ignore method.notFound
+			new BuiltStateValueObject($apartment->getBuildingState()),
 			$apartment->getExternalId(),
 		);
 	}
 
 	public function findById(int $id): ?ApartmentEntity
 	{
-		$model = ApartmentTable::getByPrimary($id)->fetchObject();
-		if(!$model)
+
+		$apartmentList = $this->findAll(
+			[],
+			[
+				ApartmentTable::F_ID => $id,
+			]
+		);
+
+		if(count($apartmentList) != 1)
 		{
-			throw new \Exception('Квартира не найдена');
+			return null;
 		}
 
+		return array_shift($apartmentList);
+	}
 
-		return $this->hydrateElement($model);
+	public function findByExternalId(string $externalId): ?ApartmentEntity
+	{
+		$apartmentList = $this->findAll(
+			[],
+			[
+				ApartmentTable::F_EXTERNAL_ID => $externalId,
+			]
+		);
+
+		if(count($apartmentList) != 1)
+		{
+			return null;
+		}
+
+		return array_shift($apartmentList);
 	}
 }

@@ -25,7 +25,7 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'BuildObjectList',
 		'PROPS'  => [
-			'BuildObjects' => $arResult['BUILD_OBJECTS'],
+			'buildObjects' => $arResult['BUILD_OBJECTS'],
 		],
 	],
 	false,

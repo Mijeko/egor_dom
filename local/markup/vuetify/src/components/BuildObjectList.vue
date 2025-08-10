@@ -18,56 +18,8 @@ export default defineComponent({
     };
   },
   props: {
-    BuildObjects: {
+    buildObjects: {
       type: Array as PropType<BuildObjectDto[]>
-    }
-  },
-  computed: {
-    buildObjectList: function (): BuildObjectDto[] {
-
-      if (this.filterApartmentList.length > 0) {
-
-        let objects: null[] | BuildObjectDto[] = this.filterApartmentList.map(function (apartment: ApartmentDto) {
-          return apartment.buildObject;
-        });
-
-        objects = objects.filter(n => n);
-
-        let _idObjects: number[] = [];
-
-        objects = objects.filter(function (buildObject: BuildObjectDto) {
-
-          let buildObjectId: number = buildObject.id;
-
-          if (_idObjects.includes(buildObjectId)) {
-            return null;
-          }
-          _idObjects.push(buildObjectId);
-          return buildObject;
-        });
-
-        objects = objects.filter(n => n);
-
-        objects = objects.map((buildObject: BuildObjectDto) => {
-
-          let _apartments = this.filterApartmentList.filter((apartment: ApartmentDto) => {
-            return apartment.buildObjectId === buildObject.id;
-          });
-
-
-          if (_apartments.length > 0) {
-            buildObject.apartments = _apartments;
-          }
-
-          return buildObject;
-        });
-
-
-        return objects as BuildObjectDto[];
-
-      }
-
-      return this.BuildObjects as BuildObjectDto[];
     }
   },
   beforeCreate(): any {
@@ -78,13 +30,8 @@ export default defineComponent({
         this.filterData.propertyList = filter.props;
       });
   },
-  beforeMount(): any {
-    // ApartmentFilterService.filterData()
-    //   .then((response: ApartmentFilterDataResponseDto) => {
-    //     let {data} = response;
-    //     let {filter} = data;
-    //     this.filterData.propertyList = filter.props;
-    //   });
+  mounted(): any {
+    console.log(this.buildObjects);
   }
 })
 </script>
@@ -97,7 +44,7 @@ export default defineComponent({
   />
 
   <v-row>
-    <v-col cols="12" sm="6" md="4" lg="3" v-for="buildObject in buildObjectList" class="mb-5">
+    <v-col cols="12" sm="6" md="4" lg="3" v-for="buildObject in buildObjects" class="mb-5">
       <v-card>
 
         <v-carousel :show-arrows="false" :hide-delimiters="true" :touch="true">

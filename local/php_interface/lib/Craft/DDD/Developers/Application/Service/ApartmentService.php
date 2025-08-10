@@ -69,32 +69,6 @@ class ApartmentService
 		return $_apartment;
 	}
 
-	public function create(ApartmentEntity $apartment): ApartmentEntity
-	{
-
-		if($buildObjectEntity = $apartment->getBuildObject())
-		{
-			$_buildObject = $this->buildObjectRepository->findByName($buildObjectEntity->getName());
-
-			if(!$_buildObject)
-			{
-				$_buildObject = $this->buildObjectRepository->create($buildObjectEntity);
-				if(!$_buildObject)
-				{
-					throw new \RuntimeException("Ошибка создания объекта недвижимости");
-				}
-			}
-
-			$apartment->getBuildObject()->refreshId($_buildObject->getId());
-		}
-
-		return $this->apartmentRepository->create($apartment);
-	}
-
-	public function update(ApartmentEntity $apartment): ApartmentEntity
-	{
-		return $this->apartmentRepository->update($apartment);
-	}
 
 	private function loadRelations(array &$apartmentList): void
 	{

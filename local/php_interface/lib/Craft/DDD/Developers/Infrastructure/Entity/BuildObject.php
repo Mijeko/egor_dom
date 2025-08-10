@@ -6,34 +6,23 @@ use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 
 class BuildObject extends EO_BuildObject
 {
-
-	const UPLOAD_PATH = '/craft/develop/objects/';
-
 	public function setGalleryEx(array $galleryData): void
 	{
-		$listFileId = [];
-
-		foreach($galleryData as $fileData)
+		foreach($galleryData as $fileId)
 		{
-			if(empty($fileData['ID']))
+			if(!is_numeric($fileId) || !is_int($fileId))
 			{
-				$file = \CIBlock::makeFileArray($fileData);
-				$fileId = \CFile::SaveFile($file, self::UPLOAD_PATH);
-			} else
-			{
-				$fileId = $fileData['ID'];
-			}
-
-
-			if($fileId)
-			{
-				$listFileId[] = $fileId;
+				throw new \Exception('Неверный тип данных для картинок');
 			}
 		}
 
-		$this->setGallery(json_encode($listFileId));
+		$this->setGallery(json_encode($galleryData));
 	}
 
+
+	/**
+	 * @return int[]
+	 */
 	public function getGalleryEx(): array
 	{
 		$result = [];

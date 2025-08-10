@@ -2,12 +2,15 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
+use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\BlossomHandler;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\FirstDevelopHandler;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\ImportHandlerInterface;
@@ -77,7 +80,8 @@ class ImportService
 			case Developer::HANDLER_FIRST_DEVELOP:
 				return new FirstDevelopHandler(
 					new YandexImport(
-						$this->apartmentService,
+						new OrmBuildObjectRepository(),
+						new OrmApartmentRepository(),
 						$this->developer,
 						$this->imageService,
 					)
@@ -86,7 +90,8 @@ class ImportService
 			case Developer::HANDLER_RASCVET:
 				return new BlossomHandler(
 					new YandexImport(
-						$this->apartmentService,
+						new OrmBuildObjectRepository(),
+						new OrmApartmentRepository(),
 						$this->developer,
 						$this->imageService,
 					)

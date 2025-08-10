@@ -8,6 +8,8 @@ interface BuildObjectRepositoryInterface
 {
 	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity;
 
+	public function update(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity;
+
 	public function findById(int $id): ?BuildObjectEntity;
 
 	public function findByName(string $name): ?BuildObjectEntity;

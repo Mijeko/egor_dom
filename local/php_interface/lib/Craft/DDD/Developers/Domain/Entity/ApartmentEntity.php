@@ -4,61 +4,76 @@ namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 
 final class ApartmentEntity
 {
+	protected ?int $id;
+	protected ?int $buildObjectId;
+	protected ?BuildObjectEntity $buildObject;
+	protected ?string $name;
+	protected ?string $description;
+	protected ?int $price;
+	protected ?int $rooms;
+	protected ?int $floor;
+	protected ?AreaValueObject $area;
+	protected ?string $renovation;
+	protected ?StringLogicValueObject $parking;
+	protected ?StringLogicValueObject $bathroomUnit;
+	protected ?string $mortgage;
+	protected ?int $builtYear;
+	protected ?array $planImagesIdList;
+	protected ?array $galleryIdList;
+	protected ?BuiltStateValueObject $buildingState;
+	protected ?string $externalId = null;
+
+
 	protected ?ImageGalleryValueObject $planImages = null;
 	protected ?ImageGalleryValueObject $gallery = null;
 
-	public function __construct(
-		protected ?int                    $id,
-		protected ?int                    $buildObjectId,
-		protected ?BuildObjectEntity      $buildObject,
-		protected ?string                 $name,
-		protected ?string                 $description,
-		protected ?int                    $price,
-		protected ?int                    $rooms,
-		protected ?int                    $floor,
-		protected ?AreaValueObject        $area,
-		protected ?string                 $renovation,
-		protected ?StringLogicValueObject $parking,
-		protected ?StringLogicValueObject $bathroomUnit,
-		protected ?string                 $mortgage,
-		protected ?int                    $builtYear,
-		protected ?array                  $planImagesIdList,
-		protected ?array                  $galleryIdList,
-		protected ?BuiltStateValueObject  $buildingState,
-		protected ?string                 $externalId = null,
-	)
+	public static function hydrate(
+		int                     $id,
+		int                     $buildObjectId,
+		string                  $name,
+		string                  $description,
+		?int                    $price,
+		?int                    $rooms,
+		?int                    $floor,
+		?AreaValueObject        $area,
+		?string                 $renovation,
+		?StringLogicValueObject $parking,
+		?StringLogicValueObject $bathroomUnit,
+		?string                 $mortgage,
+		?int                    $builtYear,
+		?array                  $planImagesIdList,
+		?BuiltStateValueObject  $buildingState,
+		?string                 $externalId = null,
+	): ApartmentEntity
 	{
+		$self = new self();
+		$self->id = $id;
+		$self->buildObjectId = $buildObjectId;
+		$self->name = $name;
+		$self->description = $description;
+		$self->price = $price;
+		$self->rooms = $rooms;
+		$self->floor = $floor;
+		$self->area = $area;
+		$self->renovation = $renovation;
+		$self->parking = $parking;
+		$self->bathroomUnit = $bathroomUnit;
+		$self->mortgage = $mortgage;
+		$self->builtYear = $builtYear;
+		$self->planImagesIdList = $planImagesIdList;
+		$self->buildingState = $buildingState;
+		$self->externalId = $externalId;
+		return $self;
 	}
 
-
-	/**
-	 *
-	 * Название квартиры формируется автоматически
-	 *
-	 * @param BuildObjectEntity $buildObject
-	 * @param string|null $description Описание
-	 * @param int $price Цена
-	 * @param int $rooms Комнаты
-	 * @param int $floor Этаж
-	 * @param AreaValueObject $area
-	 * @param string $renovation Отделка
-	 * @param StringLogicValueObject|null $parking Парковка
-	 * @param StringLogicValueObject|null $bathroomUnit Сануазел раздельный/совместный
-	 * @param int|null $floorsTotal Всего этажей
-	 * @param int|null $mortgage Ипотека ?
-	 * @param int|null $builtYear Год постройки
-	 * @param BuiltStateValueObject|null $buildingState Статус постройки
-	 * @param LocationValueObject|null $location Локация
-	 * @return ApartmentEntity
-	 */
 	public static function createFromImport(
 		?BuildObjectEntity      $buildObject,
+		?int                    $buildObjectId,
 		?string                 $description,
 		?int                    $price,
 		?int                    $rooms,
@@ -76,34 +91,31 @@ final class ApartmentEntity
 
 	): ApartmentEntity
 	{
-		$entity = new ApartmentEntity(
-			null,
-			null,
-			$buildObject,
-			null,
-			$description,
-			$price,
-			$rooms,
-			$floor,
-			$area,
-			$renovation,
-			$parking,
-			$bathroomUnit,
-			$mortgage,
-			$builtYear,
-			$planImagesIdList,
-			$galleryIdList,
-			$buildingState,
-			$externalId,
-		);
+		$self = new self();
 
-		$entity->generateName();
+		$self->buildObject = $buildObject;
+		$self->buildObjectId = $buildObjectId;
+		$self->description = $description;
+		$self->price = $price;
+		$self->rooms = $rooms;
+		$self->floor = $floor;
+		$self->area = $area;
+		$self->renovation = $renovation;
+		$self->parking = $parking;
+		$self->bathroomUnit = $bathroomUnit;
+		$self->mortgage = $mortgage;
+		$self->builtYear = $builtYear;
+		$self->planImagesIdList = $planImagesIdList;
+		$self->galleryIdList = $galleryIdList;
+		$self->buildingState = $buildingState;
+		$self->externalId = $externalId;
+		$self->generateName();
 
-		return $entity;
+		return $self;
 	}
 
 	public function updateFromImport(
-		?BuildObjectEntity      $buildObject,
+		int                     $buildObjectId,
 		?string                 $description,
 		?int                    $price,
 		?int                    $rooms,
@@ -120,7 +132,7 @@ final class ApartmentEntity
 	): ApartmentEntity
 	{
 
-		$this->buildObject = $buildObject;
+		$this->buildObjectId = $buildObjectId;
 		$this->description = $description;
 		$this->price = $price;
 		$this->rooms = $rooms;

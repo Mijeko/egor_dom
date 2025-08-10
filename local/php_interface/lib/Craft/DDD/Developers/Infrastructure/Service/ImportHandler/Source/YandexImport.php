@@ -2,10 +2,11 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service\ImportHandler\Source;
 
-use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
+use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
+use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\AddressValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ApartmentValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\AreaValueObject;
@@ -22,20 +23,22 @@ use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\ImportHandlerInter
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
+use SimpleXMLElement;
 
 class YandexImport implements ImportHandlerInterface
 {
 	public function __construct(
-		protected ApartmentService      $apartmentService,
-		protected DeveloperEntity       $developer,
-		protected ImageServiceInterface $imageSaver,
+		protected BuildObjectRepositoryInterface $buildObjectRepository,
+		protected ApartmentRepositoryInterface   $apartmentRepository,
+		protected DeveloperEntity                $developer,
+		protected ImageServiceInterface          $imageSaver,
 	)
 	{
 	}
 
 	public function execute(string $xmlData): void
 	{
-		$read = new \SimpleXMLElement($xmlData);
+		$read = new SimpleXMLElement($xmlData);
 
 
 		foreach($read->offer as $offer)
@@ -61,15 +64,19 @@ class YandexImport implements ImportHandlerInterface
 				}
 			}
 
-			$existApartment = $this->apartmentService->findByExternalId($externalId);
-			if($existApartment)
-			{
-				$buildObjectGallery = array_map(function(string $url) {
-					$savedImage = $this->imageSaver->fromUrl($url);
-					return $savedImage->id;
-				}, $listGalleryImages);
+			$buildObjectGallery = array_map(function(string $url) {
+				$savedImage = $this->imageSaver->fromUrl($url);
+				return $savedImage->id;
+			}, $listGalleryImages);
+			$planImageList = array_map(function(string $url) {
+				$savedImage = $this->imageSaver->fromUrl($url);
+				return $savedImage->id;
+			}, $listPlanImages);
 
-				$buildObject = BuildObjectEntity::fromImport(
+			$buildObject = $this->buildObjectRepository->findByName($rawApartmentData['building-name']);
+			if($buildObject)
+			{
+				$buildObject->updateFromImport(
 					$rawApartmentData['building-name'],
 					$rawApartmentData['building-type'],
 					$rawApartmentData['floors-total'],
@@ -89,14 +96,38 @@ class YandexImport implements ImportHandlerInterface
 
 				);
 
+				$buildObject = $this->buildObjectRepository->update($buildObject);
+			} else
+			{
+				$buildObject = BuildObjectEntity::createFromImport(
+					$rawApartmentData['building-name'],
+					$rawApartmentData['building-type'],
+					$rawApartmentData['floors-total'],
+					new LocationValueObject(
+						new CountryValueObject($rawApartmentData['location']['country']),
+						new RegionValueObject($rawApartmentData['location']['region']),
+						new DistrictValueObject($rawApartmentData['location']['district']),
+						new CityValueObject($rawApartmentData['location']['locality-name']),
+						new AddressValueObject($rawApartmentData['location']['address']),
+						new ApartmentValueObject($rawApartmentData['location']['apartment']),
+						new LongitudeValueObject($rawApartmentData['location']['longitude']),
+						new LatitudeValueObject($rawApartmentData['location']['latitude']),
+					),
+					$this->developer,
+					$buildObjectGallery,
+					$this->developer->getCity()
+				);
 
-				$planImageList = array_map(function(string $url) {
-					$savedImage = $this->imageSaver->fromUrl($url);
-					return $savedImage->id;
-				}, $listPlanImages);
 
+				$buildObject = $this->buildObjectRepository->create($buildObject);
+			}
+
+
+			$existApartment = $this->apartmentRepository->findByExternalId($externalId);
+			if($existApartment)
+			{
 				$existApartment->updateFromImport(
-					$buildObject,
+					$buildObject->getId(),
 					$rawApartmentData['description'][0],
 					$rawApartmentData['price']['value'],
 					intval($rawApartmentData['rooms']),
@@ -123,43 +154,12 @@ class YandexImport implements ImportHandlerInterface
 					[],
 				);
 
-
-				$this->apartmentService->update($existApartment);
+				$this->apartmentRepository->update($existApartment);
 			} else
 			{
-
-				$buildObjectGallery = array_map(function(string $url) {
-					$savedImage = $this->imageSaver->fromUrl($url);
-					return $savedImage->id;
-				}, $listGalleryImages);
-
-				$planImageList = array_map(function(string $url) {
-					$savedImage = $this->imageSaver->fromUrl($url);
-					return $savedImage->id;
-				}, $listPlanImages);
-
-				$newBuildObject = BuildObjectEntity::fromImport(
-					$rawApartmentData['building-name'],
-					$rawApartmentData['building-type'],
-					$rawApartmentData['floors-total'],
-					new LocationValueObject(
-						new CountryValueObject($rawApartmentData['location']['country']),
-						new RegionValueObject($rawApartmentData['location']['region']),
-						new DistrictValueObject($rawApartmentData['location']['district']),
-						new CityValueObject($rawApartmentData['location']['locality-name']),
-						new AddressValueObject($rawApartmentData['location']['address']),
-						new ApartmentValueObject($rawApartmentData['location']['apartment']),
-						new LongitudeValueObject($rawApartmentData['location']['longitude']),
-						new LatitudeValueObject($rawApartmentData['location']['latitude']),
-					),
-					$this->developer,
-					$buildObjectGallery,
-					$this->developer->getCity()
-
-				);
-
 				$apartment = ApartmentEntity::createFromImport(
-					$newBuildObject,
+					$buildObject,
+					$buildObject->getId(),
 					$rawApartmentData['description'][0],
 					$rawApartmentData['price']['value'],
 					intval($rawApartmentData['rooms']),
@@ -188,7 +188,7 @@ class YandexImport implements ImportHandlerInterface
 				);
 
 
-				$apartment = $this->apartmentService->create($apartment);
+				$this->apartmentRepository->create($apartment);
 			}
 
 		}

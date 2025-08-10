@@ -9,7 +9,7 @@ use Craft\DDD\Developers\Domain\ValueObject\CountryValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\DistrictValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\RegionValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\DDD\Developers\Infrastructure\Entity\EO_BuildObject;
 use Craft\DDD\Shared\Domain\ValueObject\LatitudeValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\LongitudeValueObject;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -19,28 +19,26 @@ use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
+	public function update(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
+	{
+		$model = BuildObjectTable::getByPrimary($buildObjectEntity->getId())->fetchObject();
+
+		$this->fillModel($model, $buildObjectEntity);
+
+		$result = $model->save();
+		if($result->isSuccess())
+		{
+			return $buildObjectEntity;
+		}
+
+		return null;
+	}
+
 	public function create(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
 	{
 		$model = BuildObjectTable::createObject();
 
-		$gallery = array_map(function(?ImageValueObject $image) {
-			if($image)
-			{
-				return ['ID' => $image->getId()];
-			}
-
-			return null;
-		}, $buildObjectEntity->getGallery()?->getImages() ?? []);
-
-		$model->setGalleryEx($gallery);
-		$model->setLocationEx($buildObjectEntity->getLocation());
-
-		$model->setName($buildObjectEntity->getName());
-		$model->setDeveloperId($buildObjectEntity->getDeveloper()->getId());
-		$model->setFloors($buildObjectEntity->getFloors());
-		$model->setType($buildObjectEntity->getType());
-		$model->setCityId($buildObjectEntity->getCity()->getId());
-
+		$this->fillModel($model, $buildObjectEntity);
 
 		$result = $model->save();
 
@@ -55,29 +53,36 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 
 	public function findByName(string $name): ?BuildObjectEntity
 	{
-		$model = BuildObjectTable::getList([
-			'filter' => [
+		$buildObjectList = $this->findAll(
+			[],
+			[
 				BuildObjectTable::F_NAME => $name,
 			],
-		])->fetchObject();
+		);
 
-		if(!$model)
+		if(count($buildObjectList) != 1)
 		{
 			return null;
 		}
 
-		return $this->hydrateElement($model);
+		return array_shift($buildObjectList);
 	}
 
 	public function findById(int $id): ?BuildObjectEntity
 	{
-		$model = BuildObjectTable::getByPrimary($id)->fetchObject();
-		if(!$model)
+		$buildObjectList = $this->findAll(
+			[],
+			[
+				BuildObjectTable::F_ID => $id,
+			],
+		);
+
+		if(count($buildObjectList) != 1)
 		{
 			return null;
 		}
 
-		return $this->hydrateElement($model);
+		return array_shift($buildObjectList);
 	}
 
 	/**
@@ -99,6 +104,17 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		}
 
 		return $result;
+	}
+
+	private function fillModel(EO_BuildObject &$model, BuildObjectEntity $buildObjectEntity): void
+	{
+		$model->setGalleryEx($buildObjectEntity->getGalleryIdList());
+		$model->setLocationEx($buildObjectEntity->getLocation());
+		$model->setName($buildObjectEntity->getName());
+		$model->setDeveloperId($buildObjectEntity->getDeveloper()->getId());
+		$model->setFloors($buildObjectEntity->getFloors());
+		$model->setType($buildObjectEntity->getType());
+		$model->setCityId($buildObjectEntity->getCity()->getId());
 	}
 
 	protected function hydrateElement(BuildObject $buildObject): BuildObjectEntity
