@@ -5,7 +5,6 @@ namespace Craft\DDD\Developers\Domain\Entity;
 use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\Developers\Domain\ValueObject\LocationValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
 final class BuildObjectEntity
 {

@@ -31,10 +31,6 @@ export default defineComponent({
       this.rawValue = val;
     },
   },
-  // updated(): any {
-  //   this.searchResult = this.values;
-  //   console.log(this.searchResult);
-  // },
   computed: {
     rawValue: {
       get(): any {
@@ -45,6 +41,9 @@ export default defineComponent({
       }
     }
   },
+  updated(): any {
+    this.searchResult = this.values;
+  },
   watch: {
     'searchText': function (value: string, oldValue) {
       if (value.length > 0) {
@@ -54,8 +53,6 @@ export default defineComponent({
       } else {
         this.searchResult = this.values;
       }
-
-      console.log(this.searchResult);
     }
   },
 })
@@ -79,7 +76,7 @@ export default defineComponent({
 
 
     <v-card min-width="320" class="pa-4">
-      <v-text-field v-model="searchText" label="Застройщик"/>
+      <v-text-field v-model="searchText" :label="label"/>
 
       <v-divider/>
 

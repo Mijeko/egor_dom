@@ -45,7 +45,7 @@ export default defineComponent({
         roomsTotal: null,
         floor: null,
         developerId: [],
-        buildObjectId: null,
+        buildObjectId: [],
       } as ApartmentFilterDto
     };
   },
@@ -182,6 +182,15 @@ export default defineComponent({
             />
           </v-col>
           <v-col>
+            <SelectWithSearch
+              :values="(getAr('buildObjectList')) as SelectItemDto[]"
+              color="light-blue"
+              label="Жилой комплекс"
+              icon="$cash"
+              v-model="filter.buildObjectId"
+            />
+          </v-col>
+          <v-col>
             <MinMaxInputDropdown
               color="light-blue"
               label="Стомость"
@@ -196,6 +205,7 @@ export default defineComponent({
               label="Сан-узел"
               icon="$shower"
               v-model="filter.bathroom"
+              :values="(getAr('bathroom')) as CheckboxDropdownItemDto[]"
             />
           </v-col>
           <v-col>
@@ -204,6 +214,7 @@ export default defineComponent({
               label="Отделка"
               icon="$hammer"
               v-model="filter.renovation"
+              :values="(getAr('renovation')) as CheckboxDropdownItemDto[]"
             />
           </v-col>
           <v-col>

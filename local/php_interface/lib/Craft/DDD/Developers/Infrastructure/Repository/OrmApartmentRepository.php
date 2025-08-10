@@ -12,6 +12,9 @@ use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 class OrmApartmentRepository implements ApartmentRepositoryInterface
 {
 
+	/**
+	 * @return ApartmentEntity[]
+	 */
 	public function findAll(array $order = [], array $filter = []): array
 	{
 		$result = [];
@@ -71,7 +74,7 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 	{
 		$buildObject = null;
 		return new ApartmentEntity(
-			// @phpstan-ignore method.notFound
+		// @phpstan-ignore method.notFound
 			$apartment->getId(),
 			// @phpstan-ignore method.notFound
 			$apartment->getBuildObjectId(),
@@ -91,11 +94,11 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 			// @phpstan-ignore method.notFound
 			$apartment->getRenovation(),
 			new StringLogicValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$apartment->getParking()
 			),
 			new StringLogicValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$apartment->getBathroomUnit()
 			),
 			// @phpstan-ignore method.notFound
@@ -105,7 +108,7 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 			$apartment->getPlanImageEx(),
 			$apartment->getGalleryEx(),
 			new BuiltStateValueObject(
-				// @phpstan-ignore method.notFound
+			// @phpstan-ignore method.notFound
 				$apartment->getBuildingState()
 			),
 			// @phpstan-ignore method.notFound

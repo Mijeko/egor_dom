@@ -80,6 +80,9 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 		return $this->hydrateElement($model);
 	}
 
+	/**
+	 * @return BuildObjectEntity[]
+	 */
 	public function findAll(array $order = [], array $filter = []): array
 	{
 		$result = [];

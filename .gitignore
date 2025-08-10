@@ -8,6 +8,7 @@ local/php_interface/**/vendor/
 *.zip
 
 #
+/test/
 /assets/
 **/dist/
 /local/php_interface/var
