@@ -6,6 +6,7 @@ import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import type {ApartmentFilterData} from "@/dto/ApartmentFilterData.ts";
 import ApartmentFilterService from "@/service/ApartmentFilterService.ts";
+import type ApartmentFilterDataResponseDto from "@/dto/response/ApartmentFilterDataResponseDto.ts";
 
 export default defineComponent({
   name: "BuildObjectList",
@@ -69,34 +70,21 @@ export default defineComponent({
       return this.BuildObjects as BuildObjectDto[];
     }
   },
-  mounted(): any {
-
-
-    ApartmentFilterService.filterData().then(function (r: any) {
-    });
-
-    this.filterData = {
-      propertyList: [
-        {
-          name: 'Сан-узел', code: 'bathroom', value: [
-            {label: 'Совмещенный', value: 'union'},
-            {label: 'Раздельный', value: 'split'}
-          ]
-        },
-        {
-          name: 'Застройщик', code: 'developer', value: [
-            {label: 'Градостроительный', value: '1'},
-            {label: 'Градостроительный 22', value: '2'},
-          ]
-        },
-        {
-          name: 'Отделка', code: 'renovation', value: [
-            {label: 'Чистовая', value: 'clean'},
-            {label: 'С ремонтом', value: 'repair'}
-          ]
-        }
-      ]
-    };
+  beforeCreate(): any {
+    ApartmentFilterService.filterData()
+      .then((response: ApartmentFilterDataResponseDto) => {
+        let {data} = response;
+        let {filter} = data;
+        this.filterData.propertyList = filter.props;
+      });
+  },
+  beforeMount(): any {
+    // ApartmentFilterService.filterData()
+    //   .then((response: ApartmentFilterDataResponseDto) => {
+    //     let {data} = response;
+    //     let {filter} = data;
+    //     this.filterData.propertyList = filter.props;
+    //   });
   }
 })
 </script>

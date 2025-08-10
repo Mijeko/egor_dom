@@ -26,15 +26,19 @@ class CraftApartmentFilterData extends AjaxComponent
 	{
 		$developers = $this->developerRepository->findAll();
 
-		ResponseBx::success([
+		$responseData = [
 			'filter' => new ApartmentFilterDataDto([
-				ApartmentFilterPropDto::build('Сан-узел', 'bathroom', []),
-				ApartmentFilterPropDto::build('Застройщик', 'developer', array_map(function(DeveloperEntity $developer) {
+				ApartmentFilterPropDto::build('Сан-узел', 'bathroom', 'checkbox', []),
+				ApartmentFilterPropDto::build('Застройщик', 'developer', 'select', array_map(function(DeveloperEntity $developer) {
 					return ApartmentFilterPropValueDto::build($developer->getId(), $developer->getName());
 				}, $developers)),
-				ApartmentFilterPropDto::build('Отделка', 'renovation', []),
+				ApartmentFilterPropDto::build('Отделка', 'renovation', 'checkbox', []),
 			]),
-		]);
+		];
+
+		\Bitrix\Main\Diag\Debug::dumpToFile($responseData);
+
+		ResponseBx::success($responseData);
 	}
 
 	protected function modules(): ?array

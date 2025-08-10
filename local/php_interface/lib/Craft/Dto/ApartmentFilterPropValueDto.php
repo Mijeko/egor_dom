@@ -4,14 +4,14 @@ namespace Craft\Dto;
 
 class ApartmentFilterPropValueDto
 {
-	public string $key;
+	public string $label;
 	public string $value;
 
-	public static function build(string $key, string $value): ApartmentFilterPropValueDto
+	public static function build(string $value, string $label): ApartmentFilterPropValueDto
 	{
 		$self = new self();
-		$self->key = $key;
 		$self->value = $value;
+		$self->label = $label;
 		return $self;
 	}
 }

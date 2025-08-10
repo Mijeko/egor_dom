@@ -13,7 +13,8 @@ import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import {useApartmentFilterStore} from "@/store.ts";
 import SelectWithSearch from "@/components/filter/part/SelectWithSearch.vue";
 import type CheckboxDropdownItemDto from "@/dto/present/CheckboxDropdownItemDto.ts";
-import type {ApartmentFilterData, ApartmentFilterProp} from "@/dto/ApartmentFilterData.ts";
+import type {ApartmentFilterData, ApartmentFilterProp, ApartmentFilterPropValue} from "@/dto/ApartmentFilterData.ts";
+import type SelectItemDto from "@/dto/SelectItemDto.ts";
 
 export default defineComponent({
   name: "MainApartmentFilter",
@@ -52,7 +53,6 @@ export default defineComponent({
     let store = useApartmentFilterStore();
     let defStore = store.getFilterData;
     this.filter = {...defStore};
-    this.canFilter = true;
   },
   methods: {
     clearFilter: function () {
@@ -85,9 +85,10 @@ export default defineComponent({
 
       }, 400);
     },
-    getAr: function (code: string): CheckboxDropdownItemDto[] {
+    getAr: function (code: string): CheckboxDropdownItemDto[] | SelectItemDto[] {
 
-      let prop: ApartmentFilterProp | undefined = this.filterData?.propertyList.filter((item: ApartmentFilterProp) => {
+
+      let prop: ApartmentFilterProp | undefined = this.filterData?.propertyList?.filter((item: ApartmentFilterProp) => {
         return item.code === code;
       }).shift()
 
@@ -95,12 +96,41 @@ export default defineComponent({
         return [];
       }
 
-      return prop.value as CheckboxDropdownItemDto[];
+
+      switch (prop.type) {
+        case 'select':
+
+          if (!Array.isArray(prop.value)) {
+            return [];
+          }
+
+          return prop.value.map(function (el: ApartmentFilterPropValue) {
+            return {
+              value: el.value,
+              label: el.label,
+            } as SelectItemDto;
+          }) as SelectItemDto[];
+        default:
+          if (!Array.isArray(prop.value)) {
+            return [];
+          }
+
+          return prop.value.map(function (el: ApartmentFilterPropValue) {
+            return {
+              label: el.label,
+              value: el.value,
+            } as CheckboxDropdownItemDto;
+          }) as CheckboxDropdownItemDto[];
+      }
+
     }
   },
   watch: {
     'filter': {
       handler(v, nv) {
+
+
+        console.log('canFilter', this.canFilter);
 
         if (!this.canFilter) {
           return;
@@ -144,7 +174,7 @@ export default defineComponent({
         <v-row>
           <v-col>
             <SelectWithSearch
-              :values="getAr('developer')"
+              :values="(getAr('developer')) as SelectItemDto[]"
               color="light-blue"
               label="Застройщик"
               icon="$cash"
@@ -166,7 +196,6 @@ export default defineComponent({
               label="Сан-узел"
               icon="$shower"
               v-model="filter.bathroom"
-              :values="getAr('bathroom')"
             />
           </v-col>
           <v-col>
@@ -175,7 +204,6 @@ export default defineComponent({
               label="Отделка"
               icon="$hammer"
               v-model="filter.renovation"
-              :values="getAr('renovation')"
             />
           </v-col>
           <v-col>

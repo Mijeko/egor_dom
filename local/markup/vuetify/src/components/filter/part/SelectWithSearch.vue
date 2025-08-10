@@ -1,5 +1,6 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
+import type SelectItemDto from "@/dto/SelectItemDto.ts";
 
 export default defineComponent({
   name: "SelectWithSearch",
@@ -12,40 +13,56 @@ export default defineComponent({
       default: null
     },
     values: {
-      type: [Array],
+      type: Array as PropType<SelectItemDto[]>,
       default: []
     }
   },
   data: function () {
     return {
+      rawValue: null,
       searchText: null,
-      searchResult: [] as string[],
+      searchResult: [] as SelectItemDto[],
       selectedFruits: [],
       fruits: []
     };
   },
   methods: {
-    doFilterItems: function (event: any) {
-      this.searchText = event.target.value;
-
-      if (!this.searchText) {
-        this.searchResult = this.fruits;
-      } else {
-        this.searchResult = (this.fruits.filter((phrase: string) => {
-          return phrase.toLowerCase().indexOf(String(this.searchText)) != -1;
-        })) as string[]
+    select: function (val: any) {
+      this.rawValue = val;
+    },
+  },
+  // updated(): any {
+  //   this.searchResult = this.values;
+  //   console.log(this.searchResult);
+  // },
+  computed: {
+    rawValue: {
+      get(): any {
+        return this.modelValue;
+      },
+      set(value: any) {
+        this.$emit('update:modelValue', value);
       }
     }
   },
-  mounted(): any {
-    if (!this.searchText) {
-      this.searchResult = this.fruits;
+  watch: {
+    'searchText': function (value: string, oldValue) {
+      if (value.length > 0) {
+        this.searchResult = this.values.filter((selectItem: SelectItemDto) => {
+          return selectItem.label.toLowerCase().indexOf(value.toLowerCase()) != -1;
+        });
+      } else {
+        this.searchResult = this.values;
+      }
+
+      console.log(this.searchResult);
     }
-  }
+  },
 })
 </script>
 
 <template>
+
   <v-menu
     :close-on-content-click="false"
   >
@@ -61,26 +78,26 @@ export default defineComponent({
     </template>
 
 
-    <v-card min-width="300" class="pa-4">
-      <v-select
-        v-model="selectedFruits"
-        :items="searchResult"
-        :label
-        multiple
-      >
-        <template v-slot:prepend-item>
-          <v-row>
-            <v-col class="pa-4">
-              <v-text-field label="Поиск" @keyup.prevent.stop="doFilterItems"/>
-            </v-col>
-          </v-row>
-          <v-divider class="mt-2"></v-divider>
-        </template>
+    <v-card min-width="320" class="pa-4">
+      <v-text-field v-model="searchText" label="Застройщик"/>
 
-      </v-select>
+      <v-divider/>
+
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in searchResult"
+          :key="index"
+          :value="index"
+          @click="select(item.value)"
+        >
+          <v-list-item-title>{{ item.label }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
     </v-card>
 
   </v-menu>
+
+
 </template>
 
 <style scoped>

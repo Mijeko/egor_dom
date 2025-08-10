@@ -7,11 +7,12 @@ export interface ApartmentFilterData {
 export interface ApartmentFilterProp {
   name: string;
   code: string;
-  value: ApartmentFilterPropValue[] | string | CheckboxDropdownItemDto[]
+  type: string;
+  value: ApartmentFilterPropValue[] | string
 }
 
 
-interface ApartmentFilterPropValue {
+export interface ApartmentFilterPropValue {
   value: string;
   label: string;
 }
