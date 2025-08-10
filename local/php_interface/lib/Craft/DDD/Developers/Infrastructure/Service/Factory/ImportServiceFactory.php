@@ -8,6 +8,7 @@ use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
 use Craft\DDD\Developers\Infrastructure\Service\ImportService;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 
 class ImportServiceFactory
 {
@@ -18,8 +19,10 @@ class ImportServiceFactory
 			BuildObjectServiceFactory::createOnOrm(),
 			new ApartmentService(
 				new OrmApartmentRepository(),
-				new OrmBuildObjectRepository()
+				new OrmBuildObjectRepository(),
+				new ImageService(),
 			),
+			new ImageService(),
 		);
 	}
 }

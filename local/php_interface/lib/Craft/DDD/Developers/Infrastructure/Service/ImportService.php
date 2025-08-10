@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Service\DeveloperService;
@@ -12,6 +11,8 @@ use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\BlossomHandler;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\FirstDevelopHandler;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\ImportHandlerInterface;
+use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\Source\YandexImport;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 
 class ImportService
 {
@@ -19,9 +20,10 @@ class ImportService
 	protected ?DeveloperEntity $developer = null;
 
 	public function __construct(
-		protected DeveloperService   $developerService,
-		protected BuildObjectService $buildObjectService,
-		protected ApartmentService   $apartmentService,
+		protected DeveloperService      $developerService,
+		protected BuildObjectService    $buildObjectService,
+		protected ApartmentService      $apartmentService,
+		protected ImageServiceInterface $imageService,
 	)
 	{
 	}
@@ -74,14 +76,20 @@ class ImportService
 		{
 			case Developer::HANDLER_FIRST_DEVELOP:
 				return new FirstDevelopHandler(
-					$this->apartmentService,
-					$this->developer,
+					new YandexImport(
+						$this->apartmentService,
+						$this->developer,
+						$this->imageService,
+					)
 				);
 
 			case Developer::HANDLER_RASCVET:
 				return new BlossomHandler(
-					$this->apartmentService,
-					$this->developer,
+					new YandexImport(
+						$this->apartmentService,
+						$this->developer,
+						$this->imageService,
+					)
 				);
 			default:
 				return null;
