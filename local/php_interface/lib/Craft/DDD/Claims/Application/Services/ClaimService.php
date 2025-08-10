@@ -29,9 +29,9 @@ class ClaimService
 	{
 	}
 
-	public function createClientClaim(ClaimCreateDto $s): ClaimEntity
+	public function createClientClaim(ClaimCreateDto $request): ClaimEntity
 	{
-		$claim = $this->claimCreateUseCase->execute($s);
+		$claim = $this->claimCreateUseCase->execute($request);
 		$this->managerNotificatorService->aboutNewClaim($claim);
 
 		return $claim;

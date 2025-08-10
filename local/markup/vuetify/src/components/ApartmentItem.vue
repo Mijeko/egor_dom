@@ -23,14 +23,17 @@ export default defineComponent({
     };
   },
   props: {
+    modelValue: {
+      type: Boolean,
+      default: false,
+    },
     apartment: {
       type: Object as PropType<ApartmentDto>,
       default: null
     }
   },
   methods: {
-    buy() {
-      console.log('asd');
+    buy: function () {
       this.$emit('update:modelValue', true);
       this.$emit('update:apartmentId', this.apartment.id);
     }
@@ -83,7 +86,7 @@ export default defineComponent({
         variant="flat"
         class="font-weight-medium text-green-lighten-5"
         color="green-accent-4"
-        @click="buy"
+        @click.prevent="buy"
       >Купить квартиру
       </v-btn>
     </div>

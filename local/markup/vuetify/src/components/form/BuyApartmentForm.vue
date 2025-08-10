@@ -7,9 +7,11 @@ import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import ValidateLegalData from "@/core/validate/ValidateLegalData.ts";
 import ClaimService from "@/service/ClaimService.ts";
 import type ClaimCreateResponseDto from "@/dto/response/ClaimCreateResponseDto.ts";
+import PhoneInput from "@/components/html/PhoneInput.vue";
 
 export default defineComponent({
   name: "BuyApartmentForm",
+  components: {PhoneInput},
   data: function () {
     return {
       form: {
@@ -69,6 +71,10 @@ export default defineComponent({
     };
   },
   props: {
+    modelValue: {
+      type: Boolean,
+      default: false,
+    },
     apartmentId: {
       type: Number,
       default: 0,
@@ -153,7 +159,12 @@ export default defineComponent({
     <v-container>
       <v-row>
         <v-col cols="12">
-          <v-text-field type="text" label="Телефон" v-model="form.phone" :rules="validate.phone" required/>
+          <PhoneInput
+            label="Телефон"
+            v-model="form.phone"
+            :rules="validate.phone"
+            required
+          />
         </v-col>
       </v-row>
       <v-row>

@@ -23,12 +23,7 @@ export default defineComponent({
     }
   },
   beforeCreate(): any {
-    ApartmentFilterService.filterData()
-      .then((response: ApartmentFilterDataResponseDto) => {
-        let {data} = response;
-        let {filter} = data;
-        this.filterData.propertyList = filter.props;
-      });
+
   },
   mounted(): any {
     console.log(this.buildObjects);
@@ -40,7 +35,6 @@ export default defineComponent({
 
   <MainApartmentFilter
     v-model="filterApartmentList"
-    :filter-data="filterData"
   />
 
   <v-row>

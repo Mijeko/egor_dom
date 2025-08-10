@@ -15,7 +15,11 @@ export default defineComponent({
     rules: {
       type: Array as PropType<any[]>,
       default: []
-    }
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
   },
   directives: {
     maska: vMaska as any

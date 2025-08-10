@@ -15,6 +15,7 @@ import SelectWithSearch from "@/components/filter/part/SelectWithSearch.vue";
 import type CheckboxDropdownItemDto from "@/dto/present/CheckboxDropdownItemDto.ts";
 import type {ApartmentFilterData, ApartmentFilterProp, ApartmentFilterPropValue} from "@/dto/ApartmentFilterData.ts";
 import type SelectItemDto from "@/dto/SelectItemDto.ts";
+import type ApartmentFilterDataResponseDto from "@/dto/response/ApartmentFilterDataResponseDto.ts";
 
 export default defineComponent({
   name: "MainApartmentFilter",
@@ -24,9 +25,6 @@ export default defineComponent({
       type: Array as PropType<ApartmentDto[]>,
       default: []
     },
-    filterData: {
-      type: Object as PropType<ApartmentFilterData>
-    }
   },
   data: function () {
     return {
@@ -34,6 +32,7 @@ export default defineComponent({
       filterTimeout: 0,
       preFilterTimeout: 0,
       preFilterCount: -1,
+      filterData: {} as ApartmentFilterData,
       filter: {
         price: {
           min: null,
@@ -53,6 +52,13 @@ export default defineComponent({
     let store = useApartmentFilterStore();
     let defStore = store.getFilterData;
     this.filter = {...defStore};
+
+    ApartmentFilterService.filterData()
+      .then((response: ApartmentFilterDataResponseDto) => {
+        let {data} = response;
+        let {filter} = data;
+        this.filterData.propertyList = filter.props;
+      });
   },
   methods: {
     clearFilter: function () {

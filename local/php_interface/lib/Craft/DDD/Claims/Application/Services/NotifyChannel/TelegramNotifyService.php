@@ -33,8 +33,8 @@ class TelegramNotifyService
 			$claimEntity->getId(),
 			$claimEntity->getClient(),
 			$claimEntity->getPhone(),
-			$claimEntity->getInn(),
-			$claimEntity->getOgrn(),
+			$claimEntity->getInn()->getValue(),
+			$claimEntity->getOgrn()->getValue(),
 		);
 
 		foreach($members as $member)

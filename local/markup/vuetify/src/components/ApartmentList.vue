@@ -24,7 +24,6 @@ export default defineComponent({
 </script>
 
 <template>
-
   <v-row>
     <v-col cols="12" sm="6" md="4" lg="3" v-for="apartment in apartments">
       <ApartmentItem
@@ -38,7 +37,6 @@ export default defineComponent({
 
   <BuyApartmentModal
     v-model="showModal"
-    :show-modal
     :apartment-id="selectApartmentId"
   />
 

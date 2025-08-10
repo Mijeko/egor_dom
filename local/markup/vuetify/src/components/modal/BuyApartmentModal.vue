@@ -5,14 +5,10 @@ import BuyApartmentForm from "@/components/form/BuyApartmentForm.vue";
 export default defineComponent({
   name: "BuyApartmentModal",
   components: {BuyApartmentForm},
-  data: function () {
-    return {
-      _showModalData: false
-    };
-  },
   props: {
-    showModal: {
+    modelValue: {
       type: Boolean,
+      default: false
     },
     apartmentId: {
       type: Number,
@@ -20,13 +16,11 @@ export default defineComponent({
     },
   },
   computed: {
-    _showModal: {
+    showModalComputed: {
       get(): boolean {
-        return this.showModal;
+        return this.modelValue;
       },
       set(value: boolean) {
-        console.log('asd', value);
-        this._showModalData = value;
         this.$emit('update:modelValue', value);
       }
     }
@@ -35,14 +29,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-dialog max-width="500" v-model="_showModal">
+  <v-dialog max-width="500" v-model="showModalComputed">
     <template v-slot:default="{ isActive }">
       <v-card title="Заявка на покупку квартиры">
 
 
         <BuyApartmentForm
           :apartment-id="apartmentId"
-          v-model="_showModal"
+          v-model="modelValue"
         />
 
       </v-card>

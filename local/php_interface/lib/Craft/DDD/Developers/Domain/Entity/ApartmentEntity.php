@@ -11,7 +11,6 @@ final class ApartmentEntity
 {
 	protected ?int $id;
 	protected ?int $buildObjectId;
-	protected ?BuildObjectEntity $buildObject;
 	protected ?string $name;
 	protected ?string $description;
 	protected ?int $price;
@@ -27,6 +26,8 @@ final class ApartmentEntity
 	protected ?array $galleryIdList;
 	protected ?BuiltStateValueObject $buildingState;
 	protected ?string $externalId = null;
+
+	protected ?BuildObjectEntity $buildObject = null;
 
 
 	protected ?ImageGalleryValueObject $planImages = null;
