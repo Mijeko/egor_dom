@@ -6,6 +6,7 @@ class ApartmentFilterDto
 {
 
 	public function __construct(
+		public ?int   $developerId,
 		public ?int   $buildObjectId,
 		public ?int   $minPrice,
 		public ?int   $maxPrice,
@@ -21,6 +22,7 @@ class ApartmentFilterDto
 	public function toArray(): array
 	{
 		return [
+			'developerId' => $this->developerId,
 			'buildObjectId' => $this->buildObjectId,
 			'price'         => [
 				'min' => $this->minPrice,

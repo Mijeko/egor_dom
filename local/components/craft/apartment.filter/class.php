@@ -31,6 +31,7 @@ class CraftApartmentFilterComponent extends AjaxComponent
 
 				$apartmentsCount = $this->apartmentPreFilterService->execute(
 					new ApartmentPreFilterDto(
+						$formData['developerId'],
 						$formData['buildObjectId'],
 						$formData['price']['min'],
 						$formData['price']['max'],
@@ -51,6 +52,7 @@ class CraftApartmentFilterComponent extends AjaxComponent
 
 				$apartments = $this->apartmentFilterUseCase->execute(
 					new ApartmentFilterDto(
+						$formData['developerId'],
 						$formData['buildObjectId'],
 						$formData['price']['min'],
 						$formData['price']['max'],
