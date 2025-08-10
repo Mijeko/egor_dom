@@ -100,35 +100,22 @@ class ApartmentService
 
 		}, $apartmentList);
 
-		$apartmentList = array_map(function(ApartmentEntity $apartment) {
-
-			$planImagesIdList = $apartment->getPlanImagesIdList();
-			$planImages = array_map(function(int $imageId) {
-				$image = $this->imageService->fromId($imageId);
-				return new ImageValueObject(
-					$image->id,
-					$image->src,
-				);
-			}, $planImagesIdList);
-			$planImages = array_filter($planImages);
-
-			$apartment->addPlanImage(new ImageGalleryValueObject($planImages));
-
-
-			$galleryImagesIdList = $apartment->getGalleryIdList();
-			$galleryImages = array_map(function(int $imageId) {
-				$image = $this->imageService->fromId($imageId);
-				return new ImageValueObject(
-					$image->id,
-					$image->src,
-				);
-			}, $galleryImagesIdList);
-			$galleryImages = array_filter($galleryImages);
-
-			$apartment->addGalleryImage(new ImageGalleryValueObject($galleryImages));
-
-
-			return $apartment;
-		}, $apartmentList);
+//		$apartmentList = array_map(function(ApartmentEntity $apartment) {
+//
+//			$planImagesIdList = $apartment->getPlanImagesIdList();
+//			$planImages = array_map(function(int $imageId) {
+//				$image = $this->imageService->fromId($imageId);
+//				return new ImageValueObject(
+//					$image->id,
+//					$image->src,
+//				);
+//			}, $planImagesIdList);
+//			$planImages = array_filter($planImages);
+//
+//			$apartment->addPlanImage(new ImageGalleryValueObject($planImages));
+//
+//
+//			return $apartment;
+//		}, $apartmentList);
 	}
 }

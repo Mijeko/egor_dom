@@ -37,12 +37,7 @@ final class ApartmentDto
 			$model->getBuiltYear(),
 			$model->getBuildingState()->getLabel(),
 			$buildObject,
-			array_map(function(ImageValueObject $imageGallery) {
-				return new BxImageDto(
-					$imageGallery->getId(),
-					$imageGallery->getSrc(),
-				);
-			}, $model->getPlanImages()?->getImages() ?? [])
+			null
 		);
 	}
 }

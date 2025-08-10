@@ -85,7 +85,6 @@ final class ApartmentEntity
 		?int                    $mortgage,
 		?int                    $builtYear,
 		?array                  $planImagesIdList,
-		?array                  $galleryIdList,
 		?BuiltStateValueObject  $buildingState,
 		string                  $externalId,
 
@@ -106,7 +105,6 @@ final class ApartmentEntity
 		$self->mortgage = $mortgage;
 		$self->builtYear = $builtYear;
 		$self->planImagesIdList = $planImagesIdList;
-		$self->galleryIdList = $galleryIdList;
 		$self->buildingState = $buildingState;
 		$self->externalId = $externalId;
 		$self->generateName();
@@ -128,7 +126,6 @@ final class ApartmentEntity
 		?int                    $builtYear,
 		?BuiltStateValueObject  $buildingState,
 		?array                  $planImagesIdList,
-		?array                  $galleryIdList,
 	): ApartmentEntity
 	{
 
@@ -145,7 +142,6 @@ final class ApartmentEntity
 		$this->builtYear = $builtYear;
 		$this->buildingState = $buildingState;
 		$this->planImagesIdList = $planImagesIdList;
-		$this->galleryIdList = $galleryIdList;
 		return $this;
 	}
 

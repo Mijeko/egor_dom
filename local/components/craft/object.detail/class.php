@@ -1,5 +1,8 @@
 <?php
 
+use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\Dto\BxImageDto;
 use Craft\DDD\Developers\Present\Dto\ApartmentDto;
 use Craft\DDD\Shared\Presentation\Dto\LocationDto;
@@ -21,6 +24,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 	protected ?ApartmentService $apartmentService;
 
 	protected ?DeveloperService $developerService;
+	protected ImageServiceInterface $imageService;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -38,13 +42,13 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
-			\Bitrix\Main\Diag\Debug::dump($e->getMessage());
+			Debug::dump($e->getMessage());
 		}
 	}
 
 	protected function meta(): void
 	{
-		/* @var $element \Craft\DDD\Developers\Present\Dto\BuildObjectDto */
+		/* @var $element BuildObjectDto */
 		$element = $this->arResult['BUILD_OBJECT_DTO'];
 
 		global $APPLICATION;
@@ -55,6 +59,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function loadService(): void
 	{
+		$this->imageService = new ImageService();
 		$this->buildObjectService = BuildObjectServiceFactory::createOnOrm();
 		$this->apartmentService = ApartmentServiceFactory::createOnOrm();
 		$this->developerService = DeveloperServiceFactory::createOnOrm();
@@ -84,7 +89,27 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 				);
 			}, $buildObjectEntity->getGallery()->getImages()),
 			array_map(function(ApartmentEntity $apartment) {
-				return ApartmentDto::fromEntity($apartment);
+
+				$images = array_map(function(int $imageId) {
+					$_img = $this->imageService->fromId($imageId);
+					return new BxImageDto(
+						$_img->id,
+						$_img->src,
+					);
+				}, $apartment->getPlanImagesIdList());
+
+				return new ApartmentDto(
+					$apartment->getId(),
+					$apartment->getBuildObjectId(),
+					$apartment->getName(),
+					$apartment->getName(),
+					$apartment->getRooms(),
+					$apartment->getFloor(),
+					$apartment->getBuiltYear(),
+					$apartment->getBuildingState()->getValue(),
+					null,
+					$images,
+				);
 			}, $apartmentList),
 			LocationDto::fromModel($buildObjectEntity->getLocation()),
 			'/objects/' . $buildObjectEntity->getId() . '/'

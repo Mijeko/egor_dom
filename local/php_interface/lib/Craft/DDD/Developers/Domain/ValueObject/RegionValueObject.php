@@ -5,12 +5,12 @@ namespace Craft\DDD\Developers\Domain\ValueObject;
 class RegionValueObject
 {
 	public function __construct(
-		protected string $value,
+		protected ?string $value,
 	)
 	{
 	}
 
-	public function getValue(): string
+	public function getValue(): ?string
 	{
 		return $this->value;
 	}

@@ -2,20 +2,20 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Entity;
 
-use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
-
 class Apartment extends EO_Apartment
 {
-	public function setPlanImageEx(?ImageGalleryValueObject $galleryValueObject): static
+	public function setPlanImageEx(array $imageIdList): static
 	{
-		$images = [];
-		if($galleryValueObject)
+
+		foreach($imageIdList as $imageId)
 		{
-			$images = $galleryValueObject->getImageIdList();
+			if(!is_numeric($imageId) || !is_int($imageId))
+			{
+				throw new \Exception('Неверный тип данных для картинки');
+			}
 		}
 
-		$jsonData = json_encode($images);
-		$this->setPlanImage($jsonData);
+		$this->setPlanImage(json_encode($imageIdList));
 		return $this;
 	}
 

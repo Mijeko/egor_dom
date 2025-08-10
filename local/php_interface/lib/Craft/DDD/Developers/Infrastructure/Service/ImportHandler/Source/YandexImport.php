@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service\ImportHandler\Source;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
@@ -46,7 +47,6 @@ class YandexImport implements ImportHandlerInterface
 			$rawApartmentData = json_decode(json_encode($offer), true);
 			$offerAttributes = $offer->attributes();
 
-
 			$externalId = (string)$offerAttributes['internal-id'];
 
 			$listPlanImages = [];
@@ -81,14 +81,14 @@ class YandexImport implements ImportHandlerInterface
 					$rawApartmentData['building-type'],
 					$rawApartmentData['floors-total'],
 					new LocationValueObject(
-						new CountryValueObject($rawApartmentData['location']['country']),
-						new RegionValueObject($rawApartmentData['location']['region']),
-						new DistrictValueObject($rawApartmentData['location']['district']),
-						new CityValueObject($rawApartmentData['location']['locality-name']),
-						new AddressValueObject($rawApartmentData['location']['address']),
-						new ApartmentValueObject($rawApartmentData['location']['apartment']),
-						new LongitudeValueObject($rawApartmentData['location']['longitude']),
-						new LatitudeValueObject($rawApartmentData['location']['latitude']),
+						new CountryValueObject($rawApartmentData['location']['country'] ?? null),
+						new RegionValueObject($rawApartmentData['location']['region'] ?? null),
+						new DistrictValueObject($rawApartmentData['location']['district'] ?? null),
+						new CityValueObject($rawApartmentData['location']['locality-name'] ?? null),
+						new AddressValueObject($rawApartmentData['location']['address'] ?? null),
+						new ApartmentValueObject($rawApartmentData['location']['apartment'] ?? null),
+						new LongitudeValueObject($rawApartmentData['location']['longitude'] ?? null),
+						new LatitudeValueObject($rawApartmentData['location']['latitude'] ?? null),
 					),
 					$this->developer,
 					$buildObjectGallery,
@@ -104,14 +104,14 @@ class YandexImport implements ImportHandlerInterface
 					$rawApartmentData['building-type'],
 					$rawApartmentData['floors-total'],
 					new LocationValueObject(
-						new CountryValueObject($rawApartmentData['location']['country']),
-						new RegionValueObject($rawApartmentData['location']['region']),
-						new DistrictValueObject($rawApartmentData['location']['district']),
-						new CityValueObject($rawApartmentData['location']['locality-name']),
-						new AddressValueObject($rawApartmentData['location']['address']),
-						new ApartmentValueObject($rawApartmentData['location']['apartment']),
-						new LongitudeValueObject($rawApartmentData['location']['longitude']),
-						new LatitudeValueObject($rawApartmentData['location']['latitude']),
+						new CountryValueObject($rawApartmentData['location']['country'] ?? null),
+						new RegionValueObject($rawApartmentData['location']['region'] ?? null),
+						new DistrictValueObject($rawApartmentData['location']['district'] ?? null),
+						new CityValueObject($rawApartmentData['location']['locality-name'] ?? null),
+						new AddressValueObject($rawApartmentData['location']['address'] ?? null),
+						new ApartmentValueObject($rawApartmentData['location']['apartment'] ?? null),
+						new LongitudeValueObject($rawApartmentData['location']['longitude'] ?? null),
+						new LatitudeValueObject($rawApartmentData['location']['latitude'] ?? null),
 					),
 					$this->developer,
 					$buildObjectGallery,
@@ -151,7 +151,6 @@ class YandexImport implements ImportHandlerInterface
 					$rawApartmentData['built-year'],
 					new BuiltStateValueObject($rawApartmentData['building-state']),
 					$planImageList,
-					[],
 				);
 
 				$this->apartmentRepository->update($existApartment);
@@ -182,7 +181,6 @@ class YandexImport implements ImportHandlerInterface
 					$rawApartmentData['mortgage'],
 					$rawApartmentData['built-year'],
 					$planImageList,
-					[],
 					new BuiltStateValueObject($rawApartmentData['building-state']),
 					$externalId,
 				);

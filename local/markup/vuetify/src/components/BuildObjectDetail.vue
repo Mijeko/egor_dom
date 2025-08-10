@@ -22,6 +22,9 @@ export default defineComponent({
       filterApartmentList: [],
     };
   },
+  mounted(): any {
+    console.log(this.buildObject);
+  },
   computed: {
     computedApartments: function () {
 
