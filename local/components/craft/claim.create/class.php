@@ -28,16 +28,24 @@ class CraftClaimCreateComponent extends AjaxComponent
 				$formData['email'],
 				$formData['phone'],
 				$formData['client'],
-				$formData['inn'],
-				$formData['kpp'],
-				$formData['bik'],
-				$formData['ogrn'],
-				$formData['currAccount'],
-				$formData['corrAccount'],
-				$formData['legalAddress'],
-				$formData['postAddress'],
-				$formData['bankName'],
 			));
+//			$service = ClaimServiceFactory::getClaimService();
+//			$claim = $service->createClientClaim(new ClaimCreateDto(
+//				$formData['apartmentId'],
+//				$formData['userId'],
+//				$formData['email'],
+//				$formData['phone'],
+//				$formData['client'],
+//				$formData['inn'],
+//				$formData['kpp'],
+//				$formData['bik'],
+//				$formData['ogrn'],
+//				$formData['currAccount'],
+//				$formData['corrAccount'],
+//				$formData['legalAddress'],
+//				$formData['postAddress'],
+//				$formData['bankName'],
+//			));
 
 			ResponseBx::success([
 				'claim' => ClaimDto::fromEntity($claim),

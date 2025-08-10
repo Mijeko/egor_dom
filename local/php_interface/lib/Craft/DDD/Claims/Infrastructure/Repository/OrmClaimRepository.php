@@ -27,15 +27,15 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		$model->setStatus($claim->getStatus()->getCode());
 		$model->setPhone($claim->getPhone());
 		$model->setEmail($claim->getEmail());
-		$model->setOgrn($claim->getOgrn()->getValue());
-		$model->setInn($claim->getInn()->getValue());
-		$model->setKpp($claim->getKpp()->getValue());
-		$model->setBik($claim->getBik()->getValue());
-		$model->setCurrAcc($claim->getCurrAcc()->getValue());
-		$model->setCorrAcc($claim->getCorrAcc()->getValue());
-		$model->setLegalAddress($claim->getLegalAddress());
-		$model->setPostAddress($claim->getPostAddress());
-		$model->setBankName($claim->getBankName());
+//		$model->setOgrn($claim->getOgrn()->getValue());
+//		$model->setInn($claim->getInn()->getValue());
+//		$model->setKpp($claim->getKpp()->getValue());
+//		$model->setBik($claim->getBik()->getValue());
+//		$model->setCurrAcc($claim->getCurrAcc()->getValue());
+//		$model->setCorrAcc($claim->getCorrAcc()->getValue());
+//		$model->setLegalAddress($claim->getLegalAddress());
+//		$model->setPostAddress($claim->getPostAddress());
+//		$model->setBankName($claim->getBankName());
 
 
 		$result = $model->save();

@@ -25,16 +25,12 @@ class TelegramNotifyService
 		$message = "На сайте %s новый заказ №%s\n
 		Клиент: %s (%s)\n\n
 		Рег данные:\n
-		ИНН: %s\n
-		ОГРН: %s\n
 		";
 		$message = sprintf($message,
 			Application::getInstance()->getContext()->getServer()->getServerName(),
 			$claimEntity->getId(),
 			$claimEntity->getClient(),
 			$claimEntity->getPhone(),
-			$claimEntity->getInn()->getValue(),
-			$claimEntity->getOgrn()->getValue(),
 		);
 
 		foreach($members as $member)

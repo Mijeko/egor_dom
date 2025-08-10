@@ -1,9 +1,6 @@
-export default interface ClaimCreateRequestDto {
-  userId: number;
-  apartmentId: number;
-  phone: string;
-  email: string;
-  client: string;
+import type ClaimCreateShortRequestDto from "@/dto/request/ClaimCreateShortRequestDto.ts";
+
+export default interface ClaimCreateRequestDto extends ClaimCreateShortRequestDto {
   bik: string,
   kpp: string,
   inn: string,

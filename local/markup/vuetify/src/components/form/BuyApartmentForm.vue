@@ -8,6 +8,7 @@ import ValidateLegalData from "@/core/validate/ValidateLegalData.ts";
 import ClaimService from "@/service/ClaimService.ts";
 import type ClaimCreateResponseDto from "@/dto/response/ClaimCreateResponseDto.ts";
 import PhoneInput from "@/components/html/PhoneInput.vue";
+import type ClaimCreateShortRequestDto from "@/dto/request/ClaimCreateShortRequestDto.ts";
 
 export default defineComponent({
   name: "BuyApartmentForm",
@@ -18,15 +19,6 @@ export default defineComponent({
         email: '',
         phone: '',
         client: '',
-        bik: '',
-        kpp: '',
-        inn: '',
-        ogrn: '',
-        currAccount: '',
-        corrAccount: '',
-        legalAddress: '',
-        postAddress: '',
-        bankName: '',
       },
       user: {} as BxUserDto,
       isFormValid: false,
@@ -87,15 +79,15 @@ export default defineComponent({
     this.form.phone = this.user.phone ?? '';
     this.form.email = this.user.email ?? '';
     this.form.client = this.user.fullName ?? '';
-    this.form.inn = this.user.inn ?? '';
-    this.form.bik = this.user.bik ?? '';
-    this.form.kpp = this.user.kpp ?? '';
-    this.form.ogrn = this.user.ogrn ?? '';
-    this.form.currAccount = this.user.currAccount ?? '';
-    this.form.corrAccount = this.user.corrAccount ?? '';
-    this.form.postAddress = this.user.postAddress ?? '';
-    this.form.legalAddress = this.user.legalAddress ?? '';
-    this.form.bankName = this.user.bankName ?? '';
+    // this.form.inn = this.user.inn ?? '';
+    // this.form.bik = this.user.bik ?? '';
+    // this.form.kpp = this.user.kpp ?? '';
+    // this.form.ogrn = this.user.ogrn ?? '';
+    // this.form.currAccount = this.user.currAccount ?? '';
+    // this.form.corrAccount = this.user.corrAccount ?? '';
+    // this.form.postAddress = this.user.postAddress ?? '';
+    // this.form.legalAddress = this.user.legalAddress ?? '';
+    // this.form.bankName = this.user.bankName ?? '';
   },
   methods: {
     submitForm: function () {
@@ -104,21 +96,12 @@ export default defineComponent({
         return;
       }
 
-      let body: ClaimCreateRequestDto = {
+      let body: ClaimCreateShortRequestDto = {
         apartmentId: this.apartmentId,
         userId: this.user.id,
         email: this.form.email,
         phone: this.form.phone,
         client: this.form.client,
-        bik: this.form.bik ?? '',
-        kpp: this.form.kpp ?? '',
-        inn: this.form.inn ?? '',
-        ogrn: this.form.ogrn ?? '',
-        currAccount: this.form.currAccount ?? '',
-        corrAccount: this.form.corrAccount ?? '',
-        legalAddress: this.form.legalAddress ?? '',
-        postAddress: this.form.postAddress ?? '',
-        bankName: this.form.bankName ?? '',
       };
 
       let service = new ClaimService();
@@ -133,15 +116,6 @@ export default defineComponent({
 
             this.form.email = '';
             this.form.client = '';
-            this.form.inn = '';
-            this.form.bik = '';
-            this.form.kpp = '';
-            this.form.ogrn = '';
-            this.form.currAccount = '';
-            this.form.corrAccount = '';
-            this.form.postAddress = '';
-            this.form.legalAddress = '';
-            this.form.bankName = '';
           }
         });
     },
@@ -178,101 +152,6 @@ export default defineComponent({
         </v-col>
       </v-row>
 
-
-      <v-card-subtitle>Юридические данные</v-card-subtitle>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            :rules="validate.inn"
-            type="text"
-            label="ИНН"
-            v-model="form.inn"
-            required
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="ОГРН/ОГРНИП"
-            v-model="form.ogrn"
-            :rules="validate.ogrn"
-            required/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="КПП"
-            v-model="form.kpp"
-            :rules="validate.kpp"
-            required
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="БИК"
-            v-model="form.bik"
-            :rules="validate.bik"
-            required
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="Расчетный счет"
-            v-model="form.currAccount"
-            :rules="validate.currAcc"
-            required/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="Корреспондентский счет"
-            v-model="form.corrAccount"
-            :rules="validate.corrAcc"
-            required/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="Юридический адрес"
-            v-model="form.legalAddress"
-            :rules="validate.legalAddress"
-            required/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="Почтовый адрес"
-            v-model="form.postAddress"
-            :rules="validate.postAddress"
-            required/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field
-            type="text"
-            label="Наименование банка"
-            v-model="form.bankName"
-            :rules="validate.bankName"
-            required/>
-        </v-col>
-      </v-row>
     </v-container>
 
     <v-card-actions>

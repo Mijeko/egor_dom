@@ -43,18 +43,9 @@ class ClaimEntity
 		string            $email,
 		string            $phone,
 		string            $client,
-		string            $inn,
-		string            $kpp,
-		string            $bik,
-		string            $ogrn,
-		string            $currAcc,
-		string            $corrAcc,
-		string            $legalAddress,
-		string            $postAddress,
-		string            $bankName,
 		ApartmentEntity   $apartmentEntity,
 		UserEntity        $user,
-	): static
+	): ClaimEntity
 	{
 		$self = new self();
 
@@ -63,15 +54,15 @@ class ClaimEntity
 		$self->email = $email;
 		$self->phone = $phone;
 		$self->client = $client;
-		$self->inn = new InnValueObject($inn);
-		$self->kpp = new KppValueObject($kpp);
-		$self->bik = new BikValueObject($bik);
-		$self->ogrn = new OgrnValueObject($ogrn);
-		$self->currAcc = new CurrAccountValueObject($currAcc);
-		$self->corrAcc = new CorrAccountValueObject($corrAcc);
-		$self->legalAddress = $legalAddress;
-		$self->postAddress = $postAddress;
-		$self->bankName = $bankName;
+//		$self->inn = new InnValueObject($inn);
+//		$self->kpp = new KppValueObject($kpp);
+//		$self->bik = new BikValueObject($bik);
+//		$self->ogrn = new OgrnValueObject($ogrn);
+//		$self->currAcc = new CurrAccountValueObject($currAcc);
+//		$self->corrAcc = new CorrAccountValueObject($corrAcc);
+//		$self->legalAddress = $legalAddress;
+//		$self->postAddress = $postAddress;
+//		$self->bankName = $bankName;
 		$self->apartmentEntity = $apartmentEntity;
 		$self->user = $user;
 

@@ -40,15 +40,6 @@ class ClaimCreateUseCase
 			$request->email,
 			$request->phone,
 			$request->client,
-			$request->inn,
-			$request->kpp,
-			$request->bik,
-			$request->ogrn,
-			$request->currAccount,
-			$request->corrAccount,
-			$request->legalAddress,
-			$request->postAddress,
-			$request->bankName,
 			$apartment,
 			$user
 		);
