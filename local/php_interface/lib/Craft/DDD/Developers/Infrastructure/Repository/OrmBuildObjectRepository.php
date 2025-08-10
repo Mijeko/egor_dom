@@ -30,7 +30,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			}
 
 			return null;
-		}, $buildObjectEntity->getGallery()->getImages() ?? []);
+		}, $buildObjectEntity->getGallery()?->getImages() ?? []);
 
 		$model->setGalleryEx($gallery);
 		$model->setLocationEx($buildObjectEntity->getLocation());

@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Service\ImportHandler\Source;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;

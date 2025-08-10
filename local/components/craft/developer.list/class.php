@@ -1,5 +1,6 @@
 <?php
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
@@ -9,6 +10,8 @@ use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
+use Craft\DDD\Developers\Present\Dto\DeveloperListItemDto;
+use Craft\Dto\BxImageDto;
 
 class CraftDeveloperListComponent extends CBitrixComponent
 {
@@ -25,7 +28,7 @@ class CraftDeveloperListComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
-			\Bitrix\Main\Diag\Debug::dump($e->getMessage());
+			Debug::dump($e->getMessage());
 		}
 	}
 
@@ -63,17 +66,17 @@ class CraftDeveloperListComponent extends CBitrixComponent
 			$imageDto = null;
 			if($picture = $developer->getPicture())
 			{
-				$imageDto = new \Craft\Dto\BxImageDto(
+				$imageDto = new BxImageDto(
 					$picture->getId(),
 					$picture->getSrc()
 				);
 			}
 
-			return new \Craft\DDD\Developers\Present\Dto\DeveloperListItemDto(
+			return new DeveloperListItemDto(
 				$developer->getId(),
 				$developer->getName(),
 				$imageDto,
-				count($buildObjectListReduced[$developer->getId()]),
+				count($buildObjectListReduced[$developer->getId()] ?? []),
 			);
 		}, $developerList);
 

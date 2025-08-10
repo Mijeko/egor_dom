@@ -7,7 +7,11 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
 
 $APPLICATION->SetTitle("Застройщики");
 
+use Bitrix\Main\Application;
+use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Loader;
+use Bitrix\Main\SystemException;
+use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
 foreach(['craft.develop'] as $module)
@@ -15,10 +19,10 @@ foreach(['craft.develop'] as $module)
 	if(!Loader::includeModule($module))
 	{
 		$APPLICATION->ThrowException('Не подключен модуль ' . $module);
-	};
+	}
 }
 
-$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+$request = Application::getInstance()->getContext()->getRequest();
 
 if($request->getPost('action_button'))
 {
@@ -38,10 +42,10 @@ if($request->getPost('action_button'))
 				try
 				{
 					$area->delete();
-				} catch(\Bitrix\Main\ArgumentException $e)
+				} catch(ArgumentException $e)
 				{
 
-				} catch(\Bitrix\Main\SystemException $e)
+				} catch(SystemException $e)
 				{
 
 				}
@@ -63,6 +67,7 @@ $lAdmin = new CAdminList($table_id);
 // Какие поля выводить
 $lAdmin->AddHeaders([
 	['id' => DeveloperTable::F_ID, 'content' => 'ID', 'default' => true],
+	['id' => DeveloperTable::F_CITY_ID, 'content' => 'Город', 'default' => true],
 	['id' => DeveloperTable::F_NAME, 'content' => 'Название', 'default' => true],
 	['id' => DeveloperTable::F_ACTIVE, 'content' => 'Активность', 'default' => true],
 	['id' => DeveloperTable::F_SORT, 'content' => 'Сортировка', 'default' => true],
@@ -84,6 +89,11 @@ while($element = $data->NavNext(true, "f_"))
 	$row =& $lAdmin->AddRow($f_ID, $element);
 
 	$row->AddCheckField("ACTIVE");
+
+	if($city = CityTable::getByPrimary($area->getCityId())->fetchObject())
+	{
+		$row->AddField(DeveloperTable::F_CITY_ID, $city->getName() ?? 'Не назначено');
+	}
 
 	$arActions = [];
 	$arActions[] = [

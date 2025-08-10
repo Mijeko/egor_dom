@@ -1,5 +1,4 @@
 <?php
-
 if(empty($_SERVER['DOCUMENT_ROOT']))
 {
 	$_SERVER['DOCUMENT_ROOT'] = dirname(dirname(dirname(dirname(__FILE__))));
@@ -7,7 +6,8 @@ if(empty($_SERVER['DOCUMENT_ROOT']))
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
+use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
 
-$service = \Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory::getService();
+$service = ImportServiceFactory::getService();
 $service->executeAll();
 

@@ -12,18 +12,34 @@ use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
  */
 final class DeveloperEntity
 {
+	protected ?int $id;
+	protected ?string $name;
+	protected ?int $pictureId = null;
+	protected ?int $cityId = null;
+	protected ?array $buildObjects = null;
+	protected ?ImportSettingValueObject $importSetting = null;
+
 	protected ?ImageValueObject $picture = null;
 	protected ?CityEntity $city = null;
 
-	public function __construct(
-		protected ?int                      $id,
-		protected ?string                   $name,
-		protected ?int                      $pictureId = null,
-		protected ?int                      $cityId = null,
-		protected ?array                    $buildObjects = null,
-		protected ?ImportSettingValueObject $importSetting = null,
-	)
+
+	public static function hydrate(
+		?int                      $id,
+		?string                   $name,
+		?int                      $pictureId = null,
+		?int                      $cityId = null,
+		?array                    $buildObjects = null,
+		?ImportSettingValueObject $importSetting = null,
+	): DeveloperEntity
 	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->pictureId = $pictureId;
+		$self->cityId = $cityId;
+		$self->buildObjects = $buildObjects;
+		$self->importSetting = $importSetting;
+		return $self;
 	}
 
 	public function addPicture(ImageValueObject $picture): DeveloperEntity

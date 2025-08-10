@@ -28,15 +28,25 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 	public function findById(int $id): ?DeveloperEntity
 	{
-		$result = DeveloperTable::getById($id)->fetchObject();
+		$developers = $this->findAll(
+			[],
+			[
+				DeveloperTable::F_ID => $id,
+			],
+		);
 
-		return $this->hydrateElement($result);
+		if(count($developers) != 1)
+		{
+			return null;
+		}
+
+		return array_shift($developers);
 	}
 
 	protected function hydrateElement(Developer $developer): DeveloperEntity
 	{
-		return new DeveloperEntity(
-			// @phpstan-ignore method.notFound
+		return DeveloperEntity::hydrate(
+		// @phpstan-ignore method.notFound
 			$developer->getId(),
 			// @phpstan-ignore method.notFound
 			$developer->getName(),
