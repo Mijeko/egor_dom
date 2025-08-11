@@ -94,7 +94,7 @@ class BuildObjectService
 
 			$images = array_map(function(int $imageId) {
 
-				$image = $this->imageService->fromId($imageId);
+				$image = $this->imageService->findById($imageId);
 
 				return new ImageValueObject(
 					$image->id,

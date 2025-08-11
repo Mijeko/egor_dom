@@ -8,7 +8,7 @@ use Craft\DDD\Shared\Infrastructure\Dto\ResultImageSaveDto;
 class ImageService implements ImageServiceInterface
 {
 
-	public function fromId(int $id): ?ResultImageSaveDto
+	public function findById(int $id): ?ResultImageSaveDto
 	{
 		$file = \CFile::GetFileArray($id);
 		if(!$file)
@@ -22,7 +22,7 @@ class ImageService implements ImageServiceInterface
 		);
 	}
 
-	public function fromUrl(string $url): ?ResultImageSaveDto
+	public function storeFromUrl(string $url): ?ResultImageSaveDto
 	{
 		if(!$url)
 		{
@@ -100,7 +100,7 @@ class ImageService implements ImageServiceInterface
 
 	protected function sourceFolder(): string
 	{
-		return '/import_aparts/source/';
+		return '/upload/import_aparts/source/';
 	}
 
 	protected function imageFolder(): string

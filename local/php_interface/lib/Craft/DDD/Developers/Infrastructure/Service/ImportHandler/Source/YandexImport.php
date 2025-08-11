@@ -65,11 +65,11 @@ class YandexImport implements ImportHandlerInterface
 			}
 
 			$buildObjectGallery = array_map(function(string $url) {
-				$savedImage = $this->imageSaver->fromUrl($url);
+				$savedImage = $this->imageSaver->storeFromUrl($url);
 				return $savedImage->id;
 			}, $listGalleryImages);
 			$planImageList = array_map(function(string $url) {
-				$savedImage = $this->imageSaver->fromUrl($url);
+				$savedImage = $this->imageSaver->storeFromUrl($url);
 				return $savedImage->id;
 			}, $listPlanImages);
 

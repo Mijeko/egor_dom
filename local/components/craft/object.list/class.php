@@ -50,7 +50,7 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 				$buildObjectEntity->getFloors(),
 				null,
 				array_map(function(int $imageId) {
-					$res = $this->imageService->fromId($imageId);
+					$res = $this->imageService->findById($imageId);
 					return new BxImageDto(
 						$res->id,
 						$res->src,

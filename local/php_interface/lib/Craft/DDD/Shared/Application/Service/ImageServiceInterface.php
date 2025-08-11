@@ -6,7 +6,7 @@ use Craft\DDD\Shared\Infrastructure\Dto\ResultImageSaveDto;
 
 interface ImageServiceInterface
 {
-	public function fromUrl(string $url): ?ResultImageSaveDto;
+	public function storeFromUrl(string $url): ?ResultImageSaveDto;
 
-	public function fromId(int $id): ?ResultImageSaveDto;
+	public function findById(int $id): ?ResultImageSaveDto;
 }

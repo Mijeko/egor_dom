@@ -31,7 +31,7 @@ class ManagerService
 
 	private function hydrate(ManagerEntity &$entity): void
 	{
-		$avatarImage = $this->imageService->fromId($entity->getAvatarId());
+		$avatarImage = $this->imageService->findById($entity->getAvatarId());
 		if($avatarImage)
 		{
 			$entity->setAvatar(new ImageValueObject(

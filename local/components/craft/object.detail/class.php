@@ -91,7 +91,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 			array_map(function(ApartmentEntity $apartment) {
 
 				$images = array_map(function(int $imageId) {
-					$_img = $this->imageService->fromId($imageId);
+					$_img = $this->imageService->findById($imageId);
 					return new BxImageDto(
 						$_img->id,
 						$_img->src,

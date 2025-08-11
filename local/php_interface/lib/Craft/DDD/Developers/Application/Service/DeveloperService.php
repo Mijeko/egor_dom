@@ -112,7 +112,7 @@ class DeveloperService
 
 		$developerList = array_map(function(DeveloperEntity $developerEntity) {
 
-			$image = $this->imageService->fromId($developerEntity->getPictureId());
+			$image = $this->imageService->findById($developerEntity->getPictureId());
 			if($image)
 			{
 				$developerEntity->addPicture(new ImageValueObject($image->id, $image->src));

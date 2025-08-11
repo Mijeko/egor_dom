@@ -90,7 +90,7 @@ class CraftClaimDetailComponent extends CBitrixComponent
 						null,
 					),
 					array_map(function(int $imageId) {
-						$_img = $this->imageService->fromId($imageId);
+						$_img = $this->imageService->findById($imageId);
 						return new BxImageDto(
 							$_img->id,
 							$_img->src,
