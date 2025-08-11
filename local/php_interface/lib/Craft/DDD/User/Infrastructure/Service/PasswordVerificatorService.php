@@ -7,7 +7,7 @@ use Craft\DDD\User\Application\Service\Interfaces\PasswordVerificator;
 
 class PasswordVerificatorService implements PasswordVerificator
 {
-	public function verify($password, $hash): bool
+	public function verify(string $password, string $hash): bool
 	{
 		return Password::equals($hash, $password);
 	}
