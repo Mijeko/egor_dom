@@ -6,12 +6,22 @@ use Craft\DDD\Shared\Domain\ValueObject\AvailChannelContactValueObject;
 
 class ManagerEntity
 {
-	public function __construct(
-		protected ?int                            $id = null,
-		protected ?string                         $name = null,
-		protected ?AvailChannelContactValueObject $availChannelContact
-	)
+	protected ?int $id = null;
+	protected ?string $name = null;
+	protected ?AvailChannelContactValueObject $availChannelContact;
+
+
+	public static function hydrate(
+		int                             $id,
+		string                          $name,
+		?AvailChannelContactValueObject $availChannelContact = null,
+	): ManagerEntity
 	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->availChannelContact = $availChannelContact;
+		return $self;
 	}
 
 	public function getId(): ?int

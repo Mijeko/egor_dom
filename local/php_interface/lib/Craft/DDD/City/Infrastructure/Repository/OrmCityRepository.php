@@ -48,7 +48,7 @@ class OrmCityRepository implements CityRepositoryInterface
 
 	protected function hydrate(City $city): CityEntity
 	{
-		return new CityEntity(
+		return CityEntity::hydrate(
 			$city->getId(),
 			$city->getName(),
 			$city->getCode(),

@@ -121,7 +121,7 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 	{
 		$location = $buildObject->getLocationEx();
 
-		return new BuildObjectEntity(
+		return BuildObjectEntity::hydrate(
 		// @phpstan-ignore method.notFound
 			$buildObject->getId(),
 			// @phpstan-ignore method.notFound
@@ -143,9 +143,6 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 			$buildObject->getGalleryEx(),
 			// @phpstan-ignore method.notFound
 			$buildObject->getDeveloperId(),
-			null,
-			null,
-			null
 		);
 	}
 }

@@ -9,15 +9,30 @@ use Craft\DDD\Shared\Domain\ValueObject\SortValueObject;
 
 class CityEntity
 {
-	public function __construct(
-		protected ?int                $id,
-		protected ?string             $name,
-		protected ?string             $code,
-		protected ?ActiveValueObject  $active,
-		protected ?DefaultValueObject $default,
-		protected ?SortValueObject    $sort,
-	)
+	protected ?int $id;
+	protected ?string $name;
+	protected ?string $code;
+	protected ?ActiveValueObject $active;
+	protected ?DefaultValueObject $default;
+	protected ?SortValueObject $sort;
+
+	public static function hydrate(
+		int                 $id,
+		string              $name,
+		?string             $code,
+		?ActiveValueObject  $active,
+		?DefaultValueObject $default,
+		?SortValueObject    $sort,
+	): CityEntity
 	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->code = $code;
+		$self->active = $active;
+		$self->default = $default;
+		$self->sort = $sort;
+		return $self;
 	}
 
 	public function getId(): int

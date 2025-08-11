@@ -53,7 +53,7 @@ class OrmManagerRepository implements ManagerRepositoryInterface
 
 	public function hydrate(CraftUser $user): ManagerEntity
 	{
-		return new ManagerEntity(
+		return ManagerEntity::hydrate(
 			$user->getId(),
 			$user->getName(),
 			new AvailChannelContactValueObject(
