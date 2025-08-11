@@ -99,26 +99,14 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 	protected function hydrate(Claim $claim): ClaimEntity
 	{
-		return new ClaimEntity(
+		return  ClaimEntity::hydrate(
 			$claim->getId(),
+			$claim->getApartmentId(),
 			$claim->getName(),
 			new StatusValueObject($claim->getStatus()),
 			$claim->getEmail(),
 			$claim->getPhone(),
 			$claim->getClient(),
-			new InnValueObject($claim->getInn()),
-			new KppValueObject($claim->getKpp()),
-			new BikValueObject($claim->getBik()),
-			new OgrnValueObject($claim->getOgrn()),
-			new CurrAccountValueObject($claim->getCurrAcc()),
-			new CorrAccountValueObject($claim->getCorrAcc()),
-			$claim->getLegalAddress(),
-			$claim->getPostAddress(),
-			$claim->getBankName(),
-			$claim->getApartmentId(),
-			$claim->getUserId(),
-			null,
-			null,
 			$claim->getCreatedAt()->format('d.m.Y H:i:s'),
 		);
 	}

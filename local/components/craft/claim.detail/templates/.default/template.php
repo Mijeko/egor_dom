@@ -1,12 +1,12 @@
 <?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
 <?php
 
-use Craft\DDD\Claims\Present\Dto\ClaimDto;
+use Craft\DDD\Claims\Present\Dto\ClaimDetailDto;
 
 /**
  * @var array $arResult
  * @var array $arParams
- * @var \Craft\DDD\Claims\Domain\Entity\ClaimEntity $claim
+ * @var ClaimDetailDto $claim
  * @global CMain $APPLICATION
  */
 
@@ -20,7 +20,7 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'ClaimDetail',
 		'PROPS'  => [
-			'claim' => ClaimDto::fromEntity($claim),
+			'claim' => $claim->claim,
 		],
 	],
 	false,

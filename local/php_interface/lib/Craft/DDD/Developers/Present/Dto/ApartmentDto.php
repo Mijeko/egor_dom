@@ -3,8 +3,6 @@
 namespace Craft\DDD\Developers\Present\Dto;
 
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
-use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
-use Craft\Dto\BxImageDto;
 
 final class ApartmentDto
 {

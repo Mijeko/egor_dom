@@ -31,11 +31,12 @@ class ClaimEntity
 	protected ?string $legalAddress;
 	protected ?string $postAddress;
 	protected ?string $bankName;
+	protected ?string $createdAt = null;
+
 	protected ?int $apartmentId;
 	protected ?int $userId;
 	protected ?ApartmentEntity $apartmentEntity = null;
 	protected ?UserEntity $user = null;
-	protected ?string $createdAt = null;
 
 
 	public static function createClaim(
@@ -54,20 +55,43 @@ class ClaimEntity
 		$self->email = $email;
 		$self->phone = $phone;
 		$self->client = $client;
-//		$self->inn = new InnValueObject($inn);
-//		$self->kpp = new KppValueObject($kpp);
-//		$self->bik = new BikValueObject($bik);
-//		$self->ogrn = new OgrnValueObject($ogrn);
-//		$self->currAcc = new CurrAccountValueObject($currAcc);
-//		$self->corrAcc = new CorrAccountValueObject($corrAcc);
-//		$self->legalAddress = $legalAddress;
-//		$self->postAddress = $postAddress;
-//		$self->bankName = $bankName;
+		//		$self->inn = new InnValueObject($inn);
+		//		$self->kpp = new KppValueObject($kpp);
+		//		$self->bik = new BikValueObject($bik);
+		//		$self->ogrn = new OgrnValueObject($ogrn);
+		//		$self->currAcc = new CurrAccountValueObject($currAcc);
+		//		$self->corrAcc = new CorrAccountValueObject($corrAcc);
+		//		$self->legalAddress = $legalAddress;
+		//		$self->postAddress = $postAddress;
+		//		$self->bankName = $bankName;
 		$self->apartmentEntity = $apartmentEntity;
 		$self->user = $user;
 
 		return $self;
 
+	}
+
+	public static function hydrate(
+		?int               $id,
+		?int               $apartmentId,
+		?string            $name,
+		?StatusValueObject $status,
+		?string            $email,
+		?string            $phone,
+		?string            $client,
+		?string            $createdAt,
+	): ClaimEntity
+	{
+		$self = new self();
+		$self->id = $id;
+		$self->apartmentId = $apartmentId;
+		$self->name = $name;
+		$self->status = $status;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->client = $client;
+		$self->createdAt = $createdAt;
+		return $self;
 	}
 
 	public static function closeClaim(): ClaimEntity
