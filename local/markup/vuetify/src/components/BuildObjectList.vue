@@ -7,6 +7,7 @@ import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import type {ApartmentFilterData} from "@/dto/ApartmentFilterData.ts";
 import ApartmentFilterService from "@/service/ApartmentFilterService.ts";
 import type ApartmentFilterDataResponseDto from "@/dto/response/ApartmentFilterDataResponseDto.ts";
+import init from "@/components/system/Init.vue";
 
 export default defineComponent({
   name: "BuildObjectList",
@@ -27,6 +28,77 @@ export default defineComponent({
   },
   mounted(): any {
     console.log(this.buildObjects);
+  },
+  computed: {
+    buildObjectList: function (): BuildObjectDto[] {
+
+      if (this.filterApartmentList.length > 0) {
+
+        let curObjects: BuildObjectDto[] = this.buildObjects as BuildObjectDto[];
+
+        let listBuildObjectId: number[] = [];
+
+        for (let apart of this.filterApartmentList) {
+          if (!listBuildObjectId.includes(apart.buildObjectId)) {
+            listBuildObjectId.push(apart.buildObjectId);
+          }
+        }
+
+        curObjects = curObjects.filter(function (buildObject: BuildObjectDto) {
+          return listBuildObjectId.includes(buildObject.id);
+        });
+
+        return curObjects;
+      }
+
+      return this.buildObjects as BuildObjectDto[];
+    },
+    // buildObjectList: function (): BuildObjectDto[] {
+    //
+    //   if (this.filterApartmentList.length > 0) {
+    //
+    //     let objects: null[] | BuildObjectDto[] = this.filterApartmentList.map(function (apartment: ApartmentDto) {
+    //       return apartment.buildObject;
+    //     });
+    //
+    //     objects = objects.filter(n => n);
+    //
+    //     let _idObjects: number[] = [];
+    //
+    //     objects = objects.filter(function (buildObject: BuildObjectDto) {
+    //
+    //       let buildObjectId: number = buildObject.id;
+    //
+    //       if (_idObjects.includes(buildObjectId)) {
+    //         return null;
+    //       }
+    //       _idObjects.push(buildObjectId);
+    //       return buildObject;
+    //     });
+    //
+    //     objects = objects.filter(n => n);
+    //
+    //     objects = objects.map((buildObject: BuildObjectDto) => {
+    //
+    //       let _apartments = this.filterApartmentList.filter((apartment: ApartmentDto) => {
+    //         return apartment.buildObjectId === buildObject.id;
+    //       });
+    //
+    //
+    //       if (_apartments.length > 0) {
+    //         buildObject.apartments = _apartments;
+    //       }
+    //
+    //       return buildObject;
+    //     });
+    //
+    //
+    //     return objects as BuildObjectDto[];
+    //
+    //   }
+    //
+    //   return this.buildObjects as BuildObjectDto[];
+    // },
   }
 })
 </script>
@@ -38,7 +110,7 @@ export default defineComponent({
   />
 
   <v-row>
-    <v-col cols="12" sm="6" md="4" lg="3" v-for="buildObject in buildObjects" class="mb-5">
+    <v-col cols="12" sm="6" md="4" lg="3" v-for="buildObject in buildObjectList" class="mb-5">
       <v-card>
 
         <v-carousel :show-arrows="false" :hide-delimiters="true" :touch="true">

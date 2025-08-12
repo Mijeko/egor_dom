@@ -14,6 +14,11 @@ class BuildApartmentFilter
 	{
 		$filter = [];
 
+		if($filterBody->developerId)
+		{
+			$filter[ApartmentTable::R_BUILD_OBJECT . '.' . BuildObjectTable::F_DEVELOPER_ID] = $filterBody->developerId;
+		}
+
 		if($filterBody->buildObjectId)
 		{
 			$filter[ApartmentTable::F_BUILD_OBJECT_ID] = $filterBody->buildObjectId;

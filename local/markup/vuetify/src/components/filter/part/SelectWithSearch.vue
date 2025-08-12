@@ -19,7 +19,6 @@ export default defineComponent({
   },
   data: function () {
     return {
-      rawValue: null,
       searchText: null,
       searchResult: [] as SelectItemDto[],
       selectedFruits: [],
@@ -28,18 +27,8 @@ export default defineComponent({
   },
   methods: {
     select: function (val: any) {
-      this.rawValue = val;
+      this.$emit('update:modelValue', val);
     },
-  },
-  computed: {
-    rawValue: {
-      get(): any {
-        return this.modelValue;
-      },
-      set(value: any) {
-        this.$emit('update:modelValue', value);
-      }
-    }
   },
   updated(): any {
     this.searchResult = this.values;

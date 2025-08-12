@@ -175,6 +175,7 @@ export default defineComponent({
 <template>
 
   <div class="container">
+    {{ filter }}
     <v-form>
       <v-card class="mt-3 mb-5 pa-4">
         <v-row>
