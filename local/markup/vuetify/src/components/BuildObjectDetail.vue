@@ -103,6 +103,7 @@ export default defineComponent({
         <v-col>
           <MainApartmentFilter
             v-model="filterApartmentList"
+            :skip="['developerId','buildObjectId']"
           />
         </v-col>
       </v-row>

@@ -21,6 +21,10 @@ export default defineComponent({
   name: "MainApartmentFilter",
   components: {SelectWithSearch, MinMaxInputDropdown, InputDropdown, CheckboxDropdown},
   props: {
+    skip: {
+      type: Array,
+      default: []
+    },
     filterApartmentList: {
       type: Array as PropType<ApartmentDto[]>,
       default: []
@@ -178,7 +182,7 @@ export default defineComponent({
     <v-form>
       <v-card class="mt-3 mb-5 pa-4">
         <v-row>
-          <v-col>
+          <v-col v-if="!skip.includes('developerId')">
             <SelectWithSearch
               :values="(getAr('developer')) as SelectItemDto[]"
               color="light-blue"
@@ -187,7 +191,7 @@ export default defineComponent({
               v-model="filter.developerId"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('buildObjectId')">
             <SelectWithSearch
               :values="(getAr('buildObjectList')) as SelectItemDto[]"
               color="light-blue"
@@ -196,7 +200,7 @@ export default defineComponent({
               v-model="filter.buildObjectId"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('price.min')">
             <MinMaxInputDropdown
               color="light-blue"
               label="Стомость"
@@ -205,7 +209,7 @@ export default defineComponent({
               v-model:max="filter.price.max"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('price')">
             <CheckboxDropdown
               color="light-blue"
               label="Сан-узел"
@@ -214,7 +218,7 @@ export default defineComponent({
               :values="(getAr('bathroom')) as CheckboxDropdownItemDto[]"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('renovation')">
             <CheckboxDropdown
               color="light-blue"
               label="Отделка"
@@ -223,7 +227,7 @@ export default defineComponent({
               :values="(getAr('renovation')) as CheckboxDropdownItemDto[]"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('floorsTotal')">
             <InputDropdown
               v-model="filter.floorsTotal"
               color="light-blue"
@@ -231,7 +235,7 @@ export default defineComponent({
               icon="$floorPlan"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('roomsTotal')">
             <InputDropdown
               v-model="filter.roomsTotal"
               color="light-blue"
@@ -239,7 +243,7 @@ export default defineComponent({
               icon="$bed"
             />
           </v-col>
-          <v-col>
+          <v-col v-if="!skip.includes('floor')">
             <InputDropdown
               v-model="filter.floor"
               color="light-blue"
