@@ -53,52 +53,6 @@ export default defineComponent({
 
       return this.buildObjects as BuildObjectDto[];
     },
-    // buildObjectList: function (): BuildObjectDto[] {
-    //
-    //   if (this.filterApartmentList.length > 0) {
-    //
-    //     let objects: null[] | BuildObjectDto[] = this.filterApartmentList.map(function (apartment: ApartmentDto) {
-    //       return apartment.buildObject;
-    //     });
-    //
-    //     objects = objects.filter(n => n);
-    //
-    //     let _idObjects: number[] = [];
-    //
-    //     objects = objects.filter(function (buildObject: BuildObjectDto) {
-    //
-    //       let buildObjectId: number = buildObject.id;
-    //
-    //       if (_idObjects.includes(buildObjectId)) {
-    //         return null;
-    //       }
-    //       _idObjects.push(buildObjectId);
-    //       return buildObject;
-    //     });
-    //
-    //     objects = objects.filter(n => n);
-    //
-    //     objects = objects.map((buildObject: BuildObjectDto) => {
-    //
-    //       let _apartments = this.filterApartmentList.filter((apartment: ApartmentDto) => {
-    //         return apartment.buildObjectId === buildObject.id;
-    //       });
-    //
-    //
-    //       if (_apartments.length > 0) {
-    //         buildObject.apartments = _apartments;
-    //       }
-    //
-    //       return buildObject;
-    //     });
-    //
-    //
-    //     return objects as BuildObjectDto[];
-    //
-    //   }
-    //
-    //   return this.buildObjects as BuildObjectDto[];
-    // },
   }
 })
 </script>
