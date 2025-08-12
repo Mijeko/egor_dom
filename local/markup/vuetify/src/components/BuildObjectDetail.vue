@@ -28,8 +28,8 @@ export default defineComponent({
   computed: {
     computedApartments: function () {
 
-      if (this.isRunFilter) {
-        return this.filteredApartments;
+      if (this.filterApartmentList.length > 0) {
+        return this.filterApartmentList;
       }
 
       return this.buildObject?.apartments;

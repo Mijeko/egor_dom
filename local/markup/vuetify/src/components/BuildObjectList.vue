@@ -34,25 +34,50 @@ export default defineComponent({
 
       if (this.filterApartmentList.length > 0) {
 
-        let curObjects: BuildObjectDto[] = this.buildObjects as BuildObjectDto[];
-
-        let listBuildObjectId: number[] = [];
-
-        for (let apart of this.filterApartmentList) {
-          if (!listBuildObjectId.includes(apart.buildObjectId)) {
-            listBuildObjectId.push(apart.buildObjectId);
-          }
-        }
-
-        curObjects = curObjects.filter(function (buildObject: BuildObjectDto) {
-          return listBuildObjectId.includes(buildObject.id);
+        let objects: null[] | BuildObjectDto[] = this.filterApartmentList.map(function (apartment: ApartmentDto) {
+          return apartment.buildObject;
         });
 
-        return curObjects;
+        objects = objects.filter(n => n);
+
+        let _idObjects: number[] = [];
+
+        objects = objects.filter(function (buildObject: BuildObjectDto) {
+
+          let buildObjectId: number = buildObject.id;
+
+          if (_idObjects.includes(buildObjectId)) {
+            return null;
+          }
+          _idObjects.push(buildObjectId);
+          return buildObject;
+        });
+
+        objects = objects.filter(n => n);
+
+        objects = objects.map((buildObject: BuildObjectDto) => {
+
+          let _apartments = this.filterApartmentList.filter((apartment: ApartmentDto) => {
+            return apartment.buildObjectId === buildObject.id;
+          });
+
+
+          if (_apartments.length > 0) {
+            buildObject.apartments = _apartments;
+          }
+
+          buildObject.countApartments = buildObject.apartments?.length;
+
+          return buildObject;
+        });
+
+
+        return objects as BuildObjectDto[];
+
       }
 
       return this.buildObjects as BuildObjectDto[];
-    },
+    }
   }
 })
 </script>

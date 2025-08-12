@@ -1,10 +1,14 @@
 <?php
 
+use Craft\DDD\Developers\Application\Service\BuildApartmentFilter;
+use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
+use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
@@ -40,9 +44,25 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 	protected function loadData(): void
 	{
 
-		$buildObjectList = $this->buildObjectRepository->findAll();
+		$apartmentList = $this->apartmentRepository->findAll(
+			[],
+			BuildApartmentFilter::execute(ApartmentFilterBuilder::fromUrl())
+		);
 
-		$buildObjectListDto = array_map(function(BuildObjectEntity $buildObjectEntity) {
+		$buildObjectIdList = array_map(function(ApartmentEntity $ae) {
+			return $ae->getBuildObjectId();
+		}, $apartmentList);
+
+
+		$buildObjectList = $this->buildObjectRepository->findAll(
+			[],
+			[
+				BuildObjectTable::F_ID => $buildObjectIdList,
+			],
+		);
+
+		$buildObjectListDto = array_map(function(BuildObjectEntity $buildObjectEntity) use ($apartmentList) {
+			$buildObjectId = $buildObjectEntity->getId();
 			return new BuildObjectDto(
 				$buildObjectEntity->getId(),
 				$buildObjectEntity->getName(),
@@ -59,7 +79,17 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 				null,
 				LocationDto::fromModel($buildObjectEntity->getLocation()),
 				'/objects/' . $buildObjectEntity->getId() . '/',
-				$this->apartmentRepository->countByBuildObjectId($buildObjectEntity->getId()),
+				(function() use ($apartmentList, $buildObjectId) {
+					$count = 0;
+					foreach($apartmentList as $apartment)
+					{
+						if($apartment->getBuildObjectId() == $buildObjectId)
+						{
+							$count++;
+						}
+					}
+					return $count;
+				})(),
 			);
 		}, $buildObjectList);
 

@@ -4,6 +4,7 @@ namespace Craft\DDD\Shared\Infrastructure\Service;
 
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Dto\ResultImageSaveDto;
+use Craft\Dto\BxImageDto;
 
 class ImageService implements ImageServiceInterface
 {
@@ -106,5 +107,27 @@ class ImageService implements ImageServiceInterface
 	protected function imageFolder(): string
 	{
 		return '/import_aparts/';
+	}
+
+	public function transformBx(int $imageId): BxImageDto
+	{
+		$_img = $this->findById($imageId);
+
+		return new BxImageDto(
+			$_img->id,
+			$_img->src,
+		);
+	}
+
+	public function transformBxByArray(array $imageIdList): array
+	{
+		$result = [];
+
+		foreach($imageIdList as $imageId)
+		{
+			$result[] = $this->transformBx($imageId);
+		}
+
+		return $result;
 	}
 }
