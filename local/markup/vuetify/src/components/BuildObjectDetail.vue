@@ -18,7 +18,6 @@ export default defineComponent({
   data: function () {
     return {
       isRunFilter: false,
-      filteredApartments: [],
       filterApartmentList: [],
     };
   },
