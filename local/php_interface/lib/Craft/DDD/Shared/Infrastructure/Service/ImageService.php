@@ -106,7 +106,7 @@ class ImageService implements ImageServiceInterface
 
 	protected function imageFolder(): string
 	{
-		return '/import_aparts/';
+		return '/upload/import_aparts/';
 	}
 
 	public function transformBx(int $imageId): BxImageDto
