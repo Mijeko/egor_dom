@@ -69,7 +69,7 @@ class ImportService
 			}
 		} catch(\Exception $exception)
 		{
-
+			Debug::dumpToFile($exception->getMessage(), '', '__importService.log');
 		}
 	}
 
