@@ -9,6 +9,11 @@ define('USER_GROUP_JUR_PERSON_ID', \Craft\Core\Helper\UserGroupHelper::findByCod
 define('USER_GROUP_PHYS_PERSON_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('STUDENT'));
 define('USER_GROUP_MANAGER_ID', \Craft\Core\Helper\UserGroupHelper::findByCode('MANAGER'));
 
+define('USER_GROUP_EXTERNAL_REALTOR', \Craft\Core\Helper\UserGroupHelper::findByCode('MANAGER'));
+define('USER_GROUP_CLIENT', \Craft\Core\Helper\UserGroupHelper::findByCode('MANAGER'));
+define('USER_GROUP_AGENT', \Craft\Core\Helper\UserGroupHelper::findByCode('MANAGER'));
+
+
 // iblock id
 
 
