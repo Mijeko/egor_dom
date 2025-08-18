@@ -37,6 +37,7 @@ declare module 'vue' {
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']
     ProfileEditForm: typeof import('./src/components/ProfileEditForm.vue')['default']
     ProfileIndex: typeof import('./src/components/ProfileIndex.vue')['default']
+    ProfileShortInfo: typeof import('./src/components/profile/ProfileShortInfo.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
     SelectWithSearch: typeof import('./src/components/filter/part/SelectWithSearch.vue')['default']
     ShortOrderInfo: typeof import('./src/components/profile/ShortOrderInfo.vue')['default']

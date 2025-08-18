@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
@@ -13,6 +14,7 @@ use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
+use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
 
@@ -32,17 +34,39 @@ class BxAgentRepository implements AgentRepositoryInterface
 		return null;
 	}
 
+	public function findAll(Criteria $criteria): array
+	{
+		$result = [];
+
+		$agentList = CraftUserTable::query()
+			->addFilter(null, $criteria->getFilter())
+			->withAgent()
+			->fetchCollection();
+
+
+		foreach($agentList as $agent)
+		{
+			$result[] = $this->hydrate($agent);
+		}
+
+		return $result;
+	}
 
 	public function findById(int $id): ?AgentEntity
 	{
-		$model = CraftUserTable::getList([
-			'filter' => [
-				CraftUserTable::F_ID => $id,
-			],
-		])
-			->fetchObject();
+		$agentList = $this->findAll(
+			Criteria::instance()
+				->filter([
+					CraftUserTable::F_ID => $id,
+				])
+		);
 
-		return $this->hydrate($model);
+		if(count($agentList) !== 1)
+		{
+			return null;
+		}
+
+		return array_shift($agentList);
 	}
 
 	public function findByInn(InnValueObject $inn): ?AgentEntity

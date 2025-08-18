@@ -83,7 +83,7 @@ class RegisterAgentUseCase
 		}
 
 		$this->groupAssignService->assign(
-			[USER_GROUP_JUR_PERSON_ID],
+			[USER_GROUP_EXTERNAL_REALTOR],
 			$agent->getId(),
 		);
 

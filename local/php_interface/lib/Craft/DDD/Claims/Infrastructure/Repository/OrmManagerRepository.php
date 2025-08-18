@@ -17,14 +17,14 @@ class OrmManagerRepository implements ManagerRepositoryInterface
 	{
 		$managers = [];
 
-		if(!defined('USER_GROUP_MANAGER_ID') || !USER_GROUP_MANAGER_ID)
+		if(!defined('USER_GROUP_MANAGER_ID') || !USER_GROUP_MANAGER)
 		{
 			return $managers;
 		}
 
 		$managersAssignGroup = UserGroupTable::getList([
 			'filter' => [
-				'=GROUP_ID' => USER_GROUP_MANAGER_ID,
+				'=GROUP_ID' => USER_GROUP_MANAGER,
 			],
 			'cache'  => ['ttl' => 3600 * 48],
 		])->fetchCollection();

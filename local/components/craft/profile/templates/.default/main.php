@@ -15,13 +15,32 @@
 	</div>
 	<div class="profile-body">
 		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
-
 		<?php
+
 		$APPLICATION->IncludeComponent(
 			'craft:vite',
 			'vite',
 			[
-				'SOURCE' => 'ProfileIndex',
+				'SOURCE' => 'profile/ProfileShortInfo',
+			],
+			false,
+			['HIDE_ICONS' => 'Y']
+		);
+
+		$APPLICATION->IncludeComponent(
+			'craft:vite',
+			'vite',
+			[
+				'SOURCE' => 'profile/PersonalManager',
+			],
+			false,
+			['HIDE_ICONS' => 'Y']
+		);
+		$APPLICATION->IncludeComponent(
+			'craft:vite',
+			'vite',
+			[
+				'SOURCE' => 'profile/ShortOrderInfo',
 			],
 			false,
 			['HIDE_ICONS' => 'Y']

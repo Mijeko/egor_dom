@@ -26,7 +26,7 @@ class BxUserRepository implements UserRepositoryInterface
 					CraftUserTable::F_PERSONAL_MOBILE,
 					CraftUserTable::F_PASSWORD,
 				])
-				->construct()
+				->build()
 		)
 			->fetchCollection();
 
@@ -41,7 +41,7 @@ class BxUserRepository implements UserRepositoryInterface
 
 	public function findById(int $id): ?UserEntity
 	{
-		$users = $this->findAll(Criteria::build()->filter([
+		$users = $this->findAll(Criteria::instance()->filter([
 			CraftUserTable::F_ID => $id,
 		]));
 
@@ -55,7 +55,7 @@ class BxUserRepository implements UserRepositoryInterface
 
 	public function findByPhoneNumber(PhoneValueObject $phoneNumber): ?UserEntity
 	{
-		$users = $this->findAll(Criteria::build()->filter([
+		$users = $this->findAll(Criteria::instance()->filter([
 			CraftUserTable::F_PERSONAL_MOBILE => $phoneNumber->getValue(),
 		]));
 

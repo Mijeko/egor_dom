@@ -1,16 +1,21 @@
 <?php
 
+use Bitrix\Main\Diag\Debug;
+use Craft\DDD\User\Domain\Repository\ExternalRealtorRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Repository\BxAgentRepository;
 use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Repository\BxManagerRepository;
 use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
+use Craft\DDD\User\Infrastructure\Repository\ExternalRealtorRepository;
+use Craft\Dto\BxUserDto;
 
 class CraftInitComponent extends CBitrixComponent
 {
 	protected AgentRepositoryInterface $agentRepository;
 	protected ManagerRepositoryInterface $managerRepository;
+	protected ExternalRealtorRepositoryInterface $externalRealtorRepository;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -28,7 +33,7 @@ class CraftInitComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $exception)
 		{
-//			\Bitrix\Main\Diag\Debug::dumpToFile($exception->getMessage());
+			Debug::dumpToFile($exception->getMessage());
 		}
 	}
 
@@ -44,6 +49,7 @@ class CraftInitComponent extends CBitrixComponent
 	{
 		$this->agentRepository = new BxAgentRepository();
 		$this->managerRepository = new BxManagerRepository();
+		$this->externalRealtorRepository = new ExternalRealtorRepository();
 	}
 
 	private function loadData(): void
@@ -60,7 +66,7 @@ class CraftInitComponent extends CBitrixComponent
 				$managerDto = ManagerDto::fromEntity($manager);
 			}
 
-			$dto = new \Craft\Dto\BxUserDto(
+			$dto = new BxUserDto(
 				$agent->getId(),
 				$agent->getName(),
 				$agent->getLastName(),
@@ -71,6 +77,7 @@ class CraftInitComponent extends CBitrixComponent
 					$agent->getSecondName(),
 				]),
 				$agent->getEmail()->getValue(),
+				$agent->getPhone()->getValue(),
 				$agent->getInn()->getValue(),
 				$agent->getOgrn()->getValue(),
 				$agent->getKpp()->getValue(),
@@ -82,6 +89,27 @@ class CraftInitComponent extends CBitrixComponent
 				$agent->getBankName(),
 				$managerDto,
 			);
+		}
+
+		if(!$dto)
+		{
+			$extRealtor = $this->externalRealtorRepository->findById($this->arParams['USER_ID']);
+			if($extRealtor)
+			{
+				$dto = new BxUserDto(
+					$extRealtor->getId(),
+					$extRealtor->getName(),
+					$extRealtor->getLastName(),
+					$extRealtor->getSecondName(),
+					implode(' ', [
+						$extRealtor->getName(),
+						$extRealtor->getLastName(),
+						$extRealtor->getSecondName(),
+					]),
+					$extRealtor->getEmail()->getValue(),
+					$extRealtor->getPhone()->getValue(),
+				);
+			}
 		}
 
 

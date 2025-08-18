@@ -22,8 +22,7 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$service = RegisterStudentUseCaseFactory::getUseCase();
-			$service->execute(
+			$this->registerStudentUseCase->execute(
 				new RegisterStudentDto(
 					$formData['phone'],
 					$formData['email'],

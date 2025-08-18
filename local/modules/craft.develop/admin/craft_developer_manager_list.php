@@ -59,7 +59,7 @@ if($request->getPost('action_button'))
 
 $groupList = UserGroupTable::getList([
 	'filter' => [
-		'=GROUP_ID' => USER_GROUP_MANAGER_ID,
+		'=GROUP_ID' => USER_GROUP_MANAGER,
 	],
 	'cache'  => ['ttl' => 3600 * 48],
 ])->fetchCollection();

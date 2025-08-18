@@ -165,4 +165,9 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 	{
 		return null;
 	}
+
+	public function update(BuildObjectEntity $buildObjectEntity): ?BuildObjectEntity
+	{
+		return null;
+	}
 }

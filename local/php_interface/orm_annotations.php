@@ -6156,6 +6156,11 @@ namespace Craft\Model {
 	 * @method EO_CraftUser_Result exec()
 	 * @method \Craft\Model\CraftUser fetchObject()
 	 * @method \Craft\Model\EO_CraftUser_Collection fetchCollection()
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+Array
 	 */
 	class EO_CraftUser_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**

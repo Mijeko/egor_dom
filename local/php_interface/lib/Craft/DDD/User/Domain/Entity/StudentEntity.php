@@ -7,6 +7,10 @@ use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
+
+/**
+ * Клиент/Ученик
+ */
 final class StudentEntity
 {
 	protected ?int $id;

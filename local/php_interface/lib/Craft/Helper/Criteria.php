@@ -12,7 +12,7 @@ class Criteria
 	private array $filter = [];
 	private ?int $limit = null;
 
-	public static function build(array $order = [], array $filter = [], int $limit = null): Criteria
+	public static function instance(array $order = [], array $filter = [], int $limit = null): Criteria
 	{
 		$self = new self();
 		$self->order = $order;
@@ -21,7 +21,7 @@ class Criteria
 		return $self;
 	}
 
-	public function construct(): array
+	public function build(): array
 	{
 		$r = [
 			'select' => $this->getSelect(),
@@ -43,7 +43,7 @@ class Criteria
 		return $r;
 	}
 
-	private function getSelect(): array
+	public function getSelect(): array
 	{
 		return $this->select;
 	}
@@ -80,17 +80,17 @@ class Criteria
 	}
 
 
-	private function getFilter(): array
+	public function getFilter(): array
 	{
 		return $this->filter;
 	}
 
-	private function getLimit(): ?int
+	public function getLimit(): ?int
 	{
 		return $this->limit;
 	}
 
-	private function getOrder(): array
+	public function getOrder(): array
 	{
 		return $this->order;
 	}

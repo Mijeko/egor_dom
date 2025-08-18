@@ -60,7 +60,7 @@ class RegisterStudentUseCase
 		}
 
 		$this->groupAssignService->assign(
-			[USER_GROUP_PHYS_PERSON_ID],
+			[USER_GROUP_STUDENT],
 			$student->getId(),
 		);
 

@@ -2,7 +2,6 @@
 
 namespace Craft\Dto;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
 use Craft\Model\CraftUser;
 
@@ -17,6 +16,7 @@ class BxUserDto
 		public string      $secondName,
 		public string      $fullName,
 		public string      $email,
+		public string      $phone,
 		public ?string     $inn = null,
 		public ?string     $ogrn = null,
 		public ?string     $kpp = null,
@@ -27,6 +27,8 @@ class BxUserDto
 		public ?string     $postAddress = null,
 		public ?string     $bankName = null,
 		public ?ManagerDto $manager = null,
+		public ?int        $avatarImageId = null,
+		public ?BxImageDto $avatarImage = null,
 	)
 	{
 	}
