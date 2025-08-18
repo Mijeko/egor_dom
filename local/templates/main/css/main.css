@@ -888,5 +888,16 @@ html, body {
   padding: 15px;
   flex: 1; }
 
+.profile-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; }
+  .profile-cards-item {
+    max-width: 25%;
+    width: 100%; }
+    @media (max-width: 639px) {
+      .profile-cards-item {
+        max-width: 100%; } }
+
 
 /*# sourceMappingURL=main.css.map*/

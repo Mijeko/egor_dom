@@ -39,6 +39,7 @@ class CraftUserTable extends UserTable
 	const F_UF_TG_NOTIFY_CLAIM = 'UF_TG_NOTIFY_CLAIM';
 	const F_UF_EMAIL_NOTIFY_CLAIM = 'UF_EMAIL_NOTIFY_CLAIM';
 	const F_UF_PERSONAL_MANAGER = 'UF_PERSONAL_MANAGER';
+	const F_UF_UF_REWARD_AMOUNT = 'UF_REWARD_AMOUNT';
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';

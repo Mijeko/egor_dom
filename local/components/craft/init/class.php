@@ -1,6 +1,8 @@
 <?php
 
 use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\DDD\User\Domain\Repository\ExternalRealtorRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
@@ -9,6 +11,7 @@ use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Repository\BxManagerRepository;
 use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 use Craft\DDD\User\Infrastructure\Repository\ExternalRealtorRepository;
+use Craft\Dto\BxImageDto;
 use Craft\Dto\BxUserDto;
 
 class CraftInitComponent extends CBitrixComponent
@@ -16,6 +19,8 @@ class CraftInitComponent extends CBitrixComponent
 	protected AgentRepositoryInterface $agentRepository;
 	protected ManagerRepositoryInterface $managerRepository;
 	protected ExternalRealtorRepositoryInterface $externalRealtorRepository;
+
+	protected ImageServiceInterface $imageService;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -41,7 +46,7 @@ class CraftInitComponent extends CBitrixComponent
 	{
 		if(!$this->arParams['USER_ID'])
 		{
-			throw new Exception('');
+			throw new Exception('Не передан параметр User ID');
 		}
 	}
 
@@ -50,6 +55,7 @@ class CraftInitComponent extends CBitrixComponent
 		$this->agentRepository = new BxAgentRepository();
 		$this->managerRepository = new BxManagerRepository();
 		$this->externalRealtorRepository = new ExternalRealtorRepository();
+		$this->imageService = new ImageService();
 	}
 
 	private function loadData(): void
@@ -66,7 +72,7 @@ class CraftInitComponent extends CBitrixComponent
 				$managerDto = ManagerDto::fromEntity($manager);
 			}
 
-			$dto = new BxUserDto(
+			$dto = BxUserDto::agent(
 				$agent->getId(),
 				$agent->getName(),
 				$agent->getLastName(),
@@ -96,7 +102,18 @@ class CraftInitComponent extends CBitrixComponent
 			$extRealtor = $this->externalRealtorRepository->findById($this->arParams['USER_ID']);
 			if($extRealtor)
 			{
-				$dto = new BxUserDto(
+
+				$avatar = null;
+				$_image = $this->imageService->findById($extRealtor->getAvatarId());
+				if($_image)
+				{
+					$avatar = new BxImageDto(
+						$_image->id,
+						$_image->src,
+					);
+				}
+
+				$dto = BxUserDto::extRealtor(
 					$extRealtor->getId(),
 					$extRealtor->getName(),
 					$extRealtor->getLastName(),
@@ -108,10 +125,10 @@ class CraftInitComponent extends CBitrixComponent
 					]),
 					$extRealtor->getEmail()->getValue(),
 					$extRealtor->getPhone()->getValue(),
+					$avatar,
 				);
 			}
 		}
-
 
 		$this->arResult['USER'] = $dto;
 

@@ -2,19 +2,28 @@
 import {defineComponent, type PropType} from 'vue'
 import type AsideMenuItemDto from "@/dto/present/AsideMenuItemDto.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
   name: "ProfileAsideMenu",
   props: {
-    user: {
-      type: Object as PropType<BxUserDto>,
-      default: null,
-    },
     items: {
       type: Array as PropType<AsideMenuItemDto[]>,
       default: []
     },
   },
+  data: function () {
+    return {
+      user: {} as BxUserDto
+    };
+  },
+  mounted(): any {
+    let userStore = useUserStore();
+    let user = userStore.getUser;
+    if (user) {
+      this.user = user;
+    }
+  }
 })
 </script>
 

@@ -17,11 +17,6 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'ProfileAsideMenu',
 		'PROPS'  => [
-			'user'  => [
-				'avatar' => \Craft\Model\CraftUser::load()->getAvatarPath(),
-				'email'  => \Craft\Model\CraftUser::load()->getEmail(),
-				'name'   => \Craft\Model\CraftUser::load()->getFullName(),
-			],
 			'items' => array_map(function($item) {
 				return [
 					'icon'     => $item['PARAMS']['ICON'],

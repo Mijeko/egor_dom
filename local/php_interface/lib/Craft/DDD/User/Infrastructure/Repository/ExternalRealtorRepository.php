@@ -55,6 +55,7 @@ class ExternalRealtorRepository implements ExternalRealtorRepositoryInterface
 			$user->getSecondName(),
 			new EmailValueObject($user->getEmail()),
 			new PhoneValueObject($user->getPersonalMobile()),
+			$user->getPersonalPhoto()
 		);
 	}
 }

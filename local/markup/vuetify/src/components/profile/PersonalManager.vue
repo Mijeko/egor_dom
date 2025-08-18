@@ -28,10 +28,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card class="pa-3 mb-3 mt-3" v-if="manager.id">
+  <v-card class="pa-3 mb-3 mt-3" v-if="manager && manager.id">
     <v-row>
-      <v-col cols="1">
-        <v-avatar size="100" image="https://shapka-youtube.ru/wp-content/uploads/2024/08/avatarka-bryunetka.jpg"/>
+      <v-col cols="1" v-if="manager.avatar">
+        <v-avatar size="100" :image="String(manager.avatar)"/>
       </v-col>
       <v-col cols="4">
         <v-card-title>{{ manager.lastName }} {{ manager.name }} {{ manager.secondName }}</v-card-title>

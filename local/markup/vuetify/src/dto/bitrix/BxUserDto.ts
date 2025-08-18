@@ -20,4 +20,5 @@ export default interface BxUserDto {
   bankName?: string,
   manager?: ManagerDto,
   type?: 'manager' | 'agent' | 'student'
+  position?: string
 }

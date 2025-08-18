@@ -19,13 +19,16 @@ class ExternalRealtor
 	private EmailValueObject $email;
 	private PhoneValueObject $phone;
 
+	private ?int $avatarId;
+
 	public static function hydrate(
 		int              $id,
 		string           $name,
 		string           $lastName,
 		string           $secondName,
 		EmailValueObject $email,
-		PhoneValueObject $phone
+		PhoneValueObject $phone,
+		int              $avatarId
 	): ExternalRealtor
 	{
 		$self = new self();
@@ -35,6 +38,7 @@ class ExternalRealtor
 		$self->secondName = $secondName;
 		$self->email = $email;
 		$self->phone = $phone;
+		$self->avatarId = $avatarId;
 		return $self;
 	}
 
@@ -84,5 +88,10 @@ class ExternalRealtor
 	public function getName(): string
 	{
 		return $this->name;
+	}
+
+	public function getAvatarId(): ?int
+	{
+		return $this->avatarId;
 	}
 }

@@ -11,3 +11,19 @@
 @import "block/header";
 @import "block/logo";
 @import "block/profile-section";
+
+
+.profile-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  &-item {
+    max-width: 25%;
+    width: 100%;
+
+    @include _375 {
+      max-width: 100%;
+    }
+  }
+}

@@ -8,56 +8,92 @@ use Craft\Model\CraftUser;
 class BxUserDto
 {
 
+	public int $id;
+	public string $position;
+	public string $name;
+	public string $lastName;
+	public string $secondName;
+	public string $fullName;
+	public string $email;
+	public string $phone;
+	public ?string $inn = null;
+	public ?string $ogrn = null;
+	public ?string $kpp = null;
+	public ?string $bik = null;
+	public ?string $currAccount = null;
+	public ?string $corrAccount = null;
+	public ?string $legalAddress = null;
+	public ?string $postAddress = null;
+	public ?string $bankName = null;
+	public ?ManagerDto $manager = null;
+	public ?BxImageDto $avatar = null;
 
-	public function __construct(
-		public int         $id,
-		public string      $name,
-		public string      $lastName,
-		public string      $secondName,
-		public string      $fullName,
-		public string      $email,
-		public string      $phone,
-		public ?string     $inn = null,
-		public ?string     $ogrn = null,
-		public ?string     $kpp = null,
-		public ?string     $bik = null,
-		public ?string     $currAccount = null,
-		public ?string     $corrAccount = null,
-		public ?string     $legalAddress = null,
-		public ?string     $postAddress = null,
-		public ?string     $bankName = null,
-		public ?ManagerDto $manager = null,
-		public ?int        $avatarImageId = null,
-		public ?BxImageDto $avatarImage = null,
-	)
+
+	public static function agent(
+		int         $id,
+		string      $name,
+		string      $lastName,
+		string      $secondName,
+		string      $fullName,
+		string      $email,
+		string      $phone,
+		?string     $inn = null,
+		?string     $ogrn = null,
+		?string     $kpp = null,
+		?string     $bik = null,
+		?string     $currAccount = null,
+		?string     $corrAccount = null,
+		?string     $legalAddress = null,
+		?string     $postAddress = null,
+		?string     $bankName = null,
+		?ManagerDto $manager = null,
+		?BxImageDto $avatarImage = null,
+	): BxUserDto
 	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->fullName = $fullName;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->inn = $inn;
+		$self->ogrn = $ogrn;
+		$self->kpp = $kpp;
+		$self->bik = $bik;
+		$self->currAccount = $currAccount;
+		$self->corrAccount = $corrAccount;
+		$self->legalAddress = $legalAddress;
+		$self->postAddress = $postAddress;
+		$self->bankName = $bankName;
+		$self->manager = $manager;
+		$self->avatar = $avatarImage;
+		return $self;
 	}
 
-	public static function fromGlobal(): ?static
+	public static function extRealtor(
+		int        $id,
+		string     $name,
+		string     $lastName,
+		string     $secondName,
+		string     $fullName,
+		string     $email,
+		string     $phone,
+		BxImageDto $avatarPath
+	): BxUserDto
 	{
-
-		$user = CraftUser::load();
-		if(!$user || !$user->IsAuthorized())
-		{
-			return null;
-		}
-
-		return new static(
-			(int)$user->getId(),
-			$user->getName(),
-			$user->getLastName(),
-			$user->getSecondName(),
-			$user->getFullName(),
-			$user->getEmail(),
-			$user->fillUfInn(),
-			$user->fillUfOgrn(),
-			$user->fillUfKpp(),
-			$user->fillUfBik(),
-			$user->fillUfCurrAcc(),
-			$user->fillUfCorrAcc(),
-			$user->fillUfLegalAddress(),
-			$user->fillUfPostAddress(),
-			$user->fillUfBankName(),
-		);
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->fullName = $fullName;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->avatar = $avatarPath;
+		$self->position = 'Риелтор';
+		return $self;
 	}
+
 }

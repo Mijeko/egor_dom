@@ -1,9 +1,12 @@
-<?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
-
 <?php
+if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+
 /**
  * @global CMain $APPLICATION
  */
+
+use Craft\DDD\Claims\Application\Factory\ShortOrderInfoUseCaseFactory;
+use Craft\Model\CraftUser;
 
 ?>
 
@@ -36,15 +39,53 @@
 			false,
 			['HIDE_ICONS' => 'Y']
 		);
-		$APPLICATION->IncludeComponent(
-			'craft:vite',
-			'vite',
-			[
-				'SOURCE' => 'profile/ShortOrderInfo',
-			],
-			false,
-			['HIDE_ICONS' => 'Y']
-		);
 		?>
+
+
+		<div class="profile-cards">
+			<div class="profile-cards-item">
+				<?php
+				$APPLICATION->IncludeComponent(
+					'craft:vite',
+					'vite',
+					[
+						'SOURCE' => 'profile/ProfileOrderCostInfo',
+						'PROPS'  => [
+							'items' => ShortOrderInfoUseCaseFactory::getUseCase()
+								->execute(CraftUser::load()->getId())->items,
+						],
+					],
+					false,
+					['HIDE_ICONS' => 'Y']
+				);
+				?>
+			</div>
+			<div class="profile-cards-item">
+				<?php
+				$APPLICATION->IncludeComponent(
+					'craft:vite',
+					'vite',
+					[
+						'SOURCE' => 'profile/ProfileReferral',
+					],
+					false,
+					['HIDE_ICONS' => 'Y']
+				);
+				?>
+			</div>
+			<div class="profile-cards-item">
+				<?php
+				$APPLICATION->IncludeComponent(
+					'craft:vite',
+					'vite',
+					[
+						'SOURCE' => 'profile/ProfileLastView',
+					],
+					false,
+					['HIDE_ICONS' => 'Y']
+				);
+				?>
+			</div>
+		</div>
 	</div>
 </div>
