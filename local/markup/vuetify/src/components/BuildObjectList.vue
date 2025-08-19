@@ -96,7 +96,7 @@ export default defineComponent({
           <v-carousel-item
             v-for="(item,i) in buildObject.gallery"
             :key="i"
-            :src="item.src"
+            :src="item?.src"
             cover
           ></v-carousel-item>
         </v-carousel>

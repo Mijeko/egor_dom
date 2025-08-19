@@ -71,6 +71,10 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 				null,
 				array_map(function(int $imageId) {
 					$res = $this->imageService->findById($imageId);
+					if(!$res->id)
+					{
+						return null;
+					}
 					return new BxImageDto(
 						$res->id,
 						$res->src,

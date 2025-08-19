@@ -96,6 +96,11 @@ class BuildObjectService
 
 				$image = $this->imageService->findById($imageId);
 
+				if(!$image->id)
+				{
+					return null;
+				}
+
 				return new ImageValueObject(
 					$image->id,
 					$image->src,

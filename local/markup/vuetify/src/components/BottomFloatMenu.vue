@@ -1,10 +1,12 @@
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts">
+import {defineComponent, type PropType} from 'vue'
 
 export default defineComponent({
   name: "BottomFloatMenu",
   props: {
-    menuItems: []
+    menuItems: {
+      type: Array as PropType<any[]>
+    }
   },
 })
 </script>
@@ -12,7 +14,7 @@ export default defineComponent({
 <template>
   <v-app class="d-flex d-sm-none">
     <v-container>
-      <v-app-bar location="bottom" :elevation="6" >
+      <v-app-bar location="bottom" :elevation="6">
 
         <v-btn
           class="pa-0"

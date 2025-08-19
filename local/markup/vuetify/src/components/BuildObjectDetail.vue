@@ -36,6 +36,10 @@ export default defineComponent({
     buildObjectDetailInfo: function (): BuildObjectDetailInfo[] {
       return [
         {
+          title: 'Ваше вознаграждение',
+          value: '<span style="color:green; font-weight:600;">4%</span>',
+        },
+        {
           title: 'Застройщик',
           value: String(this.buildObject?.developer?.name),
         },
@@ -71,9 +75,12 @@ export default defineComponent({
     <v-col cols="12" md="4" class="px-2">
       <v-card v-for="info in buildObjectDetailInfo"
               :title="String(info.title)"
-              :subtitle="String(info.value)"
               class="mb-3"
-      ></v-card>
+      >
+        <template #subtitle>
+          <span v-html="String(info.value)"></span>
+        </template>
+      </v-card>
     </v-col>
   </v-row>
 
