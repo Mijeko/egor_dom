@@ -1,8 +1,15 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
+import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 
 export default defineComponent({
   name: "ProfileLastView",
+  props: {
+    buildObjectList: {
+      type: Array as PropType<BuildObjectDto[]>,
+      default: []
+    }
+  },
   data: function () {
     return {
       items: [
@@ -16,11 +23,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card title="Просмотренные квартиры" v-if="items.length > 0">
+  <v-card title="Просмотренные квартиры" v-if="buildObjectList.length > 0">
     <v-divider/>
 
     <v-card-text>
-      <div class="mb-3" v-for="item in items" v-html="item"></div>
+      <div class="mb-3" v-for="item in buildObjectList">
+        <a :href="item.detailLink" v-html="item.name"></a>
+      </div>
     </v-card-text>
     <v-divider/>
 

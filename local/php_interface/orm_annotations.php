@@ -2838,6 +2838,33 @@ namespace Bitrix\Main {
 	 * @method \int fillUfPersonalManager()
 	 * @method \Bitrix\Main\EO_User setUfPersonalManager(\int $ufPersonalManager)
 	 * @method bool isUfPersonalManagerChanged()
+	 * @method \string getUfPhoneTwo()
+	 * @method \string remindActualUfPhoneTwo()
+	 * @method \string requireUfPhoneTwo()
+	 * @method bool hasUfPhoneTwo()
+	 * @method bool isUfPhoneTwoFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfPhoneTwo()
+	 * @method \string fillUfPhoneTwo()
+	 * @method \Bitrix\Main\EO_User setUfPhoneTwo(\string $ufPhoneTwo)
+	 * @method bool isUfPhoneTwoChanged()
+	 * @method \string getUfEmailTwo()
+	 * @method \string remindActualUfEmailTwo()
+	 * @method \string requireUfEmailTwo()
+	 * @method bool hasUfEmailTwo()
+	 * @method bool isUfEmailTwoFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfEmailTwo()
+	 * @method \string fillUfEmailTwo()
+	 * @method \Bitrix\Main\EO_User setUfEmailTwo(\string $ufEmailTwo)
+	 * @method bool isUfEmailTwoChanged()
+	 * @method \float getUfRewardAmount()
+	 * @method \float remindActualUfRewardAmount()
+	 * @method \float requireUfRewardAmount()
+	 * @method bool hasUfRewardAmount()
+	 * @method bool isUfRewardAmountFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfRewardAmount()
+	 * @method \float fillUfRewardAmount()
+	 * @method \Bitrix\Main\EO_User setUfRewardAmount(\float $ufRewardAmount)
+	 * @method bool isUfRewardAmountChanged()
 	 */
 	class EO_User {
 		/* @var \Bitrix\Main\UserTable */
@@ -2881,6 +2908,12 @@ namespace Bitrix\Main {
 	 * @method \boolean[] fillUfEmailNotifyClaim()
 	 * @method \int[] getUfPersonalManagerList()
 	 * @method \int[] fillUfPersonalManager()
+	 * @method \string[] getUfPhoneTwoList()
+	 * @method \string[] fillUfPhoneTwo()
+	 * @method \string[] getUfEmailTwoList()
+	 * @method \string[] fillUfEmailTwo()
+	 * @method \float[] getUfRewardAmountList()
+	 * @method \float[] fillUfRewardAmount()
 	 */
 	class EO_User_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Bitrix\Main\UserTable */
@@ -5832,6 +5865,33 @@ namespace Craft\Model {
 	 * @method \int fillUfPersonalManager()
 	 * @method \Craft\Model\CraftUser setUfPersonalManager(\int $ufPersonalManager)
 	 * @method bool isUfPersonalManagerChanged()
+	 * @method \string getUfPhoneTwo()
+	 * @method \string remindActualUfPhoneTwo()
+	 * @method \string requireUfPhoneTwo()
+	 * @method bool hasUfPhoneTwo()
+	 * @method bool isUfPhoneTwoFilled()
+	 * @method \Craft\Model\CraftUser unsetUfPhoneTwo()
+	 * @method \string fillUfPhoneTwo()
+	 * @method \Craft\Model\CraftUser setUfPhoneTwo(\string $ufPhoneTwo)
+	 * @method bool isUfPhoneTwoChanged()
+	 * @method \string getUfEmailTwo()
+	 * @method \string remindActualUfEmailTwo()
+	 * @method \string requireUfEmailTwo()
+	 * @method bool hasUfEmailTwo()
+	 * @method bool isUfEmailTwoFilled()
+	 * @method \Craft\Model\CraftUser unsetUfEmailTwo()
+	 * @method \string fillUfEmailTwo()
+	 * @method \Craft\Model\CraftUser setUfEmailTwo(\string $ufEmailTwo)
+	 * @method bool isUfEmailTwoChanged()
+	 * @method \float getUfRewardAmount()
+	 * @method \float remindActualUfRewardAmount()
+	 * @method \float requireUfRewardAmount()
+	 * @method bool hasUfRewardAmount()
+	 * @method bool isUfRewardAmountFilled()
+	 * @method \Craft\Model\CraftUser unsetUfRewardAmount()
+	 * @method \float fillUfRewardAmount()
+	 * @method \Craft\Model\CraftUser setUfRewardAmount(\float $ufRewardAmount)
+	 * @method bool isUfRewardAmountChanged()
 	 * @method \Craft\Model\EO_CraftUserUts getUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts remindActualUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts requireUtsObjectInner()
@@ -6055,6 +6115,12 @@ namespace Craft\Model {
 	 * @method \boolean[] fillUfEmailNotifyClaim()
 	 * @method \int[] getUfPersonalManagerList()
 	 * @method \int[] fillUfPersonalManager()
+	 * @method \string[] getUfPhoneTwoList()
+	 * @method \string[] fillUfPhoneTwo()
+	 * @method \string[] getUfEmailTwoList()
+	 * @method \string[] fillUfEmailTwo()
+	 * @method \float[] getUfRewardAmountList()
+	 * @method \float[] fillUfRewardAmount()
 	 * @method \Craft\Model\EO_CraftUserUts[] getUtsObjectInnerList()
 	 * @method \Craft\Model\EO_CraftUser_Collection getUtsObjectInnerCollection()
 	 * @method \Craft\Model\EO_CraftUserUts_Collection fillUtsObjectInner()
@@ -7837,6 +7903,139 @@ namespace Craft\DDD\FavoriteProduct\Infrastructure\Entity {
 	 * @method \Craft\DDD\FavoriteProduct\Infrastructure\Entity\EO_FavoriteProduct_Collection createCollection()
 	 * @method \Craft\DDD\FavoriteProduct\Infrastructure\Entity\FavoriteProduct wakeUpObject($row)
 	 * @method \Craft\DDD\FavoriteProduct\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUpCollection($rows)
+	 */
+	class EO_FavoriteProduct_Entity extends \Bitrix\Main\ORM\Entity {}
+}
+/* ORMENTITYANNOTATION:Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable */
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
+	/**
+	 * FavoriteProduct
+	 * @see \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int getProductId()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct setProductId(\int|\Bitrix\Main\DB\SqlExpression $productId)
+	 * @method bool hasProductId()
+	 * @method bool isProductIdFilled()
+	 * @method bool isProductIdChanged()
+	 * @method \int getUserId()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
+	 * @method bool hasUserId()
+	 * @method bool isUserIdFilled()
+	 * @method bool isUserIdChanged()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @property-read array $primary
+	 * @property-read int $state @see \Bitrix\Main\ORM\Objectify\State
+	 * @property-read \Bitrix\Main\Type\Dictionary $customData
+	 * @property \Bitrix\Main\Authentication\Context $authContext
+	 * @method mixed get($fieldName)
+	 * @method mixed remindActual($fieldName)
+	 * @method mixed require($fieldName)
+	 * @method bool has($fieldName)
+	 * @method bool isFilled($fieldName)
+	 * @method bool isChanged($fieldName)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct set($fieldName, $value)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct reset($fieldName)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct unset($fieldName)
+	 * @method void addTo($fieldName, $value)
+	 * @method void removeFrom($fieldName, $value)
+	 * @method void removeAll($fieldName)
+	 * @method \Bitrix\Main\ORM\Data\Result delete()
+	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
+	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct wakeUp($data)
+	 */
+	class EO_FavoriteProduct {
+		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable */
+		static public $dataClass = '\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable';
+		/**
+		 * @param bool|array $setDefaultValues
+		 */
+		public function __construct($setDefaultValues = true) {}
+	}
+}
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
+	/**
+	 * EO_FavoriteProduct_Collection
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int[] getProductIdList()
+	 * @method \int[] getUserIdList()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @method void add(\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct $object)
+	 * @method bool has(\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct $object)
+	 * @method bool hasByPrimary($primary)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct getByPrimary($primary)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct[] getAll()
+	 * @method bool remove(\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct $object)
+	 * @method void removeByPrimary($primary)
+	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUp($data)
+	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
+	 * @method void offsetSet() ArrayAccess
+	 * @method void offsetExists() ArrayAccess
+	 * @method void offsetUnset() ArrayAccess
+	 * @method void offsetGet() ArrayAccess
+	 * @method void rewind() Iterator
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct current() Iterator
+	 * @method mixed key() Iterator
+	 * @method void next() Iterator
+	 * @method bool valid() Iterator
+	 * @method int count() Countable
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection merge(?\Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection $collection)
+	 * @method bool isEmpty()
+	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
+	 */
+	class EO_FavoriteProduct_Collection implements \ArrayAccess, \Iterator, \Countable {
+		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable */
+		static public $dataClass = '\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable';
+	}
+}
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
+	/**
+	 * @method static EO_FavoriteProduct_Query query()
+	 * @method static EO_FavoriteProduct_Result getByPrimary($primary, array $parameters = [])
+	 * @method static EO_FavoriteProduct_Result getById($id)
+	 * @method static EO_FavoriteProduct_Result getList(array $parameters = [])
+	 * @method static EO_FavoriteProduct_Entity getEntity()
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection createCollection()
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct wakeUpObject($row)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUpCollection($rows)
+	 */
+	class FavoriteProductTable extends \Bitrix\Main\ORM\Data\DataManager {}
+	/**
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @method EO_FavoriteProduct_Result exec()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct fetchObject()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection fetchCollection()
+	 */
+	class EO_FavoriteProduct_Query extends \Bitrix\Main\ORM\Query\Query {}
+	/**
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct fetchObject()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection fetchCollection()
+	 */
+	class EO_FavoriteProduct_Result extends \Bitrix\Main\ORM\Query\Result {}
+	/**
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection createCollection()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct wakeUpObject($row)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUpCollection($rows)
 	 */
 	class EO_FavoriteProduct_Entity extends \Bitrix\Main\ORM\Entity {}
 }

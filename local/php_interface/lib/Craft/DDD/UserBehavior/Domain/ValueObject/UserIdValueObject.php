@@ -1,8 +1,8 @@
 <?php
 
-namespace Craft\DDD\FavoriteProduct\Domain\ValueObject;
+namespace Craft\DDD\UserBehavior\Domain\ValueObject;
 
-class ProductIdValueObject
+class UserIdValueObject
 {
 
 	public function __construct(
@@ -20,4 +20,9 @@ class ProductIdValueObject
 		}
 	}
 
+
+	public function getValue(): int
+	{
+		return $this->value;
+	}
 }

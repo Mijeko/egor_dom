@@ -76,10 +76,10 @@ use Craft\Model\CraftUser;
 			<div class="profile-cards-item">
 				<?php
 				$APPLICATION->IncludeComponent(
-					'craft:vite',
-					'vite',
+					'craft:object.last.view',
+					'.default',
 					[
-						'SOURCE' => 'profile/ProfileLastView',
+						'USER_ID' => CraftUser::load()->getId(),
 					],
 					false,
 					['HIDE_ICONS' => 'Y']

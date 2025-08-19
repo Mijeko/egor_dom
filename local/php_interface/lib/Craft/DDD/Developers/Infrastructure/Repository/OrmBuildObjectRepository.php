@@ -16,6 +16,7 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObject;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
+use Craft\Helper\Criteria;
 
 class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 {
@@ -54,10 +55,9 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 	public function findByName(string $name): ?BuildObjectEntity
 	{
 		$buildObjectList = $this->findAll(
-			[],
-			[
+			Criteria::instance()->filter([
 				BuildObjectTable::F_NAME => $name,
-			],
+			])
 		);
 
 		if(count($buildObjectList) != 1)
@@ -71,10 +71,9 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 	public function findById(int $id): ?BuildObjectEntity
 	{
 		$buildObjectList = $this->findAll(
-			[],
-			[
+			Criteria::instance()->filter([
 				BuildObjectTable::F_ID => $id,
-			],
+			])
 		);
 
 		if(count($buildObjectList) != 1)
@@ -86,16 +85,18 @@ class OrmBuildObjectRepository implements BuildObjectRepositoryInterface
 	}
 
 	/**
+	 * @param Criteria|null $criteria
 	 * @return BuildObjectEntity[]
 	 */
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		$result = [];
-		$query = BuildObjectTable::getList([
-			'order'  => $order,
-			'filter' => $filter,
-			'cache'  => ['ttl' => 3600 * 48],
-		]);
+		$params = [];
+		if($criteria)
+		{
+			$params = $criteria->cache(['ttl' => 3600 * 48])->makeGetListParams();
+		}
+		$query = BuildObjectTable::getList($params);
 
 		foreach($query->fetchCollection() as $buildObject)
 		{

@@ -73,12 +73,7 @@ class BuildObjectService
 
 	public function findAll(array $order = [], array $filter = []): array
 	{
-		$buildObjectList = $this->buildObjectRepository->findAll($order, array_merge(
-			[
-				BuildObjectTable::F_CITY_ID => $this->currentCityService?->current()?->getId(),
-			],
-			$filter
-		));
+		$buildObjectList = $this->buildObjectRepository->findAll();
 
 		$this->loadRelations($buildObjectList);
 

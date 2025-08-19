@@ -1,5 +1,5 @@
 <?php
 
-namespace Craft\DDD\FavoriteProduct\Infrastructure\Entity;
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity;
 
 class FavoriteProduct extends EO_FavoriteProduct {}

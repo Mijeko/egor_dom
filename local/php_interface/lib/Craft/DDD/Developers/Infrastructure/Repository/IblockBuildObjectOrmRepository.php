@@ -7,6 +7,7 @@ use Bitrix\Main\Loader;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\Dto\BxImageDto;
+use Craft\Helper\Criteria;
 
 class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 {
@@ -66,7 +67,7 @@ class IblockBuildObjectOrmRepository implements BuildObjectRepositoryInterface
 
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		if(!Loader::includeModule('iblock'))
 		{

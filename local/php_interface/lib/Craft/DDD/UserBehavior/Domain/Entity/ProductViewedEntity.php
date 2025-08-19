@@ -1,11 +1,11 @@
 <?php
 
-namespace Craft\DDD\FavoriteProduct\Domain\Entity;
+namespace Craft\DDD\UserBehavior\Domain\Entity;
 
-use Craft\DDD\FavoriteProduct\Domain\ValueObject\ProductIdValueObject;
-use Craft\DDD\FavoriteProduct\Domain\ValueObject\UserIdValueObject;
+use Craft\DDD\UserBehavior\Domain\ValueObject\ProductIdValueObject;
+use Craft\DDD\UserBehavior\Domain\ValueObject\UserIdValueObject;
 
-class FavoriteProduct
+class ProductViewedEntity
 {
 	private ProductIdValueObject $productId;
 	private UserIdValueObject $userId;
@@ -13,7 +13,7 @@ class FavoriteProduct
 	public static function hydrate(
 		ProductIdValueObject $productId,
 		UserIdValueObject    $userId
-	): FavoriteProduct
+	): ProductViewedEntity
 	{
 		$self = new self();
 		$self->productId = $productId;
@@ -21,7 +21,7 @@ class FavoriteProduct
 		return $self;
 	}
 
-	public static function create(ProductIdValueObject $productId, UserIdValueObject $userId): FavoriteProduct
+	public static function create(ProductIdValueObject $productId, UserIdValueObject $userId): ProductViewedEntity
 	{
 		$self = new self();
 		$self->productId = $productId;

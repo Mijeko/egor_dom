@@ -76,12 +76,7 @@ class ApartmentService
 			return $apartment->getBuildObjectId();
 		}, $apartmentList);
 
-		$buildObjectList = $this->buildObjectRepository->findAll(
-			[],
-			[
-				BuildObjectTable::F_ID => $buildObjectIdList,
-			]
-		);
+		$buildObjectList = $this->buildObjectRepository->findAll();
 
 
 		$apartmentList = array_map(function(ApartmentEntity $apartment) use ($buildObjectList) {

@@ -107,12 +107,7 @@ class ClaimService
 				return $apartment->getBuildObjectId();
 			}, $apartments);
 
-			$buildObjects = $this->buildObjectRepository->findAll(
-				[],
-				[
-					BuildObjectTable::F_ID => $buildObjectIdList,
-				]
-			);
+			$buildObjects = $this->buildObjectRepository->findAll();
 
 
 			if($buildObjects)

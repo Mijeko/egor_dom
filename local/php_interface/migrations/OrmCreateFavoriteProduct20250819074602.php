@@ -13,7 +13,7 @@ class OrmCreateFavoriteProduct20250819074602 extends Version
 
 	public function up()
 	{
-		$sql = "CREATE TABLE favorite_product (
+		$sql = "CREATE TABLE craft_favorite_product (
     PRODUCT_ID INT NOT NULL,
     USER_ID INT NOT NULL,
     PRIMARY KEY (PRODUCT_ID, USER_ID)

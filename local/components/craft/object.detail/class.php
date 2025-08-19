@@ -1,9 +1,9 @@
 <?php
 
 use Bitrix\Main\Diag\Debug;
-use Craft\DDD\FavoriteProduct\Application\Factory\AddProductInFavoriteUseCaseFactory;
-use Craft\DDD\FavoriteProduct\Application\UseCase\AddProductInFavoriteUseCase;
-use Craft\DDD\FavoriteProduct\Infrastructure\Repository\FavoriteProductRepository;
+use Craft\DDD\UserBehavior\Application\Factory\AddProductInFavoriteUseCaseFactory;
+use Craft\DDD\UserBehavior\Application\UseCase\AddProductInFavoriteUseCase;
+use Craft\DDD\UserBehavior\Infrastructure\Repository\ProductViewedRepository;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\Dto\BxImageDto;

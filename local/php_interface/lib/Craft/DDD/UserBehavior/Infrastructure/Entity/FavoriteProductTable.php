@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\FavoriteProduct\Infrastructure\Entity;
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity;
 
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -13,7 +13,7 @@ class FavoriteProductTable extends DataManager
 
 	public static function getTableName(): string
 	{
-		return 'favorite_product';
+		return 'craft_favorite_product';
 	}
 
 	public static function getMap(): array

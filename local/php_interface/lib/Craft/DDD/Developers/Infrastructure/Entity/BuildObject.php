@@ -71,6 +71,11 @@ class BuildObject extends EO_BuildObject
 	{
 		$locationJson = json_decode($this->getLocation(), true);
 
+		if(!is_array($locationJson))
+		{
+			return [];
+		}
+
 		return $locationJson;
 	}
 

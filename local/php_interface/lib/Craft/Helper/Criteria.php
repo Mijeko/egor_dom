@@ -12,6 +12,8 @@ class Criteria
 	private array $filter = [];
 	private ?int $limit = null;
 
+	private ?array $cache = [];
+
 	public static function instance(array $order = [], array $filter = [], int $limit = null): Criteria
 	{
 		$self = new self();
@@ -21,26 +23,53 @@ class Criteria
 		return $self;
 	}
 
-	public function build(): array
+	public function makeGetListParams(): array
 	{
-		$r = [
-			'select' => $this->getSelect(),
-			'order'  => $this->getOrder(),
-			'filter' => $this->getFilter(),
-		];
+		$preparedGetListParams = [];
+
+		if($this->getFilter())
+		{
+			$preparedGetListParams['filter'] = $this->getFilter();
+		}
+
+		if($this->getOrder())
+		{
+			$preparedGetListParams['order'] = $this->getOrder();
+		}
+
+		if($this->getSelect())
+		{
+			$preparedGetListParams['select'] = $this->getSelect();
+		}
 
 		if($this->getLimit())
 		{
-			$r['limit'] = $this->getLimit();
+			$preparedGetListParams['limit'] = $this->getLimit();
+		}
+
+		if($this->getCache())
+		{
+			$preparedGetListParams['cache'] = $this->getCache();
 		}
 
 		if($this->showSecureFields)
 		{
-			$r['private_fields'] = true;
-			$r['select'] = array_merge($r['select'], ['PASSWORD']);
+			$preparedGetListParams['private_fields'] = true;
+			$preparedGetListParams['select'] = array_merge($preparedGetListParams['select'], ['PASSWORD']);
 		}
 
-		return $r;
+		return $preparedGetListParams;
+	}
+
+	public function cache(array $cache): Criteria
+	{
+		$this->cache = $cache;
+		return $this;
+	}
+
+	public function getCache(): ?array
+	{
+		return $this->cache;
 	}
 
 	public function getSelect(): array

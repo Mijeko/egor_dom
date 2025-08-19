@@ -58,6 +58,10 @@ export default defineComponent({
       ]
     }
   },
+  methods: {
+    getPresentation: function () {
+    }
+  },
 })
 </script>
 
@@ -74,8 +78,17 @@ export default defineComponent({
     </v-col>
     <v-col cols="12" md="4" class="px-2">
 
-      <v-card title="Презентация">
-        <template #subtitle><v-btn ></v-btn></template>
+      <v-card class="mb-3">
+        <v-card-text>
+          <v-row>
+            <v-col>
+              <div style="font-size: 1.25rem; line-height: 1.6;">Презентация</div>
+            </v-col>
+            <v-col>
+              <v-btn variant="outlined" text="Запросить" @click.prevent="getPresentation"></v-btn>
+            </v-col>
+          </v-row>
+        </v-card-text>
       </v-card>
 
       <v-card v-for="info in buildObjectDetailInfo"

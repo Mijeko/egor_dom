@@ -13,6 +13,7 @@ use Craft\DDD\Developers\Present\Dto\ApartmentDto;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Presentation\Dto\LocationDto;
+use Craft\Helper\Criteria;
 
 class ApartmentFilterUseCase
 {
@@ -39,10 +40,9 @@ class ApartmentFilterUseCase
 
 
 		$buildObjectList = $this->buildObjectRepository->findAll(
-			[],
-			[
+			Criteria::instance()->filter([
 				BuildObjectTable::F_ID => $buildObjectIdList,
-			],
+			])
 		);
 
 		return array_map(

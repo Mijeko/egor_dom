@@ -1,8 +1,8 @@
 <?php
 
-namespace Craft\DDD\FavoriteProduct\Domain\ValueObject;
+namespace Craft\DDD\UserBehavior\Domain\ValueObject;
 
-class UserIdValueObject
+class ProductIdValueObject
 {
 
 	public function __construct(

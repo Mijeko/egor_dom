@@ -26,7 +26,7 @@ class BxUserRepository implements UserRepositoryInterface
 					CraftUserTable::F_PERSONAL_MOBILE,
 					CraftUserTable::F_PASSWORD,
 				])
-				->build()
+				->makeGetListParams()
 		)
 			->fetchCollection();
 

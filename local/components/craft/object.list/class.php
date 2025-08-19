@@ -14,6 +14,7 @@ use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\DDD\Shared\Presentation\Dto\LocationDto;
 use Craft\Dto\BxImageDto;
+use Craft\Helper\Criteria;
 
 class CraftBuildObjectListComponent extends CBitrixComponent
 {
@@ -55,10 +56,9 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 
 
 		$buildObjectList = $this->buildObjectRepository->findAll(
-			[],
-			[
+			Criteria::instance()->filter([
 				BuildObjectTable::F_ID => $buildObjectIdList,
-			],
+			])
 		);
 
 		$buildObjectListDto = array_map(function(BuildObjectEntity $buildObjectEntity) use ($apartmentList) {

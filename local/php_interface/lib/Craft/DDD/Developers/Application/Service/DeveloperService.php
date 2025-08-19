@@ -57,12 +57,7 @@ class DeveloperService
 			return $developer->getId();
 		}, $developerList);
 
-		$buildObjectList = $this->buildObjectRepository->findAll(
-			[],
-			[
-				BuildObjectTable::F_DEVELOPER_ID => $developerIdList,
-			]
-		);
+		$buildObjectList = $this->buildObjectRepository->findAll();
 
 		$developerList = array_map(function(DeveloperEntity $developer) use ($buildObjectList) {
 

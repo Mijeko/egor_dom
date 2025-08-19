@@ -18,10 +18,10 @@ final class BuildObjectDto
 {
 	public function __construct(
 		public int           $id,
-		public ?string       $name,
-		public ?string       $type,
-		public ?int          $floors,
-		public ?DeveloperDto $developer,
+		public ?string       $name = null,
+		public ?string       $type = null,
+		public ?int          $floors = null,
+		public ?DeveloperDto $developer = null,
 		public ?array        $gallery = null,
 		public ?array        $apartments = null,
 		public ?LocationDto  $location = null,
