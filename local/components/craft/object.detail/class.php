@@ -1,6 +1,9 @@
 <?php
 
 use Bitrix\Main\Diag\Debug;
+use Craft\DDD\FavoriteProduct\Application\Factory\AddProductInFavoriteUseCaseFactory;
+use Craft\DDD\FavoriteProduct\Application\UseCase\AddProductInFavoriteUseCase;
+use Craft\DDD\FavoriteProduct\Infrastructure\Repository\FavoriteProductRepository;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\Dto\BxImageDto;
@@ -25,6 +28,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 
 	protected ?DeveloperService $developerService;
 	protected ImageServiceInterface $imageService;
+	protected AddProductInFavoriteUseCase $favoriteUseCase;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -39,10 +43,24 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 			$this->loadService();
 			$this->loadData();
 			$this->meta();
+			$this->freeSpaceWork();
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
 			Debug::dump($e->getMessage());
+		}
+	}
+
+	protected function freeSpaceWork(): void
+	{
+		try
+		{
+			$this->favoriteUseCase->execute(
+				$this->arParams['ELEMENT_ID'],
+				\Craft\Model\CraftUser::load()->getId()
+			);
+		} catch(\Exception|TypeError $e)
+		{
 		}
 	}
 
@@ -63,6 +81,7 @@ class CraftBuildObjectDetailComponent extends CBitrixComponent
 		$this->buildObjectService = BuildObjectServiceFactory::createOnOrm();
 		$this->apartmentService = ApartmentServiceFactory::createOnOrm();
 		$this->developerService = DeveloperServiceFactory::createOnOrm();
+		$this->favoriteUseCase = AddProductInFavoriteUseCaseFactory::getUseCase();
 	}
 
 	protected function loadData(): void
