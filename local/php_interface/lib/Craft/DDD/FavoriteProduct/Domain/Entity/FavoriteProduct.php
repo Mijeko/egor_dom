@@ -10,6 +10,14 @@ class FavoriteProduct
 	private ProductIdValueObject $productId;
 	private UserIdValueObject $userId;
 
+	public static function create(ProductIdValueObject $productId, UserIdValueObject $userId): FavoriteProduct
+	{
+		$self = new self();
+		$self->productId = $productId;
+		$self->userId = $userId;
+		return $self;
+	}
+
 	public function getUserId(): UserIdValueObject
 	{
 		return $this->userId;
