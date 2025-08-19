@@ -63,10 +63,10 @@ use Craft\Model\CraftUser;
 			<div class="profile-cards-item">
 				<?php
 				$APPLICATION->IncludeComponent(
-					'craft:vite',
-					'vite',
+					'craft:referral.info',
+					'.default',
 					[
-						'SOURCE' => 'profile/ProfileReferral',
+						'USER_ID' => CraftUser::load()->getId(),
 					],
 					false,
 					['HIDE_ICONS' => 'Y']
