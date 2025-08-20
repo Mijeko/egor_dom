@@ -3,6 +3,10 @@ $sapi = php_sapi_name();
 $bIsConsole = ($sapi == 'cli');
 define('NEED_AUTH', !$bIsConsole);
 
+if(file_exists(__DIR__ . '/serviceLocatorInit.php'))
+{
+	require_once __DIR__ . '/serviceLocatorInit.php';
+}
 
 if(\Bitrix\Main\Loader::includeModule('craft.core'))
 {

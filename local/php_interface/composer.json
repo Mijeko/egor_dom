@@ -13,7 +13,8 @@
     "yiisoft/validator": "dev-master",
     "phpoffice/phpword": "dev-master",
     "dompdf/dompdf": "dev-master",
-    "telegram-bot/api": "3.1.0.x-dev"
+    "telegram-bot/api": "3.1.0.x-dev",
+    "symfony/event-dispatcher": "7.4.x-dev"
   },
   "replace": {
     "psr/log": "*",
