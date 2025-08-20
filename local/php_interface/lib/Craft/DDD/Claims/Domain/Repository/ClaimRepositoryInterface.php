@@ -8,6 +8,8 @@ interface ClaimRepositoryInterface
 {
 	public function create(ClaimEntity $claim): ClaimEntity;
 
+	public function update(ClaimEntity $claim): ?ClaimEntity;
+
 	/**
 	 * @return ClaimEntity[]
 	 */

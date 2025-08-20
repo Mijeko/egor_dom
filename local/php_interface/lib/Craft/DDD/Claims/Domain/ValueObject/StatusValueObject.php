@@ -67,7 +67,7 @@ class StatusValueObject
 		return new self(self::STATUS_NEW);
 	}
 
-	public static function closeClaim(): StatusValueObject
+	public static function finishClaim(): StatusValueObject
 	{
 		return new self(self::STATUS_FINISH);
 	}

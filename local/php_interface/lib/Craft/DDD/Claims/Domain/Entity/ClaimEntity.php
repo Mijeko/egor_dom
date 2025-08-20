@@ -38,6 +38,13 @@ class ClaimEntity
 	protected ?ApartmentEntity $apartmentEntity = null;
 	protected ?UserEntity $user = null;
 
+	public function finish(
+		StatusValueObject $status,
+	): ClaimEntity
+	{
+		$this->status = $status;
+		return $this;
+	}
 
 	public static function createClaim(
 		StatusValueObject $status,
@@ -91,14 +98,6 @@ class ClaimEntity
 		$self->phone = $phone;
 		$self->client = $client;
 		$self->createdAt = $createdAt;
-		return $self;
-	}
-
-	public static function closeClaim(): ClaimEntity
-	{
-		$self = new self;
-		$self->status = StatusValueObject::closeClaim();
-
 		return $self;
 	}
 

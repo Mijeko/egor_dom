@@ -5,18 +5,34 @@ namespace Craft\DDD\Referal\Domain\Entity;
 class ReferralEntity
 {
 	private int $id;
-	private string $code;
 	private int $userId;
+	private int $inviteUserId;
+	private string $code;
+	private string $phone;
 	private string $link;
 
 	public static function create(
-		int    $userId,
+		string $phone,
 		string $code,
 	): ReferralEntity
 	{
 		$self = new self();
-		$self->userId = $userId;
+		$self->phone = $phone;
 		$self->code = $code;
+		$self->link = sprintf('https://abn.ru/ref/%s/', $code);
+		return $self;
+	}
+
+	public static function invite(
+		int    $inviteUserId,
+		string $phone,
+		string $code,
+	): ReferralEntity
+	{
+		$self = new self();
+		$self->phone = $phone;
+		$self->code = $code;
+		$self->inviteUserId = $inviteUserId;
 		$self->link = sprintf('https://abn.ru/ref/%s/', $code);
 		return $self;
 	}
@@ -30,7 +46,7 @@ class ReferralEntity
 	{
 		$self = new self();
 		$self->id = $id;
-		$self->userId = $userId;
+		$self->phone = $userId;
 		$self->code = $code;
 		$self->link = $link;
 		return $self;
@@ -41,9 +57,9 @@ class ReferralEntity
 		return $this->id;
 	}
 
-	public function getUserId(): int
+	public function getPhone(): string
 	{
-		return $this->userId;
+		return $this->phone;
 	}
 
 	public function getCode(): string
@@ -54,5 +70,15 @@ class ReferralEntity
 	public function getLink(): string
 	{
 		return $this->link;
+	}
+
+	public function getUserId(): int
+	{
+		return $this->userId;
+	}
+
+	public function getInviteUserId(): int
+	{
+		return $this->inviteUserId;
 	}
 }

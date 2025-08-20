@@ -12,4 +12,6 @@ interface ReferralRepositoryInterface
 	public function findAll(Criteria $criteria): array;
 
 	public function findByUserId(int $userId): ?ReferralEntity;
+
+	public function findByCode(string $code): ?ReferralEntity;
 }
