@@ -11,12 +11,14 @@ use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
+use Craft\DDD\Shared\Infrastructure\Service\EventManager;
 use Craft\DDD\User\Application\Dto\RegisterSimpleAgentDto;
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Application\Service\Interfaces\ManagerAssignerInterface;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
+use Craft\DDD\User\Infrastructure\Events\AgentRegisterEvent;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 
 class RegisterAgentUseCase
@@ -27,6 +29,7 @@ class RegisterAgentUseCase
 		protected AuthenticatorInterface   $authenticator,
 		protected GroupAssignInterface     $groupAssignService,
 		protected ManagerAssignerInterface $managerAssignerService,
+		protected EventManager $eventDispatcher
 	)
 	{
 	}
@@ -92,6 +95,10 @@ class RegisterAgentUseCase
 		);
 
 		$this->managerAssignerService->assign($agent);
+
+		$this->eventDispatcher->dispatch(
+			new AgentRegisterEvent($agent)
+		);
 
 		return $agent;
 	}
