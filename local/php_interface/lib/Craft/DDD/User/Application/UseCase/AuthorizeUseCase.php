@@ -2,26 +2,30 @@
 
 namespace Craft\DDD\User\Application\UseCase;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
+use Craft\DDD\Shared\Infrastructure\Service\EventManager;
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Application\Service\PasswordManager;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
+use Craft\DDD\User\Infrastructure\Events\AuthorizeEvent;
 
 class AuthorizeUseCase
 {
 
 
 	public function __construct(
-		protected UserRepositoryInterface $repository,
+		protected UserRepositoryInterface $userRepository,
 		protected AuthenticatorInterface  $authenticator,
 		protected PasswordManager         $passwordManager,
+		protected EventManager            $eventManager,
 	)
 	{
 	}
 
 	public function execute(string $phone, string $password): bool
 	{
-		$user = $this->repository->findByPhoneNumber(new PhoneValueObject($phone));
+		$user = $this->userRepository->findByPhoneNumber(new PhoneValueObject($phone));
 		if(!$user)
 		{
 			throw new \Exception('Пользователь не найден');
@@ -32,6 +36,9 @@ class AuthorizeUseCase
 			throw new \Exception('Пароль не верный');
 		}
 
+		$this->eventManager->dispatch(new AuthorizeEvent($user), 'onAuthorize');
+
+		Debug::dumpToFile(rand());
 
 		return $this->authenticator->loginById($user->getId());
 	}

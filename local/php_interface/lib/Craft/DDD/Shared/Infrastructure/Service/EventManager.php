@@ -19,8 +19,8 @@ class EventManager
 		return self::$instance;
 	}
 
-	public function dispatch(Event $event): void
+	public function dispatch(Event $event, string $eventName = null): void
 	{
-		dispatcher()->dispatch($event);
+		dispatcher()->dispatch($event, $eventName);
 	}
 }

@@ -51,8 +51,6 @@ class CraftApartmentFilterData extends AjaxComponent
 			]),
 		];
 
-		Debug::dumpToFile($responseData);
-
 		ResponseBx::success($responseData);
 	}
 

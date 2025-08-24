@@ -49,8 +49,6 @@ class BuildApartmentFilter
 			$filter[ApartmentTable::F_BATHROOM_UNIT] = $filterBody->bathroom;
 		}
 
-		Debug::dumpToFile($filter);
-
 		return $filter;
 	}
 }

@@ -7,7 +7,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class ClaimFinishListener
 {
 
-	public function onClaimFinish(Event $event)
+	public function handle(Event $event)
 	{
 
 	}

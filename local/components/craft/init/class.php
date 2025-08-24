@@ -38,7 +38,7 @@ class CraftInitComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $exception)
 		{
-			Debug::dumpToFile($exception->getMessage());
+//			Debug::dumpToFile($exception->getMessage());
 		}
 	}
 

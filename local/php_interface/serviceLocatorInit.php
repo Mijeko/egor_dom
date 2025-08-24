@@ -1,14 +1,10 @@
 <?php
 
-
 use Bitrix\Main\DI\ServiceLocator;
 use Craft\DDD\Claims\Infrastructure\Listeners\ClaimFinishListener;
+use Craft\DDD\User\Infrastructure\Events\AgentRegisterListener;
+use Craft\DDD\User\Infrastructure\Events\AuthorizeListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-
-//\Bitrix\Main\DI\ServiceLocator::getInstance()->addInstanceLazy(
-//	'',
-//	'',
-//);
 
 
 ServiceLocator::getInstance()->addInstance(
@@ -25,9 +21,17 @@ if(!function_exists('dispatcher'))
 }
 
 
-dispatcher();
+//dispatcher()->addListener('onRegisterAgent', [
+//	AgentRegisterListener::class,
+//	'handle',
+//]);
 
-dispatcher()->addListener(ClaimFinishListener::class, [
-	ClaimFinishListener::class,
-	'onClaimFinish',
+dispatcher()->addListener('onAuthorize', [
+	new AuthorizeListener,
+	'handle',
 ]);
+
+//dispatcher()->addListener(ClaimFinishListener::class, [
+//	ClaimFinishListener::class,
+//	'handle',
+//]);

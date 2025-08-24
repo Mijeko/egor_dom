@@ -3,10 +3,6 @@ $sapi = php_sapi_name();
 $bIsConsole = ($sapi == 'cli');
 define('NEED_AUTH', !$bIsConsole);
 
-if(file_exists(__DIR__ . '/serviceLocatorInit.php'))
-{
-	require_once __DIR__ . '/serviceLocatorInit.php';
-}
 
 if(\Bitrix\Main\Loader::includeModule('craft.core'))
 {
@@ -27,6 +23,11 @@ if(file_exists(__DIR__ . '/vendor/autoload.php'))
 	$loader = new Psr4AutoloaderClass();
 	$loader->addNamespace("Craft\\", $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/lib');
 	$loader->register();
+}
+
+if(file_exists(__DIR__ . '/serviceLocatorInit.php'))
+{
+	require_once __DIR__ . '/serviceLocatorInit.php';
 }
 
 foreach([
