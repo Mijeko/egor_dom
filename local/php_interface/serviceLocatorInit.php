@@ -21,17 +21,8 @@ if(!function_exists('dispatcher'))
 }
 
 
-//dispatcher()->addListener('onRegisterAgent', [
-//	AgentRegisterListener::class,
-//	'handle',
-//]);
 
 dispatcher()->addListener('onAuthorize', [
 	new AuthorizeListener,
 	'handle',
 ]);
-
-//dispatcher()->addListener(ClaimFinishListener::class, [
-//	ClaimFinishListener::class,
-//	'handle',
-//]);

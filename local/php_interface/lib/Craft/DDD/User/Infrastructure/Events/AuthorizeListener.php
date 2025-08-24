@@ -9,6 +9,5 @@ class AuthorizeListener
 {
 	public function handle(AuthorizeEvent $event): void
 	{
-		Debug::dumpToFile('AuthorizeListener::handle');
 	}
 }

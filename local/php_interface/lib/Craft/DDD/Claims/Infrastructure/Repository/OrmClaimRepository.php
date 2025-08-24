@@ -110,4 +110,9 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 			$claim->getCreatedAt()->format('d.m.Y H:i:s'),
 		);
 	}
+
+	public function update(ClaimEntity $claim): ?ClaimEntity
+	{
+		// TODO: Implement update() method.
+	}
 }
