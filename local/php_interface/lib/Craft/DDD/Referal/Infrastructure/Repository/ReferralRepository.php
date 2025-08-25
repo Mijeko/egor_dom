@@ -22,4 +22,9 @@ class ReferralRepository implements ReferralRepositoryInterface
 	{
 		return null;
 	}
+
+	public function findByCode(string $code): ?ReferralEntity
+	{
+		return null;
+	}
 }
