@@ -5,7 +5,7 @@ namespace Craft\DDD\Referal\Application\UseCase;
 use Craft\DDD\Referal\Domain\Entity\ReferralEntity;
 use Craft\DDD\Referal\Domain\Repository\ReferralRepositoryInterface;
 
-class InsertReferralItemUseCase
+class InsertReferralMemberUseCase
 {
 
 	public function __construct(

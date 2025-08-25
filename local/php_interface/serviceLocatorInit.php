@@ -1,9 +1,7 @@
 <?php
 
 use Bitrix\Main\DI\ServiceLocator;
-use Craft\DDD\Claims\Infrastructure\Listeners\ClaimFinishListener;
-use Craft\DDD\User\Infrastructure\Events\AgentRegisterListener;
-use Craft\DDD\User\Infrastructure\Events\AuthorizeListener;
+use Craft\DDD\Referal\Infrastructure\Events\AuthorizeListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 
@@ -19,7 +17,6 @@ if(!function_exists('dispatcher'))
 		return ServiceLocator::getInstance()->get(EventDispatcher::class);
 	}
 }
-
 
 
 dispatcher()->addListener('onAuthorize', [
