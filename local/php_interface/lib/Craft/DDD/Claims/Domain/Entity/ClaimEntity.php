@@ -31,6 +31,9 @@ class ClaimEntity
 	protected ?string $legalAddress;
 	protected ?string $postAddress;
 	protected ?string $bankName;
+	protected ?int $costReward = 0;
+	protected ?bool $isClosed = false;
+	protected ?bool $isMoneyReceived = false;
 	protected ?string $createdAt = null;
 
 	protected ?int $apartmentId;
@@ -43,6 +46,7 @@ class ClaimEntity
 	): ClaimEntity
 	{
 		$this->status = $status;
+		$this->isClosed = true;
 		return $this;
 	}
 
@@ -87,6 +91,9 @@ class ClaimEntity
 		?string            $phone,
 		?string            $client,
 		?string            $createdAt,
+		?bool              $isClosed,
+		?bool              $isMoneyReceived,
+		?int               $costReward,
 	): ClaimEntity
 	{
 		$self = new self();
@@ -98,6 +105,9 @@ class ClaimEntity
 		$self->phone = $phone;
 		$self->client = $client;
 		$self->createdAt = $createdAt;
+		$self->isClosed = $isClosed;
+		$self->isMoneyReceived = $isMoneyReceived;
+		$self->costReward = $costReward;
 		return $self;
 	}
 
@@ -217,5 +227,20 @@ class ClaimEntity
 	public function getStatus(): ?StatusValueObject
 	{
 		return $this->status;
+	}
+
+	public function getCostReward(): ?int
+	{
+		return $this->costReward;
+	}
+
+	public function getIsClosed(): ?bool
+	{
+		return $this->isClosed;
+	}
+
+	public function getIsMoneyReceived(): ?bool
+	{
+		return $this->isMoneyReceived;
 	}
 }

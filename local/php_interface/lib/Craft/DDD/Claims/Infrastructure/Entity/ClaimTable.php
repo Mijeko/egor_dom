@@ -33,6 +33,9 @@ class ClaimTable extends DataManager
 	const F_BANK_NAME = 'BANK_NAME';
 	const F_USER_ID = 'USER_ID';
 	const F_APARTMENT_ID = 'APARTMENT_ID';
+	const F_IS_CLOSED = 'IS_CLOSED';
+	const F_IS_MONEY_RECEIVED = 'IS_MONEY_RECEIVED';
+	const F_COST_REWARD = 'COST_REWARD';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
@@ -42,6 +45,12 @@ class ClaimTable extends DataManager
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';
+
+	const IS_CLOSE_Y = 'Y';
+	const IS_CLOSE_N = 'N';
+
+	const IS_MONEY_RECEIVED_Y = 'Y';
+	const IS_MONEY_RECEIVED_N = 'N';
 
 	public static function getTableName()
 	{
@@ -92,6 +101,16 @@ class ClaimTable extends DataManager
 				->configureTitle('Активность')
 				->configureDefaultValue(self::ACTIVE_Y)
 				->configureValues(self::ACTIVE_N, self::ACTIVE_Y),
+			(new BooleanField(self::F_IS_CLOSED))
+				->configureTitle('Заказ закрыт')
+				->configureDefaultValue(self::IS_CLOSE_N)
+				->configureValues(self::IS_CLOSE_N, self::IS_CLOSE_Y),
+			(new BooleanField(self::F_IS_MONEY_RECEIVED))
+				->configureTitle('Деньги получены')
+				->configureDefaultValue(self::IS_MONEY_RECEIVED_N)
+				->configureValues(self::IS_MONEY_RECEIVED_N, self::IS_MONEY_RECEIVED_Y),
+			(new IntegerField(self::F_COST_REWARD))
+				->configureTitle('Сумма вознаграждения'),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')
 				->configureDefaultValue(new DateTime()),
