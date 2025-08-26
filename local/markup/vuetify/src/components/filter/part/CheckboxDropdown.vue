@@ -13,7 +13,11 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, null, Array],
       default: null
-    }
+    },
+    multiple: Boolean
+  },
+  mounted(): any {
+    console.log(this.values);
   },
   computed: {
     rawValue: {
@@ -33,7 +37,11 @@ export default defineComponent({
         return null;
       }
 
-      if (!currentValues || (Array.isArray(selectValues) && selectValues.length == 0)) {
+      if (!currentValues) {
+        return null;
+      }
+
+      if (!Array.isArray(selectValues)) {
         return null;
       }
 
@@ -88,6 +96,7 @@ export default defineComponent({
     <v-card min-width="300" class="pa-4">
       <div v-for="item in values">
         <v-checkbox
+          :multiple
           :hide-details="true"
           v-model="rawValue"
           :value="item.value"

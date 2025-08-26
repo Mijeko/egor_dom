@@ -211,6 +211,7 @@ export default defineComponent({
           </v-col>
           <v-col v-if="!skip.includes('price')">
             <CheckboxDropdown
+              :multiple="true"
               color="light-blue"
               label="Сан-узел"
               icon="$shower"
@@ -220,6 +221,7 @@ export default defineComponent({
           </v-col>
           <v-col v-if="!skip.includes('renovation')">
             <CheckboxDropdown
+              :multiple="true"
               color="light-blue"
               label="Отделка"
               icon="$hammer"
