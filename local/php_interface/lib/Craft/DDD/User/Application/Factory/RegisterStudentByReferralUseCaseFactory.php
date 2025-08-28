@@ -6,6 +6,7 @@ use Craft\DDD\User\Application\UseCase\RegisterStudentByReferralUseCase;
 use Craft\DDD\User\Infrastructure\Repository\BxStudentRepository;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 use Craft\DDD\User\Infrastructure\Service\Authenticator;
+use Craft\DDD\User\Infrastructure\Service\EventManager;
 use Craft\DDD\User\Infrastructure\Service\GroupAssignService;
 
 class RegisterStudentByReferralUseCaseFactory
@@ -17,6 +18,7 @@ class RegisterStudentByReferralUseCaseFactory
 			new AttachPhoneService(),
 			new Authenticator(),
 			new GroupAssignService(),
+			new EventManager(),
 		);
 	}
 }

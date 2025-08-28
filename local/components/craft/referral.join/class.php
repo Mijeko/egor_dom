@@ -8,6 +8,18 @@ use Craft\DDD\User\Application\UseCase\RegisterStudentByReferralUseCase;
 class CraftReferralJoinComponent extends AjaxComponent
 {
 
+	public function onPrepareComponentParams($arParams)
+	{
+		$arParams = parent::onPrepareComponentParams($arParams);
+
+		if(empty($arParams['CODE']))
+		{
+			throw new Exception('Реферальный код не передан');
+		}
+
+		return $arParams;
+	}
+
 	protected RegisterStudentByReferralUseCase $registerStudentByReferralUseCase;
 
 	function componentNamespace(): string
