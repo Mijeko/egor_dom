@@ -24,7 +24,6 @@ class ReferralEntity
 	}
 
 	public static function invite(
-		int    $inviteUserId,
 		string $phone,
 		string $code,
 	): ReferralEntity
@@ -32,7 +31,7 @@ class ReferralEntity
 		$self = new self();
 		$self->phone = $phone;
 		$self->code = $code;
-		$self->inviteUserId = $inviteUserId;
+		$self->inviteUserId = 0;
 		$self->link = sprintf('https://abn.ru/ref/%s/', $code);
 		return $self;
 	}

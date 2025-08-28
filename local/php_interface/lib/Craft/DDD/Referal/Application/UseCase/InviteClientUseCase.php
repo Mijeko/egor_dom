@@ -23,12 +23,11 @@ class InviteClientUseCase
 			throw new \Exception('Реферал не существует');
 		}
 
-		$newReferral = ReferralEntity::invite(
-			$clientDto->inviteUserId,
+		$invitedReferral = ReferralEntity::invite(
 			$clientDto->phone,
-			uniqid(),
+			$clientDto->code,
 		);
 
-		$this->referralRepository->create($newReferral);
+		$this->referralRepository->create($invitedReferral);
 	}
 }

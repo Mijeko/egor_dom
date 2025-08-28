@@ -18,7 +18,6 @@ class InviteStudentToStudentListener
 			$insertReferralItemUseCase = InviteClientUseCaseFactory::getUseCase();
 			$insertReferralItemUseCase->execute(
 				new JoinClientToClientDto(
-					rand(),
 					$user->getPhone()->getValue(),
 					$refCode,
 				)
