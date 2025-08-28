@@ -6,6 +6,7 @@ import type RegisterStudentRequestDto from "@/dto/request/RegisterStudentRequest
 import type RegisterStudentResponseDto from "@/dto/response/RegisterStudentResponseDto.ts";
 import ControllerApi from "@/service/ControllerApi.ts";
 import type RegisterSimpleAgentRequestDto from "@/dto/request/RegisterSimpleAgentRequestDto.ts";
+import type RegisterByReferralRequestDto from "@/dto/request/RegisterByReferralRequestDto.ts";
 
 export default class UserService {
 
@@ -29,5 +30,9 @@ export default class UserService {
 
   profileUpdate(body: ProfileUpdateDto) {
     return ControllerApi.post('craft:profile.update', body);
+  }
+
+  registerByReferral(body: RegisterByReferralRequestDto) {
+    return ControllerApi.post('craft:referral.join', body);
   }
 }
