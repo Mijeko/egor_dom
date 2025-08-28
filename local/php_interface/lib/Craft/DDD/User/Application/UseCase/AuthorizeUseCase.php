@@ -36,7 +36,7 @@ class AuthorizeUseCase
 			throw new \Exception('Пароль не верный');
 		}
 
-		$this->eventManager->dispatch(new AuthorizeEvent($user), 'onAuthorize');
+		$this->eventManager->dispatch(new AuthorizeEvent($user), AuthorizeEvent::EVENT_NAME);
 
 		Debug::dumpToFile(rand());
 

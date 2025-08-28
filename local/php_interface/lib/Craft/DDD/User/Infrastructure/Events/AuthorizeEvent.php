@@ -7,8 +7,10 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class AuthorizeEvent extends Event
 {
+	const string EVENT_NAME = 'onAuthorize';
+
 	public function __construct(
-		private UserEntity $user
+		private readonly UserEntity $user
 	)
 	{
 	}

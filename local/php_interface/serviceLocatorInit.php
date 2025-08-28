@@ -1,7 +1,10 @@
 <?php
 
 use Bitrix\Main\DI\ServiceLocator;
-use Craft\DDD\Referal\Infrastructure\Events\AuthorizeListener;
+use Craft\DDD\Referal\Infrastructure\Listeners\AuthorizeListener;
+use Craft\DDD\Referal\Infrastructure\Listeners\RegisterStudentListener;
+use Craft\DDD\User\Infrastructure\Events\AuthorizeEvent;
+use Craft\DDD\User\Infrastructure\Events\RegisterStudentEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 
@@ -19,7 +22,12 @@ if(!function_exists('dispatcher'))
 }
 
 
-dispatcher()->addListener('onAuthorize', [
+dispatcher()->addListener(AuthorizeEvent::EVENT_NAME, [
 	new AuthorizeListener,
+	'handle',
+]);
+
+dispatcher()->addListener(RegisterStudentEvent::EVENT_NAME, [
+	new RegisterStudentListener(),
 	'handle',
 ]);

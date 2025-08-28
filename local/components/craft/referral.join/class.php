@@ -1,16 +1,14 @@
 <?php
 
 use Craft\Core\Component\AjaxComponent;
-use Craft\DDD\Referal\Application\Dto\JoinClientToClientDto;
-use Craft\DDD\Referal\Application\Factory\InviteClientUseCaseFactory;
-use Craft\DDD\Referal\Application\UseCase\InviteClientUseCase;
-use Craft\DDD\Referal\Domain\Repository\ReferralRepositoryInterface;
-use Craft\DDD\Referal\Infrastructure\Repository\ReferralRepository;
+use Craft\DDD\User\Application\Dto\RegisterStudentByRefDto;
+use Craft\DDD\User\Application\Factory\RegisterStudentByReferralUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\RegisterStudentByReferralUseCase;
 
 class CraftReferralJoinComponent extends AjaxComponent
 {
-	protected ReferralRepositoryInterface $referralRepository;
-	protected InviteClientUseCase $joinClientToClientUseCase;
+
+	protected RegisterStudentByReferralUseCase $registerStudentByReferralUseCase;
 
 	function componentNamespace(): string
 	{
@@ -23,18 +21,21 @@ class CraftReferralJoinComponent extends AjaxComponent
 
 	protected function work(array $formData): void
 	{
-
 		try
 		{
-			$this->joinClientToClientUseCase->execute(
-				new JoinClientToClientDto(
-					$formData['inviteUserId'],
+
+			$this->registerStudentByReferralUseCase->registerByReferral(
+				new RegisterStudentByRefDto(
 					$formData['phone'],
-					$formData['code'],
+					$formData['email'],
+					$formData['password'],
+					$this->arParams['CODE'] ?? ''
 				)
 			);
+
 		} catch(Exception $exception)
 		{
+
 		}
 	}
 
@@ -49,7 +50,6 @@ class CraftReferralJoinComponent extends AjaxComponent
 
 	public function loadServices(): void
 	{
-		$this->referralRepository = new ReferralRepository();
-		$this->joinClientToClientUseCase = InviteClientUseCaseFactory::getUseCase();
+		$this->registerStudentByReferralUseCase = RegisterStudentByReferralUseCaseFactory::getUseCase();
 	}
 }

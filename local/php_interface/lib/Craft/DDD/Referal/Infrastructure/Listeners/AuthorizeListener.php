@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Referal\Infrastructure\Events;
+namespace Craft\DDD\Referal\Infrastructure\Listeners;
 
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Referal\Application\Factory\InsertReferralMemberFactory;

@@ -17,18 +17,17 @@
  */
 
 
-$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'RegistrationByReferral',
-		'PROPS'  => [
-			'referralCode' => $request->get('JOIN_REF_CODE') ?? '',
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
+//$APPLICATION->IncludeComponent(
+//	'craft:vite',
+//	'vite',
+//	[
+//		'SOURCE' => 'RegistrationByReferral',
+//		'PROPS'  => [
+//			'referralCode' => $request->get('JOIN_REF_CODE') ?? '',
+//		],
+//	],
+//	false,
+//	['HIDE_ICONS' => 'Y']
+//)
 ?>
