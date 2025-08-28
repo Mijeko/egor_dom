@@ -16,6 +16,14 @@ $arUrlRewrite=array (
     'PATH' => '/objects/detail.php',
     'SORT' => 100,
   ),
+  7 =>
+  array (
+    'CONDITION' => '#^/ref/([^/]+)/?(\\?[^/]*)?$#',
+    'RULE' => 'JOIN_REF_CODE=$1',
+    'ID' => '',
+    'PATH' => '/ref/index.php',
+    'SORT' => 100,
+  ),
   0 => 
   array (
     'CONDITION' => '#^\\/?\\/mobileapp/jn\\/(.*)\\/.*#',
