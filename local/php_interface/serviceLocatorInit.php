@@ -2,9 +2,9 @@
 
 use Bitrix\Main\DI\ServiceLocator;
 use Craft\DDD\Referal\Infrastructure\Listeners\AuthorizeListener;
-use Craft\DDD\Referal\Infrastructure\Listeners\RegisterStudentListener;
+use Craft\DDD\Referal\Infrastructure\Listeners\InviteStudentToStudentListener;
 use Craft\DDD\User\Infrastructure\Events\AuthorizeEvent;
-use Craft\DDD\User\Infrastructure\Events\RegisterStudentEvent;
+use Craft\DDD\User\Infrastructure\Events\InviteStudentToStudentEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 
@@ -27,7 +27,7 @@ dispatcher()->addListener(AuthorizeEvent::EVENT_NAME, [
 	'handle',
 ]);
 
-dispatcher()->addListener(RegisterStudentEvent::EVENT_NAME, [
-	new RegisterStudentListener(),
+dispatcher()->addListener(InviteStudentToStudentEvent::EVENT_NAME, [
+	new InviteStudentToStudentListener(),
 	'handle',
 ]);

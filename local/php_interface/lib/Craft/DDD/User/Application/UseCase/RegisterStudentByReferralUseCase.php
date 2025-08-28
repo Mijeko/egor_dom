@@ -7,7 +7,7 @@ use Craft\DDD\User\Application\Dto\RegisterStudentDto;
 use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
 use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
-use Craft\DDD\User\Infrastructure\Events\RegisterStudentEvent;
+use Craft\DDD\User\Infrastructure\Events\InviteStudentToStudentEvent;
 use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 use Craft\DDD\User\Infrastructure\Service\EventManager;
 
@@ -37,8 +37,11 @@ class RegisterStudentByReferralUseCase extends RegisterStudentUseCase
 			));
 
 			$this->eventManager->dispatch(
-				new RegisterStudentEvent($studentEntity),
-				RegisterStudentEvent::EVENT_NAME
+				new InviteStudentToStudentEvent(
+					$studentEntity,
+					$dto->referralCode
+				),
+				InviteStudentToStudentEvent::EVENT_NAME
 			);
 
 		} catch(\Exception $exception)
