@@ -1,5 +1,8 @@
-<?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
-<?php
+<?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+
+use Bitrix\Main\Application;
+use Craft\DDD\Referal\Application\Factory\MarkGuestUseCaseFactory;
+
 /**
  * @global CMain $APPLICATION
  */
@@ -7,13 +10,22 @@
 global $APPLICATION;
 
 
-$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+$request = Application::getInstance()->getContext()->getRequest();
+$refCode = $request->get('JOIN_REF_CODE') ?? '';
+
+try
+{
+	$service = MarkGuestUseCaseFactory::getUseCase();
+	$service->execute($refCode);
+} catch(\Exception $e)
+{
+}
 
 $APPLICATION->IncludeComponent(
 	'craft:referral.join',
 	'.default',
 	[
-		'CODE' => $request->get('JOIN_REF_CODE') ?? '',
+		'CODE' => $refCode,
 	],
 	false,
 	['HIDE_ICONS' => 'Y']
