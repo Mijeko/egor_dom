@@ -14,10 +14,7 @@ class RegisterStudentByReferralUseCaseFactory
 	public static function getUseCase(): RegisterStudentByReferralUseCase
 	{
 		return new RegisterStudentByReferralUseCase(
-			new BxStudentRepository(),
-			new AttachPhoneService(),
-			new Authenticator(),
-			new GroupAssignService(),
+			RegisterStudentUseCaseFactory::getUseCase(),
 			new EventManager(),
 		);
 	}

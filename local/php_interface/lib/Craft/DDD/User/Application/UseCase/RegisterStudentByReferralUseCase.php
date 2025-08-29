@@ -4,33 +4,24 @@ namespace Craft\DDD\User\Application\UseCase;
 
 use Craft\DDD\User\Application\Dto\RegisterStudentByRefDto;
 use Craft\DDD\User\Application\Dto\RegisterStudentDto;
-use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
-use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
-use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Events\InviteStudentToStudentEvent;
-use Craft\DDD\User\Infrastructure\Service\AttachPhoneService;
 use Craft\DDD\User\Infrastructure\Service\EventManager;
 
-class RegisterStudentByReferralUseCase extends RegisterStudentUseCase
+class RegisterStudentByReferralUseCase
 {
 
 	public function __construct(
-		StudentRepositoryInterface $studentRepository,
-		AttachPhoneService         $attachPhoneService,
-		AuthenticatorInterface     $authenticator,
-		GroupAssignInterface       $groupAssignService,
-		protected EventManager     $eventManager,
+		protected RegisterStudentUseCase $registerService,
+		protected EventManager           $eventManager,
 	)
 	{
-		parent::__construct($studentRepository, $attachPhoneService, $authenticator, $groupAssignService);
 	}
 
-
-	public function registerByReferral(RegisterStudentByRefDto $dto): void
+	public function execute(RegisterStudentByRefDto $dto): void
 	{
 		try
 		{
-			$studentEntity = $this->execute(new RegisterStudentDto(
+			$studentEntity = $this->registerService->execute(new RegisterStudentDto(
 				$dto->phone,
 				$dto->email,
 				$dto->password

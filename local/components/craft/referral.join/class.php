@@ -39,7 +39,7 @@ class CraftReferralJoinComponent extends AjaxComponent
 		try
 		{
 
-			$this->registerStudentByReferralUseCase->registerByReferral(
+			$this->registerStudentByReferralUseCase->execute(
 				new RegisterStudentByRefDto(
 					$formData['phone'],
 					$formData['email'],

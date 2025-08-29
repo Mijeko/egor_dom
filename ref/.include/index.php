@@ -16,7 +16,7 @@ $refCode = $request->get('JOIN_REF_CODE') ?? '';
 try
 {
 	$service = MarkGuestUseCaseFactory::getUseCase();
-	$service->execute($refCode);
+	$service->storeRefCode($refCode);
 } catch(\Exception $e)
 {
 }

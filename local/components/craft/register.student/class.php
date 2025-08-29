@@ -1,13 +1,17 @@
 <?php
 
+use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\User\Application\Dto\RegisterStudentDto;
-use Craft\DDD\User\Application\UseCase\RegisterStudentUseCase;
-use Craft\DDD\User\Application\Factory\RegisterStudentUseCaseFactory;
+use Craft\DDD\Referal\Application\Factory\MarkGuestUseCaseFactory;
+use Craft\DDD\Referal\Application\UseCase\MarkGuestUseCase;
+use Craft\DDD\User\Application\Dto\RegisterStudentByRefDto;
+use Craft\DDD\User\Application\Factory\RegisterStudentByReferralUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\RegisterStudentByReferralUseCase;
 
-class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
+class CraftRegisterStudent extends AjaxComponent
 {
-	protected ?RegisterStudentUseCase $registerStudentUseCase = null;
+	protected ?RegisterStudentByReferralUseCase $registerStudentByReferralUseCase = null;
+	protected ?MarkGuestUseCase $markGuestUseCase = null;
 
 	function componentNamespace(): string
 	{
@@ -22,11 +26,14 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 	{
 		try
 		{
-			$this->registerStudentUseCase->execute(
-				new RegisterStudentDto(
+			$refCode = $this->markGuestUseCase->getRefCode();
+
+			$this->registerStudentByReferralUseCase->execute(
+				new RegisterStudentByRefDto(
 					$formData['phone'],
 					$formData['email'],
 					$formData['password'],
+					$refCode,
 				)
 			);
 
@@ -34,7 +41,7 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 				'redirect' => '/',
 			]);
 
-		} catch(\Exception $e)
+		} catch(Exception $e)
 		{
 			ResponseBx::badRequest($e->getMessage());
 		}
@@ -51,6 +58,7 @@ class CraftRegisterStudent extends \Craft\Core\Component\AjaxComponent
 
 	public function loadServices(): void
 	{
-		$this->registerStudentUseCase = RegisterStudentUseCaseFactory::getUseCase();
+		$this->registerStudentByReferralUseCase = RegisterStudentByReferralUseCaseFactory::getUseCase();
+		$this->markGuestUseCase = MarkGuestUseCaseFactory::getUseCase();
 	}
 }
