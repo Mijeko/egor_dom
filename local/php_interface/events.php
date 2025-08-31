@@ -1,14 +1,17 @@
 <?php
 
+use Bitrix\Main\EventManager;
+use Craft\Bitrix\EventHandlers\OnAfterUserRegisterHandler;
 use Craft\DDD\City\Infrastructure\Events\OnPageStartHandler;
+use Craft\Rest\Handler;
 
-$eventManager = \Bitrix\Main\EventManager::getInstance();
+$eventManager = EventManager::getInstance();
 
 $eventManager->registerEventHandlerCompatible(
 	"rest",
 	"OnRestServiceBuildDescription",
 	"main",
-	\Craft\Rest\Handler::class,
+	Handler::class,
 	"onRestServiceBuildDescription"
 );
 
@@ -19,4 +22,13 @@ $eventManager->registerEventHandlerCompatible(
 	OnPageStartHandler::class,
 	"execute",
 	"100"
+);
+
+$eventManager->addEventHandler(
+	'main',
+	'OnAfterUserRegister',
+	[
+		OnAfterUserRegisterHandler::class,
+		'handle',
+	]
 );

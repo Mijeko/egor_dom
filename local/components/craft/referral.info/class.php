@@ -38,8 +38,22 @@ class CraftReferralInfoComponent extends CBitrixComponent
 
 	private function loadData(): void
 	{
+		$referralInfo = $this->referralRepository->findByUserId($this->arParams['USER_ID']);
+
+		if(!$referralInfo)
+		{
+			return;
+		}
+
+		$server = \Bitrix\Main\Application::getInstance()->getContext()->getServer();
+
 		$this->arResult['REFERRAL'] = new ReferralDto(
-			'https://abn.ru/ref/391030',
+			sprintf(
+				'%s://%s/ref/%s',
+				$server->getHttpHost() ?? 'http',
+				$server->getHttpHost(),
+				$referralInfo->getCode()
+			),
 			3,
 			Money::format(300000) . ' ' . CurrencyHtml::icon()
 		);

@@ -2,8 +2,10 @@
 
 namespace Craft\DDD\Referal\Application\UseCase;
 
+use Craft\DDD\Referal\Application\Dto\InsertReferralDto;
 use Craft\DDD\Referal\Domain\Entity\ReferralEntity;
 use Craft\DDD\Referal\Domain\Repository\ReferralRepositoryInterface;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
 class InsertReferralMemberUseCase
 {
@@ -14,17 +16,18 @@ class InsertReferralMemberUseCase
 	{
 	}
 
-	public function execute(int $userId): void
+	public function execute(InsertReferralDto $dto): void
 	{
 
-		if($this->referralRepository->findByUserId($userId))
+		if($this->referralRepository->findByUserId($dto->userId))
 		{
 			return;
 		}
 
 		$referralEntity = ReferralEntity::create(
-			$userId,
-			uniqid()
+			$dto->userId,
+			new PhoneValueObject($dto->phone),
+			uniqid(),
 		);
 
 		$this->referralRepository->create($referralEntity);
