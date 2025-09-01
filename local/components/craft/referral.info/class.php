@@ -1,10 +1,12 @@
 <?php
 
+use Bitrix\Main\Application;
 use Craft\DDD\Referal\Domain\Repository\ReferralRepositoryInterface;
 use Craft\DDD\Referal\Infrastructure\Repository\ReferralRepository;
 use Craft\DDD\Referal\Presentantion\Dto\ReferralDto;
 use Craft\Helper\CurrencyHtml;
 use Craft\Helper\Money;
+use Craft\Helper\Url;
 
 class CraftReferralInfoComponent extends CBitrixComponent
 {
@@ -45,16 +47,16 @@ class CraftReferralInfoComponent extends CBitrixComponent
 			return;
 		}
 
-		$server = \Bitrix\Main\Application::getInstance()->getContext()->getServer();
+
+		$countAssigned = $this->referralRepository->countInvitedMembers($referralInfo->getId());
 
 		$this->arResult['REFERRAL'] = new ReferralDto(
 			sprintf(
-				'%s://%s/ref/%s',
-				$server->getHttpHost() ?? 'http',
-				$server->getHttpHost(),
+				'%s/ref/%s',
+				Url::getFullUrl(),
 				$referralInfo->getCode()
 			),
-			3,
+			$countAssigned,
 			Money::format(300000) . ' ' . CurrencyHtml::icon()
 		);
 	}

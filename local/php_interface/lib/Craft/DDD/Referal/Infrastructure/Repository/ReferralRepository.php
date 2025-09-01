@@ -48,7 +48,16 @@ class ReferralRepository implements ReferralRepositoryInterface
 
 	public function findByUserId(int $userId): ?ReferralEntity
 	{
-		return null;
+		$listModels = $this->findAll(Criteria::instance()->filter([
+			ReferralTable::F_USER_ID => $userId,
+		]));
+
+		if(count($listModels) !== 1)
+		{
+			return null;
+		}
+
+		return array_shift($listModels);
 	}
 
 	public function findByCode(string $code): ?ReferralEntity
@@ -66,5 +75,14 @@ class ReferralRepository implements ReferralRepositoryInterface
 			$referral->getCode(),
 			new PhoneValueObject($referral->getPhone()),
 		);
+	}
+
+	public function countInvitedMembers(int $userId): int
+	{
+		return ReferralTable::getList([
+			'filter' => [
+				ReferralTable::F_INVITED_USER_ID => $userId,
+			],
+		])->getSelectedRowsCount();
 	}
 }
