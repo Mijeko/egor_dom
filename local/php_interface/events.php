@@ -2,6 +2,7 @@
 
 use Bitrix\Main\EventManager;
 use Craft\Bitrix\EventHandlers\OnAfterUserAddHandler;
+use Craft\Bitrix\EventHandlers\OnBeforeUserAddHandler;
 use Craft\DDD\City\Infrastructure\Events\OnPageStartHandler;
 use Craft\Rest\Handler;
 
@@ -22,6 +23,15 @@ $eventManager->registerEventHandlerCompatible(
 	OnPageStartHandler::class,
 	"execute",
 	"100"
+);
+
+$eventManager->addEventHandler(
+	'main',
+	'OnBeforeUserAdd',
+	[
+		OnBeforeUserAddHandler::class,
+		'handle',
+	]
 );
 
 $eventManager->addEventHandler(
