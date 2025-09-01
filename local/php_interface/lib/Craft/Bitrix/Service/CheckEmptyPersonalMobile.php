@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\Bitrix;
+namespace Craft\Bitrix\Service;
 
 class CheckEmptyPersonalMobile
 {

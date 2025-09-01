@@ -2,7 +2,7 @@
 
 namespace Craft\Bitrix\EventHandlers;
 
-use Craft\Bitrix\CheckEmptyPersonalMobile;
+use Craft\Bitrix\Service\CheckEmptyPersonalMobile;
 
 class OnBeforeUserAddHandler
 {
