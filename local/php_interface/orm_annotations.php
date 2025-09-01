@@ -2856,15 +2856,6 @@ namespace Bitrix\Main {
 	 * @method \string fillUfEmailTwo()
 	 * @method \Bitrix\Main\EO_User setUfEmailTwo(\string $ufEmailTwo)
 	 * @method bool isUfEmailTwoChanged()
-	 * @method \float getUfRewardAmount()
-	 * @method \float remindActualUfRewardAmount()
-	 * @method \float requireUfRewardAmount()
-	 * @method bool hasUfRewardAmount()
-	 * @method bool isUfRewardAmountFilled()
-	 * @method \Bitrix\Main\EO_User unsetUfRewardAmount()
-	 * @method \float fillUfRewardAmount()
-	 * @method \Bitrix\Main\EO_User setUfRewardAmount(\float $ufRewardAmount)
-	 * @method bool isUfRewardAmountChanged()
 	 */
 	class EO_User {
 		/* @var \Bitrix\Main\UserTable */
@@ -2912,8 +2903,6 @@ namespace Bitrix\Main {
 	 * @method \string[] fillUfPhoneTwo()
 	 * @method \string[] getUfEmailTwoList()
 	 * @method \string[] fillUfEmailTwo()
-	 * @method \float[] getUfRewardAmountList()
-	 * @method \float[] fillUfRewardAmount()
 	 */
 	class EO_User_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Bitrix\Main\UserTable */
@@ -5883,15 +5872,6 @@ namespace Craft\Model {
 	 * @method \string fillUfEmailTwo()
 	 * @method \Craft\Model\CraftUser setUfEmailTwo(\string $ufEmailTwo)
 	 * @method bool isUfEmailTwoChanged()
-	 * @method \float getUfRewardAmount()
-	 * @method \float remindActualUfRewardAmount()
-	 * @method \float requireUfRewardAmount()
-	 * @method bool hasUfRewardAmount()
-	 * @method bool isUfRewardAmountFilled()
-	 * @method \Craft\Model\CraftUser unsetUfRewardAmount()
-	 * @method \float fillUfRewardAmount()
-	 * @method \Craft\Model\CraftUser setUfRewardAmount(\float $ufRewardAmount)
-	 * @method bool isUfRewardAmountChanged()
 	 * @method \Craft\Model\EO_CraftUserUts getUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts remindActualUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts requireUtsObjectInner()
@@ -6119,8 +6099,6 @@ namespace Craft\Model {
 	 * @method \string[] fillUfPhoneTwo()
 	 * @method \string[] getUfEmailTwoList()
 	 * @method \string[] fillUfEmailTwo()
-	 * @method \float[] getUfRewardAmountList()
-	 * @method \float[] fillUfRewardAmount()
 	 * @method \Craft\Model\EO_CraftUserUts[] getUtsObjectInnerList()
 	 * @method \Craft\Model\EO_CraftUser_Collection getUtsObjectInnerCollection()
 	 * @method \Craft\Model\EO_CraftUserUts_Collection fillUtsObjectInner()
@@ -6412,6 +6390,16 @@ namespace Craft\DDD\Claims\Infrastructure\Entity {
 	 * @method \Craft\DDD\Claims\Infrastructure\Entity\Claim resetCostReward()
 	 * @method \Craft\DDD\Claims\Infrastructure\Entity\Claim unsetCostReward()
 	 * @method \int fillCostReward()
+	 * @method \int getOrderCost()
+	 * @method \Craft\DDD\Claims\Infrastructure\Entity\Claim setOrderCost(\int|\Bitrix\Main\DB\SqlExpression $orderCost)
+	 * @method bool hasOrderCost()
+	 * @method bool isOrderCostFilled()
+	 * @method bool isOrderCostChanged()
+	 * @method \int remindActualOrderCost()
+	 * @method \int requireOrderCost()
+	 * @method \Craft\DDD\Claims\Infrastructure\Entity\Claim resetOrderCost()
+	 * @method \Craft\DDD\Claims\Infrastructure\Entity\Claim unsetOrderCost()
+	 * @method \int fillOrderCost()
 	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
 	 * @method \Craft\DDD\Claims\Infrastructure\Entity\Claim setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
 	 * @method bool hasCreatedAt()
@@ -6536,6 +6524,8 @@ namespace Craft\DDD\Claims\Infrastructure\Entity {
 	 * @method \boolean[] fillIsMoneyReceived()
 	 * @method \int[] getCostRewardList()
 	 * @method \int[] fillCostReward()
+	 * @method \int[] getOrderCostList()
+	 * @method \int[] fillOrderCost()
 	 * @method \Bitrix\Main\Type\DateTime[] getCreatedAtList()
 	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime[] getUpdatedAtList()
@@ -8078,86 +8068,86 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 /* ORMENTITYANNOTATION:Craft\DDD\Referal\Infrastructure\Entity\ReferralTable */
 namespace Craft\DDD\Referal\Infrastructure\Entity {
 	/**
-	 * EO_Referral
+	 * Referral
 	 * @see \Craft\DDD\Referal\Infrastructure\Entity\ReferralTable
 	 *
 	 * Custom methods:
 	 * ---------------
 	 *
 	 * @method \int getId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setId(\int|\Bitrix\Main\DB\SqlExpression $id)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setId(\int|\Bitrix\Main\DB\SqlExpression $id)
 	 * @method bool hasId()
 	 * @method bool isIdFilled()
 	 * @method bool isIdChanged()
 	 * @method \int getUserId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
 	 * @method bool hasUserId()
 	 * @method bool isUserIdFilled()
 	 * @method bool isUserIdChanged()
 	 * @method \int remindActualUserId()
 	 * @method \int requireUserId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetUserId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetUserId()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetUserId()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetUserId()
 	 * @method \int fillUserId()
 	 * @method null|\int getInvitedUserId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setInvitedUserId(null|\int|\Bitrix\Main\DB\SqlExpression $invitedUserId)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setInvitedUserId(null|\int|\Bitrix\Main\DB\SqlExpression $invitedUserId)
 	 * @method bool hasInvitedUserId()
 	 * @method bool isInvitedUserIdFilled()
 	 * @method bool isInvitedUserIdChanged()
 	 * @method null|\int remindActualInvitedUserId()
 	 * @method null|\int requireInvitedUserId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetInvitedUserId()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetInvitedUserId()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetInvitedUserId()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetInvitedUserId()
 	 * @method null|\int fillInvitedUserId()
 	 * @method \string getCode()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setCode(\string|\Bitrix\Main\DB\SqlExpression $code)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setCode(\string|\Bitrix\Main\DB\SqlExpression $code)
 	 * @method bool hasCode()
 	 * @method bool isCodeFilled()
 	 * @method bool isCodeChanged()
 	 * @method \string remindActualCode()
 	 * @method \string requireCode()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetCode()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetCode()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetCode()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetCode()
 	 * @method \string fillCode()
 	 * @method \string getPhone()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setPhone(\string|\Bitrix\Main\DB\SqlExpression $phone)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setPhone(\string|\Bitrix\Main\DB\SqlExpression $phone)
 	 * @method bool hasPhone()
 	 * @method bool isPhoneFilled()
 	 * @method bool isPhoneChanged()
 	 * @method \string remindActualPhone()
 	 * @method \string requirePhone()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetPhone()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetPhone()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetPhone()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetPhone()
 	 * @method \string fillPhone()
 	 * @method \boolean getActive()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setActive(\boolean|\Bitrix\Main\DB\SqlExpression $active)
 	 * @method bool hasActive()
 	 * @method bool isActiveFilled()
 	 * @method bool isActiveChanged()
 	 * @method \boolean remindActualActive()
 	 * @method \boolean requireActive()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetActive()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetActive()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetActive()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetActive()
 	 * @method \boolean fillActive()
 	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
 	 * @method bool hasCreatedAt()
 	 * @method bool isCreatedAtFilled()
 	 * @method bool isCreatedAtChanged()
 	 * @method \Bitrix\Main\Type\DateTime remindActualCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime requireCreatedAt()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetCreatedAt()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetCreatedAt()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetCreatedAt()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillCreatedAt()
 	 * @method \Bitrix\Main\Type\DateTime getUpdatedAt()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral setUpdatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $updatedAt)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral setUpdatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $updatedAt)
 	 * @method bool hasUpdatedAt()
 	 * @method bool isUpdatedAtFilled()
 	 * @method bool isUpdatedAtChanged()
 	 * @method \Bitrix\Main\Type\DateTime remindActualUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime requireUpdatedAt()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral resetUpdatedAt()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unsetUpdatedAt()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral resetUpdatedAt()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unsetUpdatedAt()
 	 * @method \Bitrix\Main\Type\DateTime fillUpdatedAt()
 	 *
 	 * Common methods:
@@ -8174,9 +8164,9 @@ namespace Craft\DDD\Referal\Infrastructure\Entity {
 	 * @method bool has($fieldName)
 	 * @method bool isFilled($fieldName)
 	 * @method bool isChanged($fieldName)
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral set($fieldName, $value)
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral reset($fieldName)
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral unset($fieldName)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral set($fieldName, $value)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral reset($fieldName)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral unset($fieldName)
 	 * @method void addTo($fieldName, $value)
 	 * @method void removeFrom($fieldName, $value)
 	 * @method void removeAll($fieldName)
@@ -8184,7 +8174,7 @@ namespace Craft\DDD\Referal\Infrastructure\Entity {
 	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
 	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
 	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
-	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral wakeUp($data)
+	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\Referral wakeUp($data)
 	 */
 	class EO_Referral {
 		/* @var \Craft\DDD\Referal\Infrastructure\Entity\ReferralTable */
@@ -8222,12 +8212,12 @@ namespace Craft\DDD\Referal\Infrastructure\Entity {
 	 * ---------------
 	 *
 	 * @property-read \Bitrix\Main\ORM\Entity $entity
-	 * @method void add(\Craft\DDD\Referal\Infrastructure\Entity\EO_Referral $object)
-	 * @method bool has(\Craft\DDD\Referal\Infrastructure\Entity\EO_Referral $object)
+	 * @method void add(\Craft\DDD\Referal\Infrastructure\Entity\Referral $object)
+	 * @method bool has(\Craft\DDD\Referal\Infrastructure\Entity\Referral $object)
 	 * @method bool hasByPrimary($primary)
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral getByPrimary($primary)
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral[] getAll()
-	 * @method bool remove(\Craft\DDD\Referal\Infrastructure\Entity\EO_Referral $object)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral getByPrimary($primary)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral[] getAll()
+	 * @method bool remove(\Craft\DDD\Referal\Infrastructure\Entity\Referral $object)
 	 * @method void removeByPrimary($primary)
 	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
 	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection wakeUp($data)
@@ -8237,7 +8227,7 @@ namespace Craft\DDD\Referal\Infrastructure\Entity {
 	 * @method void offsetUnset() ArrayAccess
 	 * @method void offsetGet() ArrayAccess
 	 * @method void rewind() Iterator
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral current() Iterator
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral current() Iterator
 	 * @method mixed key() Iterator
 	 * @method void next() Iterator
 	 * @method bool valid() Iterator
@@ -8258,9 +8248,9 @@ namespace Craft\DDD\Referal\Infrastructure\Entity {
 	 * @method static EO_Referral_Result getById($id)
 	 * @method static EO_Referral_Result getList(array $parameters = [])
 	 * @method static EO_Referral_Entity getEntity()
-	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\Referral createObject($setDefaultValues = true)
 	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection createCollection()
-	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral wakeUpObject($row)
+	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\Referral wakeUpObject($row)
 	 * @method static \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection wakeUpCollection($rows)
 	 */
 	class ReferralTable extends \Bitrix\Main\ORM\Data\DataManager {}
@@ -8269,19 +8259,19 @@ namespace Craft\DDD\Referal\Infrastructure\Entity {
 	 * ---------------
 	 *
 	 * @method EO_Referral_Result exec()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral fetchObject()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral fetchObject()
 	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection fetchCollection()
 	 */
 	class EO_Referral_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral fetchObject()
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral fetchObject()
 	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection fetchCollection()
 	 */
 	class EO_Referral_Result extends \Bitrix\Main\ORM\Query\Result {}
 	/**
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral createObject($setDefaultValues = true)
 	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection createCollection()
-	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral wakeUpObject($row)
+	 * @method \Craft\DDD\Referal\Infrastructure\Entity\Referral wakeUpObject($row)
 	 * @method \Craft\DDD\Referal\Infrastructure\Entity\EO_Referral_Collection wakeUpCollection($rows)
 	 */
 	class EO_Referral_Entity extends \Bitrix\Main\ORM\Entity {}

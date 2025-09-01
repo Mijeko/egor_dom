@@ -16,7 +16,7 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 /**
  * Агент, которым стал ученик/студент
  */
-final class AgentEntity
+class AgentEntity
 {
 
 

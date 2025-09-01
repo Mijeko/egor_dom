@@ -4,7 +4,7 @@ namespace Craft\DDD\User\Infrastructure\Repository;
 
 use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
-use Craft\DDD\User\Domain\Entity\ExternalRealtor;
+use Craft\DDD\User\Domain\Entity\ExternalRealtorEntity;
 use Craft\DDD\User\Domain\Repository\ExternalRealtorRepositoryInterface;
 use Craft\Helper\Criteria;
 use Craft\Model\CraftUserTable;
@@ -30,7 +30,7 @@ class ExternalRealtorRepository implements ExternalRealtorRepositoryInterface
 		return $result;
 	}
 
-	public function findById(int $id): ?ExternalRealtor
+	public function findById(int $id): ?ExternalRealtorEntity
 	{
 		$list = $this->findAll(
 			Criteria::instance()->filter([
@@ -46,9 +46,9 @@ class ExternalRealtorRepository implements ExternalRealtorRepositoryInterface
 		return array_shift($list);
 	}
 
-	private function hydrate(EO_CraftUser $user): ExternalRealtor
+	private function hydrate(EO_CraftUser $user): ExternalRealtorEntity
 	{
-		return ExternalRealtor::hydrate(
+		return ExternalRealtorEntity::hydrate(
 			$user->getId(),
 			$user->getName(),
 			$user->getLastName(),

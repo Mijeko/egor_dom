@@ -9,7 +9,7 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 /**
  * Внешний риэлтор
  */
-class ExternalRealtor
+class ExternalRealtorEntity
 {
 	private int $id;
 
@@ -20,6 +20,7 @@ class ExternalRealtor
 	private PhoneValueObject $phone;
 
 	private ?int $avatarId;
+	private ?int $percentAward = 0;
 
 	public static function hydrate(
 		int              $id,
@@ -29,7 +30,7 @@ class ExternalRealtor
 		EmailValueObject $email,
 		PhoneValueObject $phone,
 		int              $avatarId
-	): ExternalRealtor
+	): ExternalRealtorEntity
 	{
 		$self = new self();
 		$self->id = $id;
@@ -93,5 +94,10 @@ class ExternalRealtor
 	public function getAvatarId(): ?int
 	{
 		return $this->avatarId;
+	}
+
+	public function getPercentAward(): ?int
+	{
+		return $this->percentAward;
 	}
 }

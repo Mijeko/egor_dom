@@ -11,13 +11,14 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 /**
  * Клиент/Ученик
  */
-final class StudentEntity
+class StudentEntity
 {
 	protected ?int $id;
 	protected PhoneValueObject $phone;
 	protected EmailValueObject $email;
 	protected ?PasswordValueObject $password;
 	protected ActiveValueObject $active;
+	private ?int $percentAward = 0;
 
 
 	public static function register(
@@ -62,5 +63,10 @@ final class StudentEntity
 	public function getActive(): ActiveValueObject
 	{
 		return $this->active;
+	}
+
+	public function getPercentAward(): ?int
+	{
+		return $this->percentAward;
 	}
 }

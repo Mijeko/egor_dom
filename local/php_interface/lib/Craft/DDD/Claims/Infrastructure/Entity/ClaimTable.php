@@ -36,6 +36,7 @@ class ClaimTable extends DataManager
 	const F_IS_CLOSED = 'IS_CLOSED';
 	const F_IS_MONEY_RECEIVED = 'IS_MONEY_RECEIVED';
 	const F_COST_REWARD = 'COST_REWARD';
+	const F_ORDER_COST = 'ORDER_COST';
 	const F_CREATED_AT = 'CREATED_AT';
 	const F_UPDATED_AT = 'UPDATED_AT';
 
@@ -111,6 +112,8 @@ class ClaimTable extends DataManager
 				->configureValues(self::IS_MONEY_RECEIVED_N, self::IS_MONEY_RECEIVED_Y),
 			(new IntegerField(self::F_COST_REWARD))
 				->configureTitle('Сумма вознаграждения'),
+			(new IntegerField(self::F_ORDER_COST))
+				->configureTitle('Стоимость заказа'),
 			(new DatetimeField(self::F_CREATED_AT))
 				->configureTitle('Дата создания')
 				->configureDefaultValue(new DateTime()),

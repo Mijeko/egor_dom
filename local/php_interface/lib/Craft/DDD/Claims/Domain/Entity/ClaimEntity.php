@@ -32,6 +32,7 @@ class ClaimEntity
 	protected ?string $postAddress;
 	protected ?string $bankName;
 	protected ?int $costReward = 0;
+	protected ?int $orderCost;
 	protected ?bool $isClosed = false;
 	protected ?bool $isMoneyReceived = false;
 	protected ?string $createdAt = null;
@@ -57,6 +58,7 @@ class ClaimEntity
 		string            $client,
 		ApartmentEntity   $apartmentEntity,
 		UserEntity        $user,
+		int               $orderCost,
 	): ClaimEntity
 	{
 		$self = new self();
@@ -77,6 +79,7 @@ class ClaimEntity
 		//		$self->bankName = $bankName;
 		$self->apartmentEntity = $apartmentEntity;
 		$self->user = $user;
+		$self->orderCost = $orderCost;
 
 		return $self;
 
@@ -242,5 +245,10 @@ class ClaimEntity
 	public function getIsMoneyReceived(): ?bool
 	{
 		return $this->isMoneyReceived;
+	}
+
+	public function getOrderCost(): ?int
+	{
+		return $this->orderCost;
 	}
 }

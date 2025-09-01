@@ -105,4 +105,9 @@ class StatusValueObject
 
 		return null;
 	}
+
+	public function isFinished(): bool
+	{
+		return $this->code === self::STATUS_FINISH;
+	}
 }

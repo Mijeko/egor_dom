@@ -77,12 +77,11 @@ class ReferralRepository implements ReferralRepositoryInterface
 		);
 	}
 
-	public function countInvitedMembers(int $userId): int
+	public function findAllInvitedMembers(int $userId): array
 	{
-		return ReferralTable::getList([
-			'filter' => [
-				ReferralTable::F_INVITED_USER_ID => $userId,
-			],
-		])->getSelectedRowsCount();
+		return $this->findAll(Criteria::instance()->filter([
+			ReferralTable::F_INVITED_USER_ID => $userId,
+
+		]));
 	}
 }

@@ -13,7 +13,7 @@ interface ReferralRepositoryInterface
 
 	public function findByUserId(int $userId): ?ReferralEntity;
 
-	public function countInvitedMembers(int $userId): int;
+	public function findAllInvitedMembers(int $userId): array;
 
 	public function findByCode(string $code): ?ReferralEntity;
 }
