@@ -1,7 +1,7 @@
 <?php
 
 use Bitrix\Main\EventManager;
-use Craft\Bitrix\EventHandlers\OnAfterUserRegisterHandler;
+use Craft\Bitrix\EventHandlers\OnAfterUserAddHandler;
 use Craft\DDD\City\Infrastructure\Events\OnPageStartHandler;
 use Craft\Rest\Handler;
 
@@ -26,9 +26,9 @@ $eventManager->registerEventHandlerCompatible(
 
 $eventManager->addEventHandler(
 	'main',
-	'OnAfterUserRegister',
+	'OnAfterUserAdd',
 	[
-		OnAfterUserRegisterHandler::class,
+		OnAfterUserAddHandler::class,
 		'handle',
 	]
 );
