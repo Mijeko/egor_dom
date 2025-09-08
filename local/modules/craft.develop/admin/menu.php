@@ -48,12 +48,12 @@ $aMenu = [
 			'items' => [
 				[
 					"text"  => "Риэлторы",
-					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER . "?lang=" . LANG,
+					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_REALTOR . "?lang=" . LANG,
 					"title" => "Риэлторы",
 				],
 				[
 					"text"  => "Ученики",
-					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER . "?lang=" . LANG,
+					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_STUDENT . "?lang=" . LANG,
 					"title" => "Ученики",
 				],
 				[
