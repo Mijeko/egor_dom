@@ -42,9 +42,26 @@ $aMenu = [
 			"title" => "Города",
 		],
 		[
-			"text"  => "Менеджеры",
-			"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER . "?lang=" . LANG,
-			"title" => "Менеджеры",
+			'text'  => 'Персонал',
+			'url'   => '',
+			'title' => 'Персонал',
+			'items' => [
+				[
+					"text"  => "Риэлторы",
+					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER . "?lang=" . LANG,
+					"title" => "Риэлторы",
+				],
+				[
+					"text"  => "Ученики",
+					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER . "?lang=" . LANG,
+					"title" => "Ученики",
+				],
+				[
+					"text"  => "Менеджеры",
+					"url"   => CRAFT_DEVELOP_ADMIN_URL_LIST_MANAGER . "?lang=" . LANG,
+					"title" => "Менеджеры",
+				],
+			],
 		],
 		[
 			"text"  => "Импорт",
