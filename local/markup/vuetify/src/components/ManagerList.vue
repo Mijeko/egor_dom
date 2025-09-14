@@ -1,17 +1,29 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import CreateManagerModal from "@/components/modal/CreateManagerModal.vue";
 
 export default defineComponent({
   name: "ManagerList",
+  components: {CreateManagerModal},
   props: {
     managers: {
       type: Array as PropType<BxUserDto[]>,
       default: [],
     }
   },
+  data: function () {
+    return {
+      showModal: false
+    };
+  },
   mounted(): any {
     console.log(this.managers);
+  },
+  methods: {
+    doShowModal() {
+      this.showModal = !this.showModal;
+    }
   }
 })
 </script>
@@ -21,29 +33,40 @@ export default defineComponent({
     <v-divider/>
 
     <v-card-text>
-      <div class="mb-3" v-for="manager in managers">
+      <div class="mb-3 manager-item" v-for="manager in managers">
         <v-avatar
           size="36px"
         >
           <v-img
-            v-if="manager.avatar"
-            alt="Avatar"
-            src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+            v-if="manager.avatar?.src"
+            :alt="manager.fullName"
+            :src="manager.avatar?.src"
           ></v-img>
 
         </v-avatar>
+
+        <div>{{ manager.fullName }}</div>
       </div>
     </v-card-text>
 
     <v-divider/>
 
-    <v-card-actions>
-      <v-btn>Посмотреть всё</v-btn>
+    <v-card-actions class="flex-row justify-start ga-2">
+      <v-btn>Все менеджеры</v-btn>
+      <v-btn @click.prevent="doShowModal">Добавить менеджера</v-btn>
     </v-card-actions>
+
+    <CreateManagerModal
+      :model-value="showModal"
+    />
 
   </v-card>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+.manager-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 </style>

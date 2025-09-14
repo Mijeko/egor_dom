@@ -86,7 +86,7 @@ use Craft\Model\CraftUser;
 				);
 				?>
 			</div>
-			<div class="profile-cards-item">
+			<div class="profile-cards-item x6">
 				<?php
 				$APPLICATION->IncludeComponent(
 					'craft:manager.list',

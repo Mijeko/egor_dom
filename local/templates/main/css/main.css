@@ -893,11 +893,13 @@ html, body {
   flex-wrap: wrap;
   gap: 10px; }
   .profile-cards-item {
-    max-width: 25%;
+    max-width: calc(25% - 10px);
     width: 100%; }
     @media (max-width: 639px) {
       .profile-cards-item {
         max-width: 100%; } }
+    .profile-cards-item.x6 {
+      max-width: calc(50% - 10px); }
 
 
 /*# sourceMappingURL=main.css.map*/

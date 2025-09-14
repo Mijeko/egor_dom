@@ -7,6 +7,7 @@ import type RegisterStudentResponseDto from "@/dto/response/RegisterStudentRespo
 import ControllerApi from "@/service/ControllerApi.ts";
 import type RegisterSimpleAgentRequestDto from "@/dto/request/RegisterSimpleAgentRequestDto.ts";
 import type RegisterByReferralRequestDto from "@/dto/request/RegisterByReferralRequestDto.ts";
+import type CreateManagerRequestDto from "@/dto/request/CreateManagerRequestDto.ts";
 
 export default class UserService {
 
@@ -34,5 +35,9 @@ export default class UserService {
 
   registerByReferral(body: RegisterByReferralRequestDto) {
     return ControllerApi.post('craft:referral.join', body);
+  }
+
+  createManager(body: CreateManagerRequestDto) {
+    return ControllerApi.post('craft:manager.create', body);
   }
 }
