@@ -2,7 +2,6 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
-use Bitrix\Main\Diag\Debug;
 use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
@@ -13,6 +12,28 @@ use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 
 class BxManagerRepository implements ManagerRepositoryInterface
 {
+	public function create(ManagerEntity $manager): ?ManagerEntity
+	{
+		$model = new \CUser();
+
+		$result = $model->Add([
+			CraftUserTable::F_LOGIN           => $manager->getEmail()->getValue(),
+			CraftUserTable::F_EMAIL           => $manager->getEmail()->getValue(),
+			CraftUserTable::F_PERSONAL_MOBILE => $manager->getPhone()->getValue(),
+			CraftUserTable::F_NAME            => $manager->getName(),
+			CraftUserTable::F_LAST_NAME       => $manager->getLastName(),
+			CraftUserTable::F_PASSWORD        => $manager->getPassword(),
+		]);
+
+		if($result)
+		{
+			$manager->refreshId($result);
+			return $manager;
+		}
+
+		throw new \Exception($model->LAST_ERROR);
+
+	}
 
 	public function findById(int $id): ?ManagerEntity
 	{

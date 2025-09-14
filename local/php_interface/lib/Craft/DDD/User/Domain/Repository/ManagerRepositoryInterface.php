@@ -15,4 +15,6 @@ interface ManagerRepositoryInterface
 	public function findAll(Criteria $criteria = null): array;
 
 	public function findById(int $id): ?ManagerEntity;
+
+	public function create(ManagerEntity $manager): ?ManagerEntity;
 }

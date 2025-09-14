@@ -16,6 +16,7 @@ class ManagerEntity
 	protected ?string $secondName;
 	protected ?EmailValueObject $email;
 	protected ?PhoneValueObject $phone;
+	protected ?string $password;
 	protected ?array $additionalEmailList = [];
 	protected ?int $avatarId;
 	protected ?array $additionalPhones;
@@ -47,6 +48,29 @@ class ManagerEntity
 		$obj->avatarId = $avatarId;
 		$obj->avatar = $avatar;
 		return $obj;
+	}
+
+	public static function createManager(
+		EmailValueObject $email,
+		PhoneValueObject $phone,
+		?string          $password,
+		?string          $name,
+		?string          $lastName,
+	): ManagerEntity
+	{
+		$self = new self();
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->password = $password;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		return $self;
+	}
+
+	public function refreshId(int $id): ManagerEntity
+	{
+		$this->id = $id;
+		return $this;
 	}
 
 	public function setAvatar(ImageValueObject $avatar): static
@@ -106,5 +130,10 @@ class ManagerEntity
 	public function getPhone(): ?PhoneValueObject
 	{
 		return $this->phone;
+	}
+
+	public function getPassword(): ?string
+	{
+		return $this->password;
 	}
 }

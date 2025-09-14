@@ -1,9 +1,23 @@
 <?php
 
 use Craft\Core\Component\AjaxComponent;
+use Craft\Core\Rest\ResponseBx;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
+use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
+use Craft\DDD\User\Application\Service\Interfaces\PasswordGeneratorInterface;
+use Craft\DDD\User\Domain\Entity\ManagerEntity;
+use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
+use Craft\DDD\User\Infrastructure\Repository\BxManagerRepository;
+use Craft\DDD\User\Infrastructure\Service\GroupAssignService;
+use Craft\DDD\User\Infrastructure\Service\PasswordGenerator;
 
 class CraftManagerCreateComponent extends AjaxComponent
 {
+
+	protected ManagerRepositoryInterface $managerRepository;
+	protected GroupAssignInterface $managerAssigner;
+	protected PasswordGeneratorInterface $passwordGenerator;
 
 	function componentNamespace(): string
 	{
@@ -18,13 +32,26 @@ class CraftManagerCreateComponent extends AjaxComponent
 	{
 		try
 		{
+			$manager = ManagerEntity::createManager(
+				new EmailValueObject($formData['email']),
+				new PhoneValueObject($formData['phone']),
+				$this->passwordGenerator->generate(),
+				$formData['name'],
+				$formData['lastName'],
+			);
 
-			\Craft\Core\Rest\ResponseBx::success([
-				'asd' => rand(),
-			]);
+			$manager = $this->managerRepository->create($manager);
+
+			$this->managerAssigner->assign(
+				[USER_GROUP_MANAGER],
+				$manager->getId(),
+			);
+
+			ResponseBx::success([]);
 
 		} catch(Exception $e)
 		{
+			ResponseBx::badRequest($e->getMessage());
 		}
 	}
 
@@ -39,5 +66,8 @@ class CraftManagerCreateComponent extends AjaxComponent
 
 	public function loadServices(): void
 	{
+		$this->managerRepository = new BxManagerRepository();
+		$this->managerAssigner = new GroupAssignService();
+		$this->passwordGenerator = new PasswordGenerator();
 	}
 }
