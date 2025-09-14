@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
@@ -119,11 +120,11 @@ class BxManagerRepository implements ManagerRepositoryInterface
 			[
 				new PhoneValueObject(
 				// @phpstan-ignore method.notFound
-					$craftUser->fillPersonalPhone()
+					mb_strlen($craftUser->fillPersonalPhone()) > 0 ? $craftUser->fillPersonalPhone() : null
 				),
 				new PhoneValueObject(
 				// @phpstan-ignore method.notFound
-					$craftUser->fillUfPhoneTwo()
+					mb_strlen($craftUser->fillUfPhoneTwo()) > 0 ? $craftUser->fillUfPhoneTwo() : null
 				),
 			],
 			$craftUser->getPersonalPhoto(),

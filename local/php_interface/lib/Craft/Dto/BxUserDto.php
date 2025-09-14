@@ -9,10 +9,10 @@ class BxUserDto
 
 	public int $id;
 	public string $position;
-	public string $name;
-	public string $lastName;
-	public string $secondName;
-	public string $fullName;
+	public ?string $name;
+	public ?string $lastName;
+	public ?string $secondName;
+	public ?string $fullName;
 	public string $email;
 	public string $phone;
 	public ?string $inn = null;
