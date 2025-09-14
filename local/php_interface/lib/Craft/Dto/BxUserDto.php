@@ -72,6 +72,30 @@ class BxUserDto
 		return $self;
 	}
 
+	public static function manager(
+		int         $id,
+		string      $name,
+		string      $lastName,
+		string      $secondName,
+		string      $fullName,
+		string      $email,
+		string      $phone,
+		?BxImageDto $avatarPath = null
+	): BxUserDto
+	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->fullName = $fullName;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->avatar = $avatarPath;
+		$self->position = 'Менеджер';
+		return $self;
+	}
+
 	public static function extRealtor(
 		int        $id,
 		string     $name,

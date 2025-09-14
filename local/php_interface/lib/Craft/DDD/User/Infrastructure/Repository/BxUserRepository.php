@@ -19,11 +19,7 @@ class BxUserRepository implements UserRepositoryInterface
 			$criteria
 				->useSecureFields()
 				->select([
-					CraftUserTable::F_ID,
-					CraftUserTable::F_LOGIN,
-					CraftUserTable::F_EMAIL,
-					CraftUserTable::F_PERSONAL_PHONE,
-					CraftUserTable::F_PERSONAL_MOBILE,
+					'*',
 					CraftUserTable::F_PASSWORD,
 				])
 				->makeGetListParams()
@@ -69,14 +65,13 @@ class BxUserRepository implements UserRepositoryInterface
 
 	public function hydrateElement(CraftUser $bxUser): UserEntity
 	{
-		$user = new UserEntity(
+		return UserEntity::hydrate(
 			$bxUser->getId(),
 			$bxUser->getLogin(),
 			$bxUser->getPersonalMobile(),
 			$bxUser->getEmail(),
 			$bxUser->getPassword(),
+			$bxUser->fillGroups()->getGroupIdList()
 		);
-
-		return $user;
 	}
 }

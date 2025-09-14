@@ -14,19 +14,23 @@ class ManagerEntity
 	protected ?string $name;
 	protected ?string $lastName;
 	protected ?string $secondName;
-	protected ?array $email;
+	protected ?EmailValueObject $email;
+	protected ?PhoneValueObject $phone;
+	protected ?array $additionalEmailList = [];
 	protected ?int $avatarId;
-	protected ?array $phones;
+	protected ?array $additionalPhones;
 	protected ?ImageValueObject $avatar = null;
 
-	public static function fromFind(
+	public static function hydrate(
 		int               $id,
 		?string           $name,
 		?string           $lastName,
 		?string           $secondName,
-		?array            $email,
+		?EmailValueObject $email,
+		?PhoneValueObject $phone,
+		?array            $additionalEmailList,
+		?array            $additionalPhones,
 		?int              $avatarId,
-		?array            $phones,
 		?ImageValueObject $avatar = null,
 
 	): ManagerEntity
@@ -37,8 +41,10 @@ class ManagerEntity
 		$obj->lastName = $lastName;
 		$obj->secondName = $secondName;
 		$obj->email = $email;
+		$obj->phone = $phone;
+		$obj->additionalEmailList = $additionalEmailList;
+		$obj->additionalPhones = $additionalPhones;
 		$obj->avatarId = $avatarId;
-		$obj->phones = $phones;
 		$obj->avatar = $avatar;
 		return $obj;
 	}
@@ -72,9 +78,9 @@ class ManagerEntity
 	/**
 	 * @return PhoneValueObject[]|null
 	 */
-	public function getPhones(): ?array
+	public function getAdditionalPhones(): ?array
 	{
-		return $this->phones;
+		return $this->additionalPhones;
 	}
 
 	public function getAvatar(): ?ImageValueObject
@@ -82,13 +88,23 @@ class ManagerEntity
 		return $this->avatar;
 	}
 
-	public function getEmail(): ?array
+	public function getAdditionalEmailList(): ?array
 	{
-		return $this->email;
+		return $this->additionalEmailList;
 	}
 
 	public function getAvatarId(): ?int
 	{
 		return $this->avatarId;
+	}
+
+	public function getEmail(): ?EmailValueObject
+	{
+		return $this->email;
+	}
+
+	public function getPhone(): ?PhoneValueObject
+	{
+		return $this->phone;
 	}
 }

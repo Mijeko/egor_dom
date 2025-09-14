@@ -43,12 +43,12 @@ final class ManagerDto
 			$entity->getSecondName(),
 			array_map(function(PhoneValueObject $phone) {
 				return new PhoneDto($phone->getValue());
-			}, $entity->getPhones() ?? []),
+			}, $entity->getAdditionalPhones() ?? []),
 			array_map(function(EmailValueObject $email) {
 				return new EmailDto(
 					$email->getValue(),
 				);
-			}, $entity->getEmail()),
+			}, $entity->getAdditionalEmailList()),
 			$avatarDto
 		);
 	}
