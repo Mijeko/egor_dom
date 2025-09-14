@@ -92,6 +92,11 @@ class UserEntity
 		return $this->isGroupContain('ADMIN');
 	}
 
+	public function isExtRealtor(): bool
+	{
+		return $this->isGroupContain('EXT_REALTOR');
+	}
+
 	private function isGroupContain(string $code): bool
 	{
 		$groups = array_filter($this->group, function(GroupEntity $group) use ($code) {

@@ -2,6 +2,7 @@
 
 namespace Craft\Core\Component;
 
+use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Loader;
 use Craft\Core\Exceptions\Component\NotInstalledModuleException;
 

@@ -16,7 +16,7 @@ export default defineComponent({
   mounted(): any {
     let userStore = useUserStore();
 
-    let manager = userStore.getUser.manager;
+    let manager = userStore?.getUser?.manager;
 
     if (manager !== undefined) {
       this.manager = manager;
@@ -30,8 +30,8 @@ export default defineComponent({
 <template>
   <v-card class="pa-3 mb-3 mt-3" v-if="manager && manager.id">
     <v-row>
-      <v-col cols="1" v-if="manager.avatar">
-        <v-avatar size="100" :image="String(manager.avatar)"/>
+      <v-col cols="1" v-if="manager.avatar?.src">
+        <v-avatar size="100" :image="String(manager.avatar.src)"/>
       </v-col>
       <v-col cols="4">
         <v-card-title>{{ manager.lastName }} {{ manager.name }} {{ manager.secondName }}</v-card-title>

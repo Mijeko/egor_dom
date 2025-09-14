@@ -6,6 +6,7 @@ use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\User\Domain\Entity\ManagerEntity;
 use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
+use Craft\Helper\Criteria;
 
 class ManagerService
 {
@@ -16,9 +17,9 @@ class ManagerService
 	{
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
-		$managerList = $this->repository->findAll($order, $filter);
+		$managerList = $this->repository->findAll($criteria);
 
 		return array_map(function($manager) {
 

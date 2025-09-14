@@ -24,7 +24,7 @@ export default defineComponent({
   <v-card class="mb-3" v-if="user.id">
     <v-row class="pa-4">
       <v-col cols="1" >
-        <v-avatar size="80" :image="user.avatar"/>
+        <v-avatar size="80" :image="String(user.avatar?.src)"/>
       </v-col>
       <v-col cols="8">
         <v-card-title>{{ user.fullName }}</v-card-title>

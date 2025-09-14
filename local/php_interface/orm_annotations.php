@@ -2856,6 +2856,15 @@ namespace Bitrix\Main {
 	 * @method \string fillUfEmailTwo()
 	 * @method \Bitrix\Main\EO_User setUfEmailTwo(\string $ufEmailTwo)
 	 * @method bool isUfEmailTwoChanged()
+	 * @method \float getUfRewardAmount()
+	 * @method \float remindActualUfRewardAmount()
+	 * @method \float requireUfRewardAmount()
+	 * @method bool hasUfRewardAmount()
+	 * @method bool isUfRewardAmountFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfRewardAmount()
+	 * @method \float fillUfRewardAmount()
+	 * @method \Bitrix\Main\EO_User setUfRewardAmount(\float $ufRewardAmount)
+	 * @method bool isUfRewardAmountChanged()
 	 */
 	class EO_User {
 		/* @var \Bitrix\Main\UserTable */
@@ -2903,6 +2912,8 @@ namespace Bitrix\Main {
 	 * @method \string[] fillUfPhoneTwo()
 	 * @method \string[] getUfEmailTwoList()
 	 * @method \string[] fillUfEmailTwo()
+	 * @method \float[] getUfRewardAmountList()
+	 * @method \float[] fillUfRewardAmount()
 	 */
 	class EO_User_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Bitrix\Main\UserTable */
@@ -5872,6 +5883,15 @@ namespace Craft\Model {
 	 * @method \string fillUfEmailTwo()
 	 * @method \Craft\Model\CraftUser setUfEmailTwo(\string $ufEmailTwo)
 	 * @method bool isUfEmailTwoChanged()
+	 * @method \float getUfRewardAmount()
+	 * @method \float remindActualUfRewardAmount()
+	 * @method \float requireUfRewardAmount()
+	 * @method bool hasUfRewardAmount()
+	 * @method bool isUfRewardAmountFilled()
+	 * @method \Craft\Model\CraftUser unsetUfRewardAmount()
+	 * @method \float fillUfRewardAmount()
+	 * @method \Craft\Model\CraftUser setUfRewardAmount(\float $ufRewardAmount)
+	 * @method bool isUfRewardAmountChanged()
 	 * @method \Craft\Model\EO_CraftUserUts getUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts remindActualUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts requireUtsObjectInner()
@@ -6099,6 +6119,8 @@ namespace Craft\Model {
 	 * @method \string[] fillUfPhoneTwo()
 	 * @method \string[] getUfEmailTwoList()
 	 * @method \string[] fillUfEmailTwo()
+	 * @method \float[] getUfRewardAmountList()
+	 * @method \float[] fillUfRewardAmount()
 	 * @method \Craft\Model\EO_CraftUserUts[] getUtsObjectInnerList()
 	 * @method \Craft\Model\EO_CraftUser_Collection getUtsObjectInnerCollection()
 	 * @method \Craft\Model\EO_CraftUserUts_Collection fillUtsObjectInner()

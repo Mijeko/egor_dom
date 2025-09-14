@@ -20,12 +20,7 @@ class ManagerAssigner implements ManagerAssignerInterface
 
 	public function assign(AgentEntity $agent): void
 	{
-		$managers = $this->managerRepository->findAll(
-			[],
-			[
-				CraftUserTable::F_ACTIVE => CraftUserTable::ACTIVE_Y,
-			]
-		);
+		$managers = $this->managerRepository->findAll();
 
 		if(count($managers) == 0)
 		{

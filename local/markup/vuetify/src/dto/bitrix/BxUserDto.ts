@@ -1,10 +1,11 @@
 import type ManagerDto from "@/dto/entity/ManagerDto.ts";
+import type BxImage from "@/dto/bitrix/BxImage.ts";
 
 export default interface BxUserDto {
   id: number;
   phone?: string;
   email?: string;
-  avatar?: string;
+  avatar?: BxImage;
   name?: string;
   lastName?: string;
   secondName?: string;

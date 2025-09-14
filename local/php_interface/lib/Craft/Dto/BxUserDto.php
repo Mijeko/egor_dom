@@ -3,7 +3,6 @@
 namespace Craft\Dto;
 
 use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
-use Craft\Model\CraftUser;
 
 class BxUserDto
 {
@@ -80,7 +79,7 @@ class BxUserDto
 		string      $fullName,
 		string      $email,
 		string      $phone,
-		?BxImageDto $avatarPath = null
+		?BxImageDto $avatarDto = null
 	): BxUserDto
 	{
 		$self = new self();
@@ -91,7 +90,7 @@ class BxUserDto
 		$self->fullName = $fullName;
 		$self->email = $email;
 		$self->phone = $phone;
-		$self->avatar = $avatarPath;
+		$self->avatar = $avatarDto;
 		$self->position = 'Менеджер';
 		return $self;
 	}

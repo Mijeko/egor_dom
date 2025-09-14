@@ -2,10 +2,7 @@
 
 namespace Craft\Model;
 
-use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
-use Bitrix\Main\ORM\Query\Query;
-use Bitrix\Main\UserGroupTable;
 use Bitrix\Main\UserTable;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 
@@ -66,22 +63,22 @@ class CraftUserTable extends UserTable
 		return CraftUser::class;
 	}
 
-	public static function withAgent(Query $query)
+	public static function withAgent(\Bitrix\Main\ORM\Query\Query $query)
 	{
 		$query->addFilter('GROUPS.GROUP_ID', [USER_GROUP_AGENT]);
 	}
 
-	public static function withExtRealtor(Query $query)
+	public static function withExtRealtor(\Bitrix\Main\ORM\Query\Query $query)
 	{
 		$query->addFilter('GROUPS.GROUP_ID', [USER_GROUP_EXTERNAL_REALTOR]);
 	}
 
-	public static function withManager(Query $query)
+	public static function withManager(\Bitrix\Main\ORM\Query\Query $query)
 	{
 		$query->addFilter('GROUPS.GROUP_ID', [USER_GROUP_MANAGER]);
 	}
 
-	public static function withStudent(Query $query)
+	public static function withStudent(\Bitrix\Main\ORM\Query\Query $query)
 	{
 		$query->addFilter('GROUPS.GROUP_ID', [USER_GROUP_STUDENT]);
 	}

@@ -3,6 +3,7 @@
 namespace Craft\Core\Component;
 
 use Bitrix\Main\Component\ParameterSigner;
+use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Engine\ActionFilter\Csrf;
 use Bitrix\Main\Engine\ActionFilter\HttpMethod;
 use CFile;

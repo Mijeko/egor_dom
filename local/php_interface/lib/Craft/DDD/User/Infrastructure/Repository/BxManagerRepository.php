@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
+use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
 use Craft\DDD\User\Domain\Entity\ManagerEntity;
@@ -14,12 +16,7 @@ class BxManagerRepository implements ManagerRepositoryInterface
 
 	public function findById(int $id): ?ManagerEntity
 	{
-		$managerList = $this->findAll(
-			[],
-			[
-				CraftUserTable::F_ID => $id,
-			]
-		);
+		$managerList = $this->findAll();
 
 		if(count($managerList) !== 1)
 		{
@@ -37,16 +34,32 @@ class BxManagerRepository implements ManagerRepositoryInterface
 
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
-
 		$result = [];
 
-		$model = CraftUserTable::getList([
-			'order'  => $order,
-			'filter' => $filter,
-		])->fetchCollection();
+		$model = CraftUserTable::query()
+			->withManager();
 
+		if($criteria)
+		{
+			if($criteria->getFilter())
+			{
+				$model->addFilter($criteria->getFilter());
+			}
+
+			if($criteria->getLimit())
+			{
+				$model->addLimit($criteria->getLimit());
+			}
+
+			if($criteria->getOrder())
+			{
+				$model->addOrder($criteria->getOrder());
+			}
+		}
+
+		$model = $model->fetchCollection();
 
 		foreach($model as $user)
 		{
@@ -70,7 +83,7 @@ class BxManagerRepository implements ManagerRepositoryInterface
 			// @phpstan-ignore method.notFound
 			new EmailValueObject($craftUser->getEmail()),
 			// @phpstan-ignore method.notFound
-			new PhoneValueObject($craftUser->getPersonalMobile()),
+			new PhoneValueObject($craftUser->fillPersonalMobile()),
 			[
 				new EmailValueObject(
 				// @phpstan-ignore method.notFound

@@ -45,7 +45,7 @@ class CraftInitComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $exception)
 		{
-			Debug::dumpToFile($exception->getMessage());
+			Debug::dumpToFile(__CLASS__ . ': ' . $exception->getMessage() . ' : ' . $exception->getFile() . ' : ' . $exception->getLine());
 		}
 	}
 
@@ -73,10 +73,37 @@ class CraftInitComponent extends CBitrixComponent
 
 		$mainUser = $this->service->findById($this->arParams['USER_ID']);
 
-
-		if($mainUser->isAdmin())
+		if($mainUser->isExtRealtor())
 		{
+			$extRealtor = $this->externalRealtorRepository->findById($this->arParams['USER_ID']);
+			if($extRealtor)
+			{
 
+				$avatar = null;
+				$_image = $this->imageService->findById($extRealtor->getAvatarId());
+				if($_image)
+				{
+					$avatar = new BxImageDto(
+						$_image->id,
+						$_image->src,
+					);
+				}
+
+				$dto = BxUserDto::extRealtor(
+					$extRealtor->getId(),
+					$extRealtor->getName(),
+					$extRealtor->getLastName(),
+					$extRealtor->getSecondName(),
+					implode(' ', [
+						$extRealtor->getName(),
+						$extRealtor->getLastName(),
+						$extRealtor->getSecondName(),
+					]),
+					$extRealtor->getEmail()->getValue(),
+					$extRealtor->getPhone()->getValue(),
+					$avatar,
+				);
+			}
 		}
 
 		if($mainUser->isManager())
@@ -161,39 +188,6 @@ class CraftInitComponent extends CBitrixComponent
 			}
 		}
 
-
-		if(!$dto)
-		{
-			$extRealtor = $this->externalRealtorRepository->findById($this->arParams['USER_ID']);
-			if($extRealtor)
-			{
-
-				$avatar = null;
-				$_image = $this->imageService->findById($extRealtor->getAvatarId());
-				if($_image)
-				{
-					$avatar = new BxImageDto(
-						$_image->id,
-						$_image->src,
-					);
-				}
-
-				$dto = BxUserDto::extRealtor(
-					$extRealtor->getId(),
-					$extRealtor->getName(),
-					$extRealtor->getLastName(),
-					$extRealtor->getSecondName(),
-					implode(' ', [
-						$extRealtor->getName(),
-						$extRealtor->getLastName(),
-						$extRealtor->getSecondName(),
-					]),
-					$extRealtor->getEmail()->getValue(),
-					$extRealtor->getPhone()->getValue(),
-					$avatar,
-				);
-			}
-		}
 
 		$this->arResult['USER'] = $dto;
 

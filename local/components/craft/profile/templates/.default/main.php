@@ -86,6 +86,18 @@ use Craft\Model\CraftUser;
 				);
 				?>
 			</div>
+			<div class="profile-cards-item">
+				<?php
+				$APPLICATION->IncludeComponent(
+					'craft:manager.list',
+					'.default',
+					[
+					],
+					false,
+					['HIDE_ICONS' => 'Y']
+				);
+				?>
+			</div>
 		</div>
 	</div>
 </div>

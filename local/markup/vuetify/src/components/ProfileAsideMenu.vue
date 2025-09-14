@@ -20,6 +20,7 @@ export default defineComponent({
   mounted(): any {
     let userStore = useUserStore();
     let user = userStore.getUser;
+    console.log(user);
     if (user) {
       this.user = user;
     }
@@ -34,7 +35,7 @@ export default defineComponent({
   >
     <v-list>
       <v-list-item
-        :prepend-avatar="user.avatar"
+        :prepend-avatar="String(user.avatar?.src)"
         :subtitle="user.email"
         :title="user.name"
       >
