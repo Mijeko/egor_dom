@@ -75,7 +75,7 @@ class CraftUserTable extends UserTable
 
 	public static function withManager(\Bitrix\Main\ORM\Query\Query $query)
 	{
-		$query->addFilter('GROUPS.GROUP_ID', [USER_GROUP_MANAGER]);
+		$query->addFilter('GROUPS.GROUP_ID',[USER_GROUP_MANAGER]);
 	}
 
 	public static function withStudent(\Bitrix\Main\ORM\Query\Query $query)

@@ -38,7 +38,9 @@ class BxManagerRepository implements ManagerRepositoryInterface
 
 	public function findById(int $id): ?ManagerEntity
 	{
-		$managerList = $this->findAll();
+		$managerList = $this->findAll(Criteria::instance()->filter([
+			CraftUserTable::F_ID => $id,
+		]));
 
 		if(count($managerList) !== 1)
 		{
@@ -67,17 +69,17 @@ class BxManagerRepository implements ManagerRepositoryInterface
 		{
 			if($criteria->getFilter())
 			{
-				$model->addFilter($criteria->getFilter());
+				$model->setFilter($criteria->getFilter());
 			}
 
 			if($criteria->getLimit())
 			{
-				$model->addLimit($criteria->getLimit());
+				$model->setLimit($criteria->getLimit());
 			}
 
 			if($criteria->getOrder())
 			{
-				$model->addOrder($criteria->getOrder());
+				$model->setOrder($criteria->getOrder());
 			}
 		}
 

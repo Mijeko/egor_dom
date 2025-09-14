@@ -188,7 +188,6 @@ class CraftInitComponent extends CBitrixComponent
 			}
 		}
 
-
 		$this->arResult['USER'] = $dto;
 
 		$this->arResult['APARTMENT_FILTER'] = ApartmentFilterBuilder::fromUrl()->toArray();
