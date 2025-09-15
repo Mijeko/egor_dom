@@ -21,6 +21,7 @@ class StudentEntity
 	protected EmailValueObject $email;
 	protected ?PasswordValueObject $password;
 	protected ActiveValueObject $active;
+	protected ?int $managerId = null;
 	private ?int $percentAward = 0;
 
 
@@ -55,6 +56,33 @@ class StudentEntity
 		$self->phone = $phone;
 		$self->email = $email;
 		return $self;
+	}
+
+	public static function createStudent(
+		string               $name,
+		string               $lastName,
+		string               $secondName,
+		PhoneValueObject     $phone,
+		EmailValueObject     $email,
+		int                  $managerId,
+		?PasswordValueObject $password,
+	): StudentEntity
+	{
+		$self = new self();
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->phone = $phone;
+		$self->email = $email;
+		$self->password = $password;
+		$self->managerId = $managerId;
+		return $self;
+	}
+
+	public function assignManager(ManagerEntity $entity): StudentEntity
+	{
+		$this->managerId = $entity->getId();
+		return $this;
 	}
 
 	public function refreshIdAfterRegistration(int $id): void
@@ -110,5 +138,10 @@ class StudentEntity
 	public function getFullName(): string
 	{
 		return implode(' ', [$this->lastName, $this->name, $this->secondName]);
+	}
+
+	public function getManagerId(): ?int
+	{
+		return $this->managerId;
 	}
 }

@@ -5,17 +5,17 @@ namespace Craft\DDD\User\Application\UseCase;
 use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
-use Craft\DDD\User\Application\Dto\CreateAgentRequestDto;
+use Craft\DDD\User\Application\Dto\CreateStudentRequestDto;
 use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Application\Service\Interfaces\PasswordGeneratorInterface;
-use Craft\DDD\User\Domain\Entity\AgentEntity;
-use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
+use Craft\DDD\User\Domain\Entity\StudentEntity;
+use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
 
-class CreateAgentUseCase
+class CreateStudentUseCase
 {
 
 	public function __construct(
-		protected AgentRepositoryInterface   $agentRepository,
+		protected StudentRepositoryInterface $studentRepository,
 		protected GroupAssignInterface       $groupAssign,
 		protected PasswordGeneratorInterface $passwordGenerator,
 	)
@@ -23,27 +23,28 @@ class CreateAgentUseCase
 
 	}
 
-	public function execute(CreateAgentRequestDto $agentRequestDto): void
+	public function execute(CreateStudentRequestDto $agentRequestDto): void
 	{
-		$agent = AgentEntity::createAgent(
-			new PasswordValueObject($this->passwordGenerator->generate()),
+		$studentEntity = StudentEntity::createStudent(
 			$agentRequestDto->name,
 			$agentRequestDto->lastName,
 			$agentRequestDto->secondName,
+			new PhoneValueObject($agentRequestDto->phone),
 			new EmailValueObject($agentRequestDto->email),
-			new PhoneValueObject($agentRequestDto->phone)
+			$agentRequestDto->managerId,
+			new PasswordValueObject($this->passwordGenerator->generate())
 		);
 
-		$agent = $this->agentRepository->create($agent);
+		$studentEntity = $this->studentRepository->create($studentEntity);
 
-		if(!$agent->getId())
+		if(!$studentEntity->getId())
 		{
-			throw new \Exception('Ошибка при создании агента');
+			throw new \Exception('Ошибка при создании студента');
 		}
 
 		$this->groupAssign->assign(
 			[USER_GROUP_AGENT],
-			$agent->getId()
+			$studentEntity->getId()
 		);
 	}
 }

@@ -94,7 +94,7 @@ class RegisterAgentUseCase
 			$agent->getId(),
 		);
 
-		$this->managerAssignerService->assign($agent);
+		$this->managerAssignerService->assignManagerToAgent($agent);
 
 		$this->eventDispatcher->dispatch(
 			new AgentRegisterEvent($agent)

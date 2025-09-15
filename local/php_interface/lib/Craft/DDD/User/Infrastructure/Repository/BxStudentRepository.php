@@ -97,4 +97,9 @@ class BxStudentRepository implements StudentRepositoryInterface
 			new EmailValueObject($student->getEmail()),
 		);
 	}
+
+	public function update(StudentEntity $studentEntity): ?StudentEntity
+	{
+		return null;
+	}
 }

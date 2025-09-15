@@ -15,4 +15,6 @@ interface StudentRepositoryInterface
 	public function findByPhone(PhoneValueObject $phone): ?StudentEntity;
 
 	public function create(StudentEntity $studentEntity): ?StudentEntity;
+
+	public function update(StudentEntity $studentEntity): ?StudentEntity;
 }

@@ -16,7 +16,6 @@ class CreateAgentUseCaseFactory
 			new BxAgentRepository(),
 			new GroupAssignService(),
 			new PasswordGenerator(),
-			ManagerAssignerFactory::getService()
 		);
 	}
 }

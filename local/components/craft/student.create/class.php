@@ -1,7 +1,15 @@
 <?php
 
-class CraftStudentCreateComponent extends \Craft\Core\Component\AjaxComponent
+use Craft\Core\Component\AjaxComponent;
+use Craft\Core\Rest\ResponseBx;
+use Craft\DDD\User\Application\Dto\CreateStudentRequestDto;
+use Craft\DDD\User\Application\Factory\CreateStudentUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\CreateStudentUseCase;
+
+class CraftStudentCreateComponent extends AjaxComponent
 {
+
+	protected ?CreateStudentUseCase $createStudentUseCase;
 
 	function componentNamespace(): string
 	{
@@ -14,6 +22,22 @@ class CraftStudentCreateComponent extends \Craft\Core\Component\AjaxComponent
 
 	protected function work(array $formData): void
 	{
+		try
+		{
+			$this->createStudentUseCase->execute(new CreateStudentRequestDto(
+				$formData['name'],
+				$formData['lastName'],
+				$formData['secondName'],
+				$formData['phone'],
+				$formData['email'],
+				$formData['managerId'],
+			));
+
+			ResponseBx::success([]);
+		} catch(Exception $e)
+		{
+			ResponseBx::badRequest($e->getMessage());
+		}
 	}
 
 	protected function modules(): ?array
@@ -27,5 +51,6 @@ class CraftStudentCreateComponent extends \Craft\Core\Component\AjaxComponent
 
 	public function loadServices(): void
 	{
+		$this->createStudentUseCase = CreateStudentUseCaseFactory::getUseCase();
 	}
 }
