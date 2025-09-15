@@ -136,8 +136,11 @@ export default defineComponent({
 
             <v-divider class="mb-3"/>
 
-            <v-btn color="primary" type="submit">Добавить</v-btn>
-            <v-btn @click="closeModal">Закрыть</v-btn>
+
+            <v-card-actions class="flex-row justify-space-between ga-2">
+              <v-btn color="primary" type="submit">Добавить</v-btn>
+              <v-btn @click="closeModal">Закрыть</v-btn>
+            </v-card-actions>
           </v-form>
         </v-card-text>
 
