@@ -6,6 +6,7 @@
  */
 
 
+
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
@@ -14,6 +15,7 @@ $APPLICATION->IncludeComponent(
 		'PROPS'  => [
 			'user'            => $arResult['USER'],
 			'apartmentFilter' => $arResult['APARTMENT_FILTER'],
+			'managers'        => $arResult['MANAGER_LIST'],
 		],
 	],
 	false,

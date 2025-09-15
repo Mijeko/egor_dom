@@ -49,6 +49,7 @@ declare module 'vue' {
     ProfileShortInfo: typeof import('./src/components/profile/ProfileShortInfo.vue')['default']
     Registration: typeof import('./src/components/Registration.vue')['default']
     RegistrationByReferral: typeof import('./src/components/RegistrationByReferral.vue')['default']
+    SelectInput: typeof import('./src/components/html/SelectInput.vue')['default']
     SelectWithSearch: typeof import('./src/components/filter/part/SelectWithSearch.vue')['default']
     ShortAgentList: typeof import('./src/components/profile/ShortAgentList.vue')['default']
     ShortManagerList: typeof import('./src/components/profile/ShortManagerList.vue')['default']

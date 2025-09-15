@@ -5,10 +5,14 @@ import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
 import type CreateAgentRequestDto from "@/dto/request/CreateAgentRequestDto.ts";
 import type CreateAgentResponseDto from "@/dto/response/CreateAgentResponseDto.ts";
+import SelectInput from "@/components/html/SelectInput.vue";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import {useManagerStore} from "@/store.ts";
+import SelectHelper from "@/service/SelectHelper.ts";
 
 export default defineComponent({
   name: "CreateAgentModal",
-  components: {PhoneInput},
+  components: {SelectInput, PhoneInput},
   props: {
     modelValue: {
       type: Boolean,
@@ -17,6 +21,7 @@ export default defineComponent({
   },
   data: function () {
     return {
+      managers: [] as BxUserDto[],
       isValidForm: false,
       form: {
         managerId: null,
@@ -26,6 +31,15 @@ export default defineComponent({
         lastName: null,
       },
       validate: {
+        managerId: [
+          (value: number) => {
+            if (value > 0) {
+              return true;
+            }
+
+            return 'Укажите менеджера';
+          }
+        ],
         phone: [
           (value: string) => {
             if (!value || value.length <= 0) {
@@ -49,7 +63,17 @@ export default defineComponent({
       },
     };
   },
+  mounted(): any {
+    let store = useManagerStore();
+    let _managers = store.getManagers;
+    if (_managers) {
+      this.managers = _managers;
+    }
+  },
   computed: {
+    SelectHelper() {
+      return SelectHelper
+    },
     showModalComputed: {
       get(): boolean {
         return this.modelValue;
@@ -106,6 +130,19 @@ export default defineComponent({
 
         <v-card-text>
           <v-form v-model="isValidForm" @submit.prevent="submitForm">
+
+
+            <v-row>
+              <v-col cols="12">
+                <SelectInput
+                  v-model="form.managerId"
+                  :rules="validate.managerId"
+                  :items="SelectHelper.map(managers,{key:'id', label:'name'})"
+                  placeholder="Менеджер"
+                />
+              </v-col>
+            </v-row>
+
             <v-row>
               <v-col cols="12">
                 <v-text-field type="text" label="E-Mail" v-model="form.email" :rules="validate.email" required/>

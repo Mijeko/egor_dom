@@ -38,8 +38,7 @@ class BxAgentRepository implements AgentRepositoryInterface
 	{
 		$result = [];
 
-		$agentList = CraftUserTable::query()
-			->withAgent();
+		$agentList = CraftUserTable::query();
 
 		if($criteria)
 		{
@@ -48,6 +47,8 @@ class BxAgentRepository implements AgentRepositoryInterface
 				$agentList->setFilter($criteria->getFilter());
 			}
 		}
+
+		$agentList->withAgent();
 
 		$agentList = $agentList->fetchCollection();
 		foreach($agentList as $agent)

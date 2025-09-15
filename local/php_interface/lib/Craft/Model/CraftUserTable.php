@@ -10,7 +10,7 @@ class CraftUserTable extends UserTable
 {
 
 	const F_ID = 'ID';
-	const F_ACTIVE = 'F_ACTIVE';
+	const F_ACTIVE = 'ACTIVE';
 	const F_LOGIN = 'LOGIN';
 	const F_EMAIL = 'EMAIL';
 	const F_PASSWORD = 'PASSWORD';
@@ -75,7 +75,7 @@ class CraftUserTable extends UserTable
 
 	public static function withManager(\Bitrix\Main\ORM\Query\Query $query)
 	{
-		$query->addFilter('GROUPS.GROUP_ID',[USER_GROUP_MANAGER]);
+		$query->addFilter('GROUPS.GROUP_ID', [USER_GROUP_MANAGER]);
 	}
 
 	public static function withStudent(\Bitrix\Main\ORM\Query\Query $query)

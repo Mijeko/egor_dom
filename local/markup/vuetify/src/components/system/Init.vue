@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import {useApartmentFilterStore, useUserStore} from "@/store.ts";
+import {useApartmentFilterStore, useManagerStore, useUserStore} from "@/store.ts";
 import type ApartmentFilterDto from "@/dto/ApartmentFilterDto.ts";
 
 export default defineComponent({
@@ -9,6 +9,9 @@ export default defineComponent({
   props: {
     user: {
       type: Object as PropType<BxUserDto>,
+    },
+    managers: {
+      type: Array as PropType<BxUserDto[]>,
     },
     apartmentFilter: {
       type: Object as PropType<ApartmentFilterDto>,
@@ -18,6 +21,9 @@ export default defineComponent({
   mounted(): any {
     let store = useUserStore();
     store.updateInfo(this.user as BxUserDto);
+
+    let managerStore = useManagerStore();
+    managerStore.updateInfo(this.managers as BxUserDto[]);
 
     let filterStore = useApartmentFilterStore();
     filterStore.pushFilterData(this.apartmentFilter);

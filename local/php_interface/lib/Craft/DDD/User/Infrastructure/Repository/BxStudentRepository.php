@@ -17,30 +17,31 @@ class BxStudentRepository implements StudentRepositoryInterface
 	{
 		$result = [];
 
-		$model = CraftUserTable::query()
-			->withStudent();
+		$studentList = CraftUserTable::query();
 
 		if($criteria)
 		{
 			if($criteria->getFilter())
 			{
-				$model->setFilter($criteria->getFilter());
+				$studentList->setFilter($criteria->getFilter());
 			}
 
 			if($criteria->getLimit())
 			{
-				$model->setLimit($criteria->getLimit());
+				$studentList->setLimit($criteria->getLimit());
 			}
 
 			if($criteria->getOrder())
 			{
-				$model->setOrder($criteria->getOrder());
+				$studentList->setOrder($criteria->getOrder());
 			}
 		}
 
-		$model = $model->fetchCollection();
+		$studentList->withStudent();
 
-		foreach($model as $user)
+		$studentList = $studentList->fetchCollection();
+
+		foreach($studentList as $user)
 		{
 			try
 			{

@@ -40,6 +40,22 @@ export const useUserStore = defineStore('user', {
   }
 });
 
+export const useManagerStore = defineStore('managerList', {
+  state: () => ({
+    managers: [] as BxUserDto[],
+  }),
+  actions: {
+    updateInfo(newUserInfo: BxUserDto[]) {
+      this.managers = newUserInfo;
+    },
+  },
+  getters: {
+    getManagers(state): BxUserDto[] {
+      return state.managers;
+    },
+  }
+});
+
 
 export const useApartmentFilterStore = defineStore('apartmentFilter', {
   state: () => ({

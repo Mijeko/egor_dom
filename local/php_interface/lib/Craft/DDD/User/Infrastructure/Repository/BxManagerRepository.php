@@ -62,8 +62,7 @@ class BxManagerRepository implements ManagerRepositoryInterface
 	{
 		$result = [];
 
-		$model = CraftUserTable::query()
-			->withManager();
+		$model = CraftUserTable::query();
 
 		if($criteria)
 		{
@@ -82,6 +81,8 @@ class BxManagerRepository implements ManagerRepositoryInterface
 				$model->setOrder($criteria->getOrder());
 			}
 		}
+
+		$model->withManager();
 
 		$model = $model->fetchCollection();
 

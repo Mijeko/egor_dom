@@ -6,6 +6,7 @@ use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\DDD\User\Application\Factory\UserServiceFactory;
 use Craft\DDD\User\Application\Service\UserService;
 use Craft\DDD\User\Domain\Entity\GroupEntity;
+use Craft\DDD\User\Domain\Entity\ManagerEntity;
 use Craft\DDD\User\Domain\Repository\ExternalRealtorRepositoryInterface;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
@@ -19,6 +20,8 @@ use Craft\DDD\User\Infrastructure\Repository\ExternalRealtorRepository;
 use Craft\Dto\BxImageDto;
 use Craft\Dto\BxUserDto;
 use Craft\Dto\BxUserGroupDto;
+use Craft\Helper\Criteria;
+use Craft\Model\CraftUserTable;
 
 class CraftInitComponent extends CBitrixComponent
 {
@@ -212,5 +215,26 @@ class CraftInitComponent extends CBitrixComponent
 		$this->arResult['USER'] = $dto;
 
 		$this->arResult['APARTMENT_FILTER'] = ApartmentFilterBuilder::fromUrl()->toArray();
+
+		$this->arResult['MANAGER_LIST'] = array_map(function(ManagerEntity $entity) {
+			return BxUserDto::manager(
+				$entity->getId(),
+				$entity->getName(),
+				$entity->getLastName(),
+				$entity->getSecondName(),
+				implode(' ', [
+					$entity->getName(),
+					$entity->getLastName(),
+					$entity->getSecondName(),
+				]),
+				$entity->getEmail()->getValue(),
+				$entity->getPhone()->getValue(),
+			);
+		}, $this->managerRepository->findAll(
+			Criteria::instance()
+				->filter([
+					CraftUserTable::F_ACTIVE => CraftUserTable::ACTIVE_Y,
+				])
+		));
 	}
 }
