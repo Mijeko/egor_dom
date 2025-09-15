@@ -73,6 +73,11 @@ class ManagerEntity
 		return $this;
 	}
 
+	public function fullName(): string
+	{
+		return implode(' ', [$this->lastName, $this->name]);
+	}
+
 	public function setAvatar(ImageValueObject $avatar): static
 	{
 		$this->avatar = $avatar;
