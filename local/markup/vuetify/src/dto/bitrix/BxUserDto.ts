@@ -1,5 +1,6 @@
 import type ManagerDto from "@/dto/entity/ManagerDto.ts";
 import type BxImage from "@/dto/bitrix/BxImage.ts";
+import type BxUserGroupDto from "@/dto/bitrix/BxUserGroupDto.ts";
 
 export default interface BxUserDto {
   id: number;
@@ -20,6 +21,5 @@ export default interface BxUserDto {
   postAddress?: string,
   bankName?: string,
   manager?: ManagerDto,
-  type?: 'manager' | 'agent' | 'student'
-  position?: string
+  position?: BxUserGroupDto
 }

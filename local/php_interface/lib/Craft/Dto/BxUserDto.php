@@ -8,7 +8,7 @@ class BxUserDto
 {
 
 	public int $id;
-	public string $position;
+	public ?BxUserGroupDto $position;
 	public ?string $name;
 	public ?string $lastName;
 	public ?string $secondName;
@@ -72,14 +72,15 @@ class BxUserDto
 	}
 
 	public static function manager(
-		int         $id,
-		string      $name,
-		string      $lastName,
-		string      $secondName,
-		string      $fullName,
-		string      $email,
-		string      $phone,
-		?BxImageDto $avatarDto = null
+		int             $id,
+		string          $name,
+		string          $lastName,
+		string          $secondName,
+		string          $fullName,
+		string          $email,
+		string          $phone,
+		?BxImageDto     $avatarDto = null,
+		?BxUserGroupDto $groupDto = null,
 	): BxUserDto
 	{
 		$self = new self();
@@ -91,19 +92,20 @@ class BxUserDto
 		$self->email = $email;
 		$self->phone = $phone;
 		$self->avatar = $avatarDto;
-		$self->position = 'Менеджер';
+		$self->position = $groupDto;
 		return $self;
 	}
 
 	public static function extRealtor(
-		int        $id,
-		string     $name,
-		string     $lastName,
-		string     $secondName,
-		string     $fullName,
-		string     $email,
-		string     $phone,
-		BxImageDto $avatarPath
+		int             $id,
+		string          $name,
+		string          $lastName,
+		string          $secondName,
+		string          $fullName,
+		string          $email,
+		string          $phone,
+		BxImageDto      $bxImageDto,
+		?BxUserGroupDto $groupDto = null,
 	): BxUserDto
 	{
 		$self = new self();
@@ -114,8 +116,8 @@ class BxUserDto
 		$self->fullName = $fullName;
 		$self->email = $email;
 		$self->phone = $phone;
-		$self->avatar = $avatarPath;
-		$self->position = 'Риелтор';
+		$self->avatar = $bxImageDto;
+		$self->position = $groupDto;
 		return $self;
 	}
 
