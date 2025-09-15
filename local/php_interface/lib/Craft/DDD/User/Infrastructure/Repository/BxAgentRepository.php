@@ -34,19 +34,30 @@ class BxAgentRepository implements AgentRepositoryInterface
 		return null;
 	}
 
-	public function findAll(Criteria $criteria): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		$result = [];
 
 		$agentList = CraftUserTable::query()
-			->addFilter(null, $criteria->getFilter())
-			->withAgent()
-			->fetchCollection();
+			->withAgent();
 
+		if($criteria)
+		{
+			if($criteria->getFilter())
+			{
+				$agentList->setFilter($criteria->getFilter());
+			}
+		}
 
+		$agentList = $agentList->fetchCollection();
 		foreach($agentList as $agent)
 		{
-			$result[] = $this->hydrate($agent);
+			try
+			{
+				$result[] = $this->hydrate($agent);
+			} catch(\Exception|\TypeError $exception)
+			{
+			}
 		}
 
 		return $result;
@@ -127,38 +138,22 @@ class BxAgentRepository implements AgentRepositoryInterface
 			// @phpstan-ignore method.notFound
 			$model->getSecondName(),
 			new PasswordValueObject(rand()),
-			new PhoneValueObject(
 			// @phpstan-ignore method.notFound
-				$model->getPersonalPhone()
-			),
-			new EmailValueObject(
+			new PhoneValueObject($model->fillPersonalMobile()),
 			// @phpstan-ignore method.notFound
-				$model->getEmail()
-			),
-			new InnValueObject(
+			new EmailValueObject($model->getEmail()),
 			// @phpstan-ignore method.notFound
-				$model->fillUfInn()
-			),
-			new KppValueObject(
+			new InnValueObject($model->fillUfInn()),
 			// @phpstan-ignore method.notFound
-				$model->fillUfKpp()
-			),
-			new OgrnValueObject(
+			new KppValueObject($model->fillUfKpp()),
 			// @phpstan-ignore method.notFound
-				$model->fillUfOgrn()
-			),
-			new BikValueObject(
+			new OgrnValueObject($model->fillUfOgrn()),
 			// @phpstan-ignore method.notFound
-				$model->fillUfBik()
-			),
-			new CurrAccountValueObject(
+			new BikValueObject($model->fillUfBik()),
 			// @phpstan-ignore method.notFound
-				$model->fillUfCurrAcc()
-			),
-			new CorrAccountValueObject(
+			new CurrAccountValueObject($model->fillUfCurrAcc()),
 			// @phpstan-ignore method.notFound
-				$model->fillUfCorrAcc()
-			),
+			new CorrAccountValueObject($model->fillUfCorrAcc()),
 			// @phpstan-ignore method.notFound
 			$model->fillUfPostAddress(),
 			// @phpstan-ignore method.notFound

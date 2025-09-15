@@ -3,7 +3,7 @@ import type BxUserGroupDto from "@/dto/bitrix/BxUserGroupDto.ts";
 import {toRaw} from "vue";
 
 export default class AccessService {
-  static hasRole(role: string | []): boolean {
+  static hasRole(role: string | string[]): boolean {
 
     let roles: string[] = [];
 

@@ -227,4 +227,9 @@ class AgentEntity
 	{
 		return $this->secondName;
 	}
+
+	public function fullName(): string
+	{
+		return implode(' ', [$this->lastName, $this->name, $this->secondName]);
+	}
 }

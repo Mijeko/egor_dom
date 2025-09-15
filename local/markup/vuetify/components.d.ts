@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AgentList: typeof import('./src/components/AgentList.vue')['default']
     Alert: typeof import('./src/components/Alert.vue')['default']
     ApartmentFilter: typeof import('./src/components/ApartmentFilter.vue')['default']
     ApartmentItem: typeof import('./src/components/ApartmentItem.vue')['default']
@@ -24,6 +25,7 @@ declare module 'vue' {
     ClaimList: typeof import('./src/components/ClaimList.vue')['default']
     ClaimStatus: typeof import('./src/components/part/ClaimStatus.vue')['default']
     ContactPersonalManager: typeof import('./src/components/modal/ContactPersonalManager.vue')['default']
+    CreateAgentModal: typeof import('./src/components/modal/CreateAgentModal.vue')['default']
     CreateManagerModal: typeof import('./src/components/modal/CreateManagerModal.vue')['default']
     CurrentCity: typeof import('./src/components/CurrentCity.vue')['default']
     DeveloperList: typeof import('./src/components/DeveloperList.vue')['default']
@@ -47,6 +49,7 @@ declare module 'vue' {
     Registration: typeof import('./src/components/Registration.vue')['default']
     RegistrationByReferral: typeof import('./src/components/RegistrationByReferral.vue')['default']
     SelectWithSearch: typeof import('./src/components/filter/part/SelectWithSearch.vue')['default']
+    ShortAgentList: typeof import('./src/components/profile/ShortAgentList.vue')['default']
     ShortManagerList: typeof import('./src/components/profile/ShortManagerList.vue')['default']
     ShortOrderInfo: typeof import('./src/components/profile/ShortOrderInfo.vue')['default']
     Table: typeof import('./src/components/system/Table.vue')['default']

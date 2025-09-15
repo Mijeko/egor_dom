@@ -1,14 +1,13 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import UserService from "@/service/User/UserService.ts";
-import type CreateManagerRequestDto from "@/dto/request/CreateManagerRequestDto.ts";
-import type ClaimCreateResponseDto from "@/dto/response/ClaimCreateResponseDto.ts";
-import AlertService from "@/service/AlertService.ts";
-import type CreateManagerResponseDto from "@/dto/response/CreateManagerResponseDto.ts";
 import PhoneInput from "@/components/html/PhoneInput.vue";
+import UserService from "@/service/User/UserService.ts";
+import AlertService from "@/service/AlertService.ts";
+import type CreateAgentRequestDto from "@/dto/request/CreateAgentRequestDto.ts";
+import type CreateAgentResponseDto from "@/dto/response/CreateAgentResponseDto.ts";
 
 export default defineComponent({
-  name: "CreateManagerModal",
+  name: "CreateAgentModal",
   components: {PhoneInput},
   props: {
     modelValue: {
@@ -20,6 +19,7 @@ export default defineComponent({
     return {
       isValidForm: false,
       form: {
+        managerId: null,
         phone: null,
         email: null,
         name: null,
@@ -69,7 +69,8 @@ export default defineComponent({
         return false;
       }
 
-      let body: CreateManagerRequestDto = {
+      let body: CreateAgentRequestDto = {
+        managerId: Number(this.form.managerId),
         phone: String(this.form.phone),
         email: String(this.form.email),
         name: String(this.form.name),
@@ -77,8 +78,8 @@ export default defineComponent({
       };
 
       let service = new UserService();
-      service.createManager(body)
-        .then((response: CreateManagerResponseDto) => {
+      service.createAgent(body)
+        .then((response: CreateAgentResponseDto) => {
 
           let {status} = response;
 
@@ -147,5 +148,4 @@ export default defineComponent({
 </template>
 
 <style scoped>
-
 </style>

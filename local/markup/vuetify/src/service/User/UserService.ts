@@ -8,6 +8,7 @@ import ControllerApi from "@/service/ControllerApi.ts";
 import type RegisterSimpleAgentRequestDto from "@/dto/request/RegisterSimpleAgentRequestDto.ts";
 import type RegisterByReferralRequestDto from "@/dto/request/RegisterByReferralRequestDto.ts";
 import type CreateManagerRequestDto from "@/dto/request/CreateManagerRequestDto.ts";
+import type CreateAgentRequestDto from "@/dto/request/CreateAgentRequestDto.ts";
 
 export default class UserService {
 
@@ -39,5 +40,9 @@ export default class UserService {
 
   createManager(body: CreateManagerRequestDto) {
     return ControllerApi.post('craft:manager.create', body);
+  }
+
+  createAgent(body: CreateAgentRequestDto) {
+    return ControllerApi.post('craft:agent.create', body);
   }
 }

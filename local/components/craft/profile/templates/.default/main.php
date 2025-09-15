@@ -91,8 +91,18 @@ use Craft\Model\CraftUser;
 				$APPLICATION->IncludeComponent(
 					'craft:manager.list',
 					'.default',
-					[
-					],
+					[],
+					false,
+					['HIDE_ICONS' => 'Y']
+				);
+				?>
+			</div>
+			<div class="profile-cards-item x6">
+				<?php
+				$APPLICATION->IncludeComponent(
+					'craft:agent.list',
+					'.default',
+					[],
 					false,
 					['HIDE_ICONS' => 'Y']
 				);

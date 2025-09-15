@@ -13,7 +13,7 @@ interface AgentRepositoryInterface
 
 	public function update(AgentEntity $agent): ?AgentEntity;
 
-	public function findAll(Criteria $criteria): array;
+	public function findAll(Criteria $criteria = null): array;
 
 	public function findById(int $id): ?AgentEntity;
 
