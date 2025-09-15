@@ -65,7 +65,7 @@ export default defineComponent({
               <v-icon icon="$cog" v-bind="props"></v-icon>
             </template>
             <v-list>
-              <v-list-item>
+              <v-list-item :link="`/profile/managers/${item.id}/`">
                 <v-list-item-title>Посмотреть</v-list-item-title>
               </v-list-item>
               <v-list-item>
