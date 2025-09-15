@@ -24,7 +24,7 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'ManagerEdit',
 		'PROPS'  => [
-			'manager' => [],
+			'manager' => $arResult['MANAGER'],
 		],
 	],
 	false,

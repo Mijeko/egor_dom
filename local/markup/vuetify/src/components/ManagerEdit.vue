@@ -75,7 +75,7 @@ export default defineComponent({
       </v-card>
 
       <v-card class="mt-5">
-        <v-list>
+        <v-list lines="two">
           <v-list-item
             :key="index"
             :title="item.label"
