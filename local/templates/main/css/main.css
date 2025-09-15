@@ -900,6 +900,8 @@ html, body {
         max-width: 100%; } }
     .profile-cards-item.x6 {
       max-width: calc(50% - 10px); }
+    .profile-cards-item.x12 {
+      max-width: calc(100%); }
 
 
 /*# sourceMappingURL=main.css.map*/

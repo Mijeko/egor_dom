@@ -14,6 +14,9 @@ use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 class StudentEntity
 {
 	protected ?int $id;
+	protected ?string $name;
+	protected ?string $lastName;
+	protected ?string $secondName;
 	protected PhoneValueObject $phone;
 	protected EmailValueObject $email;
 	protected ?PasswordValueObject $password;
@@ -33,6 +36,25 @@ class StudentEntity
 		$obj->password = $password;
 		$obj->active = ActiveValueObject::notActive();
 		return $obj;
+	}
+
+	public static function hydrate(
+		int              $id,
+		string           $name,
+		string           $lastName,
+		string           $secondName,
+		PhoneValueObject $phone,
+		EmailValueObject $email,
+	): StudentEntity
+	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->phone = $phone;
+		$self->email = $email;
+		return $self;
 	}
 
 	public function refreshIdAfterRegistration(int $id): void
@@ -68,5 +90,25 @@ class StudentEntity
 	public function getPercentAward(): ?int
 	{
 		return $this->percentAward;
+	}
+
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
+
+	public function getSecondName(): ?string
+	{
+		return $this->secondName;
+	}
+
+	public function getLastName(): ?string
+	{
+		return $this->lastName;
+	}
+
+	public function getFullName(): string
+	{
+		return implode(' ', [$this->lastName, $this->name, $this->secondName]);
 	}
 }

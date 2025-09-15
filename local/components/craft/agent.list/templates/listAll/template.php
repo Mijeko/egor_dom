@@ -21,7 +21,7 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'profile/ShortAgentList',
+		'SOURCE' => 'AgentList',
 		'PROPS'  => [
 			'agents' => $arResult['AGENTS'],
 		],

@@ -27,6 +27,26 @@ class BxUserDto
 	public ?ManagerDto $manager = null;
 	public ?BxImageDto $avatar = null;
 
+	public static function student(
+		int    $id,
+		string $name,
+		string $lastName,
+		string $secondName,
+		string $fullName,
+		string $email,
+		string $phone,
+	): BxUserDto
+	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->fullName = $fullName;
+		$self->email = $email;
+		$self->phone = $phone;
+		return $self;
+	}
 
 	public static function agent(
 		int         $id,

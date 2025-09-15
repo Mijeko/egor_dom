@@ -15,18 +15,19 @@
  * @var string $componentPath
  * @var CraftAgentListComponent $component
  */
+?>
 
-
+<?php
 $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'profile/ShortAgentList',
+		'SOURCE' => 'StudentList',
 		'PROPS'  => [
-			'agents' => $arResult['AGENTS'],
+			'agents' => $arResult['STUDENTS'],
 		],
 	],
 	false,
 	['HIDE_ICONS' => 'Y']
-);
+)
 ?>

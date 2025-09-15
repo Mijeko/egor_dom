@@ -32,11 +32,6 @@ class CraftAgentListComponent extends AjaxComponent
 	protected function loadData(): void
 	{
 		$agents = $this->agentRepository->findAll();
-		if(!$agents)
-		{
-			throw new Exception("Агенты не найдены");
-		}
-
 
 		$this->arResult['AGENTS'] = array_map(function(AgentEntity $agent) {
 			return BxUserDto::agent(

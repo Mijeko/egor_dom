@@ -86,7 +86,7 @@ use Craft\Model\CraftUser;
 				);
 				?>
 			</div>
-			<div class="profile-cards-item x6">
+			<div class="profile-cards-item x12">
 				<?php
 				$APPLICATION->IncludeComponent(
 					'craft:manager.list',
@@ -97,10 +97,21 @@ use Craft\Model\CraftUser;
 				);
 				?>
 			</div>
-			<div class="profile-cards-item x6">
+			<div class="profile-cards-item x12">
 				<?php
 				$APPLICATION->IncludeComponent(
 					'craft:agent.list',
+					'.default',
+					[],
+					false,
+					['HIDE_ICONS' => 'Y']
+				);
+				?>
+			</div>
+			<div class="profile-cards-item x12">
+				<?php
+				$APPLICATION->IncludeComponent(
+					'craft:student.list',
 					'.default',
 					[],
 					false,

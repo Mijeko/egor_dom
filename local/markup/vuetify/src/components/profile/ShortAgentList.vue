@@ -24,6 +24,9 @@ export default defineComponent({
       user: {} as BxUserDto
     };
   },
+  mounted(): any {
+    console.log('short agent list');
+  },
   methods: {
     doShowModal() {
       this.showModal = !this.showModal;
@@ -35,13 +38,13 @@ export default defineComponent({
 
 <template>
   <v-card
-    v-if="AccessService.hasRole(['ADMIN','MANAGER']) && agents.length > 0"
+    v-if="AccessService.hasRole(['ADMIN','MANAGER'])"
     class="pa-3 mb-3 mt-3"
     title="Агенты"
   >
-    <v-divider/>
+    <v-divider v-if="agents.length > 0"/>
 
-    <v-card-text>
+    <v-card-text v-if="agents.length > 0">
       <div class="mb-3 agent-item" v-for="agent in agents">
         <v-avatar
           size="36px"

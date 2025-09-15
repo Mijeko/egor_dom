@@ -27,6 +27,7 @@ declare module 'vue' {
     ContactPersonalManager: typeof import('./src/components/modal/ContactPersonalManager.vue')['default']
     CreateAgentModal: typeof import('./src/components/modal/CreateAgentModal.vue')['default']
     CreateManagerModal: typeof import('./src/components/modal/CreateManagerModal.vue')['default']
+    CreateStudentModal: typeof import('./src/components/modal/CreateStudentModal.vue')['default']
     CurrentCity: typeof import('./src/components/CurrentCity.vue')['default']
     DeveloperList: typeof import('./src/components/DeveloperList.vue')['default']
     Init: typeof import('./src/components/system/Init.vue')['default']
@@ -52,6 +53,7 @@ declare module 'vue' {
     ShortAgentList: typeof import('./src/components/profile/ShortAgentList.vue')['default']
     ShortManagerList: typeof import('./src/components/profile/ShortManagerList.vue')['default']
     ShortOrderInfo: typeof import('./src/components/profile/ShortOrderInfo.vue')['default']
+    ShortStudentList: typeof import('./src/components/profile/ShortStudentList.vue')['default']
     Table: typeof import('./src/components/system/Table.vue')['default']
   }
 }

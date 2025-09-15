@@ -3,11 +3,11 @@ import {defineComponent} from 'vue'
 import PhoneInput from "@/components/html/PhoneInput.vue";
 import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
-import type CreateAgentRequestDto from "@/dto/request/CreateAgentRequestDto.ts";
-import type CreateAgentResponseDto from "@/dto/response/CreateAgentResponseDto.ts";
+import type CreateStudentRequestDto from "@/dto/request/CreateStudentRequestDto.ts";
+import type CreateStudentResponseDto from "@/dto/response/CreateStudentResponseDto.ts";
 
 export default defineComponent({
-  name: "CreateAgentModal",
+  name: "CreateStudentModal",
   components: {PhoneInput},
   props: {
     modelValue: {
@@ -26,6 +26,7 @@ export default defineComponent({
         lastName: null,
       },
       validate: {
+        managerId: [],
         phone: [
           (value: string) => {
             if (!value || value.length <= 0) {
@@ -69,7 +70,7 @@ export default defineComponent({
         return false;
       }
 
-      let body: CreateAgentRequestDto = {
+      let body: CreateStudentRequestDto = {
         managerId: Number(this.form.managerId),
         phone: String(this.form.phone),
         email: String(this.form.email),
@@ -78,15 +79,16 @@ export default defineComponent({
       };
 
       let service = new UserService();
-      service.createAgent(body)
-        .then((response: CreateAgentResponseDto) => {
+      service.createStudent(body)
+        .then((response: CreateStudentResponseDto) => {
 
           let {status} = response;
 
           if (status === 'success') {
-            AlertService.showAlert('Новый менеджер', 'Менеджер успешно создан');
+            AlertService.showAlert('Новый Студент', 'Студент успешно создан');
             this.$emit('update:modelValue', false);
 
+            this.form.managerId = null;
             this.form.email = null;
             this.form.phone = null;
             this.form.name = null;
@@ -102,7 +104,7 @@ export default defineComponent({
 <template>
   <v-dialog max-width="500" v-model="showModalComputed">
     <template v-slot:default="{ isActive }">
-      <v-card title="Добавить агента">
+      <v-card title="Добавить студента">
 
         <v-card-text>
           <v-form v-model="isValidForm" @submit.prevent="submitForm">
@@ -148,4 +150,5 @@ export default defineComponent({
 </template>
 
 <style scoped>
+
 </style>
