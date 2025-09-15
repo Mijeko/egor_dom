@@ -42,6 +42,7 @@ export default defineComponent({
     v-model="compModelValue"
     :label="placeholder"
     :items="items"
+    :rules
     item-title="label"
     item-value="value"
     variant="outlined"
