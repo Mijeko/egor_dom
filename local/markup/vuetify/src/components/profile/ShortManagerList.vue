@@ -2,23 +2,28 @@
 import {defineComponent, type PropType} from 'vue'
 import CreateManagerModal from "@/components/modal/CreateManagerModal.vue";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import {useUserStore} from "@/store.ts";
+import AccessService from "@/service/AccessService.ts";
 
 export default defineComponent({
   name: "ShortManagerList",
+  computed: {
+    AccessService() {
+      return AccessService
+    }
+  },
   components: {CreateManagerModal},
   props: {
     managers: {
       type: Array as PropType<BxUserDto[]>,
       default: [],
-    }
+    },
   },
   data: function () {
     return {
-      showModal: false
+      showModal: false,
+      user: {} as BxUserDto
     };
-  },
-  mounted(): any {
-    console.log('short manager list', this.managers);
   },
   methods: {
     doShowModal() {
@@ -29,7 +34,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card class="pa-3 mb-3 mt-3" v-if="managers.length > 0" title="Менеджеры">
+  <v-card
+    v-if="AccessService.hasRole('ADMIN') && managers.length > 0"
+    class="pa-3 mb-3 mt-3"
+    title="Менеджеры"
+  >
     <v-divider/>
 
     <v-card-text>
