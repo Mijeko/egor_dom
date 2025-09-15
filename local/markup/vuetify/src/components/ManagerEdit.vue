@@ -2,6 +2,7 @@
 import {defineComponent, type PropType} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import PhoneInput from "@/components/html/PhoneInput.vue";
+import type ManagerEditDescriptionItemDto from "@/dto/present/component/ManagerEditDescriptionItemDto.ts";
 
 export default defineComponent({
   name: "ManagerEdit",
@@ -30,6 +31,30 @@ export default defineComponent({
       type: Object as PropType<BxUserDto>,
       default: null
     }
+  },
+  methods: {
+    submitForm() {
+      if (!this.isFormValid) {
+        return;
+      }
+    }
+  },
+  computed: {
+    descriptionItems: function (): ManagerEditDescriptionItemDto[] {
+      let items: ManagerEditDescriptionItemDto[] = [];
+
+      items.push({label: 'Телефон', value: this.manager.phone} as ManagerEditDescriptionItemDto);
+      items.push({label: 'E-Mail', value: this.manager.email} as ManagerEditDescriptionItemDto);
+      items.push({
+        label: 'ФИО', value: this.manager.fullName ?? [
+          this.manager.lastName,
+          this.manager.name,
+          this.manager.secondName,
+        ].join(' ')
+      } as ManagerEditDescriptionItemDto);
+
+      return items;
+    }
   }
 })
 </script>
@@ -42,39 +67,28 @@ export default defineComponent({
           :src="manager.avatar?.src"
           class="align-end"
           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-          height="200px"
+          height="400px"
           cover
         >
           <v-card-title class="text-white" v-text="manager.fullName"></v-card-title>
         </v-img>
+      </v-card>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="medium-emphasis"
-            icon="mdi-heart"
-            size="small"
-          ></v-btn>
-
-          <v-btn
-            color="medium-emphasis"
-            icon="mdi-bookmark"
-            size="small"
-          ></v-btn>
-
-          <v-btn
-            color="medium-emphasis"
-            icon="mdi-share-variant"
-            size="small"
-          ></v-btn>
-        </v-card-actions>
+      <v-card class="mt-5">
+        <v-list>
+          <v-list-item
+            :key="index"
+            :title="item.label"
+            :subtitle="item.value"
+            v-for="(item,index) in descriptionItems"
+          ></v-list-item>
+        </v-list>
       </v-card>
 
 
     </v-col>
     <v-col cols="6">
-      <v-form>
+      <v-form v-model="isFormValid" @submit.prevent="submitForm">
         <v-row>
           <v-col cols="4">
             <v-text-field v-model="form.lastName" :rules="validate.lastName" placeholder="Фамилия"/>
@@ -89,13 +103,15 @@ export default defineComponent({
 
         <v-row>
           <v-col cols="6">
-            <PhoneInput v-model="form.phone" :rules="validate.phone"/>
+            <PhoneInput v-model="form.phone" :rules="validate.phone" placeholder="Номер телефона"/>
           </v-col>
           <v-col cols="6">
             <v-text-field v-model="form.email" :rules="validate.email" placeholder="E-Mail"/>
           </v-col>
         </v-row>
 
+
+        <v-btn type="submit">Обновить</v-btn>
       </v-form>
     </v-col>
   </v-row>
