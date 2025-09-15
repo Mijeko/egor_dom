@@ -3,6 +3,7 @@
 use Bitrix\Main\EventManager;
 use Craft\Bitrix\EventHandlers\OnAfterUserAddHandler;
 use Craft\Bitrix\EventHandlers\OnBeforeUserAddHandler;
+use Craft\Bitrix\EventHandlers\OnBeforeUserUpdateHandler;
 use Craft\DDD\City\Infrastructure\Events\OnPageStartHandler;
 use Craft\Rest\Handler;
 
@@ -39,6 +40,15 @@ $eventManager->addEventHandler(
 	'OnAfterUserAdd',
 	[
 		OnAfterUserAddHandler::class,
+		'handle',
+	]
+);
+
+$eventManager->addEventHandler(
+	'main',
+	'OnBeforeUserUpdate',
+	[
+		OnBeforeUserUpdateHandler::class,
 		'handle',
 	]
 );

@@ -4,9 +4,9 @@ namespace Craft\Bitrix\EventHandlers;
 
 use Craft\Bitrix\Service\CheckEmptyPersonalMobile;
 
-class OnBeforeUserAddHandler
+class OnBeforeUserUpdateHandler
 {
-	public static function handle(&$arFields): bool
+	public static function handle(array &$arFields): bool
 	{
 		if(!CheckEmptyPersonalMobile::handle($arFields))
 		{
