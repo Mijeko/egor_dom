@@ -79,15 +79,6 @@ export default defineComponent({
     this.form.phone = this.user.phone ?? '';
     this.form.email = this.user.email ?? '';
     this.form.client = this.user.fullName ?? '';
-    // this.form.inn = this.user.inn ?? '';
-    // this.form.bik = this.user.bik ?? '';
-    // this.form.kpp = this.user.kpp ?? '';
-    // this.form.ogrn = this.user.ogrn ?? '';
-    // this.form.currAccount = this.user.currAccount ?? '';
-    // this.form.corrAccount = this.user.corrAccount ?? '';
-    // this.form.postAddress = this.user.postAddress ?? '';
-    // this.form.legalAddress = this.user.legalAddress ?? '';
-    // this.form.bankName = this.user.bankName ?? '';
   },
   methods: {
     submitForm: function () {

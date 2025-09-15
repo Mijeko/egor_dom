@@ -4,10 +4,11 @@ import CreateManagerModal from "@/components/modal/CreateManagerModal.vue";
 import AccessService from "@/service/AccessService.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import CreateStudentModal from "@/components/modal/CreateStudentModal.vue";
+import CreateAgentModal from "@/components/modal/CreateAgentModal.vue";
 
 export default defineComponent({
   name: "ShortStudentList",
-  components: {CreateStudentModal, CreateManagerModal},
+  components: {CreateAgentModal, CreateStudentModal, CreateManagerModal},
   computed: {
     AccessService() {
       return AccessService
@@ -72,7 +73,7 @@ export default defineComponent({
     </v-card-actions>
 
     <CreateStudentModal
-      :model-value="showModal"
+      v-model="showModal"
     />
 
   </v-card>

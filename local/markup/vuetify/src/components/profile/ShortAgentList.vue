@@ -75,7 +75,7 @@ export default defineComponent({
     </v-card-actions>
 
     <CreateAgentModal
-      :model-value="showModal"
+      v-model="showModal"
     />
 
   </v-card>

@@ -4,6 +4,7 @@ import CreateManagerModal from "@/components/modal/CreateManagerModal.vue";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/store.ts";
 import AccessService from "@/service/AccessService.ts";
+import CreateAgentModal from "@/components/modal/CreateAgentModal.vue";
 
 export default defineComponent({
   name: "ShortManagerList",
@@ -12,7 +13,7 @@ export default defineComponent({
       return AccessService
     }
   },
-  components: {CreateManagerModal},
+  components: {CreateAgentModal, CreateManagerModal},
   props: {
     managers: {
       type: Array as PropType<BxUserDto[]>,
@@ -71,7 +72,7 @@ export default defineComponent({
     </v-card-actions>
 
     <CreateManagerModal
-      :model-value="showModal"
+      v-model="showModal"
     />
 
   </v-card>

@@ -85,7 +85,6 @@ export default defineComponent({
   },
   methods: {
     closeModal: function () {
-      this.showModalComputed = false;
       this.$emit('update:modelValue', false);
     },
     submitForm() {
@@ -108,7 +107,7 @@ export default defineComponent({
           let {status} = response;
 
           if (status === 'success') {
-            AlertService.showAlert('Новый менеджер', 'Менеджер успешно создан');
+            AlertService.showAlert('Новый агент', 'Агент успешно создан');
             this.$emit('update:modelValue', false);
 
             this.form.email = null;
@@ -130,7 +129,6 @@ export default defineComponent({
 
         <v-card-text>
           <v-form v-model="isValidForm" @submit.prevent="submitForm">
-
 
             <v-row>
               <v-col cols="12">
