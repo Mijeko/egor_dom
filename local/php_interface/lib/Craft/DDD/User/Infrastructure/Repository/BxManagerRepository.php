@@ -105,29 +105,20 @@ class BxManagerRepository implements ManagerRepositoryInterface
 			// @phpstan-ignore method.notFound
 			$craftUser->getSecondName(),
 			// @phpstan-ignore method.notFound
-			new EmailValueObject($craftUser->getEmail()),
+			new EmailValueObject(mb_strlen($craftUser->getEmail()) > 0 ? $craftUser->getEmail() : null),
 			// @phpstan-ignore method.notFound
 			new PhoneValueObject($craftUser->fillPersonalMobile()),
 			[
-				new EmailValueObject(
 				// @phpstan-ignore method.notFound
-					$craftUser->getEmail()
-				),
-				new EmailValueObject(
+				new EmailValueObject(mb_strlen($craftUser->getEmail()) > 0 ? $craftUser->getEmail() : null),
 				// @phpstan-ignore method.notFound
-					$craftUser->fillUfEmailTwo()
-				),
+				new EmailValueObject(mb_strlen($craftUser->fillUfEmailTwo()) ? $craftUser->getUfEmailTwo() : null),
 			],
-			// @phpstan-ignore method.notFound
 			[
-				new PhoneValueObject(
 				// @phpstan-ignore method.notFound
-					mb_strlen($craftUser->fillPersonalPhone()) > 0 ? $craftUser->fillPersonalPhone() : null
-				),
-				new PhoneValueObject(
+				new PhoneValueObject(mb_strlen($craftUser->fillPersonalPhone()) > 0 ? $craftUser->getPersonalPhone() : null),
 				// @phpstan-ignore method.notFound
-					mb_strlen($craftUser->fillUfPhoneTwo()) > 0 ? $craftUser->fillUfPhoneTwo() : null
-				),
+				new PhoneValueObject(mb_strlen($craftUser->fillUfPhoneTwo()) > 0 ? $craftUser->fillUfPhoneTwo() : null),
 			],
 			$craftUser->getPersonalPhoto(),
 		);

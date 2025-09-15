@@ -10,6 +10,15 @@ $aMenuLinks = [
 		"",
 	],
 	[
+		"Менеджеры",
+		"/profile/managers/",
+		[],
+		[
+			'ICON' => '$peopleList',
+		],
+		"",
+	],
+	[
 		"Заявки",
 		"/profile/orders/",
 		[],

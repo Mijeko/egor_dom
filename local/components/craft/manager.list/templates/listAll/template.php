@@ -1,5 +1,10 @@
 <?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
 <?php
+
+use Craft\Dto\BxUserDto;
+use Craft\Helper\TableHeaderHelper;
+use Craft\Helper\TableSettingsHelper;
+
 /**
  * @var string $componentPath
  * @var array $arParams
@@ -24,9 +29,20 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'profile/ShortManagerList',
+		'SOURCE' => 'ManagerList',
 		'PROPS'  => [
-			'managers' => $arResult['ITEMS'],
+			'tableParams' => TableSettingsHelper::settings()
+				->records(array_map(function(BxUserDto $manager) {
+					return [
+						'id'   => $manager->id,
+						'name' => $manager->name,
+					];
+				}, $arResult['ITEMS'] ?? []))
+				->header([
+					TableHeaderHelper::build('id', 'ID'),
+					TableHeaderHelper::build('name', 'Название'),
+				])
+				->build(),
 		],
 	],
 	false,

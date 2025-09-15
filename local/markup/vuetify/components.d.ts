@@ -46,6 +46,8 @@ declare module 'vue' {
     Registration: typeof import('./src/components/Registration.vue')['default']
     RegistrationByReferral: typeof import('./src/components/RegistrationByReferral.vue')['default']
     SelectWithSearch: typeof import('./src/components/filter/part/SelectWithSearch.vue')['default']
+    ShortManagerList: typeof import('./src/components/profile/ShortManagerList.vue')['default']
     ShortOrderInfo: typeof import('./src/components/profile/ShortOrderInfo.vue')['default']
+    Table: typeof import('./src/components/system/Table.vue')['default']
   }
 }
