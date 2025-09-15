@@ -128,7 +128,7 @@ class BxAgentRepository implements AgentRepositoryInterface
 
 	private function hydrate(CraftUser $model): AgentEntity
 	{
-		return AgentEntity::fromFind(
+		return AgentEntity::hydrate(
 		// @phpstan-ignore method.notFound
 			$model->getId(),
 			// @phpstan-ignore method.notFound

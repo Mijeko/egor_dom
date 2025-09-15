@@ -71,7 +71,7 @@ class AgentEntity
 
 	}
 
-	public static function fromFind(
+	public static function hydrate(
 		?int                    $id,
 		?string                 $name,
 		?string                 $lastName,
@@ -112,6 +112,25 @@ class AgentEntity
 		$obj->personalManagerId = $personalManagerId;
 
 		return $obj;
+	}
+
+	public static function createAgent(
+		?PasswordValueObject $password,
+		?string              $name,
+		?string              $lastName,
+		?string              $secondName,
+		EmailValueObject     $email,
+		PhoneValueObject     $phone,
+	): AgentEntity
+	{
+		$self = new self();
+		$self->name = $name;
+		$self->password = $password;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->email = $email;
+		$self->phone = $phone;
+		return $self;
 	}
 
 	public static function simpleRegister(
