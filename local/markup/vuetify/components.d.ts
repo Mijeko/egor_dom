@@ -30,6 +30,7 @@ declare module 'vue' {
     Init: typeof import('./src/components/system/Init.vue')['default']
     InputDropdown: typeof import('./src/components/filter/part/InputDropdown.vue')['default']
     MainApartmentFilter: typeof import('./src/components/filter/MainApartmentFilter.vue')['default']
+    ManagerEdit: typeof import('./src/components/ManagerEdit.vue')['default']
     ManagerList: typeof import('./src/components/ManagerList.vue')['default']
     Map: typeof import('./src/components/Map.vue')['default']
     MaskInput: typeof import('./src/components/part/form/MaskInput.vue')['default']
