@@ -61,6 +61,7 @@ export default defineComponent({
   },
   methods: {
     closeModal: function () {
+      this.showModalComputed = false;
       this.$emit('update:modelValue', false);
       console.log('asdasd');
     },
@@ -137,7 +138,7 @@ export default defineComponent({
             <v-divider class="mb-3"/>
 
             <v-btn color="primary" type="submit">Добавить</v-btn>
-            <v-btn @click.prevent="closeModal">Закрыть</v-btn>
+            <v-btn @click="closeModal">Закрыть</v-btn>
           </v-form>
         </v-card-text>
 

@@ -21,5 +21,5 @@ export default interface BxUserDto {
   postAddress?: string,
   bankName?: string,
   manager?: ManagerDto,
-  position?: BxUserGroupDto
+  position?: BxUserGroupDto[]
 }

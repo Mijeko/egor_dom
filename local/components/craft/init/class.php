@@ -5,6 +5,7 @@ use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 use Craft\DDD\User\Application\Factory\UserServiceFactory;
 use Craft\DDD\User\Application\Service\UserService;
+use Craft\DDD\User\Domain\Entity\GroupEntity;
 use Craft\DDD\User\Domain\Repository\ExternalRealtorRepositoryInterface;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Dto\ManagerDto;
@@ -17,6 +18,7 @@ use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 use Craft\DDD\User\Infrastructure\Repository\ExternalRealtorRepository;
 use Craft\Dto\BxImageDto;
 use Craft\Dto\BxUserDto;
+use Craft\Dto\BxUserGroupDto;
 
 class CraftInitComponent extends CBitrixComponent
 {
@@ -73,6 +75,22 @@ class CraftInitComponent extends CBitrixComponent
 
 		$mainUser = $this->service->findById($this->arParams['USER_ID']);
 
+		$mainUserGroupList = $mainUser->getGroup();
+
+		$groups = array_map(function(GroupEntity $group) {
+			if($group->isSkip())
+			{
+				return null;
+			}
+			return new BxUserGroupDto(
+				$group->getId(),
+				$group->getName(),
+				$group->getCode()
+			);
+		}, $mainUserGroupList);
+
+		$groups = array_filter($groups);
+
 		if($mainUser->isExtRealtor())
 		{
 			$extRealtor = $this->externalRealtorRepository->findById($this->arParams['USER_ID']);
@@ -102,6 +120,7 @@ class CraftInitComponent extends CBitrixComponent
 					$extRealtor->getEmail()->getValue(),
 					$extRealtor->getPhone()->getValue(),
 					$avatar,
+					$groups
 				);
 			}
 		}
@@ -134,6 +153,7 @@ class CraftInitComponent extends CBitrixComponent
 					$manager->getEmail()->getValue(),
 					$manager->getPhone()->getValue(),
 					$avatar,
+					$groups
 				);
 			}
 
@@ -183,7 +203,8 @@ class CraftInitComponent extends CBitrixComponent
 					$agent->getPostAddress(),
 					$agent->getBankName(),
 					$managerDto,
-					$avatar
+					$avatar,
+					$groups
 				);
 			}
 		}

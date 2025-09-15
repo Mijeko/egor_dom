@@ -8,7 +8,7 @@ class BxUserDto
 {
 
 	public int $id;
-	public ?BxUserGroupDto $position;
+	public ?array $position;
 	public ?string $name;
 	public ?string $lastName;
 	public ?string $secondName;
@@ -47,6 +47,7 @@ class BxUserDto
 		?string     $bankName = null,
 		?ManagerDto $manager = null,
 		?BxImageDto $avatarImage = null,
+		?array      $groupDto = [],
 	): BxUserDto
 	{
 		$self = new self();
@@ -68,19 +69,20 @@ class BxUserDto
 		$self->bankName = $bankName;
 		$self->manager = $manager;
 		$self->avatar = $avatarImage;
+		$self->position = $groupDto;
 		return $self;
 	}
 
 	public static function manager(
-		int             $id,
-		string          $name,
-		string          $lastName,
-		string          $secondName,
-		string          $fullName,
-		string          $email,
-		string          $phone,
-		?BxImageDto     $avatarDto = null,
-		?BxUserGroupDto $groupDto = null,
+		int         $id,
+		string      $name,
+		string      $lastName,
+		string      $secondName,
+		string      $fullName,
+		string      $email,
+		string      $phone,
+		?BxImageDto $avatarDto = null,
+		?array      $groupDto = [],
 	): BxUserDto
 	{
 		$self = new self();
@@ -97,15 +99,15 @@ class BxUserDto
 	}
 
 	public static function extRealtor(
-		int             $id,
-		string          $name,
-		string          $lastName,
-		string          $secondName,
-		string          $fullName,
-		string          $email,
-		string          $phone,
-		BxImageDto      $bxImageDto,
-		?BxUserGroupDto $groupDto = null,
+		int        $id,
+		string     $name,
+		string     $lastName,
+		string     $secondName,
+		string     $fullName,
+		string     $email,
+		string     $phone,
+		BxImageDto $bxImageDto,
+		?array     $groupDto = [],
 	): BxUserDto
 	{
 		$self = new self();

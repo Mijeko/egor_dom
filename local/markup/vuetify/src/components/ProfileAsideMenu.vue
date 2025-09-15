@@ -20,7 +20,7 @@ export default defineComponent({
   mounted(): any {
     let userStore = useUserStore();
     let user = userStore.getUser;
-    console.log(user);
+
     if (user) {
       this.user = user;
     }
@@ -72,15 +72,6 @@ export default defineComponent({
       </v-list-item>
     </v-list>
   </v-card>
-
-
-  <!--  <v-list nav tile>-->
-  <!--    <v-list-item v-for="menuItem in items" link :to="menuItem.href">-->
-  <!--      &lt;!&ndash;      <v-icon color="black">$badgeAccountHorizontalOutline</v-icon>&ndash;&gt;-->
-  <!--      <v-icon color="black">+</v-icon>-->
-  <!--      <v-list-item-title>{{ menuItem.title }}</v-list-item-title>-->
-  <!--    </v-list-item>-->
-  <!--  </v-list>-->
 </template>
 
 <style scoped>

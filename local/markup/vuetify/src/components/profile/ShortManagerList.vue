@@ -18,7 +18,7 @@ export default defineComponent({
     };
   },
   mounted(): any {
-    console.log(this.managers);
+    console.log('short manager list', this.managers);
   },
   methods: {
     doShowModal() {
@@ -29,41 +29,44 @@ export default defineComponent({
 </script>
 
 <template>
+  <v-card class="pa-3 mb-3 mt-3" v-if="managers.length > 0" title="Менеджеры">
+    <v-divider/>
 
-  <template>
-    <v-card class="pa-3 mb-3 mt-3" v-if="managers.length > 0" title="Менеджеры">
-      <v-divider/>
+    <v-card-text>
+      <div class="mb-3 manager-item" v-for="manager in managers">
+        <v-avatar
+          size="36px"
+        >
+          <v-img
+            v-if="manager.avatar?.src"
+            :alt="manager.fullName"
+            :src="manager.avatar?.src"
+          ></v-img>
 
-      <v-card-text>
-        <div class="mb-3 manager-item" v-for="manager in managers">
-          <v-avatar
-            size="36px"
-          >
-            <v-img
-              v-if="manager.avatar?.src"
-              :alt="manager.fullName"
-              :src="manager.avatar?.src"
-            ></v-img>
+        </v-avatar>
 
-          </v-avatar>
+        <a :href="`/profile/managers/${manager.id}/`">{{ manager.fullName }}</a>
+      </div>
+    </v-card-text>
 
-          <div>{{ manager.fullName }}</div>
-        </div>
-      </v-card-text>
+    <v-divider/>
 
-      <v-divider/>
+    <v-card-actions class="flex-row justify-space-between ga-2">
+      <v-btn color="primary" href="/profile/managers/">Все менеджеры</v-btn>
+      <v-btn
+        variant="flat"
+        color="green-darken-2"
+        class="text-white"
+        @click.prevent="doShowModal"
+      >Добавить менеджера
+      </v-btn>
+    </v-card-actions>
 
-      <v-card-actions class="flex-row justify-start ga-2">
-        <v-btn href="/profile/managers/">Все менеджеры</v-btn>
-        <v-btn @click.prevent="doShowModal">Добавить менеджера</v-btn>
-      </v-card-actions>
+    <CreateManagerModal
+      :model-value="showModal"
+    />
 
-      <CreateManagerModal
-        :model-value="showModal"
-      />
-
-    </v-card>
-  </template>
+  </v-card>
 </template>
 
 

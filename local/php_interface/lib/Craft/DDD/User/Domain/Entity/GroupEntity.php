@@ -3,6 +3,8 @@
 namespace Craft\DDD\User\Domain\Entity;
 
 
+use Bitrix\Main\Diag\Debug;
+
 class GroupEntity
 {
 	protected int $id;
@@ -38,18 +40,12 @@ class GroupEntity
 		return $this->name;
 	}
 
-	public function isAdmin(): bool
-	{
-		return $this->code === 'ADMIN';
-	}
 
-	public function isManager(): bool
+	public function isSkip(): bool
 	{
-		return $this->code === 'MANAGER';
-	}
-
-	public function isAgent(): bool
-	{
-		return $this->code === 'AGENT';
+		return mb_strlen($this->code) <= 0 || in_array($this->code, [
+				'RATING_VOTE',
+				'RATING_VOTE_AUTHORITY',
+			]);
 	}
 }

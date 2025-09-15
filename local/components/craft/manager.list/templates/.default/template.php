@@ -15,10 +15,7 @@
  * @var string $componentPath
  * @var CraftManagerListComponent $component
  */
-?>
 
-
-<?php
 
 $APPLICATION->IncludeComponent(
 	'craft:vite',

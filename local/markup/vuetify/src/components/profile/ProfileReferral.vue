@@ -39,7 +39,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card title="Реферальная система">
+  <v-card title="Реферальная система" class="h-100">
     <template #subtitle v-if="referral?.link">
       Ссылка-приглашение<br>{{ referral.link }}
     </template>
@@ -55,6 +55,8 @@ export default defineComponent({
   </v-card>
 </template>
 
-<style lang="scss">
-
+<style scoped>
+:deep([data-v-app]) {
+  height: 100%;
+}
 </style>
