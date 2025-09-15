@@ -57,7 +57,7 @@ export default defineComponent({
         </td>
 
         <td class="system-table-col" v-if="!hideActionBlock">
-          <v-btn :href="`/profile/managers/${item.id}/`">
+          <v-btn :href="`/profile/managers/${item.id}/`" variant="text">
             <v-icon icon="$editBox"></v-icon>
           </v-btn>
           <v-menu>
