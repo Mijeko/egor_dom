@@ -1,13 +1,25 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import PhoneInput from "@/components/html/PhoneInput.vue";
-import type ManagerEditDescriptionItemDto from "@/dto/present/component/ManagerEditDescriptionItemDto.ts";
+import type ClaimDto from "@/dto/entity/ClaimDto.ts";
 import GuestUserInformation from "@/components/part/GuestUserInformation.vue";
+import PhoneInput from "@/components/html/PhoneInput.vue";
+import type GuestUserInfoItemDto from "@/dto/present/component/ManagerEditDescriptionItemDto.ts";
+import ClaimList from "@/components/ClaimList.vue";
 
 export default defineComponent({
-  name: "ManagerEdit",
-  components: {GuestUserInformation, PhoneInput},
+  name: "AgentEdit",
+  components: {ClaimList, PhoneInput, GuestUserInformation},
+  props: {
+    agent: {
+      type: Object as PropType<BxUserDto>,
+      default: null
+    },
+    orders: {
+      type: Array as PropType<ClaimDto[]>,
+      default: null
+    }
+  },
   data: function () {
     return {
       isFormValid: false,
@@ -27,12 +39,6 @@ export default defineComponent({
       },
     };
   },
-  props: {
-    manager: {
-      type: Object as PropType<BxUserDto>,
-      default: null
-    }
-  },
   methods: {
     submitForm() {
       if (!this.isFormValid) {
@@ -41,22 +47,22 @@ export default defineComponent({
     }
   },
   computed: {
-    descriptionItems: function (): ManagerEditDescriptionItemDto[] {
-      let items: ManagerEditDescriptionItemDto[] = [];
+    descriptionItems: function (): GuestUserInfoItemDto[] {
+      let items: GuestUserInfoItemDto[] = [];
 
-      items.push({label: 'Телефон', value: this.manager.phone} as ManagerEditDescriptionItemDto);
-      items.push({label: 'E-Mail', value: this.manager.email} as ManagerEditDescriptionItemDto);
+      items.push({label: 'Телефон', value: this.manager.phone} as GuestUserInfoItemDto);
+      items.push({label: 'E-Mail', value: this.manager.email} as GuestUserInfoItemDto);
       items.push({
         label: 'ФИО', value: this.manager.fullName ?? [
           this.manager.lastName,
           this.manager.name,
           this.manager.secondName,
         ].join(' ')
-      } as ManagerEditDescriptionItemDto);
+      } as GuestUserInfoItemDto);
 
       return items;
     }
-  }
+  },
 })
 </script>
 
@@ -64,9 +70,13 @@ export default defineComponent({
   <v-row class="mt-7">
     <v-col cols="6">
       <GuestUserInformation
-        :profile-avatar="manager.avatar?.src"
-        :profile-name="manager.fullName"
+        :profile-avatar="agent.avatar?.src"
+        :profile-name="agent.fullName"
         :list-info="descriptionItems"
+      />
+
+      <ClaimList
+        :claims="orders"
       />
     </v-col>
     <v-col cols="6">
@@ -97,6 +107,7 @@ export default defineComponent({
       </v-form>
     </v-col>
   </v-row>
+
 </template>
 
 <style scoped>

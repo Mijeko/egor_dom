@@ -23,7 +23,7 @@ $agentId = $arResult['VARIABLES']['AGENT_ID'];
 
 		<?php
 		$APPLICATION->IncludeComponent(
-			'craft:agent.detail',
+			'craft:agent.edit',
 			'.default',
 			[
 				'ID' => $agentId,

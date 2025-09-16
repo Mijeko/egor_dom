@@ -13,6 +13,7 @@ use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
+use Craft\Helper\Criteria;
 
 class OrmClaimRepository implements ClaimRepositoryInterface
 {
@@ -29,17 +30,6 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		$model->setEmail($claim->getEmail());
 		$model->setOrderCost($claim->getOrderCost());
 
-		//		$model->setOgrn($claim->getOgrn()->getValue());
-		//		$model->setInn($claim->getInn()->getValue());
-		//		$model->setKpp($claim->getKpp()->getValue());
-		//		$model->setBik($claim->getBik()->getValue());
-		//		$model->setCurrAcc($claim->getCurrAcc()->getValue());
-		//		$model->setCorrAcc($claim->getCorrAcc()->getValue());
-		//		$model->setLegalAddress($claim->getLegalAddress());
-		//		$model->setPostAddress($claim->getPostAddress());
-		//		$model->setBankName($claim->getBankName());
-
-
 		$result = $model->save();
 
 		if($result->isSuccess())
@@ -51,16 +41,14 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		throw new \Exception(implode("\n", $result->getErrors()));
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		$result = [];
 
-		$query = ClaimTable::getList([
-			'order'  => $order,
-			'filter' => $filter,
-		]);
+		$claimList = ClaimTable::getList($criteria->makeGetListParams())
+			->fetchCollection();
 
-		foreach($query->fetchCollection() as $claim)
+		foreach($claimList as $claim)
 		{
 			$result[] = $this->hydrate($claim);
 		}
@@ -70,13 +58,19 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 	public function findById(int $claimId): ?ClaimEntity
 	{
-		$object = ClaimTable::getByPrimary($claimId)->fetchObject();
-		if(!$object)
+		$items = $this->findAll(Criteria::instance(
+			[],
+			[
+				ClaimTable::F_ID => $claimId,
+			]
+		));
+
+		if(count($items) != 1)
 		{
-			throw new \Exception("Заявка не найдена");
+			return null;
 		}
 
-		return $this->hydrate($object);
+		return array_shift($items);
 	}
 
 	public function findAllByUserId(int $userId, array $order = []): array
@@ -104,6 +98,8 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		return ClaimEntity::hydrate(
 			$claim->getId(),
 			$claim->getApartmentId(),
+			$claim->getUserId(),
+			$claim->getManagerId(),
 			$claim->getName(),
 			new StatusValueObject($claim->getStatus()),
 			$claim->getEmail(),
@@ -118,6 +114,16 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 
 	public function update(ClaimEntity $claim): ?ClaimEntity
 	{
-		// TODO: Implement update() method.
+		return null;
+	}
+
+	public function findAllByManagerId(int $managerId): array
+	{
+		return $this->findAll(Criteria::instance(
+			[],
+			[
+				ClaimTable::F_MANAGER_ID => $managerId,
+			],
+		));
 	}
 }

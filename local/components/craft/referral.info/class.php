@@ -58,9 +58,7 @@ class CraftReferralInfoComponent extends CBitrixComponent
 			return $ref->getId();
 		}, $invitedMembers);
 
-		$claimList = $this->claimRepository->findAll([], [
-			ClaimTable::F_USER_ID => $idInvitedMemberList,
-		]);
+		$claimList = $this->claimRepository->findAll();
 
 		$costAward = array_reduce($claimList, function($store, ClaimEntity $item) {
 			if(

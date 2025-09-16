@@ -8,6 +8,8 @@ use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Domain\ValueObject\StatusValueObject;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 
 class ClaimCreateUseCase
@@ -37,8 +39,8 @@ class ClaimCreateUseCase
 
 		$claim = ClaimEntity::createClaim(
 			StatusValueObject::newClaim(),
-			$request->email,
-			$request->phone,
+			new EmailValueObject($request->email),
+			new PhoneValueObject($request->phone),
 			$request->client,
 			$apartment,
 			$user

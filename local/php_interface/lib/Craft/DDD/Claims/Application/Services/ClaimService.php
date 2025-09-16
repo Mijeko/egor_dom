@@ -14,6 +14,7 @@ use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
+use Craft\Helper\Criteria;
 
 class ClaimService
 {
@@ -93,12 +94,12 @@ class ClaimService
 			return $claim->getApartmentId();
 		}, $claims);
 
-		$apartments = $this->apartmentRepository->findAll(
+		$apartments = $this->apartmentRepository->findAll(Criteria::instance(
 			[],
 			[
 				ApartmentTable::F_ID => $apartmentIdList,
 			]
-		);
+		));
 
 		if($apartments)
 		{

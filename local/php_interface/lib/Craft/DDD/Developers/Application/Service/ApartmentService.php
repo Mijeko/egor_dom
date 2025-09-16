@@ -11,6 +11,7 @@ use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\Helper\Criteria;
 
 class ApartmentService
 {
@@ -39,19 +40,19 @@ class ApartmentService
 
 	public function findAll(array $order = [], array $filters = []): array
 	{
-		$apartmentList = $this->apartmentRepository->findAll($order, $filters);
+		$apartmentList = $this->apartmentRepository->findAll(Criteria::instance($order, $filters));
 		$this->loadRelations($apartmentList);
 		return $apartmentList;
 	}
 
 	public function findByExternalId(string $externalId): ?ApartmentEntity
 	{
-		$_apartmentList = $this->apartmentRepository->findAll(
+		$_apartmentList = $this->apartmentRepository->findAll(Criteria::instance(
 			[],
 			[
 				ApartmentTable::F_EXTERNAL_ID => $externalId,
 			]
-		);
+		));
 
 		if(count($_apartmentList) != 1)
 		{

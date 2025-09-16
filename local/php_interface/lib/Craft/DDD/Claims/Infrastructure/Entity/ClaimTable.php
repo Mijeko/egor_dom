@@ -33,6 +33,7 @@ class ClaimTable extends DataManager
 	const F_BANK_NAME = 'BANK_NAME';
 	const F_USER_ID = 'USER_ID';
 	const F_APARTMENT_ID = 'APARTMENT_ID';
+	const F_MANAGER_ID = 'MANAGER_ID';
 	const F_IS_CLOSED = 'IS_CLOSED';
 	const F_IS_MONEY_RECEIVED = 'IS_MONEY_RECEIVED';
 	const F_COST_REWARD = 'COST_REWARD';
@@ -97,6 +98,9 @@ class ClaimTable extends DataManager
 				->configureRequired(),
 			(new IntegerField(self::F_APARTMENT_ID))
 				->configureTitle('ID объекта')
+				->configureRequired(),
+			(new IntegerField(self::F_MANAGER_ID))
+				->configureTitle('ID менеджера')
 				->configureRequired(),
 			(new BooleanField(self::F_ACTIVE))
 				->configureTitle('Активность')

@@ -7,20 +7,20 @@ use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Domain\Entity\UserEntity;
 
 class ClaimEntity
 {
-
-
 	protected ?int $id;
 	protected ?string $name;
 	protected ?StatusValueObject $status;
-	protected ?string $email;
-	protected ?string $phone;
+	protected ?EmailValueObject $email;
+	protected ?PhoneValueObject $phone;
 	protected ?string $client;
 	protected ?InnValueObject $inn;
 	protected ?KppValueObject $kpp;
@@ -39,6 +39,7 @@ class ClaimEntity
 
 	protected ?int $apartmentId;
 	protected ?int $userId;
+	protected ?int $managerId;
 	protected ?ApartmentEntity $apartmentEntity = null;
 	protected ?UserEntity $user = null;
 
@@ -53,12 +54,11 @@ class ClaimEntity
 
 	public static function createClaim(
 		StatusValueObject $status,
-		string            $email,
-		string            $phone,
+		EmailValueObject  $email,
+		PhoneValueObject  $phone,
 		string            $client,
 		ApartmentEntity   $apartmentEntity,
 		UserEntity        $user,
-		int               $orderCost,
 	): ClaimEntity
 	{
 		$self = new self();
@@ -68,18 +68,9 @@ class ClaimEntity
 		$self->email = $email;
 		$self->phone = $phone;
 		$self->client = $client;
-		//		$self->inn = new InnValueObject($inn);
-		//		$self->kpp = new KppValueObject($kpp);
-		//		$self->bik = new BikValueObject($bik);
-		//		$self->ogrn = new OgrnValueObject($ogrn);
-		//		$self->currAcc = new CurrAccountValueObject($currAcc);
-		//		$self->corrAcc = new CorrAccountValueObject($corrAcc);
-		//		$self->legalAddress = $legalAddress;
-		//		$self->postAddress = $postAddress;
-		//		$self->bankName = $bankName;
 		$self->apartmentEntity = $apartmentEntity;
 		$self->user = $user;
-		$self->orderCost = $orderCost;
+		$self->orderCost = $apartmentEntity->getPrice();
 
 		return $self;
 
@@ -88,6 +79,8 @@ class ClaimEntity
 	public static function hydrate(
 		?int               $id,
 		?int               $apartmentId,
+		?int               $userId,
+		?int               $managerId,
 		?string            $name,
 		?StatusValueObject $status,
 		?string            $email,
@@ -102,6 +95,8 @@ class ClaimEntity
 		$self = new self();
 		$self->id = $id;
 		$self->apartmentId = $apartmentId;
+		$self->userId = $userId;
+		$self->managerId = $managerId;
 		$self->name = $name;
 		$self->status = $status;
 		$self->email = $email;
@@ -152,12 +147,12 @@ class ClaimEntity
 		return $this->user;
 	}
 
-	public function getPhone(): ?string
+	public function getPhone(): ?PhoneValueObject
 	{
 		return $this->phone;
 	}
 
-	public function getEmail(): ?string
+	public function getEmail(): ?EmailValueObject
 	{
 		return $this->email;
 	}
@@ -250,5 +245,10 @@ class ClaimEntity
 	public function getOrderCost(): ?int
 	{
 		return $this->orderCost;
+	}
+
+	public function getManagerId(): ?int
+	{
+		return $this->managerId;
 	}
 }

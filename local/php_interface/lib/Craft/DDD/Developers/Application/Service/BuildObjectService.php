@@ -15,6 +15,7 @@ use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\Helper\Criteria;
 
 class BuildObjectService
 {
@@ -147,12 +148,12 @@ class BuildObjectService
 		$buildObjectIdList = array_map(function(BuildObjectEntity $buildObjectEntity) {
 			return $buildObjectEntity->getId();
 		}, $buildObjectList);
-		$apartments = $this->apartmentRepository->findAll(
+		$apartments = $this->apartmentRepository->findAll(Criteria::instance(
 			[],
 			[
 				ApartmentTable::F_BUILD_OBJECT_ID => $buildObjectIdList,
 			]
-		);
+		));
 		if($apartments)
 		{
 			$buildObjectList = array_map(function(BuildObjectEntity $buildObjectEntity) use ($apartments) {

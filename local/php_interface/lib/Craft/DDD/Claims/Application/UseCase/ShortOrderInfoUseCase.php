@@ -8,6 +8,7 @@ use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\Helper\Criteria;
 use Craft\Helper\CurrencyHtml;
 use Craft\Helper\Money;
 
@@ -29,11 +30,14 @@ class ShortOrderInfoUseCase
 		}
 
 		$orders = $this->claimRepository->findAllByUserId($userId);
-		$apartmentList = $this->apartmentRepository->findAll([], [
-			ApartmentTable::F_ID => array_map(function(ClaimEntity $claim) {
-				return $claim->getId();
-			}, $orders),
-		]);
+		$apartmentList = $this->apartmentRepository->findAll(Criteria::instance(
+			[],
+			[
+				ApartmentTable::F_ID => array_map(function(ClaimEntity $claim) {
+					return $claim->getId();
+				}, $orders),
+			]
+		));
 
 		$rotate = (function(array $apartmentList) {
 			return array_reduce($apartmentList, function($init, ApartmentEntity $entity) {

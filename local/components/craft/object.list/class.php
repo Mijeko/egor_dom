@@ -45,10 +45,12 @@ class CraftBuildObjectListComponent extends CBitrixComponent
 	protected function loadData(): void
 	{
 
-		$apartmentList = $this->apartmentRepository->findAll(
+		$apartmentList = $this->apartmentRepository->findAll(Criteria::instance(
 			[],
-			BuildApartmentFilter::execute(ApartmentFilterBuilder::fromUrl())
-		);
+			[
+				BuildApartmentFilter::execute(ApartmentFilterBuilder::fromUrl()),
+			]
+		));
 
 		$buildObjectIdList = array_map(function(ApartmentEntity $ae) {
 			return $ae->getBuildObjectId();

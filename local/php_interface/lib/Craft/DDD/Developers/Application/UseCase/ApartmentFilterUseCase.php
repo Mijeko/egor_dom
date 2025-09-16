@@ -29,10 +29,10 @@ class ApartmentFilterUseCase
 	public function execute(ApartmentFilterDto $apartmentFilterDto): array
 	{
 
-		$apartmentList = $this->apartmentRepository->findAll(
+		$apartmentList = $this->apartmentRepository->findAll(Criteria::instance(
 			[],
 			BuildApartmentFilter::execute($apartmentFilterDto)
-		);
+		));
 
 		$buildObjectIdList = array_map(function(ApartmentEntity $ae) {
 			return $ae->getBuildObjectId();

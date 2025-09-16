@@ -8,21 +8,20 @@ use Craft\DDD\Developers\Domain\ValueObject\BuiltStateValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\StringLogicValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Apartment;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
+use Craft\Helper\Criteria;
 
 class OrmApartmentRepository implements ApartmentRepositoryInterface
 {
 
 	/**
+	 * @param Criteria|null $criteria
 	 * @return ApartmentEntity[]
 	 */
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		$result = [];
-		$apartmentList = ApartmentTable::getList([
-			'order'  => $order,
-			'filter' => $filter,
-			'cache'  => ['ttl' => 3600 * 48],
-		])->fetchCollection();
+		$apartmentList = ApartmentTable::getList($criteria->cache(['ttl' => 3600 * 48])->makeGetListParams())
+			->fetchCollection();
 
 		foreach($apartmentList as $apartment)
 		{
@@ -94,13 +93,12 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	public function findById(int $id): ?ApartmentEntity
 	{
-
-		$apartmentList = $this->findAll(
+		$apartmentList = $this->findAll(Criteria::instance(
 			[],
 			[
 				ApartmentTable::F_ID => $id,
 			]
-		);
+		));
 
 		if(count($apartmentList) != 1)
 		{
@@ -112,12 +110,12 @@ class OrmApartmentRepository implements ApartmentRepositoryInterface
 
 	public function findByExternalId(string $externalId): ?ApartmentEntity
 	{
-		$apartmentList = $this->findAll(
+		$apartmentList = $this->findAll(Criteria::instance(
 			[],
 			[
 				ApartmentTable::F_EXTERNAL_ID => $externalId,
 			]
-		);
+		));
 
 		if(count($apartmentList) != 1)
 		{
