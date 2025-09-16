@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AgentEdit: typeof import('./src/components/AgentEdit.vue')['default']
     AgentList: typeof import('./src/components/AgentList.vue')['default']
     Alert: typeof import('./src/components/Alert.vue')['default']
     ApartmentFilter: typeof import('./src/components/ApartmentFilter.vue')['default']
@@ -30,6 +31,7 @@ declare module 'vue' {
     CreateStudentModal: typeof import('./src/components/modal/CreateStudentModal.vue')['default']
     CurrentCity: typeof import('./src/components/CurrentCity.vue')['default']
     DeveloperList: typeof import('./src/components/DeveloperList.vue')['default']
+    GuestUserInformation: typeof import('./src/components/part/GuestUserInformation.vue')['default']
     Init: typeof import('./src/components/system/Init.vue')['default']
     InputDropdown: typeof import('./src/components/filter/part/InputDropdown.vue')['default']
     MainApartmentFilter: typeof import('./src/components/filter/MainApartmentFilter.vue')['default']

@@ -50,13 +50,13 @@ export default defineComponent({
     descriptionItems: function (): GuestUserInfoItemDto[] {
       let items: GuestUserInfoItemDto[] = [];
 
-      items.push({label: 'Телефон', value: this.manager.phone} as GuestUserInfoItemDto);
-      items.push({label: 'E-Mail', value: this.manager.email} as GuestUserInfoItemDto);
+      items.push({label: 'Телефон', value: this.agent.phone} as GuestUserInfoItemDto);
+      items.push({label: 'E-Mail', value: this.agent.email} as GuestUserInfoItemDto);
       items.push({
-        label: 'ФИО', value: this.manager.fullName ?? [
-          this.manager.lastName,
-          this.manager.name,
-          this.manager.secondName,
+        label: 'ФИО', value: this.agent.fullName ?? [
+          this.agent.lastName,
+          this.agent.name,
+          this.agent.secondName,
         ].join(' ')
       } as GuestUserInfoItemDto);
 

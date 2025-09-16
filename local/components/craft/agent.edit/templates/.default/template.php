@@ -25,8 +25,8 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'AgentEdit',
 		'PROPS'  => [
-			'agent' => $arResult['AGENT'],
-
+			'agent'  => $arResult['AGENT'],
+			'orders' => $arResult['ORDERS'],
 		],
 	],
 	false,
