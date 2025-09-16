@@ -1,5 +1,10 @@
 <?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
 <?php
+
+use Craft\Dto\BxUserDto;
+use Craft\Helper\TableHeaderHelper;
+use Craft\Helper\TableSettingsHelper;
+
 /**
  * @var string $componentPath
  * @var array $arParams
@@ -24,7 +29,18 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'StudentList',
 		'PROPS'  => [
-			'agents' => $arResult['STUDENTS'],
+			'tableParams' => TableSettingsHelper::settings()
+				->records(array_map(function(BxUserDto $agent) {
+					return [
+						'id'   => $agent->id,
+						'name' => $agent->name,
+					];
+				}, $arResult['STUDENTS'] ?? []))
+				->header([
+					TableHeaderHelper::build('id', 'ID'),
+					TableHeaderHelper::build('name', 'Название'),
+				])
+				->build(),
 		],
 	],
 	false,

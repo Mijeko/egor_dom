@@ -31,10 +31,6 @@ class CraftStudentListComponent extends AjaxComponent
 	protected function loadData(): void
 	{
 		$students = $this->studentRepository->findAll();
-		if(!$students)
-		{
-			throw new Exception("Студенты не найдены");
-		}
 
 		$this->arResult['STUDENTS'] = array_map(function(StudentEntity $student) {
 			return BxUserDto::student(

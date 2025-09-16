@@ -3,7 +3,7 @@ import {defineComponent, type PropType} from 'vue'
 import Table from "@/components/system/Table.vue";
 
 export default defineComponent({
-  name: "AgentList",
+  name: "StudentList",
   components: {Table},
   props: {
     tableParams: {
@@ -11,10 +11,11 @@ export default defineComponent({
     }
   },
   mounted(): any {
-    console.log('List agent', this.tableParams);
+    console.log('List student', this.tableParams);
   }
 })
 </script>
+
 
 <template>
   <Table
