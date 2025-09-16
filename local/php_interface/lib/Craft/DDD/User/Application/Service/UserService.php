@@ -22,19 +22,19 @@ class UserService
 
 	public function findAll(Criteria $criteria): array
 	{
-		$list = $this->userRepository->findAll($criteria);
+		$userList = $this->userRepository->findAll($criteria);
 
 
-		$groups = array_reduce($list, function(array $init, UserEntity $userEntity) {
+		$collectedUserGroupList = array_reduce($userList, function(array $init, UserEntity $userEntity) {
 			return array_merge($init, $this->userGroupRepository->findByUserId($userEntity->getId()));
 		}, []);
 
 
-		$list = array_map(function(UserEntity $entity) use ($groups) {
+		$userList = array_map(function(UserEntity $entity) use ($collectedUserGroupList) {
 
 			foreach($entity->getGroupIdList() as $groupId)
 			{
-				$group = array_filter($groups, function(GroupEntity $group) use ($groupId) {
+				$group = array_filter($collectedUserGroupList, function(GroupEntity $group) use ($groupId) {
 					return $group->getId() == $groupId;
 				});
 
@@ -50,10 +50,10 @@ class UserService
 
 			return $entity;
 
-		}, $list);
+		}, $userList);
 
 
-		return $list;
+		return $userList;
 	}
 
 	public function findById(int $id): ?UserEntity

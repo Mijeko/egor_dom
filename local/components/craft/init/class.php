@@ -91,7 +91,6 @@ class CraftInitComponent extends CBitrixComponent
 		}, $mainUserGroupList);
 		$groups = array_filter($groups);
 
-
 		$avatar = null;
 		if($mainUser->getAvatarId())
 		{
@@ -240,8 +239,8 @@ class CraftInitComponent extends CBitrixComponent
 			}
 		}
 
-		//		Debug::dump($dto);
-		//		exit();
+
+//		Debug::dump($dto->position);
 
 		$this->arResult['USER'] = $dto;
 

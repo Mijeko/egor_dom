@@ -31,6 +31,7 @@ class CraftObjectLastViewComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
+			\Bitrix\Main\Diag\Debug::dump($e->getMessage());
 		}
 	}
 
