@@ -45,7 +45,7 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 	{
 		$result = [];
 
-		$claimList = ClaimTable::getList($criteria->makeGetListParams())
+		$claimList = ClaimTable::getList($criteria?->makeGetListParams() ?? [])
 			->fetchCollection();
 
 		foreach($claimList as $claim)
