@@ -3,6 +3,7 @@
 namespace Craft\DDD\User\Application\Factory;
 
 use Craft\DDD\User\Application\UseCase\CreateStudentUseCase;
+use Craft\DDD\User\Infrastructure\Repository\BxManagerRepository;
 use Craft\DDD\User\Infrastructure\Repository\BxStudentRepository;
 use Craft\DDD\User\Infrastructure\Service\GroupAssignService;
 use Craft\DDD\User\Infrastructure\Service\PasswordGenerator;
@@ -13,6 +14,7 @@ class CreateStudentUseCaseFactory
 	{
 		return new CreateStudentUseCase(
 			new BxStudentRepository(),
+			new BxManagerRepository(),
 			new GroupAssignService(),
 			new PasswordGenerator(),
 		);

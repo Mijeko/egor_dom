@@ -9,6 +9,7 @@ use Craft\DDD\User\Application\Dto\CreateStudentRequestDto;
 use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Application\Service\Interfaces\PasswordGeneratorInterface;
 use Craft\DDD\User\Domain\Entity\StudentEntity;
+use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\User\Domain\Repository\StudentRepositoryInterface;
 
 class CreateStudentUseCase
@@ -16,6 +17,7 @@ class CreateStudentUseCase
 
 	public function __construct(
 		protected StudentRepositoryInterface $studentRepository,
+		protected ManagerRepositoryInterface $managerRepository,
 		protected GroupAssignInterface       $groupAssign,
 		protected PasswordGeneratorInterface $passwordGenerator,
 	)
@@ -25,6 +27,11 @@ class CreateStudentUseCase
 
 	public function execute(CreateStudentRequestDto $agentRequestDto): void
 	{
+		if(!$this->managerRepository->findById($agentRequestDto->managerId))
+		{
+			throw new \Exception("Выбранный менеджер не существует.");
+		}
+
 		$studentEntity = StudentEntity::createStudent(
 			$agentRequestDto->name,
 			$agentRequestDto->lastName,

@@ -10,12 +10,14 @@ use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
 use Craft\DDD\User\Application\Service\Interfaces\PasswordGeneratorInterface;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;
+use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 
 class CreateAgentUseCase
 {
 
 	public function __construct(
 		protected AgentRepositoryInterface   $agentRepository,
+		protected ManagerRepositoryInterface $managerRepository,
 		protected GroupAssignInterface       $groupAssign,
 		protected PasswordGeneratorInterface $passwordGenerator,
 	)
@@ -25,6 +27,11 @@ class CreateAgentUseCase
 
 	public function execute(CreateAgentRequestDto $agentRequestDto): void
 	{
+		if(!$this->managerRepository->findById($agentRequestDto->managerId))
+		{
+			throw new \Exception("Выбранный менеджер не существует.");
+		}
+
 		$agent = AgentEntity::createAgent(
 			new PasswordValueObject($this->passwordGenerator->generate()),
 			$agentRequestDto->name,
