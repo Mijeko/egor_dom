@@ -21,7 +21,7 @@ class AuthorizeListener
 
 			$insertReferralItemUseCase->execute(new InsertReferralDto(
 				$userEntity->getId(),
-				$userEntity->getPhone(),
+				$userEntity->getPhone()->getValue(),
 			));
 
 

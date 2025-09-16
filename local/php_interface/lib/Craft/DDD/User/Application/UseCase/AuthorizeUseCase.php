@@ -31,7 +31,7 @@ class AuthorizeUseCase
 			throw new \Exception('Пользователь не найден');
 		}
 
-		if(!$this->passwordManager->verifyPassword($password, $user->getPassword()))
+		if(!$this->passwordManager->verifyPassword($password, $user->getPassword()->getValue()))
 		{
 			throw new \Exception('Пароль не верный');
 		}

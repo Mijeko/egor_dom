@@ -30,7 +30,7 @@ class CraftInitComponent extends CBitrixComponent
 	protected ExternalRealtorRepositoryInterface $externalRealtorRepository;
 
 	protected UserRepositoryInterface $userRepository;
-	protected UserService $service;
+	protected UserService $userService;
 
 	protected ImageServiceInterface $imageService;
 
@@ -69,17 +69,15 @@ class CraftInitComponent extends CBitrixComponent
 		$this->externalRealtorRepository = new ExternalRealtorRepository();
 		$this->userRepository = new BxUserRepository();
 		$this->imageService = new ImageService();
-		$this->service = UserServiceFactory::getService();
+		$this->userService = UserServiceFactory::getService();
 	}
 
 	private function loadData(): void
 	{
 		$dto = null;
 
-		$mainUser = $this->service->findById($this->arParams['USER_ID']);
-
+		$mainUser = $this->userService->findById($this->arParams['USER_ID']);
 		$mainUserGroupList = $mainUser->getGroup();
-
 		$groups = array_map(function(GroupEntity $group) {
 			if($group->isSkip())
 			{
@@ -91,8 +89,38 @@ class CraftInitComponent extends CBitrixComponent
 				$group->getCode()
 			);
 		}, $mainUserGroupList);
-
 		$groups = array_filter($groups);
+
+
+		$avatar = null;
+		if($mainUser->getAvatarId())
+		{
+			$_image = $this->imageService->findById($mainUser->getAvatarId());
+			if($_image)
+			{
+				$avatar = new BxImageDto(
+					$_image->id,
+					$_image->src,
+				);
+			}
+		}
+
+		$dto = BxUserDto::simpleUser(
+			$mainUser->getId(),
+			$mainUser->getName(),
+			$mainUser->getLastName(),
+			$mainUser->getSecondName(),
+			implode(' ', [
+				$mainUser->getName(),
+				$mainUser->getLastName(),
+				$mainUser->getSecondName(),
+			]),
+			$mainUser->getEmail()->getValue(),
+			$mainUser->getPhone()->getValue(),
+			$avatar,
+			$groups
+		);
+
 
 		if($mainUser->isExtRealtor())
 		{
@@ -211,6 +239,9 @@ class CraftInitComponent extends CBitrixComponent
 				);
 			}
 		}
+
+		//		Debug::dump($dto);
+		//		exit();
 
 		$this->arResult['USER'] = $dto;
 

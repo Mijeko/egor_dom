@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\User\Infrastructure\Repository;
 
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Domain\Entity\UserEntity;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
@@ -68,9 +70,13 @@ class BxUserRepository implements UserRepositoryInterface
 		return UserEntity::hydrate(
 			$bxUser->getId(),
 			$bxUser->getLogin(),
-			$bxUser->getPersonalMobile(),
-			$bxUser->getEmail(),
-			$bxUser->getPassword(),
+			$bxUser->getName(),
+			$bxUser->getLastName(),
+			$bxUser->getSecondName(),
+			$bxUser->getPersonalPhoto(),
+			new PhoneValueObject($bxUser->getPersonalMobile()),
+			new EmailValueObject($bxUser->getEmail()),
+			new PasswordValueObject($bxUser->getPassword()),
 			$bxUser->fillGroups()->getGroupIdList()
 		);
 	}

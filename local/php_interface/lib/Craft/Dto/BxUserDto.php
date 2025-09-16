@@ -48,6 +48,31 @@ class BxUserDto
 		return $self;
 	}
 
+	public static function simpleUser(
+		int         $id,
+		string      $name,
+		string      $lastName,
+		string      $secondName,
+		string      $fullName,
+		string      $email,
+		string      $phone,
+		?BxImageDto $avatarDto = null,
+		?array      $groupDto = [],
+	): BxUserDto
+	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->fullName = $fullName;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->avatar = $avatarDto;
+		$self->position = $groupDto;
+		return $self;
+	}
+
 	public static function agent(
 		int         $id,
 		string      $name,

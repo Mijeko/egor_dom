@@ -2,31 +2,45 @@
 
 namespace Craft\DDD\User\Domain\Entity;
 
-use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PasswordValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
 class UserEntity
 {
 	protected int $id;
 	protected string $login;
-	protected string $phone;
-	protected string $email;
-	protected ?string $password = null;
+	protected PhoneValueObject $phone;
+	protected EmailValueObject $email;
+	protected ?PasswordValueObject $password = null;
+	protected ?string $name;
+	protected ?string $lastName;
+	protected ?string $secondName;
+	protected ?int $avatarId = null;
 	protected ?array $groupIdList = [];
 	protected ?array $group = [];
 
 
 	public static function hydrate(
-		int     $id,
-		string  $login,
-		string  $phone,
-		string  $email,
-		?string $password = null,
-		?array  $groupIdList = [],
+		int                  $id,
+		string               $login,
+		?string              $name,
+		?string              $lastName,
+		?string              $secondName,
+		?int                 $avatarId,
+		PhoneValueObject     $phone,
+		EmailValueObject     $email,
+		?PasswordValueObject $password = null,
+		?array               $groupIdList = [],
 	): UserEntity
 	{
 		$self = new self();
 		$self->id = $id;
 		$self->login = $login;
+		$self->name = $name;
+		$self->lastName = $lastName;
+		$self->secondName = $secondName;
+		$self->avatarId = $avatarId;
 		$self->phone = $phone;
 		$self->email = $email;
 		$self->password = $password;
@@ -34,7 +48,22 @@ class UserEntity
 		return $self;
 	}
 
-	public function getEmail(): string
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
+
+	public function getSecondName(): ?string
+	{
+		return $this->secondName;
+	}
+
+	public function getLastName(): ?string
+	{
+		return $this->lastName;
+	}
+
+	public function getEmail(): EmailValueObject
 	{
 		return $this->email;
 	}
@@ -44,12 +73,12 @@ class UserEntity
 		return $this->id;
 	}
 
-	public function getPassword(): string
+	public function getPassword(): PasswordValueObject
 	{
 		return $this->password;
 	}
 
-	public function getPhone(): string
+	public function getPhone(): PhoneValueObject
 	{
 		return $this->phone;
 	}
@@ -69,6 +98,11 @@ class UserEntity
 	public function getGroup(): array
 	{
 		return $this->group;
+	}
+
+	public function getAvatarId(): ?int
+	{
+		return $this->avatarId;
 	}
 
 	public function getGroupIdList(): ?array

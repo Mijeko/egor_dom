@@ -13,7 +13,7 @@ class PasswordManager
 	{
 	}
 
-	public function verifyPassword($password, $hash): bool
+	public function verifyPassword(string$password, string $hash): bool
 	{
 		return $this->verificator->verify($password, $hash);
 	}
