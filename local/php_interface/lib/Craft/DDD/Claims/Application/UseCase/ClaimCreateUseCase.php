@@ -5,7 +5,9 @@ namespace Craft\DDD\Claims\Application\UseCase;
 use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
 use Craft\DDD\Claims\Application\Interfaces\TgSenderInterface;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
+use Craft\DDD\Claims\Domain\Repository\BuyerRepositoryInterface;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
+use Craft\DDD\Claims\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\Claims\Domain\ValueObject\StatusValueObject;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
@@ -18,7 +20,8 @@ class ClaimCreateUseCase
 	public function __construct(
 		protected ApartmentRepositoryInterface $apartmentRepository,
 		protected ClaimRepositoryInterface     $claimRepository,
-		protected UserRepositoryInterface      $userRepository,
+		protected BuyerRepositoryInterface     $buyerRepository,
+		protected ManagerRepositoryInterface   $managerRepository,
 	)
 	{
 	}
@@ -28,13 +31,19 @@ class ClaimCreateUseCase
 		$apartment = $this->apartmentRepository->findById($request->apartmentId);
 		if(!$apartment)
 		{
-			throw new \Exception("Квартира не найдена");
+			throw new \Exception("Квартира не найдена.");
 		}
 
-		$user = $this->userRepository->findById($request->userId);
-		if(!$user)
+		$buyerEntity = $this->buyerRepository->findById($request->userId);
+		if(!$buyerEntity)
 		{
-			throw new \Exception('Пользователь не найден');
+			throw new \Exception('Покупатель не найден.');
+		}
+
+		$manager = $this->managerRepository->findById($buyerEntity->getManagerId()->getValue());
+		if(!$manager)
+		{
+			throw new \Exception('У вас не назначен менеджер.');
 		}
 
 		$claim = ClaimEntity::createClaim(
@@ -43,7 +52,8 @@ class ClaimCreateUseCase
 			new PhoneValueObject($request->phone),
 			$request->client,
 			$apartment,
-			$user
+			$buyerEntity,
+			$manager
 		);
 
 		return $this->claimRepository->create($claim);

@@ -41,7 +41,7 @@ class ClaimEntity
 	protected ?int $userId;
 	protected ?int $managerId;
 	protected ?ApartmentEntity $apartmentEntity = null;
-	protected ?UserEntity $user = null;
+	protected ?BuyerEntity $user = null;
 
 	public function finish(
 		StatusValueObject $status,
@@ -58,7 +58,8 @@ class ClaimEntity
 		PhoneValueObject  $phone,
 		string            $client,
 		ApartmentEntity   $apartmentEntity,
-		UserEntity        $user,
+		BuyerEntity       $buyerEntity,
+		ManagerEntity     $managerEntity,
 	): ClaimEntity
 	{
 		$self = new self();
@@ -69,7 +70,8 @@ class ClaimEntity
 		$self->phone = $phone;
 		$self->client = $client;
 		$self->apartmentEntity = $apartmentEntity;
-		$self->user = $user;
+		$self->user = $buyerEntity;
+		$self->managerId = $managerEntity->getId();
 		$self->orderCost = $apartmentEntity->getPrice();
 
 		return $self;
@@ -115,9 +117,9 @@ class ClaimEntity
 		return $this;
 	}
 
-	public function addUser(UserEntity $user): static
+	public function addBuyer(BuyerEntity $buyerEntity): static
 	{
-		$this->user = $user;
+		$this->user = $buyerEntity;
 		return $this;
 	}
 
@@ -142,7 +144,7 @@ class ClaimEntity
 		return $this->apartmentEntity;
 	}
 
-	public function getUser(): ?UserEntity
+	public function getUser(): ?BuyerEntity
 	{
 		return $this->user;
 	}

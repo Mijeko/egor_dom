@@ -8,40 +8,38 @@ use Craft\DDD\Claims\Domain\Repository\ManagerRepositoryInterface;
 use Craft\DDD\Shared\Domain\ValueObject\AvailChannelContactValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ChannelEmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ChannelTgValueObject;
+use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 use Craft\Model\CraftUserTable;
 
 class OrmManagerRepository implements ManagerRepositoryInterface
 {
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		$managers = [];
+		$userList = CraftUserTable::query();
 
-		if(!defined('USER_GROUP_MANAGER_ID') || !USER_GROUP_MANAGER)
+		if($criteria)
 		{
-			return $managers;
+			$criteria->cache(['ttl' => 3600 * 48]);
+
+			if($criteria->getFilter())
+			{
+				$userList->setFilter($criteria->getFilter());
+			}
+
+			if($criteria->getOrder())
+			{
+				$userList->setOrder($criteria->getOrder());
+			}
+
+			if($criteria->getSelect())
+			{
+				$userList->setSelect($criteria->getSelect());
+			}
 		}
 
-		$managersAssignGroup = UserGroupTable::getList([
-			'filter' => [
-				'=GROUP_ID' => USER_GROUP_MANAGER,
-			],
-			'cache'  => ['ttl' => 3600 * 48],
-		])->fetchCollection();
-
-		if(count($managersAssignGroup->getUserIdList()) <= 0)
-		{
-			return $managers;
-		}
-
-		$userList = CraftUserTable::getList([
-			'order'  => $order,
-			'filter' => array_merge(
-				['ID' => $managersAssignGroup->getUserIdList()],
-				$filter
-			),
-			'cache'  => ['ttl' => 3600 * 48],
-		])->fetchCollection();
+		$userList = $userList->withManager()->fetchCollection();
 
 		foreach($userList as $user)
 		{
@@ -67,5 +65,23 @@ class OrmManagerRepository implements ManagerRepositoryInterface
 				)
 			),
 		);
+	}
+
+	public function findById(int $managerId): ?ManagerEntity
+	{
+		$items = $this->findAll(Criteria::instance(
+			[],
+			[
+				CraftUserTable::F_ID => $managerId,
+			],
+		));
+
+		if(count($items) != 1)
+		{
+			return null;
+		}
+
+
+		return array_shift($items);
 	}
 }

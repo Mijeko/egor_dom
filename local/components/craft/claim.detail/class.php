@@ -109,6 +109,6 @@ class CraftClaimDetailComponent extends CBitrixComponent
 		/* @var ClaimDetailDto $claim */
 		$claim = $this->arResult['CLAIM'];
 
-		$APPLICATION->SetTitle('Заявка на приобритение ' . $claim->claim->apartment->name);
+		$APPLICATION->SetTitle('Заявка на приобретение ' . $claim->claim->apartment->name);
 	}
 }
