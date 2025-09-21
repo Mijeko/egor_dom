@@ -10,9 +10,11 @@ use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Shared\Domain\ValueObject\BikValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CorrAccountValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\CurrAccountValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\InnValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\KppValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\OgrnValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\Helper\Criteria;
 
 class OrmClaimRepository implements ClaimRepositoryInterface
@@ -103,8 +105,8 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 			$claim->getManagerId(),
 			$claim->getName(),
 			new StatusValueObject($claim->getStatus()),
-			$claim->getEmail(),
-			$claim->getPhone(),
+			new EmailValueObject($claim->getEmail()),
+			new PhoneValueObject($claim->getPhone()),
 			$claim->getClient(),
 			$claim->getCreatedAt()->format('d.m.Y H:i:s'),
 			$claim->getIsClosed(),
