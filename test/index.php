@@ -1,10 +1,14 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Новый раздел");
-?>
-
-
 <?php
-?>
 
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+if(empty($_SERVER['DOCUMENT_ROOT']))
+{
+	$_SERVER['DOCUMENT_ROOT'] = dirname(__DIR__);
+}
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
+
+
+
+
+$server = new \Craft\Socket\Server();
+$server->run();
