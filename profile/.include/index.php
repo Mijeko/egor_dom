@@ -18,6 +18,7 @@ $APPLICATION->IncludeComponent(
 		'SEF_MODE'          => 'Y',
 		'SEF_URL_TEMPLATES' => [
 			''               => 'main',
+			'stream'         => 'stream/',
 			'settings'       => 'settings/',
 			'education'      => 'education/',
 			'orders'         => 'orders/',

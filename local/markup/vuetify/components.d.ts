@@ -57,6 +57,7 @@ declare module 'vue' {
     ShortManagerList: typeof import('./src/components/profile/ShortManagerList.vue')['default']
     ShortOrderInfo: typeof import('./src/components/profile/ShortOrderInfo.vue')['default']
     ShortStudentList: typeof import('./src/components/profile/ShortStudentList.vue')['default']
+    Stream: typeof import('./src/components/profile/Stream.vue')['default']
     StudentList: typeof import('./src/components/StudentList.vue')['default']
     Table: typeof import('./src/components/system/Table.vue')['default']
   }
