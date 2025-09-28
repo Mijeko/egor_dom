@@ -15,12 +15,19 @@ class Server
 		string $host = "websocket://0.0.0.0:8686/",
 	): void
 	{
-		$http_worker = new Worker($host);
+		global $http_worker;
 
+		$http_worker = new Worker($host);
+		$global_uid = 0;
 		// Запуск 4 процессов для предоставления услуг
-		$http_worker->count = 4;
+		$http_worker->count = 1;
+		//		$http_worker->count = 4;
 
 		// При получении данных от браузера ответить hello world
+		$http_worker->onConnect = function(TcpConnection $connection) {
+			global $text_worker, $global_uid;
+			$connection->id = ++$global_uid;
+		};
 		$http_worker->onMessage = function(TcpConnection $connection, $request) {
 
 			$acceptData = null;
@@ -31,18 +38,27 @@ class Server
 
 			Debug::dumpToFile($acceptData, '', '__messageLog.log');
 
-			$service = ChatUseCaseFactory::getUseCase();
-			$service->sendMessage(
-				$acceptData['userId'],
-				$acceptData['acceptUserId'],
-				$acceptData['message'],
-			);
+			//			$service = ChatUseCaseFactory::getUseCase();
+			//			$service->sendMessage(
+			//				$acceptData['sendUserId'],
+			//				$acceptData['acceptUserId'],
+			//				$acceptData['message'],
+			//			);
 
 
 			$connection->send('hello world');
+
+			global $http_worker;
+
+			foreach($http_worker->connections as $conn)
+			{
+				$conn->send("user[{$connection->uid}] сказал: " . rand());
+			}
 		};
 
 		// Запуск worker
 		Worker::runAll();
+
+
 	}
 }
