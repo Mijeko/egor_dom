@@ -11,24 +11,26 @@ use Workerman\Worker;
 class Server
 {
 
+	private $worker;
+
+	private $uid = 0;
+
 	public function run(
 		string $host = "websocket://0.0.0.0:8686/",
 	): void
 	{
-		global $http_worker;
+		//		global $http_worker;
 
-		$http_worker = new Worker($host);
-		$global_uid = 0;
+		$this->worker = new Worker($host);
 		// Запуск 4 процессов для предоставления услуг
-		$http_worker->count = 1;
+		$this->worker->count = 1;
 		//		$http_worker->count = 4;
 
 		// При получении данных от браузера ответить hello world
-		$http_worker->onConnect = function(TcpConnection $connection) {
-			global $text_worker, $global_uid;
-			$connection->id = ++$global_uid;
+		$this->worker->onConnect = function(TcpConnection $connection) {
+			$connection->id = ++$this->uid;
 		};
-		$http_worker->onMessage = function(TcpConnection $connection, $request) {
+		$this->worker->onMessage = function(TcpConnection $connection, $request) {
 
 			$acceptData = null;
 			if(json_validate($request))
@@ -36,21 +38,18 @@ class Server
 				$acceptData = json_decode($request, true);
 			}
 
-			Debug::dumpToFile($acceptData, '', '__messageLog.log');
 
-			//			$service = ChatUseCaseFactory::getUseCase();
-			//			$service->sendMessage(
-			//				$acceptData['sendUserId'],
-			//				$acceptData['acceptUserId'],
-			//				$acceptData['message'],
-			//			);
+			$service = ChatUseCaseFactory::getUseCase();
+			$service->sendMessage(
+				$acceptData['sendUserId'],
+				$acceptData['acceptUserId'],
+				$acceptData['message'],
+			);
 
 
 			$connection->send('hello world');
 
-			global $http_worker;
-
-			foreach($http_worker->connections as $conn)
+			foreach($this->worker->connections as $conn)
 			{
 				$conn->send("user[{$connection->uid}] сказал: " . rand());
 			}

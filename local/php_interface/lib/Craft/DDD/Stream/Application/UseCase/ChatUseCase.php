@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Stream\Application\UseCase;
 
+use Craft\DDD\Stream\Domain\Entity\ChatEntity;
 use Craft\DDD\Stream\Domain\Entity\MessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
@@ -25,7 +26,17 @@ class ChatUseCase
 
 		if(!$chat)
 		{
-			throw new \Exception('Чат не найден');
+			$chat = ChatEntity::createNewChat(
+				$userId,
+				$acceptUserId,
+			);
+
+			$chat = $this->repository->createChat($chat);
+
+			if(!$chat)
+			{
+				throw new \Exception("Ошибка при создании чата");
+			}
 		}
 
 
@@ -35,6 +46,10 @@ class ChatUseCase
 		);
 
 		$message = $this->messageRepository->create($message);
+		if(!$message)
+		{
+			throw new \Exception("Ошибка при отправке сообщения");
+		}
 
 	}
 }
