@@ -1,20 +1,22 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
 import ChatService from "@/service/Chat/ChatService.ts";
-import type ChatMessageDto from "@/dto/chat/ChatMessageDto.ts";
+
+import type ChatMessageDto from "@/dto/request/ChatMessageDto.ts";
+import type ChatDto from "@/dto/entity/ChatDto.ts";
 
 export default defineComponent({
   name: "Stream",
+  props: {
+    chats: {
+      type: Array as PropType<ChatDto[]>,
+      default: [],
+    }
+  },
   data: function () {
     return {
+      currentDialog: null as ChatDto | null,
       service: null as ChatService | null,
-      profiles: [
-        {name: 'Jonh Derek', avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'},
-        {name: 'Jonh Derek', avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'},
-        {name: 'Jonh Derek', avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'},
-        {name: 'Jonh Derek', avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'},
-        {name: 'Jonh Derek', avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'},
-      ],
       isValid: false,
       form: {
         message: null,
@@ -33,6 +35,9 @@ export default defineComponent({
     };
   },
   methods: {
+    selectDialog(chat: ChatDto) {
+      this.currentDialog = chat;
+    },
     submit() {
 
       if (!this.isValid) {
@@ -58,17 +63,21 @@ export default defineComponent({
 <template>
   <div class="stream">
     <div class="stream-aside">
-      <v-row v-for="profile in profiles" class="mb-1">
+      <v-row v-for="chat in chats" class="mb-1" @click.prevent="selectDialog(chat)">
         <v-col cols="2">
-          <v-avatar :image="profile.avatar"></v-avatar>
+          <v-avatar :image="chat.acceptMember.avatar"></v-avatar>
         </v-col>
         <v-col cols="10">
-          <strong>{{ profile.name }}</strong>
+          <strong>{{ chat.acceptMember.name }}</strong>
         </v-col>
       </v-row>
     </div>
     <div class="stream-body">
-      <div class="stream-messages"></div>
+      <div class="stream-messages">
+        <v-row v-for="message in currentDialog?.messages">
+          <v-col>{{ message.text }}</v-col>
+        </v-row>
+      </div>
       <v-form @submit.prevent="submit" v-model="isValid" class="stream-form">
         <v-textarea v-model="form.message" :rules="validate.message"></v-textarea>
         <v-btn type="submit">Отправить</v-btn>

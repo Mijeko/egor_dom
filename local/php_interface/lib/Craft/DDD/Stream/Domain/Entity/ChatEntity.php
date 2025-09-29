@@ -12,6 +12,8 @@ class ChatEntity
 	private int $acceptUserId;
 	private array $messages;
 
+	private ?MemberEntity $acceptMember = null;
+
 	public static function createNewChat(
 		int $userId,
 		int $acceptUserId,
@@ -82,4 +84,14 @@ class ChatEntity
 		$this->messages = $messages;
 	}
 
+	public function addAcceptMember(MemberEntity $member): ChatEntity
+	{
+		$this->acceptMember = $member;
+		return $this;
+	}
+
+	public function getAcceptMember(): ?MemberEntity
+	{
+		return $this->acceptMember;
+	}
 }

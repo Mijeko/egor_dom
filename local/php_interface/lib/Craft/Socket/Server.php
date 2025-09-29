@@ -11,53 +11,48 @@ use Workerman\Worker;
 class Server
 {
 
-	private $worker;
+	private Worker $worker;
 
-	private $uid = 0;
+	private int $uid = 0;
+
+	private int $workers = 1;
+
+	private array $handlers = [];
 
 	public function run(
 		string $host = "websocket://0.0.0.0:8686/",
 	): void
 	{
-		//		global $http_worker;
-
 		$this->worker = new Worker($host);
-		// Запуск 4 процессов для предоставления услуг
-		$this->worker->count = 1;
-		//		$http_worker->count = 4;
+		$this->worker->count = $this->workers;
 
-		// При получении данных от браузера ответить hello world
 		$this->worker->onConnect = function(TcpConnection $connection) {
 			$connection->id = ++$this->uid;
 		};
+
 		$this->worker->onMessage = function(TcpConnection $connection, $request) {
 
-			$acceptData = null;
-			if(json_validate($request))
+			foreach($this->handlers as $handler)
 			{
-				$acceptData = json_decode($request, true);
+				call_user_func($handler, $connection, $request, $this);
 			}
 
-
-			$service = ChatUseCaseFactory::getUseCase();
-			$service->sendMessage(
-				$acceptData['sendUserId'],
-				$acceptData['acceptUserId'],
-				$acceptData['message'],
-			);
-
-
-			$connection->send('hello world');
-
-			foreach($this->worker->connections as $conn)
-			{
-				$conn->send("user[{$connection->uid}] сказал: " . rand());
-			}
 		};
 
 		// Запуск worker
 		Worker::runAll();
 
 
+	}
+
+	public function getWorker(): Worker
+	{
+		return $this->worker;
+	}
+
+	public function handlers(array $handlers = []): Server
+	{
+		$this->handlers = $handlers;
+		return $this;
 	}
 }

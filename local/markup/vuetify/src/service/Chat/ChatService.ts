@@ -1,4 +1,4 @@
-import type ChatMessageDto from "@/dto/chat/ChatMessageDto.ts";
+import type ChatMessageDto from "@/dto/request/ChatMessageDto.ts";
 
 export default class ChatService {
 

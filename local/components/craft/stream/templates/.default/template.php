@@ -25,6 +25,9 @@ $APPLICATION->IncludeComponent(
 	'vite',
 	[
 		'SOURCE' => 'profile/Stream',
+		'PROPS'  => [
+			'chats' => $arResult['CHATS'],
+		],
 	],
 	false,
 	['HIDE_ICONS' => 'Y']
