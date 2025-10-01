@@ -1,18 +1,34 @@
 import type ChatMessageDto from "@/dto/request/ChatMessageDto.ts";
+import type ChatServiceParams from "@/dto/ChatServiceParams.ts";
 
 export default class ChatService {
 
   ws: any = null;
 
-  constructor() {
+  constructor(params: ChatServiceParams) {
 
-    this.ws = new WebSocket("ws://dom.local/ws/");
+    this.ws = new WebSocket(params.host ?? "ws://dom.local/ws/");
     this.ws.onopen = () => {
       console.log("Подключение успешно");
     };
-    this.ws.onmessage = function (e: any) {
-      console.log("Получено сообщение от сервера: " + e.data);
-    };
+
+
+    if (typeof params.callback === 'function') {
+      this.ws.onmessage = params.callback;
+    } else {
+      this.ws.onmessage = function (e: any) {
+
+        let data = null;
+
+        try {
+          data = JSON.parse(e.data);
+        } catch (err) {
+          data = e.data;
+        }
+
+        console.log("Получено сообщение от сервера: ", data);
+      };
+    }
   }
 
   sendMessage(body: ChatMessageDto) {

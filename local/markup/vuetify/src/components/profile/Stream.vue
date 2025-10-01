@@ -4,6 +4,8 @@ import ChatService from "@/service/Chat/ChatService.ts";
 
 import type ChatMessageDto from "@/dto/request/ChatMessageDto.ts";
 import type ChatDto from "@/dto/entity/ChatDto.ts";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
   name: "Stream",
@@ -15,6 +17,7 @@ export default defineComponent({
   },
   data: function () {
     return {
+      currentUser: null as BxUserDto | null,
       currentDialog: null as ChatDto | null,
       service: null as ChatService | null,
       isValid: false,
@@ -44,10 +47,12 @@ export default defineComponent({
         return;
       }
 
+      console.log('send message');
+
       (this.service as ChatService).sendMessage(
         {
-          sendUserId: 1,
-          acceptUserId: 2,
+          sendUserId: this.currentUser?.id,
+          acceptUserId: this.currentDialog?.acceptUserId,
           message: String(this.form.message)
         } as ChatMessageDto
       );
@@ -55,7 +60,26 @@ export default defineComponent({
     }
   },
   created(): any {
-    this.service = new ChatService();
+    this.service = new ChatService({
+      callback: function (e: any) {
+        let data = null;
+        try {
+          data = JSON.parse(e.data);
+        } catch (err) {
+          data = e.data;
+        }
+
+        console.log("custom handler");
+        console.log("Получено сообщение от сервера: ", data);
+      }
+    });
+
+    let userStore = useUserStore();
+    let user = userStore.getUser;
+
+    if (user) {
+      this.currentUser = user;
+    }
   },
 })
 </script>
@@ -78,7 +102,7 @@ export default defineComponent({
           <v-col>{{ message.text }}</v-col>
         </v-row>
       </div>
-      <v-form @submit.prevent="submit" v-model="isValid" class="stream-form">
+      <v-form v-if="currentDialog !== null" @submit.prevent="submit" v-model="isValid" class="stream-form">
         <v-textarea v-model="form.message" :rules="validate.message"></v-textarea>
         <v-btn type="submit">Отправить</v-btn>
       </v-form>

@@ -36,7 +36,12 @@ $server->handlers([
 
 		foreach($server->getWorker()->connections as $conn)
 		{
-			$conn->send("user[{$connection->uid}] сказал: " . rand());
+			$conn->send(json_encode([
+				'action' => 'refreshStream',
+			]));
+
+
+			//			$conn->send("user[{$connection->uid}] сказал: " . rand());
 		}
 	},
 ]);
