@@ -15,20 +15,41 @@ class Server
 
 	private int $uid = 0;
 
-	private int $workers = 1;
+	private int $countWorkers = 1;
 
 	private array $handlers = [];
 
-	public function run(
-		string $host = "websocket://0.0.0.0:8686/",
-	): void
-	{
-		$this->worker = new Worker($host);
-		$this->worker->count = $this->workers;
+	private $onConnect = null;
 
+	private array $customData = [];
+
+
+	public function __construct(
+		private readonly string $host = "websocket://0.0.0.0:8686/",
+	)
+	{
+		$this->worker = new Worker($this->host);
+		$this->worker->count = $this->countWorkers;
+	}
+
+	public function run(): void
+	{
+		Worker::runAll();
+	}
+
+	public function build(): Server
+	{
 		$this->worker->onConnect = function(TcpConnection $connection) {
-			$connection->id = ++$this->uid;
+
+			if(is_callable($this->onConnect))
+			{
+				call_user_func($this->onConnect, $connection, $this);
+			} else
+			{
+				$connection->id = ++$this->uid;
+			}
 		};
+
 
 		$this->worker->onMessage = function(TcpConnection $connection, $request) {
 
@@ -36,13 +57,25 @@ class Server
 			{
 				call_user_func($handler, $connection, $request, $this);
 			}
-
 		};
 
-		// Запуск worker
-		Worker::runAll();
+		return $this;
+	}
 
+	public function onConnect(callable $callback): Server
+	{
+		$this->onConnect = $callback;
+		return $this;
+	}
 
+	public function incrementUid(): void
+	{
+		$this->uid++;
+	}
+
+	public function decrementUid(): void
+	{
+		$this->uid--;
 	}
 
 	public function getWorker(): Worker
@@ -54,5 +87,22 @@ class Server
 	{
 		$this->handlers = $handlers;
 		return $this;
+	}
+
+	public function setCustomData(array $data): Server
+	{
+		$this->customData = $data;
+		return $this;
+	}
+
+	public function refreshCustomData(string $key, $value): Server
+	{
+		$this->customData[$key] = $value;
+		return $this;
+	}
+
+	public function getCustomData(): array
+	{
+		return $this->customData;
 	}
 }
