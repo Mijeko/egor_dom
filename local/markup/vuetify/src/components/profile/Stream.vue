@@ -8,13 +8,9 @@ import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
-  emits: ['update:chats', 'update:tt'],
+  emits: ['update:chats'],
   name: "Stream",
   props: {
-    tt: {
-      type: Number,
-      default: 1,
-    },
     chats: {
       type: Array as PropType<ChatDto[]>,
       default: [],
@@ -22,6 +18,7 @@ export default defineComponent({
   },
   data: function () {
     return {
+      chatsData: null as ChatDto[] | null,
       currentUser: null as BxUserDto | null,
       currentDialog: null as ChatDto | null,
       service: null as ChatService | null,
@@ -76,9 +73,7 @@ export default defineComponent({
         let chats: ChatDto[] = data?.chats as ChatDto[];
 
         if (chats) {
-          console.log('emit');
-          this.$emit('update:tt', 1212121212122112);
-          this.$emit('update:chats', chats);
+          this.chatsComp = chats;
         }
 
       }
@@ -91,16 +86,34 @@ export default defineComponent({
       this.currentUser = user;
     }
   },
-  watch: {
-    tt: {
-      handler: function (nV, oV) {
-        console.log('tt changed');
+  computed: {
+    chatsComp: {
+      get(): ChatDto[] {
+        if (this.chatsData) {
+          return this.chatsData;
+        }
+
+        return this.chats;
       },
-      deep: true,
-    },
-    chats: {
+      set(chats: ChatDto[]) {
+        this.chatsData = chats;
+      },
+    }
+  },
+  watch: {
+    chatsComp: {
       handler: function (nV, oV) {
-        console.log('chats cnahged');
+        if (this.currentDialog) {
+
+          let chat = nV.filter((d: any) => {
+            return this.currentDialog?.id === d?.id;
+          }).shift();
+
+          if (chat) {
+            this.currentDialog = chat;
+          }
+
+        }
       },
       deep: true,
     },
@@ -111,8 +124,7 @@ export default defineComponent({
 <template>
   <div class="stream">
     <div class="stream-aside">
-      {{ tt }}
-      <v-row v-for="chat in chats" class="mb-1" @click.prevent="selectDialog(chat)">
+      <v-row v-for="chat in chatsComp" class="mb-1" @click.prevent="selectDialog(chat)">
         <v-col cols="2">
           <v-avatar :image="chat.acceptMember.avatar"></v-avatar>
         </v-col>
