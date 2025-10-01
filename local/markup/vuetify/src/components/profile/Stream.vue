@@ -40,6 +40,9 @@ export default defineComponent({
     };
   },
   methods: {
+    isCheck(id: number) {
+      return this.currentDialog?.id === id;
+    },
     selectDialog(chat: ChatDto) {
       this.currentDialog = chat;
     },
@@ -124,7 +127,11 @@ export default defineComponent({
 <template>
   <div class="stream">
     <div class="stream-aside">
-      <v-row v-for="chat in chatsComp" class="mb-1" @click.prevent="selectDialog(chat)">
+      <v-row
+        v-for="chat in chatsComp"
+        :class="`mb-1 stream-chat` + (isCheck(chat.id) ? 'active':'')"
+        @click.prevent="selectDialog(chat)"
+      >
         <v-col cols="2">
           <v-avatar :image="chat.acceptMember.avatar"></v-avatar>
         </v-col>
@@ -152,7 +159,17 @@ export default defineComponent({
   display: flex;
   gap: 10px;
 
+  &-chat {
+    cursor: pointer;
+    transition: 0.4s ease all;
+
+    &.active, &:hover {
+      background: rgba(0, 0, 0, 0.02);
+    }
+  }
+
   &-aside {
+    padding: 15px;
     max-width: 30%;
     width: 100%;
     border-right: 1px grey solid;
@@ -163,7 +180,7 @@ export default defineComponent({
   }
 
   &-messages {
-    overflow: scroll;
+    overflow-y: scroll;
     max-height: 300px;
   }
 }
