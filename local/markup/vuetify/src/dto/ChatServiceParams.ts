@@ -1,4 +1,4 @@
 export default interface ChatServiceParams {
   host: string;
-  callback: function;
+  callback: any;
 }

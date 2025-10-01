@@ -8,8 +8,13 @@ import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
+  emits: ['update:chats', 'update:tt'],
   name: "Stream",
   props: {
+    tt: {
+      type: Number,
+      default: 1,
+    },
     chats: {
       type: Array as PropType<ChatDto[]>,
       default: [],
@@ -47,8 +52,6 @@ export default defineComponent({
         return;
       }
 
-      console.log('send message');
-
       (this.service as ChatService).sendMessage(
         {
           sendUserId: this.currentUser?.id,
@@ -61,16 +64,23 @@ export default defineComponent({
   },
   created(): any {
     this.service = new ChatService({
-      callback: function (e: any) {
-        let data = null;
+      host: "ws://dom.local/ws/",
+      callback: (e: any) => {
+        let data: any = null;
         try {
           data = JSON.parse(e.data);
         } catch (err) {
           data = e.data;
         }
 
-        console.log("custom handler");
-        console.log("Получено сообщение от сервера: ", data);
+        let chats: ChatDto[] = data?.chats as ChatDto[];
+
+        if (chats) {
+          console.log('emit');
+          this.$emit('update:tt', 1212121212122112);
+          this.$emit('update:chats', chats);
+        }
+
       }
     });
 
@@ -81,12 +91,27 @@ export default defineComponent({
       this.currentUser = user;
     }
   },
+  watch: {
+    tt: {
+      handler: function (nV, oV) {
+        console.log('tt changed');
+      },
+      deep: true,
+    },
+    chats: {
+      handler: function (nV, oV) {
+        console.log('chats cnahged');
+      },
+      deep: true,
+    },
+  }
 })
 </script>
 
 <template>
   <div class="stream">
     <div class="stream-aside">
+      {{ tt }}
       <v-row v-for="chat in chats" class="mb-1" @click.prevent="selectDialog(chat)">
         <v-col cols="2">
           <v-avatar :image="chat.acceptMember.avatar"></v-avatar>
@@ -123,6 +148,11 @@ export default defineComponent({
 
   &-body {
     width: 100%;
+  }
+
+  &-messages {
+    overflow: scroll;
+    max-height: 300px;
   }
 }
 </style>

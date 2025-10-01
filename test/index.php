@@ -5,6 +5,7 @@ if(empty($_SERVER['DOCUMENT_ROOT']))
 	$_SERVER['DOCUMENT_ROOT'] = dirname(__DIR__);
 }
 
+use Craft\DDD\Stream\Application\Factory\ChatServiceFactory;
 use Craft\DDD\Stream\Application\Factory\ChatUseCaseFactory;
 use Craft\Socket\Server;
 use Workerman\Connection\TcpConnection;
@@ -14,24 +15,24 @@ define('NEED_AUTH', false);
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
 
-global $USER;
-$uid = $USER->GetID();
-
-\Bitrix\Main\Diag\Debug::dumpToFile($uid);
+//global $USER;
+//$uid = $USER->GetID();
+//
+//\Bitrix\Main\Diag\Debug::dumpToFile($uid);
 
 $server = new Server();
 $server
 	->build()
-	->onConnect(function(TcpConnection $connection, Server $server) use ($uid) {
-		
-		$customData = $server->getCustomData();
-
-		$customData['uid'] = $customData['uid'] ?? [];
-		$customData['uid'][] = $uid;
-
-		$server->setCustomData($customData);
-
-	})
+	//	->onConnect(function(TcpConnection $connection, Server $server) use ($uid) {
+	//
+	//		$customData = $server->getCustomData();
+	//
+	//		$customData['uid'] = $customData['uid'] ?? [];
+	//		$customData['uid'][] = $uid;
+	//
+	//		$server->setCustomData($customData);
+	//
+	//	})
 	->handlers([
 		function(TcpConnection $connection, $request, Server $server) {
 			$acceptData = null;
@@ -48,18 +49,13 @@ $server
 			);
 
 
-			$connection->send('hello world');
-
-			\Bitrix\Main\Diag\Debug::dumpToFile($server->getCustomData());
-
-			foreach($server->getWorker()->connections as $conn)
+			$service = ChatServiceFactory::getService();
+			foreach($server->getWorker()->connections as $tcpConnection)
 			{
-				$conn->send(json_encode([
+				$tcpConnection->send(json_encode([
 					'action' => 'refreshStream',
+					'chats'  => $service->findAll(),
 				]));
-
-
-				//			$conn->send("user[{$connection->uid}] сказал: " . rand());
 			}
 		},
 	])
