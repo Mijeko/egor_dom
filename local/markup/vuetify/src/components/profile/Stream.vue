@@ -8,7 +8,6 @@ import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
-  emits: ['update:chats'],
   name: "Stream",
   props: {
     chats: {

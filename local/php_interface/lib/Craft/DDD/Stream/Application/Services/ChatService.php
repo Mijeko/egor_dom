@@ -10,6 +10,7 @@ use Craft\DDD\Stream\Domain\Entity\MessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatMessageTable;
+use Craft\DDD\Stream\Infrastructure\Entity\ChatTable;
 use Craft\Dto\BxImageDto;
 use Craft\Helper\Criteria;
 use Craft\Model\CraftUserTable;
@@ -90,42 +91,10 @@ class ChatService
 		}, $chats);
 	}
 
-
-	//	public function findAll(Criteria $criteria = null): array
-	//	{
-	//		$chats = $this->chatRepository->findAll($criteria);
-	//		$acceptMembers = $this->memberService->findAll(Criteria::instance()->filter([
-	//			CraftUserTable::F_ID => array_map(function(ChatEntity $chat) {
-	//				return $chat->getAcceptUserId();
-	//			}, $chats),
-	//		]));
-	//		$messages = $this->chatMessageRepository->findAll(Criteria::instance()->filter([
-	//			ChatMessageTable::F_CHAT_ID => array_map(function(ChatEntity $chat) {
-	//				return $chat->getId();
-	//			}, $chats),
-	//		]));
-	//
-	//		return array_map(function(ChatEntity $chat) use ($messages, $acceptMembers) {
-	//
-	//			$messages = array_filter($messages, function(MessageEntity $message) use ($chat) {
-	//				return $message->getChatId() === $chat->getId();
-	//			});
-	//
-	//			foreach($messages as $message)
-	//			{
-	//				$chat->addMessage($message);
-	//			}
-	//
-	//			$acceptMembers = array_filter($acceptMembers, function(MemberEntity $member) use ($chat) {
-	//				return $member->getId() === $chat->getAcceptUserId();
-	//			});
-	//
-	//			foreach($acceptMembers as $member)
-	//			{
-	//				$chat->addAcceptMember($member);
-	//			}
-	//
-	//			return $chat;
-	//		}, $chats);
-	//	}
+	public function findAllByUserId(int $userId): array
+	{
+		return $this->findAll(Criteria::instance()->filter([
+			ChatTable::F_USER_ID => $userId,
+		]));
+	}
 }

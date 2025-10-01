@@ -8,7 +8,9 @@ use Craft\DDD\Stream\Application\Factory\ChatServiceFactory;
 use Craft\DDD\Stream\Application\Services\ChatService;
 use Craft\DDD\Stream\Domain\Entity\ChatEntity;
 use Craft\DDD\Stream\Domain\Entity\MessageEntity;
+use Craft\DDD\Stream\Infrastructure\Entity\ChatTable;
 use Craft\Dto\BxImageDto;
+use Craft\Helper\Criteria;
 
 class CraftStreamComponent extends AjaxComponent
 {
@@ -35,8 +37,7 @@ class CraftStreamComponent extends AjaxComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['CHATS'] = $this->chatService->findAll();
-
+		$this->arResult['CHATS'] = $this->chatService->findAllByUserId($this->arParams['USER_ID']);
 	}
 
 	public function loadServices(): void
