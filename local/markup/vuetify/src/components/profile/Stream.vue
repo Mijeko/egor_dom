@@ -40,7 +40,8 @@ export default defineComponent({
             return 'Введите текст сообщения';
           }
         ]
-      }
+      },
+      newMessage: null,
     };
   },
   methods: {
@@ -115,6 +116,18 @@ export default defineComponent({
     }
   },
   watch: {
+    newMessage: {
+      handler: function (newValue: { message: string, userId: number }, oV) {
+        (this.service as WsChatService).sendMessage(
+          {
+            sendUserId: this.currentUser?.id,
+            acceptUserId: newValue.userId,
+            message: String(newValue.message)
+          } as ChatMessageDto
+        );
+      },
+      deep: true,
+    },
     chatsComp: {
       handler: function (nV, oV) {
         if (this.currentDialog) {
@@ -142,6 +155,7 @@ export default defineComponent({
       <v-btn @click.prevent="newDialogModal">Новый диалог</v-btn>
       <NewDialogModal
         v-model="modal.newDialogModal"
+        v-model:message="newMessage"
       />
 
       <v-row

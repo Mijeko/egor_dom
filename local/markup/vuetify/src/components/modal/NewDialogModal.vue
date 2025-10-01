@@ -1,5 +1,5 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
 import ChatService from "@/service/Chat/ChatService.ts";
 import type SearchUserRequestDto from "@/dto/request/SearchUserRequest.ts";
 import type SearchUserResponseDto from "@/dto/response/SearchUserResponseDto.ts";
@@ -12,6 +12,9 @@ export default defineComponent({
     modelValue: {
       type: Boolean,
       default: false
+    },
+    message: {
+      type: String as PropType<any>,
     },
   },
   data: function () {
@@ -102,7 +105,10 @@ export default defineComponent({
         return;
       }
 
-      console.log('send message');
+      this.$emit('update:message', {
+        message: this.messageForm.text,
+        userId: this.messageForm.userId
+      });
     },
   },
   computed: {
