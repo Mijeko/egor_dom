@@ -6,7 +6,7 @@ use Craft\DDD\Stream\Application\Dto\ChatDto;
 use Craft\DDD\Stream\Application\Dto\ChatMemberDto;
 use Craft\DDD\Stream\Application\Dto\ChatMessageDto;
 use Craft\DDD\Stream\Domain\Entity\ChatEntity;
-use Craft\DDD\Stream\Domain\Entity\MessageEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatMessageTable;
@@ -45,7 +45,7 @@ class ChatService
 
 		return array_map(function(ChatEntity $chat) use ($messages, $acceptMembers) {
 
-			$messages = array_map(function(MessageEntity $message) {
+			$messages = array_map(function(ChatMessageEntity $message) {
 				return new  ChatMessageDto(
 					$message->getId(),
 					$message->getChatId(),

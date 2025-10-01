@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Stream\Domain\Entity;
 
-class MessageEntity
+class ChatMessageEntity
 {
 
 	private int $chatId;
@@ -12,7 +12,7 @@ class MessageEntity
 	public static function createMessage(
 		ChatEntity $chat,
 		string     $message
-	): MessageEntity
+	): ChatMessageEntity
 	{
 		$self = new self();
 		$self->chatId = $chat->getId();
@@ -24,7 +24,7 @@ class MessageEntity
 		int    $id,
 		int    $chatId,
 		string $message
-	): MessageEntity
+	): ChatMessageEntity
 	{
 		$self = new self();
 		$self->id = $id;
@@ -35,7 +35,7 @@ class MessageEntity
 
 	public function refreshId(
 		int $id,
-	): MessageEntity
+	): ChatMessageEntity
 	{
 		$this->id = $id;
 		return $this;

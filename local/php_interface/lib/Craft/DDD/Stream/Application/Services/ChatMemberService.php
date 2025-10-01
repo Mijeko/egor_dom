@@ -4,7 +4,7 @@ namespace Craft\DDD\Stream\Application\Services;
 
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Stream\Application\Dto\ChatMemberDto;
-use Craft\DDD\Stream\Domain\Entity\MemberEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMemberEntity;
 use Craft\DDD\Stream\Domain\Repository\MemberRepositoryInterface;
 use Craft\Dto\BxImageDto;
 use Craft\Helper\Criteria;
@@ -27,7 +27,7 @@ class ChatMemberService
 		$members = $this->memberRepository->findAll($criteria);
 
 
-		return array_map(function(MemberEntity $member) {
+		return array_map(function(ChatMemberEntity $member) {
 
 			$avatar = null;
 			$_image = $this->imageService->findById($member->getAvatarId());

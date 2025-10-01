@@ -12,7 +12,7 @@ class ChatEntity
 	private int $acceptUserId;
 	private array $messages;
 
-	private ?MemberEntity $acceptMember = null;
+	private ?ChatMemberEntity $acceptMember = null;
 
 	public static function createNewChat(
 		int $userId,
@@ -47,7 +47,7 @@ class ChatEntity
 		return $self;
 	}
 
-	public function addMessage(MessageEntity $message): ChatEntity
+	public function addMessage(ChatMessageEntity $message): ChatEntity
 	{
 		$this->messages[] = $message;
 		return $this;
@@ -84,13 +84,13 @@ class ChatEntity
 		$this->messages = $messages;
 	}
 
-	public function addAcceptMember(MemberEntity $member): ChatEntity
+	public function addAcceptMember(ChatMemberEntity $member): ChatEntity
 	{
 		$this->acceptMember = $member;
 		return $this;
 	}
 
-	public function getAcceptMember(): ?MemberEntity
+	public function getAcceptMember(): ?ChatMemberEntity
 	{
 		return $this->acceptMember;
 	}

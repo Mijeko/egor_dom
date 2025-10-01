@@ -3,7 +3,7 @@
 namespace Craft\DDD\Stream\Application\UseCase;
 
 use Craft\DDD\Stream\Domain\Entity\ChatEntity;
-use Craft\DDD\Stream\Domain\Entity\MessageEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
 
@@ -40,7 +40,7 @@ class ChatUseCase
 		}
 
 
-		$message = MessageEntity::createMessage(
+		$message = ChatMessageEntity::createMessage(
 			$chat,
 			$message
 		);

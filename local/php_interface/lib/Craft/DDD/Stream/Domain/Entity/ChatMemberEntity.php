@@ -4,7 +4,7 @@ namespace Craft\DDD\Stream\Domain\Entity;
 
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
-class MemberEntity
+class ChatMemberEntity
 {
 
 	private int $id;
@@ -17,7 +17,7 @@ class MemberEntity
 		int    $id,
 		string $name,
 		int    $avatarId,
-	): MemberEntity
+	): ChatMemberEntity
 	{
 		$self = new self();
 		$self->id = $id;

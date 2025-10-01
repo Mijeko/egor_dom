@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Stream\Infrastructure\Repository;
 
-use Craft\DDD\Stream\Domain\Entity\MessageEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatMessageTable;
 use Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMessage;
@@ -10,7 +10,7 @@ use Craft\Helper\Criteria;
 
 class ChatMessageRepository implements ChatMessageRepositoryInterface
 {
-	public function create(MessageEntity $chatMessage): ?MessageEntity
+	public function create(ChatMessageEntity $chatMessage): ?ChatMessageEntity
 	{
 		$model = ChatMessageTable::createObject();
 		$model->setChatId($chatMessage->getChatId());
@@ -43,9 +43,9 @@ class ChatMessageRepository implements ChatMessageRepositoryInterface
 		return $result;
 	}
 
-	private function hydrate(EO_ChatMessage $chatMessage): ?MessageEntity
+	private function hydrate(EO_ChatMessage $chatMessage): ?ChatMessageEntity
 	{
-		return MessageEntity::hydrate(
+		return ChatMessageEntity::hydrate(
 			$chatMessage->getId(),
 			$chatMessage->getChatId(),
 			$chatMessage->getText()

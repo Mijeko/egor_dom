@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Stream\Infrastructure\Repository;
 
-use Craft\DDD\Stream\Domain\Entity\MemberEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMemberEntity;
 use Craft\DDD\Stream\Domain\Repository\MemberRepositoryInterface;
 use Craft\Helper\Criteria;
 use Craft\Model\CraftUserTable;
@@ -24,9 +24,9 @@ class ChatMemberRepository implements MemberRepositoryInterface
 		return $result;
 	}
 
-	private function hydrate(EO_CraftUser $user): MemberEntity
+	private function hydrate(EO_CraftUser $user): ChatMemberEntity
 	{
-		return MemberEntity::hydrate(
+		return ChatMemberEntity::hydrate(
 			$user->getId(),
 			$user->getName(),
 			$user->getPersonalPhoto(),
