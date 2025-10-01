@@ -12,7 +12,7 @@ class ChatTable extends DataManager
 	const F_ID = 'ID';
 	const F_ACTIVE = 'ACTIVE';
 	const F_USER_ID = 'USER_ID';
-	const ACCEPT_USER_ID = 'ACCEPT_USER_ID';
+	const F_ACCEPT_USER_ID = 'ACCEPT_USER_ID';
 
 	const ACTIVE_Y = 'Y';
 	const ACTIVE_N = 'N';
@@ -31,7 +31,7 @@ class ChatTable extends DataManager
 				->configureDefaultValue(self::ACTIVE_Y)
 				->configureStorageValues(self::ACTIVE_N, self::ACTIVE_Y),
 			(new IntegerField(self::F_USER_ID)),
-			(new IntegerField(self::ACCEPT_USER_ID)),
+			(new IntegerField(self::F_ACCEPT_USER_ID)),
 		];
 	}
 

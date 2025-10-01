@@ -29,8 +29,8 @@ class ChatRepository implements ChatRepositoryInterface
 	public function findChatByUsers(int $userId, int $acceptUserId): ?ChatEntity
 	{
 		$chats = $this->findAll(Criteria::instance()->filter([
-			ChatTable::F_USER_ID      => $userId,
-			ChatTable::ACCEPT_USER_ID => $acceptUserId,
+			ChatTable::F_USER_ID        => $userId,
+			ChatTable::F_ACCEPT_USER_ID => $acceptUserId,
 		]));
 
 		if(count($chats) !== 1)

@@ -94,7 +94,11 @@ class ChatService
 	public function findAllByUserId(int $userId): array
 	{
 		return $this->findAll(Criteria::instance()->filter([
-			ChatTable::F_USER_ID => $userId,
+//			[
+//				'LOGIC'                     => 'OR',
+//				ChatTable::F_USER_ID        => $userId,
+//				ChatTable::F_ACCEPT_USER_ID => $userId,
+//			],
 		]));
 	}
 }

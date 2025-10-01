@@ -74,6 +74,10 @@ export default defineComponent({
 
         let chats: ChatDto[] = data?.chats as ChatDto[];
 
+        chats = chats.filter((chat: ChatDto) => {
+          return chat.userId == this.currentUser?.id;
+        });
+
         if (chats) {
           this.chatsComp = chats;
         }
