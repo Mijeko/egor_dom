@@ -3,6 +3,6 @@ import type ClaimCreateShortRequestDto from "@/dto/request/ClaimCreateShortReque
 
 export default class ClaimService {
   createClaim(body: ClaimCreateShortRequestDto) {
-    return ControllerApi.post('craft:claim.create', body)
+    return ControllerApi.post('craft:claim.create', body);
   }
 }

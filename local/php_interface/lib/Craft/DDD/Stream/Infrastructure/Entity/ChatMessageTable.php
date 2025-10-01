@@ -10,6 +10,7 @@ class ChatMessageTable extends DataManager
 {
 	const F_ID = 'ID';
 	const F_CHAT_ID = 'CHAT_ID';
+	const F_AUTHOR_USER_ID = 'AUTHOR_USER_ID';
 	const F_TEXT = 'TEXT';
 
 	public static function getTableName()
@@ -23,6 +24,7 @@ class ChatMessageTable extends DataManager
 			(new IntegerField(self::F_ID))
 				->configurePrimary(),
 			(new IntegerField(self::F_CHAT_ID)),
+			(new IntegerField(self::F_AUTHOR_USER_ID)),
 			(new StringField(self::F_TEXT)),
 		];
 	}

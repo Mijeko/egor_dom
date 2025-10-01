@@ -2856,6 +2856,15 @@ namespace Bitrix\Main {
 	 * @method \string fillUfEmailTwo()
 	 * @method \Bitrix\Main\EO_User setUfEmailTwo(\string $ufEmailTwo)
 	 * @method bool isUfEmailTwoChanged()
+	 * @method \float getUfRewardAmount()
+	 * @method \float remindActualUfRewardAmount()
+	 * @method \float requireUfRewardAmount()
+	 * @method bool hasUfRewardAmount()
+	 * @method bool isUfRewardAmountFilled()
+	 * @method \Bitrix\Main\EO_User unsetUfRewardAmount()
+	 * @method \float fillUfRewardAmount()
+	 * @method \Bitrix\Main\EO_User setUfRewardAmount(\float $ufRewardAmount)
+	 * @method bool isUfRewardAmountChanged()
 	 */
 	class EO_User {
 		/* @var \Bitrix\Main\UserTable */
@@ -2903,6 +2912,8 @@ namespace Bitrix\Main {
 	 * @method \string[] fillUfPhoneTwo()
 	 * @method \string[] getUfEmailTwoList()
 	 * @method \string[] fillUfEmailTwo()
+	 * @method \float[] getUfRewardAmountList()
+	 * @method \float[] fillUfRewardAmount()
 	 */
 	class EO_User_Collection implements \ArrayAccess, \Iterator, \Countable {
 		/* @var \Bitrix\Main\UserTable */
@@ -5872,6 +5883,15 @@ namespace Craft\Model {
 	 * @method \string fillUfEmailTwo()
 	 * @method \Craft\Model\CraftUser setUfEmailTwo(\string $ufEmailTwo)
 	 * @method bool isUfEmailTwoChanged()
+	 * @method \float getUfRewardAmount()
+	 * @method \float remindActualUfRewardAmount()
+	 * @method \float requireUfRewardAmount()
+	 * @method bool hasUfRewardAmount()
+	 * @method bool isUfRewardAmountFilled()
+	 * @method \Craft\Model\CraftUser unsetUfRewardAmount()
+	 * @method \float fillUfRewardAmount()
+	 * @method \Craft\Model\CraftUser setUfRewardAmount(\float $ufRewardAmount)
+	 * @method bool isUfRewardAmountChanged()
 	 * @method \Craft\Model\EO_CraftUserUts getUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts remindActualUtsObjectInner()
 	 * @method \Craft\Model\EO_CraftUserUts requireUtsObjectInner()
@@ -6099,6 +6119,8 @@ namespace Craft\Model {
 	 * @method \string[] fillUfPhoneTwo()
 	 * @method \string[] getUfEmailTwoList()
 	 * @method \string[] fillUfEmailTwo()
+	 * @method \float[] getUfRewardAmountList()
+	 * @method \float[] fillUfRewardAmount()
 	 * @method \Craft\Model\EO_CraftUserUts[] getUtsObjectInnerList()
 	 * @method \Craft\Model\EO_CraftUser_Collection getUtsObjectInnerCollection()
 	 * @method \Craft\Model\EO_CraftUserUts_Collection fillUtsObjectInner()
@@ -8312,6 +8334,16 @@ namespace Craft\DDD\Stream\Infrastructure\Entity {
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\ChatMessage resetChatId()
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\ChatMessage unsetChatId()
 	 * @method \int fillChatId()
+	 * @method \int getAuthorUserId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\ChatMessage setAuthorUserId(\int|\Bitrix\Main\DB\SqlExpression $authorUserId)
+	 * @method bool hasAuthorUserId()
+	 * @method bool isAuthorUserIdFilled()
+	 * @method bool isAuthorUserIdChanged()
+	 * @method \int remindActualAuthorUserId()
+	 * @method \int requireAuthorUserId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\ChatMessage resetAuthorUserId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\ChatMessage unsetAuthorUserId()
+	 * @method \int fillAuthorUserId()
 	 * @method \string getText()
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\ChatMessage setText(\string|\Bitrix\Main\DB\SqlExpression $text)
 	 * @method bool hasText()
@@ -8368,6 +8400,8 @@ namespace Craft\DDD\Stream\Infrastructure\Entity {
 	 * @method \int[] getIdList()
 	 * @method \int[] getChatIdList()
 	 * @method \int[] fillChatId()
+	 * @method \int[] getAuthorUserIdList()
+	 * @method \int[] fillAuthorUserId()
 	 * @method \string[] getTextList()
 	 * @method \string[] fillText()
 	 *
@@ -8463,26 +8497,6 @@ namespace Craft\DDD\Stream\Infrastructure\Entity {
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat resetActive()
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat unsetActive()
 	 * @method \boolean fillActive()
-	 * @method \int getUserId()
-	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
-	 * @method bool hasUserId()
-	 * @method bool isUserIdFilled()
-	 * @method bool isUserIdChanged()
-	 * @method \int remindActualUserId()
-	 * @method \int requireUserId()
-	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat resetUserId()
-	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat unsetUserId()
-	 * @method \int fillUserId()
-	 * @method \int getAcceptUserId()
-	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat setAcceptUserId(\int|\Bitrix\Main\DB\SqlExpression $acceptUserId)
-	 * @method bool hasAcceptUserId()
-	 * @method bool isAcceptUserIdFilled()
-	 * @method bool isAcceptUserIdChanged()
-	 * @method \int remindActualAcceptUserId()
-	 * @method \int requireAcceptUserId()
-	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat resetAcceptUserId()
-	 * @method \Craft\DDD\Stream\Infrastructure\Entity\Chat unsetAcceptUserId()
-	 * @method \int fillAcceptUserId()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -8529,10 +8543,6 @@ namespace Craft\DDD\Stream\Infrastructure\Entity {
 	 * @method \int[] getIdList()
 	 * @method \boolean[] getActiveList()
 	 * @method \boolean[] fillActive()
-	 * @method \int[] getUserIdList()
-	 * @method \int[] fillUserId()
-	 * @method \int[] getAcceptUserIdList()
-	 * @method \int[] fillAcceptUserId()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -8601,4 +8611,155 @@ namespace Craft\DDD\Stream\Infrastructure\Entity {
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_Chat_Collection wakeUpCollection($rows)
 	 */
 	class EO_Chat_Entity extends \Bitrix\Main\ORM\Entity {}
+}
+/* ORMENTITYANNOTATION:Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable */
+namespace Craft\DDD\Stream\Infrastructure\Entity {
+	/**
+	 * EO_ChatMember
+	 * @see \Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int getId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember setId(\int|\Bitrix\Main\DB\SqlExpression $id)
+	 * @method bool hasId()
+	 * @method bool isIdFilled()
+	 * @method bool isIdChanged()
+	 * @method \int getChatId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember setChatId(\int|\Bitrix\Main\DB\SqlExpression $chatId)
+	 * @method bool hasChatId()
+	 * @method bool isChatIdFilled()
+	 * @method bool isChatIdChanged()
+	 * @method \int remindActualChatId()
+	 * @method \int requireChatId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember resetChatId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember unsetChatId()
+	 * @method \int fillChatId()
+	 * @method \int getUserId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
+	 * @method bool hasUserId()
+	 * @method bool isUserIdFilled()
+	 * @method bool isUserIdChanged()
+	 * @method \int remindActualUserId()
+	 * @method \int requireUserId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember resetUserId()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember unsetUserId()
+	 * @method \int fillUserId()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @property-read array $primary
+	 * @property-read int $state @see \Bitrix\Main\ORM\Objectify\State
+	 * @property-read \Bitrix\Main\Type\Dictionary $customData
+	 * @property \Bitrix\Main\Authentication\Context $authContext
+	 * @method mixed get($fieldName)
+	 * @method mixed remindActual($fieldName)
+	 * @method mixed require($fieldName)
+	 * @method bool has($fieldName)
+	 * @method bool isFilled($fieldName)
+	 * @method bool isChanged($fieldName)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember set($fieldName, $value)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember reset($fieldName)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember unset($fieldName)
+	 * @method void addTo($fieldName, $value)
+	 * @method void removeFrom($fieldName, $value)
+	 * @method void removeAll($fieldName)
+	 * @method \Bitrix\Main\ORM\Data\Result delete()
+	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
+	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
+	 * @method static \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember wakeUp($data)
+	 */
+	class EO_ChatMember {
+		/* @var \Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable */
+		static public $dataClass = '\Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable';
+		/**
+		 * @param bool|array $setDefaultValues
+		 */
+		public function __construct($setDefaultValues = true) {}
+	}
+}
+namespace Craft\DDD\Stream\Infrastructure\Entity {
+	/**
+	 * EO_ChatMember_Collection
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int[] getIdList()
+	 * @method \int[] getChatIdList()
+	 * @method \int[] fillChatId()
+	 * @method \int[] getUserIdList()
+	 * @method \int[] fillUserId()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @method void add(\Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember $object)
+	 * @method bool has(\Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember $object)
+	 * @method bool hasByPrimary($primary)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember getByPrimary($primary)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember[] getAll()
+	 * @method bool remove(\Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember $object)
+	 * @method void removeByPrimary($primary)
+	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method static \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection wakeUp($data)
+	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
+	 * @method void offsetSet() ArrayAccess
+	 * @method void offsetExists() ArrayAccess
+	 * @method void offsetUnset() ArrayAccess
+	 * @method void offsetGet() ArrayAccess
+	 * @method void rewind() Iterator
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember current() Iterator
+	 * @method mixed key() Iterator
+	 * @method void next() Iterator
+	 * @method bool valid() Iterator
+	 * @method int count() Countable
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection merge(?\Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection $collection)
+	 * @method bool isEmpty()
+	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
+	 */
+	class EO_ChatMember_Collection implements \ArrayAccess, \Iterator, \Countable {
+		/* @var \Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable */
+		static public $dataClass = '\Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable';
+	}
+}
+namespace Craft\DDD\Stream\Infrastructure\Entity {
+	/**
+	 * @method static EO_ChatMember_Query query()
+	 * @method static EO_ChatMember_Result getByPrimary($primary, array $parameters = [])
+	 * @method static EO_ChatMember_Result getById($id)
+	 * @method static EO_ChatMember_Result getList(array $parameters = [])
+	 * @method static EO_ChatMember_Entity getEntity()
+	 * @method static \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection createCollection()
+	 * @method static \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember wakeUpObject($row)
+	 * @method static \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection wakeUpCollection($rows)
+	 */
+	class ChatMemberTable extends \Bitrix\Main\ORM\Data\DataManager {}
+	/**
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @method EO_ChatMember_Result exec()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember fetchObject()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection fetchCollection()
+	 */
+	class EO_ChatMember_Query extends \Bitrix\Main\ORM\Query\Query {}
+	/**
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember fetchObject()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection fetchCollection()
+	 */
+	class EO_ChatMember_Result extends \Bitrix\Main\ORM\Query\Result {}
+	/**
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection createCollection()
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember wakeUpObject($row)
+	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection wakeUpCollection($rows)
+	 */
+	class EO_ChatMember_Entity extends \Bitrix\Main\ORM\Entity {}
 }

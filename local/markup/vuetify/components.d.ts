@@ -40,6 +40,7 @@ declare module 'vue' {
     Map: typeof import('./src/components/Map.vue')['default']
     MaskInput: typeof import('./src/components/part/form/MaskInput.vue')['default']
     MinMaxInputDropdown: typeof import('./src/components/filter/part/MinMaxInputDropdown.vue')['default']
+    NewDialogModal: typeof import('./src/components/modal/NewDialogModal.vue')['default']
     PersonalManager: typeof import('./src/components/profile/PersonalManager.vue')['default']
     PhoneInput: typeof import('./src/components/html/PhoneInput.vue')['default']
     ProfileAsideMenu: typeof import('./src/components/ProfileAsideMenu.vue')['default']

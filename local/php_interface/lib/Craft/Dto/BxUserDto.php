@@ -168,4 +168,21 @@ class BxUserDto
 		return $self;
 	}
 
+
+	public static function chatMember(
+		int        $id,
+		string     $name,
+		string     $email,
+		string     $phone,
+		BxImageDto $avatarDto = null,
+	): BxUserDto
+	{
+		$self = new self();
+		$self->id = $id;
+		$self->name = $name;
+		$self->email = $email;
+		$self->phone = $phone;
+		$self->avatar = $avatarDto;
+		return $self;
+	}
 }

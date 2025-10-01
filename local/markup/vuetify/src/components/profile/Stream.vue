@@ -1,14 +1,16 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import ChatService from "@/service/Chat/ChatService.ts";
+import WsChatService from "@/service/Chat/WsChatService.ts";
 
 import type ChatMessageDto from "@/dto/request/ChatMessageDto.ts";
 import type ChatDto from "@/dto/entity/ChatDto.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/store.ts";
+import NewDialogModal from "@/components/modal/NewDialogModal.vue";
 
 export default defineComponent({
   name: "Stream",
+  components: {NewDialogModal},
   props: {
     chats: {
       type: Array as PropType<ChatDto[]>,
@@ -17,10 +19,13 @@ export default defineComponent({
   },
   data: function () {
     return {
+      modal: {
+        newDialogModal: false
+      },
       chatsData: null as ChatDto[] | null,
       currentUser: null as BxUserDto | null,
       currentDialog: null as ChatDto | null,
-      service: null as ChatService | null,
+      service: null as WsChatService | null,
       isValid: false,
       form: {
         message: null,
@@ -51,7 +56,7 @@ export default defineComponent({
         return;
       }
 
-      (this.service as ChatService).sendMessage(
+      (this.service as WsChatService).sendMessage(
         {
           sendUserId: this.currentUser?.id,
           acceptUserId: this.currentDialog?.acceptUserId,
@@ -59,10 +64,13 @@ export default defineComponent({
         } as ChatMessageDto
       );
 
-    }
+    },
+    newDialogModal() {
+      this.modal.newDialogModal = true;
+    },
   },
   created(): any {
-    this.service = new ChatService({
+    this.service = new WsChatService({
       host: "ws://dom.local/ws/",
       callback: (e: any) => {
         let data: any = null;
@@ -130,6 +138,12 @@ export default defineComponent({
 <template>
   <div class="stream">
     <div class="stream-aside">
+
+      <v-btn @click.prevent="newDialogModal">Новый диалог</v-btn>
+      <NewDialogModal
+        v-model="modal.newDialogModal"
+      />
+
       <v-row
         v-for="chat in chatsComp"
         :class="`mb-1 stream-chat` + (isCheck(chat.id) ? 'active':'')"

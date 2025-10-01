@@ -9,6 +9,7 @@ class ChatMemberTable extends DataManager
 {
 
 	const F_ID = 'ID';
+	const F_CHAT_ID = 'CHAT_ID';
 	const F_USER_ID = 'USER_ID';
 
 	public static function getTableName()
@@ -21,7 +22,13 @@ class ChatMemberTable extends DataManager
 		return [
 			(new IntegerField(self::F_ID))
 				->configurePrimary(),
+			(new IntegerField(self::F_CHAT_ID)),
 			(new IntegerField(self::F_USER_ID)),
 		];
+	}
+
+	public static function getObjectClass()
+	{
+		return ChatMember::class;
 	}
 }
