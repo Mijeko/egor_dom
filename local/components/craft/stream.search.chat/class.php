@@ -2,6 +2,7 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
+use Craft\DDD\Stream\Application\Dto\ChatDto;
 use Craft\DDD\Stream\Application\Factory\ChatServiceFactory;
 use Craft\DDD\Stream\Application\Services\ChatService;
 
@@ -27,8 +28,17 @@ class CraftStreamSearchChat extends AjaxComponent
 				intval($formData['acceptUserId']),
 			);
 
+			$chatDto = null;
+
+			if($chat)
+			{
+				$chatDto = new ChatDto(
+					$chat->getId(),
+				);
+			}
+
 			ResponseBx::success([
-				'chat' => $chat,
+				'chat' => $chatDto,
 			]);
 
 		} catch(Exception $e)

@@ -9,7 +9,6 @@ class ChatEntity
 	private int $id;
 	private ActiveValueObject $active;
 
-
 	public static function createNewChat(): ChatEntity
 	{
 		$self = new self();

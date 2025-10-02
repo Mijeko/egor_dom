@@ -63,11 +63,16 @@ class ChatService
 			return new ChatDto(
 				$chat->getId(),
 				$messages,
+				$acceptMembers,
 			);
 
 		}, $chats);
 	}
 
+
+	/**
+	 * @return array<int, ChatDto>
+	 */
 	public function findAllByUserId(int $userId): array
 	{
 		$asMember = $this->chatMemberService->findAll(Criteria::instance()->filter([
@@ -79,11 +84,13 @@ class ChatService
 			return [];
 		}
 
-		return $this->findAll(Criteria::instance()->filter([
-			//			ChatTable::F_ID => array_map(function(ChatMemberEntity $chat) {
-			//				return $chat->getChatId();
-			//			}, $asMember),
+		$chatList = $this->findAll(Criteria::instance()->filter([
+			ChatTable::F_ID => array_map(function(ChatMemberDto $chatMemberDto) {
+				return $chatMemberDto->id;
+			}, $asMember),
 		]));
+
+		return $chatList;
 	}
 
 	public function findChatBetweenUsers(int $userId1, int $userId2): ?ChatEntity
@@ -99,6 +106,7 @@ class ChatService
 			$reduce[$chat->chatId] = $chat->chatId;
 			return $reduce;
 		}, []);
+
 
 		if(count($chatData) == 1)
 		{

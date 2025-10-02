@@ -23,11 +23,11 @@ class ChatUseCase
 	public function sendMessage(
 		?int   $chatId,
 		int    $userId,
-		int    $acceptUserId,
+		?int   $acceptUserId,
 		string $text
 	): void
 	{
-		if(!$chatId)
+		if(!$chatId && $acceptUserId)
 		{
 			$this->createChatAndSendMessage($userId, $acceptUserId, $text);
 		} else

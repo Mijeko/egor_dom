@@ -45,6 +45,22 @@ export default defineComponent({
     };
   },
   methods: {
+    accepted(members: BxUserDto[]): BxUserDto | null {
+
+      let memberList: BxUserDto[] = members.filter((member: BxUserDto) => {
+        return member.id !== this.currentUser?.id;
+      });
+
+      if (memberList.length == 1) {
+        let acceptMember = memberList.shift();
+        if (acceptMember) {
+          return acceptMember;
+        }
+      }
+
+      return null;
+
+    },
     isCheck(id: number) {
       return this.currentDialog?.id === id;
     },
@@ -59,6 +75,7 @@ export default defineComponent({
 
       (this.service as WsChatService).sendMessage(
         {
+          chatId: this.currentDialog?.id,
           sendUserId: this.currentUser?.id,
           acceptUserId: this.currentDialog?.acceptUserId,
           message: String(this.form.message)
@@ -71,6 +88,9 @@ export default defineComponent({
     },
   },
   created(): any {
+    console.log(this.chats);
+
+
     this.service = new WsChatService({
       host: "ws://dom.local/ws/",
       callback: (e: any) => {
@@ -88,7 +108,7 @@ export default defineComponent({
         });
 
         if (chats) {
-          this.chatsComp = chats;
+          this.chatsComputed = chats;
         }
 
       }
@@ -102,7 +122,7 @@ export default defineComponent({
     }
   },
   computed: {
-    chatsComp: {
+    chatsComputed: {
       get(): ChatDto[] {
         if (this.chatsData) {
           return this.chatsData;
@@ -117,18 +137,19 @@ export default defineComponent({
   },
   watch: {
     newMessage: {
-      handler: function (newValue: { message: string, userId: number }, oV) {
+      handler: function (newValue: { message: string, userId: number, chatId: number }, oV) {
         (this.service as WsChatService).sendMessage(
           {
             sendUserId: this.currentUser?.id,
             acceptUserId: newValue.userId,
-            message: String(newValue.message)
+            message: String(newValue.message),
+            chatId: Number(newValue.chatId),
           } as ChatMessageDto
         );
       },
       deep: true,
     },
-    chatsComp: {
+    chatsComputed: {
       handler: function (nV, oV) {
         if (this.currentDialog) {
 
@@ -152,22 +173,26 @@ export default defineComponent({
   <div class="stream">
     <div class="stream-aside">
 
-      <v-btn @click.prevent="newDialogModal">Новый диалог</v-btn>
+      <v-btn @click.prevent="newDialogModal" class="mb-4">Новый диалог</v-btn>
+      <v-divider class="mb-6"/>
       <NewDialogModal
         v-model="modal.newDialogModal"
         v-model:message="newMessage"
       />
 
       <v-row
-        v-for="chat in chatsComp"
+        v-for="chat in chatsComputed"
         :class="`mb-1 stream-chat` + (isCheck(chat.id) ? 'active':'')"
         @click.prevent="selectDialog(chat)"
       >
         <v-col cols="2">
-          <v-avatar :image="chat.acceptMember?.avatar"></v-avatar>
+          <v-avatar
+            v-if="accepted(chat.members)"
+            :image="accepted(chat.members)?.avatar?.src ?? ''"
+          />
         </v-col>
         <v-col cols="10">
-          <strong>{{ chat.acceptMember?.name }}</strong>
+          <strong>{{ (accepted(chat.members) as BxUserDto)?.name }}</strong>
         </v-col>
       </v-row>
     </div>
