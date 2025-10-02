@@ -176,7 +176,7 @@ export default defineComponent({
           />
         </v-form>
 
-        <v-divider v-if="users"/>
+        <v-divider v-if="users" class="mb-4"/>
 
         <v-row
           v-for="user in users"
@@ -194,7 +194,8 @@ export default defineComponent({
           </v-col>
         </v-row>
 
-        <v-divider v-if="messageForm.userId"/>
+        <v-divider v-if="messageForm.userId" class="mt-4"/>
+
         <v-form v-model="isMessageValid" @submit.prevent="sendMessage" v-if="messageForm.userId">
           <v-textarea v-model="messageForm.text"></v-textarea>
           <v-btn type="submit">Отправить</v-btn>

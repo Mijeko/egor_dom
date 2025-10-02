@@ -164,10 +164,10 @@ export default defineComponent({
         @click.prevent="selectDialog(chat)"
       >
         <v-col cols="2">
-          <v-avatar :image="chat.acceptMember.avatar"></v-avatar>
+          <v-avatar :image="chat.acceptMember?.avatar"></v-avatar>
         </v-col>
         <v-col cols="10">
-          <strong>{{ chat.acceptMember.name }}</strong>
+          <strong>{{ chat.acceptMember?.name }}</strong>
         </v-col>
       </v-row>
     </div>

@@ -15,6 +15,7 @@ class ChatMessageRepository implements ChatMessageRepositoryInterface
 		$model = ChatMessageTable::createObject();
 		$model->setChatId($chatMessage->getChatId());
 		$model->setText($chatMessage->getMessage());
+		$model->setAuthorUserId($chatMessage->getUserId());
 
 		$result = $model->save();
 

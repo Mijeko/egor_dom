@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Stream\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Stream\Domain\Entity\ChatMemberEntity;
 use Craft\DDD\Stream\Domain\Repository\MemberRepositoryInterface;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable;
@@ -34,14 +35,7 @@ class ChatMemberRepository implements MemberRepositoryInterface
 		$result = [];
 
 		$members = ChatMemberTable::getList($criteria ? $criteria->makeGetListParams() : []);
-
-		if($criteria->getGroupBy())
-		{
-			$members = $members->fetchAll();
-		} else
-		{
-			$members = $members->fetchCollection();
-		}
+		$members = $members->fetchCollection();
 
 		foreach($members as $member)
 		{
@@ -51,12 +45,12 @@ class ChatMemberRepository implements MemberRepositoryInterface
 		return $result;
 	}
 
-	private function hydrate(EO_ChatMember|array $chatMember): ChatMemberEntity
+	private function hydrate(EO_ChatMember $chatMember): ChatMemberEntity
 	{
 		return ChatMemberEntity::hydrate(
-			is_array($chatMember) ? $chatMember[ChatMemberTable::F_ID] : $chatMember->getId(),
-			is_array($chatMember) ? $chatMember[ChatMemberTable::F_CHAT_ID] : $chatMember->getChatId(),
-			is_array($chatMember) ? $chatMember[ChatMemberTable::F_USER_ID] : $chatMember->getUserId(),
+			$chatMember->getId(),
+			$chatMember->getChatId(),
+			$chatMember->getUserId(),
 		);
 	}
 }

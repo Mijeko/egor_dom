@@ -93,15 +93,25 @@ class ChatService
 				->filter([
 					ChatMemberTable::F_USER_ID => [$userId1, $userId2],
 				])
-				->select([
-					'CHAT_ID',
-				])
-				->groupBy(ChatMemberTable::F_CHAT_ID)
 		);
 
-		if(count($chats) == 1)
+		$chatData = array_reduce($chats, function(array $reduce, ChatMemberDto $chat) {
+			$reduce[$chat->chatId] = $chat->chatId;
+			return $reduce;
+		}, []);
+
+		if(count($chatData) == 1)
 		{
-			return array_shift($chats);
+			$chatData = array_shift($chatData);
+			if(is_numeric($chatData))
+			{
+				$chat = $this->chatRepository->findChatById($chatData);
+
+				if($chat)
+				{
+					return $chat;
+				}
+			}
 		}
 
 		return null;
