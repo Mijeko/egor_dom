@@ -47,6 +47,7 @@ class ChatMemberService
 			return new ChatMemberDto(
 				$member->getId(),
 				$member->getChatId(),
+				$member->getUserId(),
 				$user->getName(),
 				$avatar
 			);

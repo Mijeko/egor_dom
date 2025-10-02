@@ -7,6 +7,7 @@ import type ChatDto from "@/dto/entity/ChatDto.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/store.ts";
 import NewDialogModal from "@/components/modal/NewDialogModal.vue";
+import type ChatMemberDto from "@/dto/entity/ChatMemberDto.ts";
 
 export default defineComponent({
   name: "Stream",
@@ -45,10 +46,10 @@ export default defineComponent({
     };
   },
   methods: {
-    accepted(members: BxUserDto[]): BxUserDto | null {
+    accepted(members: ChatMemberDto[]): ChatMemberDto | null {
 
-      let memberList: BxUserDto[] = members.filter((member: BxUserDto) => {
-        return member.id !== this.currentUser?.id;
+      let memberList: ChatMemberDto[] = members.filter((member: ChatMemberDto) => {
+        return member.userId !== this.currentUser?.id;
       });
 
       if (memberList.length == 1) {
@@ -104,12 +105,19 @@ export default defineComponent({
         let chats: ChatDto[] = data?.chats as ChatDto[];
 
         chats = chats.filter((chat: ChatDto) => {
-          return chat.userId == this.currentUser?.id;
+
+          let chatIdList = chat.members.map((member: ChatMemberDto) => {
+            return member.userId;
+          });
+
+          return chatIdList.includes(Number(this.currentUser?.id));
         });
 
         if (chats) {
           this.chatsComputed = chats;
         }
+
+        this.form.message = null;
 
       }
     });

@@ -8,5 +8,5 @@ export default interface ChatDto {
   acceptUserId: number;
   acceptMember: ChatMemberDto,
   messages: ChatMessageDto[],
-  members: BxUserDto[]
+  members: ChatMemberDto[]
 }

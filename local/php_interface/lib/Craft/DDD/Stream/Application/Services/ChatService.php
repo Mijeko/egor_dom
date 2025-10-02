@@ -86,7 +86,7 @@ class ChatService
 
 		$chatList = $this->findAll(Criteria::instance()->filter([
 			ChatTable::F_ID => array_map(function(ChatMemberDto $chatMemberDto) {
-				return $chatMemberDto->id;
+				return $chatMemberDto->chatId;
 			}, $asMember),
 		]));
 
