@@ -12,6 +12,8 @@ class Criteria
 	private array $filter = [];
 	private ?int $limit = null;
 
+	private ?string $groupBy = null;
+
 	private ?array $cache = [];
 
 	public static function instance(array $order = [], array $filter = [], int $limit = null): Criteria
@@ -122,5 +124,11 @@ class Criteria
 	public function getOrder(): array
 	{
 		return $this->order;
+	}
+
+	public function groupBy(string $groupBy): Criteria
+	{
+		$this->groupBy = $groupBy;
+		return $this;
 	}
 }

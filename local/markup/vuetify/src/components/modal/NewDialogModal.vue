@@ -5,6 +5,8 @@ import type SearchUserRequestDto from "@/dto/request/SearchUserRequest.ts";
 import type SearchUserResponseDto from "@/dto/response/SearchUserResponseDto.ts";
 import {da} from "vuetify/locale";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import type FindDialogRequestDto from "@/dto/request/FindDialogRequestDto.ts";
+import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
   name: "NewDialogModal",
@@ -19,6 +21,7 @@ export default defineComponent({
   },
   data: function () {
     return {
+      currentUser: null as BxUserDto | null,
       users: null as BxUserDto[] | null,
       service: null as ChatService | null,
       isValid: false,
@@ -28,6 +31,7 @@ export default defineComponent({
         source: null,
       },
       messageForm: {
+        chatId: null as number | null,
         userId: null as number | null,
         text: null,
       },
@@ -69,6 +73,12 @@ export default defineComponent({
   },
   created(): any {
     this.service = new ChatService();
+    let userStore = useUserStore();
+    let user = userStore.getUser;
+
+    if (user) {
+      this.currentUser = user;
+    }
   },
   methods: {
     searchUser() {
@@ -98,7 +108,19 @@ export default defineComponent({
 
     },
     startMessage(userId: number) {
-      this.messageForm.userId = userId;
+
+      let body: FindDialogRequestDto = {
+        userId: this.currentUser?.id,
+        acceptUserId: userId,
+      };
+
+
+      this.service?.findDialog(body).then((r: any) => {
+        console.log(r);
+        this.messageForm.userId = userId;
+      });
+
+
     },
     sendMessage() {
       if (!this.isMessageValid) {
@@ -107,7 +129,8 @@ export default defineComponent({
 
       this.$emit('update:message', {
         message: this.messageForm.text,
-        userId: this.messageForm.userId
+        userId: this.messageForm.userId,
+        chatId: this.messageForm.chatId
       });
     },
   },
@@ -129,41 +152,41 @@ export default defineComponent({
 
     <v-card title="Новый диалог">
 
+      <v-card-text>
 
-      <v-form v-model="isValid">
-        <v-text-field
-          placeholder="Номер телефона или e-mail или Фио"
-          v-model="form.source"
-          :rules="validate.source"
-          @change="searchUser"
-          @keyup.prevent="searchUser"
-        />
-      </v-form>
+        <v-form v-model="isValid">
+          <v-text-field
+            placeholder="Номер телефона или e-mail или Фио"
+            v-model="form.source"
+            :rules="validate.source"
+            @change="searchUser"
+            @keyup.prevent="searchUser"
+          />
+        </v-form>
+        <v-divider/>
+        <v-row
+          v-for="user in users"
+          class="mb-1 stream-chat"
+        >
+          <v-col cols="2">
+            <v-avatar :image="user.avatar?.src"></v-avatar>
+          </v-col>
+          <v-col cols="8">
+            <strong>{{ user.name }}</strong>
+          </v-col>
 
-      <v-divider/>
+          <v-col cols="2">
+            <v-btn @click="startMessage(user.id)">+</v-btn>
+          </v-col>
+        </v-row>
+        <v-divider/>
+        <v-form v-model="isMessageValid" @submit.prevent="sendMessage" v-if="messageForm.userId">
+          <v-textarea v-model="messageForm.text"></v-textarea>
+          <v-btn type="submit">Отправить</v-btn>
+        </v-form>
 
-      <v-row
-        v-for="user in users"
-        class="mb-1 stream-chat"
-      >
-        <v-col cols="2">
-          <v-avatar :image="user.avatar?.src"></v-avatar>
-        </v-col>
-        <v-col cols="8">
-          <strong>{{ user.name }}</strong>
-        </v-col>
+      </v-card-text>
 
-        <v-col cols="2">
-          <v-btn @click="startMessage(user.id)">+</v-btn>
-        </v-col>
-      </v-row>
-
-      <v-divider/>
-
-      <v-form v-model="isMessageValid" @submit.prevent="sendMessage" v-if="messageForm.userId">
-        <v-textarea v-model="messageForm.text"></v-textarea>
-        <v-btn type="submit">Отправить</v-btn>
-      </v-form>
 
     </v-card>
 

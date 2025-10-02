@@ -9,6 +9,7 @@ use Craft\DDD\Stream\Domain\Entity\ChatEntity;
 use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
+use Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatMessageTable;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatTable;
 use Craft\Dto\BxImageDto;
@@ -94,11 +95,23 @@ class ChatService
 	public function findAllByUserId(int $userId): array
 	{
 		return $this->findAll(Criteria::instance()->filter([
-//			[
-//				'LOGIC'                     => 'OR',
-//				ChatTable::F_USER_ID        => $userId,
-//				ChatTable::F_ACCEPT_USER_ID => $userId,
-//			],
+			//			[
+			//				'LOGIC'                     => 'OR',
+			//				ChatTable::F_USER_ID        => $userId,
+			//				ChatTable::F_ACCEPT_USER_ID => $userId,
+			//			],
 		]));
+	}
+
+	public function findChatBetweenUsers(int $userId1, int $userId2): ChatEntity
+	{
+		$chats = $this->chatMemberService->findAll(
+			Criteria::instance()
+				->filter([
+					ChatMemberTable::F_USER_ID => [$userId1, $userId2],
+				])
+				->groupBy(ChatMemberTable::F_CHAT_ID)
+		);
+
 	}
 }
