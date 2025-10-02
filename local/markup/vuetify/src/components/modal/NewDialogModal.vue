@@ -201,6 +201,8 @@ export default defineComponent({
           <v-btn type="submit">Отправить</v-btn>
         </v-form>
 
+        {{ messageForm }}
+
       </v-card-text>
 
 

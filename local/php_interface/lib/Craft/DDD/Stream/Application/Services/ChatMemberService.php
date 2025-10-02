@@ -21,6 +21,11 @@ class ChatMemberService
 	{
 	}
 
+	public function findChatIdListBetweenUsers(int $userId1, int $userId2): ?int
+	{
+		return $this->memberRepository->findChatBetweenUsers($userId1, $userId2);
+	}
+
 	/**
 	 * @return array<int, ChatMemberDto>
 	 */

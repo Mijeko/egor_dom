@@ -95,30 +95,13 @@ class ChatService
 
 	public function findChatBetweenUsers(int $userId1, int $userId2): ?ChatEntity
 	{
-		$chats = $this->chatMemberService->findAll(
-			Criteria::instance()
-				->filter([
-					ChatMemberTable::F_USER_ID => [$userId1, $userId2],
-				])
-		);
-
-		$chatData = array_reduce($chats, function(array $reduce, ChatMemberDto $chat) {
-			$reduce[$chat->chatId] = $chat->chatId;
-			return $reduce;
-		}, []);
-
-
-		if(count($chatData) == 1)
+		$chatId = $this->chatMemberService->findChatIdListBetweenUsers($userId1, $userId2);
+		if($chatId)
 		{
-			$chatData = array_shift($chatData);
-			if(is_numeric($chatData))
+			$chat = $this->chatRepository->findChatById($chatId);
+			if($chat)
 			{
-				$chat = $this->chatRepository->findChatById($chatData);
-
-				if($chat)
-				{
-					return $chat;
-				}
+				return $chat;
 			}
 		}
 
