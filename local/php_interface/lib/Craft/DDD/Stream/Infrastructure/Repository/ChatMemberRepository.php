@@ -54,14 +54,12 @@ class ChatMemberRepository implements MemberRepositoryInterface
 			->setSelect([
 				ChatMemberTable::F_CHAT_ID,
 			])
-			->where('USER_ID', $userId1)
-			->where('USER_ID', $userId2)
+			->where([
+				[ChatMemberTable::F_USER_ID, $userId1],
+				[ChatMemberTable::F_USER_ID, $userId2],
+			])
 			->addGroup(ChatMemberTable::F_CHAT_ID)
 			->fetchAll();
-
-		Debug::dumpToFile($chatData);
-		Debug::dumpToFile($userId1);
-		Debug::dumpToFile($userId2);
 
 		if(count($chatData) == 1)
 		{
