@@ -7,6 +7,7 @@ import {da} from "vuetify/locale";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import type FindDialogRequestDto from "@/dto/request/FindDialogRequestDto.ts";
 import {useUserStore} from "@/store.ts";
+import type FindChatResponseDto from "@/dto/response/FindChatResponseDto.ts";
 
 export default defineComponent({
   name: "NewDialogModal",
@@ -110,13 +111,13 @@ export default defineComponent({
     startMessage(userId: number) {
 
       let body: FindDialogRequestDto = {
-        userId: this.currentUser?.id,
+        userId: Number(this.currentUser?.id),
         acceptUserId: userId,
       };
 
 
-      this.service?.findDialog(body).then((r: any) => {
-        console.log(r);
+      this.service?.findDialog(body).then((response: FindChatResponseDto) => {
+        console.log(response);
         this.messageForm.userId = userId;
       });
 

@@ -6,6 +6,7 @@ use Craft\DDD\Stream\Application\Dto\ChatDto;
 use Craft\DDD\Stream\Application\Dto\ChatMemberDto;
 use Craft\DDD\Stream\Application\Dto\ChatMessageDto;
 use Craft\DDD\Stream\Domain\Entity\ChatEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMemberEntity;
 use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
@@ -94,16 +95,23 @@ class ChatService
 
 	public function findAllByUserId(int $userId): array
 	{
+		$asMember = $this->chatMemberService->findAll(Criteria::instance()->filter([
+			ChatMemberTable::F_USER_ID => $userId,
+		]));
+
+		if(count($asMember) <= 0)
+		{
+			return [];
+		}
+
 		return $this->findAll(Criteria::instance()->filter([
-			//			[
-			//				'LOGIC'                     => 'OR',
-			//				ChatTable::F_USER_ID        => $userId,
-			//				ChatTable::F_ACCEPT_USER_ID => $userId,
-			//			],
+			ChatTable::F_ID => array_map(function(ChatMemberEntity $chat) {
+				return $chat->getChatId();
+			}, $asMember),
 		]));
 	}
 
-	public function findChatBetweenUsers(int $userId1, int $userId2): ChatEntity
+	public function findChatBetweenUsers(int $userId1, int $userId2): ?ChatEntity
 	{
 		$chats = $this->chatMemberService->findAll(
 			Criteria::instance()
@@ -113,5 +121,11 @@ class ChatService
 				->groupBy(ChatMemberTable::F_CHAT_ID)
 		);
 
+		if(count($chats) == 1)
+		{
+			return array_shift($chats);
+		}
+
+		return null;
 	}
 }

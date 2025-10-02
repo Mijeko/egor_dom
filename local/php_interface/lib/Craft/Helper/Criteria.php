@@ -60,6 +60,11 @@ class Criteria
 			$preparedGetListParams['select'] = array_merge($preparedGetListParams['select'], ['PASSWORD']);
 		}
 
+		if($this->getGroupBy())
+		{
+			$preparedGetListParams['group'] = $this->getGroupBy();
+		}
+
 		return $preparedGetListParams;
 	}
 
@@ -130,5 +135,10 @@ class Criteria
 	{
 		$this->groupBy = $groupBy;
 		return $this;
+	}
+
+	public function getGroupBy(): ?string
+	{
+		return $this->groupBy;
 	}
 }
