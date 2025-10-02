@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Stream\Application\Services;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Stream\Application\Dto\ChatDto;
 use Craft\DDD\Stream\Application\Dto\ChatMemberDto;
 use Craft\DDD\Stream\Application\Dto\ChatMessageDto;
@@ -34,11 +35,13 @@ class ChatService
 	public function findAll(Criteria $criteria = null): array
 	{
 		$chats = $this->chatRepository->findAll($criteria);
+
 		$acceptMembers = $this->chatMemberService->findAll(Criteria::instance()->filter([
-			CraftUserTable::F_ID => array_map(function(ChatEntity $chat) {
-				return $chat->getAcceptUserId();
+			ChatMemberTable::F_CHAT_ID => array_map(function(ChatEntity $chat) {
+				return $chat->getId();
 			}, $chats),
 		]));
+
 		$messages = $this->chatMessageRepository->findAll(Criteria::instance()->filter([
 			ChatMessageTable::F_CHAT_ID => array_map(function(ChatEntity $chat) {
 				return $chat->getId();
@@ -57,37 +60,9 @@ class ChatService
 			}, $messages);
 
 
-			/** @var ChatMemberDto|null $acceptMember */
-			$acceptMember = null;
-			$acceptMembers = array_filter($acceptMembers, function(ChatMemberDto $chatMemberDto) use ($chat) {
-				return $chat->getAcceptUserId() == $chatMemberDto->id;
-			});
-
-			if(count($acceptMembers) == 1)
-			{
-				$acceptMember = array_shift($acceptMembers);
-			}
-
-
-			$avatar = null;
-			if($acceptMember && $acceptMember->avatar)
-			{
-				$avatar = new BxImageDto(
-					$acceptMember->avatar->id,
-					$acceptMember->avatar->src
-				);
-			}
-
 			return new ChatDto(
 				$chat->getId(),
-				$chat->getUserId(),
-				$chat->getAcceptUserId(),
 				$messages,
-				new ChatMemberDto(
-					$acceptMember->id,
-					$acceptMember->name,
-					$avatar,
-				)
 			);
 
 		}, $chats);
@@ -105,9 +80,9 @@ class ChatService
 		}
 
 		return $this->findAll(Criteria::instance()->filter([
-			ChatTable::F_ID => array_map(function(ChatMemberEntity $chat) {
-				return $chat->getChatId();
-			}, $asMember),
+			//			ChatTable::F_ID => array_map(function(ChatMemberEntity $chat) {
+			//				return $chat->getChatId();
+			//			}, $asMember),
 		]));
 	}
 
@@ -117,6 +92,9 @@ class ChatService
 			Criteria::instance()
 				->filter([
 					ChatMemberTable::F_USER_ID => [$userId1, $userId2],
+				])
+				->select([
+					'CHAT_ID',
 				])
 				->groupBy(ChatMemberTable::F_CHAT_ID)
 		);

@@ -7,7 +7,7 @@ use Craft\Helper\Criteria;
 
 interface ChatRepositoryInterface
 {
-	public function createChat(ChatEntity $chat): ?ChatEntity;
+	public function create(ChatEntity $chat): ?ChatEntity;
 
 	public function findChatById(int $id): ?ChatEntity;
 

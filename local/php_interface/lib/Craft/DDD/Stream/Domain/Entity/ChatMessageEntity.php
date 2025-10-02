@@ -7,28 +7,33 @@ class ChatMessageEntity
 
 	private int $chatId;
 	private int $id;
+	private int $userId;
 	private string $message;
 
 	public static function createMessage(
 		ChatEntity $chat,
+		int        $userId,
 		string     $message
 	): ChatMessageEntity
 	{
 		$self = new self();
 		$self->chatId = $chat->getId();
 		$self->message = $message;
+		$self->userId = $userId;
 		return $self;
 	}
 
 	public static function hydrate(
 		int    $id,
 		int    $chatId,
+		int    $userId,
 		string $message
 	): ChatMessageEntity
 	{
 		$self = new self();
 		$self->id = $id;
 		$self->chatId = $chatId;
+		$self->userId = $userId;
 		$self->message = $message;
 		return $self;
 	}
@@ -56,4 +61,8 @@ class ChatMessageEntity
 		return $this->message;
 	}
 
+	public function getUserId(): int
+	{
+		return $this->userId;
+	}
 }

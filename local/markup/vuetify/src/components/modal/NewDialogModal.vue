@@ -117,7 +117,18 @@ export default defineComponent({
 
 
       this.service?.findDialog(body).then((response: FindChatResponseDto) => {
-        console.log(response);
+
+        let {data, status} = response;
+        let {chat} = data;
+
+        if (status !== 'success') {
+          return;
+        }
+
+        if (chat) {
+          this.messageForm.chatId = chat.id;
+        }
+
         this.messageForm.userId = userId;
       });
 
@@ -164,7 +175,9 @@ export default defineComponent({
             @keyup.prevent="searchUser"
           />
         </v-form>
-        <v-divider/>
+
+        <v-divider v-if="users"/>
+
         <v-row
           v-for="user in users"
           class="mb-1 stream-chat"
@@ -180,7 +193,8 @@ export default defineComponent({
             <v-btn @click="startMessage(user.id)">+</v-btn>
           </v-col>
         </v-row>
-        <v-divider/>
+
+        <v-divider v-if="messageForm.userId"/>
         <v-form v-model="isMessageValid" @submit.prevent="sendMessage" v-if="messageForm.userId">
           <v-textarea v-model="messageForm.text"></v-textarea>
           <v-btn type="submit">Отправить</v-btn>

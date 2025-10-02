@@ -3,6 +3,7 @@
 namespace Craft\DDD\Stream\Application\Factory;
 
 use Craft\DDD\Stream\Application\UseCase\ChatUseCase;
+use Craft\DDD\Stream\Infrastructure\Repository\ChatMemberRepository;
 use Craft\DDD\Stream\Infrastructure\Repository\ChatMessageRepository;
 use Craft\DDD\Stream\Infrastructure\Repository\ChatRepository;
 
@@ -12,7 +13,8 @@ class ChatUseCaseFactory
 	{
 		return new ChatUseCase(
 			new ChatRepository(),
-			new ChatMessageRepository()
+			new ChatMessageRepository(),
+			new ChatMemberRepository(),
 		);
 	}
 }

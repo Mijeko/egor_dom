@@ -2,34 +2,70 @@
 
 namespace Craft\DDD\Stream\Application\UseCase;
 
+use Craft\DDD\Stream\Domain\Entity\ChatEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMemberEntity;
+use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
 use Craft\DDD\Stream\Domain\Repository\ChatMessageRepositoryInterface;
 use Craft\DDD\Stream\Domain\Repository\ChatRepositoryInterface;
-use Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable;
 use Craft\DDD\Stream\Infrastructure\Repository\ChatMemberRepository;
-use Craft\Helper\Criteria;
 
 class ChatUseCase
 {
 
 	public function __construct(
-		private ChatRepositoryInterface        $repository,
+		private ChatRepositoryInterface        $chatRepository,
 		private ChatMessageRepositoryInterface $messageRepository,
 		private ChatMemberRepository           $memberRepository,
 	)
 	{
 	}
 
-	public function sendMessage(int $userId, int $chatId, string $message): void
+	public function sendMessage(
+		?int   $chatId,
+		int    $userId,
+		int    $acceptUserId,
+		string $text
+	): void
 	{
-		$asChatMember = $this->memberRepository->findAll(Criteria::instance()->filter([
-			ChatMemberTable::F_USER_ID => $userId,
-			ChatMemberTable::F_CHAT_ID => $chatId,
-		]));
-
-		if(!$asChatMember)
+		if(!$chatId)
 		{
-
+			$this->createChatAndSendMessage($userId, $acceptUserId, $text);
+		} else
+		{
+			$this->send($chatId, $userId, $text);
 		}
 
+	}
+
+	private function createChatAndSendMessage(int $userId, int $acceptUserId, string $text): void
+	{
+		$chat = ChatEntity::createNewChat();
+		$chat = $this->chatRepository->create($chat);
+
+		$member1 = ChatMemberEntity::newChatMember($chat->getId(), $userId);
+		$member1 = $this->memberRepository->create($member1);
+
+		$member2 = ChatMemberEntity::newChatMember($chat->getId(), $acceptUserId);
+		$member2 = $this->memberRepository->create($member2);
+
+
+		$this->send($chat->getId(), $member1->getUserId(), $text);
+	}
+
+	private function send(int $chatId, int $userId, string $text): void
+	{
+		$chat = $this->chatRepository->findChatById($chatId);
+		if(!$chat)
+		{
+			throw new \Exception("Чат не найден");
+		}
+
+		$chatMessage = ChatmessageEntity::createMessage(
+			$chat,
+			$userId,
+			$text
+		);
+
+		$chatMessage = $this->messageRepository->create($chatMessage);
 	}
 }

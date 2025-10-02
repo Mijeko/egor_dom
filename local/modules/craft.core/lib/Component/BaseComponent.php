@@ -121,6 +121,7 @@ abstract class BaseComponent extends \CBitrixComponent
 			$this->load();
 		} catch(\Exception $exception)
 		{
+			Debug::dumpToFile($exception->getMessage(), '', '__component.log');
 			return;
 		}
 

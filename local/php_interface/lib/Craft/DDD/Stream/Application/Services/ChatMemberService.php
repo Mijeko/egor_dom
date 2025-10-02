@@ -30,19 +30,20 @@ class ChatMemberService
 		return array_map(function(ChatMemberEntity $member) {
 
 			$avatar = null;
-			$_image = $this->imageService->findById($member->getAvatarId());
-
-			if($_image)
-			{
-				$avatar = new BxImageDto(
-					$_image->id,
-					$_image->src,
-				);
-			}
+//			$_image = $this->imageService->findById($member->getAvatarId());
+//
+//			if($_image)
+//			{
+//				$avatar = new BxImageDto(
+//					$_image->id,
+//					$_image->src,
+//				);
+//			}
 
 			return new ChatMemberDto(
 				$member->getId(),
-				$member->getUsername(),
+				$member->getChatId(),
+				$member->getUserId(),
 				$avatar
 			);
 		}, $members);

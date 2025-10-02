@@ -15,24 +15,9 @@ define('NEED_AUTH', false);
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
 
-//global $USER;
-//$uid = $USER->GetID();
-//
-//\Bitrix\Main\Diag\Debug::dumpToFile($uid);
-
 $server = new Server();
 $server
 	->build()
-	//	->onConnect(function(TcpConnection $connection, Server $server) use ($uid) {
-	//
-	//		$customData = $server->getCustomData();
-	//
-	//		$customData['uid'] = $customData['uid'] ?? [];
-	//		$customData['uid'][] = $uid;
-	//
-	//		$server->setCustomData($customData);
-	//
-	//	})
 	->handlers([
 		function(TcpConnection $connection, $request, Server $server) {
 			$acceptData = null;
@@ -43,6 +28,7 @@ $server
 
 			$service = ChatUseCaseFactory::getUseCase();
 			$service->sendMessage(
+				$acceptData['chatId'],
 				$acceptData['sendUserId'],
 				$acceptData['acceptUserId'],
 				$acceptData['message'],

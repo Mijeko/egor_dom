@@ -8,6 +8,7 @@ class ChatMemberDto
 {
 	public function __construct(
 		public int         $id,
+		public int         $chatId,
 		public string      $name,
 		public ?BxImageDto $avatar = null,
 	)

@@ -33,7 +33,7 @@ class CraftStreamSearchChat extends AjaxComponent
 
 		} catch(Exception $e)
 		{
-
+			ResponseBx::badRequest($e->getMessage());
 		}
 	}
 

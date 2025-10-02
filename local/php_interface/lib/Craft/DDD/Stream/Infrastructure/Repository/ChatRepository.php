@@ -56,11 +56,9 @@ class ChatRepository implements ChatRepositoryInterface
 		return $result;
 	}
 
-	public function createChat(ChatEntity $chat): ?ChatEntity
+	public function create(ChatEntity $chat): ?ChatEntity
 	{
 		$model = ChatTable::createObject();
-		$model->setUserId($chat->getUserId());
-		$model->setAcceptUserId($chat->getAcceptUserId());
 		$model->setActive($chat->getActive()->getValue());
 
 		$result = $model->save();
@@ -71,7 +69,7 @@ class ChatRepository implements ChatRepositoryInterface
 			return $chat;
 		}
 
-		return null;
+		throw new \Exception(implode("\n", $result->getErrorMessages()));
 	}
 
 	private function hydrate(EO_Chat $chat): ChatEntity
@@ -79,8 +77,6 @@ class ChatRepository implements ChatRepositoryInterface
 		return ChatEntity::hydrate(
 			$chat->getId(),
 			new ActiveValueObject($chat->getActive()),
-			$chat->getUserId(),
-			$chat->getAcceptUserId()
 		);
 	}
 }

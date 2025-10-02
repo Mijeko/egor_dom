@@ -1,16 +1,9 @@
 <?php
 
 use Craft\Core\Component\AjaxComponent;
-use Craft\DDD\Stream\Application\Dto\ChatDto;
-use Craft\DDD\Stream\Application\Dto\ChatMemberDto;
-use Craft\DDD\Stream\Application\Dto\ChatMessageDto;
 use Craft\DDD\Stream\Application\Factory\ChatServiceFactory;
 use Craft\DDD\Stream\Application\Services\ChatService;
-use Craft\DDD\Stream\Domain\Entity\ChatEntity;
-use Craft\DDD\Stream\Domain\Entity\ChatMessageEntity;
-use Craft\DDD\Stream\Infrastructure\Entity\ChatTable;
-use Craft\Dto\BxImageDto;
-use Craft\Helper\Criteria;
+
 
 class CraftStreamComponent extends AjaxComponent
 {

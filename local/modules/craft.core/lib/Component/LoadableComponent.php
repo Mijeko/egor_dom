@@ -18,6 +18,7 @@ abstract class LoadableComponent extends MailedComponent
 			$this->loadModules();
 		} catch(\Exception $exception)
 		{
+			Debug::dumpToFile($exception->getMessage(), '', '__component.log');
 			return;
 		}
 

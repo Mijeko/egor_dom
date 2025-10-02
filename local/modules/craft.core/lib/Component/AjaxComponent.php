@@ -72,6 +72,7 @@ abstract class AjaxComponent extends LoadableComponent implements Controllerable
 			$this->cleanUploadFiles();
 
 			$this->addError('system_error', $exception->getMessage());
+			Debug::dumpToFile($exception->getMessage(), '', '__component.log');
 
 			return [
 				'template' => $this->renderHtml('template', $template),

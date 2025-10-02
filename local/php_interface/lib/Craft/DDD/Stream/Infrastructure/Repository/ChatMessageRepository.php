@@ -48,6 +48,7 @@ class ChatMessageRepository implements ChatMessageRepositoryInterface
 		return ChatMessageEntity::hydrate(
 			$chatMessage->getId(),
 			$chatMessage->getChatId(),
+			$chatMessage->getAuthorUserId(),
 			$chatMessage->getText()
 		);
 	}
