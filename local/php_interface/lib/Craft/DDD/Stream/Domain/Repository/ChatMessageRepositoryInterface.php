@@ -9,5 +9,8 @@ interface ChatMessageRepositoryInterface
 {
 	public function create(ChatMessageEntity $chatMessage): ?ChatMessageEntity;
 
+	/**
+	 * @return array<int, ChatMessageEntity>
+	 */
 	public function findAll(Criteria $criteria = null): array;
 }

@@ -245,6 +245,7 @@ export default defineComponent({
 
   &-messages {
     overflow-y: scroll;
+    min-height: 300px;
     max-height: 300px;
   }
 }

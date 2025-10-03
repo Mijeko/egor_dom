@@ -36,7 +36,7 @@ class ChatService
 	{
 		$chats = $this->chatRepository->findAll($criteria);
 
-		$acceptMembers = $this->chatMemberService->findAll(Criteria::instance()->filter([
+		$allMembersToAllChat = $this->chatMemberService->findAll(Criteria::instance()->filter([
 			ChatMemberTable::F_CHAT_ID => array_map(function(ChatEntity $chat) {
 				return $chat->getId();
 			}, $chats),
@@ -48,7 +48,12 @@ class ChatService
 			}, $chats),
 		]));
 
-		return array_map(function(ChatEntity $chat) use ($messages, $acceptMembers) {
+		return array_map(function(ChatEntity $chat) use ($messages, $allMembersToAllChat) {
+
+			$messages = array_filter($messages, function(ChatMessageEntity $message) use ($chat) {
+				return $message->getChatId() === $chat->getId();
+			});
+			$messages = array_values($messages);
 
 			$messages = array_map(function(ChatMessageEntity $message) {
 				return new  ChatMessageDto(
@@ -60,10 +65,16 @@ class ChatService
 			}, $messages);
 
 
+			$members = array_filter($allMembersToAllChat, function(ChatMemberDto $member) use ($chat) {
+				return $chat->getId() == $member->chatId;
+			});
+
+			$members = array_values($members);
+
 			return new ChatDto(
 				$chat->getId(),
 				$messages,
-				$acceptMembers,
+				$members,
 			);
 
 		}, $chats);
@@ -79,16 +90,20 @@ class ChatService
 			ChatMemberTable::F_USER_ID => $userId,
 		]));
 
+
 		if(count($asMember) <= 0)
 		{
 			return [];
 		}
 
+		$chatIdList = array_map(function(ChatMemberDto $chatMemberDto) {
+			return $chatMemberDto->chatId;
+		}, $asMember);
+
 		$chatList = $this->findAll(Criteria::instance()->filter([
-			ChatTable::F_ID => array_map(function(ChatMemberDto $chatMemberDto) {
-				return $chatMemberDto->chatId;
-			}, $asMember),
+			ChatTable::F_ID => $chatIdList,
 		]));
+
 
 		return $chatList;
 	}
