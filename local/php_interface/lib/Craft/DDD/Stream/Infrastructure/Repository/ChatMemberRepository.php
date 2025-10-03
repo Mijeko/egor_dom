@@ -2,10 +2,12 @@
 
 namespace Craft\DDD\Stream\Infrastructure\Repository;
 
+use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Stream\Domain\Entity\ChatMemberEntity;
 use Craft\DDD\Stream\Domain\Repository\MemberRepositoryInterface;
 use Craft\DDD\Stream\Infrastructure\Entity\ChatMemberTable;
+use Craft\DDD\Stream\Infrastructure\Entity\ChatTable;
 use Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember;
 use Craft\Helper\Criteria;
 
@@ -46,28 +48,36 @@ class ChatMemberRepository implements MemberRepositoryInterface
 	}
 
 	/**
-	 * @return array<int, int>
+	 * @param int $userId1
+	 * @param int $userId2
+	 * @return int|null
+	 * @throws SqlQueryException
 	 */
 	public function findChatBetweenUsers(int $userId1, int $userId2): ?int
 	{
-		$chatData = ChatMemberTable::query()
-			->setSelect([
-				ChatMemberTable::F_CHAT_ID,
-			])
-			->where([
-				[ChatMemberTable::F_USER_ID, $userId1],
-				[ChatMemberTable::F_USER_ID, $userId2],
-			])
-			->addGroup(ChatMemberTable::F_CHAT_ID)
-			->fetchAll();
+		$sql = sprintf("SELECT 
+    c." . ChatTable::F_ID . "
+FROM craft_chat c
+INNER JOIN craft_chat_member cp1 ON c." . ChatTable::F_ID . " = cp1." . ChatMemberTable::F_CHAT_ID . "
+INNER JOIN craft_chat_member cp2 ON c." . ChatTable::F_ID . " = cp2." . ChatMemberTable::F_CHAT_ID . "
+WHERE cp1." . ChatMemberTable::F_USER_ID . " = %s
+  AND cp2." . ChatMemberTable::F_USER_ID . " = %s
+  AND (
+    SELECT COUNT(*) 
+    FROM craft_chat_member cp3 
+    WHERE cp3." . ChatMemberTable::F_CHAT_ID . " = c." . ChatTable::F_ID . "
+  ) = 2;",
+			$userId1,
+			$userId2
+		);
 
-		if(count($chatData) == 1)
+		global $DB;
+
+		$result = $DB->Query($sql)->Fetch();
+
+		if($result['ID'])
 		{
-			$chatData = array_shift($chatData);
-			if($chatData && $chatData['CHAT_ID'])
-			{
-				return $chatData['CHAT_ID'];
-			}
+			return intval($result['ID']);
 		}
 
 		return null;
