@@ -6,6 +6,7 @@ class ChatMessageDto
 {
 	public function __construct(
 		public int    $id,
+		public int    $authorUserId,
 		public int    $chatId,
 		public string $text,
 	)

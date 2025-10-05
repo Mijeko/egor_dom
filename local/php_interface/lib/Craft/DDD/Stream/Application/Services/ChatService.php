@@ -58,6 +58,7 @@ class ChatService
 			$messages = array_map(function(ChatMessageEntity $message) {
 				return new  ChatMessageDto(
 					$message->getId(),
+					$message->getUserId(),
 					$message->getChatId(),
 					$message->getMessage(),
 				);

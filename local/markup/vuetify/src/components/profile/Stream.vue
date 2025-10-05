@@ -62,8 +62,11 @@ export default defineComponent({
       return null;
 
     },
-    isCheck(id: number) {
-      return this.currentDialog?.id === id;
+    isCheck(dialogId: number) {
+      return this.currentDialog?.id === dialogId;
+    },
+    isMyMessage(userId: number) {
+      return this.currentUser?.id === userId;
     },
     selectDialog(chat: ChatDto) {
       this.currentDialog = chat;
@@ -188,27 +191,32 @@ export default defineComponent({
         v-model:message="newMessage"
       />
 
-      <v-row
-        v-for="chat in chatsComputed"
-        :class="`mb-1 stream-chat` + (isCheck(chat.id) ? 'active':'')"
-        @click.prevent="selectDialog(chat)"
-      >
-        <v-col cols="2">
+
+      <div class="stream-member-list">
+        <div
+          :class="`stream-member-item` + (isCheck(chat.id) ? ' active':'')"
+          v-for="chat in chatsComputed"
+          @click.prevent="selectDialog(chat)"
+        >
           <v-avatar
             v-if="accepted(chat.members)"
             :image="accepted(chat.members)?.avatar?.src ?? ''"
           />
-        </v-col>
-        <v-col cols="10">
-          <strong>{{ (accepted(chat.members) as BxUserDto)?.name }}</strong>
-        </v-col>
-      </v-row>
+          <div>
+            <strong>{{ (accepted(chat.members) as BxUserDto)?.name }}</strong>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="stream-body">
-      <div class="stream-messages">
-        <v-row v-for="message in currentDialog?.messages">
-          <v-col>{{ message.text }}</v-col>
-        </v-row>
+      <div class="stream-message-list">
+        <div
+          :class="`stream-message-item `+(isMyMessage(message.authorUserId) ? 'my':'')"
+          v-for="message in currentDialog?.messages"
+        >
+          <div class="stream-message-item__text">{{ message.text }}</div>
+        </div>
       </div>
       <v-form v-if="currentDialog !== null" @submit.prevent="submit" v-model="isValid" class="stream-form">
         <v-textarea v-model="form.message" :rules="validate.message"></v-textarea>
@@ -229,6 +237,49 @@ export default defineComponent({
 
     &.active, &:hover {
       background: rgba(0, 0, 0, 0.02);
+    }
+  }
+
+  &-member {
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    &-item {
+      padding: 15px 7px;
+      border: 1px darkgray solid;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover, &.active {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  &-message {
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-item {
+      width: 100%;
+      display: flex;
+
+      &__text {
+        margin-left: auto;
+      }
+
+      &.my {
+        .stream-message-item__text {
+          margin-left: 0;
+        }
+      }
     }
   }
 
