@@ -50,3 +50,5 @@ if(file_exists(__DIR__ . '/events.php'))
 }
 
 
+
+\Bitrix\Main\Loader::includeModule('craft.inertia');

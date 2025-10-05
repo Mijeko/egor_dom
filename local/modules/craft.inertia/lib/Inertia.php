@@ -13,168 +13,181 @@ use Craft\Inertia\Support\Header;
 
 class Inertia
 {
-    protected array $sharedProps = [];
+	protected array $sharedProps = [];
 
-    protected null|string $bundle = null;
+	protected null|string $bundle = null;
 
-    protected string|Closure|null $version = null;
+	protected string|Closure|null $version = null;
 
-    protected Config $config;
+	protected Config $config;
 
-    protected array $response = [
-        'dispatched' => false,
-        'instance' => null,
-    ];
+	protected array $response = [
+		'dispatched' => false,
+		'instance'   => null,
+	];
 
-    public function __construct()
-    {
-        $this->config = new Config();
-    }
+	protected string $dir = 'abn';
 
-    public function share($key, $value = null): static
-    {
-        if (is_array($key)) {
-            $this->sharedProps = array_merge($this->sharedProps, $key);
-        } elseif (method_exists($key, 'toArray')) {
-            $this->sharedProps = array_merge($this->sharedProps, $key->toArray());
-        } else {
-            Arr::set($this->sharedProps, $key, $value);
-        }
+	public function __construct()
+	{
+		$this->config = new Config();
+	}
 
-        return $this;
-    }
+	public function share($key, $value = null): static
+	{
+		if(is_array($key))
+		{
+			$this->sharedProps = array_merge($this->sharedProps, $key);
+		} elseif(method_exists($key, 'toArray'))
+		{
+			$this->sharedProps = array_merge($this->sharedProps, $key->toArray());
+		} else
+		{
+			Arr::set($this->sharedProps, $key, $value);
+		}
 
-    public function getShared(string $key = null, $default = null): mixed
-    {
-        if ($key) {
-            return Arr::get($this->sharedProps, $key, $default);
-        }
+		return $this;
+	}
 
-        return $this->sharedProps;
-    }
+	public function getShared(string $key = null, $default = null): mixed
+	{
+		if($key)
+		{
+			return Arr::get($this->sharedProps, $key, $default);
+		}
 
-    public function flushShared(): void
-    {
-        $this->sharedProps = [];
-    }
+		return $this->sharedProps;
+	}
 
-    public function getLocalRoot(): string
-    {
-        return rtrim(dirname(__DIR__, 3), '/');
-    }
+	public function flushShared(): void
+	{
+		$this->sharedProps = [];
+	}
 
-    public function getVersionFromManifest(): ?string
-    {
-        if (file_exists($manifest = $this->getLocalRoot() . '/markup/vuetify/dist/.vite/manifest.json')) {
-            return hash_file('xxh128', $manifest);
-        }
+	public function getLocalRoot(): string
+	{
+		return rtrim(dirname(__DIR__, 3), '/');
+	}
 
-        return null;
-    }
+	public function getVersionFromManifest(): ?string
+	{
+		if(file_exists($manifest = $this->getLocalRoot() . '/markup/' . $this->dir . '/dist/.vite/manifest.json'))
+		{
+			return hash_file('xxh128', $manifest);
+		}
 
-    public function getBundlePath(): ?string
-    {
-        return $this->bundle;
-    }
+		return null;
+	}
 
-    public function setBundlePath(?string $bundle): void
-    {
-        $this->bundle = $bundle;
-    }
+	public function getBundlePath(): ?string
+	{
+		return $this->bundle;
+	}
 
-    public function config(string $key, $default = null)
-    {
-        return $this->config->get($key, $default);
-    }
+	public function setBundlePath(?string $bundle): void
+	{
+		$this->bundle = $bundle;
+	}
 
-    public function getConfig(): Config
-    {
-        return $this->config;
-    }
+	public function config(string $key, $default = null)
+	{
+		return $this->config->get($key, $default);
+	}
 
-    /**
-     * @param Closure|string|null $version
-     */
-    public function version(Closure|string|null $version): void
-    {
-        $this->version = $version;
-    }
+	public function getConfig(): Config
+	{
+		return $this->config;
+	}
 
-    public function getVersion(): string
-    {
-        $version = $this->version instanceof Closure
-            ? call_user_func($this->version)
-            : $this->version;
+	/**
+	 * @param Closure|string|null $version
+	 */
+	public function version(Closure|string|null $version): void
+	{
+		$this->version = $version;
+	}
 
-        return (string)$version;
-    }
+	public function getVersion(): string
+	{
+		$version = $this->version instanceof Closure
+			? call_user_func($this->version)
+			: $this->version;
 
-    public function lazy(callable $callback): Props\LazyProp
-    {
-        return new Props\LazyProp($callback);
-    }
+		return (string)$version;
+	}
 
-    public function globalShare(string $file): static
-    {
-        if (
-            !file_exists($file)
-            || !is_iterable($shared = require_once $file)
-        ) {
-            return $this;
-        }
+	public function lazy(callable $callback): Props\LazyProp
+	{
+		return new Props\LazyProp($callback);
+	}
 
-        return $this->share(collection_all($shared));
-    }
+	public function globalShare(string $file): static
+	{
+		if(
+			!file_exists($file)
+			|| !is_iterable($shared = require_once $file)
+		)
+		{
+			return $this;
+		}
 
-    public function view(string $component, array $props = []): void
-    {
-        $inertiaResponse = new Response($component, array_merge($this->sharedProps, $props), $this->getVersion());
+		return $this->share(collection_all($shared));
+	}
 
-        $this->globalShare($this->getLocalRoot() . '/php_interface/inertia.share.php');
+	public function view(string $component, array $props = []): void
+	{
+		$inertiaResponse = new Response($component, array_merge($this->sharedProps, $props), $this->getVersion());
 
-        $bxRequest = Application::getInstance()->getContext()->getRequest();
-        $page = $inertiaResponse->toPage($bxRequest);
+		$this->globalShare($this->getLocalRoot() . '/php_interface/inertia.share.php');
 
-        $response = $this->withMiddleware(
-            $bxRequest,
-            $page,
-            function () use ($page) {
-                if ($gatewayAnswer = (new Ssr\HttpGateway())->dispatch($page)) {
-                    Asset::getInstance()->addString($gatewayAnswer->head);
-                }
+		$bxRequest = Application::getInstance()->getContext()->getRequest();
+		$page = $inertiaResponse->toPage($bxRequest);
 
-                if (!$gatewayAnswer) {
-                    echo sprintf(
-                        '<div id="app" data-page="%s"></div>',
-                        htmlspecialchars(json_encode($page), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
-                    );
-                } else {
-                    echo $gatewayAnswer->body;
-                }
+		$response = $this->withMiddleware(
+			$bxRequest,
+			$page,
+			function() use ($page) {
+				if($gatewayAnswer = (new Ssr\HttpGateway())->dispatch($page))
+				{
+					Asset::getInstance()->addString($gatewayAnswer->head);
+				}
 
-                return new HttpResponse();
-            }
-        );
+				if(!$gatewayAnswer)
+				{
+					echo sprintf(
+						'<div id="app" data-page="%s"></div>',
+						htmlspecialchars(json_encode($page), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
+					);
+				} else
+				{
+					echo $gatewayAnswer->body;
+				}
 
-        if($response->getContent()) {
-            $response->writeHeaders();
-            $response->send();
-        }
-    }
+				return new HttpResponse();
+			}
+		);
 
-    protected function withMiddleware(HttpRequest $bxRequest, array $page, Closure $next): HttpResponse
-    {
-        return (new Middleware())->handle($bxRequest, value(function (HttpRequest $bxRequest) use ($page, $next) {
-            if ($bxRequest->getHeader(Header::INERTIA) === 'true') {
-                $response = new HttpResponse();
-                $response->addHeader(Header::INERTIA, 'true');
-                $response->setContent(json_encode($page));
-                $response->getHeaders()->setStatus(200);
+		if($response->getContent())
+		{
+			$response->writeHeaders();
+			$response->send();
+		}
+	}
 
-                return $response;
-            }
+	protected function withMiddleware(HttpRequest $bxRequest, array $page, Closure $next): HttpResponse
+	{
+		return (new Middleware())->handle($bxRequest, value(function(HttpRequest $bxRequest) use ($page, $next) {
+			if($bxRequest->getHeader(Header::INERTIA) === 'true')
+			{
+				$response = new HttpResponse();
+				$response->addHeader(Header::INERTIA, 'true');
+				$response->setContent(json_encode($page));
+				$response->getHeaders()->setStatus(200);
 
-            return $next($bxRequest);
-        }, $bxRequest));
-    }
+				return $response;
+			}
+
+			return $next($bxRequest);
+		}, $bxRequest));
+	}
 }

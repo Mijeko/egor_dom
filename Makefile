@@ -1,9 +1,14 @@
+webpack2:
+	cd local/markup/abn && npm i
+	cd local/markup/abn && npm run build
+
 webpack: npm-i markup-build markup-copy
 composer: composer-i
 
 npm-i:
 	cd local/markup/vuetify && npm i
 	cd local/markup/html && npm i
+	cd local/markup/abn && npm i
 
 markup-build:
 	cd local/markup/vuetify && npm run build
