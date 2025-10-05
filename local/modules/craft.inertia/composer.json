@@ -1,0 +1,19 @@
+{
+  "require-dev": {
+    "phpunit/phpunit": "^11.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Craft\\Inertia\\": "lib"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Craft\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.9",
+    "beta/bitrix-psr7": "1.2.0"
+  }
+}
