@@ -1,20 +1,20 @@
 <?php
 $aMenuLinks = [
 	[
-		"Канал",
-		"/profile/stream/",
-		[],
-		[
-			'ICON' => '$tgSimple',
-		],
-		"",
-	],
-	[
 		"Профиль",
 		"/profile/",
 		[],
 		[
 			'ICON' => '$home',
+		],
+		"",
+	],
+	[
+		"Общение",
+		"/profile/stream/",
+		[],
+		[
+			'ICON' => '$tgSimple',
 		],
 		"",
 	],
