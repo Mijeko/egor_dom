@@ -7,18 +7,25 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
 
 $APPLICATION->SetTitle("Заявки");
 
+use Bitrix\Main\Application;
+use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Loader;
+use Bitrix\Main\SystemException;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
+use Craft\DDD\Statistic\Application\Factory\ProfitServiceFactory;
+use Craft\Model\CraftUser;
 
 foreach(['craft.develop'] as $module)
 {
 	if(!Loader::includeModule($module))
 	{
 		$APPLICATION->ThrowException('Не подключен модуль ' . $module);
-	};
+	}
 }
 
-$request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+$statService = ProfitServiceFactory::getService();
+
+$request = Application::getInstance()->getContext()->getRequest();
 
 if($request->getPost('action_button'))
 {
@@ -38,10 +45,10 @@ if($request->getPost('action_button'))
 				try
 				{
 					$area->delete();
-				} catch(\Bitrix\Main\ArgumentException $e)
+				} catch(ArgumentException $e)
 				{
 
-				} catch(\Bitrix\Main\SystemException $e)
+				} catch(SystemException $e)
 				{
 
 				}
@@ -70,7 +77,6 @@ $lAdmin->AddHeaders([
 ]);
 
 $data = new CAdminResult($res, $table_id);
-
 while($element = $data->NavNext(true, "f_"))
 {
 	/**
@@ -87,7 +93,7 @@ while($element = $data->NavNext(true, "f_"))
 
 	$row->AddCheckField(ClaimTable::F_ACTIVE);
 
-	if($user = \Craft\Model\CraftUser::load($f_USER_ID))
+	if($user = CraftUser::load($f_USER_ID))
 	{
 		$row->AddField(ClaimTable::F_USER_ID, $user->getName());
 	}
@@ -149,6 +155,11 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_a
 // Вывод данных
 $lAdmin->DisplayList();
 
+echo
+BeginNote(),
+	'Прибыль: ' . $statService->companyProfitByAllOrders(),
+'</a>',
+EndNote();
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");
 ?>

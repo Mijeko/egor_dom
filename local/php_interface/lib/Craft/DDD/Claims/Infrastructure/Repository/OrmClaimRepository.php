@@ -28,8 +28,8 @@ class OrmClaimRepository implements ClaimRepositoryInterface
 		$model->setClient($claim->getClient());
 		$model->setName($claim->getName());
 		$model->setStatus($claim->getStatus()->getCode());
-		$model->setPhone($claim->getPhone());
-		$model->setEmail($claim->getEmail());
+		$model->setPhone($claim->getPhone()->getValue());
+		$model->setEmail($claim->getEmail()->getValue());
 		$model->setOrderCost($claim->getOrderCost());
 		$model->setManagerId($claim->getManagerId());
 

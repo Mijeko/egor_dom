@@ -2,7 +2,9 @@
 
 namespace Craft\DDD\Statistic\Application\Services;
 
+use Craft\DDD\Statistic\Domain\Entity\OrderEntity;
 use Craft\DDD\Statistic\Domain\Repository\OrderRepositoryInterface;
+use Craft\Helper\Criteria;
 
 class ProfitService
 {
@@ -15,12 +17,41 @@ class ProfitService
 		$this->companyProfit = 4.0;
 	}
 
+	public function companyProfitByAllOrders(): int
+	{
+		$orders = $this->orderRepository->findAll();
+		if(!$orders)
+		{
+			return 0;
+		}
+
+		return array_reduce($orders, function(float $result, OrderEntity $order) {
+			return $result + $this->companyProfit($order->getCost());
+		}, 0);
+	}
+
+	public function companyProfitByOrders(array $orderIdList): int
+	{
+		$orders = $this->orderRepository->findAll(Criteria::instance()->filter([
+			'ID' => $orderIdList,
+		]));
+
+		if(!$orders)
+		{
+			return 0;
+		}
+
+		return array_reduce($orders, function(float $result, OrderEntity $order) {
+			return $result + $this->companyProfit($order->getCost());
+		}, 0);
+	}
+
 	public function companyProfitByOrder(int $orderId): int
 	{
 		$order = $this->orderRepository->findById($orderId);
 		if(!$order)
 		{
-			throw new \Exception("Заказ #{$orderId} не найден");
+			return 0;
 		}
 
 		return $this->companyProfit($order->getCost());

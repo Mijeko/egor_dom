@@ -6,6 +6,7 @@ namespace Craft\DDD\Claims\Application\Factory;
 use Craft\DDD\Claims\Application\UseCase\ClaimCreateUseCase;
 use Craft\DDD\Claims\Infrastructure\Repository\BuyerRepository;
 use Craft\DDD\Claims\Infrastructure\Repository\OrmClaimRepository;
+use Craft\DDD\Claims\Infrastructure\Repository\OrmManagerRepository;
 use Craft\DDD\Claims\Infrastructure\Services\TgSenderService;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
@@ -18,6 +19,7 @@ class ClaimCreateUseCaseFactory
 			new OrmApartmentRepository(),
 			new OrmClaimRepository(),
 			new BuyerRepository(),
+			new OrmManagerRepository(),
 		);
 	}
 }

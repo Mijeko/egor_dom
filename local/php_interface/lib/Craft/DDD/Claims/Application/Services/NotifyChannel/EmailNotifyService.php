@@ -32,7 +32,7 @@ class EmailNotifyService
 			Application::getInstance()->getContext()->getServer()->getServerName(),
 			$claimEntity->getId(),
 			$claimEntity->getClient(),
-			$claimEntity->getPhone(),
+			$claimEntity->getPhone()->getValue(),
 		);
 
 		foreach($members as $member)

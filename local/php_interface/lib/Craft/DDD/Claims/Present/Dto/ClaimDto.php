@@ -27,8 +27,8 @@ final class ClaimDto
 			StatusClaimDto::fromVO($claim->getStatus()),
 			$claim->getName(),
 			$claim->getClient(),
-			$claim->getPhone(),
-			$claim->getEmail(),
+			$claim->getPhone()->getValue(),
+			$claim->getEmail()->getValue(),
 			ApartmentDto::fromEntity($claim->getApartmentEntity()),
 			$claim->getCreatedAt(),
 		);
