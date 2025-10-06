@@ -7,14 +7,14 @@
 
 global $APPLICATION;
 
-//$APPLICATION->IncludeComponent(
-//	'craft:object.list',
-//	'.default',
-//	[],
-//	false,
-//	['HIDE_ICONS' => 'Y']
-//);
+$APPLICATION->IncludeComponent(
+	'craft:object.list',
+	'.default',
+	[],
+	false,
+	['HIDE_ICONS' => 'Y']
+);
 
-inertia('index');
+//inertia('index');
 
 ?>
