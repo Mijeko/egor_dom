@@ -13,6 +13,8 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\SystemException;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
 use Craft\DDD\Statistic\Application\Factory\ProfitServiceFactory;
+use Craft\Helper\CurrencyHtml;
+use Craft\Helper\Money;
 use Craft\Model\CraftUser;
 
 foreach(['craft.develop'] as $module)
@@ -74,6 +76,7 @@ $lAdmin->AddHeaders([
 	['id' => ClaimTable::F_NAME, 'content' => 'Название', 'default' => true],
 	['id' => ClaimTable::F_ACTIVE, 'content' => 'Активность', 'default' => true],
 	['id' => ClaimTable::F_USER_ID, 'content' => 'Пользователь', 'default' => true],
+	['id' => ClaimTable::F_ORDER_COST, 'content' => 'Стоимость заказа', 'default' => true],
 ]);
 
 $data = new CAdminResult($res, $table_id);
@@ -157,7 +160,7 @@ $lAdmin->DisplayList();
 
 echo
 BeginNote(),
-	'Прибыль: ' . $statService->companyProfitByAllOrders(),
+	'Прибыль: ' . Money::format($statService->companyProfitByAllOrders()) . ' ' . CurrencyHtml::icon(),
 '</a>',
 EndNote();
 
