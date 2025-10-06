@@ -4,20 +4,33 @@ namespace Craft\DDD\Statistic\Application\Services;
 
 use Craft\DDD\Statistic\Domain\Entity\OrderEntity;
 use Craft\DDD\Statistic\Domain\Repository\OrderRepositoryInterface;
-use Craft\Helper\Criteria;
 
 class ProfitService
 {
-	private float $companyProfit;
+	private float $baseProfitValue;
+	private float $managerProfitValue;
 
 	public function __construct(
 		private OrderRepositoryInterface $orderRepository,
 	)
 	{
-		$this->companyProfit = 4.0;
+		$this->baseProfitValue = 4.0;
+		$this->managerProfitValue = 70;
 	}
 
-	public function companyProfitByAllOrders(): int
+	public function companyProfitByAllOrders(): float
+	{
+		return $this->baseProfitByAllOrders() - $this->managerProfitByAllOrders();
+	}
+
+	public function managerProfitByAllOrders(): int
+	{
+		$baseProfit = $this->baseProfitByAllOrders();
+
+		return $this->calcManagerProfit($baseProfit);
+	}
+
+	public function baseProfitByAllOrders(): int
 	{
 		$orders = $this->orderRepository->findAll();
 		if(!$orders)
@@ -26,39 +39,17 @@ class ProfitService
 		}
 
 		return array_reduce($orders, function(float $result, OrderEntity $order) {
-			return $result + $this->companyProfit($order->getCost());
+			return $result + $this->calcBaseProfit($order->getCost());
 		}, 0);
 	}
 
-	public function companyProfitByOrders(array $orderIdList): int
+	public function calcBaseProfit(int $cost): float
 	{
-		$orders = $this->orderRepository->findAll(Criteria::instance()->filter([
-			'ID' => $orderIdList,
-		]));
-
-		if(!$orders)
-		{
-			return 0;
-		}
-
-		return array_reduce($orders, function(float $result, OrderEntity $order) {
-			return $result + $this->companyProfit($order->getCost());
-		}, 0);
+		return ($cost * ($this->baseProfitValue / 100));
 	}
 
-	public function companyProfitByOrder(int $orderId): int
+	public function calcManagerProfit(int $cost): int
 	{
-		$order = $this->orderRepository->findById($orderId);
-		if(!$order)
-		{
-			return 0;
-		}
-
-		return $this->companyProfit($order->getCost());
-	}
-
-	public function companyProfit(int $cost): float
-	{
-		return $cost - ($cost * ($this->companyProfit / 100));
+		return ($cost * ($this->managerProfitValue / 100));
 	}
 }

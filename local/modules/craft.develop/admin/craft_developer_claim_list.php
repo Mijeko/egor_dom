@@ -86,6 +86,7 @@ while($element = $data->NavNext(true, "f_"))
 	 * @var int $f_ID
 	 * @var string $f_NAME
 	 * @var int $f_USER_ID
+	 * @var int $f_ORDER_COST
 	 */
 
 
@@ -100,6 +101,8 @@ while($element = $data->NavNext(true, "f_"))
 	{
 		$row->AddField(ClaimTable::F_USER_ID, $user->getName());
 	}
+
+	$row->AddViewField(ClaimTable::F_ORDER_COST, Money::format($f_ORDER_COST) . ' ' . CurrencyHtml::icon());
 
 	$arActions = [];
 	$arActions[] = [
@@ -160,7 +163,11 @@ $lAdmin->DisplayList();
 
 echo
 BeginNote(),
-	'Прибыль: ' . Money::format($statService->companyProfitByAllOrders()) . ' ' . CurrencyHtml::icon(),
+	'Прибыль: ' . Money::format($statService->baseProfitByAllOrders()) . ' ' . CurrencyHtml::icon(),
+'<br>',
+	'Менеджерам: ' . Money::format($statService->managerProfitByAllOrders()) . ' ' . CurrencyHtml::icon(),
+'<br>',
+	'Наш интерес: ' . Money::format($statService->companyProfitByAllOrders()) . ' ' . CurrencyHtml::icon(),
 '</a>',
 EndNote();
 
