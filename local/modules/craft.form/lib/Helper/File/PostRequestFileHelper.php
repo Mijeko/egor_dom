@@ -2,8 +2,6 @@
 
 namespace Craft\Form\Helper\File;
 
-use Bitrix\Main\Diag\Debug;
-
 class PostRequestFileHelper
 {
 	public static function prepareFileData(): array
