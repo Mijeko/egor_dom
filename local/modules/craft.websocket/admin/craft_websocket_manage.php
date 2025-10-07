@@ -27,7 +27,7 @@ if($request->isPost())
 	{
 		$result = null;
 		exec('php /var/www/dom.local/test/index.php start &', $result);
-		Debug::dumpToFile($result);
+		Debug::dump($result);
 	}
 }
 
