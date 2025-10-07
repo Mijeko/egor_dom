@@ -5,7 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
  * @global CMain $APPLICATION
  */
 
-$APPLICATION->SetTitle("Квартиры");
+$APPLICATION->SetTitle("Управление");
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
@@ -20,41 +20,14 @@ foreach(['craft.develop'] as $module)
 }
 
 $request = Application::getInstance()->getContext()->getRequest();
-$ID = $request->get('ID');
-$aparmentModel = $ID ? ApartmentTable::getById($ID)->fetchObject() : ApartmentTable::createObject();
-
-if($request->isPost())
-{
-	$postData = $request->getPostList()->toArray();
-	foreach($postData as $name => $value)
-	{
-		try
-		{
-			$aparmentModel->set($name, $value);
-		} catch(Exception $e)
-		{
-		}
-	}
-
-
-	$result = $aparmentModel->save();
-
-	if(!$result->isSuccess())
-	{
-		\Bitrix\Main\Diag\Debug::dumpToFile($result->getErrorMessages());
-	}
-
-	$_GET['ID'] = $aparmentModel->getId();
-	LocalRedirect($APPLICATION->GetCurPage() . "?" . http_build_query($_GET));
-}
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php");
 $aTabs = [
 	[
 		"DIV"   => "edit1",
-		"TAB"   => 'Квартира',
+		"TAB"   => 'Управление',
 		"ICON"  => "iblock_section",
-		"TITLE" => $aparmentModel->getName() ? 'Изменить: ' . $aparmentModel->getName() : 'Новая квартира',
+		"TITLE" => 'Управление',
 	],
 ];
 
@@ -64,23 +37,15 @@ $tabControl->BeginEpilogContent();
 ?>
 <?=bitrix_sessid_post()?>
 <?php
-if($ID)
-{
-	?>
-	<input type="hidden" name="ID" value=<?=$ID?>>
-	<?php
-}
 $tabControl->EndEpilogContent();
 $tabControl->Begin();
 
 $tabControl->BeginNextFormTab();
 
 
-
-
 $tabControl->Buttons([
 	"disabled" => false,
-	"back_url" => CRAFT_DEVELOP_ADMIN_URL_LIST_APARTMENTS . "?lang=" . LANG,
+	"back_url" => CRAFT_WEBSOCKET_ADMIN_URL_MANAGER . "?lang=" . LANG,
 ]);
 
 $tabControl->Show();

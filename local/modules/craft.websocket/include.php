@@ -24,4 +24,4 @@ if(!\Bitrix\Main\Loader::includeModule("craft.core"))
 	return;
 }
 
-define('CRAFT_WEBSOCKET_ADMIN_URL_MANAGER', '');
+define('CRAFT_WEBSOCKET_ADMIN_URL_MANAGER', '/bitrix/admin/craft_websocket_manage.php?lang=ru');
