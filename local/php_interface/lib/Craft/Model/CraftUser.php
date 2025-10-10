@@ -6,7 +6,6 @@ class CraftUser extends EO_CraftUser
 {
 	const PERSON_TYPE_PHYS = 'phys';
 	const PERSON_TYPE_JUR = 'jur';
-	const PERSON_TYPE_IP = 'ip';
 
 	protected static ?CraftUser $instance = null;
 
@@ -67,6 +66,12 @@ class CraftUser extends EO_CraftUser
 		return in_array(USER_GROUP_PHYS_PERSON_ID, $groups);
 	}
 
+	public function isDeveloper(): bool
+	{
+		$groups = $this->fillGroups()->getGroupIdList();
+		return in_array(USER_GROUP_DEVELOPER, $groups);
+	}
+
 	public function isJurPerson(): bool
 	{
 		if(!defined('USER_GROUP_JUR_PERSON_ID'))
@@ -76,17 +81,6 @@ class CraftUser extends EO_CraftUser
 
 		$groups = $this->fillGroups()->getGroupIdList();
 		return in_array(USER_GROUP_JUR_PERSON_ID, $groups);
-	}
-
-	public function getAvatarPath(): ?string
-	{
-		$file = \CFile::GetFileArray($this->getPersonalPhoto());
-		if(!$file)
-		{
-			return null;
-		}
-
-		return $file['SRC'];
 	}
 
 	public function getFullName(): string
