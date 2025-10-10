@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-final class ChannelTgValueObject
+final class ChannelTgValueObject implements ContactChannelInterface
 {
 	public function __construct(
 		protected ?string $enable,
@@ -22,7 +22,7 @@ final class ChannelTgValueObject
 		return $this->tgId;
 	}
 
-	public function isEnabled(): ?bool
+	public function isEnabled(): bool
 	{
 		return true;
 	}

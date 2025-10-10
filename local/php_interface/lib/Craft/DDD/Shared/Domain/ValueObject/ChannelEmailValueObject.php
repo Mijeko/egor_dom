@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Shared\Domain\ValueObject;
 
-final class ChannelEmailValueObject
+final class ChannelEmailValueObject implements ContactChannelInterface
 {
 	public function __construct(
 		protected ?string $enable,
@@ -32,7 +32,7 @@ final class ChannelEmailValueObject
 		return $this->email;
 	}
 
-	public function isEnabled(): ?bool
+	public function isEnabled(): bool
 	{
 		return true;
 	}

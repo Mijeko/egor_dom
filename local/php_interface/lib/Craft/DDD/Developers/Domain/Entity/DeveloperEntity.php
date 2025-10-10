@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\City\Domain\Entity\CityEntity;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
@@ -22,6 +23,7 @@ final class DeveloperEntity
 	protected ?ImageValueObject $picture = null;
 	protected ?CityEntity $city = null;
 
+	protected ?DeveloperSettingsValueObject $settings = null;
 
 	public static function hydrate(
 		?int                      $id,
@@ -101,5 +103,10 @@ final class DeveloperEntity
 	public function getPictureId(): ?int
 	{
 		return $this->pictureId;
+	}
+
+	public function getSettings(): ?DeveloperSettingsValueObject
+	{
+		return $this->settings;
 	}
 }
