@@ -57,8 +57,15 @@ export default defineComponent({
     };
   },
   methods: {
+    decrementLenSource() {
+      if (this.lenSources - 1 > 0) {
+        this.lenSources--;
+      }
+    },
     incrementLenSource() {
-      this.lenSources++;
+      if (this.lenSources + 1 < 5) {
+        this.lenSources++;
+      }
     },
     submit() {
 
@@ -90,7 +97,7 @@ export default defineComponent({
 
           <v-divider v-if="(number) < (lenSources)"/>
         </v-row>
-        <v-btn type="submit" class="mr-4">Обновить</v-btn>
+        <v-btn type="button" @click="decrementLenSource" class="mr-4">Убрать</v-btn>
         <v-btn type="button" @click="incrementLenSource">Еще</v-btn>
       </v-card-text>
     </v-card>
