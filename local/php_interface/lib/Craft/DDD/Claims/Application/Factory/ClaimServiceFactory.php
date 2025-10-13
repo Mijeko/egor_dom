@@ -7,7 +7,7 @@ use Craft\DDD\Claims\Application\Services\ClaimService;
 use Craft\DDD\Claims\Infrastructure\Repository\OrmClaimRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
-use Craft\DDD\Notify\Application\Factory\ManagerNotificatorServiceFactory;
+use Craft\DDD\Shared\Infrastructure\Service\EventManager;
 use Craft\DDD\User\Infrastructure\Repository\BxUserRepository;
 
 class ClaimServiceFactory
@@ -20,7 +20,7 @@ class ClaimServiceFactory
 			new BxUserRepository(),
 			new OrmBuildObjectRepository(),
 			ClaimCreateUseCaseFactory::getService(),
-			ManagerNotificatorServiceFactory::getService()
+			new EventManager(),
 		);
 	}
 }
