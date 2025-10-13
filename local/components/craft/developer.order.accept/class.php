@@ -3,12 +3,12 @@
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
 use Craft\DDD\Claims\Application\Factory\ClaimManagerAcceptUseCaseFactory;
-use Craft\DDD\Claims\Application\UseCase\ClaimManagerAcceptUseCase;
+use Craft\DDD\Claims\Application\UseCase\ClaimAcceptDeveloperUseCase;
 
 class CraftDeveloperOrderAcceptComponent extends AjaxComponent
 {
 
-	private ClaimManagerAcceptUseCase $useCase;
+	private ClaimAcceptDeveloperUseCase $useCase;
 
 
 	function componentNamespace(): string
