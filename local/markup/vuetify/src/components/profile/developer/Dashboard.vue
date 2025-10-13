@@ -25,7 +25,35 @@ export default defineComponent({
   },
   data: function () {
     return {
-      lenSources: 2
+      lenSources: 2,
+      form: {
+        sources: [],
+        timeoutBron: null,
+        timePay: null,
+        channelLead: [],
+      },
+      validate: {
+        sources: [
+          (value: any) => {
+            return true;
+          }
+        ],
+        channelLead: [
+          (value: any) => {
+            return true;
+          }
+        ],
+        timeoutBron: [
+          (value: any) => {
+            return true;
+          }
+        ],
+        timePay: [
+          (value: any) => {
+            return true;
+          }
+        ],
+      }
     };
   },
   methods: {
@@ -51,14 +79,16 @@ export default defineComponent({
     <v-card>
       <v-card-text>
         <v-card-title class="mb-3">Источники квартир</v-card-title>
-        <v-row class="mb-1" v-for="ii in lenSources">
+        <v-row class="mb-1" v-for="number in lenSources">
           <v-col cols="12" class="py-0">
             <v-text-field
+              v-model="form.sources"
+              :rules="validate.sources"
               :hide-details="false"
               label="Ссылка на источник"/>
           </v-col>
 
-          <v-divider v-if="(ii) < (lenSources)"/>
+          <v-divider v-if="(number) < (lenSources)"/>
         </v-row>
         <v-btn type="submit" class="mr-4">Обновить</v-btn>
         <v-btn type="button" @click="incrementLenSource">Еще</v-btn>
@@ -69,10 +99,13 @@ export default defineComponent({
       <v-card-text>
         <v-card-title>Способ получения заявки</v-card-title>
         <v-checkbox
-          name="channelLead"
           v-for="chanel in SelectHelper.map(channels, {key:'value',label:'label'})"
           :label="chanel.label"
           :value="chanel.value"
+          class="pa-0 ma-0"
+          v-model="form.channelLead"
+          :rules="validate.channelLead"
+          multiple
         />
       </v-card-text>
     </v-card>
@@ -80,14 +113,22 @@ export default defineComponent({
     <v-card>
       <v-card-text>
         <v-card-title>Время удержания брони</v-card-title>
-        <v-text-field name="timeoutBron" label="Время удержания брони, в часах"/>
+        <v-text-field
+          v-model="form.timeoutBron"
+          :rules="validate.timeoutBron"
+          label="Время удержания брони, в часах"
+        />
       </v-card-text>
     </v-card>
 
     <v-card width="300px">
       <v-card-text>
         <v-card-title>Срок оплаты</v-card-title>
-        <v-text-field name="timePay" label="Срок оплаты, в часах"/>
+        <v-text-field
+          v-model="form.timePay"
+          :rules="validate.timePay"
+          label="Срок оплаты, в часах"
+        />
       </v-card-text>
     </v-card>
   </v-form>
