@@ -78,6 +78,12 @@ class ClaimEntity
 
 	}
 
+	public function developerAccept(): ClaimEntity
+	{
+		$this->status = StatusValueObject::developerAccept();
+		return $this;
+	}
+
 	public static function hydrate(
 		?int               $id,
 		?int               $apartmentId,

@@ -2,11 +2,13 @@
 
 namespace Craft\DDD\Claims\Domain\ValueObject;
 
+use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Shared\Domain\Exceptions\FailedValueObjectValidateValueException;
 
 class StatusValueObject
 {
 	const STATUS_NEW = 'new';
+	const STATUS_DEVELOPER_ACCEPT = 'wait_docs';
 	const STATUS_WAIT_DOCS = 'wait_docs';
 	const STATUS_FINISH = 'finish';
 
@@ -70,6 +72,11 @@ class StatusValueObject
 	public static function finishClaim(): StatusValueObject
 	{
 		return new self(self::STATUS_FINISH);
+	}
+
+	public static function developerAccept(): StatusValueObject
+	{
+		return new self(self::STATUS_DEVELOPER_ACCEPT);
 	}
 
 	public function getCode(): string
