@@ -73,9 +73,16 @@ export default defineComponent({
         <v-text-field name="timeoutBron" label="Время удержания брони, в часах"/>
       </v-card-text>
     </v-card>
+
+    <v-card>
+      <v-card-text>
+        <v-card-title>Срок оплаты</v-card-title>
+        <v-text-field name="timePay" label="Срок оплаты, в часах"/>
+      </v-card-text>
+    </v-card>
   </v-form>
 </template>
 
-<style scoped>
+<style lang="scss">
 
 </style>
