@@ -1,7 +1,10 @@
 <?php
 
 use Bitrix\Main\DI\ServiceLocator;
-use Craft\DDD\Notify\Application\Listeners\ClaimAcceptManagerListener;
+use Craft\DDD\Claims\Infrastructure\Events\ClaimAcceptManagerEvent;
+use Craft\DDD\Claims\Infrastructure\Events\ClaimCreateEvent;
+use Craft\DDD\Notify\Infrastructure\Listeners\ClaimAcceptManagerListener;
+use Craft\DDD\Notify\Infrastructure\Listeners\ClaimCreateListener;
 use Craft\DDD\Referal\Infrastructure\Listeners\AuthorizeListener;
 use Craft\DDD\Referal\Infrastructure\Listeners\InviteStudentToStudentListener;
 use Craft\DDD\User\Infrastructure\Events\AuthorizeEvent;
@@ -33,7 +36,12 @@ dispatcher()->addListener(InviteStudentToStudentEvent::EVENT_NAME, [
 	'handle',
 ]);
 
-dispatcher()->addListener(InviteStudentToStudentEvent::EVENT_NAME, [
+dispatcher()->addListener(ClaimAcceptManagerEvent::EVENT_NAME, [
 	new ClaimAcceptManagerListener(),
+	'handle',
+]);
+
+dispatcher()->addListener(ClaimCreateEvent::EVENT_NAME, [
+	new ClaimCreateListener(),
 	'handle',
 ]);

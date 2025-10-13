@@ -1,11 +1,11 @@
 <?php
 
-namespace Craft\DDD\Claims\Application\Factory;
+namespace Craft\DDD\Notify\Application\Factory;
 
 use Craft\DDD\Claims\Infrastructure\Repository\OrmManagerRepository;
-use Craft\DDD\Claims\Application\Services\ManagerNotificatorService;
-use Craft\DDD\Claims\Application\Factory\NotifyChannel\EmailNotifyChannelFactory;
-use Craft\DDD\Claims\Application\Factory\NotifyChannel\TelegramNotifyChannelFactory;
+use Craft\DDD\Notify\Application\Services\ManagerNotificatorService;
+use Craft\DDD\Notify\Application\Factory\NotifyChannel\EmailNotifyChannelFactory;
+use Craft\DDD\Notify\Application\Factory\NotifyChannel\TelegramNotifyChannelFactory;
 
 class ManagerNotificatorServiceFactory
 {

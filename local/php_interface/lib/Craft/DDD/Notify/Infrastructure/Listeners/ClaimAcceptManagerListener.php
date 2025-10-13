@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Notify\Application\Listeners;
+namespace Craft\DDD\Notify\Infrastructure\Listeners;
 
 use Craft\DDD\Claims\Infrastructure\Events\ClaimAcceptManagerEvent;
 use Craft\DDD\Notify\Application\Factory\ClaimAcceptManagerUseCaseFactory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Claims\Application\Factory\NotifyChannel;
+namespace Craft\DDD\Notify\Application\Factory\NotifyChannel;
 
 use Craft\DDD\Claims\Application\Services\NotifyChannel\EmailNotifyService;
 use Craft\DDD\Claims\Infrastructure\Services\EmailSenderService;

@@ -6,13 +6,16 @@ use Craft\DDD\Claims\Application\Dto\ClaimCreateDto;
 use Craft\DDD\Claims\Application\UseCase\ClaimCreateUseCase;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
+use Craft\DDD\Claims\Infrastructure\Events\ClaimCreateEvent;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Notify\Application\Services\ManagerNotificatorService;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
+use Craft\DDD\Shared\Infrastructure\Service\EventManager;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 use Craft\Helper\Criteria;
 
@@ -25,7 +28,7 @@ class ClaimService
 		protected UserRepositoryInterface        $userRepository,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
 		protected ClaimCreateUseCase             $claimCreateUseCase,
-		protected ManagerNotificatorService      $managerNotificatorService,
+		protected EventManager                   $managerNotificatorService,
 	)
 	{
 	}
@@ -33,7 +36,11 @@ class ClaimService
 	public function createClientClaim(ClaimCreateDto $request): ClaimEntity
 	{
 		$claim = $this->claimCreateUseCase->execute($request);
-		$this->managerNotificatorService->aboutNewClaim($claim);
+
+		$this->managerNotificatorService->dispatch(
+			new ClaimCreateEvent($claim),
+			ClaimCreateEvent::EVENT_NAME,
+		);
 
 		return $claim;
 	}

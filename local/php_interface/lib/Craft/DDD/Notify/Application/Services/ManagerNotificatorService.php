@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Claims\Application\Services;
+namespace Craft\DDD\Notify\Application\Services;
 
 use Craft\DDD\Claims\Application\Services\NotifyChannel\EmailNotifyService;
 use Craft\DDD\Claims\Application\Services\NotifyChannel\TelegramNotifyService;
@@ -17,6 +17,11 @@ class ManagerNotificatorService
 		protected EmailNotifyService         $emailNotifyService,
 	)
 	{
+	}
+
+	public function claimAcceptManager(ClaimEntity $claim)
+	{
+
 	}
 
 	public function aboutNewClaim(ClaimEntity $claimEntity): void
