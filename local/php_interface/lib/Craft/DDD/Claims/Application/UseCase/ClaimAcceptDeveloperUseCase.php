@@ -18,21 +18,21 @@ class ClaimAcceptDeveloperUseCase
 
 	public function execute(int $orderId): ClaimDto
 	{
-		$claim = $this->claimRepository->findById($orderId);
-		if(!$claim)
+		$claimEntity = $this->claimRepository->findById($orderId);
+		if(!$claimEntity)
 		{
 			throw new \Exception("Заказ не найден");
 		}
 
-		$claim->developerAccept();
+		$claimEntity->developerAccept();
 
-		$claim = $this->claimRepository->update($claim);
+		$claimEntity = $this->claimRepository->update($claimEntity);
 
 		$this->eventManager->dispatch(
-			new ClaimAcceptManagerEvent($claim),
+			new ClaimAcceptManagerEvent($claimEntity),
 			ClaimAcceptManagerEvent::EVENT_NAME
 		);
 
-		return ClaimDto::fromEntity($claim);
+		return ClaimDto::fromEntity($claimEntity);
 	}
 }
