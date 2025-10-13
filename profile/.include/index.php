@@ -22,6 +22,7 @@ $APPLICATION->IncludeComponent(
 			'settings'       => 'settings/',
 			'education'      => 'education/',
 			'orders'         => 'orders/',
+			'orderAccept'    => 'order/accept/#ORDER_ID#/',
 			'managerListAll' => 'managers/',
 			'agentListAll'   => 'agents/',
 			'studentListAll' => 'students/',
