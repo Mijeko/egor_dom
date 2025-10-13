@@ -26,6 +26,7 @@ export default defineComponent({
   data: function () {
     return {
       lenSources: 2,
+      isValidForm: false,
       form: {
         sources: [],
         timeoutBron: null,
@@ -69,6 +70,12 @@ export default defineComponent({
     },
     submit() {
 
+      console.log('this submit form');
+
+      if (!this.isValidForm) {
+        return;
+      }
+
       let body: ManagerFeedUpdateRequestDto = {};
 
       DeveloperService.updateFeedInfo(body)
@@ -76,13 +83,27 @@ export default defineComponent({
 
         });
 
-    }
+    },
+  },
+  watch: {
+    'form': {
+      handler: function (nV: any, oV: any) {
+
+        // let form: any = this.$refs['form'] as any;
+        // if (form) {
+        //   form.submit();
+        // }
+
+        this.submit();
+      },
+      deep: true,
+    },
   }
 })
 </script>
 
 <template>
-  <v-form @submit="submit" class="d-flex ga-4 flex-wrap">
+  <v-form @submit.prevent="submit" ref="form" v-model="isValidForm" class="d-flex ga-4 flex-wrap">
     <v-card>
       <v-card-text>
         <v-card-title class="mb-3">Источники квартир</v-card-title>
