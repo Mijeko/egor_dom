@@ -3,6 +3,7 @@ import {defineComponent, type PropType} from 'vue'
 import DeveloperService from "@/service/DeveloperService.ts";
 import type ManagerFeedUpdateResponseDto from "@/dto/response/ManagerFeedUpdateResponseDto.ts";
 import type SelectVariantDto from "@/dto/present/component/SelectVariantDto.ts";
+import type ManagerFeedUpdateRequestDto from "@/dto/request/ManagerFeedUpdateRequestDto.ts";
 
 export default defineComponent({
   name: "FeedLoad",

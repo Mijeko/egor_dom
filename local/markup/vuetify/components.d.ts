@@ -31,6 +31,7 @@ declare module 'vue' {
     CreateStudentModal: typeof import('./src/components/modal/CreateStudentModal.vue')['default']
     CurrentCity: typeof import('./src/components/CurrentCity.vue')['default']
     DeveloperList: typeof import('./src/components/DeveloperList.vue')['default']
+    FeedLoad: typeof import('./src/components/profile/developer/FeedLoad.vue')['default']
     GuestUserInformation: typeof import('./src/components/part/GuestUserInformation.vue')['default']
     Init: typeof import('./src/components/system/Init.vue')['default']
     InputDropdown: typeof import('./src/components/filter/part/InputDropdown.vue')['default']
