@@ -2,13 +2,14 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
-use Craft\DDD\Claims\Infrastructure\Repository\OrmClaimRepository;
+use Craft\DDD\Claims\Application\Factory\ClaimManagerAcceptUseCaseFactory;
+use Craft\DDD\Claims\Application\UseCase\ClaimManagerAcceptUseCase;
 
 class CraftDeveloperOrderAcceptComponent extends AjaxComponent
 {
 
-	protected ?ClaimRepositoryInterface $claimRepository = null;
+	private ClaimManagerAcceptUseCase $useCase;
+
 
 	function componentNamespace(): string
 	{
@@ -23,15 +24,7 @@ class CraftDeveloperOrderAcceptComponent extends AjaxComponent
 	{
 		try
 		{
-			$claim = $this->claimRepository->findById($this->arParams['ORDER_ID']);
-			if(!$claim)
-			{
-				throw new \Exception("Заказ не найден");
-			}
-
-			$claim->developerAccept();
-
-			$claim = $this->claimRepository->update($claim);
+			$claim = $this->useCase->execute(intval($formData['orderId']));
 
 			ResponseBx::success([
 				'success' => $claim,
@@ -54,6 +47,6 @@ class CraftDeveloperOrderAcceptComponent extends AjaxComponent
 
 	public function loadServices(): void
 	{
-		$this->claimRepository = new OrmClaimRepository();
+		$this->useCase = ClaimManagerAcceptUseCaseFactory::getUseCase();
 	}
 }
