@@ -36,7 +36,14 @@ class CraftDeveloperFeedLoadComponent extends AjaxComponent
 
 	protected function loadData(): void
 	{
-		$this->arResult['SOURCE'][] = [];
+
+		$contactChannel = [
+			['value' => 'tg', 'label' => 'Telegram'],
+			['value' => 'email', 'label' => 'E-Mail'],
+			['value' => 'phone', 'label' => 'Звонок по телефону'],
+		];
+
+		$this->arResult['CHANNELS'] = $contactChannel;
 	}
 
 	public function loadServices(): void

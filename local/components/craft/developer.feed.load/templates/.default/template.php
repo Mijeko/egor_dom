@@ -23,7 +23,8 @@ $APPLICATION->IncludeComponent(
 	[
 		'SOURCE' => 'profile/developer/Dashboard',
 		'PROPS'  => [
-			'source' => $arResult['SOURCE'],
+			'source'   => $arResult['SOURCE'],
+			'channels' => $arResult['CHANNELS'],
 		],
 	],
 	false,
