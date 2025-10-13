@@ -6,7 +6,7 @@ import type SelectVariantDto from "@/dto/present/component/SelectVariantDto.ts";
 import type ManagerFeedUpdateRequestDto from "@/dto/request/ManagerFeedUpdateRequestDto.ts";
 
 export default defineComponent({
-  name: "FeedLoad",
+  name: "Dashboard",
   props: {
     source: {
       type: Array as PropType<SelectVariantDto[]>,
@@ -37,7 +37,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-form @submit="submit">
+  <v-form @submit="submit" class="d-flex ga-4 flex-wrap">
     <v-card>
       <v-card-text>
         <v-card-title>Источники квартир</v-card-title>

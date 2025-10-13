@@ -21,7 +21,7 @@ $APPLICATION->IncludeComponent(
 	'craft:vite',
 	'vite',
 	[
-		'SOURCE' => 'profile/developer/FeedLoad',
+		'SOURCE' => 'profile/developer/Dashboard',
 		'PROPS'  => [
 			'source' => $arResult['SOURCE'],
 		],
