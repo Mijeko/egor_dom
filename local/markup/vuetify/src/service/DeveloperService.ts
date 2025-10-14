@@ -1,8 +1,8 @@
 import ControllerApi from "@/service/ControllerApi.ts";
-import type ManagerFeedUpdateRequestDto from "@/dto/request/ManagerFeedUpdateRequestDto.ts";
+import type DeveloperUpdateRequestDto from "@/dto/request/ManagerFeedUpdateRequestDto.ts";
 
 export default class DeveloperService {
-  static updateFeedInfo(body: ManagerFeedUpdateRequestDto) {
-    return ControllerApi.post('craft:manager.feed.update', body);
+  static update(body: DeveloperUpdateRequestDto) {
+    return ControllerApi.post('craft:developer.update', body);
   }
 }

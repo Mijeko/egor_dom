@@ -62,4 +62,9 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			)
 		);
 	}
+
+	public function update(DeveloperEntity $developer): ?DeveloperEntity
+	{
+		return null;
+	}
 }

@@ -5,12 +5,22 @@ import type ManagerFeedUpdateResponseDto from "@/dto/response/ManagerFeedUpdateR
 import type SelectVariantDto from "@/dto/present/component/SelectVariantDto.ts";
 import type ManagerFeedUpdateRequestDto from "@/dto/request/ManagerFeedUpdateRequestDto.ts";
 import SelectHelper from "@/service/SelectHelper.ts";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import {useUserStore} from "@/store.ts";
 
 export default defineComponent({
   name: "Dashboard",
   computed: {
     SelectHelper() {
       return SelectHelper
+    }
+  },
+  created(): any {
+    let userStore = useUserStore();
+    let user = userStore.getUser;
+
+    if (user) {
+      this.currentUser = user;
     }
   },
   props: {
@@ -25,6 +35,8 @@ export default defineComponent({
   },
   data: function () {
     return {
+      currentUser: null as BxUserDto | null,
+      timer: 0,
       lenSources: 2,
       isValidForm: false,
       form: {
@@ -76,12 +88,34 @@ export default defineComponent({
         return;
       }
 
-      let body: ManagerFeedUpdateRequestDto = {};
+      let body: ManagerFeedUpdateRequestDto = {
+        developerId: (this.currentUser as BxUserDto).id,
+        sources: this.form.sources,
+        channelLead: this.form.channelLead,
+        timeoutBron: Number(this.form.timeoutBron),
+        timePay: Number(this.form.timePay)
+      };
 
-      DeveloperService.updateFeedInfo(body)
-        .then((data: ManagerFeedUpdateResponseDto) => {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
 
-        });
+      this.timer = setTimeout(function () {
+
+        DeveloperService.update(body)
+          .then((data: ManagerFeedUpdateResponseDto) => {
+            console.log(data);
+          })
+          .then((r: any) => {
+            console.log(r);
+          })
+          .then((r: any) => {
+            console.log(r);
+          })
+          .catch((r: any) => {
+            console.log(r);
+          });
+      }, 500);
 
     },
   },
@@ -110,7 +144,8 @@ export default defineComponent({
         <v-row class="mb-1" v-for="number in lenSources">
           <v-col cols="12" class="py-0">
             <v-text-field
-              v-model="form.sources"
+              multiple="multiple"
+              v-model="form.sources[number]"
               :rules="validate.sources"
               :hide-details="false"
               label="Ссылка на источник"/>
@@ -138,18 +173,7 @@ export default defineComponent({
       </v-card-text>
     </v-card>
 
-    <v-card>
-      <v-card-text>
-        <v-card-title>Время удержания брони</v-card-title>
-        <v-text-field
-          v-model="form.timeoutBron"
-          :rules="validate.timeoutBron"
-          label="Время удержания брони, в часах"
-        />
-      </v-card-text>
-    </v-card>
-
-    <v-card width="300px">
+    <v-card width="400px">
       <v-card-text>
         <v-card-title>Срок оплаты</v-card-title>
         <v-text-field
@@ -158,6 +182,19 @@ export default defineComponent({
           label="Срок оплаты, в часах"
         />
       </v-card-text>
+
+      <v-divider/>
+
+
+      <v-card-text>
+        <v-card-title>Время удержания брони</v-card-title>
+        <v-text-field
+          v-model="form.timeoutBron"
+          :rules="validate.timeoutBron"
+          label="Время удержания брони, в часах"
+        />
+      </v-card-text>
+
     </v-card>
   </v-form>
 </template>

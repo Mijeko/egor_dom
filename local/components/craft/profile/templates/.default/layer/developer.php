@@ -18,7 +18,7 @@ global $APPLICATION;
 
 <?php
 $APPLICATION->IncludeComponent(
-	'craft:developer.feed.load',
+	'craft:developer.update',
 	'.default',
 	[],
 	false,

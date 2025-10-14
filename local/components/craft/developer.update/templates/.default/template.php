@@ -14,7 +14,7 @@
  * @var string $templateFile
  * @var string $templateFolder
  * @var string $componentPath
- * @var CraftDeveloperFeedLoadComponent $component
+ * @var CraftDeveloperUpdateComponent $component
  */
 
 $APPLICATION->IncludeComponent(

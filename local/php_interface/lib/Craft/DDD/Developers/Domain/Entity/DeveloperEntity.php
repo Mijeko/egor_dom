@@ -44,6 +44,12 @@ final class DeveloperEntity
 		return $self;
 	}
 
+	public function updateSettings(DeveloperSettingsValueObject $settings): DeveloperEntity
+	{
+		$this->settings = $settings;
+		return $this;
+	}
+
 	public function addPicture(ImageValueObject $picture): DeveloperEntity
 	{
 		$this->picture = $picture;
