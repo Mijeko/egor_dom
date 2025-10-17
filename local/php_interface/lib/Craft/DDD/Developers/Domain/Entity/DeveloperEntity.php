@@ -51,6 +51,24 @@ final class DeveloperEntity
 		return $self;
 	}
 
+	public function updateByAdmin(
+		?string                       $name,
+		?int                          $sort,
+		?ActiveValueObject            $active,
+		?int                          $pictureId = null,
+		?int                          $cityId = null,
+		?DeveloperSettingsValueObject $settings = null,
+	): DeveloperEntity
+	{
+		$this->name = $name;
+		$this->sort = $sort;
+		$this->active = $active;
+		$this->pictureId = $pictureId;
+		$this->cityId = $cityId;
+		$this->settings = $settings;
+		return $this;
+	}
+
 	public function updateSettings(DeveloperSettingsValueObject $settings): DeveloperEntity
 	{
 		$this->settings = $settings;

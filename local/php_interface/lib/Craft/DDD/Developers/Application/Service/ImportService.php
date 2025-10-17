@@ -43,7 +43,7 @@ class ImportService
 		}
 
 
-//		$sourceLinkList = $this->developer->getImportSetting()->getSourceLink();
+		//		$sourceLinkList = $this->developer->getImportSetting()->getSourceLink();
 		$sourceLinkList = $this->developer->getSettings()->getFeedList();
 
 		if(!$sourceLinkList)
@@ -54,6 +54,8 @@ class ImportService
 		foreach($sourceLinkList as $sourceLink)
 		{
 			$xmlBuildData = $this->readData($sourceLink);
+
+			// TODO: переписать на авто-определение обработчика
 			$handler = $this->getHandler($this->developer->getImportSetting());
 
 			if($handler)
