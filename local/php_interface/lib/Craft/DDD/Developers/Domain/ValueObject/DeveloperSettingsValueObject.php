@@ -3,16 +3,18 @@
 namespace Craft\DDD\Developers\Domain\ValueObject;
 
 use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject\FeedListValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject\MaxReservHourValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject\TimeToPaymentsValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ContactChannelInterface;
 
 class DeveloperSettingsValueObject
 {
 
 	public function __construct(
-		private ?array $leadChannelList = null,
-		private ?array $feedList = [],
-		private ?int   $maxReservHours = 0,
-		private ?int   $timeToPayments = 0,
+		private ?array                     $leadChannelList = null,
+		private ?array                     $feedList = [],
+		private ?MaxReservHourValueObject  $maxReservHours = null,
+		private ?TimeToPaymentsValueObject $timeToPayments = null,
 	)
 	{
 		$this->validate();

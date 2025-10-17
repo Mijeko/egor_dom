@@ -2,15 +2,15 @@
 
 namespace Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
 
-class FeedListValueObject
+class MaxReservHourValueObject
 {
 	public function __construct(
-		private ?string $value = null,
+		private ?int $value = null,
 	)
 	{
 	}
 
-	public function getValue(): ?string
+	public function getValue(): ?int
 	{
 		return $this->value;
 	}

@@ -5,9 +5,12 @@ namespace Craft\DDD\Developers\Application\UseCase;
 use Craft\DDD\Developers\Application\Dto\DeveloperSettingsUpdateDto;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject\FeedListValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ChannelEmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ChannelTgValueObject;
-use Craft\DDD\Shared\Domain\ValueObject\ContactChannelInterface;
+use Exception;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject\MaxReservHourValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject\TimeToPaymentsValueObject;
 
 class DeveloperSettingsUpdateUseCase
 {
@@ -23,7 +26,7 @@ class DeveloperSettingsUpdateUseCase
 		$developer = $this->developerRepository->findById($paramsDto->developerId);
 		if(!$developer)
 		{
-			throw new \Exception("Developer with ID {$paramsDto->developerId} not found");
+			throw new Exception("Developer with ID {$paramsDto->developerId} not found");
 		}
 
 		$currentSettingsValueObject = $developer->getSettings();
@@ -50,9 +53,11 @@ class DeveloperSettingsUpdateUseCase
 				}
 
 			}, $paramsDto->channelLead) : $currentSettingsValueObject->getLeadChannelList(),
-			$paramsDto->feedList ?? null,
-			$paramsDto->maxReservHours ?? null,
-			$paramsDto->timeToPayments ?? null,
+			$paramsDto->feedList ? array_map(function(string $link) {
+				return new FeedListValueObject($link);
+			}, $paramsDto->feedList) : null,
+			$paramsDto->maxReservHours ? new MaxReservHourValueObject($paramsDto->maxReservHours) : null,
+			$paramsDto->timeToPayments ? new TimeToPaymentsValueObject($paramsDto->timeToPayments) : null,
 		);
 
 		$developer->updateSettings($newSettingsValueObject);
