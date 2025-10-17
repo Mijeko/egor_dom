@@ -1,5 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/iblock/prolog.php');
+
 
 /**
  * @global CMain $APPLICATION
@@ -13,6 +15,7 @@ use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Bitrix\Main\Page\Asset;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmDeveloperRepository;
+use Craft\Enum\ChannelListEnum;
 
 foreach(['craft.develop'] as $module)
 {
@@ -141,64 +144,46 @@ if($field = $entity->getField(DeveloperTable::F_PICTURE_ID))
 $tabControl->BeginNextFormTab();
 
 $tabControl->AddEditField(
-	'linkSo',
-	'linkSo',
+	'maxReservHours',
+	'Время максимального резерва, (в часах)',
 	false,
-	[
-
-	]
 );
 
-//$tabControl->AddDropDownField(
-//	'xmlHandler',
-//	'Обработчик',
-//	false,
-//	array_merge(
-//		[null => 'Выберите обработчик'],
-//		Developer::getImportHandlers()
-//	),
-//	$developerModel->importSettings()->getHandler()
-//);
+$tabControl->AddEditField(
+	'timeToPayments',
+	'Срок оплаты, (в часах)',
+	false,
+);
 
-//$tabControl->BeginCustomField('linkSource', 'asd');
-//?>
-	<!--	<tr>-->
-	<!--		<td></td>-->
-	<!--		<td>-->
-	<!--			<table id="multiLinkSource">-->
-	<!---->
-	<!--				--><?php
-//				foreach($developerModel->importSettings()->getLinkSource() as $link)
-//				{
-//					?>
-	<!--					<tr>-->
-	<!--						<td>-->
-	<!--							<input name="linkSource[]" type="text" value="--><?php //=$link;?><!--">-->
-	<!--						</td>-->
-	<!---->
-	<!--					</tr>-->
-	<!--					--><?php
-//				}
-//				?>
-	<!---->
-	<!--				<tr>-->
-	<!--					<td>-->
-	<!--						<input name="linkSource[]" type="text" value="">-->
-	<!--					</td>-->
-	<!---->
-	<!--				</tr>-->
-	<!---->
-	<!--				<tr>-->
-	<!--					<td>-->
-	<!--						<input type="button" value="Добавить еще" onClick="BX.IBlock.Tools.addNewRow('multiLinkSource')">-->
-	<!--					</td>-->
-	<!--				</tr>-->
-	<!--			</table>-->
-	<!--		</td>-->
-	<!--	</tr>-->
-	<!---->
+
+$tabControl->AddDropDownField(
+	'channels',
+	'Источники связи',
+	false,
+	array_reduce(ChannelListEnum::cases(), function(array $init, ChannelListEnum $item) {
+		$init[$item->name] = $item->value;
+		return $init;
+	}, [])
+);
+
+$tabControl->BeginCustomField('linkSource', 'asd');
+?>
+	<tr>
+		<td>Ссылки источников</td>
+		<td>
+			<?php
+			_ShowStringPropertyField(
+				'linkSource',
+				[
+					'MULTIPLE' => 'Y',
+				],
+				''
+			);
+			?>
+		</td>
+	</tr>
 <?php
-//$tabControl->EndCustomField('linkSource');
+$tabControl->EndCustomField('linkSource');
 
 $tabControl->Buttons([
 	"disabled" => false,

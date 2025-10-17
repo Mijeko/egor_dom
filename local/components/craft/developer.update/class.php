@@ -5,6 +5,7 @@ use Craft\Core\Rest\ResponseBx;
 use Craft\DDD\Developers\Application\Dto\DeveloperSettingsUpdateDto;
 use Craft\DDD\Developers\Application\Factory\DeveloperSettingsUpdateUseCaseFactory;
 use Craft\DDD\Developers\Application\UseCase\DeveloperSettingsUpdateUseCase;
+use Craft\Enum\ChannelListEnum;
 
 class CraftDeveloperUpdateComponent extends AjaxComponent
 {
@@ -51,12 +52,10 @@ class CraftDeveloperUpdateComponent extends AjaxComponent
 
 	protected function loadData(): void
 	{
-
-		$contactChannel = [
-			['value' => 'tg', 'label' => 'Telegram'],
-			['value' => 'email', 'label' => 'E-Mail'],
-			['value' => 'phone', 'label' => 'Звонок по телефону'],
-		];
+		$contactChannel = array_reduce(ChannelListEnum::cases(), function(array $init, ChannelListEnum $item) {
+			$init[] = ['value' => $item->name, 'label' => $item->value];
+			return $init;
+		}, []);
 
 		$this->arResult['CHANNELS'] = $contactChannel;
 	}
