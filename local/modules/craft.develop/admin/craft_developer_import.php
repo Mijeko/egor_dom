@@ -12,7 +12,7 @@ $APPLICATION->SetTitle("Импорт");
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
-use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
+use Craft\DDD\Developers\Application\Service\Factory\ImportServiceFactory;
 
 foreach(['craft.core', 'craft.develop', 'iblock'] as $module)
 {

@@ -3,7 +3,7 @@
 namespace Craft\DDD\Developers\Infrastructure\Agents;
 
 use Bitrix\Main\Diag\Debug;
-use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
+use Craft\DDD\Developers\Application\Service\Factory\ImportServiceFactory;
 
 class ImportAgent
 {

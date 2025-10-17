@@ -6,7 +6,7 @@ if(empty($_SERVER['DOCUMENT_ROOT']))
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
-use Craft\DDD\Developers\Infrastructure\Service\Factory\ImportServiceFactory;
+use Craft\DDD\Developers\Application\Service\Factory\ImportServiceFactory;
 
 $service = ImportServiceFactory::getService();
 $service->executeAll();

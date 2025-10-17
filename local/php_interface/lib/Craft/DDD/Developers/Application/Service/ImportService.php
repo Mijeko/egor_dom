@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Developers\Infrastructure\Service;
+namespace Craft\DDD\Developers\Application\Service;
 
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
@@ -43,7 +43,13 @@ class ImportService
 		}
 
 
-		$sourceLinkList = $this->developer->getImportSetting()->getSourceLink();
+//		$sourceLinkList = $this->developer->getImportSetting()->getSourceLink();
+		$sourceLinkList = $this->developer->getSettings()->getFeedList();
+
+		if(!$sourceLinkList)
+		{
+			return;
+		}
 
 		foreach($sourceLinkList as $sourceLink)
 		{

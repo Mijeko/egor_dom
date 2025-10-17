@@ -1,13 +1,13 @@
 <?php
 
-namespace Craft\DDD\Developers\Infrastructure\Service\Factory;
+namespace Craft\DDD\Developers\Application\Service\Factory;
 
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmApartmentRepository;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
-use Craft\DDD\Developers\Infrastructure\Service\ImportService;
+use Craft\DDD\Developers\Application\Service\ImportService;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
 
 class ImportServiceFactory
