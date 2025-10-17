@@ -70,4 +70,9 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 	{
 		return null;
 	}
+
+	public function update(DeveloperEntity $developer): ?DeveloperEntity
+	{
+		return null;
+	}
 }

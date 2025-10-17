@@ -2,11 +2,14 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\Developers\Infrastructure\Entity\EO_Developer;
+use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
 {
@@ -43,7 +46,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 		return array_shift($developers);
 	}
 
-	protected function hydrateElement(Developer $developer): DeveloperEntity
+	protected function hydrateElement(EO_Developer $developer): DeveloperEntity
 	{
 		return DeveloperEntity::hydrate(
 		// @phpstan-ignore method.notFound
@@ -51,15 +54,14 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			// @phpstan-ignore method.notFound
 			$developer->getName(),
 			// @phpstan-ignore method.notFound
+			$developer->getSort(),
+			new ActiveValueObject($developer->getActive()),
+			// @phpstan-ignore method.notFound
 			$developer->getPictureId(),
 			// @phpstan-ignore method.notFound
 			$developer->getCityId(),
+			DeveloperSettingsValueObject::fromJson($developer->getSettings()),
 			null,
-			new ImportSettingValueObject(
-				$developer->importSettings()->getHandler(),
-				$developer->importSettings()->getLinkSource(),
-				null
-			)
 		);
 	}
 

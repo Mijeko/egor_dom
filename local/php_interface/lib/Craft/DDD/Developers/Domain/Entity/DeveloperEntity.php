@@ -5,6 +5,7 @@ namespace Craft\DDD\Developers\Domain\Entity;
 use Craft\DDD\City\Domain\Entity\CityEntity;
 use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
+use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 
 /**
@@ -14,6 +15,8 @@ use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 final class DeveloperEntity
 {
 	protected ?int $id;
+	private ?int $sort;
+	private ?ActiveValueObject $active;
 	protected ?string $name;
 	protected ?int $pictureId = null;
 	protected ?int $cityId = null;
@@ -26,21 +29,25 @@ final class DeveloperEntity
 	protected ?DeveloperSettingsValueObject $settings = null;
 
 	public static function hydrate(
-		?int                      $id,
-		?string                   $name,
-		?int                      $pictureId = null,
-		?int                      $cityId = null,
-		?array                    $buildObjects = null,
-		?ImportSettingValueObject $importSetting = null,
+		?int                          $id,
+		?string                       $name,
+		?int                          $sort,
+		?ActiveValueObject            $active,
+		?int                          $pictureId = null,
+		?int                          $cityId = null,
+		?DeveloperSettingsValueObject $settings = null,
+		?array                        $buildObjects = null,
 	): DeveloperEntity
 	{
 		$self = new self();
 		$self->id = $id;
 		$self->name = $name;
+		$self->sort = $sort;
+		$self->active = $active;
 		$self->pictureId = $pictureId;
 		$self->cityId = $cityId;
 		$self->buildObjects = $buildObjects;
-		$self->importSetting = $importSetting;
+		$self->settings = $settings;
 		return $self;
 	}
 
@@ -114,5 +121,15 @@ final class DeveloperEntity
 	public function getSettings(): ?DeveloperSettingsValueObject
 	{
 		return $this->settings;
+	}
+
+	public function getActive(): ?ActiveValueObject
+	{
+		return $this->active;
+	}
+
+	public function getSort(): ?int
+	{
+		return $this->sort;
 	}
 }

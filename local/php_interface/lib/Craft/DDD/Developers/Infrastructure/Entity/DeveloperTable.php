@@ -19,7 +19,7 @@ class DeveloperTable extends DataManager
 	const F_ACTIVE = 'ACTIVE';
 	const F_NAME = 'NAME';
 	const F_SORT = 'SORT';
-	const F_IMPORT_SETTINGS = 'IMPORT_SETTINGS';
+	const F_SETTINGS = 'SETTINGS';
 	const F_PICTURE_ID = 'PICTURE_ID';
 	const F_CITY_ID = 'CITY_ID';
 	const F_CREATED_AT = 'CREATED_AT';
@@ -56,8 +56,8 @@ class DeveloperTable extends DataManager
 				->configureDefaultValue(500),
 			(new IntegerField(self::F_PICTURE_ID))
 				->configureTitle('Изображение'),
-			(new StringField(self::F_IMPORT_SETTINGS))
-				->configureTitle('Настройки импорта'),
+			(new StringField(self::F_SETTINGS))
+				->configureTitle('Настройки'),
 			(new IntegerField(self::F_CITY_ID))
 				->configureTitle('ID города')
 				->configureRequired(),

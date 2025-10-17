@@ -39,6 +39,13 @@ class DeveloperSettingsValueObject
 		}
 	}
 
+	public static function fromJson(string $json): DeveloperSettingsValueObject
+	{
+		$self = new self();
+
+		return $self;
+	}
+
 	public function getLeadChannelList(): ?array
 	{
 		return $this->leadChannelList;
