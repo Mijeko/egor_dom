@@ -31,34 +31,40 @@ class DeveloperSettingsUpdateUseCase
 
 		$currentSettingsValueObject = $developer->getSettings();
 
+		$leadChannelList = $paramsDto->channelLead ? array_map(function(string $key) use ($paramsDto) {
+
+			switch($key)
+			{
+				case 'email':
+					return new ChannelEmailValueObject(
+						'Y',
+						$paramsDto->email
+					);
+				case 'tg':
+					return new ChannelTgValueObject(
+						'Y',
+						$paramsDto->tgId,
+					);
+					break;
+				default:
+					return null;
+			}
+
+		}, $paramsDto->channelLead) : $currentSettingsValueObject->getLeadChannelList();
+		$feedList = $paramsDto->feedList ? array_map(function(string $link) {
+			return new FeedListValueObject($link);
+		}, $paramsDto->feedList) : $currentSettingsValueObject->getFeedList();
+		$maxReservHours = $paramsDto->maxReservHours ? new MaxReservHourValueObject($paramsDto->maxReservHours) : $currentSettingsValueObject->getMaxReservHours();
+		$timeToPayments = $paramsDto->timeToPayments ? new TimeToPaymentsValueObject($paramsDto->timeToPayments) : $currentSettingsValueObject->getTimeToPayments();
+
 
 		$newSettingsValueObject = new DeveloperSettingsValueObject(
-			$paramsDto->channelLead ? array_map(function(string $key) use ($paramsDto) {
-
-				switch($key)
-				{
-					case 'email':
-						return new ChannelEmailValueObject(
-							'Y',
-							$paramsDto->email
-						);
-					case 'tg':
-						return new ChannelTgValueObject(
-							'Y',
-							$paramsDto->tgId,
-						);
-						break;
-					default:
-						return null;
-				}
-
-			}, $paramsDto->channelLead) : $currentSettingsValueObject->getLeadChannelList(),
-			$paramsDto->feedList ? array_map(function(string $link) {
-				return new FeedListValueObject($link);
-			}, $paramsDto->feedList) : null,
-			$paramsDto->maxReservHours ? new MaxReservHourValueObject($paramsDto->maxReservHours) : null,
-			$paramsDto->timeToPayments ? new TimeToPaymentsValueObject($paramsDto->timeToPayments) : null,
+			$leadChannelList,
+			$feedList,
+			$maxReservHours,
+			$timeToPayments,
 		);
+		
 
 		$developer->updateSettings($newSettingsValueObject);
 

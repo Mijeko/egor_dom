@@ -39,20 +39,24 @@ class DeveloperSettingsValueObject
 		}
 	}
 
-	/**
-	 * @return array<int, ContactChannelInterface>|null
-	 */
 	public function getLeadChannelList(): ?array
 	{
 		return $this->leadChannelList;
 	}
 
-	/**
-	 * @return array<int, FeedListValueObject>|null
-	 */
 	public function getFeedList(): ?array
 	{
 		return $this->feedList;
+	}
+
+	public function getMaxReservHours(): ?MaxReservHourValueObject
+	{
+		return $this->maxReservHours;
+	}
+
+	public function getTimeToPayments(): ?TimeToPaymentsValueObject
+	{
+		return $this->timeToPayments;
 	}
 
 }
