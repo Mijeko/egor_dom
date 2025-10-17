@@ -3,6 +3,7 @@
 namespace Craft\Inertia\Ssr;
 
 use Bitrix\Main\DI\ServiceLocator;
+use Bitrix\Main\Diag\Debug;
 use Craft\Inertia\Inertia;
 use Exception;
 use GuzzleHttp\Client;
@@ -57,7 +58,17 @@ class HttpGateway implements Gateway
      */
     protected function shouldDispatch(): bool
     {
-        return \inertia()->config('enabled') && !is_null(\inertia()->getBundlePath());
+//		Debug::dump(\inertia()->config('ssr.enabled'));
+//		Debug::dump(!is_null(\inertia()->getBundlePath()));
+//		Debug::dump(\inertia()->config('ssr.enabled') && !is_null(\inertia()->getBundlePath()));
+//		Debug::dump(\inertia()->config('enabled'));
+//		Debug::dump(\inertia()->config('ssr.enabled'));
+//		Debug::dump(\inertia()->config('config.enabled'));
+////		Debug::dump(\inertia()->getConfig());
+//		exit();
+
+
+        return \inertia()->config('ssr.enabled') && !is_null(\inertia()->getBundlePath());
     }
 
     /**

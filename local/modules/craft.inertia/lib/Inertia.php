@@ -141,13 +141,14 @@ class Inertia
 		$this->globalShare($this->getLocalRoot() . '/php_interface/inertia.share.php');
 
 		$bxRequest = Application::getInstance()->getContext()->getRequest();
-		$page = $inertiaResponse->toPage($bxRequest);
+		$pageData = $inertiaResponse->toPage($bxRequest);
+
 
 		$response = $this->withMiddleware(
 			$bxRequest,
-			$page,
-			function() use ($page) {
-				if($gatewayAnswer = (new Ssr\HttpGateway())->dispatch($page))
+			$pageData,
+			function() use ($pageData) {
+				if($gatewayAnswer = (new Ssr\HttpGateway())->dispatch($pageData))
 				{
 					Asset::getInstance()->addString($gatewayAnswer->head);
 				}
@@ -156,7 +157,7 @@ class Inertia
 				{
 					echo sprintf(
 						'<div id="app" data-page="%s"></div>',
-						htmlspecialchars(json_encode($page), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
+						htmlspecialchars(json_encode($pageData), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
 					);
 				} else
 				{
