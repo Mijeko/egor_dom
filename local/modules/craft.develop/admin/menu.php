@@ -5,6 +5,14 @@ if(!\Bitrix\Main\Loader::includeModule('craft.develop'))
 	return;
 }
 
+//global_menu_content - раздел "Контент"
+//global_menu_marketing - раздел "Маркетинг"
+//global_menu_store - раздел "Магазин"
+//global_menu_services - раздел "Сервисы"
+//global_menu_statistics - раздел "Аналитика"
+//global_menu_marketplace - раздел "Marketplace"
+//global_menu_settings - раздел "Настройки"
+
 $aMenu = [
 	"parent_menu" => "global_menu_services",
 	"section"     => "craft.develop",
