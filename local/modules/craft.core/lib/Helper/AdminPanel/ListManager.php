@@ -4,6 +4,7 @@ namespace Craft\Core\Helper\AdminPanel;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\ArgumentException;
+use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\HttpRequest;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Request;
@@ -157,6 +158,7 @@ class ListManager
 
 		$data = new \CAdminResult($res, $table_id);
 
+//		Debug::dump($data->NavNext());
 		while($element = $data->NavNext(true, "f_"))
 		{
 			/**
@@ -164,6 +166,10 @@ class ListManager
 			 * @var string $f_NAME
 			 */
 
+
+			Debug::dump($element);
+			Debug::dump($f_ID);
+			exit();
 
 			$area = DeveloperTable::getByPrimary($f_ID)->fetchObject();
 
