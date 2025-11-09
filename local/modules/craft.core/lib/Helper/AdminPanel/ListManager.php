@@ -11,6 +11,7 @@ use Bitrix\Main\Request;
 use CAdminList;
 use CAdminResult;
 use Craft\Core\Helper\AdminPanel\Element\ContextMenu\Button;
+use Craft\Core\Helper\AdminPanel\Element\FilterField;
 use Craft\Core\Helper\AdminPanel\Element\ListHeader;
 use Exception;
 
@@ -130,7 +131,10 @@ class ListManager
 
 	private function loadData(): void
 	{
-		$res = $this->driver::getList();
+
+		$res = $this->driver::getList([
+			'filter' => $this->filter->getPreparedFilter(),
+		]);
 		$this->result = $res;
 	}
 
@@ -169,11 +173,14 @@ class ListManager
 
 	}
 
-	public function show(): void
+	public function build(): void
 	{
 		$this->lAdmin->AddHeaders(array_map(function(ListHeader $header) {
-			return ['id' => $header->getId(), 'content' => $header->getContent(), 'default' => $header->getDefault()];
+			return ['id' => $header->getId(), 'content' => $header->getContent(), 'default' => $header->getDefault(), 'sort' => $header->getSort()];
 		}, $this->headers));
+
+
+		$this->lAdmin->InitFilter($this->filter->getInitFields());
 
 
 		$this->loadData();
@@ -202,8 +209,11 @@ class ListManager
 		$rsData->NavStart();
 		$this->lAdmin->NavText($rsData->GetNavPrint('Элементы'));
 
-		$this->filter->show();
+	}
 
+	public function show(): void
+	{
+		$this->filter->show();
 		$this->lAdmin->DisplayList();
 	}
 }

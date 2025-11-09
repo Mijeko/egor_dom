@@ -46,7 +46,7 @@ class FilterFieldInput extends FilterField
 				<input
 					type="text"
 					size="25"
-					name="find"
+					name="find_<?=$this->getId();?>"
 					value="<?=htmlspecialchars(rand())?>"
 					title="<?=$this->label;?>"
 				>

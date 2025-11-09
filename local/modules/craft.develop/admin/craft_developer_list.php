@@ -41,12 +41,15 @@ $manager = ListManager::instance(
 			])
 	)
 	->headers([
-		ListHeader::build(DeveloperTable::F_ID, 'ID', true),
+		ListHeader::build(DeveloperTable::F_ID, 'ID', true, 'id'),
 		ListHeader::build(DeveloperTable::F_CITY_ID, 'Город', true),
 		ListHeader::build(DeveloperTable::F_NAME, 'Название', true),
 		ListHeader::build(DeveloperTable::F_ACTIVE, 'Активность', true),
 		ListHeader::build(DeveloperTable::F_SORT, 'Сортировка', true),
 	]);
+
+
+$manager->build();
 
 
 # второй общий пролог

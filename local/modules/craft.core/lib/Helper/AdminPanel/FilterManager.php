@@ -2,11 +2,12 @@
 
 namespace Craft\Core\Helper\AdminPanel;
 
-use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Application;
 use Craft\Core\Helper\AdminPanel\Element\FilterField;
 
 class FilterManager
 {
+	private string $prefix = 'find_';
 
 	/** @var $fields array<int, FilterField> */
 	private array $fields = [];
@@ -41,7 +42,6 @@ class FilterManager
 			$this->tableId . "_filter",
 			array_map(function(FilterField $field) {
 				return $field->getLabel();
-//				return $field->getId();
 			}, $this->fields)
 		);
 
@@ -68,5 +68,37 @@ class FilterManager
 		</form>
 		<?php
 		echo ob_get_clean();
+	}
+
+	public function getInitFields(): array
+	{
+		return array_map(function(FilterField $field) {
+			return $this->prefix . $field->getId();
+		}, $this->fields);
+	}
+
+	public function getPreparedFilter(): array
+	{
+		$request = Application::getInstance()->getContext()->getRequest();
+
+		$_filter = array_reduce($this->fields,
+			function(array $carry, FilterField $field) use ($request) {
+
+				$fieldCode = $this->prefix . $field->getId();
+
+				$_value = $request->get($fieldCode);
+
+				if($_value)
+				{
+					$carry[$field->getId()] = $_value;
+				}
+
+
+				return $carry;
+			},
+			[]
+		);
+
+		return array_filter($_filter);
 	}
 }
