@@ -7,12 +7,18 @@ use Bitrix\Main\ArgumentException;
 use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\HttpRequest;
 use Bitrix\Main\Loader;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Query\Result;
 use Bitrix\Main\Request;
 use Bitrix\Main\SystemException;
+use CAdminList;
+use CAdminResult;
 use Craft\Core\Helper\AdminPanel\Element\ContextMenu\Button;
 use Craft\Core\Helper\AdminPanel\Element\ListHeader;
 use Craft\DDD\City\Infrastructure\Entity\CityTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Exception;
+
 
 class ListManager
 {
@@ -25,11 +31,46 @@ class ListManager
 
 	private ?string $driver = null;
 
+	private $rights;
+
 	private Request|HttpRequest $request;
 
-	public static function instance(): ListManager
+	private Result $result;
+
+	public function __construct(
+		private string     $moduleId,
+		private string     $tableId,
+		private CAdminList $lAdmin,
+	)
 	{
-		return new static();
+		$this->permissions();
+
+		$this->request = Application::getInstance()->getContext()->getRequest();
+	}
+
+	public static function instance(
+		string     $moduleId,
+		string     $tableId,
+		CAdminList $lAdmin
+	): ListManager
+	{
+		return new static(
+			$moduleId,
+			$tableId,
+			$lAdmin
+		);
+	}
+
+	private function permissions(): void
+	{
+		global $APPLICATION;
+
+		$this->rights = $APPLICATION->GetGroupRight($this->moduleId);
+
+		if($this->rights == "D")
+		{
+			$APPLICATION->AuthForm(Loc::getMessage("ACCESS_DENIED"));
+		}
 	}
 
 	public function driver(string $driver): ListManager
@@ -73,175 +114,91 @@ class ListManager
 		return $this;
 	}
 
-	public function __construct()
-	{
-		$this->request = Application::getInstance()->getContext()->getRequest();
-	}
-
 	private function includeModules(): void
 	{
 		foreach($this->modules as $module)
 		{
 			if(!Loader::includeModule($module))
 			{
-				throw new \Exception("Module {$module} not found");
+				throw new Exception("Module {$module} not found");
 			}
 		}
 	}
 
-	public function show(): void
+	private function loadData(): void
 	{
+		$res = $this->driver::getList();
+		$this->result = $res;
+	}
 
-		if(!$this->driver)
+	private function renderData(): void
+	{
+		$iterator = new CAdminResult($this->result, $this->tableId);
+
+		while($element = $iterator->Fetch())
 		{
-			return;
-		}
+			$id = $element['ID'];
+			$name = $element['NAME'] ?? "Элемент с ID " . $id;
 
-		global $APPLICATION;
+			$row =& $this->lAdmin->AddRow($id, $element);
 
-		try
-		{
-			$this->includeModules();
-		} catch(\Exception $e)
-		{
-			return;
-		}
-
-		if($this->request->getPost('action_button'))
-		{
-			$elementIdList = $this->request->getPost('ID');
-			if($elementIdList)
-			{
-				if(is_array($elementIdList))
-				{
-					$areaList = DeveloperTable::getList([
-						'filter' => [
-							'ID' => $elementIdList,
-						],
-					])->fetchCollection();
-
-					foreach($areaList as $area)
-					{
-						try
-						{
-							$area->delete();
-						} catch(ArgumentException $e)
-						{
-
-						} catch(SystemException $e)
-						{
-
-						}
-					}
-				}
-			}
-		}
-
-
-		$res = DeveloperTable::getList([
-			'order' => [
-				DeveloperTable::F_ID => 'DESC',
-			],
-		]);
-		$POST_RIGHT = $APPLICATION->GetGroupRight("craft.develop");
-		$table_id = DeveloperTable::getTableName(); // ид таблицы
-		$lAdmin = new \CAdminList($table_id);
-
-		// Какие поля выводить
-		$lAdmin->AddHeaders(array_map(function(ListHeader $header) {
-			return [
-				'id'      => $header->getId(),
-				'content' => $header->getContent(),
-				'default' => $header->getDefault(),
-			];
-		}, $this->headers));
-
-		$data = new \CAdminResult($res, $table_id);
-
-//		Debug::dump($data->NavNext());
-		while($element = $data->NavNext(true, "f_"))
-		{
-			/**
-			 * @var int $f_ID
-			 * @var string $f_NAME
-			 */
-
-
-			Debug::dump($element);
-			Debug::dump($f_ID);
-			exit();
-
-			$area = DeveloperTable::getByPrimary($f_ID)->fetchObject();
-
-			// создание строки (экземпляра класса CAdminListRow)
-			$row =& $lAdmin->AddRow($f_ID, $element);
-
-			$row->AddCheckField("ACTIVE");
-
-			if($city = CityTable::getByPrimary($area->getCityId())->fetchObject())
-			{
-				$row->AddField(DeveloperTable::F_CITY_ID, $city->getName() ?? 'Не назначено');
-			}
 
 			$arActions = [];
 			$arActions[] = [
 				"ICON"    => "edit",
 				"DEFAULT" => true,
 				"TEXT"    => 'Изменить',
-				"ACTION"  => $lAdmin->ActionRedirect(CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?ID=" . $f_ID),
+				"ACTION"  => $this->lAdmin->ActionRedirect(CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?ID=" . $id),
 			];
 
-			if($POST_RIGHT >= "W")
+
+			if($this->rights >= "W")
 			{
 				$arActions[] = [
 					"ICON"   => "delete",
 					"TEXT"   => 'Удалить',
-					"ACTION" => "if(confirm('Точно удалить " . $f_NAME . "?')) " . $lAdmin->ActionDoGroup($f_ID, "delete"),
+					"ACTION" => "if(confirm('Точно удалить " . $name . "?')) " . $this->lAdmin->ActionDoGroup($id, "delete"),
 				];
 			}
 
 			$row->AddActions($arActions);
-
 		}
 
+	}
 
-		$lAdmin->AddFooter(
+	public function show(): void
+	{
+		$this->lAdmin->AddHeaders(array_map(function(ListHeader $header) {
+			return ['id' => $header->getId(), 'content' => $header->getContent(), 'default' => $header->getDefault()];
+		}, $this->headers));
+
+
+		$this->loadData();
+		$this->renderData();
+
+		$this->lAdmin->AddFooter(
 			[
-				["title" => "Количество записей", "value" => $res->getSelectedRowsCount()], // кол-во элементов
+				["title" => "Количество записей", "value" => $this->result->getSelectedRowsCount()], // кол-во элементов
 				["counter" => true, "title" => 'Выбрано записей', "value" => "0"], // счетчик выбранных элементов
 			]
 		);
 
-		$lAdmin->AddGroupActionTable([
-			"delete"     => 'Удалить',
-			"activate"   => 'Активировать',
-			"deactivate" => 'Деактивировать',
-		]);
 
-		$aContext = array_map(function(Button $button) {
+		$this->lAdmin->AddAdminContextMenu(array_map(function(Button $button) {
 			return [
 				"TEXT"  => $button->getText(),
 				"LINK"  => $button->getLink(),
 				"TITLE" => $button->getTitle(),
 				"ICON"  => $button->getIcon(),
 			];
-		}, $this->contextButtons);
+		}, $this->contextButtons));
+		$this->lAdmin->CheckListMode();
 
-		$lAdmin->AddAdminContextMenu($aContext);
 
-		$lAdmin->CheckListMode();
-
-		$rsData = new \CAdminResult($res, $table_id);
+		$rsData = new CAdminResult($this->result, $this->tableId);
 		$rsData->NavStart();
-		$lAdmin->NavText($rsData->GetNavPrint('Элементы'));
+		$this->lAdmin->NavText($rsData->GetNavPrint('Элементы'));
 
-		require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php");
-
-		// Вывод данных
-		$lAdmin->DisplayList();
-
-
-		require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");
+		$this->lAdmin->DisplayList();
 	}
-
 }
