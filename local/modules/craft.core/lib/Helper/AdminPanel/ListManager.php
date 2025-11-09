@@ -35,27 +35,28 @@ class ListManager
 
 	private Result $result;
 
+	private CAdminList $lAdmin;
+
+
 	public function __construct(
-		private string     $moduleId,
-		private string     $tableId,
-		private CAdminList $lAdmin,
+		private string $moduleId,
+		private string $tableId,
 	)
 	{
 		$this->permissions();
-
 		$this->request = Application::getInstance()->getContext()->getRequest();
+		$oSort = new \CAdminSorting($this->tableId, "ID", "desc");
+		$this->lAdmin = new CAdminList($this->tableId, $oSort);
 	}
 
 	public static function instance(
-		string     $moduleId,
-		string     $tableId,
-		CAdminList $lAdmin
+		string $moduleId,
+		string $tableId,
 	): ListManager
 	{
 		return new static(
 			$moduleId,
 			$tableId,
-			$lAdmin
 		);
 	}
 

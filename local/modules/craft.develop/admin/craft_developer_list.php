@@ -17,23 +17,16 @@ global $APPLICATION;
 
 $APPLICATION->SetTitle('Застройщики');
 
-// здесь будет вся серверная обработка и подготовка данных
-$sTableID = DeveloperTable::getTableName(); // ID таблицы
-$oSort = new CAdminSorting($sTableID, "ID", "desc"); // объект сортировки
-$lAdmin = new CAdminList($sTableID, $oSort); // основной объект списка
-
-
 $manager = ListManager::instance(
 	'craft.develop',
-	$sTableID,
-	$lAdmin
+	DeveloperTable::getTableName()
 )
 	->driver(DeveloperTable::class)
 	->contextButtons([
 		GreenButton::build('Добавить застройщика', CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?lang=" . LANG, 'Создать'),
 	])
 	->filter(
-		FilterManager::instance($sTableID)
+		FilterManager::instance(DeveloperTable::getTableName())
 			->fields([
 				FilterFieldInput::build(DeveloperTable::F_ID, 'ID'),
 				FilterFieldInput::build(DeveloperTable::F_NAME, 'Название'),
