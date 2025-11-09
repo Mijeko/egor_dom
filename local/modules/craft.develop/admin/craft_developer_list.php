@@ -4,7 +4,9 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_ad
 
 use Bitrix\Main\Loader;
 use Craft\Core\Helper\AdminPanel\Element\ContextMenu\GreenButton;
+use Craft\Core\Helper\AdminPanel\Element\Filter\FilterFieldInput;
 use Craft\Core\Helper\AdminPanel\Element\ListHeader;
+use Craft\Core\Helper\AdminPanel\FilterManager;
 use Craft\Core\Helper\AdminPanel\ListManager;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 
@@ -30,6 +32,14 @@ $manager = ListManager::instance(
 	->contextButtons([
 		GreenButton::build('Добавить застройщика', CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?lang=" . LANG, 'Создать'),
 	])
+	->filter(
+		FilterManager::instance($sTableID)
+			->fields([
+				FilterFieldInput::build(DeveloperTable::F_ID, 'ID'),
+				FilterFieldInput::build(DeveloperTable::F_NAME, 'Название'),
+				FilterFieldInput::build(DeveloperTable::F_SORT, 'Сортировка'),
+			])
+	)
 	->headers([
 		ListHeader::build(DeveloperTable::F_ID, 'ID', true),
 		ListHeader::build(DeveloperTable::F_CITY_ID, 'Город', true),

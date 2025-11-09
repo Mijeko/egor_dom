@@ -3,25 +3,22 @@
 namespace Craft\Core\Helper\AdminPanel;
 
 use Bitrix\Main\Application;
-use Bitrix\Main\ArgumentException;
-use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\HttpRequest;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Query\Result;
 use Bitrix\Main\Request;
-use Bitrix\Main\SystemException;
 use CAdminList;
 use CAdminResult;
 use Craft\Core\Helper\AdminPanel\Element\ContextMenu\Button;
 use Craft\Core\Helper\AdminPanel\Element\ListHeader;
-use Craft\DDD\City\Infrastructure\Entity\CityTable;
-use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Exception;
 
 
 class ListManager
 {
+	private FilterManager $filter;
+
 	/** @var $headers ListHeader[] */
 	private array $headers = [];
 
@@ -76,6 +73,12 @@ class ListManager
 	public function driver(string $driver): ListManager
 	{
 		$this->driver = $driver;
+		return $this;
+	}
+
+	public function filter(FilterManager $filter): ListManager
+	{
+		$this->filter = $filter;
 		return $this;
 	}
 
@@ -198,6 +201,8 @@ class ListManager
 		$rsData = new CAdminResult($this->result, $this->tableId);
 		$rsData->NavStart();
 		$this->lAdmin->NavText($rsData->GetNavPrint('Элементы'));
+
+		$this->filter->show();
 
 		$this->lAdmin->DisplayList();
 	}
