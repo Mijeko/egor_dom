@@ -3,6 +3,8 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php");
 
 use Bitrix\Main\Loader;
+use Craft\Core\Helper\AdminPanel\Element\Actions\DeleteAction;
+use Craft\Core\Helper\AdminPanel\Element\Actions\EditAction;
 use Craft\Core\Helper\AdminPanel\Element\ContextMenu\GreenButton;
 use Craft\Core\Helper\AdminPanel\Element\Filter\FilterFieldInput;
 use Craft\Core\Helper\AdminPanel\Element\ListHeader;
@@ -24,6 +26,14 @@ $manager = ListManager::instance(
 	->driver(DeveloperTable::class)
 	->contextButtons([
 		GreenButton::build('Добавить застройщика', CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?lang=" . LANG, 'Создать'),
+	])
+	->actions([
+		function(CAdminList $lAdmin, int $elementId) {
+			return EditAction::build($lAdmin->ActionRedirect(CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?ID=" . $elementId));
+		},
+		function(CAdminList $lAdmin, int $elementId, string $elementName) {
+			return DeleteAction::build("if(confirm('Точно удалить " . $elementName . "?')) " . $lAdmin->ActionDoGroup($elementId, "delete"));
+		},
 	])
 	->filter(
 		FilterManager::instance(DeveloperTable::getTableName())

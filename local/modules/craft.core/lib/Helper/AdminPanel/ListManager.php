@@ -3,6 +3,7 @@
 namespace Craft\Core\Helper\AdminPanel;
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\HttpRequest;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
@@ -11,7 +12,6 @@ use Bitrix\Main\Request;
 use CAdminList;
 use CAdminResult;
 use Craft\Core\Helper\AdminPanel\Element\ContextMenu\Button;
-use Craft\Core\Helper\AdminPanel\Element\FilterField;
 use Craft\Core\Helper\AdminPanel\Element\ListHeader;
 use Exception;
 
@@ -19,6 +19,11 @@ use Exception;
 class ListManager
 {
 	private FilterManager $filter;
+
+
+	/** @var $actions array<int,callable> */
+	private array $actions = [];
+
 
 	/** @var $headers ListHeader[] */
 	private array $headers = [];
@@ -37,6 +42,9 @@ class ListManager
 
 	private CAdminList $lAdmin;
 
+	private string $by = 'ID';
+	private string $order = 'desc';
+
 
 	public function __construct(
 		private string $moduleId,
@@ -45,8 +53,11 @@ class ListManager
 	{
 		$this->permissions();
 		$this->request = Application::getInstance()->getContext()->getRequest();
-		$oSort = new \CAdminSorting($this->tableId, "ID", "desc");
+		$oSort = new \CAdminSorting($this->tableId, $this->by, $this->order);
 		$this->lAdmin = new CAdminList($this->tableId, $oSort);
+
+		$this->by = mb_strtoupper($oSort->getField());
+		$this->order = $oSort->getOrder();
 	}
 
 	public static function instance(
@@ -70,6 +81,19 @@ class ListManager
 		{
 			$APPLICATION->AuthForm(Loc::getMessage("ACCESS_DENIED"));
 		}
+	}
+
+	public function actions(array $actions): ListManager
+	{
+		foreach($actions as $action)
+		{
+			if(is_callable($action))
+			{
+				$this->actions[] = $action;
+			}
+		}
+
+		return $this;
 	}
 
 	public function driver(string $driver): ListManager
@@ -132,8 +156,10 @@ class ListManager
 
 	private function loadData(): void
 	{
-
 		$res = $this->driver::getList([
+			'order'  => [
+				$this->by => $this->order,
+			],
 			'filter' => $this->filter->getPreparedFilter(),
 		]);
 		$this->result = $res;
@@ -152,21 +178,18 @@ class ListManager
 
 
 			$arActions = [];
-			$arActions[] = [
-				"ICON"    => "edit",
-				"DEFAULT" => true,
-				"TEXT"    => 'Изменить',
-				"ACTION"  => $this->lAdmin->ActionRedirect(CRAFT_DEVELOP_ADMIN_URL_EDIT_DEVELOPERS . "?ID=" . $id),
-			];
-
-
-			if($this->rights >= "W")
+			foreach($this->actions as $_action)
 			{
-				$arActions[] = [
-					"ICON"   => "delete",
-					"TEXT"   => 'Удалить',
-					"ACTION" => "if(confirm('Точно удалить " . $name . "?')) " . $this->lAdmin->ActionDoGroup($id, "delete"),
-				];
+				$action = $_action($this->lAdmin, $id, $name);
+				if(!$action instanceof Action)
+				{
+					continue;
+				}
+
+				if($action->hasAccess($this->rights))
+				{
+					$arActions[] = $action->getSettings();
+				}
 			}
 
 			$row->AddActions($arActions);
@@ -174,8 +197,89 @@ class ListManager
 
 	}
 
+	private function handleMassAction(): void
+	{
+		$this->editAll();
+
+		if(($elementIdList = $this->lAdmin->GroupAction()) && $this->rights == "W")
+		{
+
+			global $DB;
+
+			$action = $this->lAdmin->GetAction();
+
+			// пройдем по списку элементов
+			foreach($elementIdList as $elementId)
+			{
+				if(strlen($elementId) <= 0)
+				{
+					continue;
+				}
+
+				$elementId = IntVal($elementId);
+
+				// для каждого элемента совершим требуемое действие
+				switch($action)
+				{
+					case "delete":
+						@set_time_limit(0);
+						$DB->StartTransaction();
+
+						$result = $this->driver::delete($elementId);
+						if(!$result->isSuccess())
+						{
+							$DB->Rollback();
+							$this->lAdmin->AddGroupError(Loc::getMessage("rub_del_err") . implode('<br>', $result->getErrorMessages()), $elementId);
+						}
+
+						$DB->Commit();
+						break;
+
+					case "activate":
+					case "deactivate":
+						try
+						{
+							$element = $this->driver::getByPrimary($elementId)->fetch();
+							if($element)
+							{
+								$result = $this->driver::update($elementId, [
+									"ACTIVE" => $_REQUEST['action'] == "activate" ? 'Y' : 'N',
+								]);
+
+								if(!$result->isSuccess())
+								{
+									$this->lAdmin->AddGroupError(Loc::getMessage("rub_save_error") . implode('<br>', $result->getErrorMessages()), $elementId);
+								}
+							} else
+							{
+								$this->lAdmin->AddGroupError(Loc::getMessage("rub_save_error") . " " . Loc::getMessage("rub_no_rubric"), $elementId);
+							}
+						} catch(\Exception $e)
+						{
+							$this->lAdmin->AddGroupError($e->getMessage(), $elementId);
+						}
+				}
+			}
+		}
+	}
+
+	private function editAll(): void
+	{
+		if($this->lAdmin->EditAction() && $this->rights == "W")
+		{
+			// пройдем по списку переданных элементов
+			foreach($this->lAdmin->GetEditFields() as $ID => $arFields)
+			{
+			}
+		}
+	}
+
 	public function build(): void
 	{
+
+		$this->handleMassAction();
+
+
 		$this->lAdmin->AddHeaders(array_map(function(ListHeader $header) {
 			return ['id' => $header->getId(), 'content' => $header->getContent(), 'default' => $header->getDefault(), 'sort' => $header->getSort()];
 		}, $this->headers));
@@ -193,6 +297,12 @@ class ListManager
 				["counter" => true, "title" => 'Выбрано записей', "value" => "0"], // счетчик выбранных элементов
 			]
 		);
+
+		$this->lAdmin->AddGroupActionTable([
+			"delete"     => 'Удалить',
+			"activate"   => 'Активировать',
+			"deactivate" => 'Деактивировать',
+		]);
 
 
 		$this->lAdmin->AddAdminContextMenu(array_map(function(Button $button) {
