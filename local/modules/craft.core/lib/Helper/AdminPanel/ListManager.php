@@ -20,6 +20,8 @@ class ListManager
 {
 	private FilterManager $filter;
 
+	/** @var $modifiers array<int,callable> */
+	private array $modifiers = [];
 
 	/** @var $actions array<int,callable> */
 	private array $actions = [];
@@ -81,6 +83,12 @@ class ListManager
 		{
 			$APPLICATION->AuthForm(Loc::getMessage("ACCESS_DENIED"));
 		}
+	}
+
+	public function modifiers(array $modifiers): ListManager
+	{
+		$this->modifiers = $modifiers;
+		return $this;
 	}
 
 	public function actions(array $actions): ListManager
@@ -175,6 +183,17 @@ class ListManager
 			$name = $element['NAME'] ?? "Элемент с ID " . $id;
 
 			$row =& $this->lAdmin->AddRow($id, $element);
+
+			$row->AddCheckField('ACTIVE');
+
+			foreach($this->modifiers as $modifier)
+			{
+				if(is_callable($modifier))
+				{
+					$row = $modifier($row, $element);
+
+				}
+			}
 
 
 			$arActions = [];

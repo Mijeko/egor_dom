@@ -43,6 +43,8 @@ $manager = ListManager::instance(
 				FilterFieldInput::build(DeveloperTable::F_SORT, 'Сортировка'),
 			])
 	)
+	->modifiers([
+	])
 	->headers([
 		ListHeader::build(DeveloperTable::F_ID, 'ID', true, 'id'),
 		ListHeader::build(DeveloperTable::F_CITY_ID, 'Город', true),
