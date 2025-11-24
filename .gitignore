@@ -12,3 +12,4 @@ local/php_interface/**/vendor/
 /assets/
 **/dist/
 /local/php_interface/var
+/local/markup/**/public

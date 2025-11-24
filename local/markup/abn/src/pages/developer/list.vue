@@ -1,13 +1,22 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, type PropType} from 'vue'
+import DeveloperList from "@/components/developer/DeveloperList.vue";
 
 export default defineComponent({
-  name: "list"
+  name: "list",
+  components: {DeveloperList},
+  props: {
+    developers: {
+      type: Array as PropType<DeveloperListItemDto[]>
+    }
+  }
 })
 </script>
 
 <template>
-  DeveloperList
+  <DeveloperList
+    :developers
+  />
 </template>
 
 <style scoped>
