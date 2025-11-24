@@ -25,18 +25,6 @@ if(!$developer->getId())
 
 
 $APPLICATION->SetTitle('Строительные объекты компании: ' . $developer->getName());
-$APPLICATION->AddChainItem('Строительные объекты компании: ' . $developer->getName(),$APPLICATION->GetCurPage());
+$APPLICATION->AddChainItem('Строительные объекты компании: ' . $developer->getName(), $APPLICATION->GetCurPage());
 
-$APPLICATION->IncludeComponent(
-	'craft:object.list',
-	'.default',
-	[
-		'FILTER' => [
-			BuildObjectTable::F_DEVELOPER_ID => $_REQUEST['ELEMENT_ID'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-
-?>
+inertia('DeveloperDetail');
