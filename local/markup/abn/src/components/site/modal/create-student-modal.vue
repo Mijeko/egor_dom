@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import PhoneInput from "@/components/site/form/element/PhoneInput.vue";
+import PhoneInput from "@/components/site/form/element/phone-input.vue";
 import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
 import type CreateStudentRequestDto from "@/dto/request/CreateStudentRequestDto.ts";

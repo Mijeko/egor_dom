@@ -7,7 +7,7 @@ export default defineComponent({
 </script>
 
 <template>
-  BuildObjectDetail
+  <BuildObjectDetail/>
 </template>
 
 <style scoped>

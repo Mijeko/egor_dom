@@ -4,7 +4,7 @@ import UserService from "@/service/User/UserService.ts";
 import type CreateManagerRequestDto from "@/dto/request/CreateManagerRequestDto.ts";
 import AlertService from "@/service/AlertService.ts";
 import type CreateManagerResponseDto from "@/dto/response/CreateManagerResponseDto.ts";
-import PhoneInput from "@/components/site/form/element/PhoneInput.vue";
+import PhoneInput from "@/components/site/form/element/phone-input.vue";
 
 export default defineComponent({
   name: "CreateManagerModal",

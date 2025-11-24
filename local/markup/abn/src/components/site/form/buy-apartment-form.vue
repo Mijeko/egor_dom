@@ -6,7 +6,7 @@ import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import ValidateLegalData from "@/core/validate/validate-legal-data.ts";
 import ClaimService from "@/service/ClaimService.ts";
 import type ClaimCreateResponseDto from "@/dto/response/ClaimCreateResponseDto.ts";
-import PhoneInput from "@/components/site/form/element/PhoneInput.vue";
+import PhoneInput from "@/components/site/form/element/phone-input.vue";
 import type ClaimCreateShortRequestDto from "@/dto/request/ClaimCreateShortRequestDto.ts";
 
 export default defineComponent({
