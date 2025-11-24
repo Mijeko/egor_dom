@@ -1,9 +1,9 @@
 <script lang="ts">
-import {defineComponent, type PropType} from 'vue'
-import ApartmentList from "@/components/ApartmentList.vue";
-import type BuildObjectDetailInfo from "@/dto/present/component/buildObjectDetailInfo.ts";
-import Map from "@/components/Map.vue";
-import ApartmentFilter from "@/components/ApartmentFilter.vue";
+import {defineComponent, type PropType} from 'vue';
+import ApartmentList from "@/components/apartment/ApartmentList.vue";
+import Map from "@/components/map.vue";
+import ApartmentFilter from "@/components/filter/ApartmentFilter.vue";
+import type BuildObjectDetailInfo from "@/dto/present/build-object-detail-info.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
 
@@ -21,9 +21,6 @@ export default defineComponent({
       filterApartmentList: [],
     };
   },
-  mounted(): any {
-    console.log(this.buildObject);
-  },
   computed: {
     computedApartments: function () {
 
@@ -33,7 +30,7 @@ export default defineComponent({
 
       return this.buildObject?.apartments;
     },
-    buildObjectDetailInfo: function (): BuildObjectDetailInfo[] {
+    buildObjectDetailInfoComputed: function (): BuildObjectDetailInfo[] {
       return [
         {
           title: 'Ваше вознаграждение',
@@ -91,7 +88,7 @@ export default defineComponent({
         </v-card-text>
       </v-card>
 
-      <v-card v-for="info in buildObjectDetailInfo"
+      <v-card v-for="info in buildObjectDetailInfoComputed"
               :title="String(info.title)"
               class="mb-3"
       >

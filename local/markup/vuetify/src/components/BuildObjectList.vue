@@ -5,9 +5,6 @@ import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import type {ApartmentFilterData} from "@/dto/ApartmentFilterData.ts";
-import ApartmentFilterService from "@/service/ApartmentFilterService.ts";
-import type ApartmentFilterDataResponseDto from "@/dto/response/ApartmentFilterDataResponseDto.ts";
-import init from "@/components/system/Init.vue";
 
 export default defineComponent({
   name: "BuildObjectList",

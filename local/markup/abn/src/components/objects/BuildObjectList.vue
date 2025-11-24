@@ -2,6 +2,7 @@
 import {defineComponent, type PropType} from 'vue'
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
+import type {ApartmentFilterData} from "@/dto/ApartmentFilterData.ts";
 
 export default defineComponent({
   name: "BuildObjectList",

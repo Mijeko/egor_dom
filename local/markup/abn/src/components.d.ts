@@ -11,7 +11,28 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ApartmentFilter: typeof import('./components/filter/ApartmentFilter.vue')['default']
+    ApartmentItem: typeof import('./components/apartment/ApartmentItem.vue')['default']
+    ApartmentList: typeof import('./components/apartment/ApartmentList.vue')['default']
+    BuildObjectDetail: typeof import('./components/objects/BuildObjectDetail.vue')['default']
+    BuildObjectList: typeof import('./components/objects/BuildObjectList.vue')['default']
+    BuyApartmentForm: typeof import('./components/site/form/buy-apartment-form.vue')['default']
+    BuyApartmentModal: typeof import('./components/site/modal/buy-apartment-modal.vue')['default']
+    CheckboxDropdown: typeof import('./components/filter/part/CheckboxDropdown.vue')['default']
+    ContactPersonalManager: typeof import('./components/site/modal/contact-personal-manager.vue')['default']
+    CreateAgentModal: typeof import('./components/site/modal/create-agent-modal.vue')['default']
+    CreateManagerModal: typeof import('./components/site/modal/create-manager-modal.vue')['default']
+    CreateStudentModal: typeof import('./components/site/modal/create-student-modal.vue')['default']
+    DeveloperList: typeof import('./components/developer/DeveloperList.vue')['default']
+    InputDropdown: typeof import('./components/filter/part/InputDropdown.vue')['default']
+    MainApartmentFilter: typeof import('./components/filter/MainApartmentFilter.vue')['default']
+    Map: typeof import('./components/map.vue')['default']
+    MinMaxInputDropdown: typeof import('./components/filter/part/MinMaxInputDropdown.vue')['default']
+    NewDialogModal: typeof import('./components/site/modal/new-dialog-modal.vue')['default']
+    PhoneInput: typeof import('./components/site/form/element/PhoneInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SelectInput: typeof import('./components/site/form/element/SelectInput.vue')['default']
+    SelectWithSearch: typeof import('./components/filter/part/SelectWithSearch.vue')['default']
   }
 }

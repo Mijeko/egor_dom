@@ -1,5 +1,3 @@
-import type CheckboxDropdownItemDto from "@/dto/present/CheckboxDropdownItemDto.ts";
-
 export interface ApartmentFilterData {
   propertyList: ApartmentFilterProp[]
 }
