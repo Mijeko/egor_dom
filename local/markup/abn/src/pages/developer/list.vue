@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import DeveloperList from "@/components/developer/DeveloperList.vue";
-import DeveloperListItemDto from '@/dto/entity/DeveloperListItemDto.ts';
+import DeveloperListItemDto from "@/dto/entity/DeveloperListItemDto.ts";
 
 export default defineComponent({
   name: "list",
