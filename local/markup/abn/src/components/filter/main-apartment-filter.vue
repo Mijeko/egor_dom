@@ -1,8 +1,8 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import CheckboxDropdown from "@/components/filter/part/CheckboxDropdown.vue";
-import InputDropdown from "@/components/filter/part/InputDropdown.vue";
-import MinMaxInputDropdown from "@/components/filter/part/MinMaxInputDropdown.vue";
+import CheckboxDropdown from "@/components/filter/part/checkbox-dropdown.vue";
+import InputDropdown from "@/components/filter/part/input-dropdown.vue";
+import MinMaxInputDropdown from "@/components/filter/part/min-max-input-dropdown.vue";
 import ApartmentFilterService from "@/service/ApartmentFilterService.ts";
 import type ApartmentFilterDto from "@/dto/ApartmentFilterDto.ts";
 import type ApartmentPreFilterRequestDto from "@/dto/request/ApartmentPreFilterRequestDto.ts";
@@ -11,7 +11,7 @@ import type ApartmentFilterRequestDto from "@/dto/request/ApartmentFilterRequest
 import type ApartmentFilterResponseDto from "@/dto/response/ApartmentFilterResponseDto.ts";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import {useApartmentFilterStore} from "@/stores/app.ts";
-import SelectWithSearch from "@/components/filter/part/SelectWithSearch.vue";
+import SelectWithSearch from "@/components/filter/part/select-with-search.vue";
 import type CheckboxDropdownItemDto from "@/dto/present/CheckboxDropdownItemDto.ts";
 import type {ApartmentFilterData, ApartmentFilterProp, ApartmentFilterPropValue} from "@/dto/ApartmentFilterData.ts";
 import type SelectItemDto from "@/dto/SelectItemDto.ts";

@@ -5,7 +5,7 @@ import UserService from "@/service/User/UserService.ts";
 import AlertService from "@/service/AlertService.ts";
 import type CreateStudentRequestDto from "@/dto/request/CreateStudentRequestDto.ts";
 import type CreateStudentResponseDto from "@/dto/response/CreateStudentResponseDto.ts";
-import SelectInput from "@/components/site/form/element/SelectInput.vue";
+import SelectInput from "@/components/site/form/element/select-input.vue";
 import {useManagerStore} from "@/stores/app.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import SelectHelper from "@/service/SelectHelper.ts";

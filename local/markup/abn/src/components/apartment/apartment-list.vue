@@ -2,8 +2,8 @@
 import {defineComponent, type PropType} from 'vue'
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import BuyApartmentModal from "@/components/site/modal/buy-apartment-modal.vue";
-import ApartmentItem from "@/components/apartment/ApartmentItem.vue";
-import ApartmentFilter from "@/components/filter/ApartmentFilter.vue";
+import ApartmentItem from "@/components/apartment/apartment-item.vue";
+import ApartmentFilter from "@/components/filter/apartment-filter.vue";
 
 export default defineComponent({
   name: "ApartmentList",

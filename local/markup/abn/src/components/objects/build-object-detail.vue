@@ -1,11 +1,11 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue';
-import ApartmentList from "@/components/apartment/ApartmentList.vue";
+import ApartmentList from "@/components/apartment/apartment-list.vue";
 import Map from "@/components/map.vue";
-import ApartmentFilter from "@/components/filter/ApartmentFilter.vue";
+import ApartmentFilter from "@/components/filter/apartment-filter.vue";
 import type BuildObjectDetailInfo from "@/dto/present/build-object-detail-info.ts";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
-import MainApartmentFilter from "@/components/filter/MainApartmentFilter.vue";
+import MainApartmentFilter from "@/components/filter/main-apartment-filter.vue";
 
 export default defineComponent({
   name: "BuildObjectDetail",
