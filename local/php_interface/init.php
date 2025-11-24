@@ -1,10 +1,11 @@
 <?php
+
+use Bitrix\Main\Loader;
+
 $sapi = php_sapi_name();
 $bIsConsole = ($sapi == 'cli');
-define('NEED_AUTH', !$bIsConsole);
 
-
-if(\Bitrix\Main\Loader::includeModule('craft.core'))
+if(Loader::includeModule('craft.core'))
 {
 	require_once __DIR__ . '/defines.php';
 }
@@ -35,7 +36,7 @@ foreach([
 			'craft.modal',
 		] as $module)
 {
-	\Bitrix\Main\Loader::includeModule($module);
+	Loader::includeModule($module);
 }
 
 require_once __DIR__ . '/dev_functions.php';
@@ -50,5 +51,4 @@ if(file_exists(__DIR__ . '/events.php'))
 }
 
 
-
-\Bitrix\Main\Loader::includeModule('craft.inertia');
+Loader::includeModule('craft.inertia');

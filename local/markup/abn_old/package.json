@@ -1,12 +1,10 @@
 {
-  "name": "vkusno",
+  "name": "abn",
   "private": true,
   "type": "module",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "ssr": "vite build --ssr",
-    "ssr:run": "node --trace-warnings ./bootstrap/ssr/ssr.js",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -15,10 +13,9 @@
   },
   "dependencies": {
     "@fontsource/roboto": "5.2.7",
-    "@inertiajs/vue3": "^2.2.17",
+    "@inertiajs/core": "^2.2.8",
+    "@inertiajs/vue3": "^2.2.8",
     "@mdi/font": "7.4.47",
-    "laravel-vite-plugin": "^2.0.1",
-    "maska": "^3.2.0",
     "pinia": "^3.0.3",
     "vue": "^3.5.21",
     "vue-router": "^4.5.1",

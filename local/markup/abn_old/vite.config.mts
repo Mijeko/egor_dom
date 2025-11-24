@@ -1,5 +1,3 @@
-import laravel from 'laravel-vite-plugin'
-
 // Plugins
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -16,33 +14,7 @@ import {fileURLToPath, URL} from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
-  server: {
-    port: 27000,
-    host: true,
-    hmr: {
-      host: '127.0.0.1',
-      port: 27000
-    }
-  },
-  build: {
-    manifest: true,
-    lib: {
-      entry: ['src/main.ts'],
-      name: 'Vite',
-      fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
-      cssFileName: 'my-lib-style',
-    }
-  },
-  ssr: {
-    noExternal: ['vuetify', 'vue-router'],
-  },
   plugins: [
-    laravel({
-      input: 'src/main.ts',
-      ssr: 'src/ssr.ts',
-      refresh: true,
-    }),
     VueRouter({
       dts: 'src/typed-router.d.ts',
     }),
@@ -65,14 +37,7 @@ export default defineConfig({
       dts: 'src/components.d.ts',
     }),
     Vue({
-      // template: {transformAssetUrls},
-
-      template: {
-        transformAssetUrls: {
-          base: null,
-          includeAbsolute: false,
-        },
-      },
+      template: {transformAssetUrls},
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
@@ -116,5 +81,19 @@ export default defineConfig({
       '.tsx',
       '.vue',
     ],
+  },
+
+  server: {
+    port: 27000,
+    host: true,
+  },
+  build: {
+    manifest: true,
+    lib: {
+      entry: ['src/main.js'],
+      name: 'Vite',
+      fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
+      cssFileName: 'my-lib-style',
+    }
   },
 })

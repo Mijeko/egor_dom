@@ -1,11 +1,28 @@
-<template>
-  <v-main>
-    <router-view />
-  </v-main>
+<script lang="ts">
+import {defineComponent} from 'vue'
 
-  <AppFooter />
+export default defineComponent({
+  name: "default"
+})
+</script>
+
+<template>
+
+  <div class="stronger">
+<!--    <AppHeader/>-->
+
+
+    <div class="page-content">
+
+      <div class="container">
+        <slot/>
+      </div>
+    </div>
+
+<!--    <AppFooter/>-->
+  </div>
 </template>
 
-<script lang="ts" setup>
-  //
-</script>
+<style scoped>
+
+</style>

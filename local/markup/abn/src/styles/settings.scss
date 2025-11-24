@@ -1,10 +1,17 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
+//@forward 'vuetify/styles';
+//@forward "core/fw";
 
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+@use "system/variable" as *;
+
+@use "system/fonts";
+@use "system/common";
+@use "system/full-width-page";
+@use "system/forms";
+@use "system/modals";
+@use "system/custom";
+
+.container {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
