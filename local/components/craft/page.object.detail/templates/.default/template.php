@@ -20,7 +20,7 @@
 
 $buildObjectDto = $arResult['BUILD_OBJECT_DTO'];
 
-inertia('BuildObjectDetail', [
+inertia('objects/detail', [
 	'buildObject' => $buildObjectDto,
 ]);
 

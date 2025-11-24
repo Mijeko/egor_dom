@@ -17,6 +17,6 @@
  */
 
 
-inertia('BuildObjectList', [
+inertia('objects/list', [
 	'buildObjects' => $arResult['BUILD_OBJECTS'],
 ]);

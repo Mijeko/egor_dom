@@ -17,6 +17,6 @@
  */
 
 
-inertia('DeveloperList', [
+inertia('developer/list', [
 	'developers' => $arResult['DEVELOPERS'] ?? [],
 ]);
