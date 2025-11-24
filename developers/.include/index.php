@@ -8,7 +8,7 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:developer.list',
+	'craft:page.developer.list',
 	'.default',
 	[],
 	false,

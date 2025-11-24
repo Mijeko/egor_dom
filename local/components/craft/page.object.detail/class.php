@@ -20,7 +20,7 @@ use Craft\DDD\Developers\Application\Factory\ApartmentServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 
-class CraftBuildObjectDetailComponent extends CBitrixComponent
+class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 {
 
 	protected ?BuildObjectService $buildObjectService;

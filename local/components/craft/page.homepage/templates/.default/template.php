@@ -1,4 +1,5 @@
 <?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
+
 <?php
 /**
  * @var string $componentPath
@@ -13,22 +14,10 @@
  * @var string $templateFile
  * @var string $templateFolder
  * @var string $componentPath
- * @var CraftBuildObjectListComponent $component
+ * @var CraftHomepageComponent $component
  */
-?>
 
 
-<?php
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'BuildObjectList',
-		'PROPS'  => [
-			'buildObjects' => $arResult['BUILD_OBJECTS'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-?>
+inertia('Index',[
+
+]);

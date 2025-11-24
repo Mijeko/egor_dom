@@ -13,7 +13,7 @@ use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Present\Dto\DeveloperListItemDto;
 use Craft\Dto\BxImageDto;
 
-class CraftDeveloperListComponent extends CBitrixComponent
+class CraftPageDeveloperListComponent extends CBitrixComponent
 {
 	protected ?DeveloperService $developerService = null;
 	protected ?BuildObjectService $buildObjectService = null;

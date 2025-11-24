@@ -8,10 +8,9 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:object.list',
+	'craft:page.object.list',
 	'.default',
 	[
-		#'IBLOCK_ID' => BUILD_OBJECT_IBLOCK_ID,
 	],
 	false,
 	['HIDE_ICONS' => 'Y']

@@ -14,7 +14,7 @@ if(empty($_REQUEST['ELEMENT_ID']))
 
 
 $APPLICATION->IncludeComponent(
-	'craft:object.detail',
+	'craft:page.object.detail',
 	'.default',
 	[
 		'ELEMENT_ID' => $_REQUEST['ELEMENT_ID'],

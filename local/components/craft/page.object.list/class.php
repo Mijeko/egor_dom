@@ -16,7 +16,7 @@ use Craft\DDD\Shared\Presentation\Dto\LocationDto;
 use Craft\Dto\BxImageDto;
 use Craft\Helper\Criteria;
 
-class CraftBuildObjectListComponent extends CBitrixComponent
+class CraftPageBuildObjectListComponent extends CBitrixComponent
 {
 	protected ApartmentRepositoryInterface $apartmentRepository;
 	protected ?BuildObjectRepositoryInterface $buildObjectRepository = null;

@@ -13,19 +13,14 @@
  * @var string $templateFile
  * @var string $templateFolder
  * @var string $componentPath
- * @var  $component
+ * @var CraftPageBuildObjectDetailComponent $component
+ *
+ * @var \Craft\DDD\Developers\Present\Dto\BuildObjectDto $buildObjectDto
  */
 
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'DeveloperList',
-		'PROPS'  => [
-			'developers' => $arResult['DEVELOPERS'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+$buildObjectDto = $arResult['BUILD_OBJECT_DTO'];
+
+inertia('BuildObjectDetail', [
+	'buildObject' => $buildObjectDto,
+]);
+

@@ -8,13 +8,9 @@
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'craft:object.list',
+	'craft:page.homepage',
 	'.default',
 	[],
 	false,
 	['HIDE_ICONS' => 'Y']
 );
-
-//inertia('index');
-
-?>
