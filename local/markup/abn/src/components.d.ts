@@ -11,25 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppFooter: typeof import('./components/Site/AppFooter.vue')['default']
-    AppHeader: typeof import('./components/Site/AppHeader.vue')['default']
-    AuthModal: typeof import('./components/Modal/AuthModal.vue')['default']
-    CheckoutBlock: typeof import('./components/Sale/CheckoutBlock.vue')['default']
-    ClientInit: typeof import('./components/Site/ClientInit.vue')['default']
-    FastSearch: typeof import('./components/Site/FastSearch.vue')['default']
-    FindAddressForm: typeof import('./components/Site/Form/FindAddressForm.vue')['default']
-    HeaderUiList: typeof import('./components/Site/HeaderUiList.vue')['default']
-    ListCategory: typeof import('./components/Catalog/ListCategory.vue')['default']
-    ListProduct: typeof import('./components/Catalog/ListProduct.vue')['default']
-    MainSlider: typeof import('./components/Content/Slider/MainSlider.vue')['default']
-    Map: typeof import('./components/system/map/yandex/Map.vue')['default']
-    PhoneInput: typeof import('./components/Site/Form/Elements/PhoneInput.vue')['default']
-    PickAddressMap: typeof import('./components/Site/PickAddressMap.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SelectTypeDelivery: typeof import('./components/Site/SelectTypeDelivery.vue')['default']
-    SetupDeliveryAddressModal: typeof import('./components/Modal/SetupDeliveryAddressModal.vue')['default']
-    SigninForm: typeof import('./components/Site/Form/SigninForm.vue')['default']
-    ViewProduct: typeof import('./components/Catalog/ViewProduct.vue')['default']
   }
 }

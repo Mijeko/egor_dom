@@ -2,12 +2,12 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "BuildObjectList"
+  name: "list"
 })
 </script>
 
 <template>
-  BuildObjectList
+  DeveloperList
 </template>
 
 <style scoped>
