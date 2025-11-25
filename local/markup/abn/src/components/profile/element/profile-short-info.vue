@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import {useUserStore} from "@/store.ts";
+import {useUserStore} from "@/stores/app.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({

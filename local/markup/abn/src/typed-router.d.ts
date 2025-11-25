@@ -23,6 +23,15 @@ declare module 'vue-router/auto-routes' {
     '/Index': RouteRecordInfo<'/Index', '/Index', Record<never, never>, Record<never, never>>,
     '/objects/detail': RouteRecordInfo<'/objects/detail', '/objects/detail', Record<never, never>, Record<never, never>>,
     '/objects/list': RouteRecordInfo<'/objects/list', '/objects/list', Record<never, never>, Record<never, never>>,
+    '/profile/agent/detail': RouteRecordInfo<'/profile/agent/detail', '/profile/agent/detail', Record<never, never>, Record<never, never>>,
+    '/profile/agent/list': RouteRecordInfo<'/profile/agent/list', '/profile/agent/list', Record<never, never>, Record<never, never>>,
+    '/profile/manager/detail': RouteRecordInfo<'/profile/manager/detail', '/profile/manager/detail', Record<never, never>, Record<never, never>>,
+    '/profile/manager/list': RouteRecordInfo<'/profile/manager/list', '/profile/manager/list', Record<never, never>, Record<never, never>>,
+    '/profile/order/detail': RouteRecordInfo<'/profile/order/detail', '/profile/order/detail', Record<never, never>, Record<never, never>>,
+    '/profile/order/list': RouteRecordInfo<'/profile/order/list', '/profile/order/list', Record<never, never>, Record<never, never>>,
+    '/profile/settings': RouteRecordInfo<'/profile/settings', '/profile/settings', Record<never, never>, Record<never, never>>,
+    '/profile/stream': RouteRecordInfo<'/profile/stream', '/profile/stream', Record<never, never>, Record<never, never>>,
+    '/profile/student/list': RouteRecordInfo<'/profile/student/list', '/profile/student/list', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -54,6 +63,42 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/objects/list.vue': {
       routes: '/objects/list'
+      views: never
+    }
+    'src/pages/profile/agent/detail.vue': {
+      routes: '/profile/agent/detail'
+      views: never
+    }
+    'src/pages/profile/agent/list.vue': {
+      routes: '/profile/agent/list'
+      views: never
+    }
+    'src/pages/profile/manager/detail.vue': {
+      routes: '/profile/manager/detail'
+      views: never
+    }
+    'src/pages/profile/manager/list.vue': {
+      routes: '/profile/manager/list'
+      views: never
+    }
+    'src/pages/profile/order/detail.vue': {
+      routes: '/profile/order/detail'
+      views: never
+    }
+    'src/pages/profile/order/list.vue': {
+      routes: '/profile/order/list'
+      views: never
+    }
+    'src/pages/profile/settings.vue': {
+      routes: '/profile/settings'
+      views: never
+    }
+    'src/pages/profile/stream.vue': {
+      routes: '/profile/stream'
+      views: never
+    }
+    'src/pages/profile/student/list.vue': {
+      routes: '/profile/student/list'
       views: never
     }
   }

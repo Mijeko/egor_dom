@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type ClaimDto from "@/dto/entity/ClaimDto.ts";
-import ClaimStatus from "@/components/part/ClaimStatus.vue";
+import ClaimStatus from "@/components/claim-status.vue";
 
 export default defineComponent({
   name: "ClaimList",

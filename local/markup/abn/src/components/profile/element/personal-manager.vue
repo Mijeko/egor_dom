@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import ContactPersonalManager from "@/components/modal/ContactPersonalManager.vue";
-import {useUserStore} from "@/store.ts";
+import ContactPersonalManager from "@/components/site/modal/contact-personal-manager.vue";
+import {useUserStore} from "@/stores/app.ts";
 import type ManagerDto from "@/dto/entity/ManagerDto.ts";
 
 export default defineComponent({

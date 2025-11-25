@@ -1,10 +1,8 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type ClaimDto from "@/dto/entity/ClaimDto.ts";
-import Price from "../core/Price.ts";
-import {th} from "vuetify/locale";
-import ClaimStatus from "@/components/part/ClaimStatus.vue";
-import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
+import Price from "@/core/price.ts";
+import ClaimStatus from "@/components/claim-status.vue";
 
 export default defineComponent({
   name: "ClaimDetail",

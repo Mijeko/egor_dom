@@ -1,10 +1,9 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import CreateManagerModal from "@/components/modal/CreateManagerModal.vue";
+import CreateManagerModal from "@/components/site/modal/create-manager-modal.vue";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import {useUserStore} from "@/store.ts";
 import AccessService from "@/service/AccessService.ts";
-import CreateAgentModal from "@/components/modal/CreateAgentModal.vue";
+import CreateAgentModal from "@/components/site/modal/create-agent-modal.vue";
 
 export default defineComponent({
   name: "ShortManagerList",

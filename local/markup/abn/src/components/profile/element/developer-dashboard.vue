@@ -6,7 +6,7 @@ import type SelectVariantDto from "@/dto/present/component/SelectVariantDto.ts";
 import type ManagerFeedUpdateRequestDto from "@/dto/request/ManagerFeedUpdateRequestDto.ts";
 import SelectHelper from "@/service/SelectHelper.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import {useUserStore} from "@/store.ts";
+import {useUserStore} from "@/stores/app.ts";
 
 export default defineComponent({
   name: "DeveloperDashboard",

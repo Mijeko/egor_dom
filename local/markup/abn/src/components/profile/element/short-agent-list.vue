@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import CreateAgentModal from "@/components/modal/CreateAgentModal.vue";
+import CreateAgentModal from "@/components/site/modal/create-agent-modal.vue";
 import AccessService from "@/service/AccessService.ts";
 
 export default defineComponent({

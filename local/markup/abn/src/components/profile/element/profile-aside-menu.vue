@@ -2,7 +2,7 @@
 import {defineComponent, type PropType} from 'vue'
 import type AsideMenuItemDto from "@/dto/present/AsideMenuItemDto.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
-import {useUserStore} from "@/store.ts";
+import {useUserStore} from "@/stores/app.ts";
 
 export default defineComponent({
   name: "ProfileAsideMenu",
