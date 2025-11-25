@@ -1,6 +1,3 @@
-//@forward 'vuetify/styles';
-//@forward "core/fw";
-
 @use "system/variable" as *;
 
 @use "system/fonts";
@@ -9,37 +6,3 @@
 @use "system/forms";
 @use "system/modals";
 @use "system/custom";
-
-@use "block/header";
-@use "block/logo";
-@use "block/profile-section";
-
-.container {
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-.profile-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  &-item {
-    max-width: calc(25% - 10px);
-    width: 100%;
-
-    @include w375 {
-      max-width: 100%;
-    }
-
-    &.x6 {
-      max-width: calc(50% - 10px);
-    }
-
-    &.x12 {
-      max-width: calc(100%);
-    }
-  }
-}

@@ -247,19 +247,19 @@ if(!function_exists('inertia'))
 	/**
 	 * Inertia helper.
 	 *
-	 * @param null|string $component
+	 * @param null|string $page
 	 * @param iterable $props
 	 * @return Inertia|void
 	 */
-	function inertia(null|string $component = null, iterable $props = [])
+	function inertia(null|string $page = null, iterable $props = [])
 	{
 		$serviceLocator = ServiceLocator::getInstance();
 		/** @var Inertia $factory */
 		$factory = $serviceLocator->get(Inertia::class);
 
-		if($component)
+		if($page)
 		{
-			$factory->view($component, $props);
+			$factory->view($page, $props);
 			return;
 		}
 

@@ -18,6 +18,6 @@
  */
 
 
-inertia('Index',[
+inertia('index',[
 
 ]);

@@ -1,15 +1,18 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import AppHeader from "@/components/site/header/app-header.vue";
+import AppFooter from "@/components/site/footer/AppFooter.vue";
 
 export default defineComponent({
-  name: "default"
+  name: "default",
+  components: {AppFooter, AppHeader}
 })
 </script>
 
 <template>
 
   <div class="stronger">
-<!--    <AppHeader/>-->
+    <AppHeader/>
 
 
     <div class="page-content">
@@ -19,7 +22,7 @@ export default defineComponent({
       </div>
     </div>
 
-<!--    <AppFooter/>-->
+    <AppFooter/>
   </div>
 </template>
 

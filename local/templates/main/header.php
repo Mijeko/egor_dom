@@ -6,6 +6,7 @@
 
 use Craft\Dto\BxUserDto;
 use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
+
 ?>
 <!doctype html>
 <html lang="<?=LANGUAGE_ID;?>">
@@ -27,25 +28,13 @@ use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 
 	CJSCore::Init([
 		'fx',
-		]);
+	]);
+
+	vite()->load();
 
 	$APPLICATION->ShowHead();
 	?>
 </head>
-
-
-<?php
-$APPLICATION->IncludeComponent(
-	'craft:init',
-	'.default',
-	[
-		'USER_ID'=>$USER->GetID(),
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-?>
-
 
 <body class="page">
 <div id="panel">
@@ -58,45 +47,3 @@ $APPLICATION->IncludeComponent(
 	}
 	?>
 </div>
-
-
-<div class="stronger">
-
-	<div class="container">
-		<?php
-		if(\Craft\Model\CraftUser::load()?->IsAuthorized())
-		{
-			DevIncludeFile('header', SITE_TEMPLATE_PATH . '/.include/');
-		}
-		?>
-	</div>
-
-	<div class="page-content">
-		<div class="container">
-
-			<?php
-			if($APPLICATION->GetCurPage() != '/')
-			{
-				//				$APPLICATION->IncludeComponent(
-				//					"bitrix:breadcrumb",
-				//					"breadcrumbs",
-				//					[
-				//						"COMPONENT_TEMPLATE" => ".default",
-				//						"START_FROM"         => "0",
-				//						"PATH"               => "",
-				//						"SITE_ID"            => "s1",
-				//					],
-				//					false,
-				//					['HIDE_ICONS' => 'Y']
-				//				);
-			}
-			?>
-
-			<?php
-			if(!\Craft\Service\SkipPageTitle::skip())
-			{
-				?>
-				<h1><?php $APPLICATION->ShowTitle(); ?></h1>
-				<?php
-			}
-			?>
