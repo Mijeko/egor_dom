@@ -65,7 +65,7 @@ export default defineComponent({
         v-bind="activatorProps"
         class="current-city"
       >
-        <img src="@/assets/images/icons/gps.svg" alt="gps">
+        <img src="../../../assets/images/icons/gps.svg" alt="gps">
         <div class="current-city__label">{{ currentCity.name }}</div>
       </div>
 

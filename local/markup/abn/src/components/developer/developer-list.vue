@@ -1,40 +1,87 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
 import type DeveloperListItemDto from "@/dto/entity/DeveloperListItemDto.ts";
+import BuildObjectItem from "@/components/objects/build-object-item.vue";
+
+import Swiper from "swiper";
+import { Navigation, Pagination } from 'swiper/modules';
 
 export default defineComponent({
   name: "DeveloperList",
+  components: {BuildObjectItem},
   props: {
     developers: {
-      type: Array as PropType<DeveloperListItemDto[]>
+      type: Array as PropType<DeveloperListItemDto[]>,
+      default: () => []
     }
   }
 })
 </script>
 
 <template>
-  <v-app>
-    <v-card v-for="developer in developers" class="mb-2">
-      <v-row class="pa-2">
-        <v-col md="2" sm="4">
-          <v-img :src="developer?.picture?.src" width="200" height="100%" cover></v-img>
-        </v-col>
-        <v-col md="10" sm="8">
-          <v-card-text class="pb-1 text-subtitle-1 font-weight-bold">{{ developer.name }}</v-card-text>
-          <v-row>
-            <v-col sm="12" md="4" class="pb-sm-0">
-              <v-card-text class="pt-2 pb-sm-0">Объектов в продаже: {{ developer.buildObjectsCount }}</v-card-text>
-            </v-col>
-            <v-col sm="12" md="8" class="pl-sm-7">
-              <v-btn :href="developer.url.detail">смотреть</v-btn>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-card>
-  </v-app>
+
+
+  <section class="developer-list" v-if="developers.length > 0">
+    <div class="developer-item" v-for="developer in developers">
+
+      <div class="developer-description">
+        <img
+          class="developer-description__logo"
+          v-if="developer.picture?.src"
+          :src="developer.picture.src"
+          :alt="developer.name"
+        >
+
+        <div class="developer-description__text" v-if="developer.description">
+          {{ developer.description }}
+        </div>
+      </div>
+
+
+      <div class="developer-object-list" v-if="developer.buildObjects && developer.buildObjects.length > 0">
+
+        <v-carousel :touch="true" :show-arrows="developer.buildObjects.length > 1" :hide-delimiters="true">
+          <v-carousel-item
+            v-for="object in developer.buildObjects.slice(0, 10)"
+          >
+            <BuildObjectItem
+              :buildObject="object"
+            />
+          </v-carousel-item>
+        </v-carousel>
+
+      </div>
+
+    </div>
+  </section>
+
 </template>
 
-<style scoped>
+<style lang="scss">
+.developer {
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
+
+  .developer-item {
+    .developer {
+      &-description {
+        &__logo {
+        }
+
+        &__text {
+        }
+      }
+
+      &-object {
+        &-list {
+
+        }
+      }
+    }
+  }
+}
 </style>

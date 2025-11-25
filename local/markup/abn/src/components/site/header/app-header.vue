@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import CurrentCity from "@/components/site/current-city.vue";
-import FastSearch from "@/components/site/fast-search.vue";
+import CurrentCity from "@/components/site/header/current-city.vue";
+import FastSearch from "@/components/site/header/fast-search.vue";
 import Cabinet from "@/components/site/cabinet.vue";
 import MenuHeader from "@/components/site/header/menu-header.vue";
 

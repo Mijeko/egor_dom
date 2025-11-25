@@ -11,6 +11,8 @@ final class DeveloperListItemDto
 		public string      $name,
 		public ?BxImageDto $picture,
 		public ?int        $buildObjectsCount,
+		public ?string     $detailUrl,
+		public ?array      $buildObjects = [],
 	)
 	{
 	}

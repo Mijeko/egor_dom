@@ -10,6 +10,7 @@ use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
+use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperListItemDto;
 use Craft\Dto\BxImageDto;
 
@@ -41,7 +42,6 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-
 		$developerList = $this->developerService->findAll(
 			[],
 			[
@@ -55,13 +55,12 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 		}, $developerList);
 
 		$buildObjectList = $this->buildObjectService->findAllByDeveloperIds($developerIdList);
-		$buildObjectListReduced = array_reduce($buildObjectList, function(array $carry, BuildObjectEntity $item) {
-			$carry[$item->getDeveloperId()][] = $item;
-			return $carry;
-		}, []);
+		$buildObjectIdList = array_map(function(BuildObjectEntity $buildObject) {
+			return BuildObjectDto::fromModel($buildObject);
+		}, $buildObjectList);
 
 
-		$this->arResult['DEVELOPERS'] = array_map(function(DeveloperEntity $developer) use ($buildObjectListReduced) {
+		$this->arResult['DEVELOPERS'] = array_map(function(DeveloperEntity $developer) use ($buildObjectIdList) {
 
 			$imageDto = null;
 			if($picture = $developer->getPicture())
@@ -76,7 +75,9 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 				$developer->getId(),
 				$developer->getName(),
 				$imageDto,
-				count($buildObjectListReduced[$developer->getId()] ?? []),
+				count($buildObjectIdList ?? []),
+				'/developers/' . $developer->getId() . '/',
+				$buildObjectIdList
 			);
 		}, $developerList);
 
