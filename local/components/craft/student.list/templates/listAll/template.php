@@ -20,30 +20,18 @@ use Craft\Helper\TableSettingsHelper;
  * @var string $componentPath
  * @var CraftAgentListComponent $component
  */
-?>
 
-<?php
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'StudentList',
-		'PROPS'  => [
-			'tableParams' => TableSettingsHelper::settings()
-				->records(array_map(function(BxUserDto $agent) {
-					return [
-						'id'   => $agent->id,
-						'name' => $agent->name,
-					];
-				}, $arResult['STUDENTS'] ?? []))
-				->header([
-					TableHeaderHelper::build('id', 'ID'),
-					TableHeaderHelper::build('name', 'Название'),
-				])
-				->build(),
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-?>
+inertia('profile/student/list', [
+	'tableParams' => TableSettingsHelper::settings()
+		->records(array_map(function(BxUserDto $agent) {
+			return [
+				'id'   => $agent->id,
+				'name' => $agent->name,
+			];
+		}, $arResult['STUDENTS'] ?? []))
+		->header([
+			TableHeaderHelper::build('id', 'ID'),
+			TableHeaderHelper::build('name', 'Название'),
+		])
+		->build(),
+]);

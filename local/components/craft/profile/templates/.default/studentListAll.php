@@ -6,25 +6,11 @@
  */
 
 $APPLICATION->SetTitle('Список студентов');
-?>
 
-<div class="profile-section">
-	<div class="profile-aside">
-		<?php
-		DevIncludeFile('aside');
-		?>
-	</div>
-	<div class="profile-body">
-		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
-
-		<?php
-		$APPLICATION->IncludeComponent(
-			'craft:student.list',
-			'listAll',
-			[],
-			false,
-			['HIDE_ICONS' => 'Y']
-		);
-		?>
-	</div>
-</div>
+$APPLICATION->IncludeComponent(
+	'craft:student.list',
+	'listAll',
+	[],
+	false,
+	['HIDE_ICONS' => 'Y']
+);
