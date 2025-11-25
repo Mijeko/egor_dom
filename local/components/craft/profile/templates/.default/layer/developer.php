@@ -10,12 +10,6 @@ global $APPLICATION;
 
 <h1><?php $APPLICATION->ShowTitle(); ?></h1>
 
-<!--<div class="profile-cards">-->
-<!--	<div class="profile-cards-item">-->
-<!--		-->
-<!--	</div>-->
-<!--</div>-->
-
 <?php
 $APPLICATION->IncludeComponent(
 	'craft:developer.update',

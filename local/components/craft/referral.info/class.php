@@ -1,6 +1,7 @@
 <?php
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Claims\Domain\Entity\ClaimEntity;
 use Craft\DDD\Claims\Domain\Repository\ClaimRepositoryInterface;
 use Craft\DDD\Claims\Infrastructure\Entity\ClaimTable;
@@ -34,7 +35,7 @@ class CraftReferralInfoComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
-			\Bitrix\Main\Diag\Debug::dumpToFile($e->getMessage());
+			Debug::dumpToFile($e->getMessage());
 		}
 	}
 
