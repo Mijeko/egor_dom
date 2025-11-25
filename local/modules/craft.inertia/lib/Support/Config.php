@@ -13,10 +13,11 @@ class Config implements ArrayAccess
     {
         if(
             !file_exists($file)
-            || !is_array($config = require_once $file)
+            || !is_array($config = require $file)
         ) {
             return $this;
         }
+
 
         return $this->merge($config);
     }

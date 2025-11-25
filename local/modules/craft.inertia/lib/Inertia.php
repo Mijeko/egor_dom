@@ -2,6 +2,7 @@
 
 namespace Craft\Inertia;
 
+use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\HttpRequest;
 use Bitrix\Main\HttpResponse;
 use Bitrix\Main\Page\Asset;
@@ -25,8 +26,6 @@ class Inertia
 		'dispatched' => false,
 		'instance'   => null,
 	];
-
-	protected string $dir = 'abn';
 
 	public function __construct()
 	{
@@ -71,7 +70,7 @@ class Inertia
 
 	public function getVersionFromManifest(): ?string
 	{
-		if(file_exists($manifest = $this->getLocalRoot() . '/markup/' . $this->dir . '/dist/.vite/manifest.json'))
+		if(file_exists($manifest = $this->getLocalRoot() . '/markup/vuetify/dist/.vite/manifest.json'))
 		{
 			return hash_file('xxh128', $manifest);
 		}
@@ -141,14 +140,13 @@ class Inertia
 		$this->globalShare($this->getLocalRoot() . '/php_interface/inertia.share.php');
 
 		$bxRequest = Application::getInstance()->getContext()->getRequest();
-		$pageData = $inertiaResponse->toPage($bxRequest);
-
+		$page = $inertiaResponse->toPage($bxRequest);
 
 		$response = $this->withMiddleware(
 			$bxRequest,
-			$pageData,
-			function() use ($pageData) {
-				if($gatewayAnswer = (new Ssr\HttpGateway())->dispatch($pageData))
+			$page,
+			function() use ($page) {
+				if($gatewayAnswer = (new Ssr\HttpGateway())->dispatch($page))
 				{
 					Asset::getInstance()->addString($gatewayAnswer->head);
 				}
@@ -157,7 +155,7 @@ class Inertia
 				{
 					echo sprintf(
 						'<div id="app" data-page="%s"></div>',
-						htmlspecialchars(json_encode($pageData), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
+						htmlspecialchars(json_encode($page), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
 					);
 				} else
 				{
@@ -167,6 +165,7 @@ class Inertia
 				return new HttpResponse();
 			}
 		);
+
 
 		if($response->getContent())
 		{

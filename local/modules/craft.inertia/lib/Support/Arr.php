@@ -465,7 +465,7 @@ class Arr
 
         $finalItem = array_pop($array);
 
-        return Arr . phpimplode($glue, $array) . $finalGlue .$finalItem;
+        return implode($glue, $array).$finalGlue.$finalItem;
     }
 
     /**
