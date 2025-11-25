@@ -5,10 +5,18 @@ import DeveloperDashboard from "@/components/profile/element/developer-dashboard
 import PersonalManager from "@/components/profile/element/personal-manager.vue";
 import ProfileOrderCostInfo from "@/components/profile/element/profile-order-cost-info.vue";
 import ProfileReferral from "@/components/profile/element/profile-referral.vue";
+import ProfileLastView from "@/components/profile/element/profile-last-view.vue";
+import ShortManagerList from "@/components/profile/element/short-manager-list.vue";
+import ShortAgentList from "@/components/profile/element/short-agent-list.vue";
+import ShortStudentList from "@/components/profile/element/short-student-list.vue";
 
 export default defineComponent({
   name: "home",
   components: {
+    ShortStudentList,
+    ShortAgentList,
+    ShortManagerList,
+    ProfileLastView,
     ProfileReferral: ProfileReferral,
     ProfileOrderCostInfo: ProfileOrderCostInfo,
     PersonalManager: PersonalManager,
@@ -40,50 +48,16 @@ export default defineComponent({
         <ProfileReferral/>
       </div>
       <div class="profile-cards-item">
-        <?php
-		$APPLICATION->IncludeComponent(
-        'craft:object.last.view',
-        '.default',
-        [
-        'USER_ID' => CraftUser::load()->getId(),
-        ],
-        false,
-        ['HIDE_ICONS' => 'Y']
-        );
-        ?>
+        <ProfileLastView/>
       </div>
       <div class="profile-cards-item x12">
-        <?php
-		$APPLICATION->IncludeComponent(
-        'craft:manager.list',
-        '.default',
-        [],
-        false,
-        ['HIDE_ICONS' => 'Y']
-        );
-        ?>
+        <ShortManagerList/>
       </div>
       <div class="profile-cards-item x12">
-        <?php
-		$APPLICATION->IncludeComponent(
-        'craft:agent.list',
-        '.default',
-        [],
-        false,
-        ['HIDE_ICONS' => 'Y']
-        );
-        ?>
+        <ShortAgentList/>
       </div>
       <div class="profile-cards-item x12">
-        <?php
-		$APPLICATION->IncludeComponent(
-        'craft:student.list',
-        '.default',
-        [],
-        false,
-        ['HIDE_ICONS' => 'Y']
-        );
-        ?>
+        <ShortStudentList/>
       </div>
     </div>
   </div>
