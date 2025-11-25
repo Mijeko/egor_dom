@@ -24,27 +24,17 @@ use Craft\Helper\TableSettingsHelper;
  */
 
 
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'AgentList',
-		'PROPS'  => [
-			'tableParams' => TableSettingsHelper::settings()
-				->records(array_map(function(BxUserDto $agent) {
-					return [
-						'id'   => $agent->id,
-						'name' => $agent->name,
-					];
-				}, $arResult['AGENTS'] ?? []))
-				->header([
-					TableHeaderHelper::build('id', 'ID'),
-					TableHeaderHelper::build('name', 'Название'),
-				])
-				->build(),
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+inertia('profile/agent/list', [
+	'tableParams' => TableSettingsHelper::settings()
+		->records(array_map(function(BxUserDto $agent) {
+			return [
+				'id'   => $agent->id,
+				'name' => $agent->name,
+			];
+		}, $arResult['AGENTS'] ?? []))
+		->header([
+			TableHeaderHelper::build('id', 'ID'),
+			TableHeaderHelper::build('name', 'Название'),
+		])
+		->build(),
+]);

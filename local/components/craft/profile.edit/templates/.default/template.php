@@ -10,15 +10,6 @@
 
 $userData = $arResult['USER_DATA'];
 
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'ProfileEditForm',
-		'PROPS'  => [
-			'userData' => $userData,
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
+inertia('profile/settings', [
+	'userData' => $userData,
+]);

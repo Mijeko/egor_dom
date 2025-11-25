@@ -15,22 +15,8 @@
  * @var string $componentPath
  * @var CraftStreamComponent $component
  */
-?>
 
 
-<?php
-
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'profile/Stream',
-		'PROPS'  => [
-			'chats' => $arResult['CHATS'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-
-?>
+inertia('profile/stream', [
+	'chats' => $arResult['CHATS'] ?? [],
+]);

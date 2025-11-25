@@ -15,19 +15,8 @@
  * @var string $componentPath
  * @var CraftManagerEditComponent $component
  */
-?>
-<?php
 
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'ManagerEdit',
-		'PROPS'  => [
-			'manager' => $arResult['MANAGER'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+
+inertia('profile/manager/detail', [
+	'manager' => $arResult['MANAGER'],
+]);

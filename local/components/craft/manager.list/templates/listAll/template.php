@@ -20,32 +20,19 @@ use Craft\Helper\TableSettingsHelper;
  * @var string $componentPath
  * @var CraftManagerListComponent $component
  */
-?>
 
 
-<?php
-
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'ManagerList',
-		'PROPS'  => [
-			'tableParams' => TableSettingsHelper::settings()
-				->records(array_map(function(BxUserDto $manager) {
-					return [
-						'id'   => $manager->id,
-						'name' => $manager->name,
-					];
-				}, $arResult['ITEMS'] ?? []))
-				->header([
-					TableHeaderHelper::build('id', 'ID'),
-					TableHeaderHelper::build('name', 'Название'),
-				])
-				->build(),
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+inertia('profile/manager/list', [
+	'tableParams' => TableSettingsHelper::settings()
+		->records(array_map(function(BxUserDto $manager) {
+			return [
+				'id'   => $manager->id,
+				'name' => $manager->name,
+			];
+		}, $arResult['ITEMS'] ?? []))
+		->header([
+			TableHeaderHelper::build('id', 'ID'),
+			TableHeaderHelper::build('name', 'Название'),
+		])
+		->build(),
+]);

@@ -11,19 +11,7 @@ use Craft\DDD\Claims\Present\Dto\ClaimDetailDto;
  */
 
 $claim = $arResult['CLAIM'];
-?>
 
-<?php
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'ClaimDetail',
-		'PROPS'  => [
-			'claim' => $claim->claim,
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-?>
+inertia('profile/order/detail', [
+	'claim' => $claim
+]);

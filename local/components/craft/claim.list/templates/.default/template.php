@@ -15,20 +15,8 @@
  * @var string $componentPath
  * @var  $component
  */
-?>
 
 
-<?php
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'ClaimList',
-		'PROPS'  => [
-			'claims' => $arResult['CLAIMS'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+inertia('profile/order/list', [
+	'claims' => $arResult['CLAIMS'] ?? [],
+]);

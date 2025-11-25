@@ -10,27 +10,13 @@ global $APPLICATION;
  */
 
 $agentId = $arResult['VARIABLES']['AGENT_ID'];
-?>
 
-<div class="profile-section">
-	<div class="profile-aside">
-		<?php
-		DevIncludeFile('aside');
-		?>
-	</div>
-	<div class="profile-body">
-		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
-
-		<?php
-		$APPLICATION->IncludeComponent(
-			'craft:agent.edit',
-			'.default',
-			[
-				'ID' => $agentId,
-			],
-			false,
-			['HIDE_ICONS' => 'Y']
-		);
-		?>
-	</div>
-</div>
+$APPLICATION->IncludeComponent(
+	'craft:agent.edit',
+	'.default',
+	[
+		'ID' => $agentId,
+	],
+	false,
+	['HIDE_ICONS' => 'Y']
+);

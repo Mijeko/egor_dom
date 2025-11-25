@@ -15,21 +15,9 @@
  * @var string $componentPath
  * @var CraftAgentEditComponent $component
  */
-?>
 
 
-<?php
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'AgentEdit',
-		'PROPS'  => [
-			'agent'  => $arResult['AGENT'],
-			'orders' => $arResult['ORDERS'],
-		],
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+inertia('profile/agent/detail', [
+	'agent'  => $arResult['AGENT'],
+	'orders' => $arResult['ORDERS'],
+]);
