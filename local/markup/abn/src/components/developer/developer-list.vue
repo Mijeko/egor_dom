@@ -3,12 +3,12 @@ import {defineComponent, type PropType} from 'vue'
 import type DeveloperListItemDto from "@/dto/entity/DeveloperListItemDto.ts";
 import BuildObjectItem from "@/components/objects/build-object-item.vue";
 
-import Swiper from "swiper";
-import { Navigation, Pagination } from 'swiper/modules';
+import {Swiper, SwiperSlide} from 'swiper/vue';
+
 
 export default defineComponent({
   name: "DeveloperList",
-  components: {BuildObjectItem},
+  components: {BuildObjectItem, Swiper, SwiperSlide},
   props: {
     developers: {
       type: Array as PropType<DeveloperListItemDto[]>,
@@ -22,39 +22,35 @@ export default defineComponent({
 
 
   <section class="developer-list" v-if="developers.length > 0">
-    <div class="developer-item" v-for="developer in developers">
+    <div class="developer-card" v-for="developer in developers">
 
-      <div class="developer-description">
+      <div class="developer-card-description">
         <img
-          class="developer-description__logo"
+          class="developer-card-description__logo"
           v-if="developer.picture?.src"
           :src="developer.picture.src"
           :alt="developer.name"
         >
 
-        <div class="developer-description__text" v-if="developer.description">
+        <div class="developer-card-description__text" v-if="developer.description">
           {{ developer.description }}
         </div>
       </div>
 
 
-      <div class="developer-object-list" v-if="developer.buildObjects && developer.buildObjects.length > 0">
-
-        <BuildObjectItem
-          v-for="object in developer.buildObjects"
-          :buildObject="object"
-        />
-
-<!--        <v-carousel :touch="true" :show-arrows="developer.buildObjects.length > 1" :hide-delimiters="true">-->
-<!--          <v-carousel-item-->
-<!--            v-for="object in developer.buildObjects.slice(0, 10)"-->
-<!--          >-->
-<!--            <BuildObjectItem-->
-<!--              :buildObject="object"-->
-<!--            />-->
-<!--          </v-carousel-item>-->
-<!--        </v-carousel>-->
-
+      <div
+        v-if="developer.buildObjects && developer.buildObjects.length > 0"
+        class="developer-object-list"
+      >
+        <swiper class="mySwiper" :slides-per-view="4">
+          <swiper-slide
+            v-for="object in developer.buildObjects"
+          >
+            <BuildObjectItem
+              :buildObject="object"
+            />
+          </swiper-slide>
+        </swiper>
       </div>
 
     </div>
@@ -63,6 +59,7 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
+
 .developer {
   &-list {
     display: flex;
@@ -70,23 +67,19 @@ export default defineComponent({
     gap: 20px;
   }
 
-
-  .developer-item {
-    .developer {
-      &-description {
-        &__logo {
-        }
-
-        &__text {
-        }
+  &-card {
+    &-description {
+      &__logo {
       }
 
-      &-object {
-        &-list {
-
-        }
+      &__text {
       }
     }
   }
+
+  &-object-list {
+
+  }
 }
+
 </style>

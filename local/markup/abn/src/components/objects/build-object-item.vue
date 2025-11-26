@@ -2,70 +2,122 @@
 import {defineComponent} from 'vue'
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import {Swiper, SwiperSlide} from 'swiper/vue';
+import type DeveloperDto from "@/dto/entity/DeveloperDto.ts";
+import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
 export default defineComponent({
   name: "BuildObjectItem",
   components: {Swiper, SwiperSlide},
   props: {
-    buildObject: Object as PropType<BuildObjectDto>,
-    default: () => {
+    buildObject: {
+      type: Object as PropType<BuildObjectDto>,
+      default: () => {
+      }
+    },
+    developer: {
+      type: Object as PropType<DeveloperDto>,
+      default: () => {
+      }
     }
   },
   methods: {
     minPrice(object: BuildObjectDto): number {
-      return 0;
+
+      if (!object.apartments || object.apartments.length <= 0) {
+        return 0;
+      }
+
+      let apartment: ApartmentDto | null | undefined = null;
+      let apartmentList: ApartmentDto[] = object.apartments;
+
+      apartment = apartmentList.sort((a: ApartmentDto, b: ApartmentDto) => a.price - b.price).shift();
+
+      if (!apartment) {
+        return 0;
+      }
+
+      return apartment.price;
     }
   }
 })
 </script>
 
 <template>
-  <div class="build-object-item">
-    <div class="build-object-item-slider">
+  <div class="build-object-card">
+    <div class="build-object-card-slider">
 
-      <swiper class="mySwiper">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
-        <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide>
+      <swiper space-between="30" class="mySwiper" v-if="buildObject?.gallery">
+        <swiper-slide v-for="(image,index) in buildObject.gallery">
+          <img :src="image.src" :alt="`${buildObject.name} ${index}`">
+        </swiper-slide>
       </swiper>
 
+    </div>
+    <div class="build-object-card-name">{{ buildObject?.name }}</div>
 
-<!--      <v-carousel-->
-<!--        v-if="buildObject?.gallery"-->
-<!--        :show-arrows="buildObject?.gallery?.length > 1"-->
-<!--        :hide-delimiters="true"-->
-<!--      >-->
-<!--        <v-carousel-item-->
-<!--          v-for="galleryItem in buildObject?.gallery"-->
-<!--          :src="galleryItem.src"-->
-<!--          cover-->
-<!--        ></v-carousel-item>-->
-<!--      </v-carousel>-->
-    </div>
-    <div class="build-object-item-name">{{ buildObject?.name }}</div>
-    <div class="build-object-item-chars">
-      <div class="build-object-item-chars-row">
-        <div class="build-object-item-chars-label">Город</div>
-        <div class="build-object-item-chars-value">Барнаул</div>
+    <div class="build-object-card-chars">
+      <div class="build-object-card-chars-row">
+        <div class="build-object-card-chars-label">Город</div>
+        <div class="build-object-card-chars-value">Барнаул</div>
       </div>
-      <div class="build-object-item-chars-row">
-        <div class="build-object-item-chars-label">Застройщик</div>
-        <div class="build-object-item-chars-value">ГК "Ренова"</div>
+      <div class="build-object-card-chars-row" v-if="developer && developer.name">
+        <div class="build-object-card-chars-label">Застройщик</div>
+        <div class="build-object-card-chars-value">{{ developer.name }}</div>
       </div>
-      <div class="build-object-item-chars-row">
-        <div class="build-object-item-chars-label">Стоимость</div>
-        <div class="build-object-item-chars-value" v-if="buildObject">от {{ minPrice(buildObject) }}</div>
+      <div class="build-object-card-chars-row">
+        <div class="build-object-card-chars-label">Стоимость</div>
+        <div class="build-object-card-chars-value" v-if="buildObject">от {{ minPrice(buildObject) }}</div>
       </div>
     </div>
+
   </div>
 </template>
 
 <style lang="scss">
 
+@use '@/styles/system/variable' as *;
+
+.build-object-card {
+  &-slider {
+  }
+
+  &-name {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: $bo-color-name;
+  }
+
+  &-chars {
+    display: flex;
+    flex-direction: column;
+
+    &-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    &-label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 170%;
+      color: $bo-char-label;
+    }
+
+    &-value {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 170%;
+      text-align: right;
+      color: $bo-color-name;
+
+      b {
+        font-weight: 600;
+      }
+    }
+  }
+}
 </style>
