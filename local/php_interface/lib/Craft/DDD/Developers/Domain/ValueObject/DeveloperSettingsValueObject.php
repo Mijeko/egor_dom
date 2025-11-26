@@ -46,6 +46,11 @@ class DeveloperSettingsValueObject
 		return $self;
 	}
 
+	public function toJson(): string
+	{
+		return json_encode($this);
+	}
+
 	public function getLeadChannelList(): ?array
 	{
 		return $this->leadChannelList;

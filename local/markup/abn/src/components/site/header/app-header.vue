@@ -35,6 +35,7 @@ export default defineComponent({
 <style lang="scss">
 .header {
   margin-top: 30px !important;
+  margin-bottom: 70px !important;
   border: 1px solid #cacaca;
   border-radius: 50px;
   padding: 15px 35px !important;

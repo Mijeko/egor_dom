@@ -10,10 +10,15 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
+use Craft\DDD\Developers\Domain\ValueObject\Developer\DescriptionValueObject;
+use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
+use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
+use Craft\Dto\BxImageDto;
 
 class DeveloperService
 {
@@ -50,9 +55,42 @@ class DeveloperService
 		return $developerList;
 	}
 
-	public function loadRelations(array &$developerList): void
+	public function updateByAdmin(int $id, array $data, array $files = []): DeveloperEntity
 	{
+		$developer = $this->developerRepository->findById($id);
+		if(!$developer)
+		{
+			throw new \Exception('Застройщик не найден');
+		}
 
+		$pictureId = null;
+		if($files[DeveloperTable::F_PICTURE_ID])
+		{
+			$image = $this->imageService->storeFromArray($files[DeveloperTable::F_PICTURE_ID]);
+
+			if($image && $image->id)
+			{
+				$pictureId = $image->id;
+			}
+		}
+
+
+		$developer->updateByAdmin(
+			$data[DeveloperTable::F_NAME],
+			new DescriptionValueObject($data[DeveloperTable::F_DESCRIPTION]),
+			$data[DeveloperTable::F_SORT],
+			new ActiveValueObject($data[DeveloperTable::F_ACTIVE]),
+			$data[DeveloperTable::F_CITY_ID],
+			new DeveloperSettingsValueObject($data[DeveloperTable::F_SETTINGS]),
+			$pictureId,
+		);
+
+		$developer = $this->developerRepository->update($developer);
+		return $developer;
+	}
+
+	protected function loadRelations(array &$developerList): void
+	{
 		$developerIdList = array_map(function(DeveloperEntity $developer) {
 			return $developer->getId();
 		}, $developerList);
@@ -111,6 +149,9 @@ class DeveloperService
 			if($image)
 			{
 				$developerEntity->addPicture(new ImageValueObject($image->id, $image->src));
+			} else
+			{
+				$developerEntity->addPicture(new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src));
 			}
 
 			return $developerEntity;

@@ -18,6 +18,7 @@ class DeveloperTable extends DataManager
 	const F_ID = 'ID';
 	const F_ACTIVE = 'ACTIVE';
 	const F_NAME = 'NAME';
+	const F_DESCRIPTION = 'DESCRIPTION';
 	const F_SORT = 'SORT';
 	const F_SETTINGS = 'SETTINGS';
 	const F_PICTURE_ID = 'PICTURE_ID';
@@ -51,6 +52,8 @@ class DeveloperTable extends DataManager
 			(new StringField(self::F_NAME))
 				->configureTitle('Название застройщика')
 				->configureRequired(),
+			(new StringField(self::F_DESCRIPTION))
+				->configureTitle('Описание'),
 			(new IntegerField(self::F_SORT))
 				->configureTitle('Сортировка')
 				->configureDefaultValue(500),

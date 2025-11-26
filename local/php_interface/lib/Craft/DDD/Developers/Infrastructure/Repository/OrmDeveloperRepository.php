@@ -2,9 +2,9 @@
 
 namespace Craft\DDD\Developers\Infrastructure\Repository;
 
+use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Developers\Domain\ValueObject\Developer\DescriptionValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
-use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
-use Craft\DDD\Developers\Infrastructure\Entity\Developer;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
@@ -53,6 +53,7 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			$developer->getId(),
 			// @phpstan-ignore method.notFound
 			$developer->getName(),
+			new DescriptionValueObject($developer->getDescription()),
 			// @phpstan-ignore method.notFound
 			$developer->getSort(),
 			new ActiveValueObject($developer->getActive()),
@@ -61,12 +62,33 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 			// @phpstan-ignore method.notFound
 			$developer->getCityId(),
 			DeveloperSettingsValueObject::fromJson($developer->getSettings()),
-			null,
 		);
 	}
 
 	public function update(DeveloperEntity $developer): ?DeveloperEntity
 	{
-		return null;
+		$model = DeveloperTable::getByPrimary($developer->getId())->fetchObject();
+
+		$this->fill($model, $developer);
+
+		$result = $model->save();
+
+		if(!$result->isSuccess())
+		{
+			throw new \Exception(implode("\n", $result->getErrorMessages()));
+		}
+
+		return $developer;
+	}
+
+	protected function fill(Eo_Developer &$developer, DeveloperEntity $entity): void
+	{
+		$developer->setName($entity->getName());
+		$developer->setDescription($entity->getDescription()->getValue());
+		$developer->setActive($entity->getActive()->getValue());
+		$developer->setSort($entity->getSort());
+		$developer->setPictureId($entity->getPictureId());
+		$developer->setCityId($entity->getCityId());
+		$developer->setSettings($entity->getSettings()->toJson());
 	}
 }

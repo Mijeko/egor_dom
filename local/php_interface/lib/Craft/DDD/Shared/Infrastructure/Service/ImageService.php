@@ -9,6 +9,26 @@ use Craft\Dto\BxImageDto;
 class ImageService implements ImageServiceInterface
 {
 
+	public function storeFromArray(array $imageData): ?ResultImageSaveDto
+	{
+		$fileId = \CFile::SaveFile($imageData, $this->imageFolder());
+		if(!$fileId)
+		{
+			return null;
+		}
+
+		$file = \CFile::GetFileArray($fileId);
+		if(!$file['ID'] || !$file['SRC'])
+		{
+			return null;
+		}
+
+		return new ResultImageSaveDto(
+			$file['ID'],
+			$file['SRC'],
+		);
+	}
+
 	public function findById(int $id): ?ResultImageSaveDto
 	{
 		$file = \CFile::GetFileArray($id);

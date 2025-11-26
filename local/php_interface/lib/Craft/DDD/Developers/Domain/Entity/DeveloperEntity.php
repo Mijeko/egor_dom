@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Domain\Entity;
 
 use Craft\DDD\City\Domain\Entity\CityEntity;
+use Craft\DDD\Developers\Domain\ValueObject\Developer\DescriptionValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\DeveloperSettingsValueObject;
 use Craft\DDD\Developers\Domain\ValueObject\ImportSettingValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
@@ -18,9 +19,10 @@ final class DeveloperEntity
 	private ?int $sort;
 	private ?ActiveValueObject $active;
 	protected ?string $name;
+	protected ?DescriptionValueObject $description;
 	protected ?int $pictureId = null;
 	protected ?int $cityId = null;
-	protected ?array $buildObjects = null;
+	protected array $buildObjects = [];
 	protected ?ImportSettingValueObject $importSetting = null;
 
 	protected ?ImageValueObject $picture = null;
@@ -31,41 +33,50 @@ final class DeveloperEntity
 	public static function hydrate(
 		?int                          $id,
 		?string                       $name,
+		?DescriptionValueObject       $description,
 		?int                          $sort,
 		?ActiveValueObject            $active,
 		?int                          $pictureId = null,
 		?int                          $cityId = null,
 		?DeveloperSettingsValueObject $settings = null,
-		?array                        $buildObjects = null,
 	): DeveloperEntity
 	{
 		$self = new self();
 		$self->id = $id;
 		$self->name = $name;
+		$self->description = $description;
 		$self->sort = $sort;
 		$self->active = $active;
 		$self->pictureId = $pictureId;
 		$self->cityId = $cityId;
-		$self->buildObjects = $buildObjects;
 		$self->settings = $settings;
 		return $self;
 	}
 
 	public function updateByAdmin(
-		?string                       $name,
-		?int                          $sort,
-		?ActiveValueObject            $active,
-		?int                          $pictureId = null,
-		?int                          $cityId = null,
-		?DeveloperSettingsValueObject $settings = null,
+		string                       $name,
+		DescriptionValueObject       $description,
+		int                          $sort,
+		ActiveValueObject            $active,
+		int                          $cityId = null,
+		DeveloperSettingsValueObject $settings = null,
+		int                          $pictureId = null,
 	): DeveloperEntity
 	{
 		$this->name = $name;
+		$this->description = $description;
 		$this->sort = $sort;
 		$this->active = $active;
-		$this->pictureId = $pictureId;
 		$this->cityId = $cityId;
 		$this->settings = $settings;
+
+
+		if($pictureId)
+		{
+			$this->pictureId = $pictureId;
+		}
+
+
 		return $this;
 	}
 
@@ -149,5 +160,10 @@ final class DeveloperEntity
 	public function getSort(): ?int
 	{
 		return $this->sort;
+	}
+
+	public function getDescription(): ?DescriptionValueObject
+	{
+		return $this->description;
 	}
 }

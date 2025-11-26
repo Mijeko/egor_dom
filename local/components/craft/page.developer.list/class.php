@@ -11,6 +11,7 @@ use Craft\DDD\City\Infrastructure\Factory\CurrentCityServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
 use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
+use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperListItemDto;
 use Craft\Dto\BxImageDto;
 
@@ -62,21 +63,20 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 
 		$this->arResult['DEVELOPERS'] = array_map(function(DeveloperEntity $developer) use ($buildObjectIdList) {
 
-			$imageDto = null;
+			$developerDto = DeveloperDto::fromModel($developer);
+
 			if($picture = $developer->getPicture())
 			{
-				$imageDto = new BxImageDto(
+				$developerDto->picture = new BxImageDto(
 					$picture->getId(),
 					$picture->getSrc()
 				);
 			}
 
+
 			return new DeveloperListItemDto(
-				$developer->getId(),
-				$developer->getName(),
-				$imageDto,
-				count($buildObjectIdList ?? []),
-				'/developers/' . $developer->getId() . '/',
+				$developerDto,
+				count($buildObjectIdList),
 				$buildObjectIdList
 			);
 		}, $developerList);

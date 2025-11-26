@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
+use Bitrix\Main\Diag\Debug;
 use Craft\DDD\City\Infrastructure\Service\CurrentCityService;
 use Craft\DDD\Developers\Domain\Entity\ApartmentEntity;
 use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
@@ -15,6 +16,7 @@ use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\Dto\BxImageDto;
 use Craft\Helper\Criteria;
 
 class BuildObjectService
@@ -104,6 +106,16 @@ class BuildObjectService
 			}, $buildObjectEntity->getGalleryIdList());
 			$images = array_filter($images);
 
+
+
+			if($images)
+			{
+				$images=[];
+				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
+				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
+				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
+				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
+			}
 
 			$vo = new ImageGalleryValueObject($images);
 			$buildObjectEntity->addGalleryImage($vo);

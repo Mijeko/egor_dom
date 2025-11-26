@@ -16,16 +16,31 @@ export default defineComponent({
 </script>
 
 <template>
-
-  <h1>Застройщики</h1>
-
-  <DeveloperSearch/>
-
-  <DeveloperList
-    :developers
-  />
+  <div class="developer-list-page">
+    <h1 class="developer-list-page__title">Застройщики</h1>
+    <DeveloperSearch/>
+    <DeveloperList
+      :developers
+    />
+  </div>
 </template>
 
-<style scoped>
+<style lang="scss">
+@use '@/styles/system/variable' as *;
 
+.developer-list-page {
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
+
+  &__title {
+    font-family: var(--second-family);
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 140%;
+    text-transform: uppercase;
+    text-align: center;
+    color: $bo-color-name;
+  }
+}
 </style>

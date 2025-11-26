@@ -9,36 +9,27 @@ use Craft\Dto\BxImageDto;
 
 final class DeveloperDto
 {
+
+	public ?BxImageDto $picture = null;
+	public ?array $buildObjects = [];
+
+
 	public function __construct(
-		public int         $id,
-		public string      $name,
-		public ?BxImageDto $picture = null,
-		public ?array      $buildObjects = [],
+		public int     $id,
+		public int     $cityId,
+		public string  $name,
+		public ?string $description,
 	)
 	{
 	}
 
 	public static function fromModel(DeveloperEntity $developer): DeveloperDto
 	{
-		$pictureDto = null;
-		if($picture = $developer->getPicture())
-		{
-			$pictureDto = new BxImageDto(
-				$picture->getId(),
-				$picture->getSrc()
-			);
-		}
-
 		return new DeveloperDto(
 			$developer->getId(),
+			$developer->getCityId(),
 			$developer->getName(),
-			$pictureDto,
-			array_map(
-				function(BuildObjectEntity $buildObject) {
-					return BuildObjectDto::fromModel($buildObject);
-				},
-				$developer->getBuildObjects() ?? []
-			),
+			$developer->getDescription()->getValue(),
 		);
 	}
 }

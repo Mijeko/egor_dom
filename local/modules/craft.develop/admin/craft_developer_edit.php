@@ -12,9 +12,9 @@ $APPLICATION->SetTitle("Застройщики");
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
 use Craft\DDD\City\Infrastructure\Entity\CityTable;
+use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Bitrix\Main\Page\Asset;
-use Craft\DDD\Developers\Infrastructure\Repository\OrmDeveloperRepository;
 use Craft\Enum\ChannelListEnum;
 
 foreach(['craft.develop'] as $module)
@@ -27,29 +27,29 @@ foreach(['craft.develop'] as $module)
 
 Asset::getInstance()->addJs('/bitrix/js/iblock/iblock_edit.js');
 
-$repo = new OrmDeveloperRepository();
-
+$developerService = DeveloperServiceFactory::createOnOrm();
 $request = Application::getInstance()->getContext()->getRequest();
 $ID = $request->get('ID');
-$developerModel = $ID ? $repo->findById($ID) : null;
-
-if(!$developerModel)
-{
-	return;
-}
+$developerModel = $ID ? $developerService->findById($ID) : null;
+$error = null;
 
 if($request->isPost())
 {
+	try
+	{
+		$developerModel = $developerService->updateByAdmin(
+			$developerModel->getId(),
+			$request->getPostList()->toArray(),
+			$request->getFileList()->toArray(),
+		);
 
 
-	$developerModel->updateByAdmin(
-		$request->getPost(DeveloperTable::F_NAME),
-		'',
-		'',
-		'',
-		'',
-		'',
-	);
+		$_GET['ID'] = $developerModel->getId();
+		LocalRedirect($APPLICATION->GetCurPage() . "?" . http_build_query($_GET));
+	} catch(\Exception $exception)
+	{
+		$error = $exception->getMessage();
+	}
 }
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php");
@@ -68,6 +68,10 @@ $aTabs = [
 	],
 ];
 
+if($error)
+{
+	CAdminMessage::ShowOldStyleError($error);
+}
 
 $tabControl = new CAdminForm('craftDeveloperEditTabControl', $aTabs);
 $tabControl->BeginEpilogContent();
@@ -106,6 +110,17 @@ if($field = $entity->getField(DeveloperTable::F_NAME))
 		$field->isRequired(),
 		["size" => 35, "maxlength" => 255],
 		$developerModel?->getName()
+	);
+}
+
+if($field = $entity->getField(DeveloperTable::F_DESCRIPTION))
+{
+	$tabControl->AddTextField(
+		$field->getName(),
+		$field->getTitle(),
+		$developerModel?->getDescription()->getValue(),
+		["size" => 35, "maxlength" => 255],
+		$field->isRequired(),
 	);
 }
 

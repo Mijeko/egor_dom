@@ -7,6 +7,8 @@ use Craft\Dto\BxImageDto;
 
 interface ImageServiceInterface
 {
+	public function storeFromArray(array $imageData): ?ResultImageSaveDto;
+
 	public function storeFromUrl(string $url): ?ResultImageSaveDto;
 
 	public function findById(int $id): ?ResultImageSaveDto;

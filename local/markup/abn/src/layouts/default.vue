@@ -26,6 +26,6 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+@use '@/styles/system/full-width-page' as *;
 </style>
