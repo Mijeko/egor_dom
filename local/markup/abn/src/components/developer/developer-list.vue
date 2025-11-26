@@ -32,57 +32,59 @@ export default defineComponent({
 <template>
 
 
-  <section class="developer-list" v-if="developers.length > 0">
-    <div class="developer-card" v-for="developerItem in developers">
+  <section class="developer-list-container" v-if="developers.length > 0">
+    <section class="developer-list">
+      <div class="developer-card" v-for="developerItem in developers">
 
-      <div class="developer-card-description">
-        <img
-          class="developer-card-description__logo"
-          v-if="developerItem.developer.picture?.src"
-          :src="developerItem.developer.picture.src"
-          :alt="developerItem.developer.name"
-        >
-
-        <div class="developer-card-description__text" v-if="developerItem.developer.description">
-          {{ developerItem.developer.description }}
-        </div>
-      </div>
-
-
-      <div
-        v-if="developerItem.buildObjects && developerItem.buildObjects.length > 0"
-        class="developer-object-list"
-      >
-        <swiper
-          class="developer-slider"
-          :space-between="30"
-          :slides-per-view="3"
-          :navigation
-          :modules
-        >
-          <swiper-slide
-            v-for="object in developerItem.buildObjects"
+        <div class="developer-card-description">
+          <img
+            class="developer-card-description__logo"
+            v-if="developerItem.developer.picture?.src"
+            :src="developerItem.developer.picture.src"
+            :alt="developerItem.developer.name"
           >
-            <BuildObjectItem
-              :buildObject="object"
-            />
-          </swiper-slide>
+
+          <div class="developer-card-description__text" v-if="developerItem.developer.description">
+            {{ developerItem.developer.description }}
+          </div>
+        </div>
 
 
-          <div class="developer-slider-prev">
-            <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.75 0.75L10.75 4.75L6.75 8.75M0.75 0.750001L4.75 4.75L0.75 8.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="developer-slider-next">
-            <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.75 0.75L10.75 4.75L6.75 8.75M0.75 0.750001L4.75 4.75L0.75 8.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </swiper>
+        <div
+          v-if="developerItem.buildObjects && developerItem.buildObjects.length > 0"
+          class="developer-object-list"
+        >
+          <swiper
+            class="developer-slider"
+            :space-between="30"
+            :slides-per-view="3"
+            :navigation
+            :modules
+          >
+            <swiper-slide
+              v-for="object in developerItem.buildObjects"
+            >
+              <BuildObjectItem
+                :buildObject="object"
+              />
+            </swiper-slide>
+
+
+            <div class="developer-slider-prev">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.75 0.75L10.75 4.75L6.75 8.75M0.75 0.750001L4.75 4.75L0.75 8.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="developer-slider-next">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.75 0.75L10.75 4.75L6.75 8.75M0.75 0.750001L4.75 4.75L0.75 8.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </swiper>
+        </div>
+
       </div>
-
-    </div>
+    </section>
   </section>
 
 </template>
@@ -95,6 +97,10 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    &-container {
+      margin-bottom: 90px;
+    }
   }
 
   &-slider {
