@@ -34,4 +34,14 @@ router.isReady().then(() => {
   localStorage.removeItem('vuetify:dynamic-reload')
 })
 
+// router.beforeEach((to, from, next) => {
+//   console.log(to);
+//   if (!to.path.endsWith('/') && to.matched.some(record => record.path.endsWith('/'))) {
+//     const newPath = to.path + '/';
+//     next(newPath);
+//   } else {
+//     next();
+//   }
+// });
+
 export default router
