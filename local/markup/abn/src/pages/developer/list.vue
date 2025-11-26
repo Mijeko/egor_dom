@@ -43,6 +43,34 @@ export default defineComponent({
     </div>
   </section>
 
+  <section class="developer-page-cooperation-container">
+
+
+    <div class="developer-page-cooperation-logo-container">
+      <div class="developer-page-cooperation-logo-wrapper">
+        <img src="@/assets/images/logo.svg" alt="Логотип" class="developer-page-cooperation-logo">
+      </div>
+    </div>
+
+
+    <div class="developer-page-cooperation container">
+      <div class="developer-page-cooperation-text">
+        <h3 class="developer-page-cooperation-title">Сотрудничество</h3>
+        <p>Сотрудничество с «Побеждай» — это современная модель партнёрства, основанная на технологиях, аналитике и уважении к времени партнёра</p>
+        <p>Мы берём на себя ключевые задачи по продвижению и продаже объектов, чтобы застройщик мог сосредоточиться на главном — создании качественного продукта</p>
+        <p>
+          <b>Станьте частью профессионального сообщества девелоперов. Размещайте свои проекты на платформе, получайте квалифицированные заявки и управляйте продажами через единое решение</b>
+        </p>
+
+        <a href="">Регистрация</a>
+      </div>
+
+      <div class="developer-page-cooperation-advantage-list">
+
+      </div>
+    </div>
+  </section>
+
 </template>
 
 <style lang="scss">
@@ -117,6 +145,74 @@ export default defineComponent({
           margin-bottom: 20px;
         }
       }
+    }
+  }
+
+  &-cooperation {
+    display: flex;
+
+    &-container {
+      position: relative;
+      background-image: url("@/assets/images/layer/layer1.png");
+      background-size: cover;
+      min-height: 400px;
+      display: block;
+      padding: 143px 0 80px 0;
+    }
+
+    &-logo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      &-container {
+        position: absolute;
+        top: -50px;
+        left: 49.5%;
+        transform: translateX(-49.5%);
+        width: 210px;
+        height: 110px;
+      }
+
+      &-wrapper {
+        position: relative;
+      }
+    }
+
+    &-text {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 150%;
+      color: $bo-color-name;
+      max-width: 440px;
+      width: 100%;
+
+      p {
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
+      }
+
+      b {
+        font-weight: 500;
+      }
+    }
+
+    &-advantage {
+      &-list {
+      }
+    }
+
+    &-title {
+      font-family: var(--second-family);
+      font-weight: 300;
+      font-size: 30px;
+      line-height: 140%;
+      text-transform: uppercase;
+      color: $bo-color-name;
+      margin-bottom: 15px;
     }
   }
 }
