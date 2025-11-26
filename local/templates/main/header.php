@@ -4,8 +4,8 @@
  * @global CUser $USER
  */
 
-use Craft\Dto\BxUserDto;
-use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
+use Bitrix\Main\Application;
+use Bitrix\Main\Page\Asset;
 
 ?>
 <!doctype html>
@@ -18,7 +18,7 @@ use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 	<title><?php $APPLICATION->ShowTitle(); ?></title>
 
 	<?php
-	$assets = \Bitrix\Main\Page\Asset::getInstance();
+	$assets = Asset::getInstance();
 
 
 	$assets->addJs(SITE_TEMPLATE_PATH . '/js/bundle.js');
@@ -37,13 +37,14 @@ use Craft\DDD\Developers\Infrastructure\Service\ApartmentFilterBuilder;
 </head>
 
 <body class="page">
-<div id="panel">
-	<?php
-	if(!\Bitrix\Main\Application::getInstance()->getContext()->getRequest()->get('hp'))
-	{
-		?>
-		<?php $APPLICATION->ShowPanel(); ?>
-		<?php
-	}
+<?php
+if(!Application::getInstance()->getContext()->getRequest()->get('hp'))
+{
 	?>
-</div>
+
+	<div id="panel">
+		<?php $APPLICATION->ShowPanel(); ?>
+	</div>
+	<?php
+}
+?>
