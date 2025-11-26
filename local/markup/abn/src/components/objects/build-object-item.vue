@@ -46,7 +46,7 @@ export default defineComponent({
   <div class="build-object-card">
     <div class="build-object-card-slider">
 
-      <swiper :space-between="30" class="mySwiper" v-if="buildObject?.gallery">
+      <swiper class="mySwiper" v-if="buildObject?.gallery">
         <swiper-slide v-for="(image,index) in buildObject.gallery">
           <img :src="image.src" :alt="`${buildObject.name} ${index}`">
         </swiper-slide>

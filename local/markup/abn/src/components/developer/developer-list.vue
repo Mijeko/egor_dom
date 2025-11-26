@@ -42,7 +42,7 @@ export default defineComponent({
         v-if="developer.buildObjects && developer.buildObjects.length > 0"
         class="developer-object-list"
       >
-        <swiper class="mySwiper" :slides-per-view="4">
+        <swiper class="mySwiper" :space-between="30" :slides-per-view="4">
           <swiper-slide
             v-for="object in developer.buildObjects"
           >
