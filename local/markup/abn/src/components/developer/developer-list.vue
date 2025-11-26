@@ -40,15 +40,20 @@ export default defineComponent({
 
       <div class="developer-object-list" v-if="developer.buildObjects && developer.buildObjects.length > 0">
 
-        <v-carousel :touch="true" :show-arrows="developer.buildObjects.length > 1" :hide-delimiters="true">
-          <v-carousel-item
-            v-for="object in developer.buildObjects.slice(0, 10)"
-          >
-            <BuildObjectItem
-              :buildObject="object"
-            />
-          </v-carousel-item>
-        </v-carousel>
+        <BuildObjectItem
+          v-for="object in developer.buildObjects"
+          :buildObject="object"
+        />
+
+<!--        <v-carousel :touch="true" :show-arrows="developer.buildObjects.length > 1" :hide-delimiters="true">-->
+<!--          <v-carousel-item-->
+<!--            v-for="object in developer.buildObjects.slice(0, 10)"-->
+<!--          >-->
+<!--            <BuildObjectItem-->
+<!--              :buildObject="object"-->
+<!--            />-->
+<!--          </v-carousel-item>-->
+<!--        </v-carousel>-->
 
       </div>
 
