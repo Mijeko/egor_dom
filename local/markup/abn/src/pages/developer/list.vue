@@ -16,33 +16,33 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="developer-page">
+  <div class="developer-page container">
     <h1 class="developer-page__title">Застройщики</h1>
     <DeveloperSearch/>
     <DeveloperList
       :developers
     />
-
-    <section class="about">
-      <div class="about-image-wrapper">
-        <img class="about-image" src="@/assets/images/about1.png" alt="О компании Побеждай">
-      </div>
-      <div class="about-body">
-
-        <div class="about-header">
-          <span>30 регионов</span>
-          России
-        </div>
-
-        <div class="about-text">
-          <p>Платформа «Побеждай» объединяет ведущих девелоперов России — компании, чьи проекты формируют современную архитектуру городов и задают новые стандарты качества жизни</p>
-          <p>Партнёрская сеть «Побеждай» охватывает более 30 регионов России и продолжает активно расширяться. Мы обеспечиваем застройщикам новые каналы продаж, прозрачную аналитику и прямой доступ к покупателям по всей стране</p>
-          <p>Благодаря этому покупатели получают доступ только к актуальным, достоверным и безопасным предложениям, а застройщики — к аудитории, готовой к осознанному выбору.Мы ценим партнёров, которые строят не только дома, но и доверие.</p>
-        </div>
-      </div>
-    </section>
-
   </div>
+
+  <section class="developer-page-about container">
+    <div class="developer-page-about-image-wrapper">
+      <img class="developer-page-about-image" src="@/assets/images/about1.png" alt="О компании Побеждай">
+    </div>
+    <div class="developer-page-about-body">
+
+      <div class="developer-page-about-header">
+        <span>30 регионов</span>
+        России
+      </div>
+
+      <div class="developer-page-about-text">
+        <p>Платформа «Побеждай» объединяет ведущих девелоперов России — компании, чьи проекты формируют современную архитектуру городов и задают новые стандарты качества жизни</p>
+        <p>Партнёрская сеть «Побеждай» охватывает более 30 регионов России и продолжает активно расширяться. Мы обеспечиваем застройщикам новые каналы продаж, прозрачную аналитику и прямой доступ к покупателям по всей стране</p>
+        <p>Благодаря этому покупатели получают доступ только к актуальным, достоверным и безопасным предложениям, а застройщики — к аудитории, готовой к осознанному выбору.Мы ценим партнёров, которые строят не только дома, но и доверие.</p>
+      </div>
+    </div>
+  </section>
+
 </template>
 
 <style lang="scss">
@@ -59,10 +59,10 @@ export default defineComponent({
     color: $bo-color-name;
   }
 
-  .about {
+  &-about {
     display: flex;
     gap: 50px;
-    margin-bottom: 90px;
+    margin-bottom: 90px !important;
 
     &-image {
       position: absolute;
@@ -81,7 +81,7 @@ export default defineComponent({
     }
 
     &-body {
-      padding-top: 10px;
+      padding-top: 25px;
     }
 
     &-header {

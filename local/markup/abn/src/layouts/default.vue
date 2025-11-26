@@ -16,10 +16,7 @@ export default defineComponent({
 
 
     <div class="page-content">
-
-      <div class="container">
-        <slot/>
-      </div>
+      <slot/>
     </div>
 
     <AppFooter/>
