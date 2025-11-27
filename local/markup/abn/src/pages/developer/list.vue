@@ -105,6 +105,20 @@ export default defineComponent({
     </div>
   </section>
 
+
+  <div class="developer-page-statistic-container container">
+    <div class="developer-page-statistic">
+      <div class="developer-page-statistic-item"></div>
+      <div class="developer-page-statistic-item">
+        <img src="@/assets/images/develop-stat1.jpg" class="developer-page-statistic-item__image">
+      </div>
+      <div class="developer-page-statistic-item"></div>
+      <div class="developer-page-statistic-item"></div>
+      <div class="developer-page-statistic-item"></div>
+      <div class="developer-page-statistic-item"></div>
+    </div>
+  </div>
+
 </template>
 
 <style lang="scss">
@@ -260,6 +274,58 @@ export default defineComponent({
     &-link {
       margin-top: 30px;
     }
+  }
+
+  &-statistic {
+    width: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, [col] auto );
+    grid-template-rows: repeat(3, [row] auto  );
+    background-color: #fff;
+    color: #444;
+
+    &-item {
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #e3e3e3;
+      border-radius: 25px;
+      padding: 38px 35px;
+
+      &:nth-child(1) {
+        grid-column: col / span 2;
+        grid-row: row;
+      }
+
+      &:nth-child(2) {
+        grid-column: col 3 / span 2;
+        grid-row: row;
+      }
+
+      &:nth-child(3) {
+        grid-column: col;
+        grid-row: row 2;
+      }
+
+      &:nth-child(4) {
+        grid-column: col 2 / span 3;
+        grid-row: row 2;
+      }
+
+      &:nth-child(5) {
+        grid-column: col / span 4;
+        grid-row: row 3;
+      }
+
+
+      &__image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
   }
 }
 </style>
