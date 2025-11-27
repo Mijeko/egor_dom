@@ -11,6 +11,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AdvantageItem: typeof import('./components/developer/advantage-item.vue')['default']
+    Advantages: typeof import('./components/developer/advantages.vue')['default']
     AgentEdit: typeof import('./components/profile/agent/agent-edit.vue')['default']
     AgentList: typeof import('./components/profile/agent/agent-list.vue')['default']
     ApartmentFilter: typeof import('./components/filter/apartment-filter.vue')['default']
