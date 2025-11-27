@@ -23,6 +23,7 @@ declare module 'vue' {
     BuildObjectDetail: typeof import('./components/objects/build-object-detail.vue')['default']
     BuildObjectItem: typeof import('./components/objects/build-object-item.vue')['default']
     BuildObjectList: typeof import('./components/objects/build-object-list.vue')['default']
+    Button: typeof import('./components/site/button.vue')['default']
     BuyApartmentForm: typeof import('./components/site/form/buy-apartment-form.vue')['default']
     BuyApartmentModal: typeof import('./components/site/modal/buy-apartment-modal.vue')['default']
     Cabinet: typeof import('./components/site/cabinet.vue')['default']

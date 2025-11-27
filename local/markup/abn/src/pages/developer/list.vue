@@ -76,7 +76,7 @@ export default defineComponent({
             квалифицированные заявки и управляйте продажами через единое решение</b>
         </p>
 
-        <a href="">Регистрация</a>
+        <Button type="link" href="/" class="developer-page-cooperation-link">Регистрация</Button>
       </div>
 
       <div class="developer-page-cooperation-advantage-list">
@@ -206,8 +206,10 @@ export default defineComponent({
         top: -50px;
         left: 49.5%;
         transform: translateX(-49.5%);
-        width: 210px;
-        height: 110px;
+        //width: 210px;
+        //height: 110px;
+        width: 8%;
+        height: 10%;
       }
 
       &-wrapper {
@@ -253,6 +255,10 @@ export default defineComponent({
       text-transform: uppercase;
       color: $bo-color-name;
       margin-bottom: 15px;
+    }
+
+    &-link {
+      margin-top: 30px;
     }
   }
 }
