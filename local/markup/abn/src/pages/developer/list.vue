@@ -108,8 +108,17 @@ export default defineComponent({
 
   <div class="developer-page-statistic-container container">
     <div class="developer-page-statistic">
-      <div class="developer-page-statistic-item"></div>
       <div class="developer-page-statistic-item">
+        <div class="block-with-icon">
+          <div class="block-with-icon-icon-wrap">
+            <img src="@/assets/images/diamond.svg">
+          </div>
+          <div class="block-with-icon-text">
+            Выход на федеральный рынок без сложных интеграций
+          </div>
+        </div>
+      </div>
+      <div class="developer-page-statistic-item img">
         <img src="@/assets/images/develop-stat1.jpg" class="developer-page-statistic-item__image">
       </div>
       <div class="developer-page-statistic-item"></div>
@@ -280,8 +289,8 @@ export default defineComponent({
     width: 100%;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(4, [col] auto );
-    grid-template-rows: repeat(3, [row] auto  );
+    grid-template-columns: 1fr 2fr 1fr; /* Соотношение размеров колонок */
+    grid-auto-rows: 100px;
     background-color: #fff;
     color: #444;
 
@@ -294,35 +303,52 @@ export default defineComponent({
 
       &:nth-child(1) {
         grid-column: col / span 2;
-        grid-row: row;
+        //grid-row: row;
       }
 
       &:nth-child(2) {
-        grid-column: col 3 / span 2;
-        grid-row: row;
       }
 
       &:nth-child(3) {
-        grid-column: col;
-        grid-row: row 2;
       }
 
       &:nth-child(4) {
-        grid-column: col 2 / span 3;
-        grid-row: row 2;
       }
 
       &:nth-child(5) {
-        grid-column: col / span 4;
-        grid-row: row 3;
       }
 
+
+      &.img {
+        padding: 0;
+      }
 
       &__image {
         position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+
+      .block-with-icon {
+        &-icon {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          flex-direction: column;
+          gap: 15px;
+
+          &-wrap {
+          }
+        }
+
+        &-text {
+          font-family: var(--second-family);
+          font-weight: 300;
+          font-size: 12px;
+          line-height: 155%;
+          color: #000;
+        }
       }
     }
 
