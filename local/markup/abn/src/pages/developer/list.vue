@@ -121,10 +121,41 @@ export default defineComponent({
       <div class="developer-page-statistic-item img">
         <img src="@/assets/images/develop-stat1.jpg" class="developer-page-statistic-item__image">
       </div>
-      <div class="developer-page-statistic-item"></div>
-      <div class="developer-page-statistic-item"></div>
-      <div class="developer-page-statistic-item"></div>
-      <div class="developer-page-statistic-item"></div>
+      <div class="developer-page-statistic-item">
+        <div class="block-with-stat">
+          <div class="block-with-stat-heading">
+            До 30%
+          </div>
+
+          <div class="block-with-stat-text">
+            Снижение затрат на маркетинг. Благодаря единой системе продвижения и прозрачной аналитике эффективности
+          </div>
+        </div>
+      </div>
+      <div class="developer-page-statistic-item">
+        <div class="block-with-stat">
+          <div class="block-with-stat-heading">
+            +250%
+          </div>
+
+          <div class="block-with-stat-text">
+            Оптимизация процессов взаимодействия с клиентами
+          </div>
+        </div>
+      </div>
+      <div class="developer-page-statistic-item">
+        <div class="block-with-icon">
+          <div class="block-with-icon-icon-wrap">
+            <img src="@/assets/images/graph.png">
+          </div>
+          <div class="block-with-icon-text">
+            Профессиональная инфраструктура для работы
+          </div>
+        </div>
+      </div>
+      <div class="developer-page-statistic-item bg">«Побеждай» — это не просто цифровая платформа.
+        Это экосистема, объединяющая участников рынка недвижимости в едином технологичном пространстве
+      </div>
     </div>
   </div>
 
@@ -229,8 +260,6 @@ export default defineComponent({
         top: -50px;
         left: 49.5%;
         transform: translateX(-49.5%);
-        //width: 210px;
-        //height: 110px;
         width: 8%;
         height: 10%;
       }
@@ -286,38 +315,57 @@ export default defineComponent({
   }
 
   &-statistic {
+    padding-top: 80px;
+    padding-bottom: 134px;
     width: 100%;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 2fr 1fr; /* Соотношение размеров колонок */
-    grid-auto-rows: 100px;
-    background-color: #fff;
-    color: #444;
+    display: flex;
+    gap: 30px 10px;
+    flex-wrap: wrap;
+
+    background-color: $white-color;
+    color: $bo-color-name;
 
     &-item {
       overflow: hidden;
       position: relative;
-      border: 1px solid #e3e3e3;
+      border: 1px solid $stat-border-color;
       border-radius: 25px;
       padding: 38px 35px;
 
       &:nth-child(1) {
-        grid-column: col / span 2;
-        //grid-row: row;
+        flex: 0 0 20%;
       }
 
       &:nth-child(2) {
+        flex: 0 0 35%;
       }
 
       &:nth-child(3) {
+        flex: 0 0 43%;
       }
 
       &:nth-child(4) {
+        flex: 0 0 30%;
       }
 
       &:nth-child(5) {
+        flex: 0 0 20%;
       }
 
+      &:nth-child(6) {
+        flex: 0 0 48%;
+      }
+
+
+      &.bg {
+        background: $about-mark;
+        padding: 50px 40px;
+        font-family: var(--font-family);
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 155%;
+        color: $bo-color-name;
+      }
 
       &.img {
         padding: 0;
@@ -347,7 +395,30 @@ export default defineComponent({
           font-weight: 300;
           font-size: 12px;
           line-height: 155%;
-          color: #000;
+          color: $bo-color-name;
+        }
+      }
+
+      .block-with-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &-heading {
+          font-family: var(--second-family);
+          font-weight: 300;
+          font-size: 48px;
+          line-height: 140%;
+          text-transform: uppercase;
+          color: $bo-color-name;
+        }
+
+        &-text {
+          font-family: var(--second-family);
+          font-weight: 300;
+          font-size: 12px;
+          line-height: 155%;
+          color: $bo-color-name;
         }
       }
     }
