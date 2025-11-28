@@ -39,7 +39,7 @@ export default defineComponent({
 
 .collapse-wrapper {
   border-bottom: 1px solid $stat-border-color;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .list-item {

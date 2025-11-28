@@ -90,7 +90,12 @@ export default defineComponent({
       </swiper-slide>
     </swiper>
 
-    <div class="build-object-card-name">{{ buildObject?.name }}</div>
+    <a
+      :href="buildObject.detailLink"
+      class="build-object-card-name"
+    >
+      {{ buildObject?.name }}
+    </a>
 
     <div class="build-object-card-body">
       <div class="build-object-card-chars">
@@ -166,7 +171,8 @@ export default defineComponent({
     text-transform: uppercase;
     color: $bo-color-name;
     margin-bottom: 17px;
-
+    text-decoration: none;
+    display: block;
   }
 
   &-body {

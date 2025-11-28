@@ -53,6 +53,13 @@ export default defineComponent({
     <ListWithSearch
       label="Отделка"
     />
+
+
+    <Button
+      :showIcon="false"
+    >
+      Фильтровать
+    </Button>
   </aside>
 
 

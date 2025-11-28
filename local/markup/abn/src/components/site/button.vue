@@ -4,6 +4,10 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "button",
   props: {
+    showIcon: {
+      type: Boolean,
+      default: true,
+    },
     type: {
       type: String,
       default: () => 'button',
@@ -24,7 +28,7 @@ export default defineComponent({
   >
     <slot></slot>
 
-    <template #append>
+    <template #append v-if="showIcon">
       <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.75 0.75L10.75 4.75L6.75 8.75M0.75 0.750001L4.75 4.75L0.75 8.75" stroke="white" stroke-width="1.5"
               stroke-linecap="round" stroke-linejoin="round"/>

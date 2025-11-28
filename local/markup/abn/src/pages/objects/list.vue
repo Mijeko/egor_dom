@@ -2,10 +2,11 @@
 import {defineComponent, type PropType} from 'vue'
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import CatalogFilter from "@/components/filter/catalog-filter.vue";
+import Pagination from "@/components/site/pagination.vue";
 
 export default defineComponent({
   name: "list",
-  components: {CatalogFilter},
+  components: {Pagination, CatalogFilter},
   props: {
     buildObjects: {
       type: Array as PropType<BuildObjectDto[]>
@@ -25,13 +26,16 @@ export default defineComponent({
 
       <CatalogFilter/>
 
-      <div class="catalog container">
+      <div class="catalog-container container">
+        <div class="catalog">
+          <BuildObjectItem
+            v-for="obj in buildObjects"
+            :buildObject="obj"
+          />
 
-        <BuildObjectItem
-          v-for="obj in buildObjects"
-          :buildObject="obj"
-        />
+        </div>
 
+        <Pagination/>
       </div>
     </section>
   </section>
@@ -42,6 +46,8 @@ export default defineComponent({
 @use '@/styles/system/variable' as *;
 
 .catalog-page {
+  margin-bottom: 60px;
+
   &-body {
     display: flex;
     align-items: flex-start;
@@ -52,13 +58,22 @@ export default defineComponent({
 }
 
 .catalog {
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 30px;
+  margin-bottom: 30px;
 
-  // @over
-  margin: 0 !important;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    // @over
+    margin: 0 !important;
+  }
 
   .build-object-card {
     max-width: calc(33% - 20px);

@@ -48,6 +48,7 @@ declare module 'vue' {
     Map: typeof import('./components/map.vue')['default']
     MenuHeader: typeof import('./components/site/header/menu-header.vue')['default']
     NewDialogModal: typeof import('./components/site/modal/new-dialog-modal.vue')['default']
+    Pagination: typeof import('./components/site/pagination.vue')['default']
     PersonalManager: typeof import('./components/profile/element/personal-manager.vue')['default']
     PhoneInput: typeof import('./components/site/form/element/phone-input.vue')['default']
     ProfileAsideMenu: typeof import('./components/profile/element/profile-aside-menu.vue')['default']
