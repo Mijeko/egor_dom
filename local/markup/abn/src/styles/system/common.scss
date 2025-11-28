@@ -38,6 +38,20 @@ img {
   max-width: 100%;
 }
 
+.h1 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 140%;
+  text-transform: uppercase;
+}
+
+.page-title {
+  font-family: var(--second-family);
+  text-align: center;
+  color: $bo-color-name;
+
+}
+
 .container {
   padding: 0;
   max-width: 1150px;

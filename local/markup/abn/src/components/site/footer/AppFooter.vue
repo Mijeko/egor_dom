@@ -13,7 +13,7 @@ export default defineComponent({
         <div class="footer-col">
 
           <a href="/" class="footer-logo">
-            <img src="@/assets/images/logo.svg" alt="Логотип" class="footer-logo__img">
+            <img src="@/assets/images/logo-white.svg" alt="Логотип" class="footer-logo__img">
           </a>
 
           <div class="footer-short">

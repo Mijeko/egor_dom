@@ -6,6 +6,8 @@ import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {Pagination} from 'swiper/modules';
 import Price from "@/core/price.ts";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import type BxImage from "@/dto/bitrix/BxImage.ts";
 
 export default defineComponent({
   name: "BuildObjectItem",
@@ -49,6 +51,20 @@ export default defineComponent({
       }
 
       return apartment.price;
+    },
+    gallery(obj: BuildObjectDto): BxImage[] {
+
+      if (!obj.gallery) {
+        return [];
+      }
+
+      let gallery: BxImage[] = obj.gallery;
+
+      gallery = gallery.filter((img: BxImage) => {
+        return img?.src && typeof img?.src === 'string';
+      });
+
+      return gallery;
     }
   }
 })
@@ -64,8 +80,13 @@ export default defineComponent({
       :pagination="true"
       :modules
     >
-      <swiper-slide v-for="(image,index) in buildObject.gallery" class="build-object-card-slider-slide">
-        <img :src="image.src" :alt="`${buildObject.name} ${index}`" class="build-object-card-slider-slide__image">
+      <swiper-slide v-for="(image,index) in gallery(buildObject)" class="build-object-card-slider-slide">
+        <img
+          v-if="image.src"
+          :src="image.src"
+          :alt="`${buildObject.name} ${index}`"
+          class="build-object-card-slider-slide__image"
+        >
       </swiper-slide>
     </swiper>
 

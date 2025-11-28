@@ -18,7 +18,7 @@ export default defineComponent({
 
 <template>
   <div class="developer-page container">
-    <h1 class="developer-page__title">Застройщики</h1>
+    <h1 class="page-title h1">Застройщики</h1>
     <DeveloperSearch/>
     <DeveloperList
       :developers
@@ -165,16 +165,6 @@ export default defineComponent({
 @use '@/styles/system/variable' as *;
 
 .developer-page {
-  &__title {
-    font-family: var(--second-family);
-    font-weight: 300;
-    font-size: 30px;
-    line-height: 140%;
-    text-transform: uppercase;
-    text-align: center;
-    color: $bo-color-name;
-  }
-
   &-about {
     display: flex;
     gap: 50px;

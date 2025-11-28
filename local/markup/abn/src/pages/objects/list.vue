@@ -1,11 +1,11 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import BuildObjectList from "@/components/objects/build-object-list.vue";
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
+import CatalogFilter from "@/components/filter/catalog-filter.vue";
 
 export default defineComponent({
   name: "list",
-  components: {BuildObjectList},
+  components: {CatalogFilter},
   props: {
     buildObjects: {
       type: Array as PropType<BuildObjectDto[]>
@@ -15,45 +15,55 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="catalog-page-wrap">
-    <aside class="catalog-filter"></aside>
 
-    <div class="catalog-page">
-      <h1 class="catalog-page-title">Каталог недвижимости</h1>
-      <BuildObjectList
-        :buildObjects
-      />
-    </div>
+
+  <section class="catalog-page">
+    <section class="catalog-page-header">
+      <h1 class="page-title h1">Каталог недвижимости</h1>
+    </section>
+    <section class="catalog-page-body">
+
+      <CatalogFilter/>
+
+      <div class="catalog container">
+
+        <BuildObjectItem
+          v-for="obj in buildObjects"
+          :buildObject="obj"
+        />
+
+      </div>
+    </section>
   </section>
+
 </template>
 
 <style lang="scss">
 @use '@/styles/system/variable' as *;
 
 .catalog-page {
-  width: 100%;
-
-  &-title {
-    margin: auto auto 40px auto;
-    font-family: var(--second-family);
-    font-weight: 300;
-    font-size: 30px;
-    line-height: 140%;
-    text-transform: uppercase;
-    text-align: center;
-    color: $bo-color-name;
-  }
-
-  &-wrap {
+  &-body {
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
     gap: 30px;
-    padding-left: 100px;
+    margin-top: 40px;
   }
 }
 
-.catalog-filter {
-  max-width: 250px;
-  width: 100%;
-  border: 1px red solid;
+.catalog {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  // @over
+  margin: 0 !important;
+
+  .build-object-card {
+    max-width: calc(33% - 20px);
+    width: 100%;
+  }
 }
+
 </style>
