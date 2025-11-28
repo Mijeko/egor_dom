@@ -3,6 +3,7 @@ import {defineComponent, type PropType} from 'vue'
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import CatalogFilter from "@/components/filter/catalog-filter.vue";
 import Pagination from "@/components/site/pagination.vue";
+import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
 export default defineComponent({
   name: "list",
@@ -12,6 +13,21 @@ export default defineComponent({
       type: Array as PropType<BuildObjectDto[]>
     }
   },
+  computed: {
+    apartmentList(): ApartmentDto[] {
+
+
+      let res: ApartmentDto[] = [];
+
+      this.buildObjects?.forEach((objectDto: BuildObjectDto, index, array) => {
+        if (objectDto.apartments) {
+          res.push(objectDto.apartments);
+        }
+      });
+
+      return res;
+    }
+  }
 })
 </script>
 
@@ -19,10 +35,10 @@ export default defineComponent({
 
 
   <section class="catalog-page">
-    <section class="catalog-page-header">
+    <div class="catalog-page-header">
       <h1 class="page-title h1">Каталог недвижимости</h1>
-    </section>
-    <section class="catalog-page-body">
+    </div>
+    <div class="catalog-page-body">
 
       <CatalogFilter/>
 
@@ -37,7 +53,14 @@ export default defineComponent({
 
         <Pagination/>
       </div>
-    </section>
+    </div>
+
+    <div class="map">
+      <Map
+        :apartmentList="apartmentList"
+      />
+    </div>
+
   </section>
 
 </template>
