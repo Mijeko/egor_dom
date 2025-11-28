@@ -74,39 +74,25 @@ export default defineComponent({
 
 <template>
 
-  <MainApartmentFilter
-    v-model="filterApartmentList"
-  />
-
-  <v-row>
-    <v-col cols="12" sm="6" md="4" lg="3" v-for="buildObject in buildObjectList" class="mb-5">
-      <v-card>
-
-        <v-carousel :show-arrows="false" :hide-delimiters="true" :touch="true">
-          <v-carousel-item
-            v-for="(item,i) in buildObject.gallery"
-            :key="i"
-            :src="item?.src"
-            cover
-          ></v-carousel-item>
-        </v-carousel>
-
-        <div class="pa-3">
-
-          <v-card-title>{{ buildObject.name }}</v-card-title>
-          <v-card-subtitle>Квартир: {{ buildObject?.countApartments }}</v-card-subtitle>
-
-          <v-btn class="mt-5" :href="buildObject.detailLink">Посмотреть</v-btn>
-        </div>
-
-      </v-card>
-    </v-col>
-
-  </v-row>
-
+  <div class="catalog container">
+    <BuildObjectItem
+      v-for="object in buildObjectList"
+      :build-object="object"
+    />
+  </div>
 
 </template>
 
-<style scoped>
+<style lang="scss">
+.catalog {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-left: 0 !important;
 
+  .build-object-card {
+    max-width: 31%;
+    width: 100%;
+  }
+}
 </style>
