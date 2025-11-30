@@ -6,6 +6,7 @@ import Price from "@/core/price.ts";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import type BxImage from "@/dto/bitrix/BxImage.ts";
 import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper/types';
 
 export interface CharItem {
   key: string;
@@ -25,21 +26,15 @@ export default defineComponent({
   },
   data: () => {
     return {
-      thumbsSwiper: {} as { value: any },
+      thumbsSwiper: {} as SwiperType,
       modules: [FreeMode, Navigation, Thumbs],
     };
   },
   methods: {
     setThumbsSwiper(swiper: any) {
-      // this.thumbsSwiper?.value = swiper;
-
-      this.thumbsSwiper.value = swiper;
-    },
-
-  },
-  computed: {
-    Price() {
-      return Price
+      if (!this.thumbsSwiper) {
+      }
+        this.thumbsSwiper.value = swiper;
     },
     gallery(obj: BuildObjectDto): BxImage[] {
 
@@ -54,6 +49,11 @@ export default defineComponent({
       });
 
       return gallery;
+    },
+  },
+  computed: {
+    Price() {
+      return Price
     },
     minPrice(object: BuildObjectDto): number {
       return BuildObjectService.minPrice(object);
