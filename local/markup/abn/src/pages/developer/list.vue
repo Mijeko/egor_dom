@@ -4,10 +4,15 @@ import DeveloperList from "@/components/developer/developer-list.vue";
 import type DeveloperListItemDto from "@/dto/entity/DeveloperListItemDto.ts";
 import DeveloperSearch from "@/components/developer/developer-search.vue";
 import AdvantageItem from "@/components/developer/advantage-item.vue";
+import BlockWithStat from "@/components/site/block-with-stat/block-with-stat.vue";
+import ItemWithIcon from "@/components/site/block-with-stat/item-with-icon.vue";
+import ItemImage from "@/components/site/block-with-stat/item-image.vue";
+import ItemBigNumber from "@/components/site/block-with-stat/item-big-number.vue";
+import ItemBg from "@/components/site/block-with-stat/item-bg.vue";
 
 export default defineComponent({
   name: "list",
-  components: {AdvantageItem, DeveloperSearch, DeveloperList},
+  components: {ItemBg, ItemImage, ItemBigNumber, ItemWithIcon, BlockWithStat, AdvantageItem, DeveloperSearch, DeveloperList},
   props: {
     developers: {
       type: Array as PropType<DeveloperListItemDto[]>
@@ -106,58 +111,35 @@ export default defineComponent({
   </section>
 
 
-  <div class="developer-page-statistic-container container">
-    <div class="developer-page-statistic">
-      <div class="developer-page-statistic-item">
-        <div class="block-with-icon">
-          <div class="block-with-icon-icon-wrap">
-            <img src="@/assets/images/diamond.svg">
-          </div>
-          <div class="block-with-icon-text">
-            Выход на федеральный рынок без сложных интеграций
-          </div>
-        </div>
-      </div>
-      <div class="developer-page-statistic-item img">
-        <img src="@/assets/images/develop-stat1.jpg" class="developer-page-statistic-item__image">
-      </div>
-      <div class="developer-page-statistic-item">
-        <div class="block-with-stat">
-          <div class="block-with-stat-heading">
-            До 30%
-          </div>
+  <BlockWithStat>
 
-          <div class="block-with-stat-text">
-            Снижение затрат на маркетинг. Благодаря единой системе продвижения и прозрачной аналитике эффективности
-          </div>
-        </div>
-      </div>
-      <div class="developer-page-statistic-item">
-        <div class="block-with-stat">
-          <div class="block-with-stat-heading">
-            +250%
-          </div>
+    <ItemWithIcon iconSrc="@/assets/images/diamond.svg">
+      Выход на федеральный рынок без сложных интеграций
+    </ItemWithIcon>
 
-          <div class="block-with-stat-text">
-            Оптимизация процессов взаимодействия с клиентами
-          </div>
-        </div>
-      </div>
-      <div class="developer-page-statistic-item">
-        <div class="block-with-icon">
-          <div class="block-with-icon-icon-wrap">
-            <img src="@/assets/images/graph.png">
-          </div>
-          <div class="block-with-icon-text">
-            Профессиональная инфраструктура для работы
-          </div>
-        </div>
-      </div>
-      <div class="developer-page-statistic-item bg">«Побеждай» — это не просто цифровая платформа.
-        Это экосистема, объединяющая участников рынка недвижимости в едином технологичном пространстве
-      </div>
-    </div>
-  </div>
+    <ItemImage :src="'@/assets/images/develop-stat1.jpg'"/>
+
+    <ItemBigNumber>
+      <template #heading>До 30%</template>
+      <template #text>Снижение затрат на маркетинг. Благодаря единой системе продвижения и прозрачной аналитике эффективности</template>
+    </ItemBigNumber>
+
+    <ItemBigNumber>
+      <template #heading>+250%</template>
+      <template #text>Оптимизация процессов взаимодействия с клиентами</template>
+    </ItemBigNumber>
+
+    <ItemWithIcon iconSrc="@/assets/images/graph.png">
+      Профессиональная инфраструктура для работы
+    </ItemWithIcon>
+
+
+    <ItemBg>
+      «Побеждай» — это не просто цифровая платформа.
+      Это экосистема, объединяющая участников рынка недвижимости в едином технологичном пространстве
+    </ItemBg>
+
+  </BlockWithStat>
 
 </template>
 
@@ -302,117 +284,6 @@ export default defineComponent({
     &-link {
       margin-top: 30px;
     }
-  }
-
-  &-statistic {
-    padding-top: 80px;
-    padding-bottom: 134px;
-    width: 100%;
-    display: flex;
-    gap: 30px 10px;
-    flex-wrap: wrap;
-
-    background-color: $white-color;
-    color: $bo-color-name;
-
-    &-item {
-      overflow: hidden;
-      position: relative;
-      border: 1px solid $stat-border-color;
-      border-radius: 25px;
-      padding: 38px 35px;
-
-      &:nth-child(1) {
-        flex: 0 0 20%;
-      }
-
-      &:nth-child(2) {
-        flex: 0 0 35%;
-      }
-
-      &:nth-child(3) {
-        flex: 0 0 43%;
-      }
-
-      &:nth-child(4) {
-        flex: 0 0 30%;
-      }
-
-      &:nth-child(5) {
-        flex: 0 0 20%;
-      }
-
-      &:nth-child(6) {
-        flex: 0 0 48%;
-      }
-
-
-      &.bg {
-        background: $about-mark;
-        padding: 50px 40px;
-        font-family: var(--font-family);
-        font-weight: 300;
-        font-size: 16px;
-        line-height: 155%;
-        color: $bo-color-name;
-      }
-
-      &.img {
-        padding: 0;
-      }
-
-      &__image {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .block-with-icon {
-        &-icon {
-          display: flex;
-          align-items: flex-start;
-          justify-content: flex-start;
-          flex-direction: column;
-          gap: 15px;
-
-          &-wrap {
-          }
-        }
-
-        &-text {
-          font-family: var(--second-family);
-          font-weight: 300;
-          font-size: 12px;
-          line-height: 155%;
-          color: $bo-color-name;
-        }
-      }
-
-      .block-with-stat {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        &-heading {
-          font-family: var(--second-family);
-          font-weight: 300;
-          font-size: 48px;
-          line-height: 140%;
-          text-transform: uppercase;
-          color: $bo-color-name;
-        }
-
-        &-text {
-          font-family: var(--second-family);
-          font-weight: 300;
-          font-size: 12px;
-          line-height: 155%;
-          color: $bo-color-name;
-        }
-      }
-    }
-
   }
 }
 </style>

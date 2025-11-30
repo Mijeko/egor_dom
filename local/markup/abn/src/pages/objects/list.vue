@@ -21,7 +21,7 @@ export default defineComponent({
 
       this.buildObjects?.forEach((objectDto: BuildObjectDto, index, array) => {
         if (objectDto.apartments) {
-          res.push(objectDto.apartments);
+          res.push(...objectDto.apartments);
         }
       });
 
@@ -52,14 +52,15 @@ export default defineComponent({
         </div>
 
         <Pagination/>
+
+        <div class="map-objects container">
+          <Map
+            :apartmentList="apartmentList"
+          />
+        </div>
       </div>
     </div>
 
-    <div class="map">
-      <Map
-        :apartmentList="apartmentList"
-      />
-    </div>
 
   </section>
 
@@ -67,6 +68,14 @@ export default defineComponent({
 
 <style lang="scss">
 @use '@/styles/system/variable' as *;
+
+.map-objects {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 60px !important;
+}
 
 .catalog-page {
   margin-bottom: 60px;

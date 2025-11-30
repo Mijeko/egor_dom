@@ -13,18 +13,26 @@ interface popupWithImageDto {
 export default defineComponent({
   name: "Map",
   props: {
+    selector: {
+      type: String,
+      default: 'yamap'
+    },
     apartmentList: {
       type: Array as PropType<ApartmentDto[]>,
       default: [],
     },
     lat: {
       type: Number,
-      default: 0,
+      default: 53.359001,
     },
     lon: {
       type: Number,
-      default: 0,
+      default: 83.697997,
     },
+    zoom: {
+      type: Number,
+      default: 15,
+    }
   },
   data: function () {
     return {
@@ -39,11 +47,11 @@ export default defineComponent({
 
 
       let map = new YMap(
-        document.getElementById('app'),
+        document.getElementById(this.selector),
         {
           location: {
             center: [this.lon, this.lat],
-            zoom: 18
+            zoom: this.zoom
           },
           showScaleInCopyrights: true
         },
@@ -129,71 +137,20 @@ export default defineComponent({
       map.addChild(marker);
     },
   },
-  mounted() {
+  created() {
     this.loadMap();
   },
 })
 </script>
 
 <template>
-  <div id="app" style="width: 100%; height:500px;  position: relative; "></div>
+  <div
+    :id="selector"
+    style="width: 100%; height:100%;  position: relative;"
+  ></div>
 </template>
 
 <style lang="scss">
-.custom-popup {
-  width: 40%;
-  height: 60%;
-  background: white;
-  //border: 1px red solid;
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin-top: 15px;
-  margin-left: 15px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
-
-  &__title {
-    font-weight: bold;
-  }
-
-  &__body {
-    max-height: 70%;
-    overflow-y: scroll;
-  }
-
-  &__footer {
-  }
-
-  &__close-btn {
-    border-radius: 4px;
-    border: 1px silver solid;
-    padding: 3px 10px;
-
-  }
-}
-
-.list-apartments {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  &-item {
-    &__title {
-      font-weight: 700;
-    }
-
-    &__sub-title {
-      color: silver;
-    }
-  }
-}
 
 
 </style>
