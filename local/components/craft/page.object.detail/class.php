@@ -19,6 +19,7 @@ use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Factory\ApartmentServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
+use Craft\Model\CraftUser;
 
 class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 {
@@ -55,11 +56,15 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 	{
 		try
 		{
-			$this->favoriteUseCase->execute(
-				$this->arParams['ELEMENT_ID'],
-				\Craft\Model\CraftUser::load()->getId()
-			);
-		} catch(\Exception|TypeError $e)
+
+			if(CraftUser::load()?->getId())
+			{
+				$this->favoriteUseCase->execute(
+					$this->arParams['ELEMENT_ID'],
+					CraftUser::load()->getId()
+				);
+			}
+		} catch(Exception|TypeError $e)
 		{
 		}
 	}

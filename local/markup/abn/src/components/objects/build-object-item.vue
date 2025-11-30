@@ -2,12 +2,11 @@
 import {defineComponent} from 'vue'
 import type BuildObjectDto from "@/dto/entity/BuildObjectDto.ts";
 import type DeveloperDto from "@/dto/entity/DeveloperDto.ts";
-import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {Pagination} from 'swiper/modules';
 import Price from "@/core/price.ts";
-import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import type BxImage from "@/dto/bitrix/BxImage.ts";
+import BuildObjectService from "@/service/BuildObjectService.ts";
 
 export default defineComponent({
   name: "BuildObjectItem",
@@ -36,21 +35,7 @@ export default defineComponent({
   },
   methods: {
     minPrice(object: BuildObjectDto): number {
-
-      if (!object.apartments || object.apartments.length <= 0) {
-        return 0;
-      }
-
-      let apartment: ApartmentDto | null | undefined = null;
-      let apartmentList: ApartmentDto[] = object.apartments;
-
-      apartment = apartmentList.sort((a: ApartmentDto, b: ApartmentDto) => a.price - b.price).shift();
-
-      if (!apartment) {
-        return 0;
-      }
-
-      return apartment.price;
+      return BuildObjectService.minPrice(object);
     },
     gallery(obj: BuildObjectDto): BxImage[] {
 

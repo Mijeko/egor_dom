@@ -10,7 +10,7 @@ import ItemImage from "@/components/site/block-with-stat/item-image.vue";
 import ItemBigNumber from "@/components/site/block-with-stat/item-big-number.vue";
 import ItemBg from "@/components/site/block-with-stat/item-bg.vue";
 
-import developStat1 from '@/assets/images/develop-stat1.jpg';
+import developStat1 from '@/assets/images/multiStoryBuilding2.jpg';
 import diamond from '@/assets/images/diamond.svg';
 import graphImg from '@/assets/images/graph.png';
 

@@ -5,9 +5,9 @@ import CatalogFilter from "@/components/filter/catalog-filter.vue";
 import Pagination from "@/components/site/pagination.vue";
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
-import developStat1 from '@/assets/images/develop-stat1.jpg';
-import diamond from '@/assets/images/diamond.svg';
-import graphImg from '@/assets/images/graph.png';
+import multiStoryBuilding from '@/assets/images/multiStoryBuilding.jpg';
+import userDown from '@/assets/images/user-down.svg';
+import listCheck from '@/assets/images/graph.png';
 import ItemBg from "@/components/site/block-with-stat/item-bg.vue";
 import ItemImage from "@/components/site/block-with-stat/item-image.vue";
 import ItemBigNumber from "@/components/site/block-with-stat/item-big-number.vue";
@@ -21,9 +21,9 @@ export default defineComponent({
   name: "list",
   data: () => {
     return {
-      developStat1: developStat1,
-      diamond: diamond,
-      graph: graphImg,
+      multiStoryBuilding: multiStoryBuilding,
+      userDown: userDown,
+      listCheck: listCheck,
     };
   },
   components: {ItemBg, ItemImage, ItemBigNumber, ItemWithIcon, BlockWithStat, AdvantageItem, DeveloperSearch, DeveloperList, Pagination, CatalogFilter},
@@ -81,24 +81,24 @@ export default defineComponent({
 
         <BlockWithStat>
 
-          <ItemWithIcon :iconSrc="diamond">
-            Выход на федеральный рынок без сложных интеграций
+          <ItemWithIcon :iconSrc="listCheck">
+            Полное сопровождение сделки — всё под контролем специалистов платформы
           </ItemWithIcon>
 
-          <ItemImage :src="developStat1"/>
+          <ItemImage :src="multiStoryBuilding"/>
 
           <ItemBigNumber>
-            <template #heading>До 30%</template>
-            <template #text>Снижение затрат на маркетинг. Благодаря единой системе продвижения и прозрачной аналитике эффективности</template>
+            <template #heading>+ 10 000</template>
+            <template #text>Объектов по всей стране Актуальные предложения напрямую от застройщиков, агентств и частных продавцов</template>
           </ItemBigNumber>
 
           <ItemBigNumber>
-            <template #heading>+250%</template>
-            <template #text>Оптимизация процессов взаимодействия с клиентами</template>
+            <template #heading>100%</template>
+            <template #text>Юридическая экспертиза и контроль документов</template>
           </ItemBigNumber>
 
-          <ItemWithIcon :iconSrc="graph">
-            Профессиональная инфраструктура для работы
+          <ItemWithIcon :iconSrc="userDown">
+            Постоянно растущая база проверенных компаний
           </ItemWithIcon>
 
 
