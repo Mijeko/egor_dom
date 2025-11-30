@@ -10,8 +10,19 @@ import ItemImage from "@/components/site/block-with-stat/item-image.vue";
 import ItemBigNumber from "@/components/site/block-with-stat/item-big-number.vue";
 import ItemBg from "@/components/site/block-with-stat/item-bg.vue";
 
+import developStat1 from '@/assets/images/develop-stat1.jpg';
+import diamond from '@/assets/images/diamond.svg';
+import graphImg from '@/assets/images/graph.png';
+
 export default defineComponent({
   name: "list",
+  data: () => {
+    return {
+      developStat1: developStat1,
+      diamond: diamond,
+      graph: graphImg,
+    };
+  },
   components: {ItemBg, ItemImage, ItemBigNumber, ItemWithIcon, BlockWithStat, AdvantageItem, DeveloperSearch, DeveloperList},
   props: {
     developers: {
@@ -113,11 +124,11 @@ export default defineComponent({
 
   <BlockWithStat>
 
-    <ItemWithIcon iconSrc="@/assets/images/diamond.svg">
+    <ItemWithIcon :iconSrc="diamond">
       Выход на федеральный рынок без сложных интеграций
     </ItemWithIcon>
 
-    <ItemImage :src="'@/assets/images/develop-stat1.jpg'"/>
+    <ItemImage :src="developStat1"/>
 
     <ItemBigNumber>
       <template #heading>До 30%</template>
@@ -129,7 +140,7 @@ export default defineComponent({
       <template #text>Оптимизация процессов взаимодействия с клиентами</template>
     </ItemBigNumber>
 
-    <ItemWithIcon iconSrc="@/assets/images/graph.png">
+    <ItemWithIcon :iconSrc="graph">
       Профессиональная инфраструктура для работы
     </ItemWithIcon>
 
