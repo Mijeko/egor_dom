@@ -8,6 +8,7 @@ import type BxImage from "@/dto/bitrix/BxImage.ts";
 import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
 import type {Swiper as SwiperType} from 'swiper/types';
 import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
+import SliderObjects from "@/components/objects/slider-objects.vue";
 
 export interface CharItem {
   key: string;
@@ -16,7 +17,7 @@ export interface CharItem {
 
 export default defineComponent({
   name: "detail",
-  components: {Swiper, SwiperSlide},
+  components: {SliderObjects, Swiper, SwiperSlide},
   props: {
     buildObject: {
       type: Object as PropType<BuildObjectDto>,
@@ -24,6 +25,10 @@ export default defineComponent({
         return {};
       }
     },
+    similarBuildObjects: {
+      type: Array as PropType<BuildObjectDto[]>,
+      default: () => [],
+    }
   },
   data: () => {
     return {
@@ -171,6 +176,10 @@ export default defineComponent({
     />
   </div>
 
+  <SliderObjects
+    :buildObjectList="similarBuildObjects"
+  />
+
   <div class="build-object-detail-house container">
 
     <img src="@/assets/images/vertical-house.png" class="build-object-detail-house__home" alt="Дом">
@@ -211,6 +220,12 @@ export default defineComponent({
     flex: 1 1 auto;
     width: 550px;
 
+  }
+
+  &-title {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-bottom: 15px !important;
   }
 
   &-developer {
@@ -259,6 +274,11 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-bottom: 35px;
+
+    .sign-view-button {
+      margin-left: auto;
+    }
 
     .add-favorite {
       margin-left: 20px;
