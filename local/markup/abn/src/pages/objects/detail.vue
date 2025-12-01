@@ -26,7 +26,7 @@ export default defineComponent({
   },
   data: () => {
     return {
-      thumbsSwiper: {} as SwiperType,
+      thumbsSwiper: null as SwiperType | null,
       modules: [FreeMode, Navigation, Thumbs],
     };
   },
@@ -80,7 +80,7 @@ export default defineComponent({
     <div class="build-object-detail-left">
       <swiper
         class="build-object-detail-slider"
-        v-if="buildObject?.gallery"
+        v-if="buildObject?.gallery && thumbsSwiper"
         :spaceBetween="10"
         :navigation="true"
         :thumbs="{ swiper: thumbsSwiper }"
