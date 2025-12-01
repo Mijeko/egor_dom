@@ -171,10 +171,13 @@ export default defineComponent({
 
   &-left {
     flex: 1 1 550px;
+    width: 550px;
   }
 
   &-right {
     flex: 1 1 auto;
+    width: 550px;
+
   }
 
   &-developer {
