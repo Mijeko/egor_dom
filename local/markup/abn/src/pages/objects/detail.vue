@@ -6,7 +6,7 @@ import Price from "@/core/price.ts";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import type BxImage from "@/dto/bitrix/BxImage.ts";
 import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
-import type { Swiper as SwiperType } from 'swiper/types';
+import type {Swiper as SwiperType} from 'swiper/types';
 
 export interface CharItem {
   key: string;
@@ -32,9 +32,7 @@ export default defineComponent({
   },
   methods: {
     setThumbsSwiper(swiper: any) {
-      if (!this.thumbsSwiper) {
-      }
-        this.thumbsSwiper.value = swiper;
+      this.thumbsSwiper = swiper;
     },
     gallery(obj: BuildObjectDto): BxImage[] {
 
