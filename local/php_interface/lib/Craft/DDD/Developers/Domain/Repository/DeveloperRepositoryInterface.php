@@ -3,6 +3,7 @@
 namespace Craft\DDD\Developers\Domain\Repository;
 
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
+use Craft\Helper\Criteria;
 
 interface DeveloperRepositoryInterface
 {
@@ -10,5 +11,5 @@ interface DeveloperRepositoryInterface
 
 	public function findById(int $id): ?DeveloperEntity;
 
-	public function findAll(array $order = [], array $filter = []): array;
+	public function findAll(Criteria $criteria = null): array;
 }

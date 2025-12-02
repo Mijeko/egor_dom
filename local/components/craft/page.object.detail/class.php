@@ -25,10 +25,6 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 {
 
 	protected ?BuildObjectService $buildObjectService;
-	protected ?ApartmentService $apartmentService;
-
-	protected ?DeveloperService $developerService;
-	protected ImageServiceInterface $imageService;
 	protected AddProductInFavoriteUseCase $favoriteUseCase;
 
 	public function onPrepareComponentParams($arParams)
@@ -82,10 +78,7 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 
 	protected function loadService(): void
 	{
-		$this->imageService = new ImageService();
 		$this->buildObjectService = BuildObjectServiceFactory::createOnOrm();
-		$this->apartmentService = ApartmentServiceFactory::createOnOrm();
-		$this->developerService = DeveloperServiceFactory::createOnOrm();
 		$this->favoriteUseCase = AddProductInFavoriteUseCaseFactory::getUseCase();
 	}
 
@@ -97,46 +90,6 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 			throw new Exception('Element not found');
 		}
 
-		$apartmentList = $this->apartmentService->findAllByBuildObjectId($buildObjectEntity->getId());
-		$developer = $this->developerService->findById($buildObjectEntity->getDeveloperId());
-
-		$this->arResult['BUILD_OBJECT_DTO'] = new BuildObjectDto(
-			$buildObjectEntity->getId(),
-			$buildObjectEntity->getName(),
-			$buildObjectEntity->getType(),
-			$buildObjectEntity->getFloors(),
-			DeveloperDto::fromModel($developer),
-			array_map(function(ImageValueObject $image) {
-				return new BxImageDto(
-					$image->getId(),
-					$image->getSrc(),
-				);
-			}, $buildObjectEntity->getGallery()->getImages()),
-			array_map(function(ApartmentEntity $apartment) {
-
-				$images = array_map(function(int $imageId) {
-					$_img = $this->imageService->findById($imageId);
-					return new BxImageDto(
-						$_img->id,
-						$_img->src,
-					);
-				}, $apartment->getPlanImagesIdList());
-
-				return new ApartmentDto(
-					$apartment->getId(),
-					$apartment->getBuildObjectId(),
-					$apartment->getName(),
-					$apartment->getName(),
-					$apartment->getRooms(),
-					$apartment->getFloor(),
-					$apartment->getBuiltYear(),
-					$apartment->getBuildingState()->getValue(),
-					null,
-					$images,
-				);
-			}, $apartmentList),
-			LocationDto::fromModel($buildObjectEntity->getLocation()),
-			'/objects/' . $buildObjectEntity->getId() . '/'
-		);
+		$this->arResult['BUILD_OBJECT_DTO'] = $buildObjectEntity;
 	}
 }

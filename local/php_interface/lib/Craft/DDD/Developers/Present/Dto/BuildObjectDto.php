@@ -12,7 +12,8 @@ use Craft\Dto\BxImageDto;
 
 
 /**
- * @var BxImageDto[] $gallery
+ * @property  BxImageDto[] $gallery
+ * @property  ApartmentDto[] $apartments
  */
 final class BuildObjectDto
 {

@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\Developers\Application\Service;
 
+use Bitrix\Main\Data\Cache;
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Application\Service\ApartmentService;
 use Craft\DDD\Developers\Application\Service\BuildObjectService;
@@ -16,6 +17,7 @@ use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\FirstDevelopHandle
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\ImportHandlerInterface;
 use Craft\DDD\Developers\Infrastructure\Service\ImportHandler\Source\YandexImport;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
+use Exception;
 
 class ImportService
 {
@@ -32,14 +34,14 @@ class ImportService
 	}
 
 	/**
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function executeById(int $developerId): void
 	{
 		$this->developer = $this->developerService->findById($developerId);
 		if(!$this->developer)
 		{
-			throw new \Exception('Застройщик не найден');
+			throw new Exception('Застройщик не найден');
 		}
 
 
@@ -75,7 +77,7 @@ class ImportService
 			{
 				$this->executeById($developer->getId());
 			}
-		} catch(\Exception $exception)
+		} catch(Exception $exception)
 		{
 			Debug::dumpToFile($exception->getMessage(), '', '__importService.log');
 		}
@@ -112,7 +114,7 @@ class ImportService
 	private function readData(string $sourceLink): string
 	{
 		$content = null;
-		$cache = \Bitrix\Main\Data\Cache::createInstance(); // получаем экземпляр класса
+		$cache = Cache::createInstance();
 		if($cache->initCache(7200, "importReadData_" . md5($sourceLink)))
 		{
 			$vars = $cache->getVars();
@@ -125,7 +127,7 @@ class ImportService
 
 		if(!$content)
 		{
-			throw new \Exception('Содержимое ответа источника данных пустое');
+			throw new Exception('Содержимое ответа источника данных пустое');
 		}
 
 		return $content;
@@ -151,7 +153,7 @@ class ImportService
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		if($httpCode !== 200)
 		{
-			throw new \Exception('Ошибка чтения выгрузки застройщика');
+			throw new Exception('Ошибка чтения выгрузки застройщика');
 		}
 
 		// Закрытие

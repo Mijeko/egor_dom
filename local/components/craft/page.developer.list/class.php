@@ -14,6 +14,7 @@ use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Developers\Present\Dto\DeveloperListItemDto;
 use Craft\Dto\BxImageDto;
+use Craft\Helper\Criteria;
 
 class CraftPageDeveloperListComponent extends CBitrixComponent
 {
@@ -43,25 +44,16 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 
 	protected function loadData(): void
 	{
-		$developerList = $this->developerService->findAll(
-			[],
-			[
-				DeveloperTable::F_CITY_ID => $this->currentCityService->current()->getId(),
-			]
-		);
+		$developerList = $this->developerService->findAll(Criteria::instance()->filter([
+			DeveloperTable::F_CITY_ID => $this->currentCityService->current()->getId(),
+		]));
 
 
-		$developerIdList = array_map(function(DeveloperEntity $developer) {
-			return $developer->getId();
-		}, $developerList);
-
+		$developerIdList = array_map(fn(DeveloperEntity $developer) => $developer->getId(), $developerList);
 		$buildObjectList = $this->buildObjectService->findAllByDeveloperIds($developerIdList);
-		$buildObjectIdList = array_map(function(BuildObjectEntity $buildObject) {
-			return BuildObjectDto::fromModel($buildObject);
-		}, $buildObjectList);
 
 
-		$this->arResult['DEVELOPERS'] = array_map(function(DeveloperEntity $developer) use ($buildObjectIdList) {
+		$this->arResult['DEVELOPERS'] = array_map(function(DeveloperEntity $developer) use ($buildObjectList) {
 
 			$developerDto = DeveloperDto::fromModel($developer);
 
@@ -76,8 +68,8 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 
 			return new DeveloperListItemDto(
 				$developerDto,
-				count($buildObjectIdList),
-				$buildObjectIdList
+				count($buildObjectList),
+				$buildObjectList
 			);
 		}, $developerList);
 

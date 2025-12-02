@@ -7,6 +7,7 @@ use CIBlockElement;
 use Craft\DDD\Developers\Domain\Entity\DeveloperEntity;
 use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\Dto\BxImageDto;
+use Craft\Helper\Criteria;
 
 class IblockDeveloperRepository implements DeveloperRepositoryInterface
 {
@@ -17,7 +18,7 @@ class IblockDeveloperRepository implements DeveloperRepositoryInterface
 	{
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		if(!Loader::includeModule('iblock'))
 		{

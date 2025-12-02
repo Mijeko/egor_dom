@@ -150,4 +150,16 @@ class ImageService implements ImageServiceInterface
 
 		return $result;
 	}
+
+	public function transformBxList(array $imageIdList): array
+	{
+		$result = [];
+
+		foreach($imageIdList as $imageId)
+		{
+			$result[] = $this->transformBx($imageId);
+		}
+
+		return $result;
+	}
 }

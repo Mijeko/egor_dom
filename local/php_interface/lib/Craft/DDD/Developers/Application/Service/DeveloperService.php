@@ -19,6 +19,7 @@ use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
 use Craft\Dto\BxImageDto;
+use Craft\Helper\Criteria;
 
 class DeveloperService
 {
@@ -46,9 +47,9 @@ class DeveloperService
 		return array_shift($developer);
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
-		$developerList = $this->developerRepository->findAll($order, $filter);
+		$developerList = $this->developerRepository->findAll($criteria);
 
 		$this->loadRelations($developerList);
 

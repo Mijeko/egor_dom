@@ -13,9 +13,13 @@ use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
+use Craft\DDD\Developers\Present\Dto\ApartmentDto;
+use Craft\DDD\Developers\Present\Dto\BuildObjectDto;
+use Craft\DDD\Developers\Present\Dto\DeveloperDto;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Domain\ValueObject\ImageGalleryValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\ImageValueObject;
+use Craft\DDD\Shared\Presentation\Dto\LocationDto;
 use Craft\Dto\BxImageDto;
 use Craft\Helper\Criteria;
 
@@ -36,7 +40,13 @@ class BuildObjectService
 		return $this->buildObjectRepository->create($buildObjectEntity);
 	}
 
-	public function findById(int $id): ?BuildObjectEntity
+
+	/**
+	 * @param int $id
+	 * @return BuildObjectDto|null
+	 * @throws \Exception
+	 */
+	public function findById(int $id): ?BuildObjectDto
 	{
 
 		$buildObject = $this->buildObjectRepository->findById($id);
@@ -50,38 +60,32 @@ class BuildObjectService
 
 		$this->loadRelations($buildObjectList);
 
-		return $buildObjectList[0];
+		$mapped = $this->mapping($buildObjectList);
+
+		return array_shift($mapped);
 	}
 
-	public function findByName(string $name): ?BuildObjectEntity
-	{
-		$buildObject = $this->buildObjectRepository->findByName($name);
-
-		$buildObjectList = [$buildObject];
-
-		$this->loadRelations($buildObjectList);
-
-		return $buildObjectList[0];
-	}
-
+	/**
+	 * @return array<int, BuildObjectDto>
+	 */
 	public function findAllByDeveloperIds(array $developerIds): array
 	{
-		return $this->findAll(
-			[],
-			[
-				BuildObjectTable::F_DEVELOPER_ID => $developerIds,
-			]
-		);
+		return $this->findAll(Criteria::instance()->filter([
+			BuildObjectTable::F_DEVELOPER_ID => $developerIds,
+		]));
 	}
 
-	public function findAll(array $order = [], array $filter = []): array
+
+	/**
+	 * @return array<int, BuildObjectDto>
+	 */
+	public function findAll(Criteria $criteria = null): array
 	{
-		$buildObjectList = $this->buildObjectRepository->findAll();
+		$buildObjectList = $this->buildObjectRepository->findAll($criteria);
 
 		$this->loadRelations($buildObjectList);
 
-		return $buildObjectList;
-
+		return $this->mapping($buildObjectList);
 	}
 
 	private function loadRelations(array &$buildObjectList): void
@@ -107,10 +111,9 @@ class BuildObjectService
 			$images = array_filter($images);
 
 
-
 			if($images)
 			{
-				$images=[];
+				$images = [];
 				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
 				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
 				$images[] = new ImageValueObject(BxImageDto::empty()->id, BxImageDto::empty()->src);
@@ -130,12 +133,9 @@ class BuildObjectService
 		$developerIdList = array_map(function(BuildObjectEntity $buildObjectEntity) {
 			return $buildObjectEntity->getDeveloperId();
 		}, $buildObjectList);
-		$developers = $this->developerRepository->findAll(
-			[],
-			[
-				DeveloperTable::F_ID => $developerIdList,
-			]
-		);
+		$developers = $this->developerRepository->findAll(Criteria::instance()->filter([
+			DeveloperTable::F_ID => $developerIdList,
+		]));
 		if($developers)
 		{
 			$buildObjectList = array_map(function(BuildObjectEntity $buildObjectEntity) use ($developers) {
@@ -183,5 +183,49 @@ class BuildObjectService
 			}, $buildObjectList);
 		}
 		// ===============================APARTMENTS;==============================================
+	}
+
+
+	/**
+	 * @param array<int, BuildObjectEntity> $buildObjectList
+	 */
+	private function mapping(array $buildObjectList): array
+	{
+		$result = [];
+
+		$developers = $this->developerRepository->findAll(Criteria::instance()->filter([
+			DeveloperTable::F_ID => array_map(fn(BuildObjectEntity $buildObject) => $buildObject->getDeveloperId(), $buildObjectList),
+		]));
+
+		foreach($buildObjectList as $buildObject)
+		{
+			$developer = null;
+			$_developer = array_filter($developers, fn(DeveloperEntity $developer) => $buildObject->getDeveloperId() === $developer->getId());
+			$_developer = array_values($_developer);
+
+			if(count($_developer) == 1)
+			{
+				$_developer = array_shift($_developer);
+				$developer = DeveloperDto::fromModel($_developer);
+			}
+
+
+			$gallery = $this->imageService->transformBxByArray($buildObject->getGalleryIdList());
+			$apartments = array_map(fn(ApartmentEntity $apartmentEntity) => ApartmentDto::fromEntity($apartmentEntity), $buildObject->getApartments());
+
+			$result[] = new BuildObjectDto(
+				$buildObject->getId(),
+				$buildObject->getName(),
+				$buildObject->getType(),
+				$buildObject->getFloors(),
+				$developer,
+				$gallery,
+				$apartments,
+				LocationDto::fromModel($buildObject->getLocation()),
+				'/objects/' . $buildObject->getId() . '/'
+			);
+		}
+
+		return $result;
 	}
 }

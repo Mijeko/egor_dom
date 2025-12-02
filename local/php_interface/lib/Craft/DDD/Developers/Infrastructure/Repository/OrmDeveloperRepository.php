@@ -10,16 +10,14 @@ use Craft\DDD\Developers\Domain\Repository\DeveloperRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\DeveloperTable;
 use Craft\DDD\Developers\Infrastructure\Entity\EO_Developer;
 use Craft\DDD\Shared\Domain\ValueObject\ActiveValueObject;
+use Craft\Helper\Criteria;
 
 class OrmDeveloperRepository implements DeveloperRepositoryInterface
 {
-	public function findAll(array $order = [], array $filter = []): array
+	public function findAll(Criteria $criteria = null): array
 	{
 		$result = [];
-		$query = DeveloperTable::getList([
-			'order'  => $order,
-			'filter' => $filter,
-		]);
+		$query = DeveloperTable::getList($criteria?->makeGetListParams());
 
 		foreach($query->fetchCollection() as $developer)
 		{
@@ -31,12 +29,9 @@ class OrmDeveloperRepository implements DeveloperRepositoryInterface
 
 	public function findById(int $id): ?DeveloperEntity
 	{
-		$developers = $this->findAll(
-			[],
-			[
-				DeveloperTable::F_ID => $id,
-			],
-		);
+		$developers = $this->findAll(Criteria::instance()->filter([
+			DeveloperTable::F_ID => $id,
+		]));
 
 		if(count($developers) != 1)
 		{

@@ -15,5 +15,11 @@ interface ImageServiceInterface
 
 	public function transformBx(int $imageId): BxImageDto;
 
+	/**
+	 * @return array<int, BxImageDto>
+	 */
+	public function transformBxList(array $imageIdList): array;
+
 	public function transformBxByArray(array $imageIdList): array;
+
 }
