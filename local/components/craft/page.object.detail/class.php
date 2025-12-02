@@ -1,6 +1,7 @@
 <?php
 
 use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\UserBehavior\Application\Factory\AddProductInFavoriteUseCaseFactory;
 use Craft\DDD\UserBehavior\Application\UseCase\AddProductInFavoriteUseCase;
 use Craft\DDD\UserBehavior\Infrastructure\Repository\ProductViewedRepository;
@@ -19,6 +20,7 @@ use Craft\DDD\Developers\Application\Service\BuildObjectService;
 use Craft\DDD\Developers\Application\Factory\ApartmentServiceFactory;
 use Craft\DDD\Developers\Application\Factory\DeveloperServiceFactory;
 use Craft\DDD\Developers\Application\Factory\BuildObjectServiceFactory;
+use Craft\Helper\Criteria;
 use Craft\Model\CraftUser;
 
 class CraftPageBuildObjectDetailComponent extends CBitrixComponent
@@ -91,5 +93,13 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 		}
 
 		$this->arResult['BUILD_OBJECT_DTO'] = $buildObjectEntity;
+		$this->arResult['SIMILAR'] = $this->buildObjectService->findAll(
+			Criteria::instance()
+				->limit(10)
+				->filter([
+					BuildObjectTable::F_DEVELOPER_ID => $buildObjectEntity->developer->id,
+					'!' . BuildObjectTable::F_ID     => $buildObjectEntity->id,
+				])
+		);
 	}
 }

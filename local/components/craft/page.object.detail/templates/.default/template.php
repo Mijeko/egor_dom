@@ -21,6 +21,7 @@
 $buildObjectDto = $arResult['BUILD_OBJECT_DTO'];
 
 inertia('objects/detail', [
-	'buildObject' => $buildObjectDto,
+	'buildObject'         => $buildObjectDto,
+	'similarBuildObjects' => $arResult['SIMILAR'],
 ]);
 

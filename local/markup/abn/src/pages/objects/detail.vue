@@ -176,9 +176,13 @@ export default defineComponent({
     />
   </div>
 
-  <SliderObjects
-    :buildObjectList="similarBuildObjects"
-  />
+  <div class="build-object-detail-similar container">
+    <h3 class="build-object-detail-similar__title">Похожие объекты</h3>
+    <SliderObjects
+      :buildObjectList="similarBuildObjects"
+    />
+    <a class="build-object-detail-similar__back">Вернуться в каталог</a>
+  </div>
 
   <div class="build-object-detail-house container">
 
@@ -325,6 +329,44 @@ export default defineComponent({
       font-size: 14px;
       line-height: 220%;
       color: $bo-char-label;
+    }
+  }
+
+  &-similar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px !important;
+
+    &__title {
+      font-family: var(--second-family);
+      font-weight: 300;
+      font-size: 30px;
+      line-height: 140%;
+      text-transform: uppercase;
+      text-align: center;
+      color: $bo-color-name;
+      margin-bottom: 30px;
+    }
+
+    &__back {
+      border: 1px solid $bod;
+      border-radius: 30px;
+      padding: 17px 50px;
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 100%;
+      color: $bod;
+      transition: all 0.4s ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $bod;
+        color: $white-color;
+        transition: all 0.4s ease;
+      }
     }
   }
 
