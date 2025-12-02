@@ -25,7 +25,9 @@ export default defineComponent({
               :items="[]"
             />
 
-            <MenuBx/>
+            <MenuBx
+              typeMenu="profile_aside"
+            />
 
           </div>
           <div class="profile-body">
