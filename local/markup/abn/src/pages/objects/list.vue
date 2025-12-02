@@ -39,7 +39,7 @@ export default defineComponent({
       let res: ApartmentDto[] = [];
 
       this.buildObjects?.forEach((objectDto: BuildObjectDto, index, array) => {
-        if (objectDto.apartments) {
+        if (Array.isArray(objectDto.apartments)) {
           res.push(...objectDto.apartments);
         }
       });

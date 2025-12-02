@@ -30,6 +30,8 @@ class CraftPageBuildObjectListComponent extends CBitrixComponent
 	protected function loadData(): void
 	{
 		$this->arResult['BUILD_OBJECTS'] = $this->buildObjectService->findAll();
+//		\Bitrix\Main\Diag\Debug::dump($this->arResult['BUILD_OBJECTS']);
+//		exit();
 	}
 
 	protected function loadService(): void
