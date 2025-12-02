@@ -21,10 +21,7 @@ use Bitrix\Main\Page\Asset;
 	$assets = Asset::getInstance();
 
 
-	$assets->addJs(SITE_TEMPLATE_PATH . '/js/bundle.js');
 	$assets->addJs("https://api-maps.yandex.ru/v3/?apikey=6ff29c21-740b-42c8-b626-81e1097f38fb&amp;lang=ru_RU");
-	$assets->addCss(SITE_TEMPLATE_PATH . '/css/main.css');
-
 
 	CJSCore::Init([
 		'fx',

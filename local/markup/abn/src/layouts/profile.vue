@@ -11,9 +11,12 @@ export default defineComponent({
 <template>
 
   <div class="stronger">
+
+
+    <AppHeader/>
+
     <div class="page-content">
       <div class="container">
-
 
         <div class="profile-section">
           <div class="profile-aside">
@@ -22,19 +25,30 @@ export default defineComponent({
             />
           </div>
           <div class="profile-body">
-
             <slot/>
-
           </div>
         </div>
-
-
       </div>
     </div>
+
+    <AppFooter/>
 
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
+.profile {
+  &-section {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 
+  &-aside {
+  }
+
+  &-body {
+  }
+}
 </style>
