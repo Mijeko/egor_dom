@@ -51,6 +51,7 @@ declare module 'vue' {
     ManagerEdit: typeof import('./components/profile/manager/manager-edit.vue')['default']
     ManagerList: typeof import('./components/profile/manager/manager-list.vue')['default']
     Map: typeof import('./components/map.vue')['default']
+    MenuBx: typeof import('./components/menu-bx.vue')['default']
     MenuHeader: typeof import('./components/site/header/menu-header.vue')['default']
     NewDialogModal: typeof import('./components/site/modal/new-dialog-modal.vue')['default']
     Pagination: typeof import('./components/site/pagination.vue')['default']

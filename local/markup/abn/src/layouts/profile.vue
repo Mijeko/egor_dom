@@ -1,10 +1,11 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import ProfileAsideMenu from "@/components/profile/element/profile-aside-menu.vue";
+import MenuBxBx from "@/components/menu-bx.vue";
 
 export default defineComponent({
   name: "default",
-  components: {ProfileAsideMenu: ProfileAsideMenu}
+  components: {MenuBx: MenuBxBx, ProfileAsideMenu: ProfileAsideMenu}
 })
 </script>
 
@@ -23,6 +24,9 @@ export default defineComponent({
             <ProfileAsideMenu
               :items="[]"
             />
+
+            <MenuBx/>
+
           </div>
           <div class="profile-body">
             <slot/>
