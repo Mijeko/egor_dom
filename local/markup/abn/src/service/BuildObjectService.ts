@@ -3,6 +3,7 @@ import type ApartmentDto from "@/dto/entity/ApartmentDto.ts";
 
 export default class BuildObjectService {
   static minPrice(object: BuildObjectDto) {
+
     if (!object.apartments || !Array.isArray(object.apartments) || object.apartments.length <= 0) {
       return 0;
     }

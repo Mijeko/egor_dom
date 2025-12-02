@@ -212,7 +212,7 @@ class BuildObjectService
 
 			$gallery = array_map(fn(ImageValueObject $img) => new BxImageDto($img->getId(), $img->getSrc()), $buildObject->getGallery()->getImages());
 			$apartments = array_map(fn(ApartmentEntity $apartmentEntity) => ApartmentDto::fromEntity($apartmentEntity), $buildObject->getApartments());
-
+			$apartments = array_values($apartments);
 
 			$result[] = new BuildObjectDto(
 				$buildObject->getId(),
