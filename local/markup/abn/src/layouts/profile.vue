@@ -21,13 +21,19 @@ export default defineComponent({
 
         <div class="profile-section">
           <div class="profile-aside">
-            <ProfileAsideMenu
-              :items="[]"
-            />
+
 
             <MenuBx
               typeMenu="profile_aside"
-            />
+            >
+              <template #items="{items}">
+                <ProfileAsideMenu
+                  v-if="items"
+                  :items="items"
+                />
+              </template>
+
+            </MenuBx>
 
           </div>
           <div class="profile-body">

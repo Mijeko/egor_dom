@@ -1,14 +1,14 @@
 <script lang="ts">
 import {defineComponent, type PropType} from 'vue'
-import type AsideMenuItemDto from "@/dto/present/AsideMenuItemDto.ts";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import {useUserStore} from "@/stores/app.ts";
+import type MenuItemDto from "@/dto/present/MenuItemDto.ts";
 
 export default defineComponent({
   name: "ProfileAsideMenu",
   props: {
     items: {
-      type: Array as PropType<AsideMenuItemDto[]>,
+      type: Array as PropType<MenuItemDto[]>,
       default: []
     },
   },
@@ -17,36 +17,27 @@ export default defineComponent({
       user: {} as BxUserDto
     };
   },
-  mounted(): any {
-    let userStore = useUserStore();
-    let user = userStore.getUser;
-
-    if (user) {
-      this.user = user;
-    }
-  }
 })
 </script>
 
 <template>
-
   <v-card
     elevation="0"
   >
     <v-list>
-      <v-list-item
-        :prepend-avatar="String(user.avatar?.src)"
-        :subtitle="user.email"
-        :title="user.name"
-      >
-        <template v-slot:append>
-          <v-btn
-            icon="mdi-menu-down"
-            size="small"
-            variant="text"
-          ></v-btn>
-        </template>
-      </v-list-item>
+      <!--      <v-list-item-->
+      <!--        :prepend-avatar="String(user.avatar?.src)"-->
+      <!--        :subtitle="user.email"-->
+      <!--        :title="user.name"-->
+      <!--      >-->
+      <!--        <template v-slot:append>-->
+      <!--          <v-btn-->
+      <!--            icon="mdi-menu-down"-->
+      <!--            size="small"-->
+      <!--            variant="text"-->
+      <!--          ></v-btn>-->
+      <!--        </template>-->
+      <!--      </v-list-item>-->
     </v-list>
 
     <v-divider></v-divider>
@@ -62,10 +53,10 @@ export default defineComponent({
         :value="item"
         color="primary"
         link
-        :href="item.href"
+        :href="item.url"
       >
         <template v-slot:prepend>
-          <v-icon :icon="item.icon"></v-icon>
+          <v-icon :icon="item.params?.ICON"></v-icon>
         </template>
 
         <v-list-item-title v-text="item.title"></v-list-item-title>

@@ -48,10 +48,12 @@ class CraftMenuComponent extends AjaxComponent
 
 				$title = $item[0] ?? null;
 				$url = $item[1] ?? null;
+				$params = $item[3] ?? [];
 
 				return new MenuItemDto(
 					$title,
 					$url,
+					$params
 				);
 
 			}, $menu->arMenu);
