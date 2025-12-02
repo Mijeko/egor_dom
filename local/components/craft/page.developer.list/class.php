@@ -65,6 +65,8 @@ class CraftPageDeveloperListComponent extends CBitrixComponent
 				);
 			}
 
+			$buildObjectList = array_filter($buildObjectList, fn(BuildObjectDto $el) => $el->developer->id === $developer->getId());
+			$buildObjectList = array_values($buildObjectList);
 
 			return new DeveloperListItemDto(
 				$developerDto,
