@@ -56,6 +56,7 @@ declare module 'vue' {
     NewDialogModal: typeof import('./components/site/modal/new-dialog-modal.vue')['default']
     Pagination: typeof import('./components/site/pagination.vue')['default']
     PersonalManager: typeof import('./components/profile/element/personal-manager.vue')['default']
+    PersonalMemberShort: typeof import('./components/personal-member-short.vue')['default']
     PhoneInput: typeof import('./components/site/form/element/phone-input.vue')['default']
     ProfileAsideMenu: typeof import('./components/profile/element/profile-aside-menu.vue')['default']
     ProfileEditForm: typeof import('./components/profile/element/profile-edit-form.vue')['default']

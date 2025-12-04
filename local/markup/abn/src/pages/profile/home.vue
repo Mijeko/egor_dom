@@ -1,9 +1,11 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import Profile from '@/layouts/profile.vue';
+import PersonalMemberShort from "@/components/personal-member-short.vue";
 
 export default defineComponent({
   name: "Home",
+  components: {PersonalMemberShort},
   layout: [Profile],
 })
 </script>
@@ -43,9 +45,10 @@ export default defineComponent({
               </div>
 
             </div>
+
+            <Button class="personal-reward-link">Подробнее</Button>
           </div>
 
-          <Button>Подробнее</Button>
         </div>
 
       </div>
@@ -77,7 +80,7 @@ export default defineComponent({
             </div>
           </div>
 
-          <Button>Скопировать</Button>
+          <Button class="referral-data-more">Скопировать</Button>
         </div>
       </div>
     </div>
@@ -86,16 +89,45 @@ export default defineComponent({
     <div class="profile-main-card">
       <div class="profile-main-card-title">Просмотренные</div>
       <div class="profile-main-card-wrap">
+
         <div class="visited-list">
           <a href="" class="visited-item">Дом в мичурино</a>
           <a href="" class="visited-item">Дом в мичурино</a>
           <a href="" class="visited-item">Дом в мичурино</a>
         </div>
+
+        <Button class="visited-more">Скопировать</Button>
       </div>
+
+
     </div>
-
-
   </div>
+
+
+  <PersonalMemberShort>
+    <template #title>Менеджеры</template>
+    <template #actions>
+      <div class="all-list-button">Все менеджеры</div>
+      <div class="add-member-button">Добавить +</div>
+    </template>
+  </PersonalMemberShort>
+
+  <PersonalMemberShort>
+    <template #title>Агенты</template>
+    <template #actions>
+      <div class="all-list-button">Все агенты</div>
+      <div class="add-member-button">Добавить +</div>
+    </template>
+  </PersonalMemberShort>
+
+  <PersonalMemberShort>
+    <template #title>Студенты</template>
+    <template #actions>
+      <div class="all-list-button">Все студенты</div>
+      <div class="add-member-button">Добавить +</div>
+    </template>
+  </PersonalMemberShort>
+
 </template>
 
 <style lang="scss">
@@ -112,6 +144,7 @@ export default defineComponent({
     align-items: stretch;
     justify-content: flex-start;
     gap: 15px;
+    margin-bottom: 20px;
   }
 
   &-card {
@@ -128,6 +161,8 @@ export default defineComponent({
       border: 1px solid $stat-border-color;
       border-radius: 25px;
       padding: 25px;
+      display: flex;
+      flex-direction: column;
     }
 
     &-title {
@@ -143,6 +178,7 @@ export default defineComponent({
 }
 
 .personal-reward {
+  height: 100%;
 
   &-title {
     margin-bottom: 26px;
@@ -157,7 +193,9 @@ export default defineComponent({
   }
 
   &-body {
-    margin-bottom: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   &-chars {
@@ -189,6 +227,10 @@ export default defineComponent({
       color: $bo-color-name;
     }
   }
+
+  &-link {
+    margin-top: auto;
+  }
 }
 
 .referral-data {
@@ -217,7 +259,6 @@ export default defineComponent({
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
 
     &-row {
       display: flex;
@@ -242,6 +283,10 @@ export default defineComponent({
       color: $bo-color-name;
     }
   }
+
+  &-more {
+    margin-top: auto;
+  }
 }
 
 .visited {
@@ -258,5 +303,35 @@ export default defineComponent({
     line-height: 250%;
     color: $bo-color-name;
   }
+
+  &-more {
+    margin-top: auto;
+  }
+}
+
+
+.all-list-button {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  text-align: right;
+  color: $bo-color-name;
+  border: 1px solid #e3e3e3;
+  border-radius: 50px;
+  background: $white-color;
+  padding: 8px 20px;
+}
+
+.add-member-button {
+  padding: 8px 20px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  text-align: right;
+  color: $white-color;
+  border-radius: 50px;
+  background: $bo-color-name;
 }
 </style>
