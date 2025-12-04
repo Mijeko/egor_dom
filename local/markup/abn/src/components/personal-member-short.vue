@@ -36,7 +36,7 @@ export default defineComponent({
 .personal-member {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
   border: 1px solid #e3e3e3;
   border-radius: 25px;
   padding: 30px 40px;

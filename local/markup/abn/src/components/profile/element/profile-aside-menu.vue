@@ -54,6 +54,7 @@ export default defineComponent({
         color="primary"
         link
         :href="item.url"
+        class="profile-aside-menu-item"
       >
         <template v-slot:prepend>
           <v-icon :icon="item.params?.ICON"></v-icon>
@@ -65,6 +66,12 @@ export default defineComponent({
   </v-card>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+.profile-aside-menu {
+  &-item {
+    .v-list-item__spacer {
+      width: 5px !important;
+    }
+  }
+}
 </style>

@@ -135,7 +135,7 @@ export default defineComponent({
 
 .profile-main {
   &-title {
-    text-align: left;
+    text-align: left !important;
     margin-bottom: 30px !important;
   }
 
