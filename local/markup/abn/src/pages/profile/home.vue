@@ -26,28 +26,27 @@ export default defineComponent({
           <div class="personal-reward-title">
             Вознаграждение: 4%
           </div>
-          <div class="personal-reward-body">
-            <div class="personal-reward-chars">
 
-              <div class="personal-reward-chars-row">
-                <div class="personal-reward-chars-key">Кол-во сделок:</div>
-                <div class="personal-reward-chars-value">0</div>
-              </div>
+          <div class="personal-reward-chars">
 
-              <div class="personal-reward-chars-row">
-                <div class="personal-reward-chars-key">Оборот:</div>
-                <div class="personal-reward-chars-value">0</div>
-              </div>
-
-              <div class="personal-reward-chars-row">
-                <div class="personal-reward-chars-key">К получению:</div>
-                <div class="personal-reward-chars-value">0</div>
-              </div>
-
+            <div class="personal-reward-chars-row">
+              <div class="personal-reward-chars-key">Кол-во сделок:</div>
+              <div class="personal-reward-chars-value">0</div>
             </div>
 
-            <Button class="personal-reward-link">Подробнее</Button>
+            <div class="personal-reward-chars-row">
+              <div class="personal-reward-chars-key">Оборот:</div>
+              <div class="personal-reward-chars-value">0</div>
+            </div>
+
+            <div class="personal-reward-chars-row">
+              <div class="personal-reward-chars-key">К получению:</div>
+              <div class="personal-reward-chars-value">0</div>
+            </div>
+
           </div>
+
+          <Button class="personal-reward-link">Подробнее</Button>
 
         </div>
 
@@ -160,7 +159,7 @@ export default defineComponent({
       height: 100%;
       border: 1px solid $stat-border-color;
       border-radius: 25px;
-      padding: 25px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
     }
@@ -179,6 +178,8 @@ export default defineComponent({
 
 .personal-reward {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &-title {
     margin-bottom: 26px;
@@ -189,13 +190,7 @@ export default defineComponent({
     font-size: 14px;
     line-height: 100%;
     color: #fff;
-    padding: 5px 40px;
-  }
-
-  &-body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    padding: 5px 25px;
   }
 
   &-chars {
@@ -234,6 +229,10 @@ export default defineComponent({
 }
 
 .referral-data {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   &-link {
     margin-bottom: 20px;
 
