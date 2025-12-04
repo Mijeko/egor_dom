@@ -124,6 +124,7 @@ export default defineComponent({
 
     &-wrap {
       width: 100%;
+      height: 100%;
       border: 1px solid $stat-border-color;
       border-radius: 25px;
       padding: 25px;
