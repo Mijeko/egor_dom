@@ -197,6 +197,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 30px;
 
     &-row {
       display: flex;
@@ -258,6 +259,7 @@ export default defineComponent({
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
 
     &-row {
       display: flex;
@@ -310,6 +312,7 @@ export default defineComponent({
 
 
 .all-list-button {
+  cursor: pointer;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
@@ -320,9 +323,17 @@ export default defineComponent({
   border-radius: 50px;
   background: $white-color;
   padding: 8px 20px;
+  transition: all 0.4s ease;
+
+  &:hover {
+    color: $white-color;
+    background: $bo-color-name;
+    transition: all 0.4s ease;
+  }
 }
 
 .add-member-button {
+  cursor: pointer;
   padding: 8px 20px;
   font-family: var(--font-family);
   font-weight: 400;
@@ -332,5 +343,13 @@ export default defineComponent({
   color: $white-color;
   border-radius: 50px;
   background: $bo-color-name;
+  border: 1px $bo-color-name solid;
+  transition: all 0.4s ease;
+
+  &:hover {
+    color: $bo-color-name;
+    background: $white-color;
+    transition: all 0.4s ease;
+  }
 }
 </style>
