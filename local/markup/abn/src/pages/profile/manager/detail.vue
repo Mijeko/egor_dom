@@ -2,10 +2,12 @@
 import {defineComponent, type PropType} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import ManagerEdit from "@/components/profile/manager/manager-edit.vue";
+import Profile from "@/layouts/profile.vue";
 
 export default defineComponent({
   name: "detail",
   components: {ManagerEdit},
+  layout: [Profile],
   props: {
     manager: {
       type: Object as PropType<BxUserDto>,

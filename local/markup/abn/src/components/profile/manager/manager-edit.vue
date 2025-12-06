@@ -72,28 +72,28 @@ export default defineComponent({
     <v-col cols="6">
       <v-form v-model="isFormValid" @submit.prevent="submitForm">
         <v-row>
-          <v-col cols="4">
+          <v-col cols="12">
             <v-text-field v-model="form.lastName" :rules="validate.lastName" placeholder="Фамилия"/>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="12">
             <v-text-field v-model="form.name" :rules="validate.name" placeholder="Имя"/>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="12">
             <v-text-field v-model="form.secondName" :rules="validate.secondName" placeholder="Отчество"/>
           </v-col>
         </v-row>
 
         <v-row>
-          <v-col cols="6">
+          <v-col cols="12">
             <PhoneInput v-model="form.phone" :rules="validate.phone" placeholder="Номер телефона"/>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12">
             <v-text-field v-model="form.email" :rules="validate.email" placeholder="E-Mail"/>
           </v-col>
         </v-row>
 
 
-        <v-btn type="submit">Обновить</v-btn>
+<!--        <v-btn type="submit">Обновить</v-btn>-->
       </v-form>
     </v-col>
   </v-row>
