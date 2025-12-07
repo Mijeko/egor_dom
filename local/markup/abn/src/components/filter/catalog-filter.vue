@@ -55,11 +55,11 @@ export default defineComponent({
     />
 
 
-    <Button
+    <SButton
       :showIcon="false"
     >
       Фильтровать
-    </Button>
+    </SButton>
   </aside>
 
 

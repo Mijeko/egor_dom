@@ -146,15 +146,15 @@ export default defineComponent({
           от {{ Price.format(minPrice) }}
         </div>
 
-        <button class="sign-view-button">
+        <SButton class="sign-view-button">
           Записаться на просмотр
-        </button>
+        </SButton>
 
-        <button class="add-favorite">
+        <SButton class="add-favorite">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M3.80674 6.20641C4.70687 5.30655 5.92755 4.80104 7.20034 4.80104C8.47313 4.80104 9.69381 5.30655 10.5939 6.20641L12.0003 7.61161L13.4067 6.20641C13.8495 5.74796 14.3792 5.38229 14.9648 5.13072C15.5504 4.87916 16.1803 4.74675 16.8176 4.74121C17.455 4.73567 18.087 4.85712 18.6769 5.09847C19.2668 5.33982 19.8028 5.69623 20.2534 6.14691C20.7041 6.5976 21.0605 7.13353 21.3019 7.72343C21.5432 8.31333 21.6647 8.9454 21.6591 9.58274C21.6536 10.2201 21.5212 10.8499 21.2696 11.4356C21.0181 12.0212 20.6524 12.5508 20.1939 12.9936L12.0003 21.1884L3.80674 12.9936C2.90688 12.0935 2.40137 10.8728 2.40137 9.60001C2.40137 8.32722 2.90688 7.10654 3.80674 6.20641V6.20641Z" stroke="#739AFE" stroke-width="1.5" stroke-linejoin="round"/>
           </svg>
-        </button>
+        </SButton>
 
       </div>
 
@@ -202,7 +202,7 @@ export default defineComponent({
       <h3 class="build-object-detail-house-text__title">24/7 на связи</h3>
       <p>Доступ из личного кабинета. Все операции онлайн: объекты, заявки, сделки и выплаты — в одном месте</p>
 
-      <Button class="build-object-detail-house-join">Регистрация</Button>
+      <SButton class="build-object-detail-house-join">Регистрация</SButton>
     </div>
 
   </div>

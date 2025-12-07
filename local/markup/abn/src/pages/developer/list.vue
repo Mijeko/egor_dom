@@ -92,7 +92,7 @@ export default defineComponent({
             квалифицированные заявки и управляйте продажами через единое решение</b>
         </p>
 
-        <Button type="link" href="/" class="developer-page-cooperation-link">Регистрация</Button>
+        <SButton type="link" href="/" class="developer-page-cooperation-link">Регистрация</SButton>
       </div>
 
       <div class="developer-page-cooperation-advantage-list">

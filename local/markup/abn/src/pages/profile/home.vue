@@ -46,7 +46,7 @@ export default defineComponent({
 
           </div>
 
-          <Button class="personal-reward-link">Подробнее</Button>
+          <SButton class="personal-reward-link">Подробнее</SButton>
 
         </div>
 
@@ -79,7 +79,7 @@ export default defineComponent({
             </div>
           </div>
 
-          <Button class="referral-data-more">Скопировать</Button>
+          <SButton class="referral-data-more">Скопировать</SButton>
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@ export default defineComponent({
           <a href="" class="visited-item">Дом в мичурино</a>
         </div>
 
-        <Button class="visited-more">Скопировать</Button>
+        <SButton class="visited-more">Скопировать</SButton>
       </div>
 
 
