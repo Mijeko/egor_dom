@@ -6,6 +6,9 @@ import BuildObjectItem from "@/components/objects/build-object-item.vue";
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import {Navigation} from 'swiper/modules';
 import type {NavigationOptions} from "swiper/types";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 
 export default defineComponent({

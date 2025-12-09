@@ -7,6 +7,9 @@ import {Pagination} from 'swiper/modules';
 import Price from "@/core/price.ts";
 import type BxImage from "@/dto/bitrix/BxImage.ts";
 import BuildObjectService from "@/service/BuildObjectService.ts";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default defineComponent({
   name: "BuildObjectItem",
