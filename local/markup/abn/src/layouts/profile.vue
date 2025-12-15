@@ -5,7 +5,13 @@ import MenuBxBx from "@/components/menu-bx.vue";
 
 export default defineComponent({
   name: "default",
-  components: {MenuBx: MenuBxBx, ProfileAsideMenu: ProfileAsideMenu}
+  components: {MenuBx: MenuBxBx, ProfileAsideMenu: ProfileAsideMenu},
+  props: {
+    user: {}
+  },
+  created(): any {
+    console.log(this.$props);
+  }
 })
 </script>
 
