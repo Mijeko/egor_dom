@@ -4,6 +4,7 @@ use Bitrix\Main\EventManager;
 use Craft\Bitrix\EventHandlers\OnAfterUserAddHandler;
 use Craft\Bitrix\EventHandlers\OnBeforeUserAddHandler;
 use Craft\Bitrix\EventHandlers\OnBeforeUserUpdateHandler;
+use Craft\Bitrix\EventHandlers\OnPrologHandler;
 use Craft\DDD\City\Infrastructure\Events\OnPageStartHandler;
 use Craft\Rest\Handler;
 
@@ -49,6 +50,15 @@ $eventManager->addEventHandler(
 	'OnBeforeUserUpdate',
 	[
 		OnBeforeUserUpdateHandler::class,
+		'handle',
+	]
+);
+
+$eventManager->addEventHandler(
+	'main',
+	'OnProlog',
+	[
+		OnPrologHandler::class,
 		'handle',
 	]
 );

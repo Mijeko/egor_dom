@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Service;
 
-use Craft\DDD\User\Application\Service\Interfaces\ManagerAssignerInterface;
+use Craft\DDD\User\Application\Contract\ManagerAssignerInterface;
 use Craft\DDD\User\Domain\Entity\AgentEntity;
 use Craft\DDD\User\Domain\Entity\StudentEntity;
 use Craft\DDD\User\Domain\Repository\AgentRepositoryInterface;

@@ -7,6 +7,12 @@ export default defineComponent({
   name: "Home",
   components: {PersonalMemberShort},
   layout: [Profile],
+  props: {
+    user: {}
+  },
+  created(): any {
+    console.log(this.$props);
+  }
 })
 </script>
 

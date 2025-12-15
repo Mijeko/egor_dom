@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Service;
 
-use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
+use Craft\DDD\User\Application\Contract\GroupAssignInterface;
 
 class GroupAssignService implements GroupAssignInterface
 {

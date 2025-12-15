@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Infrastructure\Service;
 
-use Craft\DDD\User\Application\Service\Interfaces\PasswordGeneratorInterface;
+use Craft\DDD\User\Application\Contract\PasswordGeneratorInterface;
 
 class PasswordGenerator implements PasswordGeneratorInterface
 {

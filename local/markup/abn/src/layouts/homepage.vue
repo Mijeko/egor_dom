@@ -2,7 +2,13 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "Homepage"
+  name: "Homepage",
+  props: {
+    user:{}
+  },
+  created(): any {
+    console.log(this.$props);
+  }
 })
 </script>
 

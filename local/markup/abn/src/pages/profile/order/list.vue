@@ -18,6 +18,7 @@ export default defineComponent({
 </script>
 
 <template>
+  {{orders}}
   <ClaimList
     :claims="orders"
   />

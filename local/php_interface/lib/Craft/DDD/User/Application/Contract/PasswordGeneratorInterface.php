@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\User\Application\Service\Interfaces;
+namespace Craft\DDD\User\Application\Contract;
 
 interface PasswordGeneratorInterface
 {

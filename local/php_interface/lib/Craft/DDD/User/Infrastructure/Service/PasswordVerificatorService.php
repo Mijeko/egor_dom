@@ -3,7 +3,7 @@
 namespace Craft\DDD\User\Infrastructure\Service;
 
 use Bitrix\Main\Security\Password;
-use Craft\DDD\User\Application\Service\Interfaces\PasswordVerificator;
+use Craft\DDD\User\Application\Contract\PasswordVerificator;
 
 class PasswordVerificatorService implements PasswordVerificator
 {

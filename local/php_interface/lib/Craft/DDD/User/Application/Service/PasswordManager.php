@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\User\Application\Service;
 
-use Craft\DDD\User\Application\Service\Interfaces\PasswordVerificator;
+use Craft\DDD\User\Application\Contract\PasswordVerificator;
 
 class PasswordManager
 {

@@ -5,7 +5,7 @@ namespace Craft\DDD\User\Application\UseCase;
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\Shared\Infrastructure\Service\EventManager;
-use Craft\DDD\User\Application\Service\Interfaces\AuthenticatorInterface;
+use Craft\DDD\User\Application\Contract\AuthenticatorInterface;
 use Craft\DDD\User\Application\Service\PasswordManager;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 use Craft\DDD\User\Infrastructure\Events\AuthorizeEvent;

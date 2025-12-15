@@ -5,8 +5,8 @@ namespace Craft\DDD\User\Application\UseCase;
 use Craft\DDD\Shared\Domain\ValueObject\EmailValueObject;
 use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Dto\CreateManagerRequestDto;
-use Craft\DDD\User\Application\Service\Interfaces\GroupAssignInterface;
-use Craft\DDD\User\Application\Service\Interfaces\PasswordGeneratorInterface;
+use Craft\DDD\User\Application\Contract\GroupAssignInterface;
+use Craft\DDD\User\Application\Contract\PasswordGeneratorInterface;
 use Craft\DDD\User\Domain\Entity\ManagerEntity;
 use Craft\DDD\User\Domain\Repository\ManagerRepositoryInterface;
 
