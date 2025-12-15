@@ -24,24 +24,6 @@ export default defineComponent({
   <v-card
     elevation="0"
   >
-    <v-list>
-      <!--      <v-list-item-->
-      <!--        :prepend-avatar="String(user.avatar?.src)"-->
-      <!--        :subtitle="user.email"-->
-      <!--        :title="user.name"-->
-      <!--      >-->
-      <!--        <template v-slot:append>-->
-      <!--          <v-btn-->
-      <!--            icon="mdi-menu-down"-->
-      <!--            size="small"-->
-      <!--            variant="text"-->
-      <!--          ></v-btn>-->
-      <!--        </template>-->
-      <!--      </v-list-item>-->
-    </v-list>
-
-    <v-divider></v-divider>
-
     <v-list
       :lines="false"
       density="compact"
