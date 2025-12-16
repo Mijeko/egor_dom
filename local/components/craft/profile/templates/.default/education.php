@@ -5,15 +5,6 @@
  * @global CMain $APPLICATION
  */
 
-?>
 
-<div class="profile-section">
-	<div class="profile-aside">
-		<?php
-		DevIncludeFile('aside');
-		?>
-	</div>
-	<div class="profile-body">
-		<h1><?php $APPLICATION->ShowTitle(); ?></h1>
-	</div>
-</div>
+inertia('profile/education', []);
+?>

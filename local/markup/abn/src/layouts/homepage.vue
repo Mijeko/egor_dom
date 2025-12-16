@@ -3,17 +3,17 @@ import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: "Homepage",
-  props: {
-    user:{}
-  },
-  created(): any {
-    console.log(this.$props);
-  }
 })
 </script>
 
 <template>
+  <div class="stronger">
+    <div class="page-content">
+      <slot/>
+    </div>
 
+    <AppFooter/>
+  </div>
 </template>
 
 <style lang="scss">

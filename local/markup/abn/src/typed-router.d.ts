@@ -25,6 +25,7 @@ declare module 'vue-router/auto-routes' {
     '/objects/list': RouteRecordInfo<'/objects/list', '/objects/list', Record<never, never>, Record<never, never>>,
     '/profile/agent/detail': RouteRecordInfo<'/profile/agent/detail', '/profile/agent/detail', Record<never, never>, Record<never, never>>,
     '/profile/agent/list': RouteRecordInfo<'/profile/agent/list', '/profile/agent/list', Record<never, never>, Record<never, never>>,
+    '/profile/education': RouteRecordInfo<'/profile/education', '/profile/education', Record<never, never>, Record<never, never>>,
     '/profile/home': RouteRecordInfo<'/profile/home', '/profile/home', Record<never, never>, Record<never, never>>,
     '/profile/manager/detail': RouteRecordInfo<'/profile/manager/detail', '/profile/manager/detail', Record<never, never>, Record<never, never>>,
     '/profile/manager/list': RouteRecordInfo<'/profile/manager/list', '/profile/manager/list', Record<never, never>, Record<never, never>>,
@@ -72,6 +73,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/profile/agent/list.vue': {
       routes: '/profile/agent/list'
+      views: never
+    }
+    'src/pages/profile/education.vue': {
+      routes: '/profile/education'
       views: never
     }
     'src/pages/profile/home.vue': {

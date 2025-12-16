@@ -106,7 +106,7 @@ export default defineComponent({
   <PersonalMemberShort>
     <template #title>Менеджеры</template>
     <template #actions>
-      <div class="all-list-button">Все менеджеры</div>
+      <a href="/profile/managers/" class="all-list-button">Все менеджеры</a>
       <div class="add-member-button">Добавить +</div>
     </template>
   </PersonalMemberShort>
@@ -114,7 +114,7 @@ export default defineComponent({
   <PersonalMemberShort>
     <template #title>Агенты</template>
     <template #actions>
-      <div class="all-list-button">Все агенты</div>
+      <a href="/profile/agents/" class="all-list-button">Все агенты</a>
       <div class="add-member-button">Добавить +</div>
     </template>
   </PersonalMemberShort>
@@ -122,7 +122,7 @@ export default defineComponent({
   <PersonalMemberShort>
     <template #title>Студенты</template>
     <template #actions>
-      <div class="all-list-button">Все студенты</div>
+      <a href="/profile/students/" class="all-list-button">Все студенты</a>
       <div class="add-member-button">Добавить +</div>
     </template>
   </PersonalMemberShort>
@@ -324,6 +324,7 @@ export default defineComponent({
   background: $white-color;
   padding: 8px 20px;
   transition: all 0.4s ease;
+  text-decoration: none !important;
 
   &:hover {
     color: $white-color;

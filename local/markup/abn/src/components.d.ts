@@ -69,6 +69,7 @@ declare module 'vue' {
     SelectInput: typeof import('./components/site/form/element/select-input.vue')['default']
     ShortAgentList: typeof import('./components/profile/element/short-agent-list.vue')['default']
     ShortManagerList: typeof import('./components/profile/element/short-manager-list.vue')['default']
+    ShortSideInfo: typeof import('./components/profile/short-side-info.vue')['default']
     ShortStudentList: typeof import('./components/profile/element/short-student-list.vue')['default']
     SliderObjects: typeof import('./components/objects/slider-objects.vue')['default']
     StudentList: typeof import('./components/student/StudentList.vue')['default']

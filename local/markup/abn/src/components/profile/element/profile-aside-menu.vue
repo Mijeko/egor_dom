@@ -12,11 +12,6 @@ export default defineComponent({
       default: []
     },
   },
-  data: function () {
-    return {
-      user: {} as BxUserDto
-    };
-  },
 })
 </script>
 
@@ -51,8 +46,14 @@ export default defineComponent({
 <style lang="scss">
 .profile-aside-menu {
   &-item {
+    margin-top: 10px !important;
+
     .v-list-item__spacer {
       width: 5px !important;
+    }
+
+    .v-list-item__prepend {
+      margin-right: 10px !important;
     }
   }
 }

@@ -75,7 +75,7 @@ export default defineComponent({
     &__avatar {
       width: 100%;
       max-width: 40px;
-      padding-bottom: 5%;
+      padding-bottom: 5.5%;
       position: relative;
       border-radius: 50%;
       overflow: hidden;

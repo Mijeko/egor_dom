@@ -2,15 +2,19 @@
 import {defineComponent} from 'vue'
 import ProfileAsideMenu from "@/components/profile/element/profile-aside-menu.vue";
 import MenuBxBx from "@/components/menu-bx.vue";
+import ShortSideInfo from "@/components/profile/short-side-info.vue";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({
   name: "default",
-  components: {MenuBx: MenuBxBx, ProfileAsideMenu: ProfileAsideMenu},
+  components: {ShortSideInfo, MenuBx: MenuBxBx, ProfileAsideMenu: ProfileAsideMenu},
   props: {
-    user: {}
-  },
-  created(): any {
-    console.log(this.$props);
+    user: {
+      type: Object as PropType<BxUserDto>,
+      default: () => {
+        return {};
+      }
+    }
   }
 })
 </script>
@@ -28,6 +32,11 @@ export default defineComponent({
         <div class="profile-section">
           <div class="profile-aside">
             <div class="profile-aside-wrapper">
+
+              <ShortSideInfo
+                :user
+              />
+
               <MenuBx
                 typeMenu="profile_aside"
               >
