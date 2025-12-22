@@ -5,7 +5,10 @@ import {vMaska} from "maska/vue";
 export default defineComponent({
   name: "ModernPhone",
   props: {
-    modelValue: {},
+    modelValue: {
+      type: [String, Number, null, Boolean, Array, Object],
+      default: null
+    },
     label: {
       type: String
     },

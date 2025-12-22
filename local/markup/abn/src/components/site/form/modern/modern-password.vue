@@ -4,7 +4,10 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "ModernPassword",
   props: {
-    modelValue: {},
+    modelValue: {
+      type: [String, Number, null, Boolean, Array, Object],
+      default: null
+    },
     rules: {
       type: Array as PropType<any[]>,
       default: []
@@ -26,7 +29,7 @@ export default defineComponent({
 <template>
   <v-text-field
     type="password"
-    v-model="modelValue"
+    v-model="modelValueComp"
     :rules
   />
 </template>

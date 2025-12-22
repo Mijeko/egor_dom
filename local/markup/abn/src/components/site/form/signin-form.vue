@@ -37,7 +37,12 @@ export default defineComponent({
       service
         .authorize(body)
         .then((response: any) => {
-          console.log(response);
+          let {data} = response;
+          let {redirect} = data;
+
+          if (redirect) {
+            window.location.href = redirect;
+          }
         });
     },
   }
@@ -56,7 +61,7 @@ export default defineComponent({
         v-model="form.password"
         :rules="validate.password"
       />
-      <v-btn>Войти</v-btn>
+      <v-btn type="submit">Войти</v-btn>
     </v-form>
 
   </v-card>

@@ -4,7 +4,10 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "ModernInput",
   props: {
-    modelValue: {},
+    modelValue: {
+      type: [String, Number, null, Boolean, Array, Object],
+      default: null
+    },
     rules: {
       type: Array as PropType<any[]>,
       default: []
@@ -25,7 +28,7 @@ export default defineComponent({
 
 <template>
   <v-text-field
-    v-model="modelValue"
+    v-model="modelValueComp"
     :rules
   />
 </template>
