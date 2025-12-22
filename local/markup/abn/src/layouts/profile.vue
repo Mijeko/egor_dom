@@ -23,8 +23,9 @@ export default defineComponent({
 
   <div class="stronger">
 
-
-    <AppHeader/>
+    <AppHeader
+      :user
+    />
 
     <div class="page-content">
       <div class="container">

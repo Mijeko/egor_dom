@@ -1,9 +1,11 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
+import SigninForm from "@/components/site/form/signin-form.vue";
 
 export default defineComponent({
   name: "Cabinet",
+  components: {SigninForm: SigninForm},
   props: {
     user: {
       type: Object as PropType<BxUserDto>,
@@ -17,7 +19,7 @@ export default defineComponent({
       showModal: false
     };
   },
-  methods: {
+  computed: {
     isAuthorized(): boolean {
 
       if (this.user && this.user.id) {
@@ -45,9 +47,7 @@ export default defineComponent({
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card title="Войти на сайт">
-
-      </v-card>
+      <SigninForm />
     </template>
   </v-dialog>
   <a

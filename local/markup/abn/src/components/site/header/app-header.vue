@@ -35,7 +35,9 @@ export default defineComponent({
 
     <FastSearch/>
 
-    <Cabinet/>
+    <Cabinet
+      :user
+    />
 
 
   </header>
