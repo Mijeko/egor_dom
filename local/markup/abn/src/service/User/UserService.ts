@@ -10,6 +10,7 @@ import type RegisterByReferralRequestDto from "@/dto/request/RegisterByReferralR
 import type CreateManagerRequestDto from "@/dto/request/CreateManagerRequestDto.ts";
 import type CreateAgentRequestDto from "@/dto/request/CreateAgentRequestDto.ts";
 import type CreateStudentRequestDto from "@/dto/request/CreateStudentRequestDto.ts";
+import type RegisterRequestDto from "@/dto/request/RegisterRequestDto.ts";
 
 export default class UserService {
 
@@ -17,6 +18,10 @@ export default class UserService {
 
   constructor() {
 
+  }
+
+  register(body: RegisterRequestDto) {
+    return ControllerApi.post('craft:register', body);
   }
 
   authorize(body: AuthorizeDto) {

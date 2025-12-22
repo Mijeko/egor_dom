@@ -3,6 +3,8 @@ import {defineComponent} from 'vue'
 import ModernInput from "@/components/site/form/modern/modern-input.vue";
 import ModernPassword from "@/components/site/form/modern/modern-password.vue";
 import ModernPhone from "@/components/site/form/modern/modern-phone.vue";
+import UserService from "@/service/User/UserService.ts";
+import type RegisterRequestDto from "@/dto/request/RegisterRequestDto.ts";
 
 export default defineComponent({
   name: "SignupForm",
@@ -25,6 +27,13 @@ export default defineComponent({
       if (!this.isFormValid) {
         return;
       }
+
+      let body: RegisterRequestDto = {};
+
+      let service = new UserService();
+      service.register(body).then((response: any) => {
+
+      });
     },
   }
 })
@@ -32,18 +41,21 @@ export default defineComponent({
 
 <template>
   <v-card title="Войти на сайт">
+    <v-card-text>
 
-    <v-form v-model="isFormValid" @submit.prevent="submitForm">
-      <ModernPhone
-        v-model="form.phone"
-        :rules="validate.phone"
-      />
-      <ModernPassword
-        v-model="form.password"
-        :rules="validate.password"
-      />
-      <v-btn>Регистрация</v-btn>
-    </v-form>
+      <v-form v-model="isFormValid" @submit.prevent="submitForm">
+        <ModernPhone
+          v-model="form.phone"
+          :rules="validate.phone"
+        />
+        <ModernPassword
+          v-model="form.password"
+          :rules="validate.password"
+        />
+        <v-btn type="submit">Регистрация</v-btn>
+      </v-form>
+
+    </v-card-text>
 
   </v-card>
 </template>
