@@ -1,30 +1,42 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import {vMaska} from "maska/vue";
 
 export default defineComponent({
-  name: "ModernPassword",
+  name: "ModernPhone",
   props: {
     modelValue: {},
+    label: {
+      type: String
+    },
     rules: {},
+    required: {
+      type: Boolean,
+      default: false
+    },
+  },
+  directives: {
+    maska: vMaska as any
   },
   computed: {
-    modelValueComp: {
+    computedValue: {
       set(value: any) {
         this.$emit('update:modelValue', value);
       },
-      get(): any {
+      get() {
         return this.modelValue;
       },
     }
-  },
+  }
 })
 </script>
 
 <template>
   <v-text-field
-    type="password"
-    v-model="modelValue"
+    v-maska="'+7 (###) ### ##-##'"
+    v-model="computedValue"
     :rules
+    :label
   />
 </template>
 

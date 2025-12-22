@@ -2,17 +2,29 @@
 import {defineComponent} from 'vue'
 import ModernInput from "@/components/site/form/modern/modern-input.vue";
 import ModernPassword from "@/components/site/form/modern/modern-password.vue";
+import ModernPhone from "@/components/site/form/modern/modern-phone.vue";
 
 export default defineComponent({
   name: "SigninForm",
   data: function () {
     return {
-
+      isFormValid: false,
+      form: {
+        phone: {},
+        password: {},
+      },
+      validate: {
+        phone: [],
+        password: []
+      },
     };
   },
-  components: {ModernPassword: ModernPassword, ModernInput: ModernInput},
+  components: {ModernPhone, ModernPassword: ModernPassword, ModernInput: ModernInput},
   methods: {
     submitForm() {
+      if (!this.isFormValid) {
+        return;
+      }
     },
   }
 })
@@ -21,12 +33,17 @@ export default defineComponent({
 <template>
   <v-card title="Войти на сайт">
 
-    <v-form @submit.prevent="submitForm">
-      <ModernInput/>
-      <ModernPassword/>
+    <v-form v-model="isFormValid" @submit.prevent="submitForm">
+      <ModernPhone
+        v-model="form.phone"
+        :rules="validate.phone"
+      />
+      <ModernPassword
+        v-model="form.password"
+        :rules="validate.password"
+      />
+      <v-btn>Войти</v-btn>
     </v-form>
-
-    <v-btn>Войти</v-btn>
 
   </v-card>
 </template>
