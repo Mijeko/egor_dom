@@ -3,6 +3,8 @@ import {defineComponent} from 'vue'
 import ModernInput from "@/components/site/form/modern/modern-input.vue";
 import ModernPassword from "@/components/site/form/modern/modern-password.vue";
 import ModernPhone from "@/components/site/form/modern/modern-phone.vue";
+import UserService from "@/service/User/UserService.ts";
+import type AuthorizeDto from "@/dto/request/AuthorizeDto.ts";
 
 export default defineComponent({
   name: "SigninForm",
@@ -25,6 +27,18 @@ export default defineComponent({
       if (!this.isFormValid) {
         return;
       }
+
+      let body: AuthorizeDto = {
+        phone: String(this.form.phone),
+        password: String(this.form.password),
+      };
+
+      let service = new UserService();
+      service
+        .authorize(body)
+        .then((response: any) => {
+          console.log(response);
+        });
     },
   }
 })
