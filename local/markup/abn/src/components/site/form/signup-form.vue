@@ -42,7 +42,7 @@ export default defineComponent({
         v-model="form.password"
         :rules="validate.password"
       />
-      <v-btn>Войти</v-btn>
+      <v-btn>Регистрация</v-btn>
     </v-form>
 
   </v-card>
