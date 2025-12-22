@@ -21,7 +21,7 @@ export default class UserService {
   }
 
   register(body: RegisterRequestDto) {
-    return ControllerApi.post('craft:register', body);
+    return ControllerApi.post('craft:register.simple', body);
   }
 
   authorize(body: AuthorizeDto) {
