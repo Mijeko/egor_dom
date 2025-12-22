@@ -4,10 +4,19 @@ import CurrentCity from "@/components/site/header/current-city.vue";
 import FastSearch from "@/components/site/header/fast-search.vue";
 import Cabinet from "@/components/site/cabinet.vue";
 import MenuHeader from "@/components/site/header/menu-header.vue";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({
   name: "AppHeader",
-  components: {MenuHeader, Cabinet, FastSearch, CurrentCity}
+  components: {MenuHeader, Cabinet, FastSearch, CurrentCity},
+  props: {
+    user: {
+      type: Object as PropType<BxUserDto>,
+      default: () => {
+        return {};
+      }
+    }
+  },
 })
 </script>
 

@@ -1,8 +1,17 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({
   name: "Cabinet",
+  props: {
+    user: {
+      type: Object as PropType<BxUserDto>,
+      default: () => {
+        return {};
+      }
+    }
+  },
   data: function () {
     return {
       showModal: false
@@ -10,6 +19,11 @@ export default defineComponent({
   },
   methods: {
     isAuthorized(): boolean {
+
+      if (this.user && this.user.id) {
+        return true;
+      }
+
       return false;
     }
   }
