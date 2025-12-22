@@ -5,7 +5,10 @@ export default defineComponent({
   name: "ModernInput",
   props: {
     modelValue: {},
-    rules: {},
+    rules: {
+      type: Array as PropType<any[]>,
+      default: []
+    },
   },
   computed: {
     modelValueComp: {

@@ -9,7 +9,10 @@ export default defineComponent({
     label: {
       type: String
     },
-    rules: {},
+    rules: {
+      type: Array as PropType<any[]>,
+      default: []
+    },
     required: {
       type: Boolean,
       default: false

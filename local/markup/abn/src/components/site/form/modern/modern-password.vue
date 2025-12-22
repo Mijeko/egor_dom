@@ -5,7 +5,10 @@ export default defineComponent({
   name: "ModernPassword",
   props: {
     modelValue: {},
-    rules: {},
+    rules: {
+      type: Array as PropType<any[]>,
+      default: []
+    },
   },
   computed: {
     modelValueComp: {
