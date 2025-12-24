@@ -258,7 +258,18 @@ class Response
     protected function getUrl(HttpRequest $request): string
     {
         $url = parse_url($request->getRequestUri());
-        return '/' . trim($url['path'], '/') . ($url['query'] ? ('?' . $url['query']) : '');
+        $path = $url['path'] ?? '/';
+        
+        // Preserve trailing slash if it exists (except for root path)
+        $hasTrailingSlash = $path !== '/' && substr($path, -1) === '/';
+        $normalizedPath = '/' . trim($path, '/');
+        
+        // Restore trailing slash if it was present
+        if ($hasTrailingSlash && $normalizedPath !== '/') {
+            $normalizedPath .= '/';
+        }
+        
+        return $normalizedPath . ($url['query'] ?? '' ? ('?' . $url['query']) : '');
     }
 }
 
