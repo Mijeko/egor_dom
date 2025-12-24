@@ -10,6 +10,12 @@ export default defineComponent({
 
 <template>
 
+
+
+  <ReviewsBlock
+
+  />
+
 </template>
 
 <style lang="scss">

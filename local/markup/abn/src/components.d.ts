@@ -66,7 +66,7 @@ declare module 'vue' {
     ProfileOrderCostInfo: typeof import('./components/profile/element/profile-order-cost-info.vue')['default']
     ProfileReferral: typeof import('./components/profile/element/profile-referral.vue')['default']
     ProfileShortInfo: typeof import('./components/profile/element/profile-short-info.vue')['default']
-    ReviewsBlock: typeof import('./components/homepage/ReviewsBlock.vue')['default']
+    ReviewsBlock: typeof import('./components/homepage/reviews-block.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SButton: typeof import('./components/site/s-button.vue')['default']
