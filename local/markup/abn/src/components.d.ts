@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    _modernInput: typeof import('./components/site/form/modern/_modern-input.vue')['default']
     AdvantageItem: typeof import('./components/developer/advantage-item.vue')['default']
     Advantages: typeof import('./components/developer/advantages.vue')['default']
     AgentEdit: typeof import('./components/profile/agent/agent-edit.vue')['default']
