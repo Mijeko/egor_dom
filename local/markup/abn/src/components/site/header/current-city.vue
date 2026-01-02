@@ -65,7 +65,8 @@ export default defineComponent({
         v-bind="activatorProps"
         class="current-city"
       >
-        <img src="../../../assets/images/icons/gps.svg" alt="gps">
+        <slot name="gpsIcon" v-if="$.slots.gpsIcon"></slot>
+        <img v-else src="@/assets/images/icons/gps.svg" alt="gps">
         <div class="current-city__label">{{ currentCity.name }}</div>
       </div>
 

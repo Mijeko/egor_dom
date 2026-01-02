@@ -43,6 +43,7 @@ export default defineComponent({
 .contacts-block {
   display: flex;
   gap: 40px;
+  margin-bottom: 80px !important;
 
   &-title {
     margin-bottom: 30px;
