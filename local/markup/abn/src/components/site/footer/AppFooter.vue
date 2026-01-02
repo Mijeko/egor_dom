@@ -1,8 +1,10 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import ContactsWithIcon from "@/components/site/contacts-with-icon.vue";
 
 export default defineComponent({
-  name: "AppFooter"
+  name: "AppFooter",
+  components: {ContactsWithIcon}
 })
 </script>
 
@@ -49,20 +51,7 @@ export default defineComponent({
           </div>
         </div>
         <div class="footer-col">
-          <ul class="with-icon">
-            <li class="with-icon-item">
-              <img class="with-icon-item__icon" src="@/assets/images/icons/phone-tg.svg" alt="Телефон">
-              <a href="tel:+7 (000) 000-00-00" class="with-icon-item__text">+7 (000) 000-00-00</a>
-            </li>
-            <li class="with-icon-item">
-              <img class="with-icon-item__icon" src="@/assets/images/icons/email.svg" alt="Email">
-              <a href="mailto:email.ru" class="with-icon-item__text">email.ru</a>
-            </li>
-            <li class="with-icon-item">
-              <img class="with-icon-item__icon" src="@/assets/images/icons/gps2.svg" alt="Адрес">
-              <div class="with-icon-item__text">Офис ООО фирма "Побеждай", Россия, Новосибирск, Аэродромная 44</div>
-            </li>
-          </ul>
+          <ContactsWithIcon/>
         </div>
       </div>
       <div class="footer-row">
@@ -77,7 +66,6 @@ export default defineComponent({
 
 .footer {
   background: $footer-bg;
-
 
   &-row {
     padding-top: 40px;
@@ -153,31 +141,4 @@ export default defineComponent({
   }
 }
 
-.with-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  &-item {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 130%;
-    color: $white-color;
-
-    &__icon {
-    }
-
-    &__text {
-      font-weight: inherit;
-      font-size: inherit;
-      line-height: inherit;
-      color: inherit;
-    }
-  }
-}
 </style>
