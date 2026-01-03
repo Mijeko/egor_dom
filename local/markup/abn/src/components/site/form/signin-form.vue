@@ -70,10 +70,18 @@ export default defineComponent({
 
           </template>
         </ModernPhone>
+
+
         <ModernPassword
           v-model="form.password"
           :rules="validate.password"
-        />
+        >
+
+          <template #template>
+            ыыыыыыыыы
+          </template>
+
+        </ModernPassword>
         <v-btn type="submit">Войти</v-btn>
       </v-form>
 

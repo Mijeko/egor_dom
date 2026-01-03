@@ -27,11 +27,15 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-text-field
+  <ModernInput
+    v-bind="{...$props,...$attrs}"
     type="password"
     v-model="modelValueComp"
-    :rules
-  />
+  >
+    <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
+      <slot :name="slotName" v-bind="slotProps"></slot>
+    </template>
+  </ModernInput>
 </template>
 
 <style scoped>
