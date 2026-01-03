@@ -62,6 +62,7 @@ declare module 'vue' {
     ModernPassword: typeof import('./components/site/form/modern/modern-password.vue')['default']
     ModernPhone: typeof import('./components/site/form/modern/modern-phone.vue')['default']
     NewDialogModal: typeof import('./components/site/modal/new-dialog-modal.vue')['default']
+    OrigModernPhone: typeof import('./components/site/form/modern/orig-modern-phone.vue')['default']
     Pagination: typeof import('./components/site/pagination.vue')['default']
     PersonalManager: typeof import('./components/profile/element/personal-manager.vue')['default']
     PersonalMemberShort: typeof import('./components/personal-member-short.vue')['default']

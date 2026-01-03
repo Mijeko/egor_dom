@@ -20,8 +20,6 @@ define('USER_GROUP_AGENT', UserGroupHelper::findByCode('AGENT'));
 
 
 // iblock id
-
-
 # Недвижимость->Объекты
 define('BUILD_OBJECT_IBLOCK_ID', IblockHelper::getIblockIdByCode('immovables_objects'));
 define('BUILD_DEVELOPERS_IBLOCK_ID', IblockHelper::getIblockIdByCode('immovables_developers'));

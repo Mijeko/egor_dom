@@ -1,0 +1,51 @@
+<script lang="ts">
+import {defineComponent} from 'vue'
+import {vMaska} from "maska/vue";
+
+export default defineComponent({
+  name: "ModernPhone",
+  props: {
+    modelValue: {
+      type: [String, Number, null, Boolean, Array, Object],
+      default: null
+    },
+    label: {
+      type: String
+    },
+    rules: {
+      type: Array as PropType<any[]>,
+      default: []
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+  },
+  directives: {
+    maska: vMaska as any
+  },
+  computed: {
+    computedValue: {
+      set(value: any) {
+        this.$emit('update:modelValue', value);
+      },
+      get() {
+        return this.modelValue;
+      },
+    }
+  }
+})
+</script>
+
+<template>
+  <v-text-field
+    v-maska="'+7 (###) ### ##-##'"
+    v-model="computedValue"
+    :rules
+    :label
+  />
+</template>
+
+<style scoped>
+
+</style>

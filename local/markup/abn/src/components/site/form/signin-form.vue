@@ -12,8 +12,8 @@ export default defineComponent({
     return {
       isFormValid: false,
       form: {
-        phone: {},
-        password: {},
+        phone: null,
+        password: null,
       },
       validate: {
         phone: [],
@@ -57,7 +57,19 @@ export default defineComponent({
         <ModernPhone
           v-model="form.phone"
           :rules="validate.phone"
-        />
+          label="Номер телефона"
+        >
+          <template #template="{label, type, value}">
+
+
+            <label>
+              {{ label }}
+            </label>
+
+            {{ value }}
+
+          </template>
+        </ModernPhone>
         <ModernPassword
           v-model="form.password"
           :rules="validate.password"
