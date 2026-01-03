@@ -19,10 +19,9 @@ export default defineComponent({
   <section class="first-screen container">
 
     <div class="first-screen-wrapper">
-      <div class="first-screen-layer">
+      <div class="first-screen-header">
 
-        <div class="first-screen-header">
-
+        <div class="blue-bg">
           <a href="/" class="first-screen-logo-link">
             <img src="@/assets/images/logo.svg" class="first-screen-logo" alt="Побеждай логотип">
           </a>
@@ -35,6 +34,13 @@ export default defineComponent({
             </CurrentCity>
           </div>
 
+          <div class="blue-bg-suffix">
+            <div class="blue-bg-suffix-top"></div>
+            <div class="blue-bg-suffix-bottom"></div>
+          </div>
+        </div>
+
+        <div class="white-bg">
           <MenuBx
             typeMenu="landing_top"
           >
@@ -46,63 +52,61 @@ export default defineComponent({
               </ul>
             </template>
           </MenuBx>
-
           <div class="first-screen-search">
             <FastSearch/>
           </div>
-
           <div class="first-screen-cabinet">
             <Cabinet
               :user
             />
           </div>
+        </div>
+
+
+      </div>
+      <div class="first-screen-body">
+
+        <div class="first-screen-body-left">
+
+          <div class="first-screen-content">
+            <p>онлайн</p>
+            <p>платформа</p>
+            <p>//недвижимости</p>
+
+            <div class="first-screen-description">
+              Выгодные объекты от застройщиков, удобный поиск, профессиональные кабинеты для застройщиков и риэлторов
+            </div>
+
+            <SButton>Регистрация</SButton>
+          </div>
 
         </div>
-        <div class="first-screen-body">
-
-          <div class="first-screen-body-left">
-
-            <div class="first-screen-content">
-              <p>онлайн</p>
-              <p>платформа</p>
-              <p>//недвижимости</p>
-
-              <div class="first-screen-description">
-                Выгодные объекты от застройщиков, удобный поиск, профессиональные кабинеты для застройщиков и риэлторов
-              </div>
-
-              <SButton>Регистрация</SButton>
+        <div class="first-screen-body-right">
+          <div class="first-screen-image-wrapper">
+            <div class="first-screen-image">
+              <img src="@/assets/images/first-screen-bg.png" alt="Площадка">
             </div>
-
-          </div>
-          <div class="first-screen-body-right">
-            <div class="first-screen-image-wrapper">
-              <div class="first-screen-image">
-                <img src="@/assets/images/first-screen-bg.png" alt="Площадка">
+            <div class="first-screen-advantages">
+              <div class="first-screen-advantages-item">
+                <div class="first-screen-advantages-item__icon">
+                  <img src="@/assets/images/icons/diamond.svg" alt="Инвестиции в выгодные объекты">
+                </div>
+                <div class="first-screen-advantages-item__text">Инвестиции в выгодные объекты</div>
               </div>
-              <div class="first-screen-advantages">
-                <div class="first-screen-advantages-item">
-                  <div class="first-screen-advantages-item__icon">
-                    <img src="@/assets/images/icons/diamond.svg" alt="Инвестиции в выгодные объекты">
-                  </div>
-                  <div class="first-screen-advantages-item__text">Инвестиции в выгодные объекты</div>
+              <div class="first-screen-advantages-item">
+                <div class="first-screen-advantages-item__icon">
+                  <img src="@/assets/images/icons/coin-hand.svg" alt="Заработок через приглашение людей">
                 </div>
-                <div class="first-screen-advantages-item">
-                  <div class="first-screen-advantages-item__icon">
-                    <img src="@/assets/images/icons/coin-hand.svg" alt="Заработок через приглашение людей">
-                  </div>
-                  <div class="first-screen-advantages-item__text">Заработок через приглашение людей</div>
+                <div class="first-screen-advantages-item__text">Заработок через приглашение людей</div>
+              </div>
+              <div class="first-screen-advantages-item">
+                <div class="first-screen-advantages-item__icon">
+                  <img src="@/assets/images/icons/home-04.svg" alt="Покупка квартиры без риэлтора">
                 </div>
-                <div class="first-screen-advantages-item">
-                  <div class="first-screen-advantages-item__icon">
-                    <img src="@/assets/images/icons/home-04.svg" alt="Покупка квартиры без риэлтора">
-                  </div>
-                  <div class="first-screen-advantages-item__text">Покупка квартиры без риэлтора</div>
-                </div>
+                <div class="first-screen-advantages-item__text">Покупка квартиры без риэлтора</div>
               </div>
             </div>
           </div>
-
         </div>
 
       </div>
@@ -125,7 +129,7 @@ export default defineComponent({
 
   &-logo {
     display: block;
-    width: 168px;
+    height: 70px;
     object-fit: contain;
 
     &-link {
@@ -145,22 +149,22 @@ export default defineComponent({
     position: relative;
   }
 
-  &-layer {
-    width: 100%;
-    height: 100%;
-    background-image: url("@/assets/images/first-screen-wrap.svg");
-    background-size: 100% 100%;
-  }
-
   &-header {
+    background: white;
+    position: relative;
+    z-index: 99;
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
 
   &-body {
+    position: relative;
+    z-index: 99;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
+    background: radial-gradient(50% 50% at 50% 50%, rgb(213, 232, 255) 0%, rgb(184, 217, 255) 100%);
+    border-radius: 0 30px 30px 30px;
 
     &-left {
       display: flex;
@@ -207,7 +211,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     gap: 35px;
-    margin-left: 87px;
+    margin-left: 47px;
 
     &-item {
       font-family: var(--font-family);
@@ -225,11 +229,17 @@ export default defineComponent({
   }
 
   &-search {
+    width: 180px;
     margin-left: 40px;
+
+    .search-header {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   &-cabinet {
-    margin-left: 40px;
+    margin-left: 20px;
   }
 
   &-image {
@@ -272,6 +282,69 @@ export default defineComponent({
       color: $bo-color-name;
     }
   }
+}
+
+.blue-bg, .white-bg {
+  display: flex;
+  align-items: center;
+}
+
+.blue-bg {
+  border-radius: 30px 30px 0 0;
+  padding: 0 50px 0 30px;
+  background: radial-gradient(50% 50% at 50% 50%, rgb(184, 217, 255) 0%, rgb(184, 217, 255) 100%);
+  position: relative;
+
+  &-suffix {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    background: white;
+
+    &-top {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 50%;
+
+      &:after {
+        background: radial-gradient(50% 50% at 50% 50%, rgb(184, 217, 255) 0%, rgb(184, 217, 255) 100%);
+        content: "";
+        display: block;
+        position: absolute;
+        border-radius: 0 30px 0 0;
+        top: 0;
+        right: 50%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &-bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50%;
+      background: radial-gradient(50% 50% at 50% 50%, rgb(184, 217, 255) 0%, rgb(184, 217, 255) 100%);
+
+      &:after {
+        background: white;
+        content: "";
+        display: block;
+        position: absolute;
+        border-radius: 0 0 0 30px;
+        top: 0;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.white-bg {
+  background: white;
 }
 
 </style>
