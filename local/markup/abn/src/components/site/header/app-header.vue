@@ -3,12 +3,11 @@ import {defineComponent} from 'vue'
 import CurrentCity from "@/components/site/header/current-city.vue";
 import FastSearch from "@/components/site/header/fast-search.vue";
 import Cabinet from "@/components/site/cabinet.vue";
-import MenuHeader from "@/components/site/header/menu-header.vue";
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({
   name: "AppHeader",
-  components: {MenuHeader, Cabinet, FastSearch, CurrentCity},
+  components: {Cabinet, FastSearch, CurrentCity},
   props: {
     user: {
       type: Object as PropType<BxUserDto>,
@@ -21,7 +20,6 @@ export default defineComponent({
 </script>
 
 <template>
-
   <header class="container header">
     <a href="/" class="logo">
       <img class="logo__image" src="@/assets/images/logo.svg" alt="logo">
@@ -29,9 +27,19 @@ export default defineComponent({
 
     <CurrentCity/>
 
-    <MenuHeader
+    <MenuBx
+      typeMenu="top"
+    >
+      <template #items="{items}">
 
-    />
+        <ul class="menu-header">
+          <li class="menu-header__item" v-for="item in items">
+            <a class="menu-header__link" :href="item.url">{{ item.title }}</a>
+          </li>
+        </ul>
+
+      </template>
+    </MenuBx>
 
     <FastSearch/>
 
@@ -44,6 +52,8 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
+@use "@/styles/system/variable" as *;
+
 .header {
   margin-top: 30px !important;
   margin-bottom: 70px !important;
@@ -54,6 +64,32 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
   gap: 50px;
+}
+
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+
+  &__item {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    color: $menu-blacked;
+
+  }
+
+  &__link {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    color: $menu-blacked;
+    text-decoration: none;
+  }
 }
 
 .logo {

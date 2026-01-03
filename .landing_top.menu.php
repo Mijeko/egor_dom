@@ -20,7 +20,7 @@ $aMenuLinks = [
 	],
 	[
 		"Помощь",
-		"/help/",
+		"/support/",
 		[],
 		[
 			'ICON' => 'mdi-crosshairs-gps',

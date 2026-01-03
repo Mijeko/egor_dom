@@ -1,10 +1,11 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import ContactsWithIcon from "@/components/site/contacts-with-icon.vue";
+import ScriptBlock from "@/components/site/script-block.vue";
 
 export default defineComponent({
   name: "ContactsBlock",
-  components: {ContactsWithIcon}
+  components: {ScriptBlock, ContactsWithIcon}
 })
 </script>
 
@@ -31,7 +32,10 @@ export default defineComponent({
     </div>
     <div class="contacts-block-right">
       <div>
-        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4b4dfe125038ee2dde7c3359b924ec7bd0c3e38fc03d2cfe112e67acd1b7aa23&amp;width=100%25&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>
+        <ScriptBlock
+          src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4b4dfe125038ee2dde7c3359b924ec7bd0c3e38fc03d2cfe112e67acd1b7aa23&amp;width=100%25&amp;height=300&amp;lang=ru_RU&amp;scroll=true"
+          :isAsync="true"
+        />
       </div>
     </div>
   </section>

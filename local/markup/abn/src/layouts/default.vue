@@ -2,18 +2,28 @@
 import {defineComponent} from 'vue'
 import AppHeader from "@/components/site/header/app-header.vue";
 import AppFooter from "@/components/site/footer/AppFooter.vue";
+import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 
 export default defineComponent({
   name: "default",
-  components: {AppFooter, AppHeader}
+  components: {AppFooter, AppHeader},
+  props: {
+    user: {
+      type: Object as PropType<BxUserDto>,
+      default: () => {
+        return {};
+      }
+    }
+  },
 })
 </script>
 
 <template>
 
   <div class="stronger">
-    <AppHeader/>
-
+    <AppHeader
+      :user
+    />
 
     <div class="page-content">
       <slot/>

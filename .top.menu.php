@@ -19,17 +19,8 @@ $aMenuLinks = [
 		"",
 	],
 	[
-		"Кабинет",
-		"/profile/",
-		[],
-		[
-			'ICON' => 'mdi-crosshairs-gps',
-		],
-		"",
-	],
-	[
 		"Помощь",
-		"/help/",
+		"/support/",
 		[],
 		[
 			'ICON' => 'mdi-crosshairs-gps',
