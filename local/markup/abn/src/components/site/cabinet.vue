@@ -2,10 +2,12 @@
 import {defineComponent} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import SigninForm from "@/components/site/form/signin-form.vue";
+import SignupForm from "@/components/site/form/signup-form.vue";
+import ModalContent from "@/components/site/modal/modal-content.vue";
 
 export default defineComponent({
   name: "Cabinet",
-  components: {SigninForm: SigninForm},
+  components: {ModalContent, SigninForm, SignupForm},
   props: {
     user: {
       type: Object as PropType<BxUserDto>,
@@ -16,7 +18,22 @@ export default defineComponent({
   },
   data: function () {
     return {
-      showModal: false
+      tab: null,
+      showModal: false,
+      content: [
+        {
+          title: 'Авторизация',
+          render: () => {
+            return h(SigninForm);
+          }
+        },
+        {
+          title: 'Регистрация',
+          render: () => {
+            return h(SignupForm);
+          }
+        },
+      ],
     };
   },
   computed: {
@@ -33,7 +50,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-dialog max-width="500" v-model="showModal" v-if="!isAuthorized">
+  <v-dialog max-width="850" v-model="showModal" v-if="!isAuthorized">
     <template v-slot:activator="{ props: activatorProps }">
 
       <div
@@ -47,7 +64,32 @@ export default defineComponent({
     </template>
 
     <template v-slot:default="{ isActive }">
-      <SigninForm />
+      <ModalContent v-model="showModal">
+
+        <template #content>
+
+          <v-tabs
+            v-model="tab"
+            grow
+          >
+            <v-tab :text="contentItem.title" :key="index" :value="index" v-for="(contentItem,index) in content"></v-tab>
+          </v-tabs>
+
+          <v-tabs-window v-model="tab">
+            <v-tabs-window-item
+              v-for="(contentItem, index) in content"
+              :key="index"
+              :value="index"
+            >
+              <div class="modern-tab-content">
+                <component :is="contentItem.render"/>
+              </div>
+            </v-tabs-window-item>
+          </v-tabs-window>
+
+        </template>
+
+      </ModalContent>
     </template>
   </v-dialog>
   <a
@@ -84,6 +126,12 @@ export default defineComponent({
     font-size: 14px;
     line-height: 120%;
     color: $blacked;
+  }
+}
+
+.modern-tab {
+  &-content {
+    padding: 15px 0;
   }
 }
 </style>

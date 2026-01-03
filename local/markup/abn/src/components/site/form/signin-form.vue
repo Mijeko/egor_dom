@@ -16,14 +16,33 @@ export default defineComponent({
         password: null,
       },
       validate: {
-        phone: [],
-        password: []
+        phone: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Должно быть заполнено';
+            }
+
+            return true;
+          }
+        ],
+        password: [
+          (value: string) => {
+            if (value.length <= 0) {
+              return 'Должно быть заполнено';
+            }
+
+            return true;
+          }
+        ]
       },
     };
   },
   components: {ModernPhone, ModernPassword: ModernPassword, ModernInput: ModernInput},
   methods: {
     submitForm() {
+
+      console.log('asdadsads');
+
       if (!this.isFormValid) {
         return;
       }
@@ -32,6 +51,10 @@ export default defineComponent({
         phone: String(this.form.phone),
         password: String(this.form.password),
       };
+
+
+      console.log('asdadsads 222222');
+
 
       let service = new UserService();
       service
@@ -50,45 +73,54 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card title="Войти на сайт">
-    <v-card-text>
+  <v-form class="signin-form" v-model="isFormValid" @submit.prevent="submitForm">
+    <!--    <ModernPhone-->
+    <!--      v-model="form.phone"-->
+    <!--      :rules="validate.phone"-->
+    <!--      label="Номер телефона"-->
+    <!--    >-->
+    <!--      <template #template="{label, type, value}">-->
 
-      <v-form v-model="isFormValid" @submit.prevent="submitForm">
-        <ModernPhone
-          v-model="form.phone"
-          :rules="validate.phone"
-          label="Номер телефона"
-        >
-          <template #template="{label, type, value}">
+    <!--        <label>-->
+    <!--          {{ label }}-->
+    <!--        </label>-->
 
-
-            <label>
-              {{ label }}
-            </label>
-
-            {{ value }}
-
-          </template>
-        </ModernPhone>
+    <!--      </template>-->
+    <!--    </ModernPhone>-->
 
 
-        <ModernPassword
-          v-model="form.password"
-          :rules="validate.password"
-        >
+    <!--    <ModernPassword-->
+    <!--      v-model="form.password"-->
+    <!--      :rules="validate.password"-->
+    <!--    >-->
 
-          <template #template>
-            ыыыыыыыыы
-          </template>
+    <!--      <template #template="{label, type, value}">-->
+    <!--        <label>-->
+    <!--          {{ label }}-->
+    <!--        </label>-->
+    <!--      </template>-->
 
-        </ModernPassword>
-        <v-btn type="submit">Войти</v-btn>
-      </v-form>
+    <!--    </ModernPassword>-->
 
-    </v-card-text>
-  </v-card>
+
+    <ModernInput
+      v-model="form.phone"
+      :rules="validate.phone"
+    >
+    </ModernInput>
+
+    <ModernInput
+      v-model="form.password"
+      :rules="validate.password"
+    >
+    </ModernInput>
+
+    <v-btn type="submit">Войти</v-btn>
+  </v-form>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+.signin-form {
+  height: 100%;
+}
 </style>

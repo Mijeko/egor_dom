@@ -40,24 +40,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-card title="Войти на сайт">
-    <v-card-text>
-
-      <v-form v-model="isFormValid" @submit.prevent="submitForm">
-        <ModernPhone
-          v-model="form.phone"
-          :rules="validate.phone"
-        />
-        <ModernPassword
-          v-model="form.password"
-          :rules="validate.password"
-        />
-        <v-btn type="submit">Регистрация</v-btn>
-      </v-form>
-
-    </v-card-text>
-
-  </v-card>
+  <v-form v-model="isFormValid" @submit.prevent="submitForm">
+    <ModernPhone
+      v-model="form.phone"
+      :rules="validate.phone"
+    />
+    <ModernPassword
+      v-model="form.password"
+      :rules="validate.password"
+    />
+    <v-btn type="submit">Регистрация</v-btn>
+  </v-form>
 </template>
 
 <style scoped>

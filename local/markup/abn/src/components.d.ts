@@ -58,6 +58,7 @@ declare module 'vue' {
     ManagerList: typeof import('./components/profile/manager/manager-list.vue')['default']
     Map: typeof import('./components/map.vue')['default']
     MenuBx: typeof import('./components/menu-bx.vue')['default']
+    ModalContent: typeof import('./components/site/modal/modal-content.vue')['default']
     ModernInput: typeof import('./components/site/form/modern/modern-input.vue')['default']
     ModernPassword: typeof import('./components/site/form/modern/modern-password.vue')['default']
     ModernPhone: typeof import('./components/site/form/modern/modern-phone.vue')['default']
