@@ -1,5 +1,6 @@
 <script lang="ts">
 import {defineComponent, type PropType, computed, ref, watch} from 'vue'
+import {vMaska} from "maska/vue";
 
 export interface InputParams {
   label: string;
@@ -97,6 +98,9 @@ export default defineComponent({
       validateValue,
     }
   },
+  directives: {
+    maska: vMaska as any
+  },
   computed: {
     inputParams: function (): InputParams {
       return {
@@ -118,6 +122,7 @@ export default defineComponent({
     <slot name="template" v-bind="inputParams"></slot>
 
     <input
+      v-maska="'+7 (###) ### ##-##'"
       v-model="modelValueComp"
       :type="type"
       :placeholder="placeholder"
