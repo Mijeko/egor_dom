@@ -328,14 +328,23 @@ export default defineComponent({
     }
 
     // Computed для классов
-    const hasError = computed(() => errorMessages.value.length > 0 || props.error)
+    // Ошибки показываются только если поле не pristine (было взаимодействие) или если явно указана ошибка
+    const hasError = computed(() => {
+      if (props.error) return true
+      // Не показываем ошибки, если поле pristine (не было взаимодействия)
+      if (isPristine.value) return false
+      return errorMessages.value.length > 0
+    })
     const firstError = computed(() => errorMessages.value[0] || '')
 
     // Watchers для валидации
+    // Валидация при изменении значения (только если поле не pristine или есть фокус)
     if (validateOnConfig.value.input || (validateOnConfig.value.invalidInput && isValid.value === false)) {
       watch(validationModel, async (newValue) => {
         if (newValue != null) {
-          await validate()
+          // Если поле pristine, валидируем с silent=true, чтобы не делать его не-pristine
+          // Это позволяет валидировать значение, но не показывать ошибки до взаимодействия
+          await validate(isPristine.value)
         } else if (isFocused.value) {
           const unwatch = watch(() => isFocused.value, async (val) => {
             if (!val) {

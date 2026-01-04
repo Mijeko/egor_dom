@@ -12,6 +12,7 @@ export default defineComponent({
     return {
       isFormValid: false,
       form: {
+        demo: null,
         phone: null,
         password: null,
       },
@@ -74,33 +75,42 @@ export default defineComponent({
 
 <template>
   <v-form class="signin-form" v-model="isFormValid" @submit.prevent="submitForm">
-        <ModernPhone
-          v-model="form.phone"
-          :rules="validate.phone"
-          label="Номер телефона"
-        >
-          <template #template="{label, type, value}">
 
-            <label>
-              {{ label }}
-            </label>
+    <v-text-field
 
-          </template>
-        </ModernPhone>
+      v-model="form.demo"
+      :rules="validate.phone"
+    >
+
+    </v-text-field>
+
+    <ModernPhone
+      v-model="form.phone"
+      :rules="validate.phone"
+      label="Номер телефона"
+    >
+      <template #template="{label, type, value}">
+
+        <label>
+          {{ label }}
+        </label>
+
+      </template>
+    </ModernPhone>
 
 
-        <ModernPassword
-          v-model="form.password"
-          :rules="validate.password"
-        >
+    <ModernPassword
+      v-model="form.password"
+      :rules="validate.password"
+    >
 
-          <template #template="{label, type, value}">
-            <label>
-              {{ label }}
-            </label>
-          </template>
+      <template #template="{label, type, value}">
+        <label>
+          {{ label }}
+        </label>
+      </template>
 
-        </ModernPassword>
+    </ModernPassword>
 
     <v-btn type="submit">Войти</v-btn>
   </v-form>
