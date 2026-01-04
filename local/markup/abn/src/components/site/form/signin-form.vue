@@ -102,6 +102,7 @@ export default defineComponent({
     <ModernPassword
       v-model="form.password"
       :rules="validate.password"
+      label="Пароль"
     >
 
       <template #template="{label, type, value}">

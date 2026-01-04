@@ -156,7 +156,7 @@ export default defineComponent({
     'update:modelValue': (value: string | number | null) => true,
     'update:focused': (focused: boolean) => true
   },
-  setup(props: ModernInputProps, { emit, attrs, slots }) {
+  setup(props: ModernInputProps, {emit, attrs, slots}) {
     // Состояние компонента
     const internalErrorMessages = ref<string[]>([])
     const isPristine = shallowRef(true)
@@ -369,7 +369,7 @@ export default defineComponent({
       if (form) {
         form.update?.(uid.value, isValid.value, errorMessages.value)
       }
-    }, { flush: 'post' })
+    }, {flush: 'post'})
 
     // Регистрация в форме
     onBeforeMount(() => {
@@ -415,6 +415,75 @@ export default defineComponent({
       inputRef.value?.blur()
     }
 
+    // Данные для передачи в слоты
+    const slotProps = computed(() => ({
+      // State
+      modelValue: modelValue.value,
+      errorMessages: errorMessages.value,
+      hasError: hasError.value,
+      firstError: firstError.value,
+      isValid: isValid.value,
+      isFocused: isFocused.value,
+      isValidating: isValidating.value,
+      uid: uid.value,
+      
+      // Computed
+      counterValue: counterValue.value,
+      counterText: counterText.value,
+      hasCounter: hasCounter.value,
+      
+      // Props
+      label: props.label,
+      type: props.type,
+      placeholder: props.placeholder,
+      disabled: props.disabled || form?.isDisabled?.value || false,
+      readonly: props.readonly || form?.isReadonly?.value || false,
+      required: props.required,
+      prefix: props.prefix,
+      suffix: props.suffix,
+      persistentPlaceholder: props.persistentPlaceholder,
+      persistentCounter: props.persistentCounter,
+      role: props.role,
+      
+      // Methods
+      validate,
+      reset,
+      resetValidation,
+      focus,
+      blur,
+      handleInput,
+      handleFocus,
+      handleBlur
+    }))
+
+    // Input props для передачи в слот
+    const inputProps = computed(() => ({
+      id: uid.value,
+      value: modelValue.value ?? '',
+      type: props.type,
+      placeholder: props.persistentPlaceholder ? props.placeholder : (isFocused.value || modelValue.value ? '' : props.placeholder),
+      disabled: props.disabled || form?.isDisabled?.value || false,
+      readonly: props.readonly || form?.isReadonly?.value || false,
+      required: props.required,
+      role: props.role,
+      'aria-label': props.label,
+      'aria-required': props.required,
+      'aria-invalid': hasError.value,
+      'aria-describedby': hasError.value ? `${uid.value}-error` : undefined,
+      class: {
+        'modern-input__field': true,
+        'modern-input__field--error': hasError.value,
+        'modern-input__field--disabled': props.disabled || form?.isDisabled?.value || false,
+        'modern-input__field--readonly': props.readonly || form?.isReadonly?.value || false,
+        'modern-input__field--prefixed': !!props.prefix,
+        'modern-input__field--suffixed': !!props.suffix || hasCounter.value
+      },
+      onInput: handleInput,
+      onFocus: handleFocus,
+      onBlur: handleBlur,
+      ...attrs // Дополнительные атрибуты, переданные в компонент
+    }))
+
     return {
       // State
       modelValue,
@@ -455,15 +524,45 @@ export default defineComponent({
       persistentCounter: computed(() => props.persistentCounter),
       role: computed(() => props.role),
       
-      // Slots
-      slots
+      // Slot data
+      slotProps,
+      inputProps
     }
   }
 })
 </script>
 
 <template>
-  <div class="modern-input" :class="{
+  <!-- Если указан слот template, используем его для полной кастомизации -->
+  <div v-if="$slots.template" class="modern-input" :class="{
+    'modern-input--error': hasError,
+    'modern-input--disabled': disabled,
+    'modern-input--readonly': readonly,
+    'modern-input--focused': isFocused
+  }">
+    <slot name="template" v-bind="{ ...slotProps, input: inputProps }">
+      <!-- В слоте template доступны:
+        - Все данные: modelValue, hasError, firstError, errorMessages, isValid, isFocused, isValidating
+        - Props: label, type, placeholder, disabled, readonly, required, prefix, suffix, и т.д.
+        - Готовый input элемент через input (объект с props) - используйте <input v-bind="input" />
+        - Методы: validate, reset, resetValidation, focus, blur, handleInput, handleFocus, handleBlur
+        
+        Пример использования:
+        <template #template="{ input, hasError, firstError, label, required }">
+          <div class="my-custom-wrapper">
+            <label v-if="label">{{ label }}<span v-if="required">*</span></label>
+            <input v-bind="input" />
+            <div v-if="hasError" class="my-error">{{ firstError }}</div>
+          </div>
+        </template>
+        
+        Примечание: input элемент предоставляется через input props.
+        Пользователь должен разместить <input v-bind="input" /> в своем HTML, но не может изменять его структуру. -->
+    </slot>
+  </div>
+
+  <!-- Стандартный HTML, если слот template не указан -->
+  <div v-else class="modern-input" :class="{
     'modern-input--error': hasError,
     'modern-input--disabled': disabled,
     'modern-input--readonly': readonly,
@@ -471,7 +570,7 @@ export default defineComponent({
   }">
     <!-- Label -->
     <label v-if="label || $slots.label" class="modern-input__label">
-      <slot name="label">
+      <slot name="label" v-bind="slotProps">
         {{ label }}
         <span v-if="required" class="modern-input__required">*</span>
       </slot>
@@ -480,11 +579,13 @@ export default defineComponent({
     <!-- Input wrapper -->
     <div class="modern-input__wrapper">
       <!-- Prefix -->
-      <span v-if="prefix" class="modern-input__prefix">
-        {{ prefix }}
+      <span v-if="prefix || $slots.prefix" class="modern-input__prefix">
+        <slot name="prefix" v-bind="slotProps">
+          {{ prefix }}
+        </slot>
       </span>
 
-      <!-- Input field -->
+      <!-- Input field - готовый элемент, который нельзя изменять -->
       <input
         ref="inputRef"
         :id="uid"
@@ -514,26 +615,30 @@ export default defineComponent({
       />
 
       <!-- Suffix -->
-      <span v-if="suffix" class="modern-input__suffix">
-        {{ suffix }}
+      <span v-if="suffix || $slots.suffix" class="modern-input__suffix">
+        <slot name="suffix" v-bind="slotProps">
+          {{ suffix }}
+        </slot>
       </span>
 
       <!-- Counter -->
       <span v-if="hasCounter && (persistentCounter || isFocused || modelValue)" class="modern-input__counter">
-        {{ counterText }}
+        <slot name="counter" v-bind="slotProps">
+          {{ counterText }}
+        </slot>
       </span>
     </div>
 
     <!-- Error messages -->
-    <div v-if="hasError" :id="`${uid}-error`" class="modern-input__error" role="alert">
-      <slot name="error" :error="firstError">
+    <div v-if="hasError || $slots.error" :id="`${uid}-error`" class="modern-input__error" role="alert">
+      <slot name="error" v-bind="slotProps">
         {{ firstError }}
       </slot>
     </div>
 
     <!-- Details slot -->
     <div v-if="$slots.details" class="modern-input__details">
-      <slot name="details"></slot>
+      <slot name="details" v-bind="slotProps"></slot>
     </div>
   </div>
 </template>
