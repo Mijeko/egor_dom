@@ -76,25 +76,18 @@ export default defineComponent({
 <template>
   <v-form class="signin-form" v-model="isFormValid" @submit.prevent="submitForm">
 
-    <v-text-field
-
-      v-model="form.demo"
-      :rules="validate.phone"
-    >
-
-    </v-text-field>
 
     <ModernPhone
       v-model="form.phone"
       :rules="validate.phone"
       label="Номер телефона"
     >
-      <template #template="{label, type, value}">
-
-        <label>
-          {{ label }}
-        </label>
-
+      <template #template="{ input, hasError, firstError, label, required }">
+        <div class="my-custom-wrapper">
+          <label v-if="label">{{ label }}<span v-if="required">*</span></label>
+          <input v-bind="input" />
+          <div v-if="hasError" class="my-error">{{ firstError }}</div>
+        </div>
       </template>
     </ModernPhone>
 
@@ -105,10 +98,12 @@ export default defineComponent({
       label="Пароль"
     >
 
-      <template #template="{label, type, value}">
-        <label>
-          {{ label }}
-        </label>
+      <template #template="{ input, hasError, firstError, label, required }">
+        <div class="my-custom-wrapper">
+          <label v-if="label">{{ label }}<span v-if="required">*</span></label>
+          <input v-bind="input" />
+          <div v-if="hasError" class="my-error">{{ firstError }}</div>
+        </div>
       </template>
 
     </ModernPassword>
