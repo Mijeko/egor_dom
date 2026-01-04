@@ -44,11 +44,34 @@ export default defineComponent({
     v-maska="'+7 (###) ### ##-##'"
     v-model="modelValueComputed"
   >
-    <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
-      <slot :name="slotName" v-bind="slotProps"></slot>
+    <template #template="{ input, hasError, firstError, label, required }">
+
+      <div class="modern-input-wrapper">
+
+        <label v-if="label">{{ label }}
+          <span v-if="required">*</span>
+        </label>
+
+        <div class="modern-input">
+          <input v-bind="input"/>
+        </div>
+
+        <div v-if="hasError" class="my-error">{{ firstError }}</div>
+
+      </div>
+
     </template>
   </ModernInput>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+.modern-input {
+  display: flex;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
 </style>

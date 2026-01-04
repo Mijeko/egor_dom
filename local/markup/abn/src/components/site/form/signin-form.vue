@@ -76,37 +76,17 @@ export default defineComponent({
 <template>
   <v-form class="signin-form" v-model="isFormValid" @submit.prevent="submitForm">
 
-
     <ModernPhone
       v-model="form.phone"
       :rules="validate.phone"
       label="Номер телефона"
-    >
-      <template #template="{ input, hasError, firstError, label, required }">
-        <div class="my-custom-wrapper">
-          <label v-if="label">{{ label }}<span v-if="required">*</span></label>
-          <input v-bind="input" />
-          <div v-if="hasError" class="my-error">{{ firstError }}</div>
-        </div>
-      </template>
-    </ModernPhone>
-
+    />
 
     <ModernPassword
       v-model="form.password"
       :rules="validate.password"
       label="Пароль"
-    >
-
-      <template #template="{ input, hasError, firstError, label, required }">
-        <div class="my-custom-wrapper">
-          <label v-if="label">{{ label }}<span v-if="required">*</span></label>
-          <input v-bind="input" />
-          <div v-if="hasError" class="my-error">{{ firstError }}</div>
-        </div>
-      </template>
-
-    </ModernPassword>
+    />
 
     <v-btn type="submit">Войти</v-btn>
   </v-form>
@@ -115,5 +95,8 @@ export default defineComponent({
 <style lang="scss">
 .signin-form {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 </style>

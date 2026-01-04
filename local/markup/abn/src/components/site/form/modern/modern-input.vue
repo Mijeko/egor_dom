@@ -426,12 +426,12 @@ export default defineComponent({
       isFocused: isFocused.value,
       isValidating: isValidating.value,
       uid: uid.value,
-      
+
       // Computed
       counterValue: counterValue.value,
       counterText: counterText.value,
       hasCounter: hasCounter.value,
-      
+
       // Props
       label: props.label,
       type: props.type,
@@ -444,7 +444,7 @@ export default defineComponent({
       persistentPlaceholder: props.persistentPlaceholder,
       persistentCounter: props.persistentCounter,
       role: props.role,
-      
+
       // Methods
       validate,
       reset,
@@ -471,12 +471,12 @@ export default defineComponent({
       'aria-invalid': hasError.value,
       'aria-describedby': hasError.value ? `${uid.value}-error` : undefined,
       class: {
-        'modern-input__field': true,
-        'modern-input__field--error': hasError.value,
-        'modern-input__field--disabled': props.disabled || form?.isDisabled?.value || false,
-        'modern-input__field--readonly': props.readonly || form?.isReadonly?.value || false,
-        'modern-input__field--prefixed': !!props.prefix,
-        'modern-input__field--suffixed': !!props.suffix || hasCounter.value
+        'base-input__field': true,
+        'base-input__field--error': hasError.value,
+        'base-input__field--disabled': props.disabled || form?.isDisabled?.value || false,
+        'base-input__field--readonly': props.readonly || form?.isReadonly?.value || false,
+        'base-input__field--prefixed': !!props.prefix,
+        'base-input__field--suffixed': !!props.suffix || hasCounter.value
       },
       onInput: handleInput,
       onFocus: handleFocus,
@@ -495,12 +495,12 @@ export default defineComponent({
       isValidating,
       inputRef,
       uid,
-      
+
       // Computed
       counterValue,
       counterText,
       hasCounter,
-      
+
       // Methods
       validate,
       reset,
@@ -510,7 +510,7 @@ export default defineComponent({
       handleInput,
       handleFocus,
       handleBlur,
-      
+
       // Props (для использования в template)
       label: computed(() => props.label),
       type: computed(() => props.type),
@@ -523,7 +523,7 @@ export default defineComponent({
       persistentPlaceholder: computed(() => props.persistentPlaceholder),
       persistentCounter: computed(() => props.persistentCounter),
       role: computed(() => props.role),
-      
+
       // Slot data
       slotProps,
       inputProps
@@ -534,11 +534,11 @@ export default defineComponent({
 
 <template>
   <!-- Если указан слот template, используем его для полной кастомизации -->
-  <div v-if="$slots.template" class="modern-input" :class="{
-    'modern-input--error': hasError,
-    'modern-input--disabled': disabled,
-    'modern-input--readonly': readonly,
-    'modern-input--focused': isFocused
+  <div v-if="$slots.template" class="base-input" :class="{
+    'base-input--error': hasError,
+    'base-input--disabled': disabled,
+    'base-input--readonly': readonly,
+    'base-input--focused': isFocused
   }">
     <slot name="template" v-bind="{ ...slotProps, input: inputProps }">
       <!-- В слоте template доступны:
@@ -546,7 +546,7 @@ export default defineComponent({
         - Props: label, type, placeholder, disabled, readonly, required, prefix, suffix, и т.д.
         - Готовый input элемент через input (объект с props) - используйте <input v-bind="input" />
         - Методы: validate, reset, resetValidation, focus, blur, handleInput, handleFocus, handleBlur
-        
+
         Пример использования:
         <template #template="{ input, hasError, firstError, label, required }">
           <div class="my-custom-wrapper">
@@ -555,31 +555,31 @@ export default defineComponent({
             <div v-if="hasError" class="my-error">{{ firstError }}</div>
           </div>
         </template>
-        
+
         Примечание: input элемент предоставляется через input props.
         Пользователь должен разместить <input v-bind="input" /> в своем HTML, но не может изменять его структуру. -->
     </slot>
   </div>
 
   <!-- Стандартный HTML, если слот template не указан -->
-  <div v-else class="modern-input" :class="{
-    'modern-input--error': hasError,
-    'modern-input--disabled': disabled,
-    'modern-input--readonly': readonly,
-    'modern-input--focused': isFocused
+  <div v-else class="base-input" :class="{
+    'base-input--error': hasError,
+    'base-input--disabled': disabled,
+    'base-input--readonly': readonly,
+    'base-input--focused': isFocused
   }">
     <!-- Label -->
-    <label v-if="label || $slots.label" class="modern-input__label">
+    <label v-if="label || $slots.label" class="base-input__label">
       <slot name="label" v-bind="slotProps">
         {{ label }}
-        <span v-if="required" class="modern-input__required">*</span>
+        <span v-if="required" class="base-input__required">*</span>
       </slot>
     </label>
 
     <!-- Input wrapper -->
-    <div class="modern-input__wrapper">
+    <div class="base-input__wrapper">
       <!-- Prefix -->
-      <span v-if="prefix || $slots.prefix" class="modern-input__prefix">
+      <span v-if="prefix || $slots.prefix" class="base-input__prefix">
         <slot name="prefix" v-bind="slotProps">
           {{ prefix }}
         </slot>
@@ -600,13 +600,13 @@ export default defineComponent({
         :aria-required="required"
         :aria-invalid="hasError"
         :aria-describedby="hasError ? `${uid}-error` : undefined"
-        class="modern-input__field"
+        class="base-input__field"
         :class="{
-          'modern-input__field--error': hasError,
-          'modern-input__field--disabled': disabled,
-          'modern-input__field--readonly': readonly,
-          'modern-input__field--prefixed': prefix,
-          'modern-input__field--suffixed': suffix || hasCounter
+          'base-input__field--error': hasError,
+          'base-input__field--disabled': disabled,
+          'base-input__field--readonly': readonly,
+          'base-input__field--prefixed': prefix,
+          'base-input__field--suffixed': suffix || hasCounter
         }"
         @input="handleInput"
         @focus="handleFocus"
@@ -615,14 +615,14 @@ export default defineComponent({
       />
 
       <!-- Suffix -->
-      <span v-if="suffix || $slots.suffix" class="modern-input__suffix">
+      <span v-if="suffix || $slots.suffix" class="base-input__suffix">
         <slot name="suffix" v-bind="slotProps">
           {{ suffix }}
         </slot>
       </span>
 
       <!-- Counter -->
-      <span v-if="hasCounter && (persistentCounter || isFocused || modelValue)" class="modern-input__counter">
+      <span v-if="hasCounter && (persistentCounter || isFocused || modelValue)" class="base-input__counter">
         <slot name="counter" v-bind="slotProps">
           {{ counterText }}
         </slot>
@@ -630,63 +630,63 @@ export default defineComponent({
     </div>
 
     <!-- Error messages -->
-    <div v-if="hasError || $slots.error" :id="`${uid}-error`" class="modern-input__error" role="alert">
+    <div v-if="hasError || $slots.error" :id="`${uid}-error`" class="base-input__error" role="alert">
       <slot name="error" v-bind="slotProps">
         {{ firstError }}
       </slot>
     </div>
 
     <!-- Details slot -->
-    <div v-if="$slots.details" class="modern-input__details">
+    <div v-if="$slots.details" class="base-input__details">
       <slot name="details" v-bind="slotProps"></slot>
     </div>
   </div>
 </template>
 
 <style scoped>
-.modern-input {
+.base-input {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
 }
 
-.modern-input__label {
+.base-input__label {
   font-size: 0.875rem;
   font-weight: 500;
   color: rgba(var(--v-theme-on-surface), 0.87);
   line-height: 1.5;
 }
 
-.modern-input__required {
+.base-input__required {
   color: rgb(var(--v-theme-error));
   margin-left: 0.25rem;
 }
 
-.modern-input__wrapper {
+.base-input__wrapper {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.modern-input__prefix,
-.modern-input__suffix {
+.base-input__prefix,
+.base-input__suffix {
   font-size: 1rem;
   color: rgba(var(--v-theme-on-surface), 0.6);
   white-space: nowrap;
   user-select: none;
 }
 
-.modern-input__prefix {
+.base-input__prefix {
   padding-right: 0.5rem;
 }
 
-.modern-input__suffix {
+.base-input__suffix {
   padding-left: 0.5rem;
 }
 
-.modern-input__counter {
+.base-input__counter {
   font-size: 0.75rem;
   color: rgba(var(--v-theme-on-surface), 0.6);
   padding-left: 0.5rem;
@@ -694,7 +694,7 @@ export default defineComponent({
   user-select: none;
 }
 
-.modern-input__field {
+.base-input__field {
   flex: 1;
   padding: 0.75rem;
   border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
@@ -710,71 +710,71 @@ export default defineComponent({
   box-sizing: border-box;
 }
 
-.modern-input__field::placeholder {
+.base-input__field::placeholder {
   color: rgba(var(--v-theme-on-surface), 0.38);
 }
 
-.modern-input__field:hover:not(.modern-input__field--disabled):not(.modern-input__field--readonly) {
+.base-input__field:hover:not(.base-input__field--disabled):not(.base-input__field--readonly) {
   border-color: rgba(var(--v-border-color), 1);
 }
 
-.modern-input__field:focus {
+.base-input__field:focus {
   border-color: rgb(var(--v-theme-primary));
   border-width: 2px;
   box-shadow: 0 0 0 2px rgba(var(--v-theme-primary), 0.12);
 }
 
-.modern-input__field--error {
+.base-input__field--error {
   border-color: rgb(var(--v-theme-error));
 }
 
-.modern-input__field--error:focus {
+.base-input__field--error:focus {
   border-color: rgb(var(--v-theme-error));
   box-shadow: 0 0 0 2px rgba(var(--v-theme-error), 0.12);
 }
 
-.modern-input__field--disabled {
+.base-input__field--disabled {
   opacity: 0.6;
   cursor: not-allowed;
   background-color: rgba(var(--v-theme-surface), 0.38);
 }
 
-.modern-input__field--readonly {
+.base-input__field--readonly {
   cursor: default;
   background-color: rgba(var(--v-theme-surface), 0.12);
 }
 
-.modern-input__field--prefixed {
+.base-input__field--prefixed {
   padding-left: 0.5rem;
 }
 
-.modern-input__field--suffixed {
+.base-input__field--suffixed {
   padding-right: 0.5rem;
 }
 
-.modern-input__error {
+.base-input__error {
   font-size: 0.75rem;
   color: rgb(var(--v-theme-error));
   line-height: 1.5;
   margin-top: -0.25rem;
 }
 
-.modern-input__details {
+.base-input__details {
   font-size: 0.75rem;
   color: rgba(var(--v-theme-on-surface), 0.6);
   line-height: 1.5;
 }
 
-.modern-input--error .modern-input__label {
+.base-input--error .base-input__label {
   color: rgb(var(--v-theme-error));
 }
 
-.modern-input--disabled {
+.base-input--disabled {
   opacity: 0.6;
   pointer-events: none;
 }
 
-.modern-input--readonly {
+.base-input--readonly {
   opacity: 0.87;
 }
 </style>
