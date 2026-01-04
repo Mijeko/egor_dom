@@ -17,51 +17,20 @@ export default defineComponent({
       default: null
     },
     rules: {
-      type: Array as PropType<Array<(value: any) => boolean | string>>,
-      default: () => []
-    },
-    // Добавьте другие нужные вам props, например:
-    label: {
-      type: String,
-      default: ''
-    },
-    type: {
-      type: String,
-      default: 'text'
-    },
-    placeholder: {
-      type: String,
-      default: ''
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    required: {
-      type: Boolean,
-      default: false
+      type: Array as PropType<any[]>,
+      default: []
     },
   },
   emits: ['update:modelValue'],
   directives: {
     maska: vMaska as any
   },
-  methods: {
-    obtainIn(): InputParams {
-      return {
-        label: this.label,
-        type: this.type,
-        required: this.required,
-        value: this.modelValueComputed as any
-      };
-    }
-  },
   computed: {
     modelValueComputed: {
-      set(val: any) {
-        this.$emit('update:modelValue', val);
+      set(value: any) {
+        this.$emit('update:modelValue', value);
       },
-      get(): string | number | boolean | any[] | Record<string, any> | null {
+      get(): any {
         return this.modelValue;
       },
     },

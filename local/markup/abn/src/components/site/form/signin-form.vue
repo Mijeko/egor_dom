@@ -17,8 +17,8 @@ export default defineComponent({
       },
       validate: {
         phone: [
-          (value: string) => {
-            if (value.length <= 0) {
+          (value: string | null) => {
+            if (!value || value.length <= 0) {
               return 'Должно быть заполнено';
             }
 
@@ -26,8 +26,8 @@ export default defineComponent({
           }
         ],
         password: [
-          (value: string) => {
-            if (value.length <= 0) {
+          (value: string | null) => {
+            if (!value || value.length <= 0) {
               return 'Должно быть заполнено';
             }
 
@@ -74,46 +74,33 @@ export default defineComponent({
 
 <template>
   <v-form class="signin-form" v-model="isFormValid" @submit.prevent="submitForm">
-    <!--    <ModernPhone-->
-    <!--      v-model="form.phone"-->
-    <!--      :rules="validate.phone"-->
-    <!--      label="Номер телефона"-->
-    <!--    >-->
-    <!--      <template #template="{label, type, value}">-->
+        <ModernPhone
+          v-model="form.phone"
+          :rules="validate.phone"
+          label="Номер телефона"
+        >
+          <template #template="{label, type, value}">
 
-    <!--        <label>-->
-    <!--          {{ label }}-->
-    <!--        </label>-->
+            <label>
+              {{ label }}
+            </label>
 
-    <!--      </template>-->
-    <!--    </ModernPhone>-->
-
-
-    <!--    <ModernPassword-->
-    <!--      v-model="form.password"-->
-    <!--      :rules="validate.password"-->
-    <!--    >-->
-
-    <!--      <template #template="{label, type, value}">-->
-    <!--        <label>-->
-    <!--          {{ label }}-->
-    <!--        </label>-->
-    <!--      </template>-->
-
-    <!--    </ModernPassword>-->
+          </template>
+        </ModernPhone>
 
 
-    <ModernInput
-      v-model="form.phone"
-      :rules="validate.phone"
-    >
-    </ModernInput>
+        <ModernPassword
+          v-model="form.password"
+          :rules="validate.password"
+        >
 
-    <ModernInput
-      v-model="form.password"
-      :rules="validate.password"
-    >
-    </ModernInput>
+          <template #template="{label, type, value}">
+            <label>
+              {{ label }}
+            </label>
+          </template>
+
+        </ModernPassword>
 
     <v-btn type="submit">Войти</v-btn>
   </v-form>
