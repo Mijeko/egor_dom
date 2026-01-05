@@ -65,6 +65,7 @@ export default defineComponent({
 
   &-icon {
     width: 20px;
+    margin-right: 5px;
 
     &__image, image {
       height: 100%;
@@ -77,8 +78,9 @@ export default defineComponent({
     align-items: stretch;
     justify-content: flex-start;
     border: 1px gray solid;
-    padding: 10px;
-    border-radius: 7px;
+    padding: 10px 10px 10px 20px;
+    border-radius: 50px;
+    //border-radius: 7px;
     width: 100%;
   }
 
