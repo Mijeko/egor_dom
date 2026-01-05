@@ -31,16 +31,42 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-checkbox
-    v-model="modelValueComputed"
-    :rules
-  >
-    <template v-slot:label>
-      <slot></slot>
-    </template>
-  </v-checkbox>
+  <div class="modern-form-agree">
+    <v-checkbox
+      class=""
+      v-model="modelValueComputed"
+      :rules
+      hideDetails="auto"
+    >
+      <template v-slot:label>
+        <slot></slot>
+      </template>
+    </v-checkbox>
+  </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.modern-form-agree {
+  &:deep(*) {
+    --v-input-control-height: 16px !important;
+    --v-selection-control-size: 20px !important;
 
+    .v-label {
+      font-size: 14px !important;
+      line-height: calc(14px * 1.3) !important;
+    }
+
+    .v-checkbox.v-input {
+      padding: 0 10px 0 15px !important;
+    }
+
+    .v-selection-control__wrapper {
+      margin-right: 10px;
+    }
+
+    .v-input__control, .v-input__details {
+      padding: 0 10px 0 5px !important;
+    }
+  }
+}
 </style>

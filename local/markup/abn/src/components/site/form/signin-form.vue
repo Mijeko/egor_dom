@@ -141,7 +141,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding-top: 35px;
+    padding-top: 25px;
   }
 
   &-with-social {
