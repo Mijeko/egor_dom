@@ -38,20 +38,5 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
-@use '@/styles/system/variable' as *;
 
-.btn-main {
-  background: $button-color;
-  border-radius: 30px !important;
-  padding: 17px 43px !important;
-  height: auto !important;
-
-  .v-btn__content {
-    color: $white-color;
-  }
-
-  .v-btn__append {
-    margin-inline: 15px;
-  }
-}
 </style>

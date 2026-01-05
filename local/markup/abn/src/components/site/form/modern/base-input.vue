@@ -39,7 +39,7 @@ interface VuetifyForm {
 type ValidationRule = (value: any) => boolean | string | Promise<boolean | string>
 
 // Интерфейс для props компонента
-interface ModernInputProps {
+interface BaseInputProps {
   modelValue?: string | number | null
   rules?: ValidationRule[]
   label?: string
@@ -64,7 +64,7 @@ interface ModernInputProps {
 }
 
 export default defineComponent({
-  name: "ModernInput",
+  name: "BaseInput",
   inheritAttrs: false,
   props: {
     modelValue: {
@@ -156,7 +156,7 @@ export default defineComponent({
     'update:modelValue': (value: string | number | null) => true,
     'update:focused': (focused: boolean) => true
   },
-  setup(props: ModernInputProps, {emit, attrs, slots}) {
+  setup(props: BaseInputProps, {emit, attrs, slots}) {
     // Состояние компонента
     const internalErrorMessages = ref<string[]>([])
     const isPristine = shallowRef(true)

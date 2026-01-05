@@ -39,39 +39,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <ModernInput
+  <IconInput
     v-bind="{...$props,...$attrs}"
     v-maska="'+7 (###) ### ##-##'"
     v-model="modelValueComputed"
+    type="text"
   >
-    <template #template="{ input, hasError, firstError, label, required }">
-
-      <div class="modern-input-wrapper">
-
-        <label v-if="label">{{ label }}
-          <span v-if="required">*</span>
-        </label>
-
-        <div class="modern-input">
-          <input v-bind="input"/>
-        </div>
-
-        <div v-if="hasError" class="my-error">{{ firstError }}</div>
-
-      </div>
-
+    <template #icon="{label}">
+      <img class="modern-input-icon__image" src="@/assets/images/icons/input/mobile.svg" :alt="label">
     </template>
-  </ModernInput>
+  </IconInput>
 </template>
 
-<style lang="scss" scoped>
-
-.modern-input {
-  display: flex;
-
-  &-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-}
+<style lang="scss">
 </style>

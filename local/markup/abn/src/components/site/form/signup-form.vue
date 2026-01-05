@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import ModernInput from "@/components/site/form/modern/modern-input.vue";
+import BaseInput from "@/components/site/form/modern/base-input.vue";
 import ModernPassword from "@/components/site/form/modern/modern-password.vue";
 import ModernPhone from "@/components/site/form/modern/modern-phone.vue";
 import UserService from "@/service/User/UserService.ts";
@@ -21,7 +21,7 @@ export default defineComponent({
       },
     };
   },
-  components: {ModernPhone, ModernPassword: ModernPassword, ModernInput: ModernInput},
+  components: {ModernPhone, ModernPassword: ModernPassword, ModernInput: BaseInput},
   methods: {
     submitForm() {
       if (!this.isFormValid) {
@@ -40,19 +40,28 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-form v-model="isFormValid" @submit.prevent="submitForm">
+  <v-form class="signup-form" v-model="isFormValid" @submit.prevent="submitForm">
     <ModernPhone
       v-model="form.phone"
       :rules="validate.phone"
+      label="Номер телефона"
     />
     <ModernPassword
       v-model="form.password"
       :rules="validate.password"
+      label="Пароль"
     />
-    <v-btn type="submit">Регистрация</v-btn>
+
+
+    <SButton type="submit">Регистрация</SButton>
   </v-form>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+.signup-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 </style>

@@ -1,8 +1,10 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import IconInput from "@/components/site/form/modern/icon-input.vue";
 
 export default defineComponent({
   name: "ModernPassword",
+  components: {IconInput},
   props: {
     modelValue: {
       type: [String, Number, null, Boolean, Array, Object],
@@ -27,74 +29,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <ModernInput
+  <IconInput
     v-bind="{...$props,...$attrs}"
-    type="password"
     v-model="modelValueComp"
+    type="password"
   >
-    <template #template="{ input, hasError, firstError, label, required }">
-
-      <div class="modern-input-container">
-
-        <div class="modern-input">
-          <div class="modern-input-wrapper">
-            <div class="modern-input-icon">
-              <img class="modern-input-icon__image" src="@/assets/images/icons/input/mobile.svg" :alt="label">
-            </div>
-            <input class="modern-input-field" v-bind="input" :placeholder="label"/>
-          </div>
-        </div>
-
-        <div v-if="hasError" class="modern-input-error">{{ firstError }}</div>
-
-      </div>
-
+    <template #icon="{label}">
+      <img class="modern-input-icon__image" src="@/assets/images/icons/input/encrypted.svg" :alt="label">
     </template>
-  </ModernInput>
+  </IconInput>
 </template>
 
-<style lang="scss" scoped>
-
-.modern-input {
-  display: flex;
-
-  &-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &-icon {
-    width: 20px;
-
-    &__image {
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-
-  &-wrapper {
-    display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
-    border: 1px gray solid;
-    padding: 10px;
-    border-radius: 7px;
-    width: 100%;
-  }
-
-  &-field {
-    outline: none;
-    border: 0;
-    height: 100%;
-    padding: 5px;
-  }
-
-  &-error {
-    font-size: 14px;
-    color: red;
-    text-transform: lowercase;
-    margin-top: 3px;
-  }
-}
-
+<style lang="scss">
 </style>

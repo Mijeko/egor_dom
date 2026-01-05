@@ -1,10 +1,11 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import ModernInput from "@/components/site/form/modern/modern-input.vue";
+import BaseInput from "@/components/site/form/modern/base-input.vue";
 import ModernPassword from "@/components/site/form/modern/modern-password.vue";
 import ModernPhone from "@/components/site/form/modern/modern-phone.vue";
 import UserService from "@/service/User/UserService.ts";
 import type AuthorizeDto from "@/dto/request/AuthorizeDto.ts";
+import Agree from "@/components/site/form/element/agree.vue";
 
 export default defineComponent({
   name: "SigninForm",
@@ -12,11 +13,20 @@ export default defineComponent({
     return {
       isFormValid: false,
       form: {
-        demo: null,
+        agree: false,
         phone: null,
         password: null,
       },
       validate: {
+        agree: [
+          (value: boolean) => {
+            if (!value) {
+              return 'Необходимо дать свое согласие';
+            }
+
+            return true;
+          }
+        ],
         phone: [
           (value: string | null) => {
             if (!value || value.length <= 0) {
@@ -38,7 +48,7 @@ export default defineComponent({
       },
     };
   },
-  components: {ModernPhone, ModernPassword: ModernPassword, ModernInput: ModernInput},
+  components: {Agree, ModernPhone, ModernPassword: ModernPassword, ModernInput: BaseInput},
   methods: {
     submitForm() {
 
@@ -88,15 +98,110 @@ export default defineComponent({
       label="Пароль"
     />
 
-    <v-btn type="submit">Войти</v-btn>
+    <Agree v-model="form.agree" :rules="validate.agree">
+      Я согласен с политикой конфидициальности и офертой
+    </Agree>
+
+    <SButton type="submit">Авторизоваться</SButton>
+
+
+    <div class="signin-with-social">
+      <div class="signin-with-social-line-wrap">
+        <div class="signin-with-social-line-text">или</div>
+        <div class="signin-with-social-line"></div>
+      </div>
+
+
+      <div class="signin-with-social-list">
+        <div class="signin-with-social-item">
+          <v-icon icon="$googleIcon" size="medium" color="white"/>
+        </div>
+        <div class="signin-with-social-item">
+          <v-icon icon="$peopleList" size="medium" color="white"/>
+        </div>
+        <div class="signin-with-social-item">
+          <v-icon icon="$peopleList" size="medium" color="white"/>
+        </div>
+        <div class="signin-with-social-item">
+          <v-icon icon="$peopleList" size="medium" color="white"/>
+        </div>
+      </div>
+    </div>
+
+    <!--    <v-btn type="submit">Войти</v-btn>-->
   </v-form>
 </template>
 
 <style lang="scss">
-.signin-form {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+@use '@/styles/system/variable' as *;
+
+.signin {
+  &-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 35px;
+  }
+
+  &-with-social {
+    margin-top: 30px;
+
+    &-line {
+
+      width: 100%;
+      height: 1px;
+      background: $gray-color;
+      //background: $menu-blacked;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0px, -50%);
+
+      &-wrap {
+        position: relative;
+        height: 40px;
+      }
+
+      &-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 33;
+        background: $white-color;
+        //background: $button-color;
+        //color: $white-color;
+        font-size: 12px;
+        padding: 3px 7px;
+        border-radius: 10px;
+      }
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    &-item {
+      border: 1px $footer-short solid;
+      border-radius: 5px;
+      padding: 5px;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      cursor: pointer;
+      background: $about-text-border;
+      //background: #e6f2ff;
+      //background: $about-text-border;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 </style>

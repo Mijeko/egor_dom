@@ -1,7 +1,7 @@
-@use "variable";
+@use "variable" as *;
 
 .primary-btn {
-  border: 1px variable.$primary-color-custom solid;
+  border: 1px $primary-color-custom solid;
   color: black;
   border-radius: 5px;
   padding: 4px 10px;
@@ -9,7 +9,22 @@
   cursor: pointer;
 
   &:hover {
-    background-color: variable.$primary-color-custom;
+    background-color: $primary-color-custom;
     color: white;
+  }
+}
+
+.btn-main {
+  background: $button-color !important;;
+  border-radius: 30px !important;
+  padding: 17px 43px !important;
+  height: auto !important;
+
+  .v-btn__content {
+    color: $white-color !important;
+  }
+
+  .v-btn__append {
+    margin-inline: 15px;
   }
 }

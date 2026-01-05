@@ -69,7 +69,8 @@ export default defineComponent({
   }
 
   &-bg {
-    padding-bottom: 150%;
+    height: 100%;
+    padding-bottom: 130%;
     position: relative;
 
     .modal-img, img {
@@ -81,12 +82,15 @@ export default defineComponent({
   }
 
   &-left {
-    width: 50%;
+    width: 40%;
   }
 
   &-right {
-    width: 50%;
+    width: 60%;
     padding: 40px 20px 20px 20px;
+    background: #fff;
+    //background: #e6f2ff;
+    //background: radial-gradient(50% 50% at 50% 50%,#d5e8ff,#b8d9ff);
   }
 }
 </style>
