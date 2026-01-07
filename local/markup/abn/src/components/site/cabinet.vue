@@ -71,6 +71,7 @@ export default defineComponent({
           <v-tabs
             v-model="tab"
             grow
+            class="auth-tab"
           >
             <v-tab :text="contentItem.title" :key="index" :value="index" v-for="(contentItem,index) in content"></v-tab>
           </v-tabs>
@@ -81,7 +82,7 @@ export default defineComponent({
               :key="index"
               :value="index"
             >
-              <div class="modern-tab-content">
+              <div class="auth-tab-content">
                 <component :is="contentItem.render"/>
               </div>
             </v-tabs-window-item>
@@ -129,9 +130,36 @@ export default defineComponent({
   }
 }
 
-.modern-tab {
+.auth-tab {
+  height: auto !important;
+
+  .v-slide-group__content {
+    gap: 10px;
+    flex: unset;
+  }
+
+  .v-btn {
+    height: auto !important;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+
+    &.v-tab-item--selected {
+      background: $about-mark;
+    }
+
+    &__content {
+      color: $bo-color-name;
+    }
+  }
+
+  .v-tab__slider {
+    display: none;
+  }
+
+
   &-content {
-    padding: 15px 0;
+    padding: 25px 0 15px 0;
   }
 }
 </style>

@@ -4,8 +4,8 @@ use Craft\Core\Component\AjaxComponent;
 use Craft\DDD\Referal\Application\Factory\MarkGuestUseCaseFactory;
 use Craft\DDD\Referal\Application\UseCase\MarkGuestUseCase;
 use Craft\DDD\User\Application\Dto\RegisterStudentByRefDto;
-use Craft\DDD\User\Application\Factory\RegisterStudentByReferralUseCaseFactory;
-use Craft\DDD\User\Application\UseCase\RegisterStudentByReferralUseCase;
+use Craft\DDD\User\Application\Factory\UseCase\RegisterStudentByReferralUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Register\RegisterStudentByReferralUseCase;
 
 class CraftReferralJoinComponent extends AjaxComponent
 {

@@ -2,12 +2,14 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\User\Application\UseCase\RegisterSimpleUseCase;
+use Craft\DDD\User\Application\Dto\Request\RegisterRequestDto;
+use Craft\DDD\User\Application\Factory\UseCase\RegisterUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Register\RegisterUseCase;
 
 class CraftRegisterSimpleComponent extends AjaxComponent
 {
 
-	private RegisterSimpleUseCase $uc;
+	private RegisterUseCase $registerUseCase;
 
 	function componentNamespace(): string
 	{
@@ -22,6 +24,12 @@ class CraftRegisterSimpleComponent extends AjaxComponent
 	{
 		try
 		{
+			$this->registerUseCase->execute(new RegisterRequestDto(
+				$formData['email'],
+				$formData['phone'],
+				$formData['password'],
+			));
+
 			ResponseBx::success([
 				rand() => rand(),
 			]);
@@ -42,6 +50,6 @@ class CraftRegisterSimpleComponent extends AjaxComponent
 
 	public function loadServices(): void
 	{
-		$this->uc = new RegisterSimpleUseCase();
+		$this->registerUseCase = RegisterUseCaseFactory::getUseCase();
 	}
 }

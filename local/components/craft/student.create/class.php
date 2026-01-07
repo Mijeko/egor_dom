@@ -2,9 +2,9 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\User\Application\Dto\CreateStudentRequestDto;
-use Craft\DDD\User\Application\Factory\CreateStudentUseCaseFactory;
-use Craft\DDD\User\Application\UseCase\CreateStudentUseCase;
+use Craft\DDD\User\Application\Dto\Request\CreateStudentRequestDto;
+use Craft\DDD\User\Application\Factory\UseCase\CreateStudentUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Crud\CreateStudentUseCase;
 
 class CraftStudentCreateComponent extends AjaxComponent
 {

@@ -643,7 +643,10 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped>
+<style lang="scss">
+
+@use "@/styles/system/variable" as *;
+
 .base-input {
   display: flex;
   flex-direction: column;
@@ -704,10 +707,10 @@ export default defineComponent({
   line-height: 1.5;
   color: rgba(var(--v-theme-on-surface), 0.87);
   background-color: rgb(var(--v-theme-surface));
-  outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
   box-sizing: border-box;
+  outline: none !important;
 }
 
 .base-input__field::placeholder {
@@ -719,18 +722,18 @@ export default defineComponent({
 }
 
 .base-input__field:focus {
-  border-color: rgb(var(--v-theme-primary));
-  border-width: 2px;
-  box-shadow: 0 0 0 2px rgba(var(--v-theme-primary), 0.12);
+  //border-color: rgb(var(--v-theme-primary));
+  //border-width: 2px;
+  //box-shadow: 0 0 0 2px rgba(var(--v-theme-primary), 0.12);
 }
 
 .base-input__field--error {
-  border-color: rgb(var(--v-theme-error));
+  //border-color: rgb(var(--v-theme-error));
 }
 
 .base-input__field--error:focus {
-  border-color: rgb(var(--v-theme-error));
-  box-shadow: 0 0 0 2px rgba(var(--v-theme-error), 0.12);
+  //border-color: rgb(var(--v-theme-error));
+  //box-shadow: 0 0 0 2px rgba(var(--v-theme-error), 0.12);
 }
 
 .base-input__field--disabled {
@@ -754,7 +757,7 @@ export default defineComponent({
 
 .base-input__error {
   font-size: 0.75rem;
-  color: rgb(var(--v-theme-error));
+  color: $error-color;
   line-height: 1.5;
   margin-top: -0.25rem;
 }

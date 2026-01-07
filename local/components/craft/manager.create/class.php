@@ -2,9 +2,9 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\User\Application\Dto\CreateManagerRequestDto;
-use Craft\DDD\User\Application\Factory\CreateManagerUseCaseFactory;
-use Craft\DDD\User\Application\UseCase\CreateManagerUseCase;
+use Craft\DDD\User\Application\Dto\Request\CreateManagerRequestDto;
+use Craft\DDD\User\Application\Factory\UseCase\CreateManagerUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Crud\CreateManagerUseCase;
 
 
 class CraftManagerCreateComponent extends AjaxComponent

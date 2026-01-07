@@ -90,5 +90,6 @@ declare module 'vue' {
     SliderObjects: typeof import('./components/objects/slider-objects.vue')['default']
     StudentList: typeof import('./components/student/StudentList.vue')['default']
     Table: typeof import('./components/table.vue')['default']
+    WithSocial: typeof import('./components/site/with-social.vue')['default']
   }
 }

@@ -12,6 +12,10 @@ export default defineComponent({
       type: Array as PropType<any[]>,
       default: []
     },
+    hideIcon: {
+      type: Boolean,
+      default: false,
+    }
   },
   computed: {
     modelValueComp: {
@@ -33,11 +37,14 @@ export default defineComponent({
   >
     <template #template="{ input, hasError, firstError, label, required }">
 
-      <div class="modern-input-container">
+      <div :class="{
+        'modern-input-container':true,
+        'modern-input-has-error': hasError,
+      }">
 
         <div class="modern-input">
           <div class="modern-input-wrapper">
-            <div class="modern-input-icon">
+            <div class="modern-input-icon" v-if="!hideIcon">
               <slot name="icon" v-if="$slots.icon" :label="label"></slot>
               <img v-else class="modern-input-icon__image" src="@/assets/images/icons/input/mobile.svg" :alt="label">
             </div>
@@ -55,12 +62,20 @@ export default defineComponent({
 
 <style lang="scss">
 
+@use "@/styles/system/variable" as *;
+
 .modern-input {
   display: flex;
 
   &-container {
     display: flex;
     flex-direction: column;
+  }
+
+  &-has-error {
+    .modern-input-wrapper {
+      border-color: $error-color;
+    }
   }
 
   &-icon {
@@ -77,7 +92,7 @@ export default defineComponent({
     display: flex;
     align-items: stretch;
     justify-content: flex-start;
-    border: 1px gray solid;
+    border: 1px $footer-short solid;
     padding: 10px 10px 10px 20px;
     border-radius: 50px;
     //border-radius: 7px;
@@ -93,7 +108,7 @@ export default defineComponent({
 
   &-error {
     font-size: 14px;
-    color: rgb(var(--v-theme-error));
+    color: $error-color;
     text-transform: lowercase;
     margin-top: 3px;
   }

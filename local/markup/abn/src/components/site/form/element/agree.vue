@@ -49,7 +49,14 @@ export default defineComponent({
 .modern-form-agree {
   &:deep(*) {
     --v-input-control-height: 16px !important;
-    --v-selection-control-size: 20px !important;
+    --v-selection-control-size: 10px !important;
+
+    .v-icon{
+      width: 15px!important;
+      min-width: 15px!important;
+      height: 15px!important;
+      min-height: 15px!important;
+    }
 
     .v-label {
       font-size: 14px !important;

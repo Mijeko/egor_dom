@@ -2,8 +2,8 @@
 
 use Craft\Core\Rest\ResponseBx;
 use Craft\Core\Component\AjaxComponent;
-use Craft\DDD\User\Application\Factory\AuthorizeUseCaseFactory;
-use Craft\DDD\User\Application\UseCase\AuthorizeUseCase;
+use Craft\DDD\User\Application\Factory\UseCase\AuthorizeUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Signin\AuthorizeUseCase;
 
 class CraftAuthComponent extends AjaxComponent
 {

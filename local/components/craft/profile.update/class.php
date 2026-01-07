@@ -1,7 +1,7 @@
 <?php
 
 use Craft\DDD\User\Application\Dto\ProfileUpdateServiceDto;
-use Craft\DDD\User\Application\Factory\UpdateProfileUseCaseFactory;
+use Craft\DDD\User\Application\Factory\UseCase\UpdateProfileUseCaseFactory;
 
 class CraftProfileUpdateComponent extends \Craft\Core\Component\AjaxComponent
 {

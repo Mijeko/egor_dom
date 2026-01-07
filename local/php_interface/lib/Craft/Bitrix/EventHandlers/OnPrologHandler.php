@@ -2,7 +2,7 @@
 
 namespace Craft\Bitrix\EventHandlers;
 
-use Craft\DDD\User\Application\Factory\CurrentUserFactory;
+use Craft\DDD\User\Application\Factory\Service\CurrentUserFactory;
 
 class OnPrologHandler
 {

@@ -7,6 +7,8 @@ use Craft\DDD\Notify\Infrastructure\Listeners\ClaimAcceptManagerListener;
 use Craft\DDD\Notify\Infrastructure\Listeners\ClaimCreateListener;
 use Craft\DDD\Referal\Infrastructure\Listeners\AuthorizeListener;
 use Craft\DDD\Referal\Infrastructure\Listeners\InviteStudentToStudentListener;
+use Craft\DDD\Referal\Infrastructure\Listeners\RegisterListener;
+use Craft\DDD\User\Application\Event\UserRegisterEvent;
 use Craft\DDD\User\Infrastructure\Events\AuthorizeEvent;
 use Craft\DDD\User\Infrastructure\Events\InviteStudentToStudentEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -43,5 +45,10 @@ dispatcher()->addListener(ClaimAcceptManagerEvent::EVENT_NAME, [
 
 dispatcher()->addListener(ClaimCreateEvent::EVENT_NAME, [
 	new ClaimCreateListener(),
+	'handle',
+]);
+
+dispatcher()->addListener(UserRegisterEvent::EVENT_NAME, [
+	new RegisterListener(),
 	'handle',
 ]);

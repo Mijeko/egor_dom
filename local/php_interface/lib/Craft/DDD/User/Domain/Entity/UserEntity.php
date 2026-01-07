@@ -48,6 +48,20 @@ class UserEntity
 		return $self;
 	}
 
+	public static function register(
+		PhoneValueObject     $phone,
+		EmailValueObject     $email,
+		?PasswordValueObject $password,
+	): UserEntity
+	{
+		$self = new self();
+		$self->login = $phone->getValue();
+		$self->phone = $phone;
+		$self->email = $email;
+		$self->password = $password;
+		return $self;
+	}
+
 	public function getName(): ?string
 	{
 		return $this->name;

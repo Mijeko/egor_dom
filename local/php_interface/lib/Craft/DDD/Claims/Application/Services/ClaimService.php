@@ -12,10 +12,8 @@ use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\ApartmentRepositoryInterface;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\ApartmentTable;
-use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
-use Craft\DDD\Notify\Application\Services\ManagerNotificatorService;
 use Craft\DDD\Shared\Infrastructure\Exceptions\NotFoundOrmElement;
-use Craft\DDD\Shared\Infrastructure\Service\EventManager;
+use Craft\DDD\Shared\Infrastructure\Service\EventManagerInterface;
 use Craft\DDD\User\Domain\Repository\UserRepositoryInterface;
 use Craft\Helper\Criteria;
 
@@ -28,7 +26,7 @@ class ClaimService
 		protected UserRepositoryInterface        $userRepository,
 		protected BuildObjectRepositoryInterface $buildObjectRepository,
 		protected ClaimCreateUseCase             $claimCreateUseCase,
-		protected EventManager                   $managerNotificatorService,
+		protected EventManagerInterface          $eventManager,
 	)
 	{
 	}
@@ -37,7 +35,7 @@ class ClaimService
 	{
 		$claim = $this->claimCreateUseCase->execute($request);
 
-		$this->managerNotificatorService->dispatch(
+		$this->eventManager->dispatch(
 			new ClaimCreateEvent($claim),
 			ClaimCreateEvent::EVENT_NAME,
 		);

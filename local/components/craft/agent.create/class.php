@@ -2,9 +2,9 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\User\Application\Dto\CreateAgentRequestDto;
-use Craft\DDD\User\Application\Factory\CreateAgentUseCaseFactory;
-use Craft\DDD\User\Application\UseCase\CreateAgentUseCase;
+use Craft\DDD\User\Application\Dto\Request\CreateAgentRequestDto;
+use Craft\DDD\User\Application\Factory\UseCase\CreateAgentUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Crud\CreateAgentUseCase;
 
 class CraftAgentCreateComponent extends AjaxComponent
 {

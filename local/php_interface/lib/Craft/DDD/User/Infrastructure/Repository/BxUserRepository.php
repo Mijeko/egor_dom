@@ -80,4 +80,9 @@ class BxUserRepository implements UserRepositoryInterface
 			$bxUser->fillGroups()->getGroupIdList()
 		);
 	}
+
+	public function create(UserEntity $entity): ?UserEntity
+	{
+		return null;
+	}
 }

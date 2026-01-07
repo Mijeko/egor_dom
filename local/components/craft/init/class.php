@@ -3,7 +3,7 @@
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
-use Craft\DDD\User\Application\Factory\UserServiceFactory;
+use Craft\DDD\User\Application\Factory\Service\UserServiceFactory;
 use Craft\DDD\User\Application\Service\UserService;
 use Craft\DDD\User\Domain\Entity\GroupEntity;
 use Craft\DDD\User\Domain\Entity\ManagerEntity;

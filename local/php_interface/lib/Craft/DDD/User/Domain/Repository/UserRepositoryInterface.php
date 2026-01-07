@@ -13,4 +13,6 @@ interface UserRepositoryInterface
 	public function findById(int $id): ?UserEntity;
 
 	public function findAll(Criteria $criteria): array;
+
+	public function create(UserEntity $entity): ?UserEntity;
 }

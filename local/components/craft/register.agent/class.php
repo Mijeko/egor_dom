@@ -2,8 +2,8 @@
 
 use Craft\Core\Rest\ResponseBx;
 use Craft\DDD\User\Application\Dto\RegisterSimpleAgentDto;
-use Craft\DDD\User\Application\UseCase\RegisterAgentUseCase;
-use Craft\DDD\User\Application\Factory\RegisterAgentUseCaseFactory;
+use Craft\DDD\User\Application\UseCase\Register\RegisterAgentUseCase;
+use Craft\DDD\User\Application\Factory\UseCase\RegisterAgentUseCaseFactory;
 
 class CraftRegisterAgent extends \Craft\Core\Component\AjaxComponent
 {
