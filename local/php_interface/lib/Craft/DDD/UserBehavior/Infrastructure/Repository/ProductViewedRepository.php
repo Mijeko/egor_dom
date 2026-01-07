@@ -2,6 +2,8 @@
 
 namespace Craft\DDD\UserBehavior\Infrastructure\Repository;
 
+use Bitrix\Main\Type\DateTime;
+use Craft\DDD\Shared\Domain\ValueObject\DateTimeValueObject;
 use Craft\DDD\UserBehavior\Domain\Entity\ProductViewedEntity;
 use Craft\DDD\UserBehavior\Domain\Repository\ProductViewedRepositoryInterface;
 use Craft\DDD\UserBehavior\Domain\ValueObject\DetailLinkValueObject;
@@ -23,6 +25,7 @@ class ProductViewedRepository implements ProductViewedRepositoryInterface
 		$model->setUserId($favoriteProduct->getUserId()->getValue());
 		$model->setLink($favoriteProduct->getDetailLink()->getValue());
 		$model->setName($favoriteProduct->getName()->getValue());
+		$model->setCreatedAt(new DateTime($favoriteProduct->getCreatedAt()));
 
 		$result = $model->save();
 
@@ -72,13 +75,17 @@ class ProductViewedRepository implements ProductViewedRepositoryInterface
 			new ProductIdValueObject($model->getProductId()),
 			new UserIdValueObject($model->getUserId()),
 			new NameValueObject($model->getName()),
-			new DetailLinkValueObject($model->getLink())
+			new DetailLinkValueObject($model->getLink()),
+			DateTimeValueObject::fromTimestamp($model->getCreatedAt()->getTimestamp()),
 		);
 	}
 
 	public function findAllByUserId(int $userId): array
 	{
 		return $this->findAll(Criteria::instance()
+			->order([
+				ViewedProductTable::F_CREATED_AT => 'ASC',
+			])
 			->filter([
 				ViewedProductTable::F_USER_ID => $userId,
 			])

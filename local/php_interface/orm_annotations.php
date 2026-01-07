@@ -8802,6 +8802,16 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct resetLink()
 	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct unsetLink()
 	 * @method \string fillLink()
+	 * @method \Bitrix\Main\Type\DateTime getCreatedAt()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setCreatedAt(\Bitrix\Main\Type\DateTime|\Bitrix\Main\DB\SqlExpression $createdAt)
+	 * @method bool hasCreatedAt()
+	 * @method bool isCreatedAtFilled()
+	 * @method bool isCreatedAtChanged()
+	 * @method \Bitrix\Main\Type\DateTime remindActualCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime requireCreatedAt()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct resetCreatedAt()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct unsetCreatedAt()
+	 * @method \Bitrix\Main\Type\DateTime fillCreatedAt()
 	 *
 	 * Common methods:
 	 * ---------------
@@ -8851,6 +8861,8 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method \string[] fillName()
 	 * @method \string[] getLinkList()
 	 * @method \string[] fillLink()
+	 * @method \Bitrix\Main\Type\DateTime[] getCreatedAtList()
+	 * @method \Bitrix\Main\Type\DateTime[] fillCreatedAt()
 	 *
 	 * Common methods:
 	 * ---------------

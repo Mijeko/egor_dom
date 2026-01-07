@@ -2,6 +2,7 @@
 
 namespace Craft\DDD\UserBehavior\Domain\Entity;
 
+use Craft\DDD\Shared\Domain\ValueObject\DateTimeValueObject;
 use Craft\DDD\UserBehavior\Domain\ValueObject\DetailLinkValueObject;
 use Craft\DDD\UserBehavior\Domain\ValueObject\NameValueObject;
 use Craft\DDD\UserBehavior\Domain\ValueObject\ProductIdValueObject;
@@ -13,12 +14,14 @@ class ProductViewedEntity
 	private DetailLinkValueObject $detailLink;
 	private ProductIdValueObject $productId;
 	private UserIdValueObject $userId;
+	private DateTimeValueObject $createdAt;
 
 	public static function hydrate(
 		ProductIdValueObject  $productId,
 		UserIdValueObject     $userId,
 		NameValueObject       $name,
 		DetailLinkValueObject $detailLink,
+		DateTimeValueObject   $createdAt,
 
 	): ProductViewedEntity
 	{
@@ -27,6 +30,7 @@ class ProductViewedEntity
 		$self->userId = $userId;
 		$self->name = $name;
 		$self->detailLink = $detailLink;
+		$self->createdAt = $createdAt;
 		return $self;
 	}
 
@@ -42,6 +46,7 @@ class ProductViewedEntity
 		$self->userId = $userId;
 		$self->name = $name;
 		$self->detailLink = $detailLink;
+		$self->createdAt = DateTimeValueObject::now();
 		return $self;
 	}
 
@@ -63,5 +68,10 @@ class ProductViewedEntity
 	public function getName(): NameValueObject
 	{
 		return $this->name;
+	}
+
+	public function getCreatedAt(): DateTimeValueObject
+	{
+		return $this->createdAt;
 	}
 }
