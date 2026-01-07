@@ -5,6 +5,7 @@ namespace Craft\DDD\Referal\Application\UseCase;
 use Craft\DDD\Referal\Application\Dto\JoinClientToClientDto;
 use Craft\DDD\Referal\Domain\Entity\ReferralEntity;
 use Craft\DDD\Referal\Domain\Repository\ReferralRepositoryInterface;
+use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 
 class InviteClientUseCase
 {
@@ -24,7 +25,7 @@ class InviteClientUseCase
 		}
 
 		$invitedReferral = ReferralEntity::invite(
-			$clientDto->phone,
+			new PhoneValueObject($clientDto->phone),
 			$clientDto->code,
 		);
 

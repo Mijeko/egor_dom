@@ -2,11 +2,27 @@
 import {defineComponent} from 'vue'
 import Profile from '@/layouts/profile.vue';
 import PersonalMemberShort from "@/components/personal-member-short.vue";
+import type {ReferralInformationDto} from "@/dto/present/ReferralInformationDto.ts";
+import type {ViewedInformationDto} from "@/dto/present/ViewedInformationDto.ts";
 
 export default defineComponent({
   name: "Home",
   components: {PersonalMemberShort},
   layout: [Profile],
+  props: {
+    referralInfo: {
+      type: Object as PropType<ReferralInformationDto>,
+      default: () => {
+        return {};
+      }
+    },
+    viewedInfo: {
+      type: Object as PropType<ViewedInformationDto>,
+      default: () => {
+        return {};
+      }
+    },
+  }
 })
 </script>
 
@@ -64,18 +80,18 @@ export default defineComponent({
             </div>
 
             <div class="referral-data-link__source">
-              http://abn.dev-kvsn.ru/ref/68ca83b5e9c52
+              {{ referralInfo.link }}
             </div>
           </div>
 
           <div class="referral-data-char">
             <div class="referral-data-char-row">
               <div class="referral-data-char-key">Приглашено</div>
-              <div class="referral-data-char-value">0</div>
+              <div class="referral-data-char-value">{{ referralInfo.countJoined }}</div>
             </div>
             <div class="referral-data-char-row">
               <div class="referral-data-char-key">Вознаграждение</div>
-              <div class="referral-data-char-value">0 руб</div>
+              <div class="referral-data-char-value">{{ referralInfo.reward }}</div>
             </div>
           </div>
 
@@ -89,10 +105,8 @@ export default defineComponent({
       <div class="profile-main-card-title">Просмотренные</div>
       <div class="profile-main-card-wrap">
 
-        <div class="visited-list">
-          <a href="" class="visited-item">Дом в мичурино</a>
-          <a href="" class="visited-item">Дом в мичурино</a>
-          <a href="" class="visited-item">Дом в мичурино</a>
+        <div class="visited-list" v-for="(viewItem, index) in viewedInfo.items">
+          <a :href="viewItem.detailLink" class="visited-item" :key="index">{{ viewItem.name }}</a>
         </div>
 
         <SButton class="visited-more">Скопировать</SButton>

@@ -4,19 +4,25 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Repository;
 
 use Craft\DDD\UserBehavior\Domain\Entity\ProductViewedEntity;
 use Craft\DDD\UserBehavior\Domain\Repository\ProductViewedRepositoryInterface;
+use Craft\DDD\UserBehavior\Domain\ValueObject\DetailLinkValueObject;
+use Craft\DDD\UserBehavior\Domain\ValueObject\NameValueObject;
 use Craft\DDD\UserBehavior\Domain\ValueObject\ProductIdValueObject;
 use Craft\DDD\UserBehavior\Domain\ValueObject\UserIdValueObject;
 use Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct;
-use Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable;
+use Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct;
+use Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable;
 use Craft\Helper\Criteria;
 
 class ProductViewedRepository implements ProductViewedRepositoryInterface
 {
 	public function create(ProductViewedEntity $favoriteProduct): ?ProductViewedEntity
 	{
-		$model = FavoriteProductTable::createObject();
+		$model = ViewedProductTable::createObject();
+
 		$model->setProductId($favoriteProduct->getProductId()->getValue());
 		$model->setUserId($favoriteProduct->getUserId()->getValue());
+		$model->setLink($favoriteProduct->getDetailLink()->getValue());
+		$model->setName($favoriteProduct->getName()->getValue());
 
 		$result = $model->save();
 
@@ -32,8 +38,8 @@ class ProductViewedRepository implements ProductViewedRepositoryInterface
 	{
 		$list = $this->findAll(
 			Criteria::instance()->filter([
-				FavoriteProductTable::F_PRODUCT_ID => $productId,
-				FavoriteProductTable::F_USER_ID    => $userId,
+				ViewedProductTable::F_PRODUCT_ID => $productId,
+				ViewedProductTable::F_USER_ID    => $userId,
 			])
 		);
 
@@ -48,7 +54,9 @@ class ProductViewedRepository implements ProductViewedRepositoryInterface
 	public function findAll(Criteria $criteria): array
 	{
 		$results = [];
-		$list = FavoriteProductTable::getList($criteria->makeGetListParams())->fetchCollection();
+		$listQuery = ViewedProductTable::getList($criteria->makeGetListParams());
+
+		$list = $listQuery->fetchCollection();
 
 		foreach($list as $favoriteProduct)
 		{
@@ -58,18 +66,23 @@ class ProductViewedRepository implements ProductViewedRepositoryInterface
 		return $results;
 	}
 
-	private function hydrate(EO_FavoriteProduct $model): ProductViewedEntity
+	private function hydrate(EO_ViewedProduct $model): ProductViewedEntity
 	{
 		return ProductViewedEntity::hydrate(
 			new ProductIdValueObject($model->getProductId()),
-			new UserIdValueObject($model->getUserId())
+			new UserIdValueObject($model->getUserId()),
+			new NameValueObject($model->getName()),
+			new DetailLinkValueObject($model->getLink())
 		);
 	}
 
 	public function findAllByUserId(int $userId): array
 	{
-		return $this->findAll(Criteria::instance()->filter([
-			FavoriteProductTable::F_USER_ID => $userId,
-		]));
+		return $this->findAll(Criteria::instance()
+			->filter([
+				ViewedProductTable::F_USER_ID => $userId,
+			])
+			->limit(5)
+		);
 	}
 }

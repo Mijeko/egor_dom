@@ -1,5 +1,7 @@
 <?php
 
+use Bitrix\Main\Diag\Debug;
+use Craft\DDD\Developers\Domain\Entity\BuildObjectEntity;
 use Craft\DDD\Developers\Domain\Repository\BuildObjectRepositoryInterface;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
 use Craft\DDD\Developers\Infrastructure\Repository\OrmBuildObjectRepository;
@@ -31,7 +33,7 @@ class CraftObjectLastViewComponent extends CBitrixComponent
 			$this->includeComponentTemplate();
 		} catch(Exception $e)
 		{
-			\Bitrix\Main\Diag\Debug::dump($e->getMessage());
+			Debug::dump($e->getMessage());
 		}
 	}
 
@@ -53,7 +55,7 @@ class CraftObjectLastViewComponent extends CBitrixComponent
 			])
 		);
 
-		$this->arResult['BUILD_OBJECT_LIST'] = array_map(function(\Craft\DDD\Developers\Domain\Entity\BuildObjectEntity $buildObjectEntity) {
+		$this->arResult['BUILD_OBJECT_LIST'] = array_map(function(BuildObjectEntity $buildObjectEntity) {
 			return new BuildObjectDto(
 				$buildObjectEntity->getId(),
 				$buildObjectEntity->getName(),

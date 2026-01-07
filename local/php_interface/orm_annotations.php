@@ -7970,18 +7970,18 @@ namespace Craft\DDD\FavoriteProduct\Infrastructure\Entity {
 namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	/**
 	 * FavoriteProduct
-	 * @see \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable
+	 * @see \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable
 	 *
 	 * Custom methods:
 	 * ---------------
 	 *
 	 * @method \int getProductId()
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct setProductId(\int|\Bitrix\Main\DB\SqlExpression $productId)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setProductId(\int|\Bitrix\Main\DB\SqlExpression $productId)
 	 * @method bool hasProductId()
 	 * @method bool isProductIdFilled()
 	 * @method bool isProductIdChanged()
 	 * @method \int getUserId()
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
 	 * @method bool hasUserId()
 	 * @method bool isUserIdFilled()
 	 * @method bool isUserIdChanged()
@@ -8000,9 +8000,9 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method bool has($fieldName)
 	 * @method bool isFilled($fieldName)
 	 * @method bool isChanged($fieldName)
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct set($fieldName, $value)
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct reset($fieldName)
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct unset($fieldName)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct set($fieldName, $value)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct reset($fieldName)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct unset($fieldName)
 	 * @method void addTo($fieldName, $value)
 	 * @method void removeFrom($fieldName, $value)
 	 * @method void removeAll($fieldName)
@@ -8010,10 +8010,10 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
 	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
 	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
-	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct wakeUp($data)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct wakeUp($data)
 	 */
 	class EO_FavoriteProduct {
-		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable */
+		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable */
 		static public $dataClass = '\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable';
 		/**
 		 * @param bool|array $setDefaultValues
@@ -8035,12 +8035,12 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * ---------------
 	 *
 	 * @property-read \Bitrix\Main\ORM\Entity $entity
-	 * @method void add(\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct $object)
-	 * @method bool has(\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct $object)
+	 * @method void add(\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct $object)
+	 * @method bool has(\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct $object)
 	 * @method bool hasByPrimary($primary)
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct getByPrimary($primary)
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct[] getAll()
-	 * @method bool remove(\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct $object)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct getByPrimary($primary)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct[] getAll()
+	 * @method bool remove(\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct $object)
 	 * @method void removeByPrimary($primary)
 	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
 	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUp($data)
@@ -8050,7 +8050,7 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method void offsetUnset() ArrayAccess
 	 * @method void offsetGet() ArrayAccess
 	 * @method void rewind() Iterator
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct current() Iterator
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct current() Iterator
 	 * @method mixed key() Iterator
 	 * @method void next() Iterator
 	 * @method bool valid() Iterator
@@ -8060,7 +8060,7 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
 	 */
 	class EO_FavoriteProduct_Collection implements \ArrayAccess, \Iterator, \Countable {
-		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable */
+		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable */
 		static public $dataClass = '\Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProductTable';
 	}
 }
@@ -8071,9 +8071,9 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * @method static EO_FavoriteProduct_Result getById($id)
 	 * @method static EO_FavoriteProduct_Result getList(array $parameters = [])
 	 * @method static EO_FavoriteProduct_Entity getEntity()
-	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct createObject($setDefaultValues = true)
 	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection createCollection()
-	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct wakeUpObject($row)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct wakeUpObject($row)
 	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUpCollection($rows)
 	 */
 	class FavoriteProductTable extends \Bitrix\Main\ORM\Data\DataManager {}
@@ -8082,19 +8082,19 @@ namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
 	 * ---------------
 	 *
 	 * @method EO_FavoriteProduct_Result exec()
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct fetchObject()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct fetchObject()
 	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection fetchCollection()
 	 */
 	class EO_FavoriteProduct_Query extends \Bitrix\Main\ORM\Query\Query {}
 	/**
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct fetchObject()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct fetchObject()
 	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection fetchCollection()
 	 */
 	class EO_FavoriteProduct_Result extends \Bitrix\Main\ORM\Query\Result {}
 	/**
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct createObject($setDefaultValues = true)
 	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection createCollection()
-	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\FavoriteProduct wakeUpObject($row)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct wakeUpObject($row)
 	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_FavoriteProduct_Collection wakeUpCollection($rows)
 	 */
 	class EO_FavoriteProduct_Entity extends \Bitrix\Main\ORM\Entity {}
@@ -8762,4 +8762,161 @@ namespace Craft\DDD\Stream\Infrastructure\Entity {
 	 * @method \Craft\DDD\Stream\Infrastructure\Entity\EO_ChatMember_Collection wakeUpCollection($rows)
 	 */
 	class EO_ChatMember_Entity extends \Bitrix\Main\ORM\Entity {}
+}
+/* ORMENTITYANNOTATION:Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable */
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
+	/**
+	 * ViewedProduct
+	 * @see \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int getProductId()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setProductId(\int|\Bitrix\Main\DB\SqlExpression $productId)
+	 * @method bool hasProductId()
+	 * @method bool isProductIdFilled()
+	 * @method bool isProductIdChanged()
+	 * @method \int getUserId()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setUserId(\int|\Bitrix\Main\DB\SqlExpression $userId)
+	 * @method bool hasUserId()
+	 * @method bool isUserIdFilled()
+	 * @method bool isUserIdChanged()
+	 * @method \string getName()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setName(\string|\Bitrix\Main\DB\SqlExpression $name)
+	 * @method bool hasName()
+	 * @method bool isNameFilled()
+	 * @method bool isNameChanged()
+	 * @method \string remindActualName()
+	 * @method \string requireName()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct resetName()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct unsetName()
+	 * @method \string fillName()
+	 * @method \string getLink()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct setLink(\string|\Bitrix\Main\DB\SqlExpression $link)
+	 * @method bool hasLink()
+	 * @method bool isLinkFilled()
+	 * @method bool isLinkChanged()
+	 * @method \string remindActualLink()
+	 * @method \string requireLink()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct resetLink()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct unsetLink()
+	 * @method \string fillLink()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @property-read array $primary
+	 * @property-read int $state @see \Bitrix\Main\ORM\Objectify\State
+	 * @property-read \Bitrix\Main\Type\Dictionary $customData
+	 * @property \Bitrix\Main\Authentication\Context $authContext
+	 * @method mixed get($fieldName)
+	 * @method mixed remindActual($fieldName)
+	 * @method mixed require($fieldName)
+	 * @method bool has($fieldName)
+	 * @method bool isFilled($fieldName)
+	 * @method bool isChanged($fieldName)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct set($fieldName, $value)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct reset($fieldName)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct unset($fieldName)
+	 * @method void addTo($fieldName, $value)
+	 * @method void removeFrom($fieldName, $value)
+	 * @method void removeAll($fieldName)
+	 * @method \Bitrix\Main\ORM\Data\Result delete()
+	 * @method mixed fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method mixed[] collectValues($valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL)
+	 * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult|\Bitrix\Main\ORM\Data\Result save()
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct wakeUp($data)
+	 */
+	class EO_ViewedProduct {
+		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable */
+		static public $dataClass = '\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable';
+		/**
+		 * @param bool|array $setDefaultValues
+		 */
+		public function __construct($setDefaultValues = true) {}
+	}
+}
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
+	/**
+	 * EO_ViewedProduct_Collection
+	 *
+	 * Custom methods:
+	 * ---------------
+	 *
+	 * @method \int[] getProductIdList()
+	 * @method \int[] getUserIdList()
+	 * @method \string[] getNameList()
+	 * @method \string[] fillName()
+	 * @method \string[] getLinkList()
+	 * @method \string[] fillLink()
+	 *
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @property-read \Bitrix\Main\ORM\Entity $entity
+	 * @method void add(\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct $object)
+	 * @method bool has(\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct $object)
+	 * @method bool hasByPrimary($primary)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct getByPrimary($primary)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct[] getAll()
+	 * @method bool remove(\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct $object)
+	 * @method void removeByPrimary($primary)
+	 * @method array|\Bitrix\Main\ORM\Objectify\Collection|null fill($fields = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL) flag or array of field names
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection wakeUp($data)
+	 * @method \Bitrix\Main\ORM\Data\Result save($ignoreEvents = false)
+	 * @method void offsetSet() ArrayAccess
+	 * @method void offsetExists() ArrayAccess
+	 * @method void offsetUnset() ArrayAccess
+	 * @method void offsetGet() ArrayAccess
+	 * @method void rewind() Iterator
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct current() Iterator
+	 * @method mixed key() Iterator
+	 * @method void next() Iterator
+	 * @method bool valid() Iterator
+	 * @method int count() Countable
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection merge(?\Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection $collection)
+	 * @method bool isEmpty()
+	 * @method array collectValues(int $valuesType = \Bitrix\Main\ORM\Objectify\Values::ALL, int $fieldsMask = \Bitrix\Main\ORM\Fields\FieldTypeMask::ALL, bool $recursive = false)
+	 */
+	class EO_ViewedProduct_Collection implements \ArrayAccess, \Iterator, \Countable {
+		/* @var \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable */
+		static public $dataClass = '\Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProductTable';
+	}
+}
+namespace Craft\DDD\UserBehavior\Infrastructure\Entity {
+	/**
+	 * @method static EO_ViewedProduct_Query query()
+	 * @method static EO_ViewedProduct_Result getByPrimary($primary, array $parameters = [])
+	 * @method static EO_ViewedProduct_Result getById($id)
+	 * @method static EO_ViewedProduct_Result getList(array $parameters = [])
+	 * @method static EO_ViewedProduct_Entity getEntity()
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct createObject($setDefaultValues = true)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection createCollection()
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct wakeUpObject($row)
+	 * @method static \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection wakeUpCollection($rows)
+	 */
+	class ViewedProductTable extends \Bitrix\Main\ORM\Data\DataManager {}
+	/**
+	 * Common methods:
+	 * ---------------
+	 *
+	 * @method EO_ViewedProduct_Result exec()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct fetchObject()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection fetchCollection()
+	 */
+	class EO_ViewedProduct_Query extends \Bitrix\Main\ORM\Query\Query {}
+	/**
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct fetchObject()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection fetchCollection()
+	 */
+	class EO_ViewedProduct_Result extends \Bitrix\Main\ORM\Query\Result {}
+	/**
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct createObject($setDefaultValues = true)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection createCollection()
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\ViewedProduct wakeUpObject($row)
+	 * @method \Craft\DDD\UserBehavior\Infrastructure\Entity\EO_ViewedProduct_Collection wakeUpCollection($rows)
+	 */
+	class EO_ViewedProduct_Entity extends \Bitrix\Main\ORM\Entity {}
 }

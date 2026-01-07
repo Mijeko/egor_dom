@@ -2,4 +2,4 @@
 
 namespace Craft\DDD\UserBehavior\Infrastructure\Entity;
 
-class FavoriteProduct extends EO_FavoriteProduct {}
+class ViewedProduct extends EO_ViewedProduct {}

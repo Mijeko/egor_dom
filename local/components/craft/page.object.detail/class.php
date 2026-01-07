@@ -2,8 +2,9 @@
 
 use Bitrix\Main\Diag\Debug;
 use Craft\DDD\Developers\Infrastructure\Entity\BuildObjectTable;
-use Craft\DDD\UserBehavior\Application\Factory\AddProductInFavoriteUseCaseFactory;
-use Craft\DDD\UserBehavior\Application\UseCase\AddProductInFavoriteUseCase;
+use Craft\DDD\UserBehavior\Application\Dto\AddProductInViewedDto;
+use Craft\DDD\UserBehavior\Application\Factory\AddProductInViewedUseCaseFactory;
+use Craft\DDD\UserBehavior\Application\UseCase\AddProductInViewedUseCase;
 use Craft\DDD\UserBehavior\Infrastructure\Repository\ProductViewedRepository;
 use Craft\DDD\Shared\Application\Service\ImageServiceInterface;
 use Craft\DDD\Shared\Infrastructure\Service\ImageService;
@@ -27,7 +28,7 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 {
 
 	protected ?BuildObjectService $buildObjectService;
-	protected AddProductInFavoriteUseCase $favoriteUseCase;
+	protected AddProductInViewedUseCase $addProductInViewedUseCase;
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -54,12 +55,18 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 	{
 		try
 		{
-
 			if(CraftUser::load()?->getId())
 			{
-				$this->favoriteUseCase->execute(
-					$this->arParams['ELEMENT_ID'],
-					CraftUser::load()->getId()
+				/* @var BuildObjectDto $entity */
+				$entity = $this->arResult['BUILD_OBJECT_DTO'];
+
+				$this->addProductInViewedUseCase->execute(
+					new AddProductInViewedDto(
+						$this->arParams['ELEMENT_ID'],
+						CraftUser::load()->getId(),
+						$entity->name,
+						$entity->detailLink,
+					)
 				);
 			}
 		} catch(Exception|TypeError $e)
@@ -81,7 +88,7 @@ class CraftPageBuildObjectDetailComponent extends CBitrixComponent
 	protected function loadService(): void
 	{
 		$this->buildObjectService = BuildObjectServiceFactory::createOnOrm();
-		$this->favoriteUseCase = AddProductInFavoriteUseCaseFactory::getUseCase();
+		$this->addProductInViewedUseCase = AddProductInViewedUseCaseFactory::getUseCase();
 	}
 
 	protected function loadData(): void
