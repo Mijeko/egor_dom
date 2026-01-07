@@ -4,9 +4,15 @@ import Profile from '@/layouts/profile.vue';
 import PersonalMemberShort from "@/components/personal-member-short.vue";
 import type {ReferralInformationDto} from "@/dto/present/ReferralInformationDto.ts";
 import type {ViewedInformationDto} from "@/dto/present/ViewedInformationDto.ts";
+import {CopyService} from "@/service/CopyService.ts";
 
 export default defineComponent({
   name: "Home",
+  computed: {
+    CopyService() {
+      return CopyService
+    }
+  },
   components: {PersonalMemberShort},
   layout: [Profile],
   props: {
@@ -95,7 +101,7 @@ export default defineComponent({
             </div>
           </div>
 
-          <SButton class="referral-data-more">Скопировать</SButton>
+          <SButton class="referral-data-more" @click="()=>CopyService.execute(referralInfo.link)">Скопировать</SButton>
         </div>
       </div>
     </div>
@@ -109,7 +115,7 @@ export default defineComponent({
           <a :href="viewItem.detailLink" class="visited-item" :key="index">{{ viewItem.name }}</a>
         </div>
 
-        <SButton class="visited-more">Скопировать</SButton>
+<!--        <SButton class="visited-more">Скопировать</SButton>-->
       </div>
 
 
