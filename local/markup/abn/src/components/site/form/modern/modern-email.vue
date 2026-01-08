@@ -1,10 +1,8 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import BaseAgree from "@/components/site/form/element/base-agree.vue";
 
 export default defineComponent({
-  name: "Agree",
-  components: {BaseAgree},
+  name: "modern-email",
   props: {
     modelValue: {
       type: [String, Number, null, Boolean, Array, Object],
@@ -29,15 +27,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <BaseAgree
+  <IconInput
     v-bind="{...$attrs,...$props}"
     v-model="modelValueComp"
   >
-    <template #default>
-      Я согласен с политикой конфидициальности и офертой
+    <template #icon="{label}">
+      <img class="modern-input-icon__image" src="@/assets/images/icons/input/email.svg" :alt="label">
     </template>
-  </BaseAgree>
+  </IconInput>
 </template>
 
-<style lang="scss">
+<style scoped>
+
 </style>

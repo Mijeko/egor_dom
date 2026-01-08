@@ -34,6 +34,7 @@ declare module 'vue-router/auto-routes' {
     '/profile/settings': RouteRecordInfo<'/profile/settings', '/profile/settings', Record<never, never>, Record<never, never>>,
     '/profile/stream': RouteRecordInfo<'/profile/stream', '/profile/stream', Record<never, never>, Record<never, never>>,
     '/profile/student/list': RouteRecordInfo<'/profile/student/list', '/profile/student/list', Record<never, never>, Record<never, never>>,
+    '/ref': RouteRecordInfo<'/ref', '/ref', Record<never, never>, Record<never, never>>,
     '/support': RouteRecordInfo<'/support', '/support', Record<never, never>, Record<never, never>>,
   }
 
@@ -110,6 +111,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/profile/student/list.vue': {
       routes: '/profile/student/list'
+      views: never
+    }
+    'src/pages/ref.vue': {
+      routes: '/ref'
       views: never
     }
     'src/pages/support.vue': {

@@ -7,10 +7,11 @@ import UserService from "@/service/User/UserService.ts";
 import type RegisterRequestDto from "@/dto/request/RegisterRequestDto.ts";
 import WithSocial from "@/components/site/with-social.vue";
 import ValidatePersonalData from "@/core/validate/validate-personal-data.ts";
+import ModernEmail from "@/components/site/form/modern/modern-email.vue";
 
 export default defineComponent({
   name: "SignupForm",
-  components: {WithSocial, ModernPhone, ModernPassword: ModernPassword, ModernInput: BaseInput},
+  components: {ModernEmail, WithSocial, ModernPhone, ModernPassword: ModernPassword, ModernInput: BaseInput},
   data: function () {
     return {
       isFormValid: false,
@@ -57,15 +58,11 @@ export default defineComponent({
       label="Номер телефона"
     />
 
-    <IconInput
+    <ModernEmail
       v-model="form.email"
       :rules="validate.email"
-      label="E-Mail"
-    >
-      <template #icon="{label}">
-        <img class="modern-input-icon__image" src="@/assets/images/icons/input/email.svg" :alt="label">
-      </template>
-    </IconInput>
+      label="E-Mail адрес"
+    />
 
     <ModernPassword
       v-model="form.password"
@@ -73,9 +70,7 @@ export default defineComponent({
       label="Пароль"
     />
 
-    <Agree v-model="form.agree" :rules="validate.agree">
-      Я согласен с политикой конфидициальности и офертой
-    </Agree>
+    <Agree v-model="form.agree" :rules="validate.agree" />
 
     <SButton type="submit">Зарегистрироваться</SButton>
 

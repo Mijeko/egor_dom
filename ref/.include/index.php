@@ -21,13 +21,4 @@ try
 {
 }
 
-$APPLICATION->IncludeComponent(
-	'craft:referral.join',
-	'.default',
-	[
-		'CODE' => $refCode,
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-);
-?>
+inertia('ref');
