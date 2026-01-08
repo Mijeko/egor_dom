@@ -18,7 +18,7 @@ class SessionStorageInfo implements StorageInformationInterface
 	}
 
 
-	public function store($data): void
+	public function store(array $data): void
 	{
 		$this->session->set(self::REF_SESS_STORE_KEY, json_encode($data));
 	}

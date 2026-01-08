@@ -9,7 +9,7 @@ class StorageManager
 {
 	const string REF_SESS_STORE_KEY = 'refCode';
 
-	private StorageInformationInterface $storageInformation;
+	protected StorageInformationInterface $storageInformation;
 
 	public static function instance(): StorageManager
 	{
@@ -22,9 +22,11 @@ class StorageManager
 	}
 
 
-	public function store(array $data): void
+	public function storeCode(string $code): void
 	{
-		$this->storageInformation->store($data);
+		$this->storageInformation->store([
+			self::REF_SESS_STORE_KEY => $code,
+		]);
 	}
 
 	public function getCode(): ?string

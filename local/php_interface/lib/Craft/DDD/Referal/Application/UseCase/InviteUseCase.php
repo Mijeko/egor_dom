@@ -18,21 +18,26 @@ class InviteUseCase
 	{
 	}
 
-	public function execute(int $userId): void
+	/**
+	 * @param int $userId
+	 * @return null
+	 * @throws \Exception
+	 */
+	public function execute(int $userId): null
 	{
 		$code = $this->getCode();
 
 		$guest = $this->referralRepository->findByUserId($userId);
 		if(!$guest)
 		{
-			throw new \Exception('');
+			throw new \Exception('Реферал-гость не найден');
 		}
 
 
 		$invited = $this->referralRepository->findByCode($code);
 		if(!$invited)
 		{
-			throw new \Exception('');
+			throw new \Exception('Реферал не найден');
 		}
 
 		$invited = $invited->invite($guest);
@@ -40,6 +45,7 @@ class InviteUseCase
 		$this->referralRepository->update($invited);
 		$this->referralRepository->update($guest);
 
+		return null;
 	}
 
 	private function getCode(): ?string

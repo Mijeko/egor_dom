@@ -11,7 +11,7 @@ interface ReferralRepositoryInterface
 
 	public function update(ReferralEntity $referral): ?ReferralEntity;
 
-	public function findAll(Criteria $criteria): array;
+	public function findAll(?Criteria $criteria = null): array;
 
 	public function findByUserId(int $userId): ?ReferralEntity;
 

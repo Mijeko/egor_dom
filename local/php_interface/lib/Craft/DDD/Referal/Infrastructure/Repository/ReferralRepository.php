@@ -14,26 +14,22 @@ class ReferralRepository implements ReferralRepositoryInterface
 {
 	public function create(ReferralEntity $referral): ?ReferralEntity
 	{
-		$modal = ReferralTable::createObject();
+		$model = ReferralTable::createObject();
 
-		$modal->setCode($referral->getCode());
-		$modal->setPhone($referral->getPhone()->getValue());
-		$modal->setActive($referral->getActive()->getValue());
-		$modal->setInvitedUserId($referral->getInviteUserId());
-		$modal->setUserId($referral->getUserId());
+		$model = $this->fill($referral, $model);
 
-		$result = $modal->save();
+		$result = $model->save();
 
 		if($result->isSuccess())
 		{
-			$referral->refreshId($modal->getId());
+			$referral->refreshId($model->getId());
 			return $referral;
 		}
 
 		return null;
 	}
 
-	public function findAll(Criteria $criteria): array
+	public function findAll(?Criteria $criteria = null): array
 	{
 		$result = [];
 		$models = ReferralTable::getList($criteria->makeGetListParams())->fetchCollection();
@@ -83,5 +79,30 @@ class ReferralRepository implements ReferralRepositoryInterface
 			ReferralTable::F_INVITED_USER_ID => $userId,
 
 		]));
+	}
+
+	public function update(ReferralEntity $referral): ?ReferralEntity
+	{
+		$model = ReferralTable::getByPrimary($referral->getId())->fetchObject();
+
+		$model = $this->fill($referral, $model);
+
+		$result = $model->save();
+
+		if($result->isSuccess())
+		{
+			return $referral;
+		}
+
+		return null;
+	}
+
+	private function fill(ReferralEntity $referral, EO_Referral $modal): EO_Referral
+	{
+		$modal->setCode($referral->getCode());
+		$modal->setPhone($referral->getPhone()->getValue());
+		$modal->setActive($referral->getActive()->getValue());
+		$modal->setInvitedUserId($referral->getInviteUserId());
+		$modal->setUserId($referral->getUserId());
 	}
 }

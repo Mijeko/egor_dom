@@ -33,6 +33,11 @@ class ReferralEntity
 		ReferralEntity $target
 	): ReferralEntity
 	{
+		if($target->userId === $this->userId)
+		{
+			throw new \Exception("Нельзя пригласить себя");
+		}
+
 		$target->inviteUserId = $this->inviteUserId;
 		return $this;
 	}
