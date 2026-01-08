@@ -3,13 +3,4 @@
 /**
  * @global CMain $APPLICATION
  */
-$APPLICATION->IncludeComponent(
-	'craft:vite',
-	'vite',
-	[
-		'SOURCE' => 'Registration',
-	],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-?>
+inertia('signup');

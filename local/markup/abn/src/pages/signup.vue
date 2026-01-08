@@ -1,10 +1,8 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import SignupWrap from "@/components/site/form/signup-wrap.vue";
 
 export default defineComponent({
-  name: "Ref",
-  components: {SignupRefForm: SignupWrap},
+  name: "Signup"
 })
 </script>
 

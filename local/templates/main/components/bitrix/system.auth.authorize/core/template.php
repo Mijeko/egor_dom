@@ -5,11 +5,5 @@
  */
 
 
-$APPLICATION->IncludeComponent(
-	'craft:auth',
-	'.default',
-	[],
-	false,
-	['HIDE_ICONS' => 'Y']
-)
-?>
+
+inertia('signin');

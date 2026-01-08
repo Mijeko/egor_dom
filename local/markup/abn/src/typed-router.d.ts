@@ -35,6 +35,8 @@ declare module 'vue-router/auto-routes' {
     '/profile/stream': RouteRecordInfo<'/profile/stream', '/profile/stream', Record<never, never>, Record<never, never>>,
     '/profile/student/list': RouteRecordInfo<'/profile/student/list', '/profile/student/list', Record<never, never>, Record<never, never>>,
     '/ref': RouteRecordInfo<'/ref', '/ref', Record<never, never>, Record<never, never>>,
+    '/signin': RouteRecordInfo<'/signin', '/signin', Record<never, never>, Record<never, never>>,
+    '/signup': RouteRecordInfo<'/signup', '/signup', Record<never, never>, Record<never, never>>,
     '/support': RouteRecordInfo<'/support', '/support', Record<never, never>, Record<never, never>>,
   }
 
@@ -115,6 +117,14 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/ref.vue': {
       routes: '/ref'
+      views: never
+    }
+    'src/pages/signin.vue': {
+      routes: '/signin'
+      views: never
+    }
+    'src/pages/signup.vue': {
+      routes: '/signup'
       views: never
     }
     'src/pages/support.vue': {

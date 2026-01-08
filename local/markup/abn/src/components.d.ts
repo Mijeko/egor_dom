@@ -89,7 +89,7 @@ declare module 'vue' {
     ShortStudentList: typeof import('./components/profile/element/short-student-list.vue')['default']
     SigninForm: typeof import('./components/site/form/signin-form.vue')['default']
     SignupForm: typeof import('./components/site/form/signup-form.vue')['default']
-    SignupRefForm: typeof import('./components/site/form/signup-ref-form.vue')['default']
+    SignupWrap: typeof import('./components/site/form/signup-wrap.vue')['default']
     SliderObjects: typeof import('./components/objects/slider-objects.vue')['default']
     StudentList: typeof import('./components/student/StudentList.vue')['default']
     Table: typeof import('./components/table.vue')['default']
