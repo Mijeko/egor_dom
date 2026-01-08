@@ -115,7 +115,6 @@ export default defineComponent({
           <a :href="viewItem.detailLink" class="visited-item" :key="index">{{ viewItem.name }}</a>
         </div>
 
-<!--        <SButton class="visited-more">Скопировать</SButton>-->
       </div>
 
 
@@ -123,29 +122,29 @@ export default defineComponent({
   </div>
 
 
-  <PersonalMemberShort>
-    <template #title>Менеджеры</template>
-    <template #actions>
-      <a href="/profile/managers/" class="all-list-button">Все менеджеры</a>
-      <div class="add-member-button">Добавить +</div>
-    </template>
-  </PersonalMemberShort>
+<!--  <PersonalMemberShort>-->
+<!--    <template #title>Менеджеры</template>-->
+<!--    <template #actions>-->
+<!--      <a href="/profile/managers/" class="all-list-button">Все менеджеры</a>-->
+<!--      <div class="add-member-button">Добавить +</div>-->
+<!--    </template>-->
+<!--  </PersonalMemberShort>-->
 
-  <PersonalMemberShort>
-    <template #title>Агенты</template>
-    <template #actions>
-      <a href="/profile/agents/" class="all-list-button">Все агенты</a>
-      <div class="add-member-button">Добавить +</div>
-    </template>
-  </PersonalMemberShort>
+<!--  <PersonalMemberShort>-->
+<!--    <template #title>Агенты</template>-->
+<!--    <template #actions>-->
+<!--      <a href="/profile/agents/" class="all-list-button">Все агенты</a>-->
+<!--      <div class="add-member-button">Добавить +</div>-->
+<!--    </template>-->
+<!--  </PersonalMemberShort>-->
 
-  <PersonalMemberShort>
-    <template #title>Студенты</template>
-    <template #actions>
-      <a href="/profile/students/" class="all-list-button">Все студенты</a>
-      <div class="add-member-button">Добавить +</div>
-    </template>
-  </PersonalMemberShort>
+<!--  <PersonalMemberShort>-->
+<!--    <template #title>Студенты</template>-->
+<!--    <template #actions>-->
+<!--      <a href="/profile/students/" class="all-list-button">Все студенты</a>-->
+<!--      <div class="add-member-button">Добавить +</div>-->
+<!--    </template>-->
+<!--  </PersonalMemberShort>-->
 
 </template>
 

@@ -18,33 +18,33 @@ $aMenuLinks = [
 		],
 		"",
 	],
-	[
-		"Менеджеры",
-		"/profile/managers/",
-		[],
-		[
-			'ICON' => '$peopleList',
-		],
-		"",
-	],
-	[
-		"Студенты",
-		"/profile/students/",
-		[],
-		[
-			'ICON' => '$peopleList',
-		],
-		"",
-	],
-	[
-		"Агенты",
-		"/profile/agents/",
-		[],
-		[
-			'ICON' => '$peopleList',
-		],
-		"",
-	],
+//	[
+//		"Менеджеры",
+//		"/profile/managers/",
+//		[],
+//		[
+//			'ICON' => '$peopleList',
+//		],
+//		"",
+//	],
+//	[
+//		"Студенты",
+//		"/profile/students/",
+//		[],
+//		[
+//			'ICON' => '$peopleList',
+//		],
+//		"",
+//	],
+//	[
+//		"Агенты",
+//		"/profile/agents/",
+//		[],
+//		[
+//			'ICON' => '$peopleList',
+//		],
+//		"",
+//	],
 	[
 		"Заявки",
 		"/profile/orders/",
