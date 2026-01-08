@@ -1,7 +1,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {Swiper, SwiperSlide} from 'swiper/vue';
-import {Navigation} from 'swiper/modules';
+import {Navigation, Pagination} from 'swiper/modules';
 import type {ReviewDto} from "@/dto/entity/ReviewDto.ts";
 import type {NavigationOptions} from "swiper/types";
 
@@ -16,11 +16,15 @@ export default defineComponent({
   },
   data: () => {
     return {
-      modules: [Navigation],
+      modules: [Navigation, Pagination],
       navigation: {
         nextEl: '.reviews-block-slider-next',
         prevEl: '.reviews-block-slider-prev',
       } as NavigationOptions,
+      pagination: {
+        el: '.reviews-block-slider-pagination',
+        clickable: true,
+      },
     };
   }
 })
@@ -30,22 +34,28 @@ export default defineComponent({
   <section class="reviews-block-container container" v-if="reviews.length > 0">
     <h3 class="reviews-block-title page-title h1">Отзывы пользователей</h3>
 
-    <swiper
-      :modules="modules"
-      :navigation
-      :slidesPerView="3"
-      :spaceBetween="60"
-      class="mySwiper reviews-block-slider"
-    >
-      <swiper-slide class="review-card-slide" v-for="(review,index) in reviews" :key="index">
-        <div class="review-card">
-          <div class="review-card-header">
-            <div class="review-card-author">{{ review.author }}</div>
-            <div class="review-card-date">{{ review.date }}</div>
+    <div class="reviews-block-slider-container">
+      <swiper
+        :modules="modules"
+        :pagination
+        :navigation
+        :slidesPerView="3"
+        :spaceBetween="60"
+        class="mySwiper reviews-block-slider"
+      >
+        <swiper-slide class="review-card-slide" v-for="(review,index) in reviews" :key="index">
+          <div class="review-card">
+            <div class="review-card-header">
+              <div class="review-card-author">{{ review.author }}</div>
+              <div class="review-card-date">{{ review.date }}</div>
+            </div>
+            <div class="review-card-body" v-html="review.text"></div>
           </div>
-          <div class="review-card-body">{{ review.text }}</div>
-        </div>
-      </swiper-slide>
+        </swiper-slide>
+
+      </swiper>
+
+      <div class="reviews-block-slider-pagination"></div>
 
       <div class="reviews-block-slider-prev">
         <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,8 +68,7 @@ export default defineComponent({
         </svg>
       </div>
 
-
-    </swiper>
+    </div>
 
   </section>
 </template>
@@ -103,44 +112,58 @@ export default defineComponent({
 .reviews-block {
 
   &-title {
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   }
 
   &-container {
-    margin-bottom: 80px !important;
+    margin-bottom: 150px !important;
   }
 
   &-slider {
-    padding-bottom: 70px;
+
+    &-container {
+      position: relative;
+    }
+
+    &-pagination {
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      .swiper-pagination-bullet {
+        color: $stat-border-color;
+        background: $stat-border-color;
+        opacity: 1;
+        margin: 0 !important;
+
+        &-active {
+          color: $pagination-active;
+          background: $pagination-active;
+        }
+      }
+    }
 
     &-prev, &-next {
       position: absolute;
-      top: auto;
-      bottom: 0;
+      top: 50%;
       padding: 16px 25px;
       border: 1px solid #f9f9f9;
       border-radius: 50px;
       cursor: pointer;
 
-      &.swiper-button-disabled {
-        background: #f6f6f6;
 
-        svg {
-          path {
-            stroke: #cacaca;
-          }
+      svg {
+        path {
+          stroke: #cacaca;
         }
-      }
-
-      &:not(.swiper-button-disabled) {
-        box-shadow: 0 0 20px 0 rgba(139, 139, 139, 0.1);
-        background: #9fccff;
       }
     }
 
     &-prev {
-      left: 45%;
-      transform: translateX(-45%);
+      left: -30px;
+      transform: translate(-30px, -50%);
 
       svg {
         transform: rotate(180deg);
@@ -148,8 +171,8 @@ export default defineComponent({
     }
 
     &-next {
-      right: 45%;
-      transform: translateX(45%);
+      right: -30px;
+      transform: translate(30px, -50%);
     }
   }
 }

@@ -54,12 +54,12 @@ export default defineComponent({
   }
 
   &-left {
-    max-width: 45%;
+    max-width: 50%;
     width: 100%;
   }
 
   &-right {
-    max-width: 45%;
+    max-width: 50%;
     width: 100%;
   }
 
