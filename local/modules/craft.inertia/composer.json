@@ -1,6 +1,5 @@
 {
   "require-dev": {
-    "phpunit/phpunit": "^11.5"
   },
   "autoload": {
     "psr-4": {
@@ -9,7 +8,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Craft\\Tests\\": "tests/"
+      "Craft\\Inertia\\Tests\\": "tests/"
     }
   },
   "require": {

@@ -5,7 +5,6 @@ namespace Craft\DDD\Referal\Infrastructure\Listeners;
 use Craft\DDD\Referal\Application\Dto\InsertReferralDto;
 use Craft\DDD\Referal\Application\Factory\InsertReferralMemberFactory;
 use Craft\DDD\Referal\Application\Factory\InviteUseCaseFactory;
-use Craft\DDD\Shared\Domain\ValueObject\PhoneValueObject;
 use Craft\DDD\User\Application\Event\UserRegisterEvent;
 
 class RegisterListener
