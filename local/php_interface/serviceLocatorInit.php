@@ -33,11 +33,6 @@ dispatcher()->addListener(AuthorizeEvent::EVENT_NAME, [
 	'handle',
 ]);
 
-dispatcher()->addListener(InviteStudentToStudentEvent::EVENT_NAME, [
-	new InviteStudentToStudentListener(),
-	'handle',
-]);
-
 dispatcher()->addListener(ClaimAcceptManagerEvent::EVENT_NAME, [
 	new ClaimAcceptManagerListener(),
 	'handle',

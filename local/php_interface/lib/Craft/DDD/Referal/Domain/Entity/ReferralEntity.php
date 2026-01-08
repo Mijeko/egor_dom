@@ -29,16 +29,12 @@ class ReferralEntity
 		return $self;
 	}
 
-	public static function invite(
-		PhoneValueObject $phone,
-		string           $code,
+	public function invite(
+		ReferralEntity $target
 	): ReferralEntity
 	{
-		$self = new self();
-		$self->phone = $phone;
-		$self->code = $code;
-		$self->inviteUserId = null;
-		return $self;
+		$target->inviteUserId = $this->inviteUserId;
+		return $this;
 	}
 
 	public static function hydrate(

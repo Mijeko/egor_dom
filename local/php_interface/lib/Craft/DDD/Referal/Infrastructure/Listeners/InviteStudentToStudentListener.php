@@ -2,8 +2,8 @@
 
 namespace Craft\DDD\Referal\Infrastructure\Listeners;
 
-use Craft\DDD\Referal\Application\Dto\JoinClientToClientDto;
-use Craft\DDD\Referal\Application\Factory\InviteClientUseCaseFactory;
+use Craft\DDD\Referal\Application\Dto\InviteDto;
+use Craft\DDD\Referal\Application\Factory\InviteUseCaseFactory;
 use Craft\DDD\User\Infrastructure\Events\InviteStudentToStudentEvent;
 
 class InviteStudentToStudentListener
@@ -15,9 +15,9 @@ class InviteStudentToStudentListener
 			$user = $event->getStudentEntity();
 			$refCode = $event->getReferralCode();
 
-			$insertReferralItemUseCase = InviteClientUseCaseFactory::getUseCase();
+			$insertReferralItemUseCase = InviteUseCaseFactory::getUseCase();
 			$insertReferralItemUseCase->execute(
-				new JoinClientToClientDto(
+				new InviteDto(
 					$user->getPhone()->getValue(),
 					$refCode,
 				)

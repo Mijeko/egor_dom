@@ -2,7 +2,7 @@
 
 namespace Craft\DDD\Referal\Application\Dto;
 
-class JoinClientToClientDto
+class InviteDto
 {
 	public function __construct(
 		public string $phone,
