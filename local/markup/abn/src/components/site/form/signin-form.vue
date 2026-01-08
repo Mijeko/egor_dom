@@ -71,9 +71,7 @@ export default defineComponent({
       label="Пароль"
     />
 
-    <Agree v-model="form.agree" :rules="validate.agree">
-      Я согласен с политикой конфидициальности и офертой
-    </Agree>
+    <Agree v-model="form.agree" :rules="validate.agree" />
 
     <SButton type="submit">Авторизоваться</SButton>
 

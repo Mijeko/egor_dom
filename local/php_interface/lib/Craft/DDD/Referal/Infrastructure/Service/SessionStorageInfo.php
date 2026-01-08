@@ -4,7 +4,7 @@ namespace Craft\DDD\Referal\Infrastructure\Service;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Session\SessionInterface;
-use Craft\DDD\Referal\Application\Service\StorageInformationInterface;
+use Craft\DDD\Referal\Application\Contract\StorageInformationInterface;
 
 class SessionStorageInfo implements StorageInformationInterface
 {

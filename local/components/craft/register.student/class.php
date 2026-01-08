@@ -2,8 +2,9 @@
 
 use Craft\Core\Component\AjaxComponent;
 use Craft\Core\Rest\ResponseBx;
-use Craft\DDD\Referal\Application\Factory\MarkGuestUseCaseFactory;
-use Craft\DDD\Referal\Application\UseCase\MarkGuestUseCase;
+use Craft\DDD\Referal\Application\Facade\StorageManager;
+use Craft\DDD\Referal\Application\Factory\AttachRefCodeToGuestUseCaseFactory;
+use Craft\DDD\Referal\Application\UseCase\AttachRefCodeToGuestUseCase;
 use Craft\DDD\User\Application\Dto\RegisterStudentByRefDto;
 use Craft\DDD\User\Application\Factory\UseCase\RegisterStudentByReferralUseCaseFactory;
 use Craft\DDD\User\Application\UseCase\Register\RegisterStudentByReferralUseCase;
@@ -11,7 +12,7 @@ use Craft\DDD\User\Application\UseCase\Register\RegisterStudentByReferralUseCase
 class CraftRegisterStudent extends AjaxComponent
 {
 	protected ?RegisterStudentByReferralUseCase $registerStudentByReferralUseCase = null;
-	protected ?MarkGuestUseCase $markGuestUseCase = null;
+	protected ?StorageManager $storageManager = null;
 
 	function componentNamespace(): string
 	{
@@ -26,7 +27,7 @@ class CraftRegisterStudent extends AjaxComponent
 	{
 		try
 		{
-			$refCode = $this->markGuestUseCase->getRefCode();
+			$refCode = $this->storageManager->getCode();
 
 			$this->registerStudentByReferralUseCase->execute(
 				new RegisterStudentByRefDto(
@@ -59,6 +60,6 @@ class CraftRegisterStudent extends AjaxComponent
 	public function loadServices(): void
 	{
 		$this->registerStudentByReferralUseCase = RegisterStudentByReferralUseCaseFactory::getUseCase();
-		$this->markGuestUseCase = MarkGuestUseCaseFactory::getUseCase();
+		$this->storageManager = StorageManager::instance();
 	}
 }

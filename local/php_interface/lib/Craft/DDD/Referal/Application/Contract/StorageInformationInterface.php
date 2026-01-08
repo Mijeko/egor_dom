@@ -1,6 +1,6 @@
 <?php
 
-namespace Craft\DDD\Referal\Application\Service;
+namespace Craft\DDD\Referal\Application\Contract;
 
 interface StorageInformationInterface
 {

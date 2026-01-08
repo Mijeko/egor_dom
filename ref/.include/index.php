@@ -1,7 +1,7 @@
 <?php if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Application;
-use Craft\DDD\Referal\Application\Factory\MarkGuestUseCaseFactory;
+use Craft\DDD\Referal\Application\Factory\AttachRefCodeToGuestUseCaseFactory;
 
 /**
  * @global CMain $APPLICATION
@@ -15,8 +15,8 @@ $refCode = $request->get('JOIN_REF_CODE') ?? '';
 
 try
 {
-	$service = MarkGuestUseCaseFactory::getUseCase();
-	$service->storeRefCode($refCode);
+	$service = AttachRefCodeToGuestUseCaseFactory::getUseCase();
+	$service->execute($refCode);
 } catch(\Exception $e)
 {
 }
