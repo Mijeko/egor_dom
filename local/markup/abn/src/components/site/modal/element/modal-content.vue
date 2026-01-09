@@ -91,10 +91,8 @@ export default defineComponent({
 
   &-right {
     width: 60%;
-    padding: 40px 20px 20px 20px;
+    padding: 55px 20px 20px 20px;
     background: #fff;
-    //background: #e6f2ff;
-    //background: radial-gradient(50% 50% at 50% 50%,#d5e8ff,#b8d9ff);
   }
 }
 </style>

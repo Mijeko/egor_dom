@@ -93,8 +93,8 @@ export default defineComponent({
     align-items: stretch;
     justify-content: flex-start;
     border: 1px $footer-short solid;
-    padding: 10px 10px 10px 20px;
-    border-radius: 50px;
+    padding: 5px 5px 5px 15px;
+    border-radius: 12px;
     //border-radius: 7px;
     width: 100%;
   }

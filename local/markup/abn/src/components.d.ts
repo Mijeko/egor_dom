@@ -23,6 +23,7 @@ declare module 'vue' {
     BaseAgree: typeof import('./components/site/form/element/base-agree.vue')['default']
     BaseInput: typeof import('./components/site/form/modern/base-input.vue')['default']
     BaseModernModal: typeof import('./components/site/modal/base-modern-modal.vue')['default']
+    BlockParams: typeof import('./components/site/form/element/new-user/block-params.vue')['default']
     BlockWithStat: typeof import('./components/site/block-with-stat/block-with-stat.vue')['default']
     BuildObjectDetail: typeof import('./components/objects/build-object-detail.vue')['default']
     BuildObjectItem: typeof import('./components/objects/build-object-item.vue')['default']

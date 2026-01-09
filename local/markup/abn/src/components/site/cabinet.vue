@@ -126,6 +126,7 @@ export default defineComponent({
 
 .auth-tab {
   height: auto !important;
+  margin-bottom: 15px;
 
   .v-slide-group__content {
     gap: 10px;
@@ -153,7 +154,6 @@ export default defineComponent({
 
 
   &-content {
-    padding: 25px 0 15px 0;
   }
 }
 </style>
