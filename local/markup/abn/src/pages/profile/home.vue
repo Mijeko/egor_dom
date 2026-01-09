@@ -5,6 +5,7 @@ import PersonalMemberShort from "@/components/personal-member-short.vue";
 import type {ReferralInformationDto} from "@/dto/present/ReferralInformationDto.ts";
 import type {ViewedInformationDto} from "@/dto/present/ViewedInformationDto.ts";
 import {CopyService} from "@/service/CopyService.ts";
+import CreateUserModal from "@/components/site/modal/create-user-modal.vue";
 
 export default defineComponent({
   name: "Home",
@@ -13,7 +14,7 @@ export default defineComponent({
       return CopyService
     }
   },
-  components: {PersonalMemberShort},
+  components: {CreateUserModal, PersonalMemberShort},
   layout: [Profile],
   props: {
     referralInfo: {
@@ -122,13 +123,18 @@ export default defineComponent({
   </div>
 
 
-<!--  <PersonalMemberShort>-->
-<!--    <template #title>Менеджеры</template>-->
-<!--    <template #actions>-->
-<!--      <a href="/profile/managers/" class="all-list-button">Все менеджеры</a>-->
-<!--      <div class="add-member-button">Добавить +</div>-->
-<!--    </template>-->
-<!--  </PersonalMemberShort>-->
+  <PersonalMemberShort>
+    <template #title>Пользователи</template>
+    <template #actions>
+      <a href="/profile/managers/" class="all-list-button">Все менеджеры</a>
+      <div class="add-member-button">Добавить +</div>
+    </template>
+  </PersonalMemberShort>
+
+
+  <CreateUserModal
+    
+  />
 
 <!--  <PersonalMemberShort>-->
 <!--    <template #title>Агенты</template>-->

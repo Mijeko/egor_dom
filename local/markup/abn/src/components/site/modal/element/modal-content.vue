@@ -16,8 +16,8 @@ export default defineComponent({
   },
   computed: {
     modelValueComp: {
-      set() {
-        this.$emit('update:modelValue');
+      set(value: boolean) {
+        this.$emit('update:modelValue', value);
       },
       get() {
         return this.modelValue;
@@ -32,13 +32,17 @@ export default defineComponent({
 
   <div class="modern-modal">
 
-    <div class="modern-modal-close" @click="close">
+    <slot name="close" v-if="$slots.close"></slot>
+    <div v-else class="modern-modal-close" @click="close">
       <img src="@/assets/images/icons/close-modal.svg" alt="Закрыть">
     </div>
 
     <div class="modern-modal-left">
       <div class="modern-modal-bg">
+
+        <slot name="backgroundImage" v-if="$slots.backgroundImage"></slot>
         <img
+          v-else
           class="modal-img"
           src="@/assets/images/modal/bg/auth.png"
           alt="Фон модального окна"

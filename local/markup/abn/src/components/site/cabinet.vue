@@ -3,7 +3,7 @@ import {defineComponent} from 'vue'
 import type BxUserDto from "@/dto/bitrix/BxUserDto.ts";
 import SigninForm from "@/components/site/form/signin-form.vue";
 import SignupForm from "@/components/site/form/signup-form.vue";
-import ModalContent from "@/components/site/modal/modal-content.vue";
+import ModalContent from "@/components/site/modal/element/modal-content.vue";
 
 export default defineComponent({
   name: "Cabinet",
@@ -50,9 +50,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-dialog max-width="850" v-model="showModal" v-if="!isAuthorized">
-    <template v-slot:activator="{ props: activatorProps }">
-
+  <BaseModernModal max-width="850" v-if="!isAuthorized">
+    <template #activator="{activatorProps}">
       <div
         v-bind="activatorProps"
         class="ui-cabinet"
@@ -60,39 +59,34 @@ export default defineComponent({
         <img class="ui-cabinet__icon" src="@/assets/images/icons/cabinet.svg" alt="Кабинет">
         <div class="ui-cabinet__label">Профиль</div>
       </div>
-
     </template>
 
-    <template v-slot:default="{ isActive }">
-      <ModalContent v-model="showModal">
-
-        <template #content>
-
-          <v-tabs
-            v-model="tab"
-            grow
-            class="auth-tab"
-          >
-            <v-tab :text="contentItem.title" :key="index" :value="index" v-for="(contentItem,index) in content"></v-tab>
-          </v-tabs>
-
-          <v-tabs-window v-model="tab">
-            <v-tabs-window-item
-              v-for="(contentItem, index) in content"
-              :key="index"
-              :value="index"
-            >
-              <div class="auth-tab-content">
-                <component :is="contentItem.render"/>
-              </div>
-            </v-tabs-window-item>
-          </v-tabs-window>
-
-        </template>
-
-      </ModalContent>
+    <template #backgroundImage>
+      <img src="@/assets/images/modal/bg/auth.png" class="modal-image" alt="Новый пользователь">
     </template>
-  </v-dialog>
+
+    <template #content>
+      <v-tabs
+        v-model="tab"
+        grow
+        class="auth-tab"
+      >
+        <v-tab :text="contentItem.title" :key="index" :value="index" v-for="(contentItem,index) in content"></v-tab>
+      </v-tabs>
+
+      <v-tabs-window v-model="tab">
+        <v-tabs-window-item
+          v-for="(contentItem, index) in content"
+          :key="index"
+          :value="index"
+        >
+          <div class="auth-tab-content">
+            <component :is="contentItem.render"/>
+          </div>
+        </v-tabs-window-item>
+      </v-tabs-window>
+    </template>
+  </BaseModernModal>
   <a
     href="/profile/"
     v-else
