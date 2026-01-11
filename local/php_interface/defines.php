@@ -19,10 +19,11 @@ define('USER_GROUP_STUDENT', UserGroupHelper::findByCode('STUDENT'));
 define('USER_GROUP_AGENT', UserGroupHelper::findByCode('AGENT'));
 
 # new
-define('USER_GROUP_BUYER', UserGroupHelper::findByCode('AGENT'));				# Покупатель (buyer) - базовый пользователь с правами на покупку
-define('USER_GROUP_REALTOR', UserGroupHelper::findByCode('AGENT'));			# Риэлтор (realtor) - профессиональный агент с правами на консультации
-define('USER_GROUP_DEVELOPER', UserGroupHelper::findByCode('DEVELOPER'));		# Застройщик (developer) - B2B-партнер с правами на публикацию новостроек
-define('USER_GROUP_LAWYER', UserGroupHelper::findByCode('AGENT'));			# Юрист/Эксперт (lawyer) - специалист с правами на консультации и экспертный контент
+define('USER_GROUP_BUYER', UserGroupHelper::findByCode('BUYER'));					# Покупатель (buyer) - базовый пользователь с правами на покупку
+define('USER_GROUP_REALTOR', UserGroupHelper::findByCode('REALTOR'));				# Риэлтор (realtor) - профессиональный агент с правами на консультации
+define('USER_GROUP_DEVELOPER', UserGroupHelper::findByCode('DEVELOPER'));			# Застройщик (developer) - B2B-партнер с правами на публикацию новостроек
+define('USER_GROUP_LAWYER', UserGroupHelper::findByCode('LAWYER'));				# Юрист/Эксперт (lawyer) - специалист с правами на консультации и экспертный контент
+define('USER_GROUP_AGENCY', UserGroupHelper::findByCode('AGENCY'));				# Юрист/Эксперт (lawyer) - специалист с правами на консультации и экспертный контент
 
 // iblock id
 # Недвижимость->Объекты

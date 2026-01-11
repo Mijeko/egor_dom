@@ -45,6 +45,7 @@ export default defineComponent({
           {id: 2, code: 'realtor', name: 'Риэлтор'},
           {id: 3, code: 'developer', name: 'Застройщик'},
           {id: 4, code: 'law', name: 'Юрист'},
+          {id: 4, code: 'agency', name: 'Агенство'},
         ];
       },
     }
@@ -79,8 +80,13 @@ export default defineComponent({
 
     <div v-for="(group, index) in form.group">
 
-      <BlockParams :label="`Настройки для ${group}`">
-        {{ Math.random() }}
+      <BlockParams :label="`Настройки для ${group}`" v-if="group=='developer'">
+      </BlockParams>
+      <BlockParams :label="`Настройки для ${group}`" v-else-if="group=='law'">
+      </BlockParams>
+      <BlockParams :label="`Настройки для ${group}`" v-else-if="group=='realtor'">
+      </BlockParams>
+      <BlockParams :label="`Настройки для ${group}`" v-else-if="group=='agency'">
       </BlockParams>
     </div>
 
