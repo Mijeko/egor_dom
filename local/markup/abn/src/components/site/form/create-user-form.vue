@@ -71,24 +71,37 @@ export default defineComponent({
 
     <!--  base start  -->
     <BlockParams label="Базовые настройки">
-      <ModernPhone :hideIcon="true" v-model="form.base.phone" label="Номер телефона"/>
-      <IconInput :hideIcon="true" v-model="form.base.email" label="E-Mail адрес"/>
-      <IconInput :hideIcon="true" v-model="form.base.password" label="Пароль"/>
+      <div class="create-user-form-layer">
+        <ModernPhone :hideIcon="true" v-model="form.base.phone" label="Номер телефона"/>
+        <IconInput :hideIcon="true" v-model="form.base.email" label="E-Mail адрес"/>
+        <IconInput :hideIcon="true" v-model="form.base.password" label="Пароль"/>
+      </div>
     </BlockParams>
     <!--  base end    -->
 
 
-    <div v-for="(group, index) in form.group">
+    <BlockParams :label="`Настройки для ${group}`" v-for="(group, index) in form.group">
 
-      <BlockParams :label="`Настройки для ${group}`" v-if="group=='developer'">
-      </BlockParams>
-      <BlockParams :label="`Настройки для ${group}`" v-else-if="group=='law'">
-      </BlockParams>
-      <BlockParams :label="`Настройки для ${group}`" v-else-if="group=='realtor'">
-      </BlockParams>
-      <BlockParams :label="`Настройки для ${group}`" v-else-if="group=='agency'">
-      </BlockParams>
-    </div>
+      <div v-if="group=='developer'" class="create-user-form-layer">
+        <IconInput :hideIcon="true" v-model="form.developer.companyName" label="Именование"/>
+        <IconInput :hideIcon="true" v-model="form.developer.contactPerson" label="Имя менеджера"/>
+        <IconInput :hideIcon="true" v-model="form.developer.inn" label="ИНН"/>
+        <IconInput :hideIcon="true" v-model="form.developer.ogrn" label="ОГРН"/>
+        <IconInput :hideIcon="true" v-model="form.developer.legalAddress" label="Юридический адрес"/>
+        <IconInput :hideIcon="true" v-model="form.developer.tariff" label="Тариф?"/>
+      </div>
+
+      <div v-else-if="group=='law'" class="create-user-form-layer">
+        law
+      </div>
+      <div v-else-if="group=='realtor'" class="create-user-form-layer">
+        realtor
+      </div>
+      <div v-else-if="group=='agency'" class="create-user-form-layer">
+        agency
+      </div>
+
+    </BlockParams>
 
     <SButton type="submit">Добавить</SButton>
   </v-form>
@@ -99,5 +112,11 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  &-layer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 </style>

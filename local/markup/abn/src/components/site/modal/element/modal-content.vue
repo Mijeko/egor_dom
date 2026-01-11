@@ -50,7 +50,9 @@ export default defineComponent({
       </div>
     </div>
     <div class="modern-modal-right">
-      <slot name="content"></slot>
+      <div class="modern-modal-content">
+        <slot name="content"></slot>
+      </div>
     </div>
   </div>
 
@@ -93,6 +95,12 @@ export default defineComponent({
     width: 60%;
     padding: 55px 20px 20px 20px;
     background: #fff;
+  }
+
+  &-content {
+    padding-right: 10px;
+    max-height: 500px;
+    overflow: scroll;
   }
 }
 </style>
