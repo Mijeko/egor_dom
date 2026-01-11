@@ -2,14 +2,14 @@
 
 namespace Craft\DDD\Statistic\Application\Factory;
 
-use Craft\DDD\Statistic\Application\Services\ProfitService;
+use Craft\DDD\Statistic\Application\Services\RewardService;
 use Craft\DDD\Statistic\Infrastructure\Repository\OrderRepository;
 
 class ProfitServiceFactory
 {
-	public static function getService(): ProfitService
+	public static function getService(): RewardService
 	{
-		return new ProfitService(
+		return new RewardService(
 			new OrderRepository(),
 		);
 	}

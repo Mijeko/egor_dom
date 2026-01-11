@@ -6,6 +6,7 @@ import type {ReferralInformationDto} from "@/dto/present/ReferralInformationDto.
 import type {ViewedInformationDto} from "@/dto/present/ViewedInformationDto.ts";
 import {CopyService} from "@/service/CopyService.ts";
 import CreateUserModal from "@/components/site/modal/create-user-modal.vue";
+import type {ClaimStatisticDto} from "@/dto/present/ClaimStatisticDto.ts";
 
 export default defineComponent({
   name: "Home",
@@ -29,6 +30,12 @@ export default defineComponent({
         return {};
       }
     },
+    claimStatistic: {
+      type: Object as PropType<ClaimStatisticDto>,
+      default: () => {
+        return {};
+      }
+    },
   }
 })
 </script>
@@ -47,24 +54,24 @@ export default defineComponent({
 
         <div class="personal-reward">
           <div class="personal-reward-title">
-            Вознаграждение: 4%
+            Вознаграждение: {{ claimStatistic.amountReward }}
           </div>
 
           <div class="personal-reward-chars">
 
             <div class="personal-reward-chars-row">
               <div class="personal-reward-chars-key">Кол-во сделок:</div>
-              <div class="personal-reward-chars-value">0</div>
+              <div class="personal-reward-chars-value">{{ claimStatistic.claimTotal }}</div>
             </div>
 
             <div class="personal-reward-chars-row">
               <div class="personal-reward-chars-key">Оборот:</div>
-              <div class="personal-reward-chars-value">0</div>
+              <div class="personal-reward-chars-value">{{ claimStatistic.moneyRotate }}</div>
             </div>
 
             <div class="personal-reward-chars-row">
               <div class="personal-reward-chars-key">К получению:</div>
-              <div class="personal-reward-chars-value">0</div>
+              <div class="personal-reward-chars-value">{{ claimStatistic.acceptTake }}</div>
             </div>
 
           </div>
@@ -133,24 +140,24 @@ export default defineComponent({
 
 
   <CreateUserModal
-    
+
   />
 
-<!--  <PersonalMemberShort>-->
-<!--    <template #title>Агенты</template>-->
-<!--    <template #actions>-->
-<!--      <a href="/profile/agents/" class="all-list-button">Все агенты</a>-->
-<!--      <div class="add-member-button">Добавить +</div>-->
-<!--    </template>-->
-<!--  </PersonalMemberShort>-->
+  <!--  <PersonalMemberShort>-->
+  <!--    <template #title>Агенты</template>-->
+  <!--    <template #actions>-->
+  <!--      <a href="/profile/agents/" class="all-list-button">Все агенты</a>-->
+  <!--      <div class="add-member-button">Добавить +</div>-->
+  <!--    </template>-->
+  <!--  </PersonalMemberShort>-->
 
-<!--  <PersonalMemberShort>-->
-<!--    <template #title>Студенты</template>-->
-<!--    <template #actions>-->
-<!--      <a href="/profile/students/" class="all-list-button">Все студенты</a>-->
-<!--      <div class="add-member-button">Добавить +</div>-->
-<!--    </template>-->
-<!--  </PersonalMemberShort>-->
+  <!--  <PersonalMemberShort>-->
+  <!--    <template #title>Студенты</template>-->
+  <!--    <template #actions>-->
+  <!--      <a href="/profile/students/" class="all-list-button">Все студенты</a>-->
+  <!--      <div class="add-member-button">Добавить +</div>-->
+  <!--    </template>-->
+  <!--  </PersonalMemberShort>-->
 
 </template>
 

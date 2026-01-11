@@ -5,7 +5,7 @@ namespace Craft\DDD\Statistic\Application\Services;
 use Craft\DDD\Statistic\Domain\Entity\OrderEntity;
 use Craft\DDD\Statistic\Domain\Repository\OrderRepositoryInterface;
 
-class ProfitService
+class RewardService
 {
 	private float $baseProfitValue;
 	private float $managerProfitValue;

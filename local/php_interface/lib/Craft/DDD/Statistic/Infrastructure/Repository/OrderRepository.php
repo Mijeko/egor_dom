@@ -46,4 +46,10 @@ class OrderRepository implements OrderRepositoryInterface
 		);
 	}
 
+	public function findAllByUserId(int $userId): array
+	{
+		return $this->findAll(Criteria::instance()->filter([
+			ClaimTable::F_USER_ID => $userId,
+		]));
+	}
 }

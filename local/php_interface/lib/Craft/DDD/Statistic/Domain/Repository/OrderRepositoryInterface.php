@@ -10,4 +10,6 @@ interface OrderRepositoryInterface
 	public function findAll(Criteria $criteria = null): array;
 
 	public function findById(int $orderId): ?OrderEntity;
+
+	public function findAllByUserId(int $userId): array;
 }
